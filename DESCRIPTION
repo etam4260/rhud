@@ -1,12 +1,16 @@
 Package: hudr
-Title: What the Package Does (One Line, Title Case)
+Title: An R interface for accessing HUD (US Department of Housing and Urban Development)
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Emmet", "Tam", , "emmet_tam@yahoo.com", role = c("aut", "cre"))
+Description: 
+	An R interface for accessing HUD (US Department of Housing and Urban Development) API.
+	The HUD has four main datasets:
+	USPS ZIP CODE CROSSWALK
+	FAIR MARKETS RENT
+	INCOME LIMITS
+	COMPREHENSIVE HOUSING AFFORDABILITY STRATEGY
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

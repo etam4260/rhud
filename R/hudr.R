@@ -1,3 +1,5 @@
+#library for http requests
+#library to sanitize strings
 #' @import httr
 #' @import stringr
 
@@ -13,16 +15,12 @@
 # INCOME LIMITS
 # COMPREHENSIVE HOUSING AFFORDABILITY STRATEGY
 
-#library for http requests
-#library to sanitize strings
-library(httr)
-library(stringr)
+
 
 # Creating global environment to set default values to some
 # of parameters in the web queries.
 pkg.env <- new.env(parent = emptyenv())
-pkg.env$curr.year <- strsplit(toString(Sys.Date()), "-")
-
+pkg.env$curr.year <- strsplit(toString(Sys.Date()), "-")[[1]][1]
 
 #' hudcw
 #' @name hudcw
