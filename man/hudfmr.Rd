@@ -3,7 +3,7 @@
 \name{hudfmr}
 \alias{hudfmr}
 \title{hudfmr
-This function queries the Free Markets Rent API provided by US Department of Housing and Urban Development}
+This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development}
 \usage{
 hudfmr(query, year = pkg.env$curr.year, key)
 }
@@ -15,7 +15,7 @@ hudfmr(query, year = pkg.env$curr.year, key)
 \item{key}{The API key for this user. You must go to HUD and sign up for an account and request for an API key.}
 }
 \value{
-This function returns a dataframe containing FREE MARKETS RENT data for a particular county or state.
+This function returns a dataframe containing FAIR MARKETS RENT data for a particular county or state.
 For county level data, these measurements include the county_name, counties_msa, town_name, metro_status, metro_name,
 smallarea_status, basicdata, Efficiency, One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year
 For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html

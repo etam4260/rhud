@@ -5,7 +5,13 @@
 \title{hudcw
 This function queries the Crosswalks API provided by US Department of Housing and Urban Development}
 \usage{
-hudcw(type, query, year = pkg.env$curr.year, quarter = "4", key)
+hudcw(
+  type,
+  query,
+  year = pkg.env$curr.year,
+  quarter = pkg.env$curr.quarter,
+  key
+)
 }
 \arguments{
 \item{type}{Must be a number between 1 and 12 depending on the Crosswalk type.
@@ -32,7 +38,7 @@ or
 or
 5 digit CBSA code for Micropolitan and Metropolitan Areas Eg: 10380 for type 8
 or
-5-dgit CBSA Division code which only applies to Metropolitan Areas. Eg: 35614 for type 9
+5-digit CBSA Division code which only applies to Metropolitan Areas. Eg: 35614 for type 9
 or
 4-digit GEOID for the Congressional District which consists of state FIPS + Congressional District code. Eg: 7200 for type 10
 or
