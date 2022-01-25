@@ -6,7 +6,16 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of hudr is to …
+This library contains an interface to the US Department of Housing and
+Urban Development datasets. The APIs which this library interfaces with:
+
+CROSSWALKS
+
+FAIR MARKETS RENT
+
+INCOME LIMITS
+
+COMPREHENSIVE HOUSING AND AFFORDABILITY STRATEGY
 
 ## Installation
 
@@ -17,13 +26,6 @@ You can install the development version from
 # install.packages("devtools")
 devtools::install_github("etam4260/hudr")
 ```
-
-## Details
-
-This library contains an interface to the US Department of Housing and
-Urban Development datasets. This library currently includes: CROSSWALKS
-FAIR MARKETS RENT INCOME LIMITS COMPREHENSIVE HOUSING AND AFFORDABILITY
-STRATEGY
 
 ## Setup
 
