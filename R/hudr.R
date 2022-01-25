@@ -170,20 +170,21 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
 #' For state level data, these measurements will be the same as county level data, but will return a dataframe with
 #' the individual measurements for each individual county within the state.
 #' @examples
-#' fmr <- hudfmr(query = '22031', year = '2021', key = 'edf23jf834qd72nja')
+#' fmr <- hudfmr(query = '0801499999', year = '2021', key = 'edf23jf834qd72nja')
 #' fmr <- hudfmr(query = 'VA', year = '2021', key = 'edf23jf834qd72nja')
 hudfmr <- function(query, year = pkg.env$curr.year, key) {
   #chop off leading and trailing whitespace in inputs.
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- paste(str_trim(as.character(year), side = "both"))
   key <- paste(str_trim(as.character(key), side = "both"))
-
+  numbers_only <- function(x) !grepl("\\D", x)
   if(as.integer(year) > as.integer(pkg.env$curr.year)) stop("The year specified seems to be in the future?")
-  if(is.na(as.integer(query)) && nchar(query) != 2) stop("The inputted query for state abbreviation is not right.")
-  if(!is.na(as.integer(query)) && nchar(query) != 5) stop("The inputted query input is not a 5 digit fips or CBSA code.")
+  if(!numbers_only(query) && nchar(query) != 2) stop("The inputted query for state abbreviation is not right.")
+  if(numbers_only(query) && nchar(query) != 10) stop("The inputted query input is not a 10 digit fips.")
   geoid <- NULL
-  if(is.na(as.integer(query))) geoid <- "state"
-  if(!is.na(as.integer(query))) geoid <- "county or CBSA"
+
+  if(!numbers_only(query)) geoid <- "state"
+  if(numbers_only(query)) geoid <- "county or CBSA"
 
   # Build the URL for querying the data.
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(geoid == "state") "statedata/" else "data/", query, "?year=", year, sep="") #build URL
@@ -196,39 +197,84 @@ hudfmr <- function(query, year = pkg.env$curr.year, key) {
     stop("The query did not return any results. Please check if these input values follow the rules stated for each parameter. Maybe your authorization key is wrong? Maybe
          there hasn't been data recorded for this particular time period.")
   } else {
-    res<-data.frame(geoid=if(geoid == "state") character() else integer(),
-                    year = integer(),
-                    town=character(),
-                    county=character(),
-                    metro=character(),
-                    fips=character(),
-                    efficiency=integer(),
-                    onebedroom=integer(),
-                    twobedroom=integer(),
-                    threebedroom=integer(),
-                    fourbedroom=integer(),
-                    fmrpercentile=integer(),
-                    statename=character(),
-                    smallareastatus=integer()) #build df
-    colnames(res)[1] <- geoid
+    if(geoid == "state") {
+      res<-data.frame(geoid=if(geoid == "state") character() else integer(),
+                      year = integer(),
+                      town=character(),
+                      county=character(),
+                      metro=character(),
+                      metrostatus=integer(),
+                      fips=character(),
+                      efficiency=integer(),
+                      onebedroom=integer(),
+                      twobedroom=integer(),
+                      threebedroom=integer(),
+                      fourbedroom=integer(),
+                      fmrpercentile=integer(),
+                      statename=character(),
+                      smallareastatus=integer()) #build df
+      colnames(res)[1] <- geoid
 
-    for(i in seq(1,length(cont$data$results),1)){ #iterate over results and append to df
+      for(i in seq(1,length(cont$data$counties),1)){ #iterate over results and append to df
+        int<-data.frame(geoid = 0, year = 0, town = 0, county = 0, metro = 0, metrostatus = 0, fips = 0,
+                        efficiency = 0, onebedroom = 0, twobedroom = 0, threebedroom = 0,
+                        fourbedroom = 0, fmrpercentile = 0, statename = 0, smallareastatus = 0)
 
-      int<-data.frame(geoid=query,
-                      year = year,
-                      town=cont$data$counties[[i]][["town_name"]],
-                      county=cont$data$counties[[i]][["county_name"]],
-                      metro=cont$data$counties[[i]][["metro_name"]],
-                      fips=cont$data$counties[[i]][["fips_code"]],
-                      efficiency=cont$data$counties[[i]][["Efficiency"]],
-                      onebedroom =cont$data$counties[[i]][["`One-Bedroom`"]] ,
-                      twobedroom =cont$data$counties[[i]][["`Two-Bedroom`"]] ,
-                      threebedroom =cont$data$counties[[i]][["`Three-Bedroom`"]],
-                      fourbedroom =cont$data$counties[[i]][["`Four-Bedroom`"]],
-                      fmrpercentile =cont$data$counties[[i]][["`FMR Percentile`"]],
-                      statename =cont$data$counties[[i]][["statename"]],
-                      smallareastatus = cont$data$counties[[i]][["smallarea_status"]]
-                      )
+        int$geoid <- query
+        int$year <- year
+        int$town <- if(is.null(cont$data$counties[[i]][["town_name"]]) || cont$data$counties[[i]][["town_name"]] == "") "NA" else cont$data$counties[[i]][["town_name"]]
+        int$county <- cont$data$counties[[i]][["county_name"]]
+        int$metro <- cont$data$counties[[i]][["metro_name"]]
+        int$metrostatus <- cont$data$counties[[i]][["metro_status"]]
+        int$fips <- cont$data$counties[[i]][["fips_code"]]
+        int$efficiency <- cont$data$counties[[i]][["Efficiency"]]
+        int$onebedroom <- cont$data$counties[[i]][["`One-Bedroom`"]]
+        int$twobedroom <- cont$data$counties[[i]][["`Two-Bedroom`"]]
+        int$threebedroom <- cont$data$counties[[i]][["`Three-Bedroom`"]]
+        int$fourbedroom <- cont$data$counties[[i]][["`Four-Bedroom`"]]
+        int$fmrpercentile <- cont$data$counties[[i]][["`FMR Percentile`"]]
+        int$statename <- cont$data$counties[[i]][["statename"]]
+        int$smallareastatus <- cont$data$counties[[i]][["smallarea_status"]]
+
+        colnames(int)[1] <- geoid
+        res<-rbind.data.frame(res, int) #appends rows to df
+      }
+    } else {
+      res<-data.frame(geoid=if(geoid == "state") character() else integer(),
+                      year = integer(),
+                      town=character(),
+                      county=character(),
+                      metro=character(),
+                      metrostatus=integer(),
+                      fips=character(),
+                      efficiency=integer(),
+                      onebedroom=integer(),
+                      twobedroom=integer(),
+                      threebedroom=integer(),
+                      fourbedroom=integer(),
+                      fmrpercentile=integer(),
+                      statename=character(),
+                      smallareastatus=integer()) #build df
+      colnames(res)[1] <- geoid
+
+      int<-data.frame(geoid = 0, year = 0, town = 0, county = 0, metro = 0, metrostatus = 0, fips = 0,
+                      efficiency = 0, onebedroom = 0, twobedroom = 0, threebedroom = 0,
+                      fourbedroom = 0, fmrpercentile = 0, statename = 0, smallareastatus = 0)
+      int$geoid <- query
+      int$year <- year
+      int$town <- if(is.null(cont$data[["town_name"]]) || cont$data[["town_name"]] == "") "NA" else cont$data[["town_name"]]
+      int$county <- cont$data[["county_name"]]
+      int$metro <- cont$data[["metro_name"]]
+      int$metrostatus <- cont$data[["metro_status"]]
+      int$fips <- cont$data[["fips_code"]]
+      int$efficiency <- cont$basicdata$data[["Efficiency"]]
+      int$onebedroom <- cont$basicdata$data[["`One-Bedroom`"]]
+      int$twobedroom <- cont$basicdata$data[["`Two-Bedroom`"]]
+      int$threebedroom <- cont$basicdata$data[["`Three-Bedroom`"]]
+      int$fourbedroom <- cont$basicdata$data[["`Four-Bedroom`"]]
+      int$fmrpercentile <- cont$basicdata$data[["`FMR Percentile`"]]
+      int$statename <- cont$data[["statename"]]
+      int$smallareastatus <- cont$data[["smallarea_status"]]
       colnames(int)[1] <- geoid
       res<-rbind.data.frame(res, int) #appends rows to df
     }
@@ -263,7 +309,7 @@ hudil <- function(query, year = pkg.env$curr.year, key) {
 
   if(as.integer(year) > as.integer(pkg.env$curr.year)) stop("The year specified seems to be in the future?")
   if(is.na(as.integer(query)) && nchar(query) != 2) stop("The inputted query for state abbreviation is not right.")
-  if(!is.na(as.integer(query)) && nchar(query) != 5) stop("The inputted query input is not a 5 digit fips or CBSA code.")
+  if(!is.na(as.integer(query)) && nchar(query) != 10) stop("The inputted query input is not a 10 digit fips.")
   geoid <- NULL
   if(is.na(as.integer(query))) geoid <- "state"
   if(!is.na(as.integer(query))) geoid <- "county or CBSA"
@@ -310,7 +356,7 @@ hudil <- function(query, year = pkg.env$curr.year, key) {
                       ) #build df
       colnames(res)[1] <- geoid
 
-      for(i in seq(1,length(cont$data$results),1)){ #iterate over results and append to df
+      for(i in seq(1,length(cont$data),1)){ #iterate over results and append to df
 
         int<-data.frame(geoid=query,
                         year=year,

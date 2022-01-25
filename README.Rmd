@@ -22,39 +22,122 @@ The goal of hudr is to ...
 
 ## Installation
 
-You can install the released version of hudr from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("hudr")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("etam4260/hudr")
 ```
-## Example
+## Details
 
-This is a basic example which shows you how to solve a common problem:
+This library contains an interface to
+the US Department of Housing and Urban Development datasets. 
+This library currently includes:
+CROSSWALKS
+FAIR MARKETS RENT
+INCOME LIMITS
+COMPREHENSIVE HOUSING AND AFFORDABILITY STRATEGY
 
-```{r example}
+## Setup
+
+The US Department of Housing and Urban Development requires users to gain an 
+access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and make an account.
+From there you need to make a new token. Make sure to save the token somewhere as
+you will only be able to view it once. You can now supply the 'key' argument
+for each function.
+
+
+## Examples
+
+### CROSSWALKS API
+This is a basic example which shows you how to query the CROSSWALKS dataset.
+
+```{r}
 library(hudr)
-## basic example code
+
+# Type 7 corresponds to county level data. The query is a 5 digit fips code.
+# The year and quarter specifies when these measurements were made. The key
+# is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
+key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"
+
+hudcw(type = 7, query = '22031', year = '2010', quarter = '4', key = key)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+#### CROSSWALKS DATASET FIELDS
 
-```{r cars}
-summary(cars)
+zip/fips/fipstract/CBSA/Congressional District/County Subdistrict > 
+Zip, Tract, County, CD or CBSA code
+
+year >
+Value of year
+
+quarter >
+Quarter of the year
+
+res_ratio > 
+The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to the total number of residential addresses in the entire ZIP. (for type 1-5)
+The ratio of residential addresses in the Zip, Tract, County, or CBSA - ZIP part to the total number of residential addresses in the entire Zip, Tract, County, or CBSA. (for type 6-10)
+
+bus_ratio >
+The ratio of business addresses in the ZIP – Tract, County, or CBSA part to the total number of business addresses in the entire ZIP. (for type 1-5)
+The ratio of business addresses in the Tract, County, or CBSA – ZIP part to the total number of business addresses in the entire Tract, County, or CBSA. (for type 6-10)
+
+oth_ratio >
+The ratio of other addresses in the ZIP – Tract to the total number of other addresses in the entire ZIP. (for type 1-5)
+The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the total number of other addresses in the entire Tract, County, or CBSA. (for type 6-10)
+
+tot_ratio >
+The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5)
+The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10)
+
+
+
+This is a basic example to show you how to query the Fair Markets Rent API. Query
+a state will return a dataframe with rows representing counties within the state.
+A county fips + subdivision 10 digit code will return a 1 row dataframe for that
+county.
+
+```{r}
+key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"
+
+sfmr <- hudfmr(query = 'VA', year = '2021', key = key)
+
+cfmr <- hudfmr(query = '0100199999', year = '2017', key = key)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
+state/county or CBSA >
+Name of the county if it is a county.
 
-You can also embed plots, for example:
+year >
+Value of year
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
+counties_msa >
+Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+town_name >
+Town name - applicable for North East regions
+
+metro_status >
+value will be "1" if it is a metropolitan county. Otherwise value will be "0".
+
+metro_name >
+Metro area name if metro_status is "1"
+
+smallarea_status >
+value will be "1" if it is a small area. Otherwise value will be "0".
+
+Efficiency >
+Efficiency FMR
+
+One-Bedroom >
+1-bedroom FMR
+
+Two-Bedroom >
+2-bedroom FMR
+
+Three-Bedroom >
+3-bedroom FMR
+
+Four-Bedroom >
+4-bedroom FMR
+
