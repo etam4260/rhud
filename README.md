@@ -126,28 +126,26 @@ head(hudfmr(query = 'VA', year = '2021', key = key))
 #> 4 Alleghany County-Clifton Forge city-Covington city, VA HUD Nonmetro FMR Area
 #> 5                                                             Richmond, VA MSA
 #> 6                                                            Lynchburg, VA MSA
-#>   metrostatus fips efficiency onebedroom twobedroom threebedroom fourbedroom
-#> 1          NA   NA         NA         NA         NA           NA          NA
-#> 2          NA   NA         NA         NA         NA           NA          NA
-#> 3          NA   NA         NA         NA         NA           NA          NA
-#> 4          NA   NA         NA         NA         NA           NA          NA
-#> 5          NA   NA         NA         NA         NA           NA          NA
-#> 6          NA   NA         NA         NA         NA           NA          NA
+#>         fips efficiency onebedroom twobedroom threebedroom fourbedroom
+#> 1 5100199999        481        602        713          947         967
+#> 2 5100399999        949       1077       1266         1575        1965
+#> 3 5151099999       1513       1548       1765         2263        2742
+#> 4 5100599999        495        558        735          958        1142
+#> 5 5100799999        993       1020       1163         1538        1840
+#> 6 5100999999        633        660        784         1053        1241
 #>   fmrpercentile statename smallareastatus
-#> 1            NA  Virginia               0
-#> 2            NA  Virginia               0
-#> 3            NA  Virginia               1
-#> 4            NA  Virginia               0
-#> 5            NA  Virginia               0
-#> 6            NA  Virginia               0
+#> 1            40  Virginia               0
+#> 2            40  Virginia               0
+#> 3            40  Virginia               1
+#> 4            40  Virginia               0
+#> 5            40  Virginia               0
+#> 6            40  Virginia               0
 
 hudfmr(query = '0100199999', year = '2017', key = key)
 #>   county or CBSA year town             county              metro metrostatus
 #> 1     0100199999 2017   NA Autauga County, AL Montgomery, AL MSA           1
-#>   fips efficiency onebedroom twobedroom threebedroom fourbedroom fmrpercentile
-#> 1   NA         NA         NA         NA           NA          NA            NA
-#>   statename smallareastatus
-#> 1        NA               0
+#>   efficiency onebedroom twobedroom threebedroom fourbedroom smallareastatus
+#> 1        587        682        822         1054        1425               0
 ```
 
 #### Fair Markets Rent Data Fields

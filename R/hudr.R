@@ -5,16 +5,17 @@
 
 # Implementation thought process was adapted from
 # https://github.com/dteck/HUD
+# Inspiration to build an API
+# came from
+# https://github.com/ropensci/rnoaa
 
-# This documentation is for the year of 2022.
 # An R interface for accessing HUD (US Department of Housing and Urban Development)
 # API.
 # The HUD has four main datasets:
-# USPS ZIP CODE CROSSWALK
-# FAIR MARKETS RENT
-# INCOME LIMITS
-# COMPREHENSIVE HOUSING AFFORDABILITY STRATEGY
-
+# Crosswalk
+# Fair Markets Rent
+# Income Limits
+# Comprehensive and Affordability Strategy
 
 
 # Creating global environment to set default values to some
@@ -32,6 +33,14 @@ if(as.integer(pkg.env$curr.year) > 9) {
   pkg.env$curr.quarter <- "1"
 }
 
+
+#' setkey
+#' @name setkey
+#' @title setkey
+#' @param key The token given by USPS
+#' @description The function will save the key into your package download. You will need to
+#' update this for new downloads. You can also set a new key by using this function with a new one.
+#' @export
 setkey <- function(key) {
   pkg.env$curr.key <- key
 }
@@ -210,7 +219,6 @@ hudfmr <- function(query, year = pkg.env$curr.year, key) {
                       town=character(length(cont$data$counties)),
                       county=character(length(cont$data$counties)),
                       metro=character(length(cont$data$counties)),
-                      metrostatus=integer(length(cont$data$counties)),
                       fips=character(length(cont$data$counties)),
                       efficiency=integer(length(cont$data$counties)),
                       onebedroom=integer(length(cont$data$counties)),
@@ -221,20 +229,19 @@ hudfmr <- function(query, year = pkg.env$curr.year, key) {
                       statename=character(length(cont$data$counties)),
                       smallareastatus=integer(length(cont$data$counties))) #build df
 
-      for(i in seq(1,length(cont$data$counties),1)){ #iterate over results and append to df
+      for(i in seq(1,length(cont$data$counties),1)){ #iterate over results and append to d
         res$geoid[i] <- query
         res$year[i] <- year
         res$town[i] <- if(is.null(cont$data$counties[[i]][["town_name"]]) || cont$data$counties[[i]][["town_name"]] == "") "NA" else cont$data$counties[[i]][["town_name"]]
         res$county[i] <- cont$data$counties[[i]][["county_name"]]
         res$metro[i] <- cont$data$counties[[i]][["metro_name"]]
-        res$metrostatus[i] <- if(is.null(cont$data[["metro_status"]]) || cont$data[["metro_status"]] == "") "NA" else cont$data[["metro_status"]]
-        res$fips[i] <- if(is.null(cont$data[["fips_code"]]) || cont$data[["fips_code"]] == "") "NA" else cont$data[["fips_code"]]
-        res$efficiency[i] <- if(is.null(cont$data[["Efficiency"]]) || cont$data[["Efficiency"]] == "") "NA" else cont$data[["Efficiency"]]
-        res$onebedroom[i] <- if(is.null(cont$data[["`One-Bedroom`"]]) || cont$data[["`One-Bedroom`"]] == "") "NA" else cont$data[["`One-Bedroom`"]]
-        res$twobedroom[i] <- if(is.null(cont$data[["`Two-Bedroom`"]]) || cont$data[["`Two-Bedroom`"]] == "") "NA" else cont$data[["`Two-Bedroom`"]]
-        res$threebedroom[i] <- if(is.null(cont$data[["`Three-Bedroom`"]]) || cont$data[["`Three-Bedroom`"]] == "") "NA" else cont$data[["`Three-Bedroom`"]]
-        res$fourbedroom[i] <- if(is.null(cont$data[["`Four-Bedroom`"]]) || cont$data[["`Four-Bedroom`"]] == "") "NA" else cont$data[["`Four-Bedroom`"]]
-        res$fmrpercentile[i] <- if(is.null(cont$data[["`FMR Percentile`"]]) || cont$data[["`FMR Percentile`"]] == "") "NA" else cont$data[["`FMR Percentile`"]]
+        res$fips[i] <- cont$data$counties[[i]][["fips_code"]]
+        res$efficiency[i] <- cont$data$counties[[i]][["Efficiency"]]
+        res$onebedroom[i] <- cont$data$counties[[i]]$`One-Bedroom`
+        res$twobedroom[i] <- cont$data$counties[[i]]$`Two-Bedroom`
+        res$threebedroom[i] <- cont$data$counties[[i]]$`Three-Bedroom`
+        res$fourbedroom[i] <- cont$data$counties[[i]]$`Four-Bedroom`
+        res$fmrpercentile[i] <- cont$data$counties[[i]]$`FMR Percentile`
         res$statename[i] <- cont$data$counties[[i]][["statename"]]
         res$smallareastatus[i] <- cont$data$counties[[i]][["smallarea_status"]]
 
@@ -246,14 +253,11 @@ hudfmr <- function(query, year = pkg.env$curr.year, key) {
                       county=character(1),
                       metro=character(1),
                       metrostatus=integer(1),
-                      fips=character(1),
                       efficiency=integer(1),
                       onebedroom=integer(1),
                       twobedroom=integer(1),
                       threebedroom=integer(1),
                       fourbedroom=integer(1),
-                      fmrpercentile=integer(1),
-                      statename=character(1),
                       smallareastatus=integer(1)) #build df
 
       res$geoid[1] <- query
@@ -261,15 +265,12 @@ hudfmr <- function(query, year = pkg.env$curr.year, key) {
       res$town[1] <- if(is.null(cont$data[["town_name"]]) || cont$data[["town_name"]] == "") "NA" else cont$data[["town_name"]]
       res$county[1] <- cont$data[["county_name"]]
       res$metro[1] <- cont$data[["metro_name"]]
-      res$metrostatus[1] <- if(is.null(cont$data[["metro_status"]]) || cont$data[["metro_status"]] == "") "NA" else cont$data[["metro_status"]]
-      res$fips[1] <- if(is.null(cont$data[["fips_code"]]) || cont$data[["fips_code"]] == "") "NA" else cont$data[["fips_code"]]
-      res$efficiency[1] <- if(is.null(cont$basicdata$data[["Efficiency"]]) || cont$basicdata$data[["Efficiency"]] == "") "NA" else cont$basicdata$data[["Efficiency"]]
-      res$onebedroom[1] <- if(is.null(cont$basicdata$data[["`One-Bedroom`"]]) || cont$basicdata$data[["`One-Bedroom`"]] == "") "NA" else cont$basicdata$data[["`One-Bedroom`"]]
-      res$twobedroom[1] <- if(is.null(cont$basicdata$data[["`Two-Bedroom`"]]) || cont$basicdata$data[["`Two-Bedroom`"]] == "") "NA" else cont$basicdata$data[["`Two-Bedroom`"]]
-      res$threebedroom[1] <- if(is.null(cont$basicdata$data[["`Three-Bedroom`"]]) || cont$basicdata$data[["`Three-Bedroom`"]] == "") "NA" else cont$basicdata$data[["`Three-Bedroom`"]]
-      res$fourbedroom[1] <- if(is.null(cont$basicdata$data[["`Four-Bedroom`"]]) || cont$basicdata$data[["`Four-Bedroom`"]] == "") "NA" else cont$basicdata$data[["`Four-Bedroom`"]]
-      res$fmrpercentile[1] <- if(is.null(cont$basicdata$data[["`FMR Percentile`"]]) || cont$basicdata$data[["`FMR Percentile`"]] == "") "NA" else cont$basicdata$data[["`FMR Percentile`"]]
-      res$statename[1] <- if(is.null(cont$basicdata$data[["statename"]]) || cont$basicdata$data[["statename"]] == "") "NA" else cont$basicdata$data[["statename"]]
+      res$metrostatus[1] <- cont$data[["metro_status"]]
+      res$efficiency[1] <- cont$data$basicdata[["Efficiency"]]
+      res$onebedroom[1] <- cont$data$basicdata$`One-Bedroom`
+      res$twobedroom[1] <- cont$data$basicdata$`Two-Bedroom`
+      res$threebedroom[1] <- cont$data$basicdata$`Three-Bedroom`
+      res$fourbedroom[1] <- cont$data$basicdata$`Four-Bedroom`
       res$smallareastatus[1] <- cont$data[["smallarea_status"]]
     }
     colnames(res)[1] <- geoid
