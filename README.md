@@ -67,37 +67,39 @@ hudcw(type = 7, query = '22031', year = '2010', quarter = '4', key = key)
 
 #### Crosswalk Data Fields
 
-zip/fips/fipstract/CBSA/Congressional District/County Subdistrict &gt;
-Zip, Tract, County, CD or CBSA code
-
-year &gt; Value of year
-
-quarter &gt; Quarter of the year
-
-res\_ratio &gt; The ratio of residential addresses in the ZIP – Tract,
-County, or CBSA part to the total number of residential addresses in the
-entire ZIP. (for type 1-5) The ratio of residential addresses in the
-Zip, Tract, County, or CBSA - ZIP part to the total number of
-residential addresses in the entire Zip, Tract, County, or CBSA. (for
-type 6-10)
-
-bus\_ratio &gt; The ratio of business addresses in the ZIP – Tract,
-County, or CBSA part to the total number of business addresses in the
-entire ZIP. (for type 1-5) The ratio of business addresses in the Tract,
-County, or CBSA – ZIP part to the total number of business addresses in
-the entire Tract, County, or CBSA. (for type 6-10)
-
-oth\_ratio &gt; The ratio of other addresses in the ZIP – Tract to the
-total number of other addresses in the entire ZIP. (for type 1-5) The
-ratio of other addresses in the Tract, County, or CBSA – ZIP part to the
-total number of other addresses in the entire Tract, County, or CBSA.
-(for type 6-10)
-
-tot\_ratio &gt; The ratio of all addresses in the ZIP – Tract to the
-total number of all types of addresses in the entire ZIP. (for type 1-5)
-The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the
-total number of all types of addresses in the entire Tract, County, or
-CBSA. (for type 6-10)
+1.  zip/fips/fipstract/CBSA/Congressional District/County
+    Subdistrict &gt;
+    -   Zip, Tract, County, CD or CBSA code
+2.  year
+    -   Value of year
+3.  quarter
+    -   Quarter of the year
+4.  res\_ratio
+    -   The ratio of residential addresses in the ZIP – Tract, County,
+        or CBSA part to the total number of residential addresses in the
+        entire ZIP. (for type 1-5) The ratio of residential addresses in
+        the Zip, Tract, County, or CBSA - ZIP part to the total number
+        of residential addresses in the entire Zip, Tract, County, or
+        CBSA. (for type 6-10)
+5.  bus\_ratio
+    -   The ratio of business addresses in the ZIP – Tract, County, or
+        CBSA part to the total number of business addresses in the
+        entire ZIP. (for type 1-5) The ratio of business addresses in
+        the Tract, County, or CBSA – ZIP part to the total number of
+        business addresses in the entire Tract, County, or CBSA. (for
+        type 6-10)
+6.  oth\_ratio
+    -   The ratio of other addresses in the ZIP – Tract to the total
+        number of other addresses in the entire ZIP. (for type 1-5) The
+        ratio of other addresses in the Tract, County, or CBSA – ZIP
+        part to the total number of other addresses in the entire Tract,
+        County, or CBSA. (for type 6-10)
+7.  tot\_ratio
+    -   The ratio of all addresses in the ZIP – Tract to the total
+        number of all types of addresses in the entire ZIP. (for type
+        1-5) The ratio of all addresses in the Tract, County, or
+        CBSA-ZIP part to the total number of all types of addresses in
+        the entire Tract, County, or CBSA. (for type 6-10)
 
 ### Fair Markets Rent API
 
@@ -151,37 +153,32 @@ hudfmr(query = '0100199999', year = '2017', key = key)
 #### Fair Markets Rent Data Fields
 
 1.  state/county or CBSA
-
--   Name of the county if it is a county.
-
+    -   Name of the county if it is a county.
 2.  year
-
--   Value of year
-
-3.  counties\_msa &gt;
-
--   Names of all counties belonging to the Metro Area if it is a Metro
-    Area (MSA).
-
-town\_name &gt; Town name - applicable for North East regions
-
-metro\_status &gt; value will be “1” if it is a metropolitan county.
-Otherwise value will be “0”.
-
-metro\_name &gt; Metro area name if metro\_status is “1”
-
-smallarea\_status &gt; value will be “1” if it is a small area.
-Otherwise value will be “0”.
-
-Efficiency &gt; Efficiency FMR
-
-One-Bedroom &gt; 1-bedroom FMR
-
-Two-Bedroom &gt; 2-bedroom FMR
-
-Three-Bedroom &gt; 3-bedroom FMR
-
-Four-Bedroom &gt; 4-bedroom FMR
+    -   Value of year
+3.  counties\_msa
+    -   Names of all counties belonging to the Metro Area if it is a
+        Metro Area (MSA).
+4.  town\_name
+    -   Town name - applicable for North East regions
+5.  metro\_status
+    -   value will be “1” if it is a metropolitan county. Otherwise
+        value will be “0”.
+6.  metro\_name
+    -   Metro area name if metro\_status is “1”
+7.  smallarea\_status
+    -   value will be “1” if it is a small area. Otherwise value will be
+        “0”.
+8.  Efficiency
+    -   Efficiency FMR
+9.  One-Bedroom
+    -   1-bedroom FMR
+10. Two-Bedroom
+    -   2-bedroom FMR
+11. Three-Bedroom
+    -   3-bedroom FMR
+12. Four-Bedroom
+    -   4-bedroom FMR
 
 ## Contributors
 
