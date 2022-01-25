@@ -38,9 +38,9 @@ now supply the ‘key’ argument for each function.
 
 ## Examples
 
-### CROSSWALKS API
+### Crosswalk API
 
-This is a basic example which shows you how to query the CROSSWALKS
+This is a basic example which shows you how to query the CROSSWALK
 dataset.
 
 ``` r
@@ -65,7 +65,7 @@ hudcw(type = 7, query = '22031', year = '2010', quarter = '4', key = key)
 #> 10 22031 2010       4 71065 0.000176819 0.0000000 0.0000000 0.000167266
 ```
 
-#### CROSSWALKS DATASET FIELDS
+#### Crosswalk Data Fields
 
 zip/fips/fipstract/CBSA/Congressional District/County Subdistrict &gt;
 Zip, Tract, County, CD or CBSA code
@@ -99,6 +99,8 @@ The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the
 total number of all types of addresses in the entire Tract, County, or
 CBSA. (for type 6-10)
 
+### Fair Markets Rent API
+
 This is a basic example to show you how to query the Fair Markets Rent
 API. Query a state will return a dataframe with rows representing
 counties within the state. A county fips + subdivision 10 digit code
@@ -111,6 +113,8 @@ sfmr <- hudfmr(query = 'VA', year = '2021', key = key)
 
 cfmr <- hudfmr(query = '0100199999', year = '2017', key = key)
 ```
+
+#### Fair Markets Rent Data Fields
 
 state/county or CBSA &gt; Name of the county if it is a county.
 
