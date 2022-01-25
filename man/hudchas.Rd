@@ -3,9 +3,9 @@
 \name{hudchas}
 \alias{hudchas}
 \title{hudchas
-This function queries the Income Limits API provided by US Department of Housing and Urban Development}
+This function queries the CHAS API provided by US Department of Housing and Urban Development}
 \usage{
-hudchas(type, query, year = "2014-2018", key)
+hudchas(type, stateId = NULL, entityId = NULL, year = "2014-2018", key)
 }
 \arguments{
 \item{type}{Queries the data based off
@@ -15,7 +15,7 @@ hudchas(type, query, year = "2014-2018", key)
 4 - MCD
 5 - Place}
 
-\item{query}{Can provide either FIPS code, CBSA code for metro areas, or state abbreviation.}
+\item{stateId}{For types 2,3,4,5, you must provide a stateId. For 3,4,5}
 
 \item{year}{Gets the year that this data was recorded. Defaults to 2014-2018. There are specific year ranges
 that are only accepted.
@@ -30,13 +30,12 @@ that are only accepted.
 2006-2010}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for an account and request for an API key.}
+
+\item{countId}{For types 3,4,5, you must provide a fips code}
 }
 \value{
-This function returns a dataframe containing FREE MARKETS RENT data for a particular county or state.
-
+This function returns a dataframe containing CHAS data for a particular state.
 For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html
-For state level data, these measurements will be the same as county level data, but will return a dataframe with
-the individual measurements for each individual county within the state.
 }
 \description{
 hudchas

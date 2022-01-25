@@ -8,7 +8,7 @@ This function queries the Fair Markets Rent API provided by US Department of Hou
 hudfmr(query, year = pkg.env$curr.year, key)
 }
 \arguments{
-\item{query}{Can provide either FIPS code, CBSA code for metro areas, or state abbreviation.}
+\item{query}{Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.}
 
 \item{year}{Gets the year that this data was recorded. Default is the latest year.}
 

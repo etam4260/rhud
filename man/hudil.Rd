@@ -8,7 +8,7 @@ This function queries the Income Limits API provided by US Department of Housing
 hudil(query, year = pkg.env$curr.year, key)
 }
 \arguments{
-\item{query}{Can provide either FIPS code, CBSA code for metro areas, or state abbreviation.}
+\item{query}{Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.}
 
 \item{year}{Gets the year that this data was recorded. Default is the latest year.}
 
@@ -19,8 +19,6 @@ This function returns a dataframe containing INCOME LIMITS data for a particular
 For county level data, these measurements include the county_name, counties_msa, town_name, metro_status, metro_name,
 year, median_income, very_low+, extremely_low+, and low+.
 For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html
-For state level data, these measurements will be the same as county level data, but will return a dataframe with
-the individual measurements for each individual county within the state.
 }
 \description{
 hudil
