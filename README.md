@@ -9,13 +9,13 @@
 This library contains an interface to the US Department of Housing and
 Urban Development datasets. The APIs which this library interfaces with:
 
-CROSSWALKS
+-   Crosswalk
 
-FAIR MARKETS RENT
+-   Fair Markets Rent
 
-INCOME LIMITS
+-   Income Limits
 
-COMPREHENSIVE HOUSING AND AFFORDABILITY STRATEGY
+-   Comprehensive Housing and Affordability Strategy
 
 ## Installation
 
@@ -52,17 +52,17 @@ library(hudr)
 key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"
 
 hudcw(type = 7, query = '22031', year = '2010', quarter = '4', key = key)
-#>     fips year quarter   zip   res_ratio bus_ratio oth_ratio   tot_ratio
-#> 1  22031 2010       4 71052 0.427990000 0.6806280 0.5479450 0.440830000
-#> 2  22031 2010       4 71078 0.183273000 0.0890052 0.1506850 0.178556000
-#> 3  22031 2010       4 71049 0.111750000 0.0663176 0.1506850 0.109810000
-#> 4  22031 2010       4 71032 0.081690400 0.0453752 0.0136986 0.079535000
-#> 5  22031 2010       4 71027 0.070285600 0.0523560 0.0410959 0.069248100
-#> 6  22031 2010       4 71030 0.043674300 0.0174520 0.0410959 0.042401900
-#> 7  22031 2010       4 71046 0.042790200 0.0279232 0.0136986 0.041900100
-#> 8  22031 2010       4 71063 0.027849000 0.0139616 0.0410959 0.027264400
-#> 9  22031 2010       4 71419 0.010520700 0.0069808 0.0000000 0.010286900
-#> 10 22031 2010       4 71065 0.000176819 0.0000000 0.0000000 0.000167266
+#>     fips zip   res_ratio bus_ratio oth_ratio   tot_ratio year quarter
+#> 1  22031   0 0.427990000 0.6806280 0.5479450 0.440830000 2010       4
+#> 2  22031   0 0.183273000 0.0890052 0.1506850 0.178556000 2010       4
+#> 3  22031   0 0.111750000 0.0663176 0.1506850 0.109810000 2010       4
+#> 4  22031   0 0.081690400 0.0453752 0.0136986 0.079535000 2010       4
+#> 5  22031   0 0.070285600 0.0523560 0.0410959 0.069248100 2010       4
+#> 6  22031   0 0.043674300 0.0174520 0.0410959 0.042401900 2010       4
+#> 7  22031   0 0.042790200 0.0279232 0.0136986 0.041900100 2010       4
+#> 8  22031   0 0.027849000 0.0139616 0.0410959 0.027264400 2010       4
+#> 9  22031   0 0.010520700 0.0069808 0.0000000 0.010286900 2010       4
+#> 10 22031   0 0.000176819 0.0000000 0.0000000 0.000167266 2010       4
 ```
 
 #### Crosswalk Data Fields
@@ -102,7 +102,7 @@ CBSA. (for type 6-10)
 ### Fair Markets Rent API
 
 This is a basic example to show you how to query the Fair Markets Rent
-API. Query a state will return a dataframe with rows representing
+API. Querying a state will return a dataframe with rows representing
 counties within the state. A county fips + subdivision 10 digit code
 will return a 1 row dataframe for that county.
 
@@ -124,29 +124,44 @@ head(hudfmr(query = 'VA', year = '2021', key = key))
 #> 4 Alleghany County-Clifton Forge city-Covington city, VA HUD Nonmetro FMR Area
 #> 5                                                             Richmond, VA MSA
 #> 6                                                            Lynchburg, VA MSA
-#>         fips efficiency statename smallareastatus
-#> 1 5100199999        481  Virginia               0
-#> 2 5100399999        949  Virginia               0
-#> 3 5151099999       1513  Virginia               1
-#> 4 5100599999        495  Virginia               0
-#> 5 5100799999        993  Virginia               0
-#> 6 5100999999        633  Virginia               0
+#>   metrostatus fips efficiency onebedroom twobedroom threebedroom fourbedroom
+#> 1          NA   NA         NA         NA         NA           NA          NA
+#> 2          NA   NA         NA         NA         NA           NA          NA
+#> 3          NA   NA         NA         NA         NA           NA          NA
+#> 4          NA   NA         NA         NA         NA           NA          NA
+#> 5          NA   NA         NA         NA         NA           NA          NA
+#> 6          NA   NA         NA         NA         NA           NA          NA
+#>   fmrpercentile statename smallareastatus
+#> 1            NA  Virginia               0
+#> 2            NA  Virginia               0
+#> 3            NA  Virginia               1
+#> 4            NA  Virginia               0
+#> 5            NA  Virginia               0
+#> 6            NA  Virginia               0
 
 hudfmr(query = '0100199999', year = '2017', key = key)
 #>   county or CBSA year town             county              metro metrostatus
 #> 1     0100199999 2017   NA Autauga County, AL Montgomery, AL MSA           1
-#>   smallareastatus
-#> 1               0
+#>   fips efficiency onebedroom twobedroom threebedroom fourbedroom fmrpercentile
+#> 1   NA         NA         NA         NA           NA          NA            NA
+#>   statename smallareastatus
+#> 1        NA               0
 ```
 
 #### Fair Markets Rent Data Fields
 
-state/county or CBSA &gt; Name of the county if it is a county.
+1.  state/county or CBSA
 
-year &gt; Value of year
+-   Name of the county if it is a county.
 
-counties\_msa &gt; Names of all counties belonging to the Metro Area if
-it is a Metro Area (MSA).
+2.  year
+
+-   Value of year
+
+3.  counties\_msa &gt;
+
+-   Names of all counties belonging to the Metro Area if it is a Metro
+    Area (MSA).
 
 town\_name &gt; Town name - applicable for North East regions
 
@@ -167,3 +182,17 @@ Two-Bedroom &gt; 2-bedroom FMR
 Three-Bedroom &gt; 3-bedroom FMR
 
 Four-Bedroom &gt; 4-bedroom FMR
+
+## Contributors
+
+-   Emmet Tam(<https://github.com/etam4260>)
+
+## Disclaimers
+
+-   This is a WIP so please report any issues or bugs to:
+    <https://github.com/etam4260/hudr/issues>
+-   License: MIT
+-   To get citation information for hudr in R, type citation(package =
+    ‘hudr’)
+-   This is open source, so please fork and introduce some pull
+    requests!

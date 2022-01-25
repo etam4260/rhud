@@ -22,13 +22,14 @@ This library contains an interface to
 the US Department of Housing and Urban Development datasets. 
 The APIs which this library interfaces with:
 
-CROSSWALKS
+* Crosswalk
 
-FAIR MARKETS RENT
+* Fair Markets Rent
 
-INCOME LIMITS
+* Income Limits
 
-COMPREHENSIVE HOUSING AND AFFORDABILITY STRATEGY
+* Comprehensive Housing and Affordability Strategy
+
 
 ## Installation
 
@@ -94,7 +95,7 @@ The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total n
 
 ### Fair Markets Rent API
 
-This is a basic example to show you how to query the Fair Markets Rent API. Query
+This is a basic example to show you how to query the Fair Markets Rent API. Querying
 a state will return a dataframe with rows representing counties within the state.
 A county fips + subdivision 10 digit code will return a 1 row dataframe for that
 county.
@@ -108,14 +109,14 @@ hudfmr(query = '0100199999', year = '2017', key = key)
 ```
 
 #### Fair Markets Rent Data Fields
-state/county or CBSA >
-Name of the county if it is a county.
+1) state/county or CBSA 
+  * Name of the county if it is a county.
 
-year >
-Value of year
+2) year 
+  * Value of year
 
-counties_msa >
-Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
+3) counties_msa >
+  * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
 
 town_name >
 Town name - applicable for North East regions
@@ -144,3 +145,14 @@ Three-Bedroom >
 Four-Bedroom >
 4-bedroom FMR
 
+## Contributors
+
+* Emmet Tam(https://github.com/etam4260)
+
+
+## Disclaimers
+
+* This is a WIP so please report any issues or bugs to: https://github.com/etam4260/hudr/issues
+* License: MIT
+* To get citation information for hudr in R, type citation(package = 'hudr')
+* This is open source, so please fork and introduce some pull requests!
