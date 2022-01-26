@@ -138,21 +138,21 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
 
-  res<-data.frame(geoid=integer(length(cont$data)),
-                  zip=integer(length(cont$data)),
-                  res_ratio=integer(length(cont$data)),
-                  bus_ratio=integer(length(cont$data)),
-                  oth_ratio=integer(length(cont$data)),
-                  tot_ratio=integer(length(cont$data)),
-                  year=integer(length(cont$data)),
-                  quarter=integer(length(cont$data))) #build df
+  res<-data.frame(geoid=integer(length(cont$data$results)),
+                  zip=integer(length(cont$data$results)),
+                  res_ratio=integer(length(cont$data$results)),
+                  bus_ratio=integer(length(cont$data$results)),
+                  oth_ratio=integer(length(cont$data$results)),
+                  tot_ratio=integer(length(cont$data$results)),
+                  year=integer(length(cont$data$results)),
+                  quarter=integer(length(cont$data$results))) #build df
 
   if (length(cont$data) == 0){ #check to see if results exist - if not warn use of errors in their input values
     stop("The query did not return any results. Please check if these input values follow the rules stated for each parameter. Maybe your authorization key is wrong? Maybe
          there hasn't been data recorded for this particular time period.")
   } else {
 
-    for(i in seq(1,length(cont$data),1)){ #iterate over results and append to df
+    for(i in seq(1,length(cont$data$results),1)){ #iterate over results and append to df
       res$geoid[i] <- query
       res$zip[i] <- cont$data$results[[i]][["geoid"]]
       res$year[i] <- year
