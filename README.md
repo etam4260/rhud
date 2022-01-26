@@ -63,8 +63,12 @@ dataset.
 # is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
 # This example does not have the key because we already set it up using setkey()
 hudcw(type = 7, query = '22031', year = '2010', quarter = '4')
-#>    fips zip res_ratio bus_ratio oth_ratio tot_ratio year quarter
-#> 1 22031   0   0.42799  0.680628  0.547945   0.44083 2010       4
+#>    fips   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter
+#> 1 22031 71052 0.4279900 0.6806280 0.5479450 0.4408300 2010       4
+#> 2 22031 71078 0.1832730 0.0890052 0.1506850 0.1785560 2010       4
+#> 3 22031 71049 0.1117500 0.0663176 0.1506850 0.1098100 2010       4
+#> 4 22031 71032 0.0816904 0.0453752 0.0136986 0.0795350 2010       4
+#> 5 22031 71027 0.0702856 0.0523560 0.0410959 0.0692481 2010       4
 ```
 
 #### Crosswalk Data Fields

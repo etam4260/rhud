@@ -138,28 +138,29 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
 
-  res<-data.frame(geoid=integer(1),
-                  zip=integer(1),
-                  res_ratio=integer(1),
-                  bus_ratio=integer(1),
-                  oth_ratio=integer(1),
-                  tot_ratio=integer(1),
-                  year=integer(1),
-                  quarter=integer(1)) #build df
+  res<-data.frame(geoid=integer(length(cont$data)),
+                  zip=integer(length(cont$data)),
+                  res_ratio=integer(length(cont$data)),
+                  bus_ratio=integer(length(cont$data)),
+                  oth_ratio=integer(length(cont$data)),
+                  tot_ratio=integer(length(cont$data)),
+                  year=integer(length(cont$data)),
+                  quarter=integer(length(cont$data))) #build df
 
   if (length(cont$data) == 0){ #check to see if results exist - if not warn use of errors in their input values
     stop("The query did not return any results. Please check if these input values follow the rules stated for each parameter. Maybe your authorization key is wrong? Maybe
          there hasn't been data recorded for this particular time period.")
   } else {
 
-    for(i in seq(1,1,1)){ #iterate over results and append to df
-      res$geoid[1] <- query
-      res$year[1] <- year
-      res$quarter[1] <- quarter
-      res$res_ratio[1] <- cont$data$results[[1]][["res_ratio"]]
-      res$bus_ratio[1] <- cont$data$results[[1]][["bus_ratio"]]
-      res$oth_ratio[1] <- cont$data$results[[1]][["oth_ratio"]]
-      res$tot_ratio[1] <- cont$data$results[[1]][["tot_ratio"]]
+    for(i in seq(1,length(cont$data),1)){ #iterate over results and append to df
+      res$geoid[i] <- query
+      res$zip[i] <- cont$data$results[[i]][["geoid"]]
+      res$year[i] <- year
+      res$quarter[i] <- quarter
+      res$res_ratio[i] <- cont$data$results[[i]][["res_ratio"]]
+      res$bus_ratio[i] <- cont$data$results[[i]][["bus_ratio"]]
+      res$oth_ratio[i] <- cont$data$results[[i]][["oth_ratio"]]
+      res$tot_ratio[i] <- cont$data$results[[i]][["tot_ratio"]]
     }
     colnames(res)[1] <- geoid
     return(res) #returns df as output of function
