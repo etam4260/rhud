@@ -175,6 +175,9 @@ hudfmr(query = '0100199999', year = '2017')
 
 ## Disclaimers
 
+-   This interface uses the HUD User Data API but is not endorsed or
+    certified by HUD User.
+-   The limit on the maximum number of API calls is 1200 queries a min.
 -   This is a WIP so please report any issues or bugs to:
     <https://github.com/etam4260/hudr/issues>
 -   License: MIT
