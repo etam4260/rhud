@@ -23,6 +23,7 @@
 pkg.env <- new.env(parent = emptyenv())
 pkg.env$curr.year <- strsplit(toString(Sys.Date()), "-")[[1]][1]
 pkg.env$curr.quarter <- NULL
+pkg.env$curr.key <- NULL
 if(as.integer(pkg.env$curr.year) > 9) {
   pkg.env$curr.quarter <- "4"
 } else if(as.integer(pkg.env$curr.year) > 6) {
@@ -85,7 +86,7 @@ setkey <- function(key) {
 #' These measurements include res-ratio, bus-ratio, oth-ratio, tot-ratio. For more details on these measurements, visit https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' cw <- hudwc(type = 7, query = '22031', year = '2021', quarter = '4', key = 'edf23jf834qd72nja')
-hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.quarter, key) {
+hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.quarter, key = pkg.env$curr.key) {
   geoid <- NULL
   URL <- NULL
   call <- NULL
@@ -166,8 +167,6 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
 }
 
 
-
-
 #' hudfmr
 #' @name hudfmr
 #' @title hudfmr
@@ -186,7 +185,7 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
 #' @examples
 #' fmr <- hudfmr(query = '0801499999', year = '2021', key = 'edf23jf834qd72nja')
 #' fmr <- hudfmr(query = 'VA', year = '2021', key = 'edf23jf834qd72nja')
-hudfmr <- function(query, year = pkg.env$curr.year, key) {
+hudfmr <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
   #chop off leading and trailing whitespace in inputs.
   geoid <- NULL
   URL <- NULL
@@ -297,7 +296,7 @@ hudfmr <- function(query, year = pkg.env$curr.year, key) {
 #' @examples
 #' il <- hudil(query = '22031', year = '2021', key = 'edf23jf834qd72nja')
 #' il <- hudil(query = 'VA', year = '2021', key = 'edf23jf834qd72nja')
-hudil <- function(query, year = pkg.env$curr.year, key) {
+hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
 
   geoid <- NULL
   URL <- NULL
@@ -488,7 +487,7 @@ hudil <- function(query, year = pkg.env$curr.year, key) {
 #' For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html
 #' @examples
 #' chas <- hudchas(type = '2', query = '56', year = '2014-2018', key = 'edf23jf834qd72nja')
-hudchas <- function(type, stateId = NULL, entityId = NULL, year = "2014-2018", key) {
+hudchas <- function(type, stateId = NULL, entityId = NULL, year = "2014-2018", key =  pkg.env$curr.key) {
   geoid <- NULL
   URL <- NULL
   call <- NULL

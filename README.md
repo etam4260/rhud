@@ -7,14 +7,17 @@
 <!-- badges: end -->
 
 This library contains an interface to the US Department of Housing and
-Urban Development datasets. The APIs which this library interfaces with:
+Urban Development datasets. The goal of this project is to provide an
+easy to use interface to access various open source datasets provided by
+HUD. This only contains a few datasets
+
+## Available Datasets
+
+The APIs which this library interfaces with:
 
 -   Crosswalk
-
 -   Fair Markets Rent
-
 -   Income Limits
-
 -   Comprehensive Housing and Affordability Strategy
 
 ## Installation
@@ -34,7 +37,18 @@ gain an access key before querying their systems. You must go to
 <https://www.huduser.gov/hudapi/public/register?comingfrom=1> and make
 an account. From there you need to make a new token. Make sure to save
 the token somewhere as you will only be able to view it once. You can
-now supply the ‘key’ argument for each function.
+now supply the ‘key’ argument.
+
+To reduce the need to supply the key in every function call, you can use
+the setkey(key) function to save the key to the package environment.
+
+``` r
+library(hudr)
+
+# The function will not output anything. You can now run the other functions
+# without supplying the key argument.
+setkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
+```
 
 ## Examples
 
@@ -44,14 +58,11 @@ This is a basic example which shows you how to query the CROSSWALK
 dataset.
 
 ``` r
-library(hudr)
-
 # Type 7 corresponds to county level data. The query is a 5 digit fips code.
-# The year and quarter specifies when these measurements were made. The key
+# The year and quarter specifies when these measurements were made. The key argument
 # is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
-key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"
-
-hudcw(type = 7, query = '22031', year = '2010', quarter = '4', key = key)
+# This example does not have the key because we already set it up using setkey()
+hudcw(type = 7, query = '22031', year = '2010', quarter = '4')
 #>     fips zip   res_ratio bus_ratio oth_ratio   tot_ratio year quarter
 #> 1  22031   0 0.427990000 0.6806280 0.5479450 0.440830000 2010       4
 #> 2  22031   0 0.183273000 0.0890052 0.1506850 0.178556000 2010       4
@@ -109,9 +120,9 @@ counties within the state. A county fips + subdivision 10 digit code
 will return a 1 row dataframe for that county.
 
 ``` r
-key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"
-
-head(hudfmr(query = 'VA', year = '2021', key = key))
+# Querying the Fair Markets Rent dataset for Virginia in the year of 2021. This selected
+# the first few rows and the first four columns.
+head(hudfmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
 #>   state year town           county
 #> 1    VA 2021   NA  Accomack County
 #> 2    VA 2021   NA Albemarle County
@@ -119,29 +130,9 @@ head(hudfmr(query = 'VA', year = '2021', key = key))
 #> 4    VA 2021   NA Alleghany County
 #> 5    VA 2021   NA    Amelia County
 #> 6    VA 2021   NA   Amherst County
-#>                                                                          metro
-#> 1                                                          Accomack County, VA
-#> 2                                       Charlottesville, VA HUD Metro FMR Area
-#> 3                 Washington-Arlington-Alexandria, DC-VA-MD HUD Metro FMR Area
-#> 4 Alleghany County-Clifton Forge city-Covington city, VA HUD Nonmetro FMR Area
-#> 5                                                             Richmond, VA MSA
-#> 6                                                            Lynchburg, VA MSA
-#>         fips efficiency onebedroom twobedroom threebedroom fourbedroom
-#> 1 5100199999        481        602        713          947         967
-#> 2 5100399999        949       1077       1266         1575        1965
-#> 3 5151099999       1513       1548       1765         2263        2742
-#> 4 5100599999        495        558        735          958        1142
-#> 5 5100799999        993       1020       1163         1538        1840
-#> 6 5100999999        633        660        784         1053        1241
-#>   fmrpercentile statename smallareastatus
-#> 1            40  Virginia               0
-#> 2            40  Virginia               0
-#> 3            40  Virginia               1
-#> 4            40  Virginia               0
-#> 5            40  Virginia               0
-#> 6            40  Virginia               0
 
-hudfmr(query = '0100199999', year = '2017', key = key)
+# Querying the Fair Markets Rent dataset for a county in the year of 2017.
+hudfmr(query = '0100199999', year = '2017')
 #>   county or CBSA year town             county              metro metrostatus
 #> 1     0100199999 2017   NA Autauga County, AL Montgomery, AL MSA           1
 #>   efficiency onebedroom twobedroom threebedroom fourbedroom smallareastatus

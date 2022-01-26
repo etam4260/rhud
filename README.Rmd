@@ -19,17 +19,19 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 This library contains an interface to
-the US Department of Housing and Urban Development datasets. 
+the US Department of Housing and Urban Development datasets. The goal
+of this project is to provide an easy to use interface to access various open source
+datasets provided by HUD. This only contains a few datasets
+
+
+## Available Datasets
+
 The APIs which this library interfaces with:
 
 * Crosswalk
-
 * Fair Markets Rent
-
 * Income Limits
-
 * Comprehensive Housing and Affordability Strategy
-
 
 ## Installation
 
@@ -45,8 +47,18 @@ devtools::install_github("etam4260/hudr")
 The US Department of Housing and Urban Development requires users to gain an 
 access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and make an account.
 From there you need to make a new token. Make sure to save the token somewhere as
-you will only be able to view it once. You can now supply the 'key' argument
-for each function.
+you will only be able to view it once. You can now supply the 'key' argument.
+
+To reduce the need to supply the key in every function call, you can use the 
+setkey(key) function to save the key to the package environment.
+
+```{r}
+library(hudr)
+
+# The function will not output anything. You can now run the other functions
+# without supplying the key argument.
+setkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
+```
 
 
 ## Examples
@@ -55,14 +67,12 @@ for each function.
 This is a basic example which shows you how to query the CROSSWALK dataset.
 
 ```{r}
-library(hudr)
 
 # Type 7 corresponds to county level data. The query is a 5 digit fips code.
-# The year and quarter specifies when these measurements were made. The key
+# The year and quarter specifies when these measurements were made. The key argument
 # is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
-key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"
-
-hudcw(type = 7, query = '22031', year = '2010', quarter = '4', key = key)
+# This example does not have the key because we already set it up using setkey()
+hudcw(type = 7, query = '22031', year = '2010', quarter = '4')
 ```
 
 #### Crosswalk Data Fields
@@ -101,11 +111,12 @@ A county fips + subdivision 10 digit code will return a 1 row dataframe for that
 county.
 
 ```{r}
-key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"
+# Querying the Fair Markets Rent dataset for Virginia in the year of 2021. This selected
+# the first few rows and the first four columns.
+head(hudfmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
 
-head(hudfmr(query = 'VA', year = '2021', key = key))
-
-hudfmr(query = '0100199999', year = '2017', key = key)
+# Querying the Fair Markets Rent dataset for a county in the year of 2017.
+hudfmr(query = '0100199999', year = '2017')
 ```
 
 #### Fair Markets Rent Data Fields
