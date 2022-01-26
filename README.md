@@ -123,13 +123,13 @@ will return a 1 row dataframe for that county.
 # Querying the Fair Markets Rent dataset for Virginia in the year of 2021. This selected
 # the first few rows and the first four columns.
 head(hudfmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
-#>   state year town      county
-#> 1    VA 2021   NA York County
-#> 2          0                 
-#> 3          0                 
-#> 4          0                 
-#> 5          0                 
-#> 6          0
+#>   state year town           county
+#> 1    VA 2021   NA  Accomack County
+#> 2    VA 2021   NA Albemarle County
+#> 3    VA 2021   NA  Alexandria city
+#> 4    VA 2021   NA Alleghany County
+#> 5    VA 2021   NA    Amelia County
+#> 6    VA 2021   NA   Amherst County
 
 # Querying the Fair Markets Rent dataset for a county in the year of 2017.
 hudfmr(query = '0100199999', year = '2017')

@@ -230,20 +230,20 @@ hudfmr <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
                       smallareastatus=integer(length(cont$data$counties))) #build df
 
       for(i in seq(1,length(cont$data$counties),1)){ #iterate over results and append to d
-        res$geoid[1] <- query
-        res$year[1] <- year
-        res$town[1] <- if(is.null(cont$data$counties[[i]][["town_name"]]) || cont$data$counties[[1]][["town_name"]] == "") "NA" else cont$data$counties[[1]][["town_name"]]
-        res$county[1] <- cont$data$counties[[i]][["county_name"]]
-        res$metro[1] <- cont$data$counties[[i]][["metro_name"]]
-        res$fips[1] <- cont$data$counties[[i]][["fips_code"]]
-        res$efficiency[1] <- cont$data$counties[[i]][["Efficiency"]]
-        res$onebedroom[1] <- cont$data$counties[[i]]$`One-Bedroom`
-        res$twobedroom[1] <- cont$data$counties[[i]]$`Two-Bedroom`
-        res$threebedroom[1] <- cont$data$counties[[i]]$`Three-Bedroom`
-        res$fourbedroom[1] <- cont$data$counties[[i]]$`Four-Bedroom`
-        res$fmrpercentile[1] <- cont$data$counties[[i]]$`FMR Percentile`
-        res$statename[1] <- cont$data$counties[[i]][["statename"]]
-        res$smallareastatus[1] <- cont$data$counties[[i]][["smallarea_status"]]
+        res$geoid[i] <- query
+        res$year[i] <- year
+        res$town[i] <- if(is.null(cont$data$counties[[i]][["town_name"]]) || cont$data$counties[[i]][["town_name"]] == "") "NA" else cont$data$counties[[i]][["town_name"]]
+        res$county[i] <- cont$data$counties[[i]][["county_name"]]
+        res$metro[i] <- cont$data$counties[[i]][["metro_name"]]
+        res$fips[i] <- cont$data$counties[[i]][["fips_code"]]
+        res$efficiency[i] <- cont$data$counties[[i]][["Efficiency"]]
+        res$onebedroom[i] <- cont$data$counties[[i]]$`One-Bedroom`
+        res$twobedroom[i] <- cont$data$counties[[i]]$`Two-Bedroom`
+        res$threebedroom[i] <- cont$data$counties[[i]]$`Three-Bedroom`
+        res$fourbedroom[i] <- cont$data$counties[[i]]$`Four-Bedroom`
+        res$fmrpercentile[i] <- cont$data$counties[[i]]$`FMR Percentile`
+        res$statename[i] <- cont$data$counties[[i]][["statename"]]
+        res$smallareastatus[i] <- cont$data$counties[[i]][["smallarea_status"]]
 
       }
     } else {
