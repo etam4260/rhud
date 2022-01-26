@@ -232,18 +232,18 @@ hudfmr <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
       for(i in seq(1,length(cont$data$counties),1)){ #iterate over results and append to d
         res$geoid[1] <- query
         res$year[1] <- year
-        res$town[1] <- if(is.null(cont$data$counties[[1]][["town_name"]]) || cont$data$counties[[1]][["town_name"]] == "") "NA" else cont$data$counties[[1]][["town_name"]]
-        res$county[1] <- cont$data$counties[[1]][["county_name"]]
-        res$metro[1] <- cont$data$counties[[1]][["metro_name"]]
-        res$fips[1] <- cont$data$counties[[1]][["fips_code"]]
-        res$efficiency[1] <- cont$data$counties[[1]][["Efficiency"]]
-        res$onebedroom[1] <- cont$data$counties[[1]]$`One-Bedroom`
-        res$twobedroom[1] <- cont$data$counties[[1]]$`Two-Bedroom`
-        res$threebedroom[1] <- cont$data$counties[[1]]$`Three-Bedroom`
-        res$fourbedroom[1] <- cont$data$counties[[1]]$`Four-Bedroom`
-        res$fmrpercentile[1] <- cont$data$counties[[1]]$`FMR Percentile`
-        res$statename[1] <- cont$data$counties[[1]][["statename"]]
-        res$smallareastatus[1] <- cont$data$counties[[1]][["smallarea_status"]]
+        res$town[1] <- if(is.null(cont$data$counties[[i]][["town_name"]]) || cont$data$counties[[1]][["town_name"]] == "") "NA" else cont$data$counties[[1]][["town_name"]]
+        res$county[1] <- cont$data$counties[[i]][["county_name"]]
+        res$metro[1] <- cont$data$counties[[i]][["metro_name"]]
+        res$fips[1] <- cont$data$counties[[i]][["fips_code"]]
+        res$efficiency[1] <- cont$data$counties[[i]][["Efficiency"]]
+        res$onebedroom[1] <- cont$data$counties[[i]]$`One-Bedroom`
+        res$twobedroom[1] <- cont$data$counties[[i]]$`Two-Bedroom`
+        res$threebedroom[1] <- cont$data$counties[[i]]$`Three-Bedroom`
+        res$fourbedroom[1] <- cont$data$counties[[i]]$`Four-Bedroom`
+        res$fmrpercentile[1] <- cont$data$counties[[i]]$`FMR Percentile`
+        res$statename[1] <- cont$data$counties[[i]][["statename"]]
+        res$smallareastatus[1] <- cont$data$counties[[i]][["smallarea_status"]]
 
       }
     } else {
