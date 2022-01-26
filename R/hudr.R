@@ -138,28 +138,28 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
 
-  res<-data.frame(geoid=integer(length(cont$data$results)),
-                  zip=integer(length(cont$data$results)),
-                  res_ratio=integer(length(cont$data$results)),
-                  bus_ratio=integer(length(cont$data$results)),
-                  oth_ratio=integer(length(cont$data$results)),
-                  tot_ratio=integer(length(cont$data$results)),
-                  year=integer(length(cont$data$results)),
-                  quarter=integer(length(cont$data$results))) #build df
+  res<-data.frame(geoid=integer(1),
+                  zip=integer(1),
+                  res_ratio=integer(1),
+                  bus_ratio=integer(1),
+                  oth_ratio=integer(1),
+                  tot_ratio=integer(1),
+                  year=integer(1),
+                  quarter=integer(1)) #build df
 
   if (length(cont$data) == 0){ #check to see if results exist - if not warn use of errors in their input values
     stop("The query did not return any results. Please check if these input values follow the rules stated for each parameter. Maybe your authorization key is wrong? Maybe
          there hasn't been data recorded for this particular time period.")
   } else {
 
-    for(i in seq(1,length(cont$data$results),1)){ #iterate over results and append to df
-      res$geoid[i] <- query
-      res$year[i] <- year
-      res$quarter[i] <- quarter
-      res$res_ratio[i] <- cont$data$results[[i]][["res_ratio"]]
-      res$bus_ratio[i] <- cont$data$results[[i]][["bus_ratio"]]
-      res$oth_ratio[i] <- cont$data$results[[i]][["oth_ratio"]]
-      res$tot_ratio[i] <- cont$data$results[[i]][["tot_ratio"]]
+    for(i in seq(1,1,1)){ #iterate over results and append to df
+      res$geoid[1] <- query
+      res$year[1] <- year
+      res$quarter[1] <- quarter
+      res$res_ratio[1] <- cont$data$results[[1]][["res_ratio"]]
+      res$bus_ratio[1] <- cont$data$results[[1]][["bus_ratio"]]
+      res$oth_ratio[1] <- cont$data$results[[1]][["oth_ratio"]]
+      res$tot_ratio[1] <- cont$data$results[[1]][["tot_ratio"]]
     }
     colnames(res)[1] <- geoid
     return(res) #returns df as output of function
@@ -229,20 +229,20 @@ hudfmr <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
                       smallareastatus=integer(length(cont$data$counties))) #build df
 
       for(i in seq(1,length(cont$data$counties),1)){ #iterate over results and append to d
-        res$geoid[i] <- query
-        res$year[i] <- year
-        res$town[i] <- if(is.null(cont$data$counties[[i]][["town_name"]]) || cont$data$counties[[i]][["town_name"]] == "") "NA" else cont$data$counties[[i]][["town_name"]]
-        res$county[i] <- cont$data$counties[[i]][["county_name"]]
-        res$metro[i] <- cont$data$counties[[i]][["metro_name"]]
-        res$fips[i] <- cont$data$counties[[i]][["fips_code"]]
-        res$efficiency[i] <- cont$data$counties[[i]][["Efficiency"]]
-        res$onebedroom[i] <- cont$data$counties[[i]]$`One-Bedroom`
-        res$twobedroom[i] <- cont$data$counties[[i]]$`Two-Bedroom`
-        res$threebedroom[i] <- cont$data$counties[[i]]$`Three-Bedroom`
-        res$fourbedroom[i] <- cont$data$counties[[i]]$`Four-Bedroom`
-        res$fmrpercentile[i] <- cont$data$counties[[i]]$`FMR Percentile`
-        res$statename[i] <- cont$data$counties[[i]][["statename"]]
-        res$smallareastatus[i] <- cont$data$counties[[i]][["smallarea_status"]]
+        res$geoid[1] <- query
+        res$year[1] <- year
+        res$town[1] <- if(is.null(cont$data$counties[[1]][["town_name"]]) || cont$data$counties[[1]][["town_name"]] == "") "NA" else cont$data$counties[[1]][["town_name"]]
+        res$county[1] <- cont$data$counties[[1]][["county_name"]]
+        res$metro[1] <- cont$data$counties[[1]][["metro_name"]]
+        res$fips[1] <- cont$data$counties[[1]][["fips_code"]]
+        res$efficiency[1] <- cont$data$counties[[1]][["Efficiency"]]
+        res$onebedroom[1] <- cont$data$counties[[1]]$`One-Bedroom`
+        res$twobedroom[1] <- cont$data$counties[[1]]$`Two-Bedroom`
+        res$threebedroom[1] <- cont$data$counties[[1]]$`Three-Bedroom`
+        res$fourbedroom[1] <- cont$data$counties[[1]]$`Four-Bedroom`
+        res$fmrpercentile[1] <- cont$data$counties[[1]]$`FMR Percentile`
+        res$statename[1] <- cont$data$counties[[1]][["statename"]]
+        res$smallareastatus[1] <- cont$data$counties[[1]][["smallarea_status"]]
 
       }
     } else {
@@ -307,12 +307,13 @@ hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- paste(str_trim(as.character(year), side = "both"))
   key <- paste(str_trim(as.character(key), side = "both"))
+  numbers_only <- function(x) !grepl("\\D", x)
 
   if(as.integer(year) > as.integer(pkg.env$curr.year)) stop("The year specified seems to be in the future?")
-  if(is.na(as.integer(query)) && nchar(query) != 2) stop("The inputted query for state abbreviation is not right.")
-  if(!is.na(as.integer(query)) && nchar(query) != 10) stop("The inputted query input is not a 10 digit fips.")
-  if(is.na(as.integer(query))) geoid <- "state"
-  if(!is.na(as.integer(query))) geoid <- "county or CBSA"
+  if(!numbers_only(query) && nchar(query) != 2) stop("The inputted query for state abbreviation is not right.")
+  if(numbers_only(query) && nchar(query) != 10) stop("The inputted query input is not a 10 digit fips.")
+  if(!numbers_only(query)) geoid <- "state"
+  if(numbers_only(query)) geoid <- "county or CBSA"
 
   # Build the URL for querying the data.
   URL <- paste("https://www.huduser.gov/hudapi/public/il/", if(geoid == "state") "statedata/" else "data/", query, "?year=", year, sep="") #build URL
@@ -324,131 +325,128 @@ hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
          there hasn't been data recorded for this particular time period.")
   } else {
     if(geoid == "state") {
-      res<-data.frame(geoid=character(length(cont$data)),
-                      year=integer(length(cont$data)),
-                      median_income=integer(length(cont$data)),
-                      verylowil50p1=integer(length(cont$data)),
-                      verylowil50p2=integer(length(cont$data)),
-                      verylowil50p3=integer(length(cont$data)),
-                      verylowil50p4=integer(length(cont$data)),
-                      verylowil50p5=integer(length(cont$data)),
-                      verylowil50p6=integer(length(cont$data)),
-                      verylowil50p7=integer(length(cont$data)),
-                      verylowil50p8=integer(length(cont$data)),
-                      extremelowil30p1=integer(length(cont$data)),
-                      extremelowil30p2=integer(length(cont$data)),
-                      extremelowil30p3=integer(length(cont$data)),
-                      extremelowil30p4=integer(length(cont$data)),
-                      extremelowil30p5=integer(length(cont$data)),
-                      extremelowil30p6=integer(length(cont$data)),
-                      extremelowil30p7=integer(length(cont$data)),
-                      extremelowil30p8=integer(length(cont$data)),
-                      lowil80p1=integer(length(cont$data)),
-                      lowil80p2=integer(length(cont$data)),
-                      lowil80p3=integer(length(cont$data)),
-                      lowil80p4=integer(length(cont$data)),
-                      lowil80p5=integer(length(cont$data)),
-                      lowil80p6=integer(length(cont$data)),
-                      lowil80p7=integer(length(cont$data)),
-                      lowil80p8=integer(length(cont$data))
+      res<-data.frame(geoid=character(1),
+                      year=integer(1),
+                      median_income=integer(1),
+                      verylowil50p1=integer(1),
+                      verylowil50p2=integer(1),
+                      verylowil50p3=integer(1),
+                      verylowil50p4=integer(1),
+                      verylowil50p5=integer(1),
+                      verylowil50p6=integer(1),
+                      verylowil50p7=integer(1),
+                      verylowil50p8=integer(1),
+                      extremelowil30p1=integer(1),
+                      extremelowil30p2=integer(1),
+                      extremelowil30p3=integer(1),
+                      extremelowil30p4=integer(1),
+                      extremelowil30p5=integer(1),
+                      extremelowil30p6=integer(1),
+                      extremelowil30p7=integer(1),
+                      extremelowil30p8=integer(1),
+                      lowil80p1=integer(1),
+                      lowil80p2=integer(1),
+                      lowil80p3=integer(1),
+                      lowil80p4=integer(1),
+                      lowil80p5=integer(1),
+                      lowil80p6=integer(1),
+                      lowil80p7=integer(1),
+                      lowil80p8=integer(1)
                       ) #build df
 
-      for(i in seq(1,length(cont$data),1)){ #iterate over results and append to df
-        res$geoid[i]=query
-        res$year[i]=year
-        res$median_income[i]=cont$data$median_income
-        res$verylowil50p1[i]=cont$data$very_low$il50_p1
-        res$verylowil50p2[i]=cont$data$very_low$il50_p2
-        res$verylowil50p3[i]=cont$data$very_low$il50_p3
-        res$verylowil50p4[i]=cont$data$very_low$il50_p4
-        res$verylowil50p5[i]=cont$data$very_low$il50_p5
-        res$verylowil50p6[i]=cont$data$very_low$il50_p6
-        res$verylowil50p7[i]=cont$data$very_low$il50_p7
-        res$verylowil50p8[i]=cont$data$very_low$il50_p8
-        res$extremelowil30p1[i]=cont$data$extremely_low$il30_p1
-        res$extremelowil30p2[i]=cont$data$extremely_low$il30_p2
-        res$extremelowil30p3[i]=cont$data$extremely_low$il30_p3
-        res$extremelowil30p4[i]=cont$data$extremely_low$il30_p4
-        res$extremelowil30p5[i]=cont$data$extremely_low$il30_p5
-        res$extremelowil30p6[i]=cont$data$extremely_low$il30_p6
-        res$extremelowil30p7[i]=cont$data$extremely_low$il30_p7
-        res$extremelowil30p8[i]=cont$data$extremely_low$il30_p8
-        res$lowil80p1[i]=cont$data$low$il80_p1
-        res$lowil80p2[i]=cont$data$low$il80_p2
-        res$lowil80p3[i]=cont$data$low$il80_p3
-        res$lowil80p4[i]=cont$data$low$il80_p4
-        res$lowil80p5[i]=cont$data$low$il80_p5
-        res$lowil80p6[i]=cont$data$low$il80_p6
-        res$lowil80p7[i]=cont$data$low$il80_p7
-        res$lowil80p8[i]=cont$data$low$il80_p8
-      }
+
+      res$geoid[1]=query
+      res$year[1]=year
+      res$median_income[1]=cont$data$median_income
+      res$verylowil50p1[1]=cont$data$very_low$il50_p1
+      res$verylowil50p2[1]=cont$data$very_low$il50_p2
+      res$verylowil50p3[1]=cont$data$very_low$il50_p3
+      res$verylowil50p4[1]=cont$data$very_low$il50_p4
+      res$verylowil50p5[1]=cont$data$very_low$il50_p5
+      res$verylowil50p6[1]=cont$data$very_low$il50_p6
+      res$verylowil50p7[1]=cont$data$very_low$il50_p7
+      res$verylowil50p8[1]=cont$data$very_low$il50_p8
+      res$extremelowil30p1[1]=cont$data$extremely_low$il30_p1
+      res$extremelowil30p2[1]=cont$data$extremely_low$il30_p2
+      res$extremelowil30p3[1]=cont$data$extremely_low$il30_p3
+      res$extremelowil30p4[1]=cont$data$extremely_low$il30_p4
+      res$extremelowil30p5[1]=cont$data$extremely_low$il30_p5
+      res$extremelowil30p6[1]=cont$data$extremely_low$il30_p6
+      res$extremelowil30p7[1]=cont$data$extremely_low$il30_p7
+      res$extremelowil30p8[1]=cont$data$extremely_low$il30_p8
+      res$lowil80p1[1]=cont$data$low$il80_p1
+      res$lowil80p2[1]=cont$data$low$il80_p2
+      res$lowil80p3[1]=cont$data$low$il80_p3
+      res$lowil80p4[1]=cont$data$low$il80_p4
+      res$lowil80p5[1]=cont$data$low$il80_p5
+      res$lowil80p6[1]=cont$data$low$il80_p6
+      res$lowil80p7[1]=cont$data$low$il80_p7
+      res$lowil80p8[1]=cont$data$low$il80_p8
+
     } else {
-      res<-data.frame(geoid=integer(length(cont$data$results)),
-                      town = character(length(cont$data$results)),
-                      metrostatus = integer(length(cont$data$results)),
-                      areaname = character(length(cont$data$results)),
-                      year=integer(length(cont$data$results)),
-                      median_income=integer(length(cont$data$results)),
-                      verylowil50p1=integer(length(cont$data$results)),
-                      verylowil50p2=integer(length(cont$data$results)),
-                      verylowil50p3=integer(length(cont$data$results)),
-                      verylowil50p4=integer(length(cont$data$results)),
-                      verylowil50p5=integer(length(cont$data$results)),
-                      verylowil50p6=integer(length(cont$data$results)),
-                      verylowil50p7=integer(length(cont$data$results)),
-                      verylowil50p8=integer(length(cont$data$results)),
-                      extremelowil30p1=integer(length(cont$data$results)),
-                      extremelowil30p2=integer(length(cont$data$results)),
-                      extremelowil30p3=integer(length(cont$data$results)),
-                      extremelowil30p4=integer(length(cont$data$results)),
-                      extremelowil30p5=integer(length(cont$data$results)),
-                      extremelowil30p6=integer(length(cont$data$results)),
-                      extremelowil30p7=integer(length(cont$data$results)),
-                      extremelowil30p8=integer(length(cont$data$results)),
-                      lowil80p1=integer(length(cont$data$results)),
-                      lowil80p2=integer(length(cont$data$results)),
-                      lowil80p3=integer(length(cont$data$results)),
-                      lowil80p4=integer(length(cont$data$results)),
-                      lowil80p5=integer(length(cont$data$results)),
-                      lowil80p6=integer(length(cont$data$results)),
-                      lowil80p7=integer(length(cont$data$results)),
-                      lowil80p8=integer(length(cont$data$results))
+      res<-data.frame(geoid=integer(1),
+                      town = character(1),
+                      metrostatus = integer(1),
+                      areaname = character(1),
+                      year=integer(1),
+                      median_income=integer(1),
+                      verylowil50p1=integer(1),
+                      verylowil50p2=integer(1),
+                      verylowil50p3=integer(1),
+                      verylowil50p4=integer(1),
+                      verylowil50p5=integer(1),
+                      verylowil50p6=integer(1),
+                      verylowil50p7=integer(1),
+                      verylowil50p8=integer(1),
+                      extremelowil30p1=integer(1),
+                      extremelowil30p2=integer(1),
+                      extremelowil30p3=integer(1),
+                      extremelowil30p4=integer(1),
+                      extremelowil30p5=integer(1),
+                      extremelowil30p6=integer(1),
+                      extremelowil30p7=integer(1),
+                      extremelowil30p8=integer(1),
+                      lowil80p1=integer(1),
+                      lowil80p2=integer(1),
+                      lowil80p3=integer(1),
+                      lowil80p4=integer(1),
+                      lowil80p5=integer(1),
+                      lowil80p6=integer(1),
+                      lowil80p7=integer(1),
+                      lowil80p8=integer(1)
       ) #build df
 
-      for(i in seq(1,length(cont$data$results),1)){ #iterate over results and append to df
+      res$geoid[1]=query
+      res$year[1]=year
+      res$town[1]=cont$data$town_name
+      res$metrostatus[1]=cont$data$metro_status
+      res$areaname[1]=cont$data$area_name
+      res$median_income[1]=cont$data$median_income
+      res$verylowil50p1[1]=cont$data$very_low$il50_p1
+      res$verylowil50p2[1]=cont$data$very_low$il50_p2
+      res$verylowil50p3[1]=cont$data$very_low$il50_p3
+      res$verylowil50p4[1]=cont$data$very_low$il50_p4
+      res$verylowil50p5[1]=cont$data$very_low$il50_p5
+      res$verylowil50p6[1]=cont$data$very_low$il50_p6
+      res$verylowil50p7[1]=cont$data$very_low$il50_p7
+      res$verylowil50p8[1]=cont$data$very_low$il50_p8
+      res$extremelowil30p1[1]=cont$data$extremely_low$il30_p1
+      res$extremelowil30p2[1]=cont$data$extremely_low$il30_p2
+      res$extremelowil30p3[1]=cont$data$extremely_low$il30_p3
+      res$extremelowil30p4[1]=cont$data$extremely_low$il30_p4
+      res$extremelowil30p5[1]=cont$data$extremely_low$il30_p5
+      res$extremelowil30p6[1]=cont$data$extremely_low$il30_p6
+      res$extremelowil30p7[1]=cont$data$extremely_low$il30_p7
+      res$extremelowil30p8[1]=cont$data$extremely_low$il30_p8
+      res$lowil80p1[1]=cont$data$low$il80_p1
+      res$lowil80p2[1]=cont$data$low$il80_p2
+      res$lowil80p3[1]=cont$data$low$il80_p3
+      res$lowil80p4[1]=cont$data$low$il80_p4
+      res$lowil80p5[1]=cont$data$low$il80_p5
+      res$lowil80p6[1]=cont$data$low$il80_p6
+      res$lowil80p7[1]=cont$data$low$il80_p7
+      res$lowil80p8[1]=cont$data$low$il80_p8
 
-        res$geoid[i]=query
-        res$year[i]=year
-        res$town[i]=cont$data$town_name
-        res$metrostatus[i]=cont$data$metro_status
-        res$areaname[i]=cont$data$area_name
-        res$median_income[i]=cont$data$median_income
-        res$verylowil50p1[i]=cont$data$very_low$il50_p1
-        res$verylowil50p2[i]=cont$data$very_low$il50_p2
-        res$verylowil50p3[i]=cont$data$very_low$il50_p3
-        res$verylowil50p4[i]=cont$data$very_low$il50_p4
-        res$verylowil50p5[i]=cont$data$very_low$il50_p5
-        res$verylowil50p6[i]=cont$data$very_low$il50_p6
-        res$verylowil50p7[i]=cont$data$very_low$il50_p7
-        res$verylowil50p8[i]=cont$data$very_low$il50_p8
-        res$extremelowil30p1[i]=cont$data$extremely_low$il30_p1
-        res$extremelowil30p2[i]=cont$data$extremely_low$il30_p2
-        res$extremelowil30p3[i]=cont$data$extremely_low$il30_p3
-        res$extremelowil30p4[i]=cont$data$extremely_low$il30_p4
-        res$extremelowil30p5[i]=cont$data$extremely_low$il30_p5
-        res$extremelowil30p6[i]=cont$data$extremely_low$il30_p6
-        res$extremelowil30p7[i]=cont$data$extremely_low$il30_p7
-        res$extremelowil30p8[i]=cont$data$extremely_low$il30_p8
-        res$lowil80p1[i]=cont$data$low$il80_p1
-        res$lowil80p2[i]=cont$data$low$il80_p2
-        res$lowil80p3[i]=cont$data$low$il80_p3
-        res$lowil80p4[i]=cont$data$low$il80_p4
-        res$lowil80p5[i]=cont$data$low$il80_p5
-        res$lowil80p6[i]=cont$data$low$il80_p6
-        res$lowil80p7[i]=cont$data$low$il80_p7
-        res$lowil80p8[i]=cont$data$low$il80_p8
-
-      }
     }
     colnames(res)[1] <- geoid
     return(res) #returns df as output of function

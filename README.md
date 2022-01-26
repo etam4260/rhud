@@ -9,7 +9,7 @@
 This library contains an interface to the US Department of Housing and
 Urban Development datasets. The goal of this project is to provide an
 easy to use interface to access various open source datasets provided by
-HUD. This only contains a few datasets
+HUD. This library only contains a few datasets.
 
 ## Available Datasets
 
@@ -63,17 +63,8 @@ dataset.
 # is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
 # This example does not have the key because we already set it up using setkey()
 hudcw(type = 7, query = '22031', year = '2010', quarter = '4')
-#>     fips zip   res_ratio bus_ratio oth_ratio   tot_ratio year quarter
-#> 1  22031   0 0.427990000 0.6806280 0.5479450 0.440830000 2010       4
-#> 2  22031   0 0.183273000 0.0890052 0.1506850 0.178556000 2010       4
-#> 3  22031   0 0.111750000 0.0663176 0.1506850 0.109810000 2010       4
-#> 4  22031   0 0.081690400 0.0453752 0.0136986 0.079535000 2010       4
-#> 5  22031   0 0.070285600 0.0523560 0.0410959 0.069248100 2010       4
-#> 6  22031   0 0.043674300 0.0174520 0.0410959 0.042401900 2010       4
-#> 7  22031   0 0.042790200 0.0279232 0.0136986 0.041900100 2010       4
-#> 8  22031   0 0.027849000 0.0139616 0.0410959 0.027264400 2010       4
-#> 9  22031   0 0.010520700 0.0069808 0.0000000 0.010286900 2010       4
-#> 10 22031   0 0.000176819 0.0000000 0.0000000 0.000167266 2010       4
+#>    fips zip res_ratio bus_ratio oth_ratio tot_ratio year quarter
+#> 1 22031   0   0.42799  0.680628  0.547945   0.44083 2010       4
 ```
 
 #### Crosswalk Data Fields
@@ -123,13 +114,13 @@ will return a 1 row dataframe for that county.
 # Querying the Fair Markets Rent dataset for Virginia in the year of 2021. This selected
 # the first few rows and the first four columns.
 head(hudfmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
-#>   state year town           county
-#> 1    VA 2021   NA  Accomack County
-#> 2    VA 2021   NA Albemarle County
-#> 3    VA 2021   NA  Alexandria city
-#> 4    VA 2021   NA Alleghany County
-#> 5    VA 2021   NA    Amelia County
-#> 6    VA 2021   NA   Amherst County
+#>   state year town          county
+#> 1    VA 2021   NA Accomack County
+#> 2          0                     
+#> 3          0                     
+#> 4          0                     
+#> 5          0                     
+#> 6          0
 
 # Querying the Fair Markets Rent dataset for a county in the year of 2017.
 hudfmr(query = '0100199999', year = '2017')

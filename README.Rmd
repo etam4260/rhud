@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 This library contains an interface to
 the US Department of Housing and Urban Development datasets. The goal
 of this project is to provide an easy to use interface to access various open source
-datasets provided by HUD. This only contains a few datasets
+datasets provided by HUD. This library only contains a few datasets.
 
 
 ## Available Datasets
