@@ -234,33 +234,9 @@ for a ‘region’
 # Querying the Comprehensive Housing and Affordability Strategy dataset for a state in the years of 2014-2018.
 # Return the first 6 rows. There are specific date ranges that are allowed. Please check the specifications.
 # https://www.huduser.gov/portal/dataset/chas-api.html
-head(hudchas(type = '2', stateId ='56', year = '2014-2018'))
+head(hudchas(type = '2', stateId ='56', year = '2014-2018'))[,c(1,2,3,4,5,6,7,8,9)]
 #>   geoname sumlevel      year      A1      A2      A3      A4      A5      A6
 #> 1 Wyoming    State 2014-2018 11520.0 15235.0 26755.0 13990.0 12975.0 26965.0
-#>        A7      A8      A9     A10    A11     A12     A13     A14      A15
-#> 1 25625.0 15380.0 41005.0 17130.0 7870.0 25000.0 91855.0 19045.0 110900.0
-#>        A16     A17      A18      B1      B2      B3       B4      B5       B6
-#> 1 160120.0 70510.0 230630.0 29810.0 27105.0 56915.0 130310.0 43400.0 173710.0
-#>   B7 B8 B9      C1      C2      C3       C4      C5       C6       D1      D2
-#> 1 NA NA NA 13265.0 14865.0 28130.0 146860.0 55645.0 202505.0 131650.0 44935.0
-#>         D3      D4      D5      D6      D7      D8      D9    D10   D11    D12
-#> 1 176585.0 16760.0 13110.0 29870.0 10710.0 11480.0 22190.0 1005.0 985.0 1990.0
-#>        E1     E2 E3      E5      E6 E7      E9     E10 E11    E13     E14 E15
-#> 1 19520.0 7235.0 NA 14740.0 12225.0 NA 12515.0 28495.0  NA 4290.0 20710.0  NA
-#>      E17      E18 E19     E21      E22 E23      F1     F2 F3     F5     F6 F7
-#> 1 5850.0 105050.0  NA 56915.0 173710.0  NA 11275.0 3960.0 NA 8800.0 4175.0 NA
-#>       F9     F10 F11    F13    F14 F15    F17     F18 F19     F21     F22 F23
-#> 1 4865.0 10520.0  NA 1125.0 6745.0  NA 1040.0 18005.0  NA 27105.0 43400.0  NA
-#>       G1     G2 G3     G5     G6 G7     G9     G10 G11    G13     G14 G15
-#> 1 8245.0 3275.0 NA 5940.0 8050.0 NA 7650.0 17975.0  NA 3165.0 13965.0  NA
-#>      G17     G18 G19      H1      H2      H4     H5      H7     H8    H10   H11
-#> 1 4810.0 87045.0  NA 19115.0 14880.0 13995.0 4470.0 11210.0 1970.0 3585.0 350.0
-#>      H13   H14     H16      I1     I2     I4     I5     I7    I8   I10  I11
-#> 1 4165.0 520.0 52070.0 11025.0 9135.0 8400.0 1970.0 4015.0 355.0 765.0 20.0
-#>     I13 I14     I16     J1     J2     J4     J5     J7     J8    J10   J11
-#> 1 385.0 0.0 24590.0 8090.0 5745.0 5595.0 2505.0 7190.0 1610.0 2815.0 330.0
-#>      J13   J14     J16
-#> 1 3780.0 520.0 27470.0
 ```
 
 ##### Comprehensive Housing and Affordability Strategy Data Fields
