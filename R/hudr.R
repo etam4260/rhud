@@ -485,7 +485,7 @@ hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
 #' @returns This function returns a dataframe containing CHAS data for a particular state.
 #' For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html
 #' @examples
-#' chas <- hudchas(type = '2', query = '56', year = '2014-2018', key = 'edf23jf834qd72nja')
+#' hudchas(type = '2', stateId = '56', year = '2014-2018', key = 'edf23jf834qd72nja')
 hudchas <- function(type, stateId = "", entityId = "", year = "2014-2018", key =  pkg.env$curr.key) {
   URL <- NULL
   call <- NULL

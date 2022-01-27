@@ -47,7 +47,7 @@ For more details about these measurements, go to https://www.huduser.gov/portal/
 hudchas
 }
 \examples{
-chas <- hudchas(type = '2', query = '56', year = '2014-2018', key = 'edf23jf834qd72nja')
+hudchas(type = '2', stateId = '56', year = '2014-2018', key = 'edf23jf834qd72nja')
 }
 \keyword{(CHAS)}
 \keyword{API}
