@@ -222,7 +222,7 @@ income levels, occupancy, housing problems, and burden for a 'region'
 # Querying the Comprehensive Housing and Affordability Strategy dataset for a state in the years of 2014-2018.
 # Return the first 6 rows. There are specific date ranges that are allowed. Please check the specifications.
 # https://www.huduser.gov/portal/dataset/chas-api.html
-head(hudchas(type = '2', stateId ='56', year = '2014-2018'))
+head(hudchas(type = '2', stateId ='56', year = '2014-2018'))[,c(1,2,3,4,5,6,7,8,9)]
 ```
 
 ##### Comprehensive Housing and Affordability Strategy Data Fields
