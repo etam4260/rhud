@@ -234,7 +234,9 @@ for a ‘region’
 # Querying the Comprehensive Housing and Affordability Strategy dataset for a state in the years of 2014-2018.
 # Return the first 6 rows. There are specific date ranges that are allowed. Please check the specifications.
 # https://www.huduser.gov/portal/dataset/chas-api.html
-head(hudchas(type = '2', stateId ='56', year = '2014-2018'))[,c(1,2,3,4,5,6,7,8,9)]
+
+# This displays the first 9 columns
+hudchas(type = '2', stateId ='56', year = '2014-2018')[,c(1,2,3,4,5,6,7,8,9)]
 #>   geoname sumlevel      year      A1      A2      A3      A4      A5      A6
 #> 1 Wyoming    State 2014-2018 11520.0 15235.0 26755.0 13990.0 12975.0 26965.0
 ```
