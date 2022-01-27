@@ -181,24 +181,16 @@ single row.
 
 ``` r
 # Querying the Fair Markets Rent dataset for Virginia in the year of 2021.
-head(hudil(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
-#>   state year median_income verylowil50p1
-#> 1    VA 2021         93000         32550
+# Grabbing the first 6 columns
+head(hudil(query = 'VA', year = '2021'))[ ,c(1,2,3,4,5,6)]
+#>   state year median_income verylowil50p1 verylowil50p2 verylowil50p3
+#> 1    VA 2021         93000         32550         37200         41850
 
 # Querying the Fair Markets Rent dataset for a county in the year of 2017.
-hudil(query = '0100199999', year = '2017')
+# Grabbing the first 6 columns
+hudil(query = '0100199999', year = '2017')[ ,c(1,2,3,4,5,6)]
 #>   county or CBSA town metrostatus           areaname year median_income
 #> 1     0100199999                1 Montgomery, AL MSA 2017         59700
-#>   verylowil50p1 verylowil50p2 verylowil50p3 verylowil50p4 verylowil50p5
-#> 1         20900         23900         26900         29850         32250
-#>   verylowil50p6 verylowil50p7 verylowil50p8 extremelowil30p1 extremelowil30p2
-#> 1         34650         37050         39450            12550            16240
-#>   extremelowil30p3 extremelowil30p4 extremelowil30p5 extremelowil30p6
-#> 1            20420            24600            28780            32960
-#>   extremelowil30p7 extremelowil30p8 lowil80p1 lowil80p2 lowil80p3 lowil80p4
-#> 1            37050            39450     33450     38200     43000     47750
-#>   lowil80p5 lowil80p6 lowil80p7 lowil80p8
-#> 1     51600     55400     59250     63050
 ```
 
 ##### Income Limits Data Fields

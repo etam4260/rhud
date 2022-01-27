@@ -167,10 +167,12 @@ a single row.
 
 ```{r}
 # Querying the Fair Markets Rent dataset for Virginia in the year of 2021.
-head(hudil(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
+# Grabbing the first 6 columns
+head(hudil(query = 'VA', year = '2021'))[ ,c(1,2,3,4,5,6)]
 
 # Querying the Fair Markets Rent dataset for a county in the year of 2017.
-hudil(query = '0100199999', year = '2017')
+# Grabbing the first 6 columns
+hudil(query = '0100199999', year = '2017')[ ,c(1,2,3,4,5,6)]
 ```
 
 
