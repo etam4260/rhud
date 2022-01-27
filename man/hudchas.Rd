@@ -5,7 +5,13 @@
 \title{hudchas
 This function queries the CHAS API provided by US Department of Housing and Urban Development}
 \usage{
-hudchas(type, stateId = NULL, entityId = NULL, year = "2014-2018", key)
+hudchas(
+  type,
+  stateId = "",
+  entityId = "",
+  year = "2014-2018",
+  key = pkg.env$curr.key
+)
 }
 \arguments{
 \item{type}{Queries the data based off

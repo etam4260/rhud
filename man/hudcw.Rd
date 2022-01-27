@@ -10,7 +10,7 @@ hudcw(
   query,
   year = pkg.env$curr.year,
   quarter = pkg.env$curr.quarter,
-  key
+  key = pkg.env$curr.key
 )
 }
 \arguments{

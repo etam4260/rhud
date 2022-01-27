@@ -5,7 +5,7 @@
 \title{hudil
 This function queries the Income Limits API provided by US Department of Housing and Urban Development}
 \usage{
-hudil(query, year = pkg.env$curr.year, key)
+hudil(query, year = pkg.env$curr.year, key = pkg.env$curr.key)
 }
 \arguments{
 \item{query}{Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.}

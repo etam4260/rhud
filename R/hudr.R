@@ -93,7 +93,7 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
   cont <- NULL
   res <- NULL
 
-  #chop off leading and trailing whitespace in inputs.
+  # Removing leading and ending spaces and converting all integer inputs to characters
   type <- paste(str_trim(as.character(type), side = "both"))
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- paste(str_trim(as.character(year), side = "both"))
@@ -187,12 +187,12 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
 #' fmr <- hudfmr(query = '0801499999', year = '2021', key = 'edf23jf834qd72nja')
 #' fmr <- hudfmr(query = 'VA', year = '2021', key = 'edf23jf834qd72nja')
 hudfmr <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
-  #chop off leading and trailing whitespace in inputs.
   geoid <- NULL
   URL <- NULL
   call <- NULL
   cont <- NULL
 
+  # Removing leading and ending spaces and converting all integer inputs to characters
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- paste(str_trim(as.character(year), side = "both"))
   key <- paste(str_trim(as.character(key), side = "both"))
@@ -304,7 +304,7 @@ hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
   call <- NULL
   cont <- NULL
 
-  #chop off leading and trailing whitespace in inputs.
+  # Removing leading and ending spaces and converting all integer inputs to characters
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- paste(str_trim(as.character(year), side = "both"))
   key <- paste(str_trim(as.character(key), side = "both"))
@@ -486,12 +486,12 @@ hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
 #' For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html
 #' @examples
 #' chas <- hudchas(type = '2', query = '56', year = '2014-2018', key = 'edf23jf834qd72nja')
-hudchas <- function(type, stateId = NULL, entityId = NULL, year = "2014-2018", key =  pkg.env$curr.key) {
-  geoid <- NULL
+hudchas <- function(type, stateId = "", entityId = "", year = "2014-2018", key =  pkg.env$curr.key) {
   URL <- NULL
   call <- NULL
   cont <- NULL
 
+  # Removing leading and ending spaces and converting all integer inputs to characters
   type <- paste(str_trim(as.character(type), side = "both"))
   stateId <- paste(str_trim(as.character(stateId), side = "both"))
   entityId <- paste(str_trim(as.character(entityId), side = "both"))
@@ -499,26 +499,289 @@ hudchas <- function(type, stateId = NULL, entityId = NULL, year = "2014-2018", k
   key <- paste(str_trim(as.character(key), side = "both"))
 
   # Build the URL for querying the data.
-
   if(type == "1") {
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type, "&year=", year,  sep="") #build URL
-    geoid <- "Nation"
   }
   if(type == "2") {
     if(is.null(stateId)) stop("You need to specify a stateId for this type.")
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type, "&stateId=", stateId, "&year=", year,  sep="") #build URL
-    geoid <- "State"
   }
   if(type == "3" || type == "4" || type == "5") {
     if(is.null(stateId) || is.null(entityId)) stop("You need to specify a stateId and entityId for this type.")
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type, "&stateId=", stateId, "&entityId", entityId, "&year=", year,  sep="") #build URL
-    if(type == "3") geoid <- "County"
-    if(type == "4") geoid <- "MCD"
-    if(type == "5") geoid <- "Place"
   }
 
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
 
+  # Parse for state type
+  res<-data.frame(
+                  geoname = character(1),
+                  sumlevel= character(1),
+                  year= character(1),
+                  A1= numeric(1),
+                  A2= numeric(1),
+                  A3= numeric(1),
+                  A4= numeric(1),
+                  A5= numeric(1),
+                  A6= numeric(1),
+                  A7= numeric(1),
+                  A8= numeric(1),
+                  A9= numeric(1),
+                  A10= numeric(1),
+                  A11= numeric(1),
+                  A12= numeric(1),
+                  A13= numeric(1),
+                  A14= numeric(1),
+                  A15= numeric(1),
+                  A16= numeric(1),
+                  A17= numeric(1),
+                  A18= numeric(1),
+                  B1= numeric(1),
+                  B2= numeric(1),
+                  B3= numeric(1),
+                  B4= numeric(1),
+                  B5= numeric(1),
+                  B6= numeric(1),
+                  B7= numeric(1),
+                  B8= numeric(1),
+                  B9= numeric(1),
+                  C1= numeric(1),
+                  C2= numeric(1),
+                  C3= numeric(1),
+                  C4= numeric(1),
+                  C5= numeric(1),
+                  C6= numeric(1),
+                  D1= numeric(1),
+                  D2= numeric(1),
+                  D3= numeric(1),
+                  D4= numeric(1),
+                  D5= numeric(1),
+                  D6= numeric(1),
+                  D7= numeric(1),
+                  D8= numeric(1),
+                  D9= numeric(1),
+                  D10= numeric(1),
+                  D11= numeric(1),
+                  D12= numeric(1),
+                  E1= numeric(1),
+                  E2= numeric(1),
+                  E3= numeric(1),
+                  E5= numeric(1),
+                  E6= numeric(1),
+                  E7= numeric(1),
+                  E9= numeric(1),
+                  E10= numeric(1),
+                  E11= numeric(1),
+                  E13= numeric(1),
+                  E14= numeric(1),
+                  E15= numeric(1),
+                  E17= numeric(1),
+                  E18= numeric(1),
+                  E19= numeric(1),
+                  E21= numeric(1),
+                  E22= numeric(1),
+                  E23= numeric(1),
+                  F1= numeric(1),
+                  F2= numeric(1),
+                  F3= numeric(1),
+                  F5= numeric(1),
+                  F6= numeric(1),
+                  F7= numeric(1),
+                  F9= numeric(1),
+                  F10= numeric(1),
+                  F11= numeric(1),
+                  F13= numeric(1),
+                  F14= numeric(1),
+                  F15= numeric(1),
+                  F17= numeric(1),
+                  F18= numeric(1),
+                  F19= numeric(1),
+                  F21= numeric(1),
+                  F22= numeric(1),
+                  F23= numeric(1),
+                  G1= numeric(1),
+                  G2= numeric(1),
+                  G3= numeric(1),
+                  G5= numeric(1),
+                  G6= numeric(1),
+                  G7= numeric(1),
+                  G9= numeric(1),
+                  G10= numeric(1),
+                  G11= numeric(1),
+                  G13= numeric(1),
+                  G14= numeric(1),
+                  G15= numeric(1),
+                  G17= numeric(1),
+                  G18= numeric(1),
+                  G19= numeric(1),
+                  H1= numeric(1),
+                  H2= numeric(1),
+                  H4= numeric(1),
+                  H5= numeric(1),
+                  H7= numeric(1),
+                  H8= numeric(1),
+                  H10= numeric(1),
+                  H11= numeric(1),
+                  H13= numeric(1),
+                  H14= numeric(1),
+                  H16= numeric(1),
+                  I1= numeric(1),
+                  I2= numeric(1),
+                  I4= numeric(1),
+                  I5= numeric(1),
+                  I7= numeric(1),
+                  I8= numeric(1),
+                  I10= numeric(1),
+                  I11= numeric(1),
+                  I13= numeric(1),
+                  I14= numeric(1),
+                  I16= numeric(1),
+                  J1= numeric(1),
+                  J2= numeric(1),
+                  J4= numeric(1),
+                  J5= numeric(1),
+                  J7= numeric(1),
+                  J8= numeric(1),
+                  J10= numeric(1),
+                  J11= numeric(1),
+                  J13= numeric(1),
+                  J14= numeric(1),
+                  J16= numeric(1)
+  ) #build df
 
+  res$geoname <- if(is.null(cont[[1]]$geoname)) "NA" else cont[[1]]$geoname
+  res$sumlevel <- if(is.null(cont[[1]]$sumlevel)) "NA" else cont[[1]]$sumlevel
+  res$year <- if(is.null(cont[[1]]$year )) "NA" else cont[[1]]$year
+  res$A1 <- if(is.null(cont[[1]]$A1 )) "NA" else cont[[1]]$A1
+  res$A2 <- if(is.null(cont[[1]]$A2 )) "NA" else cont[[1]]$A2
+  res$A3 <- if(is.null(cont[[1]]$A3 )) "NA" else cont[[1]]$A3
+  res$A4 <- if(is.null(cont[[1]]$A4 )) "NA" else cont[[1]]$A4
+  res$A5 <- if(is.null(cont[[1]]$A5 )) "NA" else cont[[1]]$A5
+  res$A6 <- if(is.null(cont[[1]]$A6 )) "NA" else cont[[1]]$A6
+  res$A7 <- if(is.null(cont[[1]]$A7 )) "NA" else cont[[1]]$A7
+  res$A8 <- if(is.null(cont[[1]]$A8 )) "NA" else cont[[1]]$A8
+  res$A9 <- if(is.null(cont[[1]]$A9 )) "NA" else cont[[1]]$A9
+  res$A10 <- if(is.null(cont[[1]]$A10 )) "NA" else cont[[1]]$A10
+  res$A11 <- if(is.null(cont[[1]]$A11 )) "NA" else cont[[1]]$A11
+  res$A12 <- if(is.null(cont[[1]]$A12 )) "NA" else cont[[1]]$A12
+  res$A13 <- if(is.null(cont[[1]]$A13 )) "NA" else cont[[1]]$A13
+  res$A14 <- if(is.null(cont[[1]]$A14 )) "NA" else cont[[1]]$A14
+  res$A15 <- if(is.null(cont[[1]]$A15 )) "NA" else cont[[1]]$A15
+  res$A16 <- if(is.null(cont[[1]]$A16 )) "NA" else cont[[1]]$A16
+  res$A17 <- if(is.null(cont[[1]]$A17 )) "NA" else cont[[1]]$A17
+  res$A18 <- if(is.null(cont[[1]]$A18 )) "NA" else cont[[1]]$A18
+  res$B1 <- if(is.null(cont[[1]]$B1 )) "NA" else cont[[1]]$B1
+  res$B2 <- if(is.null(cont[[1]]$B2 )) "NA" else cont[[1]]$B2
+  res$B3 <- if(is.null(cont[[1]]$B3 )) "NA" else cont[[1]]$B3
+  res$B4 <- if(is.null(cont[[1]]$B4 )) "NA" else cont[[1]]$B4
+  res$B5 <- if(is.null(cont[[1]]$B5 )) "NA" else cont[[1]]$B5
+  res$B6 <- if(is.null(cont[[1]]$B6 )) "NA" else cont[[1]]$B6
+  res$B7 <- if(is.null(cont[[1]]$B7 )) "NA" else cont[[1]]$B7
+  res$B8 <- if(is.null(cont[[1]]$B8 )) "NA" else cont[[1]]$B8
+  res$B9 <- if(is.null(cont[[1]]$B9 )) "NA" else cont[[1]]$B9
+  res$C1 <- if(is.null(cont[[1]]$C1 )) "NA" else cont[[1]]$C1
+  res$C2 <- if(is.null(cont[[1]]$C2 )) "NA" else cont[[1]]$C2
+  res$C3 <- if(is.null(cont[[1]]$C3 )) "NA" else cont[[1]]$C3
+  res$C4 <- if(is.null(cont[[1]]$C4 )) "NA" else cont[[1]]$C4
+  res$C5 <- if(is.null(cont[[1]]$C5 )) "NA" else cont[[1]]$C5
+  res$C6 <- if(is.null(cont[[1]]$C6 )) "NA" else cont[[1]]$C6
+  res$D1 <- if(is.null(cont[[1]]$D1 )) "NA" else cont[[1]]$D1
+  res$D2 <- if(is.null(cont[[1]]$D2 )) "NA" else cont[[1]]$D2
+  res$D3 <- if(is.null(cont[[1]]$D3 )) "NA" else cont[[1]]$D3
+  res$D4 <- if(is.null(cont[[1]]$D4 )) "NA" else cont[[1]]$D4
+  res$D5 <- if(is.null(cont[[1]]$D5 )) "NA" else cont[[1]]$D5
+  res$D6 <- if(is.null(cont[[1]]$D6 )) "NA" else cont[[1]]$D6
+  res$D7 <- if(is.null(cont[[1]]$D7 )) "NA" else cont[[1]]$D7
+  res$D8 <- if(is.null(cont[[1]]$D8 )) "NA" else cont[[1]]$D8
+  res$D9 <- if(is.null(cont[[1]]$D9 )) "NA" else cont[[1]]$D9
+  res$D10 <- if(is.null(cont[[1]]$D10 )) "NA" else cont[[1]]$D10
+  res$D11 <- if(is.null(cont[[1]]$D11 )) "NA" else cont[[1]]$D11
+  res$D12 <- if(is.null(cont[[1]]$D12 )) "NA" else cont[[1]]$D12
+  res$E1 <- if(is.null(cont[[1]]$E1 )) "NA" else cont[[1]]$E1
+  res$E2 <- if(is.null(cont[[1]]$E2 )) "NA" else cont[[1]]$E2
+  res$E3 <- if(is.null(cont[[1]]$E3 )) "NA" else cont[[1]]$E3
+  res$E5 <- if(is.null(cont[[1]]$E5 )) "NA" else cont[[1]]$E5
+  res$E6 <- if(is.null(cont[[1]]$E6 )) "NA" else cont[[1]]$E6
+  res$E7 <- if(is.null(cont[[1]]$E7 )) "NA" else cont[[1]]$E7
+  res$E9 <- if(is.null(cont[[1]]$E9 )) "NA" else cont[[1]]$E9
+  res$E10 <- if(is.null(cont[[1]]$E10 )) "NA" else cont[[1]]$E10
+  res$E11 <- if(is.null(cont[[1]]$E11 )) "NA" else cont[[1]]$E11
+  res$E13 <- if(is.null(cont[[1]]$E13 )) "NA" else cont[[1]]$E13
+  res$E14 <- if(is.null(cont[[1]]$E14 )) "NA" else cont[[1]]$E14
+  res$E15 <- if(is.null(cont[[1]]$E15 )) "NA" else cont[[1]]$E15
+  res$E17 <- if(is.null(cont[[1]]$E17 )) "NA" else cont[[1]]$E17
+  res$E18 <- if(is.null(cont[[1]]$E18 )) "NA" else cont[[1]]$E18
+  res$E19 <- if(is.null(cont[[1]]$E19 )) "NA" else cont[[1]]$E19
+  res$E21 <- if(is.null(cont[[1]]$E21 )) "NA" else cont[[1]]$E21
+  res$E22 <- if(is.null(cont[[1]]$E22 )) "NA" else cont[[1]]$E22
+  res$E23 <- if(is.null(cont[[1]]$E23 )) "NA" else cont[[1]]$E23
+  res$F1 <- if(is.null(cont[[1]]$F1 )) "NA" else cont[[1]]$F1
+  res$F2 <- if(is.null(cont[[1]]$F2 )) "NA" else cont[[1]]$F2
+  res$F3 <- if(is.null(cont[[1]]$F3 )) "NA" else cont[[1]]$F3
+  res$F5 <- if(is.null(cont[[1]]$F5 )) "NA" else cont[[1]]$F5
+  res$F6 <- if(is.null(cont[[1]]$F6 )) "NA" else cont[[1]]$F6
+  res$F7 <- if(is.null(cont[[1]]$F7 )) "NA" else cont[[1]]$F7
+  res$F9 <- if(is.null(cont[[1]]$F9 )) "NA" else cont[[1]]$F9
+  res$F10 <- if(is.null(cont[[1]]$F10 )) "NA" else cont[[1]]$F10
+  res$F11 <- if(is.null(cont[[1]]$F11 )) "NA" else cont[[1]]$F11
+  res$F13 <- if(is.null(cont[[1]]$F13 )) "NA" else cont[[1]]$F13
+  res$F14 <- if(is.null(cont[[1]]$F14 )) "NA" else cont[[1]]$F14
+  res$F15 <- if(is.null(cont[[1]]$F15 )) "NA" else cont[[1]]$F15
+  res$F17 <- if(is.null(cont[[1]]$F17 )) "NA" else cont[[1]]$F17
+  res$F18 <- if(is.null(cont[[1]]$F18 )) "NA" else cont[[1]]$F18
+  res$F19 <- if(is.null(cont[[1]]$F19 )) "NA" else cont[[1]]$F19
+  res$F21 <- if(is.null(cont[[1]]$F21 )) "NA" else cont[[1]]$F21
+  res$F22 <- if(is.null(cont[[1]]$F22 )) "NA" else cont[[1]]$F22
+  res$F23 <- if(is.null(cont[[1]]$F23 )) "NA" else cont[[1]]$F23
+  res$G1 <- if(is.null(cont[[1]]$G1 )) "NA" else cont[[1]]$G1
+  res$G2 <- if(is.null(cont[[1]]$G2 )) "NA" else cont[[1]]$G2
+  res$G3 <- if(is.null(cont[[1]]$G3 )) "NA" else cont[[1]]$G3
+  res$G5 <- if(is.null(cont[[1]]$G5 )) "NA" else cont[[1]]$G5
+  res$G6 <- if(is.null(cont[[1]]$G6 )) "NA" else cont[[1]]$G6
+  res$G7 <- if(is.null(cont[[1]]$G7 )) "NA" else cont[[1]]$G7
+  res$G9 <- if(is.null(cont[[1]]$G9 )) "NA" else cont[[1]]$G9
+  res$G10 <- if(is.null(cont[[1]]$G10 )) "NA" else cont[[1]]$G10
+  res$G11 <- if(is.null(cont[[1]]$G11 )) "NA" else cont[[1]]$G11
+  res$G13 <- if(is.null(cont[[1]]$G13 )) "NA" else cont[[1]]$G13
+  res$G14 <- if(is.null(cont[[1]]$G14 )) "NA" else cont[[1]]$G14
+  res$G15 <- if(is.null(cont[[1]]$G15 )) "NA" else cont[[1]]$G15
+  res$G17 <- if(is.null(cont[[1]]$G17 )) "NA" else cont[[1]]$G17
+  res$G18 <- if(is.null(cont[[1]]$G18 )) "NA" else cont[[1]]$G18
+  res$G19 <- if(is.null(cont[[1]]$G19 )) "NA" else cont[[1]]$G19
+  res$H1 <- if(is.null(cont[[1]]$H1 )) "NA" else cont[[1]]$H1
+  res$H2 <- if(is.null(cont[[1]]$H2 )) "NA" else cont[[1]]$H2
+  res$H4 <- if(is.null(cont[[1]]$H4 )) "NA" else cont[[1]]$H4
+  res$H5 <- if(is.null(cont[[1]]$H5 )) "NA" else cont[[1]]$H5
+  res$H7 <- if(is.null(cont[[1]]$H7 )) "NA" else cont[[1]]$H7
+  res$H8 <- if(is.null(cont[[1]]$H8 )) "NA" else cont[[1]]$H8
+  res$H10 <- if(is.null(cont[[1]]$H10 )) "NA" else cont[[1]]$H10
+  res$H11 <- if(is.null(cont[[1]]$H11 )) "NA" else cont[[1]]$H11
+  res$H13 <- if(is.null(cont[[1]]$H13 )) "NA" else cont[[1]]$H13
+  res$H14 <- if(is.null(cont[[1]]$H14 )) "NA" else cont[[1]]$H14
+  res$H16 <- if(is.null(cont[[1]]$H16 )) "NA" else cont[[1]]$H16
+  res$I1 <- if(is.null(cont[[1]]$I1 )) "NA" else cont[[1]]$I1
+  res$I2 <- if(is.null(cont[[1]]$I2 )) "NA" else cont[[1]]$I2
+  res$I4 <- if(is.null(cont[[1]]$I4 )) "NA" else cont[[1]]$I4
+  res$I5 <- if(is.null(cont[[1]]$I5 )) "NA" else cont[[1]]$I5
+  res$I7 <- if(is.null(cont[[1]]$I7 )) "NA" else cont[[1]]$I7
+  res$I8 <- if(is.null(cont[[1]]$I8 )) "NA" else cont[[1]]$I8
+  res$I10 <- if(is.null(cont[[1]]$I10 )) "NA" else cont[[1]]$I10
+  res$I11 <- if(is.null(cont[[1]]$I11 )) "NA" else cont[[1]]$I11
+  res$I13 <- if(is.null(cont[[1]]$I13 )) "NA" else cont[[1]]$I13
+  res$I14 <- if(is.null(cont[[1]]$I14 )) "NA" else cont[[1]]$I14
+  res$I16 <- if(is.null(cont[[1]]$I16 )) "NA" else cont[[1]]$I16
+  res$J1 <- if(is.null(cont[[1]]$J1 )) "NA" else cont[[1]]$J1
+  res$J2 <- if(is.null(cont[[1]]$J2 )) "NA" else cont[[1]]$J2
+  res$J4 <- if(is.null(cont[[1]]$J4 )) "NA" else cont[[1]]$J4
+  res$J5 <- if(is.null(cont[[1]]$J5 )) "NA" else cont[[1]]$J5
+  res$J7 <- if(is.null(cont[[1]]$J7 )) "NA" else cont[[1]]$J7
+  res$J8 <- if(is.null(cont[[1]]$J8 )) "NA" else cont[[1]]$J8
+  res$J10 <- if(is.null(cont[[1]]$J10 )) "NA" else cont[[1]]$J10
+  res$J11 <- if(is.null(cont[[1]]$J11 )) "NA" else cont[[1]]$J11
+  res$J13 <- if(is.null(cont[[1]]$J13 )) "NA" else cont[[1]]$J13
+  res$J14 <- if(is.null(cont[[1]]$J14 )) "NA" else cont[[1]]$J14
+  res$J16 <- if(is.null(cont[[1]]$J16 )) "NA" else cont[[1]]$J16
+
+  return(res)
 }

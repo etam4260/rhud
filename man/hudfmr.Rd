@@ -5,7 +5,7 @@
 \title{hudfmr
 This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development}
 \usage{
-hudfmr(query, year = pkg.env$curr.year, key)
+hudfmr(query, year = pkg.env$curr.year, key = pkg.env$curr.key)
 }
 \arguments{
 \item{query}{Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.}
