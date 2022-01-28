@@ -2,8 +2,7 @@
 % Please edit documentation in R/hudr.R
 \name{hudchas}
 \alias{hudchas}
-\title{hudchas
-This function queries the CHAS API provided by US Department of Housing and Urban Development}
+\title{hudchas}
 \usage{
 hudchas(
   type,
@@ -44,6 +43,9 @@ This function returns a dataframe containing CHAS data for a particular state.
 For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html
 }
 \description{
+This function queries the CHAS API provided by US Department of Housing and Urban Development
+}
+\details{
 hudchas
 }
 \keyword{(CHAS)}

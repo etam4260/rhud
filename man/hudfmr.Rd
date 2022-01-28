@@ -2,8 +2,7 @@
 % Please edit documentation in R/hudr.R
 \name{hudfmr}
 \alias{hudfmr}
-\title{hudfmr
-This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development}
+\title{hudfmr}
 \usage{
 hudfmr(query, year = pkg.env$curr.year, key = pkg.env$curr.key)
 }
@@ -23,6 +22,9 @@ For state level data, these measurements will be the same as county level data, 
 the individual measurements for each individual county within the state.
 }
 \description{
+This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development
+}
+\details{
 hudfmr
 }
 \keyword{API}

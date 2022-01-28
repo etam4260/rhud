@@ -35,21 +35,21 @@ if(as.integer(pkg.env$curr.year) > 9) {
 }
 
 
-#' setkey
-#' @name setkey
-#' @title setkey
-#' @param key The token given by USPS
+#' hudsetkey
+#' @name hudsetkey
+#' @title hudsetkey
 #' @description The function will save the key into your package download. You will need to
 #' update this for new downloads. You can also set a new key by using this function with a new one.
+#' @param key The token given by USPS
 #' @export
-setkey <- function(key) {
+hudsetkey <- function(key) {
   pkg.env$curr.key <- key
 }
 
 #' hudcw
 #' @name hudcw
 #' @title hudcw
-#' This function queries the Crosswalks API provided by US Department of Housing and Urban Development
+#' @description This function queries the Crosswalks API provided by US Department of Housing and Urban Development
 #' @param type Must be a number between 1 and 12 depending on the Crosswalk type.
 #' 1) zip-tract
 #' 2) zip-county
@@ -169,7 +169,7 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
 #' hudfmr
 #' @name hudfmr
 #' @title hudfmr
-#' This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development
+#' @description This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development
 #' @param query Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.
 #' @param year Gets the year that this data was recorded. Default is the latest year.
 #' @param key The API key for this user. You must go to HUD and sign up for an account and request for an API key.
@@ -279,7 +279,7 @@ hudfmr <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
 #' hudil
 #' @name hudil
 #' @title hudil
-#' This function queries the Income Limits API provided by US Department of Housing and Urban Development
+#' @description This function queries the Income Limits API provided by US Department of Housing and Urban Development
 #' @param query Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.
 #' @param year Gets the year that this data was recorded. Default is the latest year.
 #' @param key The API key for this user. You must go to HUD and sign up for an account and request for an API key.
@@ -451,7 +451,7 @@ hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
 #' hudchas
 #' @name hudchas
 #' @title hudchas
-#' This function queries the CHAS API provided by US Department of Housing and Urban Development
+#' @description This function queries the CHAS API provided by US Department of Housing and Urban Development
 #' @param type Queries the data based off
 #' 1 - Nation
 #' 2 - State

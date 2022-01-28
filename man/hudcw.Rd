@@ -2,8 +2,7 @@
 % Please edit documentation in R/hudr.R
 \name{hudcw}
 \alias{hudcw}
-\title{hudcw
-This function queries the Crosswalks API provided by US Department of Housing and Urban Development}
+\title{hudcw}
 \usage{
 hudcw(
   type,
@@ -55,6 +54,9 @@ This function returns a dataframe containing CROSSWALK data for a particular GEO
 These measurements include res-ratio, bus-ratio, oth-ratio, tot-ratio. For more details on these measurements, visit https://www.huduser.gov/portal/dataset/uspszip-api.html
 }
 \description{
+This function queries the Crosswalks API provided by US Department of Housing and Urban Development
+}
+\details{
 hudcw
 }
 \keyword{API}

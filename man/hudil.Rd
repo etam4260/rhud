@@ -2,8 +2,7 @@
 % Please edit documentation in R/hudr.R
 \name{hudil}
 \alias{hudil}
-\title{hudil
-This function queries the Income Limits API provided by US Department of Housing and Urban Development}
+\title{hudil}
 \usage{
 hudil(query, year = pkg.env$curr.year, key = pkg.env$curr.key)
 }
@@ -21,6 +20,9 @@ year, median_income, very_low+, extremely_low+, and low+.
 For more details about these measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html
 }
 \description{
+This function queries the Income Limits API provided by US Department of Housing and Urban Development
+}
+\details{
 hudil
 }
 \keyword{API}
