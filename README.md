@@ -15,8 +15,8 @@ coverage](https://codecov.io/gh/etam4260/hudr/branch/main/graph/badge.svg)](http
 version](https://www.r-pkg.org/badges/version/hudr)](https://cran.r-project.org/package=hudr)
 [![cran
 checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs/hudr)
-[![cran
-version](https://www.r-pkg.org/badges/version/hudr)](https://cran.r-project.org/package=hudr)
+[![rstudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 
 <!-- badges: end -->
 
