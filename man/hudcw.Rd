@@ -57,8 +57,5 @@ These measurements include res-ratio, bus-ratio, oth-ratio, tot-ratio. For more 
 \description{
 hudcw
 }
-\examples{
-cw <- hudwc(type = 7, query = '22031', year = '2021', quarter = '4', key = 'edf23jf834qd72nja')
-}
 \keyword{API}
 \keyword{Crosswalks}

@@ -23,10 +23,6 @@ For more details about these measurements, go to https://www.huduser.gov/portal/
 \description{
 hudil
 }
-\examples{
-il <- hudil(query = '22031', year = '2021', key = 'edf23jf834qd72nja')
-il <- hudil(query = 'VA', year = '2021', key = 'edf23jf834qd72nja')
-}
 \keyword{API}
 \keyword{Income}
 \keyword{Limits}

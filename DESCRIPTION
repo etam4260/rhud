@@ -5,11 +5,8 @@ Authors@R:
     person("Emmet", "Tam", , "emmet_tam@yahoo.com", role = c("aut", "cre"))
 Description: 
 	An R interface for accessing HUD (US Department of Housing and Urban Development) API.
-	The HUD has four main datasets:
-	USPS ZIP CODE CROSSWALK
-	FAIR MARKETS RENT
-	INCOME LIMITS
-	COMPREHENSIVE HOUSING AFFORDABILITY STRATEGY
+	The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent,
+	Income Limits, and the Comprehensive Housing Affordability Strategy.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -21,5 +18,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
+Imports:
+    httr,
+    stringr
 Config/testthat/edition: 3
 VignetteBuilder: knitr

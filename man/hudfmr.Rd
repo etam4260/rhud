@@ -25,9 +25,5 @@ the individual measurements for each individual county within the state.
 \description{
 hudfmr
 }
-\examples{
-fmr <- hudfmr(query = '0801499999', year = '2021', key = 'edf23jf834qd72nja')
-fmr <- hudfmr(query = 'VA', year = '2021', key = 'edf23jf834qd72nja')
-}
 \keyword{API}
 \keyword{Crosswalks}

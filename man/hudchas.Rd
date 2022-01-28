@@ -23,6 +23,8 @@ hudchas(
 
 \item{stateId}{For types 2,3,4,5, you must provide a stateId. For 3,4,5}
 
+\item{entityId}{For types 3,4,5, you must provide a fips code}
+
 \item{year}{Gets the year that this data was recorded. Defaults to 2014-2018. There are specific year ranges
 that are only accepted.
 2014-2018
@@ -36,8 +38,6 @@ that are only accepted.
 2006-2010}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for an account and request for an API key.}
-
-\item{countId}{For types 3,4,5, you must provide a fips code}
 }
 \value{
 This function returns a dataframe containing CHAS data for a particular state.
@@ -45,9 +45,6 @@ For more details about these measurements, go to https://www.huduser.gov/portal/
 }
 \description{
 hudchas
-}
-\examples{
-hudchas(type = '2', stateId = '56', year = '2014-2018', key = 'edf23jf834qd72nja')
 }
 \keyword{(CHAS)}
 \keyword{API}
