@@ -3,13 +3,15 @@
 
 # hudr
 
+![alt text](https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true)
+
 <!-- badges: start -->
 <!-- badges: end -->
 
 This library contains an interface to the US Department of Housing and
-Urban Development datasets. The goal of this project is to provide an
-easy to use interface to access various open source datasets provided by
-HUD. This library only contains a few datasets.
+Urban Development datasets within R. The goal of this project is to
+provide an easy to use interface to access various open source APIs
+provided by HUD. This library only contains a few datasets.
 
 ## Available Datasets
 
