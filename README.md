@@ -3,14 +3,15 @@
 
 # hudr
 
+<!-- badges: start -->
+
 [![Project Status: WIP - Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+<!-- badges: end -->
+
 ![alt
 text](https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true)
-
-<!-- badges: start -->
-<!-- badges: end -->
 
 This library contains an interface to the US Department of Housing and
 Urban Development datasets within R. The goal of this project is to
