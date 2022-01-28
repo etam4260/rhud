@@ -504,7 +504,7 @@ hudchas <- function(type, stateId = "", entityId = "", year = "2014-2018", key =
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
 
-  if(length(cont$data) == 0) {
+  if(length(cont) == 0) {
     stop("The query did not return any results. Please check if these input values follow the rules stated for each parameter. Maybe your authorization key is wrong? Maybe
          there hasn't been data recorded for this particular time period.")
   } else {
