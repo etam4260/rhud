@@ -26,7 +26,37 @@ text](https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true)
 This library contains an interface to the US Department of Housing and
 Urban Development datasets within R. The goal of this project is to
 provide an easy to use interface to access various open source APIs
-provided by HUD. This library only contains a few datasets.
+provided by HUD.
+
+HUD has multiple websites for gaining access to various different
+datasets. There is HUD USER as well as HUD EXCHANGE.
+
+<https://www.huduser.gov/portal/datasets>
+
+“HUD USER is an information source containing reports and reference
+documents for the U.S. Department of Housing and Urban Development. HUD
+USER was established by the HUD’s Office of Policy Development and
+Research in 1978.”
+
+HUD USER maintains an API to gain access to their data. However, their
+API system can be rather confusing and provides their information in
+JSON format rather than a dataframe like object. Although there exist
+file downloadables, R users may want to be able to extract specific bits
+of the data into memory.
+
+<https://www.hudexchange.info/programs/drgr/>
+
+“The Department of Housing and Urban Development has a office known as
+HUD Exchange which is a comprehensive online platform that provides
+tools, resources, and contact information for the organizations and
+individuals that partner with HUD. These often include nonprofit groups
+and state and municipal governments, but also include borrowers,
+lenders, and brokers involved in HUD’s multifamily loan programs”
+
+(Currently a WIP) The DRGR Disaster Recovery Grant Reporting System does
+not have an active API for retrieving data. However, there does exist
+datasets freely available online which can be directly downloadable into
+R. This package provides the ability to directly get such data.
 
 ## Available Datasets
 
@@ -76,22 +106,32 @@ hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2N
 This is a basic example which shows you how to query the CROSSWALK API.
 
 ``` r
-# Type 7 corresponds to county level data. The query is a 5 digit fips code.
+# Type 7 corresponds county level data in where measurements are done in individual zip codes.
 # The year and quarter specifies when these measurements were made. The key argument
 # is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
-# This example does not have the key because we already set it up using setkey()
-hudcw(type = 7, query = '22031', year = '2010', quarter = '4')
-#>     fips   zip   res_ratio bus_ratio oth_ratio   tot_ratio year quarter
-#> 1  22031 71052 0.427990000 0.6806280 0.5479450 0.440830000 2010       4
-#> 2  22031 71078 0.183273000 0.0890052 0.1506850 0.178556000 2010       4
-#> 3  22031 71049 0.111750000 0.0663176 0.1506850 0.109810000 2010       4
-#> 4  22031 71032 0.081690400 0.0453752 0.0136986 0.079535000 2010       4
-#> 5  22031 71027 0.070285600 0.0523560 0.0410959 0.069248100 2010       4
-#> 6  22031 71030 0.043674300 0.0174520 0.0410959 0.042401900 2010       4
-#> 7  22031 71046 0.042790200 0.0279232 0.0136986 0.041900100 2010       4
-#> 8  22031 71063 0.027849000 0.0139616 0.0410959 0.027264400 2010       4
-#> 9  22031 71419 0.010520700 0.0069808 0.0000000 0.010286900 2010       4
-#> 10 22031 71065 0.000176819 0.0000000 0.0000000 0.000167266 2010       4
+# This example does not have the key because it is already set up using hudsetkey()
+hudcw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1'))
+#>    county year quarter   zip   res_ratio  bus_ratio oth_ratio   tot_ratio
+#> 1   22031 2010       1 71052    0.432213   0.699634   0.56338     0.44551
+#> 2   22031 2010       1 71078     0.18167  0.0860806   0.15493     0.17704
+#> 3   22031 2010       1 71049    0.110358  0.0659341   0.15493    0.108552
+#> 4   22031 2010       1 71032   0.0813449   0.040293 0.0140845   0.0790172
+#> 5   22031 2010       1 71027   0.0699566   0.047619 0.0422535   0.0687441
+#> 6   22031 2010       1 71030   0.0435647  0.0201465 0.0422535   0.0424621
+#> 7   22031 2010       1 71046   0.0425705   0.021978 0.0140845   0.0414348
+#> 8   22031 2010       1 71063   0.0275669   0.014652 0.0140845   0.0268813
+#> 9   22031 2010       1 71419   0.0105748   0.003663         0   0.0101875
+#> 10  22031 2010       1 71065 0.000180766          0         0 0.000171218
+#> 11  22031 2011       1 71052    0.427555   0.674658  0.533333    0.440199
+#> 12  22031 2011       1 71078    0.183464  0.0873288  0.146667    0.178571
+#> 13  22031 2011       1 71049    0.111765  0.0650685  0.146667    0.109718
+#> 14  22031 2011       1 71032   0.0818909  0.0479452      0.04   0.0799834
+#> 15  22031 2011       1 71027   0.0702047  0.0565068      0.04   0.0693522
+#> 16  22031 2011       1 71030   0.0436693  0.0171233      0.04   0.0423588
+#> 17  22031 2011       1 71046   0.0427906  0.0291096 0.0133333   0.0419435
+#> 18  22031 2011       1 71063   0.0279413   0.015411      0.04   0.0274086
+#> 19  22031 2011       1 71419   0.0105439 0.00684932         0    0.010299
+#> 20  22031 2011       1 71065 0.000175731          0         0 0.000166113
 ```
 
 ##### Crosswalk Data Fields

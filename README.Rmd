@@ -30,8 +30,25 @@ knitr::opts_chunk$set(
 This library contains an interface to
 the US Department of Housing and Urban Development datasets within R. The goal
 of this project is to provide an easy to use interface to access various open source
-APIs provided by HUD. This library only contains a few datasets.
+APIs provided by HUD. 
 
+
+HUD has multiple websites for gaining access to various different datasets.
+There is HUD USER as well as HUD EXCHANGE.
+
+https://www.huduser.gov/portal/datasets
+
+"HUD USER is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD's Office of Policy Development and Research in 1978."
+
+HUD USER maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a dataframe like object. Although there exist
+file downloadables, R users may want to be able to extract specific bits of the data into memory.
+
+https://www.hudexchange.info/programs/drgr/
+
+"The Department of Housing and Urban Development has a office known as HUD Exchange
+which is a comprehensive online platform that provides tools, resources, and contact information for the organizations and individuals that partner with HUD. These often include nonprofit groups and state and municipal governments, but also include borrowers, lenders, and brokers involved in HUD’s multifamily loan programs"
+
+(Currently a WIP) The DRGR Disaster Recovery Grant Reporting System does not have an active API for retrieving data. However, there does exist datasets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.
 
 ## Available Datasets
 
@@ -78,11 +95,11 @@ This is a basic example which shows you how to query the CROSSWALK API.
 
 ```{r}
 
-# Type 7 corresponds to county level data. The query is a 5 digit fips code.
+# Type 7 corresponds county level data in where measurements are done in individual zip codes.
 # The year and quarter specifies when these measurements were made. The key argument
 # is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
-# This example does not have the key because we already set it up using setkey()
-hudcw(type = 7, query = '22031', year = '2010', quarter = '4')
+# This example does not have the key because it is already set up using hudsetkey()
+hudcw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1'))
 ```
 
 ##### Crosswalk Data Fields
