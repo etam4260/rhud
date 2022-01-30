@@ -8,7 +8,7 @@
 
 
 # An R interface for accessing HUD EXCHANGE (US Department of Housing and Urban Development)
-# API.
+# DRGR Datasets.
 # The HUD EXCHANGE has three main datasets:
 # CDBG-DR (Community Development Block Grant - Disaster Recovery)
 # NSP (Neighborhood Stabilization Program)

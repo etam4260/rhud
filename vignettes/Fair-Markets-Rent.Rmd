@@ -1,0 +1,75 @@
+---
+title: "Fair-Markets-Rent"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Fair-Markets-Rent}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Fair Markets Rent API
+
+This is a basic example to show you how to query the FAIR MARKETS RENT API. 
+
+Querying a state will return a dataframe with rows representing counties within the state.
+A county fips + subdivision 10 digit code will return a 1 row dataframe for that
+county.
+
+```{r}
+library(hudr)
+
+# Setting the key.
+hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
+
+# Querying the Fair Markets Rent dataset for Virginia in the year of 2021. This selected
+# the first few rows and the first four columns.
+head(hudfmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
+
+# Querying the Fair Markets Rent dataset for a county in the year of 2017.
+hudfmr(query = '0100199999', year = '2017')
+```
+
+#### Fair Markets Rent Data Fields
+
+1) state/county or CBSA 
+    * Name of the county if it is a county.
+
+2) year 
+    * Value of year
+
+3) counties_msa 
+    * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
+
+4) town_name 
+    * Town name - applicable for North East regions
+
+5) metro_status 
+    * value will be "1" if it is a metropolitan county. Otherwise value will be "0".
+
+6) metro_name 
+    * Metro area name if metro_status is "1"
+
+7) smallarea_status 
+    * value will be "1" if it is a small area. Otherwise value will be "0".
+
+8) Efficiency 
+    * Efficiency FMR
+
+9) One-Bedroom 
+    * 1-bedroom FMR
+
+10) Two-Bedroom 
+    * 2-bedroom FMR
+
+11) Three-Bedroom 
+    * 3-bedroom FMR
+
+12) Four-Bedroom 
+    * 4-bedroom FMR

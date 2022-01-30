@@ -1,0 +1,39 @@
+---
+title: "Setup"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Setup}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Setup
+
+The US Department of Housing and Urban Development for HUD USER requires users to gain an 
+access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and make an account.
+
+From there you need to make a new token. Make sure to save the token somewhere as
+you will only be able to view it once. However, you can use it as many times as you want.
+You can now supply the 'key' argument.
+
+To reduce the need to supply the key in every function call, you can use the 
+hudsetkey(key) function to save the key to the package environment.
+
+HUD Exchange does not require a key to gain access to their data.
+
+```{r}
+library(hudr)
+
+# The function will not output anything. 
+hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
+```
+
+You can now access the API from HUD User. I recommend taking a look at the other articles to get a 
+better sense of how to access specific datasets.

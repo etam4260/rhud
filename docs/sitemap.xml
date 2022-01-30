@@ -4,10 +4,28 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/Community-Development-Block-Grant.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Comprehensive-Housing-and-Affordability-Strategy.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Crosswalk.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Fair-Markets-Rent.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Income-Limits.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/my-vignette.html</loc>
+    <loc>/articles/Neighborhood-Stabilization-Program.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Setup.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -22,6 +40,9 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/reference/hudcdbg.html</loc>
+  </url>
+  <url>
     <loc>/reference/hudchas.html</loc>
   </url>
   <url>
@@ -34,9 +55,12 @@
     <loc>/reference/hudil.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>/reference/hudnsp.html</loc>
   </url>
   <url>
-    <loc>/reference/setkey.html</loc>
+    <loc>/reference/hudsetkey.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
   </url>
 </urlset>

@@ -1,0 +1,19 @@
+---
+title: "Community-Development-Block-Grant"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Community-Development-Block-Grant}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(hudr)
+```

@@ -32,7 +32,6 @@ the US Department of Housing and Urban Development datasets within R. The goal
 of this project is to provide an easy to use interface to access various open source
 APIs provided by HUD. 
 
-
 HUD has multiple websites for gaining access to various different datasets.
 There is HUD USER as well as HUD EXCHANGE.
 
@@ -48,17 +47,24 @@ https://www.hudexchange.info/programs/drgr/
 "The Department of Housing and Urban Development has a office known as HUD Exchange
 which is a comprehensive online platform that provides tools, resources, and contact information for the organizations and individuals that partner with HUD. These often include nonprofit groups and state and municipal governments, but also include borrowers, lenders, and brokers involved in HUD’s multifamily loan programs"
 
-(Currently a WIP) The DRGR Disaster Recovery Grant Reporting System does not have an active API for retrieving data. However, there does exist datasets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.
+(Currently a WIP) The DRGR Disaster Recovery Grant Reporting System which HUD Exchange uses
+to supply public data does not have an active API for retrieving information. 
+However, there does exist datasets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.
 
-## Available Datasets
+## Available Data
 
-The APIs which this library interfaces with:
+The APIs and datasets which this library interfaces with:
 
-* Crosswalk
-* Fair Markets Rent
-* Income Limits
-* Comprehensive Housing and Affordability Strategy
+1) HUD User
+    * Crosswalk
+    * Fair Markets Rent
+    * Income Limits
+    * Comprehensive Housing and Affordability Strategy
 
+2) HUD Exchange
+    * Community Develop Block Grant - Disaster Recovery
+    * Neighborhood Stabilization Program
+    
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
@@ -68,195 +74,9 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("etam4260/hudr")
 ```
 
-## Setup
-
-The US Department of Housing and Urban Development requires users to gain an 
-access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and make an account.
-
-From there you need to make a new token. Make sure to save the token somewhere as
-you will only be able to view it once. You can now supply the 'key' argument.
-
-To reduce the need to supply the key in every function call, you can use the 
-hudsetkey(key) function to save the key to the package environment.
-
-```{r}
-library(hudr)
-
-# The function will not output anything. You can now run the other functions
-# without supplying the key argument.
-hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
-```
-
-
-## Examples
-
-### Crosswalk API
-This is a basic example which shows you how to query the CROSSWALK API.
-
-```{r}
-
-# Type 7 corresponds county level data in where measurements are done in individual zip codes.
-# The year and quarter specifies when these measurements were made. The key argument
-# is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
-# This example does not have the key because it is already set up using hudsetkey()
-hudcw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1'))
-```
-
-##### Crosswalk Data Fields
-
-1) zip/fips/fipstract/CBSA/Congressional District/County Subdistrict > 
-    * Zip, Tract, County, CD or CBSA code
-
-2) year 
-    * Value of year
-
-3) quarter 
-    * Quarter of the year
-
-4) res_ratio  
-    * The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to the total number of residential addresses in the entire ZIP. (for type 1-5)
-The ratio of residential addresses in the Zip, Tract, County, or CBSA - ZIP part to the total number of residential addresses in the entire Zip, Tract, County, or CBSA. (for type 6-10)
-
-5) bus_ratio 
-    * The ratio of business addresses in the ZIP – Tract, County, or CBSA part to the total number of business addresses in the entire ZIP. (for type 1-5)
-The ratio of business addresses in the Tract, County, or CBSA – ZIP part to the total number of business addresses in the entire Tract, County, or CBSA. (for type 6-10)
-
-6) oth_ratio 
-    * The ratio of other addresses in the ZIP – Tract to the total number of other addresses in the entire ZIP. (for type 1-5)
-The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the total number of other addresses in the entire Tract, County, or CBSA. (for type 6-10)
-
-7) tot_ratio 
-    * The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5) The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10)
-
-
-### Fair Markets Rent API
-
-This is a basic example to show you how to query the FAIR MARKETS RENT API. 
-
-Querying a state will return a dataframe with rows representing counties within the state.
-A county fips + subdivision 10 digit code will return a 1 row dataframe for that
-county.
-
-```{r}
-# Querying the Fair Markets Rent dataset for Virginia in the year of 2021. This selected
-# the first few rows and the first four columns.
-head(hudfmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
-
-# Querying the Fair Markets Rent dataset for a county in the year of 2017.
-hudfmr(query = '0100199999', year = '2017')
-```
-
-##### Fair Markets Rent Data Fields
-
-1) state/county or CBSA 
-    * Name of the county if it is a county.
-
-2) year 
-    * Value of year
-
-3) counties_msa 
-    * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
-
-4) town_name 
-    * Town name - applicable for North East regions
-
-5) metro_status 
-    * value will be "1" if it is a metropolitan county. Otherwise value will be "0".
-
-6) metro_name 
-    * Metro area name if metro_status is "1"
-
-7) smallarea_status 
-    * value will be "1" if it is a small area. Otherwise value will be "0".
-
-8) Efficiency 
-    * Efficiency FMR
-
-9) One-Bedroom 
-    * 1-bedroom FMR
-
-10) Two-Bedroom 
-    * 2-bedroom FMR
-
-11) Three-Bedroom 
-    * 3-bedroom FMR
-
-12) Four-Bedroom 
-    * 4-bedroom FMR
-
-### Income Limits API
-
-This is a basic example showing you how to query the INCOME LIMITS API.
-
-Querying a state or (fips + subdivision 10 digit fips) both return
-a single row.
-
-```{r}
-# Querying the Fair Markets Rent dataset for Virginia in the year of 2021.
-# Grabbing the first 6 columns
-head(hudil(query = 'VA', year = '2021'))[ ,c(1,2,3,4,5,6)]
-
-# Querying the Fair Markets Rent dataset for a county in the year of 2017.
-# Grabbing the first 6 columns
-hudil(query = '0100199999', year = '2017')[ ,c(1,2,3,4,5,6)]
-```
-
-
-##### Income Limits Data Fields
-
-1) county_name 
-    * Name of the county if it is a county.
-
-2) counties_msa
-    * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
-
-3) town_name
-    * Town name - applicable for North East regions
-
-4) metro_status
-    * value will be "1" if it is a metropolitan county. Otherwise value will be "0".
-
-5) metro_name
-    * Metro area name if metro_status is "1"
-
-6) year
-    * year of the data
-
-7) median_income
-    * Median Income for the area
-    
-8) Very Low 
-    * (50%) Income Limits
-    * For more details on il50 check the website.
-
-9) Extremely Low 
-    * (30%) Income Limits
-    * For more details on il30 check the website.
-    
-10) Low 
-    * (80%) Income Limits
-    * For more details on il80 check the website.
-
-### Comprehensive Housing and Affordability Strategy API
-
-This is a basic example showing you how to query the COMPREHENSIVE HOUSING AND AFFORDABILITY STRATEGY API.
-
-This function returns a single row dataframe containing information about household
-income levels, occupancy, housing problems, and burden for a 'region' 
-
-```{r}
-# Querying the Comprehensive Housing and Affordability Strategy dataset for a state in the years of 2014-2018.
-# Return the first 6 rows. There are specific date ranges that are allowed. Please check the specifications.
-# https://www.huduser.gov/portal/dataset/chas-api.html
-
-# This displays the first 9 columns
-hudchas(type = '2', stateId ='56', year = '2014-2018')[,c(1,2,3,4,5,6,7,8,9)]
-```
-
-##### Comprehensive Housing and Affordability Strategy Data Fields
-
-I recommend checking out https://www.huduser.gov/portal/dataset/chas-api.html for more
-details on this as there are too many fields to display.
+For more details on how to setup and utilize this package. Please go to
+https://etam4260.github.io/hudr/. Select the "Articles" in the top scroll bar 
+and click on "Setup"
 
 ## Contributors
 

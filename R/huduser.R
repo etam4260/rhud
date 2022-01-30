@@ -15,7 +15,7 @@
 # Crosswalk
 # Fair Markets Rent
 # Income Limits
-# Comprehensive and Affordability Strategy
+# Comprehensive and Housing Affordability Strategy
 
 
 # Creating global environment to set default values to some

@@ -1,0 +1,42 @@
+---
+title: "Comprehensive-Housing-and-Affordability-Strategy"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comprehensive-Housing-and-Affordability-Strategy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Comprehensive Housing and Affordability Strategy API
+
+This is a basic example showing you how to query the COMPREHENSIVE HOUSING AND AFFORDABILITY STRATEGY API.
+
+This function returns a single row dataframe containing information about household
+income levels, occupancy, housing problems, and burden for a 'region' 
+
+```{r}
+library(hudr)
+
+# Setting the key.
+hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
+
+# Querying the Comprehensive Housing and Affordability Strategy dataset for a state in the years of 2014-2018.
+# Return the first 6 rows. There are specific date ranges that are allowed. Please check the specifications.
+# https://www.huduser.gov/portal/dataset/chas-api.html
+
+# This displays the first 9 columns
+hudchas(type = '2', stateId ='56', year = '2014-2018')[,c(1,2,3,4,5,6,7,8,9)]
+```
+
+#### Comprehensive Housing and Affordability Strategy Data Fields
+
+I recommend checking out https://www.huduser.gov/portal/dataset/chas-api.html for more
+details on this as there are too many fields to display.
+
