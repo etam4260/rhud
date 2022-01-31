@@ -8,7 +8,7 @@
 
 
 # An R interface for accessing HUD EXCHANGE (US Department of Housing and Urban Development)
-# DRGR Datasets.
+# DRGR Datasets at https://drgr.hud.gov/public/index.html#
 # The HUD EXCHANGE has three main datasets:
 # CDBG-DR (Community Development Block Grant - Disaster Recovery)
 # NSP (Neighborhood Stabilization Program)
@@ -18,7 +18,7 @@
 # Currently there is no data for RIF (Rural Innovation Fund) and therefore
 # there are no functions to grab that data. A main issue with these datasets
 # is that the information is not provided in a tabular format, but rather as
-# dictionary-like. These scripts will unroll and format it into a dataframe.
+# dictionary-like. These scripts will unroll those fields and format it into a dataframe.
 
 
 #' hudcdbg
@@ -31,8 +31,12 @@
 #' 2) DR CDBG CDBG-DR Financial Report by Grantee (xlsx - 0.1 MB - 1/1/2022)
 #' 3) DR CDBG CDBG-DR Financial Report Monthly Summary (xlsx - 0.1 MB - 1/1/2022)
 #' 4) DR CDBG CDBG-DR Performance by Activity (xlsx - 2.2 MB - 1/1/2022)
+#' @returns A dataframe.
 #' @export
 hudcdbg <- function(file = 1) {
+
+  if(as.integer(file) > 4 || as.integer(file) < 1) stop("File number out of range.")
+
   if(as.integer(file) == 1) {
     data <- read.xlsx("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Appropriation.xlsx")
 
@@ -123,7 +127,33 @@ hudcdbg <- function(file = 1) {
 #' @description This will grab data from https://drgr.hud.gov/public/data_downloads.html?programName=NSP
 #' and format it into a dataframe. It will unroll each field to remove NA values in cells. Currently this only supports getting access to the NSP NSP Grant Summary.
 #' @param file The specific file needed.
+#' 1)NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status
+#' 2)
+#' 3)
+#' 4)
+#' 5)
+#' 6)
+#' 7)
+#' 8)
+#' @returns A dataframe.
 #' @export
 hudnsp <- function(file = 1) {
+  # No functions have been made to directly download xls files into R, so this will take a more inefficient
+  # route by downloading it into disk, reading it and then deleting it.
 
+  if(as.integer(file) > 1 || as.integer(file) < 1) stop("File number out of range.")
+
+  if(file == 1) {
+    data <- read.xlsx("https://drgr.hud.gov/public/downloads/NSP/NSP%20Close-out_Admin%20Rept02b%20-%20with%20Act%20Start%20and%20End%20dates%20and%20ENV%20Status.xlsx")
+    colnames(data) <- data[2,]
+    data <- data[-c(1,2), ]
+
+    for(j in seq(1,6)) {
+      nonNA <- which(!is.na(data[ ,j]))
+      for(i in seq(1, length(nonNA) - 1)) {
+        data[c(seq(nonNA[i], nonNA[i+1] - 1)), j] <- data[nonNA[i], j]
+      }
+    }
+  }
+  return(data)
 }

@@ -7,7 +7,18 @@
 hudnsp(file = 1)
 }
 \arguments{
-\item{file}{The specific file needed.}
+\item{file}{The specific file needed.
+1)NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status
+2)
+3)
+4)
+5)
+6)
+7)
+8)}
+}
+\value{
+A dataframe.
 }
 \description{
 This will grab data from https://drgr.hud.gov/public/data_downloads.html?programName=NSP

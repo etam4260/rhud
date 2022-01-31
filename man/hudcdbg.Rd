@@ -15,6 +15,9 @@ hudcdbg(file = 1)
 \item DR CDBG CDBG-DR Performance by Activity (xlsx - 2.2 MB - 1/1/2022)
 }}
 }
+\value{
+A dataframe.
+}
 \description{
 This will grab data from https://drgr.hud.gov/public/data_downloads.html?programName=DR\%20CDBG
 and format it into a dataframe. It will unroll each field to remove NA values in cells.

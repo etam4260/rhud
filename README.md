@@ -81,8 +81,7 @@ devtools::install_github("etam4260/hudr")
 ```
 
 For more details on how to setup and utilize this package. Please go to
-<https://etam4260.github.io/hudr/>. Select the “Articles” in the top
-scroll bar and click on “Setup”
+<https://etam4260.github.io/hudr/>. Select Setup in the navigation bar.
 
 ## Contributors
 

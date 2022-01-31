@@ -16,6 +16,13 @@ knitr::opts_chunk$set(
 
 ## Setup
 
+You can install the development version from GitHub with:
+
+```{r, warning=FALSE, results='hide',message=FALSE}
+# install.packages("devtools")
+devtools::install_github("etam4260/hudr")
+```
+
 The US Department of Housing and Urban Development for HUD USER requires users to gain an 
 access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and make an account.
 
@@ -33,6 +40,9 @@ library(hudr)
 
 # The function will not output anything. 
 hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
+
+# To check the current key.
+# print(hudgetkey())
 ```
 
 You can now access the API from HUD User. I recommend taking a look at the other articles to get a 

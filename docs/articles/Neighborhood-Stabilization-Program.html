@@ -110,12 +110,67 @@
 <div class="section level3">
 <h3 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
 </h3>
+<p>"HUD’s Neighborhood Stabilization Program (www.hud.gov/nsp) provides emergency assistance to state and local governments to acquire and redevelop foreclosed properties that might otherwise become sources of abandonment and blight within their communities. The Neighborhood Stabilization Program (NSP) provides grants to every state, certain local communities, and other organizations to purchase foreclosed or abandoned homes and to rehabilitate, resell, or redevelop these homes in order to stabilize neighborhoods and stem the decline of house values of neighboring homes. The program is authorized under Title III of the Housing and Economic Recovery Act of 2008.</p>
+<p>There have been three rounds of funding for NSP. The Housing and Economic Recovery Act of 2008 provided a first round of formula funding to States and units of general local government, and is referred to herein as NSP1. The American Recovery and Reinvestment Act provided a second round of funds in 2009 awarded by competition, and is referred to herein as NSP2. The third round of funding, NSP3, was provided in 2010 as part of the Dodd-Frank Wall Street Reform Act and was allocated by formula (<a href="https://www.huduser.gov/portal/datasets/NSP.html#" class="external-link uri">https://www.huduser.gov/portal/datasets/NSP.html#</a>:~:text=The%20Neighborhood%20Stabilization%20Program%20%28NSP%29%20provides%20grants%20to,the%20decline%20of%20house%20values%20of%20neighboring%20homes.)."</p>
+<p>The dataset currently stored by HUD are in the older xls format which is unsuprising given that this program hasn’t been active for almost a decade. This function does allow getting the xlsx formatted files, but not the xls files. To get the other ones, go to <a href="https://drgr.hud.gov/public/data_downloads.html?programName=NSP" class="external-link uri">https://drgr.hud.gov/public/data_downloads.html?programName=NSP</a></p>
+<p>These files are built in a dictionary like structure (JSON/XML), but this function also unrolls each field so each row has a corresponding entity for each column.</p>
+<ol style="list-style-type: decimal">
+<li>NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status</li>
+<li>
+<li>
+<li>
+</ol>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
+
+<span class="co"># Getting the first which is NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status.xlsx</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/hudnsp.html">hudnsp</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;    Grantee Name Grant Status    Grant Number Grant Description</span>
+<span class="co">#&gt; 3     Miami, FL       Active B-08-MN-12-0016              NSP1</span>
+<span class="co">#&gt; 4   Detroit, MI       Active B-08-MN-26-0004              NSP1</span>
+<span class="co">#&gt; 5 West Virginia       Active B-08-DN-54-0001              NSP1</span>
+<span class="co">#&gt; 6 West Virginia       Active B-08-DN-54-0001              NSP1</span>
+<span class="co">#&gt; 7     Tennessee       Active B-08-DN-47-0001              NSP1</span>
+<span class="co">#&gt; 8    Fresno, CA       Active B-08-MN-06-0003              NSP1</span>
+<span class="co">#&gt;                                             Activity Type</span>
+<span class="co">#&gt; 3 Rehabilitation/reconstruction of residential structures</span>
+<span class="co">#&gt; 4 Rehabilitation/reconstruction of residential structures</span>
+<span class="co">#&gt; 5 Rehabilitation/reconstruction of residential structures</span>
+<span class="co">#&gt; 6 Rehabilitation/reconstruction of residential structures</span>
+<span class="co">#&gt; 7                                   Acquisition - general</span>
+<span class="co">#&gt; 8                                   Acquisition - general</span>
+<span class="co">#&gt;        Responsible Organization                       Activity Number</span>
+<span class="co">#&gt; 3                      1521 LLc                         COM-NSP-B1-04</span>
+<span class="co">#&gt; 4             1800 Brainard LLC 14S 1800 Brainard (Phoenix Comm) LMMI</span>
+<span class="co">#&gt; 5         25045 A New Clendenin            25045 A New Clendenin - 25</span>
+<span class="co">#&gt; 6         25045 A New Clendenin            25045 A New Clendenin LMMI</span>
+<span class="co">#&gt; 7 28th Legislative District CDC                           NSP1-09-033</span>
+<span class="co">#&gt; 8                2M Corporation                            HG0003/ACQ</span>
+<span class="co">#&gt;   Activity Status Env Assess Status Action Plan Projected Start Date</span>
+<span class="co">#&gt; 3       Completed         COMPLETED                            40415</span>
+<span class="co">#&gt; 4       Under Way         COMPLETED                            40249</span>
+<span class="co">#&gt; 5       Completed         COMPLETED                            40408</span>
+<span class="co">#&gt; 6       Completed         COMPLETED                            40208</span>
+<span class="co">#&gt; 7       Under Way         COMPLETED                            39995</span>
+<span class="co">#&gt; 8       Completed         COMPLETED                            40087</span>
+<span class="co">#&gt;   Action Plan Projected End Date QPR - Actual Completion Date Metrics</span>
+<span class="co">#&gt; 3                          41121                        41596    &lt;NA&gt;</span>
+<span class="co">#&gt; 4                          41363                                 &lt;NA&gt;</span>
+<span class="co">#&gt; 5                          40998                        41128    &lt;NA&gt;</span>
+<span class="co">#&gt; 6                          40663                        41128    &lt;NA&gt;</span>
+<span class="co">#&gt; 7                          41183                                 &lt;NA&gt;</span>
+<span class="co">#&gt; 8                          40421                        40178    &lt;NA&gt;</span>
+<span class="co">#&gt;   Grant Fund Budgets Funds Drawndown</span>
+<span class="co">#&gt; 3         1200000.01      1199548.13</span>
+<span class="co">#&gt; 4            1117000         1117000</span>
+<span class="co">#&gt; 5             584535          584535</span>
+<span class="co">#&gt; 6            2115465         2115465</span>
+<span class="co">#&gt; 7             300000          300000</span>
+<span class="co">#&gt; 8           834118.9        834118.9</span></code></pre></div>
 </div>
   </div>
 

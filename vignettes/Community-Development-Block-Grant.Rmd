@@ -24,6 +24,11 @@ The first two datasets are the same, but are organized in a different manner.
 Querying the HUD Exchange website for data is a bit different than HUD User. These functions
 directly download the data into memory. Furthermore, these datasets do not need a key.
 
+1) DR CDBG CDBG-DR Financial Report by Appropriation
+2) DR CDBG CDBG-DR Financial Report by Grantee
+3) DR CDBG CDBG-DR Financial Report Monthly Summary
+4) DR CDBG CDBG-DR Performance by Activity
+
 ### Example
 
 #### CDBG-DR Financial Report by Appropriation

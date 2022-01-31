@@ -16,9 +16,29 @@ knitr::opts_chunk$set(
 
 ### About
 
+"HUD's Neighborhood Stabilization Program (www.hud.gov/nsp) provides emergency assistance to state and local governments to acquire and redevelop foreclosed properties that might otherwise become sources of abandonment and blight within their communities. The Neighborhood Stabilization Program (NSP) provides grants to every state, certain local communities, and other organizations to purchase foreclosed or abandoned homes and to rehabilitate, resell, or redevelop these homes in order to stabilize neighborhoods and stem the decline of house values of neighboring homes. The program is authorized under Title III of the Housing and Economic Recovery Act of 2008.
+
+There have been three rounds of funding for NSP. The Housing and Economic Recovery Act of 2008 provided a first round of formula funding to States and units of general local government, and is referred to herein as NSP1. The American Recovery and Reinvestment Act provided a second round of funds in 2009 awarded by competition, and is referred to herein as NSP2. The third round of funding, NSP3, was provided in 2010 as part of the Dodd-Frank Wall Street Reform Act and was allocated by formula (https://www.huduser.gov/portal/datasets/NSP.html#:~:text=The%20Neighborhood%20Stabilization%20Program%20%28NSP%29%20provides%20grants%20to,the%20decline%20of%20house%20values%20of%20neighboring%20homes.)."
+
+The dataset currently stored by HUD are in the older xls format which is unsuprising given that this program
+hasn't been active for almost a decade. This function does allow getting the xlsx formatted files, but not 
+the xls files. To get the other ones, go to https://drgr.hud.gov/public/data_downloads.html?programName=NSP
+
+These files are built in a dictionary like structure (JSON/XML), but this function also unrolls each field so
+each row has a corresponding entity for each column.
+
+1) NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status
+2)
+3)
+4)
+
 
 
 ### Example
 ```{r}
 library(hudr)
+
+# Getting the first which is NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status.xlsx
+head(hudnsp(file = 1))
+
 ```

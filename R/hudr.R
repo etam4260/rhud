@@ -2,9 +2,8 @@
 # of parameters in the web queries.
 pkg.env <- new.env(parent = emptyenv())
 pkg.env$curr.year <- c(strsplit(toString(Sys.Date()), "-")[[1]][1])
-pkg.env$curr.key <- NULL
 pkg.env$curr.quarter <- c("1","2","3","4")
-
+pkg.env$curr.key <- NULL
 
 #' hudsetkey
 #' @name hudsetkey
@@ -15,4 +14,13 @@ pkg.env$curr.quarter <- c("1","2","3","4")
 #' @export
 hudsetkey <- function(key) {
   pkg.env$curr.key <- key
+}
+
+#' hudgetkey
+#' @name hudgetkey
+#' @title hudgetkey
+#' @description The function will return the most recent key set. If no key is set it will return NULL.
+#' @export
+hudgetkey <- function() {
+  return(pkg.env$curr.key)
 }
