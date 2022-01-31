@@ -14,46 +14,86 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Crosswalk API
+### About
 
-This is a basic example which shows you how to query the CROSSWALK API.
+"One of the many challenges that social science researchers and practitioners face is the difficulty of relating United States Postal Service (USPS) ZIP codes to Census Bureau geographies. There are valuable data available only at the ZIP code level that, when combined with demographic data tabulated at various Census geography levels, could open up new avenues of exploration.
+
+While some acceptable methods of combining ZIP codes and Census geography exist, they have limitations. To provide additional avenues for merging these data, PD&R has released the HUD-USPS Crosswalk Files. These unique files are derived from data in the quarterly USPS Vacancy Data. They originate directly from the USPS; are updated quarterly, making them highly responsive to changes in ZIP code configurations; and reflect the locations of both business and residential addresses. The latter feature is of particular interest to housing researchers because many of the phenomena that they study are based on housing unit or address. By using an allocation method based on residential addresses rather than by area or by population, analysts can take into account not only the spatial distribution of population, but also the spatial distribution of residences. This enables a slightly more nuanced approach to allocating data between disparate geographies(https://www.huduser.gov/portal/datasets/usps_crosswalk.html)."
+
+This journal article describes the problem and proposed solution in more detail: 
+Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S. Department of Housing and Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277 – 294. https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf
+
+type: Must be a number between 1 and 12 depending on the Crosswalk type.
+ 1) zip-tract
+ 2) zip-county
+ 3) zip-cbsa
+ 4) zip-cbsadiv (Available 4th Quarter 2017 onwards)
+ 5) zip-cd
+ 6) tract-zip
+ 7) county-zip
+ 8) cbsa-zip
+ 9) cbsadiv-zip (Available 4th Quarter 2017 onwards)
+ 10) cd-zip
+ 11) zip-countysub (Available 2nd Quarter 2018 onwards)
+ 12) countysub-zip (Available 2nd Quarter 2018 onwards)
+
+The first half of the 'type' argument describes the specific region we want to query. 
+The second half of the 'type' argument describe a secondary region and how much it 'intersects' with the
+first region. For example, in type 7, we might have a county called 22301 which has zip
+codes 35213, 13132, and 22411 which are either fully or partially inside the county 22301.
+Each individual observation describes how much 'intersection' the second half geoid has with 
+the first half geoid. Intersection is describe in the % of residental, business, and other buildings
+in the second half geoid that are in the first half geoid. For example, 50% of residential buildings
+in 35213 are also inside the county 22301.
+
+### Example
+
+This is a basic example which shows you how to query the Crosswalk API.
 
 ```{r}
 library(hudr)
 
-# Setting the key.
+# First need to set the key.
 hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
 
-# Type 7 corresponds county level data in where measurements are done in individual zip codes.
-# The year and quarter specifies when these measurements were made. The key argument
-# is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1
-# This example does not have the key because it is already set up using hudsetkey()
+# Type 7 (county-zip) corresponds zip level data which intersects with this county. 
+# The year and quarter specifies when these measurements are made.
 hudcw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1'))
 ```
 
-#### Crosswalk Data Fields
+### Data Fields
 
-1) zip/fips/fipstract/CBSA/Congressional District/County Subdistrict > 
-    * Zip, Tract, County, CD or CBSA code
+1) zip/county/fipstract/CBSA/Congressional District/County Subdistrict
+    * The first half of the 'type' argument
+
 
 2) year 
-    * Value of year
+    * Year the measurement was taken.
+
 
 3) quarter 
-    * Quarter of the year
+    * Quarter of year when measurement was taken.
 
-4) res_ratio  
+
+4) zip/county/fipstract/CBSA/Congressional District/County Subdistrict
+    * The second half of the 'type' argument
+
+
+5) res_ratio  
     * The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to the total number of residential addresses in the entire ZIP. (for type 1-5)
 The ratio of residential addresses in the Zip, Tract, County, or CBSA - ZIP part to the total number of residential addresses in the entire Zip, Tract, County, or CBSA. (for type 6-10)
 
-5) bus_ratio 
+
+6) bus_ratio 
     * The ratio of business addresses in the ZIP – Tract, County, or CBSA part to the total number of business addresses in the entire ZIP. (for type 1-5)
 The ratio of business addresses in the Tract, County, or CBSA – ZIP part to the total number of business addresses in the entire Tract, County, or CBSA. (for type 6-10)
 
-6) oth_ratio 
+
+7) oth_ratio 
     * The ratio of other addresses in the ZIP – Tract to the total number of other addresses in the entire ZIP. (for type 1-5)
 The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the total number of other addresses in the entire Tract, County, or CBSA. (for type 6-10)
 
-7) tot_ratio 
+
+8) tot_ratio 
     * The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5) The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10)
 

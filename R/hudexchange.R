@@ -121,7 +121,7 @@ hudcdbg <- function(file = 1) {
 #' @name hudnsp
 #' @title hudnsp
 #' @description This will grab data from https://drgr.hud.gov/public/data_downloads.html?programName=NSP
-#' and format it into a dataframe. It will unroll each field to remove NA values in cells.
+#' and format it into a dataframe. It will unroll each field to remove NA values in cells. Currently this only supports getting access to the NSP NSP Grant Summary.
 #' @param file The specific file needed.
 #' @export
 hudnsp <- function(file = 1) {

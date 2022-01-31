@@ -14,6 +14,147 @@ knitr::opts_chunk$set(
 )
 ```
 
+### About
+
+"The Community Development Block Grant (CDBG) Program has Disaster Recovery grants to rebuild the affected areas and provide crucial seed money to start the recovery process. These flexible grants help cities, counties, and States recover from Presidentially declared disasters, especially in low-income areas, subject to availability of supplemental appropriations. Since CDBG Disaster Recovery (CDBG-DR) assistance may fund a broad range of recovery activities, HUD can help communities and neighborhoods that otherwise might not recover due to limited resources (https://www.hud.gov/program_offices/comm_planning/cdbg-dr)."
+
+The datasets which this function deals with are located at https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG
+The first two datasets are the same, but are organized in a different manner.
+
+Querying the HUD Exchange website for data is a bit different than HUD User. These functions
+directly download the data into memory. Furthermore, these datasets do not need a key.
+
+### Example
+
+#### CDBG-DR Financial Report by Appropriation
+
+This is an example grabbing the first file, DR CDBG CDBG-DR Financial Report
+by Appropriation, and displaying the first 6 rows.
 ```{r}
 library(hudr)
+head(hudcdbg(file = 1))
 ```
+
+#### Data Fields
+
+1) Appropriation Abbreviation
+
+2) Appropriation 
+
+3) Grantee	
+
+4) Grant	
+
+5) Grant Status	
+
+6) Grant $ (Grant Level)	
+
+7) Grant Obligated $	
+
+8) Obligated %	
+
+9) Grant Disbursed $	
+
+10) Disbursed %	
+
+11) Remaining Balance
+
+#### CDBG CDBG-DR Financial Report by Grantee
+
+This is an example grabbing the second file, DR CDBG CDBG-DR Financial Report by Grantee, 
+and displaying the first 6 rows.
+```{r}
+head(hudcdbg(file = 2))
+```
+
+#### Data Fields
+
+Grantee State
+
+Appropriation		
+
+Grantee	Grant	
+
+Grant Status	
+
+Grant $ (Grant Level)	
+
+Grant Obligated $	
+
+Obligated %	
+
+Grant Disbursed $	
+
+Disbursed %	
+
+Remaining Balance
+
+
+#### CDBG-DR Financial Report Monthly Summary
+
+This is an example grabbing the third file, DR CDBG CDBG-DR Financial Report Monthly Summary, 
+and displaying the first 6 rows. The data provides grants that were given in the last month.
+```{r}
+head(hudcdbg(file = 3))
+```
+
+#### Data Fields
+
+Grantee State
+
+Grantee	
+
+Grant	
+
+Grant $ (deprecated)
+
+Activity Budget $	
+
+% Budget	
+
+Activity Obligation $	
+
+% Obligated	
+
+Activity Drawn $	
+
+Activity Budget Disbursed %	
+
+Remaining Balance
+
+#### DR CDBG CDBG-DR Performance by Activity
+
+This is an example grabbing the fourth file, DR CDBG CDBG-DR Performance by Activity, 
+and displaying the first 6 rows.
+```{r}
+head(hudcdbg(file = 4))
+```
+
+#### Data Fields
+
+Appropriation		
+
+Grantee	
+
+Grant	
+
+Activity Responsible Org	
+
+Activity Type	
+
+Activity Number	
+
+Activity Title	
+
+Activity Status	
+
+Activity Measure Category	
+
+Low			
+Projected   Actual	Actual to Projected %
+
+Mod
+Projected   Actual	Actual to Projected %
+
+Total
+Projected   Actual	Actual to Projected %

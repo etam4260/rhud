@@ -17,21 +17,20 @@ version](https://www.r-pkg.org/badges/version/hudr)](https://cran.r-project.org/
 checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs/hudr)
 [![rstudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
-
 <!-- badges: end -->
 
-![alt
-text](https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true)
+![](https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true)
 
-This library contains an interface to the US Department of Housing and
-Urban Development datasets within R. The goal of this project is to
-provide an easy to use interface to access various open source APIs
-provided by HUD.
+This package contains an interface to the US Department of Housing and
+Urban Development  
+datasets within R. The goal of this project is to provide an easy to use
+interface to access various open source APIs provided by HUD.
 
-HUD has multiple websites for gaining access to various different
-datasets. There is HUD USER as well as HUD EXCHANGE.
+HUD has two main websites for gaining access to various different
+datasets: HUD User and Exchange.
 
-<https://www.huduser.gov/portal/datasets>
+Link to HUD User: <https://www.huduser.gov/portal/datasets> Link to HUD
+Exchange: <https://www.hudexchange.info/programs/drgr/>
 
 “HUD USER is an information source containing reports and reference
 documents for the U.S. Department of Housing and Urban Development. HUD
@@ -44,9 +43,7 @@ JSON format rather than a dataframe like object. Although there exist
 file downloadables, R users may want to be able to extract specific bits
 of the data into memory.
 
-<https://www.hudexchange.info/programs/drgr/>
-
-“The Department of Housing and Urban Development has a office known as
+“The Department of Housing and Urban Development has website known as
 HUD Exchange which is a comprehensive online platform that provides
 tools, resources, and contact information for the organizations and
 individuals that partner with HUD. These often include nonprofit groups

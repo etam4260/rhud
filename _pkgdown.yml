@@ -1,0 +1,33 @@
+template:
+  bootstrap: 5
+  bslib:
+  base_font: {google: "Roboto"}
+  heading_font: {google: "Roboto Slab"}
+  code_font: {google: "JetBrains Mono"}
+
+navbar:
+  structure:
+    left:  [intro, setup, articles, reference, tutorials, news]
+    right: [search, github]
+  components:
+   setup:
+    text: Setup
+    href: articles/Setup.html
+   articles:
+    text: Articles
+    menu:
+    - text: "HUD User"
+    - text: Crosswalk
+      href: articles/Crosswalk.html
+    - text: Fair Markets Rent
+      href: articles/Fair-Markets-Rent.html
+    - text: Income Limits
+      href: articles/Income-Limits.html
+    - text: Comprehensive Housing and Affordability Strategy
+      href: articles/Comprehensive-Housing-and-Affordability-Strategy.html
+    - text: -------
+    - text: "HUD Exchange"
+    - text: Community Development Block Grant - Disaster Recovery
+      href: articles/Community-Development-Block-Grant.html
+    - text: Neighborhood Stabilization Program
+      href: articles/Neighborhood-Stabilization-Program.html

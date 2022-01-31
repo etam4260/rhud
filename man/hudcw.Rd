@@ -56,8 +56,5 @@ These measurements include res-ratio, bus-ratio, oth-ratio, tot-ratio. For more 
 \description{
 This function queries the Crosswalks API provided by US Department of Housing and Urban Development
 }
-\details{
-hudcw
-}
 \keyword{API}
 \keyword{Crosswalks}

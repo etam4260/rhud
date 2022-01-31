@@ -14,12 +14,17 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Income Limits API
+### About
 
-This is a basic example showing you how to query the INCOME LIMITS API.
+"The Department of Housing and Urban Development (HUD) sets income limits that determine eligibility for assisted housing programs including the Public Housing, Section 8 project-based, Section 8 Housing Choice Voucher, Section 202 housing for the elderly, and Section 811 housing for persons with disabilities programs. HUD develops income limits based on Median Family Income estimates and Fair Market Rent area definitions for each metropolitan area, parts of some metropolitan areas, and each non-metropolitan county(https://www.huduser.gov/portal/datasets/il.html)."
 
-Querying a state or (fips + subdivision 10 digit fips) both return
-a single row.
+
+### Example
+
+This is a basic example showing you how to query the Income Limits API.
+
+This works similarly to the FMR API.
+Querying a state or (fips + subdivision 10 digit fips) both return a single row dataframe.
 
 ```{r}
 library(hudr)
@@ -27,45 +32,52 @@ library(hudr)
 # Setting the key.
 hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
 
-# Querying the Fair Markets Rent dataset for Virginia in the year of 2021.
-# Grabbing the first 6 columns
+# This selects the first 6 rows and the first four columns.
 head(hudil(query = 'VA', year = '2021'))[ ,c(1,2,3,4,5,6)]
 
-# Querying the Fair Markets Rent dataset for a county in the year of 2017.
-# Grabbing the first 6 columns
+# Getting a county requires a county fip + state fip + census tract. Get first 6 columns.
 hudil(query = '0100199999', year = '2017')[ ,c(1,2,3,4,5,6)]
 ```
 
-#### Income Limits Data Fields
+### Income Limits Data Fields
 
 1) county_name 
     * Name of the county if it is a county.
 
+
 2) counties_msa
     * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
+
 
 3) town_name
     * Town name - applicable for North East regions
 
+
 4) metro_status
     * value will be "1" if it is a metropolitan county. Otherwise value will be "0".
+
 
 5) metro_name
     * Metro area name if metro_status is "1"
 
+
 6) year
     * year of the data
 
+
 7) median_income
     * Median Income for the area
+    
     
 8) Very Low 
     * (50%) Income Limits
     * For more details on il50 check the website.
 
+
 9) Extremely Low 
     * (30%) Income Limits
     * For more details on il30 check the website.
+    
     
 10) Low 
     * (80%) Income Limits

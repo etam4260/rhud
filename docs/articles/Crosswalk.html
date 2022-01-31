@@ -4,119 +4,111 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="hudr">
 <title>Crosswalk • hudr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Crosswalk">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Crosswalk">
 <meta property="og:description" content="hudr">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">hudr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">hudr</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../reference/index.html">Reference</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../articles/Setup.html">Setup</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/Community-Development-Block-Grant.html">Community-Development-Block-Grant</a>
-    </li>
-    <li>
-      <a href="../articles/Comprehensive-Housing-and-Affordability-Strategy.html">Comprehensive-Housing-and-Affordability-Strategy</a>
-    </li>
-    <li>
-      <a href="../articles/Crosswalk.html">Crosswalk</a>
-    </li>
-    <li>
-      <a href="../articles/Fair-Markets-Rent.html">Fair-Markets-Rent</a>
-    </li>
-    <li>
-      <a href="../articles/Income-Limits.html">Income-Limits</a>
-    </li>
-    <li>
-      <a href="../articles/Neighborhood-Stabilization-Program.html">Neighborhood-Stabilization-Program</a>
-    </li>
-    <li>
-      <a href="../articles/Setup.html">Setup</a>
-    </li>
-  </ul>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/etam4260/hudr/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <h6 class="dropdown-header" data-toc-skip>HUD User</h6>
+    <a class="dropdown-item" href="../articles/Crosswalk.html">Crosswalk</a>
+    <a class="dropdown-item" href="../articles/Fair-Markets-Rent.html">Fair Markets Rent</a>
+    <a class="dropdown-item" href="../articles/Income-Limits.html">Income Limits</a>
+    <a class="dropdown-item" href="../articles/Comprehensive-Housing-and-Affordability-Strategy.html">Comprehensive Housing and Affordability Strategy</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>HUD Exchange</h6>
+    <a class="dropdown-item" href="../articles/Community-Development-Block-Grant.html">Community Development Block Grant - Disaster Recovery</a>
+    <a class="dropdown-item" href="../articles/Neighborhood-Stabilization-Program.html">Neighborhood Stabilization Program</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/etam4260/hudr/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Crosswalk</h1>
+
+
+
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Crosswalk</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/etam4260/hudr/blob/HEAD/vignettes/Crosswalk.Rmd" class="external-link"><code>vignettes/Crosswalk.Rmd</code></a></small>
-      <div class="hidden name"><code>Crosswalk.Rmd</code></div>
-
+      <div class="d-none name"><code>Crosswalk.Rmd</code></div>
     </div>
 
     
     
-<div class="section level2">
-<h2 id="crosswalk-api">Crosswalk API<a class="anchor" aria-label="anchor" href="#crosswalk-api"></a>
-</h2>
-<p>This is a basic example which shows you how to query the CROSSWALK API.</p>
+<div class="section level3">
+<h3 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
+</h3>
+<p>"One of the many challenges that social science researchers and practitioners face is the difficulty of relating United States Postal Service (USPS) ZIP codes to Census Bureau geographies. There are valuable data available only at the ZIP code level that, when combined with demographic data tabulated at various Census geography levels, could open up new avenues of exploration.</p>
+<p>While some acceptable methods of combining ZIP codes and Census geography exist, they have limitations. To provide additional avenues for merging these data, PD&amp;R has released the HUD-USPS Crosswalk Files. These unique files are derived from data in the quarterly USPS Vacancy Data. They originate directly from the USPS; are updated quarterly, making them highly responsive to changes in ZIP code configurations; and reflect the locations of both business and residential addresses. The latter feature is of particular interest to housing researchers because many of the phenomena that they study are based on housing unit or address. By using an allocation method based on residential addresses rather than by area or by population, analysts can take into account not only the spatial distribution of population, but also the spatial distribution of residences. This enables a slightly more nuanced approach to allocating data between disparate geographies(<a href="https://www.huduser.gov/portal/datasets/usps_crosswalk.html" class="external-link uri">https://www.huduser.gov/portal/datasets/usps_crosswalk.html</a>)."</p>
+<p>This journal article describes the problem and proposed solution in more detail: Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S. Department of Housing and Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277 – 294. <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf</a></p>
+<p>type: Must be a number between 1 and 12 depending on the Crosswalk type. 1) zip-tract 2) zip-county 3) zip-cbsa 4) zip-cbsadiv (Available 4th Quarter 2017 onwards) 5) zip-cd 6) tract-zip 7) county-zip 8) cbsa-zip 9) cbsadiv-zip (Available 4th Quarter 2017 onwards) 10) cd-zip 11) zip-countysub (Available 2nd Quarter 2018 onwards) 12) countysub-zip (Available 2nd Quarter 2018 onwards)</p>
+<p>The first half of the ‘type’ argument describes the specific region we want to query. The second half of the ‘type’ argument describe a secondary region and how much it ‘intersects’ with the first region. For example, in type 7, we might have a county called 22301 which has zip codes 35213, 13132, and 22411 which are either fully or partially inside the county 22301. Each individual observation describes how much ‘intersection’ the second half geoid has with the first half geoid. Intersection is describe in the % of residental, business, and other buildings in the second half geoid that are in the first half geoid. For example, 50% of residential buildings in 35213 are also inside the county 22301.</p>
+</div>
+<div class="section level3">
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h3>
+<p>This is a basic example which shows you how to query the Crosswalk API.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
 
-<span class="co"># Setting the key.</span>
+<span class="co"># First need to set the key.</span>
 <span class="fu"><a href="../reference/hudsetkey.html">hudsetkey</a></span><span class="op">(</span><span class="st">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"</span><span class="op">)</span>
 
-<span class="co"># Type 7 corresponds county level data in where measurements are done in individual zip codes.</span>
-<span class="co"># The year and quarter specifies when these measurements were made. The key argument</span>
-<span class="co"># is the token you got from https://www.huduser.gov/hudapi/public/register?comingfrom=1</span>
-<span class="co"># This example does not have the key because it is already set up using hudsetkey()</span>
+<span class="co"># Type 7 (county-zip) corresponds zip level data which intersects with this county. </span>
+<span class="co"># The year and quarter specifies when these measurements are made.</span>
 <span class="fu"><a href="../reference/hudcw.html">hudcw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">7</span>, query <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;    county year quarter   zip   res_ratio  bus_ratio oth_ratio   tot_ratio</span>
 <span class="co">#&gt; 1   22031 2010       1 71052    0.432213   0.699634   0.56338     0.44551</span>
@@ -139,23 +131,29 @@
 <span class="co">#&gt; 18  22031 2011       1 71063   0.0279413   0.015411      0.04   0.0274086</span>
 <span class="co">#&gt; 19  22031 2011       1 71419   0.0105439 0.00684932         0    0.010299</span>
 <span class="co">#&gt; 20  22031 2011       1 71065 0.000175731          0         0 0.000166113</span></code></pre></div>
-<div class="section level4">
-<h4 id="crosswalk-data-fields">Crosswalk Data Fields<a class="anchor" aria-label="anchor" href="#crosswalk-data-fields"></a>
-</h4>
+</div>
+<div class="section level3">
+<h3 id="data-fields">Data Fields<a class="anchor" aria-label="anchor" href="#data-fields"></a>
+</h3>
 <ol style="list-style-type: decimal">
-<li>zip/fips/fipstract/CBSA/Congressional District/County Subdistrict &gt;
+<li>zip/county/fipstract/CBSA/Congressional District/County Subdistrict
 <ul>
-<li>Zip, Tract, County, CD or CBSA code</li>
+<li>The first half of the ‘type’ argument</li>
 </ul>
 </li>
 <li>year
 <ul>
-<li>Value of year</li>
+<li>Year the measurement was taken.</li>
 </ul>
 </li>
 <li>quarter
 <ul>
-<li>Quarter of the year</li>
+<li>Quarter of year when measurement was taken.</li>
+</ul>
+</li>
+<li>zip/county/fipstract/CBSA/Congressional District/County Subdistrict
+<ul>
+<li>The second half of the ‘type’ argument</li>
 </ul>
 </li>
 <li>res_ratio
@@ -180,34 +178,25 @@
 </li>
 </ol>
 </div>
-</div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by Emmet Tam.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 

@@ -14,12 +14,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Fair Markets Rent API
+### About
 
-This is a basic example to show you how to query the FAIR MARKETS RENT API. 
+"Fair Market Rent is the rent amount, including utilities (except telephone), to rent privately owned, existing, decent, safe and sanitary rental housing of modest (non-luxury) nature with suitable amenities.
+
+The Fair Market Rent rate established by Department of Housing and Urban Development (HUD) to be used as a basis for paying federal housing assistance programs like the Housing Choice Voucher Program.
+
+Fair Market Rent prices are set for each county and metro area across the country. Rates are set for zero-bedroom studios or efficiencies all the way up to 4-bedroom homes.
+
+Fair Market Rent (FMR) is defined as the 40th percentile of rents paid by recent movers (renters who moved in the last 24 months) in a given FMR area. This means FMR rent prices are slightly below the median price (https://www.rentdata.org/articles/what-is-fair-market-rent)."
+
+
+### Example
+
+This is a basic example to show you how to query the Fair Markets Rent API. 
 
 Querying a state will return a dataframe with rows representing counties within the state.
-A county fips + subdivision 10 digit code will return a 1 row dataframe for that
+A (state fip + county fip + county subdivision) 10 digit code will return a 1 row dataframe for that
 county.
 
 ```{r}
@@ -28,48 +39,58 @@ library(hudr)
 # Setting the key.
 hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
 
-# Querying the Fair Markets Rent dataset for Virginia in the year of 2021. This selected
-# the first few rows and the first four columns.
+# This selects the first few rows and the first four columns.
 head(hudfmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
 
-# Querying the Fair Markets Rent dataset for a county in the year of 2017.
+# Getting a county requires a county fip + state fip + census tract.
 hudfmr(query = '0100199999', year = '2017')
 ```
 
-#### Fair Markets Rent Data Fields
+### Data Fields
 
 1) state/county or CBSA 
     * Name of the county if it is a county.
 
+
 2) year 
     * Value of year
+
 
 3) counties_msa 
     * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
 
+
 4) town_name 
     * Town name - applicable for North East regions
+
 
 5) metro_status 
     * value will be "1" if it is a metropolitan county. Otherwise value will be "0".
 
+
 6) metro_name 
     * Metro area name if metro_status is "1"
+
 
 7) smallarea_status 
     * value will be "1" if it is a small area. Otherwise value will be "0".
 
-8) Efficiency 
-    * Efficiency FMR
+
+8) Efficiency(A studio apartment) 
+    * Efficiency FMR in US Dollars
+
 
 9) One-Bedroom 
-    * 1-bedroom FMR
+    * 1-bedroom FMR in US Dollars
+
 
 10) Two-Bedroom 
-    * 2-bedroom FMR
+    * 2-bedroom FMR in US Dollars
+
 
 11) Three-Bedroom 
-    * 3-bedroom FMR
+    * 3-bedroom FMR in US Dollars
+
 
 12) Four-Bedroom 
-    * 4-bedroom FMR
+    * 4-bedroom FMR in US Dollars
