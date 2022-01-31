@@ -29,8 +29,9 @@ interface to access various open source APIs provided by HUD.
 HUD has two main websites for gaining access to various different
 datasets: HUD User and Exchange.
 
-Link to HUD User: <https://www.huduser.gov/portal/datasets> Link to HUD
-Exchange: <https://www.hudexchange.info/programs/drgr/>
+Link to HUD User: <https://www.huduser.gov/portal/datasets>
+
+Link to HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
 
 “HUD USER is an information source containing reports and reference
 documents for the U.S. Department of Housing and Urban Development. HUD
@@ -43,7 +44,7 @@ JSON format rather than a dataframe like object. Although there exist
 file downloadables, R users may want to be able to extract specific bits
 of the data into memory.
 
-“The Department of Housing and Urban Development has website known as
+“The Department of Housing and Urban Development has a website known as
 HUD Exchange which is a comprehensive online platform that provides
 tools, resources, and contact information for the organizations and
 individuals that partner with HUD. These often include nonprofit groups
