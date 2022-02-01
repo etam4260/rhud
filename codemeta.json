@@ -1,0 +1,132 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "hudr",
+  "description": " An R interface for accessing HUD (US Department of Housing and Urban Development) API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits, and the Comprehensive Housing Affordability Strategy. Interfaces with the HUD DRGR reporting system part which is part of HUD Exchange.",
+  "name": "hudr: An R interface for accessing HUD (US Department of Housing and Urban Development)",
+  "codeRepository": "https://github.com/etam4260/hudr",
+  "issueTracker": "https://github.com/etam4260/hudr/issues",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.0.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.0.5 (2021-03-31)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Emmet",
+      "familyName": "Tam",
+      "email": "emmet_tam@yahoo.com"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Emmet",
+      "familyName": "Tam",
+      "email": "emmet_tam@yahoo.com"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "covr",
+      "name": "covr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=covr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "httr",
+      "name": "httr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=httr"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "stringr",
+      "name": "stringr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stringr"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "43650.761KB",
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "datePublished": "2022",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Emmet",
+          "familyName": "Tam"
+        }
+      ],
+      "name": "hudr: Accessing HUD User APIs",
+      "url": "https://github.com/etam4260/hudr"
+    }
+  ],
+  "releaseNotes": "https://github.com/etam4260/hudr/blob/master/NEWS.md",
+  "readme": "https://github.com/etam4260/hudr/blob/main/README.md",
+  "contIntegration": ["https://github.com/etam4260/hudr/actions", "https://codecov.io/gh/etam4260/hudr?branch=main"],
+  "developmentStatus": "https://www.repostatus.org/#wip",
+  "keywords": ["hud", "crosswalk", "incomelimits", "fairmarketsrent", "chas", "api", "r", "rstats", "r-package", "cdbg-dr", "nsp"]
+}

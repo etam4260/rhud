@@ -1,0 +1,16 @@
+citHeader("To cite hudr in publications use:")
+
+citEntry(
+  entry    = "Misc",
+  title    = "hudr: Accessing HUD User APIs",
+  author   = as.person("Emmet Tam"),
+  journal  = "",
+  year     = 2022,
+  volume   = "",
+  number   = "",
+  pages    = "",
+  url      = "https://github.com/etam4260/hudr",
+  textVersion = paste(
+    "Tam, Emmet. 2022. hudr: Accessing HUD User APIs. available at https://github.com/etam4260/hudr"
+  )
+)

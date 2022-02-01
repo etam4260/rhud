@@ -1,0 +1,163 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.2.1
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "hudr" in publications use:'
+type: software
+license: MIT
+title: 'hudr: An R interface for accessing HUD (US Department of Housing and Urban
+  Development)'
+version: 0.0.0.9000
+abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
+  API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits,
+  and the Comprehensive Housing Affordability Strategy. Interfaces with the HUD DRGR
+  reporting system part which is part of HUD Exchange.
+authors:
+- family-names: Tam
+  given-names: Emmet
+  email: emmet_tam@yahoo.com
+preferred-citation:
+  type: manual
+  title: 'hudr: An R interface for accessing HUD (US Department of Housing and Urban
+    Development)'
+  authors:
+  - family-names: Tam
+    given-names: Emmet
+    email: emmet_tam@yahoo.com
+  version: 0.0.0.9000
+  abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
+    API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income
+    Limits, and the Comprehensive Housing Affordability Strategy. Interfaces with
+    the HUD DRGR reporting system part which is part of HUD Exchange.
+  repository-code: https://github.com/etam4260/hudr
+  url: https://github.com/etam4260/hudr
+  contact:
+  - family-names: Tam
+    given-names: Emmet
+    email: emmet_tam@yahoo.com
+  keywords:
+  - api
+  - cdbg-dr
+  - chas
+  - crosswalk
+  - fairmarketsrent
+  - hud
+  - incomelimits
+  - nsp
+  - r
+  - r-package
+  - rstats
+  license: MIT
+  year: '2022'
+repository-code: https://github.com/etam4260/hudr
+url: https://github.com/etam4260/hudr
+contact:
+- family-names: Tam
+  given-names: Emmet
+  email: emmet_tam@yahoo.com
+keywords:
+- api
+- cdbg-dr
+- chas
+- crosswalk
+- fairmarketsrent
+- hud
+- incomelimits
+- nsp
+- r
+- r-package
+- rstats
+references:
+- type: software
+  title: covr
+  abstract: 'covr: Test Coverage for Packages'
+  notes: Suggests
+  authors:
+  - family-names: Hester
+    given-names: Jim
+    email: james.f.hester@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=covr
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2022'
+  url: https://CRAN.R-project.org/package=knitr
+- type: software
+  title: rmarkdown
+  abstract: 'rmarkdown: Dynamic Documents for R'
+  notes: Suggests
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@rstudio.com
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  - family-names: McPherson
+    given-names: Jonathan
+    email: jonathan@rstudio.com
+  - family-names: Luraschi
+    given-names: Javier
+    email: javier@rstudio.com
+  - family-names: Ushey
+    given-names: Kevin
+    email: kevin@rstudio.com
+  - family-names: Atkins
+    given-names: Aron
+    email: aron@rstudio.com
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@rstudio.com
+  - family-names: Chang
+    given-names: Winston
+    email: winston@rstudio.com
+  - family-names: Iannone
+    given-names: Richard
+    email: rich@rstudio.com
+    orcid: https://orcid.org/0000-0003-3925-190X
+  year: '2022'
+  url: https://CRAN.R-project.org/package=rmarkdown
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=testthat
+  version: '>= 3.0.0'
+- type: software
+  title: httr
+  abstract: 'httr: Tools for Working with URLs and HTTP'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=httr
+- type: software
+  title: stringr
+  abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=stringr
