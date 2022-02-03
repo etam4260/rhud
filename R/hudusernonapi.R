@@ -11,7 +11,7 @@
 #' @name hudlithtc
 #' @title hudlithtc
 #' @description Returns a data frame from https://lihtc.huduser.gov/ 
-#' @param key The token given by USPS
+#' @param file The specific file needed. 
 #' @returns A data frame built from the file.
 #' @export
 hudlihtc <- function(file = 1) {
@@ -288,6 +288,7 @@ hudhvl <- function(year = 2021) {
 #' @title hudmsil
 #' @description Returns a data frame from HUD USER pertaining to the Multifamily Tax Subsidy Projects (MTSP) Income Limits.
 #' @param year The year to query for in Multifamily Tax Subsidy Projects (MTSP) Income Limits. Supports years 2021 to 2014.
+#' @param avg The averaged or non averaged dataset.
 #' @returns A data frame built from the file.
 #' @export
 hudmsil <- function(year = 2021, avg = FALSE) {

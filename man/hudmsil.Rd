@@ -8,6 +8,8 @@ hudmsil(year = 2021, avg = FALSE)
 }
 \arguments{
 \item{year}{The year to query for in Multifamily Tax Subsidy Projects (MTSP) Income Limits. Supports years 2021 to 2014.}
+
+\item{avg}{The averaged or non averaged dataset.}
 }
 \value{
 A data frame built from the file.

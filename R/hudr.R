@@ -40,7 +40,7 @@ hudgetkey <- function() {
 #' @export
 huddatasets <- function() {
   html <- read_html("https://www.huduser.gov/portal/datasets/update-schedule.html")
-  table <- as.data.frame(html_table(html_nodes(turlr, 'table')[[1]]))
+  table <- as.data.frame(html_table(html_nodes(html, 'table')[[1]]))
 
   # Clean up procedures. Seems like rvest can't read the table perfectly?
   table[4] <- NULL

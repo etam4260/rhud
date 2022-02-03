@@ -22,6 +22,10 @@ Suggests:
     testthat (>= 3.0.0)
 Imports:
     httr,
-    stringr
+    stringr,
+    data.table,
+    openxlsx,
+    rvest,
+    devtools
 Config/testthat/edition: 3
 VignetteBuilder: knitr

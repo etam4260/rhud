@@ -8,7 +8,7 @@
 hudlihtc(file = 1)
 }
 \arguments{
-\item{key}{The token given by USPS}
+\item{file}{The specific file needed.}
 }
 \value{
 A data frame built from the file.
