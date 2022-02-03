@@ -38,7 +38,7 @@ Link to HUD Exchange: https://www.hudexchange.info/programs/drgr/
 
 "HUD User is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD's Office of Policy Development and Research in 1978."
 
-HUD USER maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a dataframe like object. Although there exist
+HUD User maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a dataframe like object. Although there exist
 file downloadables, R users may want to be able to extract specific bits of the data into memory.
 
 "The Department of Housing and Urban Development has a website known as HUD Exchange
@@ -55,6 +55,7 @@ downloadable into R. This package provides the ability to directly get such data
 The APIs and datasets which this library interfaces with:
 
 1) HUD User
+    
     API Based:
     * Crosswalk
     * Fair Markets Rent

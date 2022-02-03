@@ -38,7 +38,7 @@ documents for the U.S. Department of Housing and Urban Development. HUD
 USER was established by the HUD’s Office of Policy Development and
 Research in 1978.”
 
-HUD USER maintains an API to gain access to their data. However, their
+HUD User maintains an API to gain access to their data. However, their
 API system can be rather confusing and provides their information in
 JSON format rather than a dataframe like object. Although there exist
 file downloadables, R users may want to be able to extract specific bits
@@ -61,13 +61,17 @@ ability to directly get such data.
 
 The APIs and datasets which this library interfaces with:
 
-1.  HUD User API Based:
+1.  HUD User
+
+    API Based:
+
     -   Crosswalk
     -   Fair Markets Rent
     -   Income Limits
     -   Comprehensive Housing and Affordability Strategy
 
     File Based:
+
     -   Neighborhood Stabilization Program
     -   Low-Income Housing Tax Credit
     -   Annual Adjustment Factors (AAFs)
@@ -85,7 +89,9 @@ The APIs and datasets which this library interfaces with:
     -   Renewal Funding Inflation Factors
     -   Small Area Fair Market Rents (SAFMRs)
     -   Assisted Housing: Local and Global
+
 2.  HUD Exchange
+
     -   Community Development Block Grant - Disaster Recovery
 
 ## Installation
