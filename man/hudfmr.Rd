@@ -24,8 +24,5 @@ the individual measurements for each individual county within the state.
 \description{
 This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development
 }
-\details{
-hudfmr
-}
 \keyword{API}
 \keyword{Crosswalks}

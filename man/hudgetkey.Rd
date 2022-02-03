@@ -6,8 +6,11 @@
 \usage{
 hudgetkey()
 }
+\value{
+Will return the most recent key set. If no key is set it will return NULL.
+}
 \description{
-The function will return the most recent key set. If no key is set it will return NULL.
+Will return the most recent key set. If no key is set it will return NULL.
 }
 \details{
 hudgetkey

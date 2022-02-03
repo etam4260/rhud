@@ -17,7 +17,6 @@
 # Income Limits
 # Comprehensive and Housing Affordability Strategy
 
-#' hudcw
 #' @name hudcw
 #' @title hudcw
 #' @description This function queries the Crosswalks API provided by US Department of Housing and Urban Development
@@ -153,7 +152,6 @@ hudcw <- function(type, query, year = pkg.env$curr.year, quarter = pkg.env$curr.
 }
 
 
-#' hudfmr
 #' @name hudfmr
 #' @title hudfmr
 #' @description This function queries the Fair Markets Rent API provided by US Department of Housing and Urban Development
@@ -263,7 +261,6 @@ hudfmr <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
 
 
 
-#' hudil
 #' @name hudil
 #' @title hudil
 #' @description This function queries the Income Limits API provided by US Department of Housing and Urban Development
@@ -435,7 +432,6 @@ hudil <- function(query, year = pkg.env$curr.year, key = pkg.env$curr.key) {
 
 
 
-#' hudchas
 #' @name hudchas
 #' @title hudchas
 #' @description This function queries the CHAS API provided by US Department of Housing and Urban Development

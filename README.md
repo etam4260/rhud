@@ -22,9 +22,9 @@ downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.
 ![](https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true)
 
 This package contains an interface to the US Department of Housing and
-Urban Development  
-datasets within R. The goal of this project is to provide an easy to use
-interface to access various open source APIs provided by HUD.
+Urban Development datasets within R. The goal of this project is to
+provide an easy to use interface to access various open source APIs
+provided by HUD.
 
 HUD has two main websites for gaining access to various different
 datasets: HUD User and Exchange.
@@ -33,7 +33,7 @@ Link to HUD User: <https://www.huduser.gov/portal/datasets>
 
 Link to HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
 
-“HUD USER is an information source containing reports and reference
+“HUD User is an information source containing reports and reference
 documents for the U.S. Department of Housing and Urban Development. HUD
 USER was established by the HUD’s Office of Policy Development and
 Research in 1978.”
@@ -51,24 +51,42 @@ individuals that partner with HUD. These often include nonprofit groups
 and state and municipal governments, but also include borrowers,
 lenders, and brokers involved in HUD’s multifamily loan programs”
 
-(Currently a WIP) The DRGR Disaster Recovery Grant Reporting System
-which HUD Exchange uses to supply public data does not have an active
-API for retrieving information. However, there does exist datasets
-freely available online which can be directly downloadable into R. This
-package provides the ability to directly get such data.
+The DRGR Disaster Recovery Grant Reporting System which HUD Exchange
+uses to supply public data does not have an active API for retrieving
+information. However, there does exist datasets freely available online
+which can be directly downloadable into R. This package provides the
+ability to directly get such data.
 
 ## Available Data
 
 The APIs and datasets which this library interfaces with:
 
-1.  HUD User
+1.  HUD User API Based:
     -   Crosswalk
     -   Fair Markets Rent
     -   Income Limits
     -   Comprehensive Housing and Affordability Strategy
-2.  HUD Exchange
-    -   Community Develop Block Grant - Disaster Recovery
+
+    File Based:
     -   Neighborhood Stabilization Program
+    -   Low-Income Housing Tax Credit
+    -   Annual Adjustment Factors (AAFs)
+    -   Difficult Development Areas (DDA)
+    -   Homeowner Assistance Fund (HAF) Income Limits
+    -   50th percentile (or median)
+    -   Housing Affordability Data System (HADS)
+    -   Components of Inventory Change (CINCH) report
+    -   Point-In-Time (PIT) count
+    -   Housing Inventory Count (HIC)
+    -   HOME Investment Partnerships Program (HOME) and Housing Trust
+    -   Fund (HTF) Homeownership Value Limits
+    -   Multifamily Tax Subsidy Projects (MTSP) Income Limits
+    -   Utility Allowance Factors (UAFs)
+    -   Renewal Funding Inflation Factors
+    -   Small Area Fair Market Rents (SAFMRs)
+    -   Assisted Housing: Local and Global
+2.  HUD Exchange
+    -   Community Development Block Grant - Disaster Recovery
 
 ## Installation
 
@@ -81,7 +99,8 @@ devtools::install_github("etam4260/hudr")
 ```
 
 For more details on how to setup and utilize this package. Please go to
-<https://etam4260.github.io/hudr/>. Select Setup in the navigation bar.
+<https://etam4260.github.io/hudr/>. Select ‘Setup’ in the navigation
+bar.
 
 ## Contributors
 
@@ -89,13 +108,13 @@ For more details on how to setup and utilize this package. Please go to
 
 ## Disclaimers
 
+-   License: MIT
+-   To get citation information for hudr in R, type citation(package =
+    ‘hudr’)
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
 -   The limit on the maximum number of API calls is 1200 queries a min.
 -   This is a WIP so please report any issues or bugs to:
     <https://github.com/etam4260/hudr/issues>
--   License: MIT
--   To get citation information for hudr in R, type citation(package =
-    ‘hudr’)
 -   This is open source, so please fork and introduce some pull
     requests!

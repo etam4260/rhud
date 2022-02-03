@@ -45,9 +45,6 @@ For more details about these measurements, go to https://www.huduser.gov/portal/
 \description{
 This function queries the CHAS API provided by US Department of Housing and Urban Development
 }
-\details{
-hudchas
-}
 \keyword{(CHAS)}
 \keyword{API}
 \keyword{Affordability}

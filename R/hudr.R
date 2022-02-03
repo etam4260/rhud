@@ -1,3 +1,5 @@
+#' @import rvest
+
 # Creating global environment to set default values to some
 # of parameters in the web queries.
 pkg.env <- new.env(parent = emptyenv())
@@ -19,8 +21,32 @@ hudsetkey <- function(key) {
 #' hudgetkey
 #' @name hudgetkey
 #' @title hudgetkey
-#' @description The function will return the most recent key set. If no key is set it will return NULL.
+#' @description  Will return the most recent key set. If no key is set it will return NULL.
+#' @returns Will return the most recent key set. If no key is set it will return NULL.
 #' @export
 hudgetkey <- function() {
   return(pkg.env$curr.key)
+}
+
+
+# Need to add associated links to functions to access data as well as the functions
+# themself as well as datasets that are supported by this library.
+
+#' huddatasets
+#' @name huddatasets
+#' @title huddatasets
+#' @description Scrapes the dataset information page at https://www.huduser.gov/portal/datasets/update-schedule.html.
+#' @returns Dataframe with information about the various datasets that HUD has, update information, and corresponding functions and documentation to access a dataset using the package.
+#' @export
+huddatasets <- function() {
+  html <- read_html("https://www.huduser.gov/portal/datasets/update-schedule.html")
+  table <- as.data.frame(html_table(html_nodes(turlr, 'table')[[1]]))
+
+  # Clean up procedures. Seems like rvest can't read the table perfectly?
+  table[4] <- NULL
+  table <- table[-5, ]
+  table[4,2] <- table[4,3]
+  table[4,3] <- ""
+
+  return(table)
 }

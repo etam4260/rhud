@@ -14,6 +14,7 @@
 # NSP (Neighborhood Stabilization Program)
 # RIF (Rural Innovation Fund)
 
+# We don't cover NSP here because it is covered in the HUD USER.
 
 # Currently there is no data for RIF (Rural Innovation Fund) and therefore
 # there are no functions to grab that data. A main issue with these datasets
@@ -21,7 +22,6 @@
 # dictionary-like. These scripts will unroll those fields and format it into a dataframe.
 
 
-#' hudcdbg
 #' @name hudcdbg
 #' @title hudcdbg
 #' @description This will grab data from https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG
@@ -121,39 +121,3 @@ hudcdbg <- function(file = 1) {
 }
 
 
-#' hudnsp
-#' @name hudnsp
-#' @title hudnsp
-#' @description This will grab data from https://drgr.hud.gov/public/data_downloads.html?programName=NSP
-#' and format it into a dataframe. It will unroll each field to remove NA values in cells. Currently this only supports getting access to the NSP NSP Grant Summary.
-#' @param file The specific file needed.
-#' 1)NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status
-#' 2)
-#' 3)
-#' 4)
-#' 5)
-#' 6)
-#' 7)
-#' 8)
-#' @returns A dataframe.
-#' @export
-hudnsp <- function(file = 1) {
-  # No functions have been made to directly download xls files into R, so this will take a more inefficient
-  # route by downloading it into disk, reading it and then deleting it.
-
-  if(as.integer(file) > 1 || as.integer(file) < 1) stop("File number out of range.")
-
-  if(file == 1) {
-    data <- read.xlsx("https://drgr.hud.gov/public/downloads/NSP/NSP%20Close-out_Admin%20Rept02b%20-%20with%20Act%20Start%20and%20End%20dates%20and%20ENV%20Status.xlsx")
-    colnames(data) <- data[2,]
-    data <- data[-c(1,2), ]
-
-    for(j in seq(1,6)) {
-      nonNA <- which(!is.na(data[ ,j]))
-      for(i in seq(1, length(nonNA) - 1)) {
-        data[c(seq(nonNA[i], nonNA[i+1] - 1)), j] <- data[nonNA[i], j]
-      }
-    }
-  }
-  return(data)
-}

@@ -22,9 +22,6 @@ For more details about these measurements, go to https://www.huduser.gov/portal/
 \description{
 This function queries the Income Limits API provided by US Department of Housing and Urban Development
 }
-\details{
-hudil
-}
 \keyword{API}
 \keyword{Income}
 \keyword{Limits}
