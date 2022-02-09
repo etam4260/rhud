@@ -1,44 +1,30 @@
 #' @import rvest
 
-# Creating global environment to set default values to some
-# of parameters in the web queries.
-pkg.env <- new.env(parent = emptyenv())
-pkg.env$curr.year <- c(strsplit(toString(Sys.Date()), "-")[[1]][1])
-pkg.env$curr.quarter <- c("1","2","3","4")
-pkg.env$curr.key <- NULL
 
-#' hudsetkey
-#' @name hudsetkey
-#' @title hudsetkey
-#' @description The function will save the key into your library download. You will need to
-#' update this for new library(hudr) call. You can also set a new key by using this function with a new one.
-#' @param key The token given by USPS
+#' @name hud_get_key
+#' @title hud_get_key
+#' @description  Return most recent key set in the HUD_KEY environment variable.
+#' If no key is set, return "".
+#' @returns Returns a string.
 #' @export
-hudsetkey <- function(key) {
-  pkg.env$curr.key <- key
-}
-
-#' hudgetkey
-#' @name hudgetkey
-#' @title hudgetkey
-#' @description  Will return the most recent key set. If no key is set it will return NULL.
-#' @returns Will return the most recent key set. If no key is set it will return NULL.
-#' @export
-hudgetkey <- function() {
-  return(pkg.env$curr.key)
+hud_get_key <- function() {
+  return(Sys.getenv("HUD_KEY"))
 }
 
 
-# Need to add associated links to functions to access data as well as the functions
-# themself as well as datasets that are supported by this library.
-
-#' huddatasets
-#' @name huddatasets
-#' @title huddatasets
-#' @description Scrapes the dataset information page at https://www.huduser.gov/portal/datasets/update-schedule.html.
-#' @returns Dataframe with information about the various datasets that HUD has, update information, and corresponding functions and documentation to access a dataset using the package.
+#' @name hud_data_sets
+#' @title hud_data_sets
+#' @description Scrapes the dataset information page at
+#' https://www.huduser.gov/portal/datasets/update-schedule.html.
+#' @returns Dataframe with information about the various datasets that HUD has,
+#' update information, and corresponding functions/documentation to access a
+#' dataset.
 #' @export
-huddatasets <- function() {
+hud_data_sets <- function() {
+  # Need to add associated links to functions to access data as well as
+  # the functions themself as well as datasets that are supported by this library.
+  # Maintenance might be an issue if HUD decides to modify their website...
+
   html <- read_html("https://www.huduser.gov/portal/datasets/update-schedule.html")
   table <- as.data.frame(html_table(html_nodes(html, 'table')[[1]]))
 

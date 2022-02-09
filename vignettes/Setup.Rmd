@@ -24,27 +24,61 @@ library(devtools)
 devtools::install_github("etam4260/hudr")
 ```
 
-The US Department of Housing and Urban Development for HUD USER requires users to gain an 
-access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and make an account.
+The US Department of Housing and Urban Development for HUD USER requires users 
+to gain an  access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and follow the 
+instructions for making an account.
 
-From there you need to make a new token. Make sure to save the token somewhere as
-you will only be able to view it once. However, you can use it as many times as you want.
-You can now supply the 'key' argument.
+HUD Exchange has data stored in files and does not have a readily available API
+system for gaining access to their data. 
 
-To reduce the need to supply the key in every function call, you can use the 
-hudsetkey(key) function to save the key to the package environment.
+From there you need to make a new token. Make sure to save the token somewhere 
+as you will only be able to view it once. However, you can use it as many times 
+as you want. You can now supply the 'key' argument to the function calls. 
+However, it is **NOT RECOMMENDED** to do this. Rather, to reduce the need to 
+supply the key argument in every function call, you can use the Sys.setenv() 
+function to save the key to the user environment.
 
-HUD Exchange does not require a key to gain access to their data.
+## Key Setup
 
-```{r}
+There are various method of setting up a key. However, I recommend using THE
+Sys.setenv() function. You can also choose to save it into your .Rprofile or
+.Renviron files. 
+
+### Using Sys.setenv() during an interactive session
+One method of setting the API key is to use environment variables. This library
+searches for HUD_KEY in the user environment to check if a key has been defined.
+If no key has been defined, an empty string is outputted.
+
+```{r, eval=FALSE}
 library(hudr)
 
-# The function will not output anything. 
-hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
-
-# To check the current key.
-# print(hudgetkey())
+Sys.getenv("HUD_KEY")
 ```
 
-You can now access the API from HUD User. I recommend taking a look at the other articles to get a 
-better sense of how to access specific datasets.
+To set the key...
+
+```{r, eval=TRUE}
+Sys.setenv("HUD_KEY" = "2yeuduhq72ueajk")
+Sys.getenv("HUD_KEY")
+```
+
+To check whether hudr can gain access to this environment variable...
+
+```{r, eval=TRUE}
+hudgetkey()
+```
+
+It is now setup for the rest of the R session.
+
+You can now access the API from HUD User. I recommend taking a look at the other
+articles to get a better sense of how to access specific datasets. For more 
+details on what datasets are available and their official documentation, go to
+https://www.huduser.gov/portal/datasets/update-schedule.html
+
+You can also check available datasets shown at 
+https://www.huduser.gov/portal/datasets/update-schedule.html and those
+which this library currently supports.
+
+```{r, eval=TRUE}
+huddatasets()
+```
