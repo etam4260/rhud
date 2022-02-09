@@ -5,17 +5,18 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An R interface for accessing HUD (US Department of Housing and Urban Development) • hudr</title>
+<title>An R interface for accessing HUD (US Department of Housing and Urban Development) APIs • hudr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="An R interface for accessing HUD (US Department of Housing and Urban Development)">
+<script src="pkgdown.js"></script><meta property="og:title" content="An R interface for accessing HUD (US Department of Housing and Urban Development) APIs">
 <meta property="og:description" content="
 	An R interface for accessing HUD (US Department of Housing and Urban Development) API.
 	The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent,
-	Income Limits, and the Comprehensive Housing Affordability Strategy.">
+	Income Limits, and the Comprehensive Housing Affordability Strategy.
+	Interfaces with the HUD DRGR reporting system part which is part of HUD Exchange.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -79,6 +80,9 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -104,33 +108,53 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><img src="https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true"></p>
-<p>This package contains an interface to the US Department of Housing and Urban Development<br>
-datasets within R. The goal of this project is to provide an easy to use interface to access various open source APIs provided by HUD.</p>
+<p><img src="https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true" width="1250" height="200"></p>
+<p>This package contains an interface to the US Department of Housing and Urban Development datasets within R. The goal of this project is to provide an easy to use interface to access various open source APIs provided by HUD.</p>
 <p>HUD has two main websites for gaining access to various different datasets: HUD User and Exchange.</p>
-<p>Link to HUD User: <a href="https://www.huduser.gov/portal/datasets" class="external-link uri">https://www.huduser.gov/portal/datasets</a></p>
-<p>Link to HUD Exchange: <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
-<p>“HUD USER is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD’s Office of Policy Development and Research in 1978.”</p>
-<p>HUD USER maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a dataframe like object. Although there exist file downloadables, R users may want to be able to extract specific bits of the data into memory.</p>
+<p>HUD User: <a href="https://www.huduser.gov/portal/datasets" class="external-link uri">https://www.huduser.gov/portal/datasets</a> HUD Exchange: <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
+<p>“HUD User is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD’s Office of Policy Development and Research in 1978.”</p>
+<p>HUD User maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a dataframe like object. Although there exist file downloadables, R users may want to be able to extract specific bits of the data into memory.</p>
 <p>“The Department of Housing and Urban Development has a website known as HUD Exchange which is a comprehensive online platform that provides tools, resources, and contact information for the organizations and individuals that partner with HUD. These often include nonprofit groups and state and municipal governments, but also include borrowers, lenders, and brokers involved in HUD’s multifamily loan programs”</p>
-<p>(Currently a WIP) The DRGR Disaster Recovery Grant Reporting System which HUD Exchange uses to supply public data does not have an active API for retrieving information. However, there does exist datasets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.</p>
+<p>The DRGR Disaster Recovery Grant Reporting System which HUD Exchange uses to supply public data does not have an active API for retrieving information. However, there does exist datasets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.</p>
 <div class="section level2">
 <h2 id="available-data">Available Data<a class="anchor" aria-label="anchor" href="#available-data"></a>
 </h2>
 <p>The APIs and datasets which this library interfaces with:</p>
 <ol style="list-style-type: decimal">
-<li>HUD User
+<li>
+<p>HUD User</p>
+<p>API Based:</p>
 <ul>
 <li>Crosswalk</li>
 <li>Fair Markets Rent</li>
 <li>Income Limits</li>
 <li>Comprehensive Housing and Affordability Strategy</li>
 </ul>
-</li>
-<li>HUD Exchange
+<p>File Based:</p>
 <ul>
-<li>Community Develop Block Grant - Disaster Recovery</li>
 <li>Neighborhood Stabilization Program</li>
+<li>Low-Income Housing Tax Credit</li>
+<li>Annual Adjustment Factors (AAFs)</li>
+<li>Difficult Development Areas (DDA)</li>
+<li>Homeowner Assistance Fund (HAF) Income Limits</li>
+<li>50th percentile (or median)</li>
+<li>Housing Affordability Data System (HADS)</li>
+<li>Components of Inventory Change (CINCH) report</li>
+<li>Point-In-Time (PIT) count</li>
+<li>Housing Inventory Count (HIC)</li>
+<li>HOME Investment Partnerships Program (HOME) and Housing Trust</li>
+<li>Fund (HTF) Homeownership Value Limits</li>
+<li>Multifamily Tax Subsidy Projects (MTSP) Income Limits</li>
+<li>Utility Allowance Factors (UAFs)</li>
+<li>Renewal Funding Inflation Factors</li>
+<li>Small Area Fair Market Rents (SAFMRs)</li>
+<li>Assisted Housing: Local and Global</li>
+</ul>
+</li>
+<li>
+<p>HUD Exchange</p>
+<ul>
+<li>Community Development Block Grant - Disaster Recovery</li>
 </ul>
 </li>
 </ol>
@@ -142,7 +166,7 @@ datasets within R. The goal of this project is to provide an easy to use interfa
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"etam4260/hudr"</span><span class="op">)</span></code></pre></div>
-<p>For more details on how to setup and utilize this package. Please go to <a href="https://etam4260.github.io/hudr/" class="external-link uri">https://etam4260.github.io/hudr/</a>. Select Setup in the navigation bar.</p>
+<p>For more details on how to setup and utilize this package. Please go to <a href="https://etam4260.github.io/hudr/" class="external-link uri">https://etam4260.github.io/hudr/</a>. Select ‘Setup’ in the navigation bar.</p>
 </div>
 <div class="section level2">
 <h2 id="contributors">Contributors<a class="anchor" aria-label="anchor" href="#contributors"></a>
@@ -155,12 +179,12 @@ datasets within R. The goal of this project is to provide an easy to use interfa
 <h2 id="disclaimers">Disclaimers<a class="anchor" aria-label="anchor" href="#disclaimers"></a>
 </h2>
 <ul>
+<li>License: MIT</li>
+<li>To get citation information for hudr in R, type citation(package = ‘hudr’)</li>
 <li>This interface uses the HUD User Data API but is not endorsed or certified by HUD User.</li>
 <li>The limit on the maximum number of API calls is 1200 queries a min.</li>
 <li>This is a WIP so please report any issues or bugs to: <a href="https://github.com/etam4260/hudr/issues" class="external-link uri">https://github.com/etam4260/hudr/issues</a>
 </li>
-<li>License: MIT</li>
-<li>To get citation information for hudr in R, type citation(package = ‘hudr’)</li>
 <li>This is open source, so please fork and introduce some pull requests!</li>
 </ul>
 </div>
@@ -184,6 +208,12 @@ datasets within R. The goal of this project is to provide an easy to use interfa
 </ul>
 </div>
 
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>

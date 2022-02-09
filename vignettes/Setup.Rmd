@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 You can install the development version from GitHub with:
 
-```{r, warning=FALSE, results='hide',message=FALSE}
+```{r, eval=FALSE}
 # install.packages("devtools")
 library(devtools)
 devtools::install_github("etam4260/hudr")
@@ -57,15 +57,15 @@ Sys.getenv("HUD_KEY")
 
 To set the key...
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 Sys.setenv("HUD_KEY" = "2yeuduhq72ueajk")
 Sys.getenv("HUD_KEY")
 ```
 
 To check whether hudr can gain access to this environment variable...
 
-```{r, eval=TRUE}
-hudgetkey()
+```{r, eval=FALSE}
+hud_get_key()
 ```
 
 It is now setup for the rest of the R session.
@@ -79,6 +79,6 @@ You can also check available datasets shown at
 https://www.huduser.gov/portal/datasets/update-schedule.html and those
 which this library currently supports.
 
-```{r, eval=TRUE}
-huddatasets()
+```{r, eval=FALSE}
+hud_data_sets()
 ```

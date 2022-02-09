@@ -97,7 +97,7 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   if(FALSE %in% numbers_only(quarter)) stop("Quarter input must only be numbers.")
 
-  ifelse(TRUE %in% as.integer(year) > as.integer(pkg.env$curr.year),
+  ifelse(TRUE %in% as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1]),
          stop("The year specified seems to be in the future?"), "")
   ifelse(as.integer(type) < 1 || as.integer(type) >= 12,
          stop("The type input is not in the range of 1-12"), "")
@@ -192,7 +192,7 @@ hud_fmr <- function(query, year = 2021, key = Sys.getenv("HUD_KEY")) {
 
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
-  ifelse(as.integer(year) > as.integer(pkg.env$curr.year),
+  ifelse(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1]),
          stop("The year specified seems to be in the future?"), "")
   ifelse(!numbers_only(query) && nchar(query) != 2,
          stop("The inputted query for state abbreviation is not right."), "")
@@ -258,7 +258,7 @@ hud_il <- function(query, year = 2021, key = Sys.getenv("HUD_KEY")) {
 
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
-  ifelse(as.integer(year) > as.integer(pkg.env$curr.year),
+  ifelse(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1]),
          stop("The year specified seems to be in the future?"), "")
   ifelse(!numbers_only(query) && nchar(query) != 2,
          stop("The inputted query for state abbreviation is not right."), "")
@@ -316,7 +316,7 @@ hud_il <- function(query, year = 2021, key = Sys.getenv("HUD_KEY")) {
 #' @returns This function returns a dataframe containing CHAS data for a
 #' particular state. For more details about these measurements, go to
 #' https://www.huduser.gov/portal/dataset/fmr-api.html
-hud_chas <- function(type, stateId = "", entityId = "", year = "2014-2018", key = System.env("HUD_KEY")) {
+hud_chas <- function(type, stateId = "", entityId = "", year = "2014-2018", key = Sys.getenv("HUD_KEY")) {
   URL <- NULL
   call <- NULL
   cont <- NULL

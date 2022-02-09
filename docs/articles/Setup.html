@@ -76,6 +76,9 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -113,20 +116,37 @@
 <p>You can install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"etam4260/hudr"</span><span class="op">)</span></code></pre></div>
-<p>The US Department of Housing and Urban Development for HUD USER requires users to gain an access key before querying their systems. You must go to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a> and make an account.</p>
-<p>From there you need to make a new token. Make sure to save the token somewhere as you will only be able to view it once. However, you can use it as many times as you want. You can now supply the ‘key’ argument.</p>
-<p>To reduce the need to supply the key in every function call, you can use the hudsetkey(key) function to save the key to the package environment.</p>
-<p>HUD Exchange does not require a key to gain access to their data.</p>
+<p>The US Department of Housing and Urban Development for HUD USER requires users to gain an access key before querying their systems. You must go to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a> and follow the instructions for making an account.</p>
+<p>HUD Exchange has data stored in files and does not have a readily available API system for gaining access to their data.</p>
+<p>From there you need to make a new token. Make sure to save the token somewhere as you will only be able to view it once. However, you can use it as many times as you want. You can now supply the ‘key’ argument to the function calls. However, it is <strong>NOT RECOMMENDED</strong> to do this. Rather, to reduce the need to supply the key argument in every function call, you can use the Sys.setenv() function to save the key to the user environment.</p>
+</div>
+<div class="section level2">
+<h2 id="key-setup">Key Setup<a class="anchor" aria-label="anchor" href="#key-setup"></a>
+</h2>
+<p>There are various method of setting up a key. However, I recommend using THE Sys.setenv() function. You can also choose to save it into your .Rprofile or .Renviron files.</p>
+<div class="section level3">
+<h3 id="using-sys-setenv-during-an-interactive-session">Using Sys.setenv() during an interactive session<a class="anchor" aria-label="anchor" href="#using-sys-setenv-during-an-interactive-session"></a>
+</h3>
+<p>One method of setting the API key is to use environment variables. This library searches for HUD_KEY in the user environment to check if a key has been defined. If no key has been defined, an empty string is outputted.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
 
-<span class="co"># The function will not output anything. </span>
-<span class="fu"><a href="../reference/hudsetkey.html">hudsetkey</a></span><span class="op">(</span><span class="st">"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow"</span><span class="op">)</span>
-
-<span class="co"># To check the current key.</span>
-<span class="co"># print(hudgetkey())</span></code></pre></div>
-<p>You can now access the API from HUD User. I recommend taking a look at the other articles to get a better sense of how to access specific datasets.</p>
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span></code></pre></div>
+<p>To set the key…</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span> <span class="op">=</span> <span class="st">"2yeuduhq72ueajk"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span></code></pre></div>
+<p>To check whether hudr can gain access to this environment variable…</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_key.html">hud_get_key</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>It is now setup for the rest of the R session.</p>
+<p>You can now access the API from HUD User. I recommend taking a look at the other articles to get a better sense of how to access specific datasets. For more details on what datasets are available and their official documentation, go to <a href="https://www.huduser.gov/portal/datasets/update-schedule.html" class="external-link uri">https://www.huduser.gov/portal/datasets/update-schedule.html</a></p>
+<p>You can also check available datasets shown at <a href="https://www.huduser.gov/portal/datasets/update-schedule.html" class="external-link uri">https://www.huduser.gov/portal/datasets/update-schedule.html</a> and those which this library currently supports.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_data_sets.html">hud_data_sets</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+</div>
 </div>
   </div>
 

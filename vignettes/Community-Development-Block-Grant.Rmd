@@ -35,9 +35,9 @@ directly download the data into memory. Furthermore, these datasets do not need 
 
 This is an example grabbing the first file, DR CDBG CDBG-DR Financial Report
 by Appropriation, and displaying the first 6 rows.
-```{r}
+```{r, eval=FALSE}
 library(hudr)
-head(hudcdbg(file = 1))
+head(hud_cdbg(file = 1))
 ```
 
 #### Data Fields
@@ -68,8 +68,8 @@ head(hudcdbg(file = 1))
 
 This is an example grabbing the second file, DR CDBG CDBG-DR Financial Report by Grantee, 
 and displaying the first 6 rows.
-```{r}
-head(hudcdbg(file = 2))
+```{r, eval=FALSE}
+head(hud_cdbg(file = 2))
 ```
 
 #### Data Fields
@@ -99,8 +99,8 @@ Remaining Balance
 
 This is an example grabbing the third file, DR CDBG CDBG-DR Financial Report Monthly Summary, 
 and displaying the first 6 rows. The data provides grants that were given in the last month.
-```{r}
-head(hudcdbg(file = 3))
+```{r, eval=FALSE}
+head(hud_cdbg(file = 3))
 ```
 
 #### Data Fields
@@ -131,8 +131,8 @@ Remaining Balance
 
 This is an example grabbing the fourth file, DR CDBG CDBG-DR Performance by Activity, 
 and displaying the first 6 rows.
-```{r}
-head(hudcdbg(file = 4))
+```{r, eval=FALSE}
+head(hud_cdbg(file = 4))
 ```
 
 #### Data Fields

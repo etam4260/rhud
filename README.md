@@ -19,7 +19,7 @@ checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs
 downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 <!-- badges: end -->
 
-![](https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true)
+<img src="https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true" width="1250" height="200"/>
 
 This package contains an interface to the US Department of Housing and
 Urban Development datasets within R. The goal of this project is to
@@ -29,9 +29,8 @@ provided by HUD.
 HUD has two main websites for gaining access to various different
 datasets: HUD User and Exchange.
 
-Link to HUD User: <https://www.huduser.gov/portal/datasets>
-
-Link to HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
+HUD User: <https://www.huduser.gov/portal/datasets> HUD Exchange:
+<https://www.hudexchange.info/programs/drgr/>
 
 “HUD User is an information source containing reports and reference
 documents for the U.S. Department of Housing and Urban Development. HUD

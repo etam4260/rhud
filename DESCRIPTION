@@ -26,6 +26,8 @@ Imports:
     data.table,
     openxlsx,
     rvest,
-    devtools
+    devtools,
+    tidyverse,
+    zoo
 Config/testthat/edition: 3
 VignetteBuilder: knitr

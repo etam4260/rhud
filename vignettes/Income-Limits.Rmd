@@ -26,17 +26,14 @@ This is a basic example showing you how to query the Income Limits API.
 This works similarly to the FMR API.
 Querying a state or (fips + subdivision 10 digit fips) both return a single row dataframe.
 
-```{r}
+```{r, eval=FALSE}
 library(hudr)
 
-# Setting the key.
-hudsetkey("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5OGJlNjBkNjYzMjM1ZmE2NzQxYWY5ZmViM2QzMDBkNDY3NTliYjgzMzhmNjJiZTE3ZDc4MmE0YWNhYjU2ZmMyMTIxMjM1MjJkYTVjNzY1In0.eyJhdWQiOiI2IiwianRpIjoiMzk4YmU2MGQ2NjMyMzVmYTY3NDFhZjlmZWIzZDMwMGQ0Njc1OWJiODMzOGY2MmJlMTdkNzgyYTRhY2FiNTZmYzIxMjEyMzUyMmRhNWM3NjUiLCJpYXQiOjE2NDI5ODg1MTgsIm5iZiI6MTY0Mjk4ODUxOCwiZXhwIjoxOTU4NTIxMzE3LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Ke0N8s797ohuGArbGb7rAMsLKDAWqP6mdItM8KjFQjHDMn8NYBazD8WopijiezC4wgV-n4n41NW4tSivV8yVow")
-
 # This selects the first 6 rows and the first four columns.
-head(hudil(query = 'VA', year = '2021'))[ ,c(1,2,3,4,5,6)]
+head(hud_il(query = 'VA', year = '2021'))[ ,c(1,2,3,4,5,6)]
 
 # Getting a county requires a county fip + state fip + census tract. Get first 6 columns.
-hudil(query = '0100199999', year = '2017')[ ,c(1,2,3,4,5,6)]
+hud_il(query = '0100199999', year = '2017')[ ,c(1,2,3,4,5,6)]
 ```
 
 ### Income Limits Data Fields

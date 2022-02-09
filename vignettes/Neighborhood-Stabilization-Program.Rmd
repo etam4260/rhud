@@ -35,10 +35,10 @@ each row has a corresponding entity for each column.
 
 
 ### Example
-```{r}
+```{r, eval=FALSE}
 library(hudr)
 
 # Getting the first which is NSP NSP Close-out_Admin Rept02b - with Act Start and End dates and ENV Status.xlsx
-head(hudnsp(file = 1))
+head(hud_nsp(file = 1))
 
 ```
