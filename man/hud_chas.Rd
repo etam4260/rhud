@@ -9,7 +9,7 @@ hud_chas(
   stateId = "",
   entityId = "",
   year = "2014-2018",
-  key = System.env("HUD_KEY")
+  key = Sys.getenv("HUD_KEY")
 )
 }
 \arguments{
