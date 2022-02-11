@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
 The datasets which this function deals with are located at https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG
 The first two datasets are the same, but are organized in a different manner.
 
-Querying the HUD Exchange website for data is a bit different than HUD User. These functions
-directly download the data into memory. Furthermore, these datasets do not need a key.
+Querying the HUD Exchange website for data is a bit different than HUD User. 
+These datasets do not need a key.
 
 1) DR CDBG CDBG-DR Financial Report by Appropriation
 2) DR CDBG CDBG-DR Financial Report by Grantee
@@ -156,10 +156,10 @@ Activity Status
 Activity Measure Category	
 
 Low			
-Projected   Actual	Actual to Projected %
+Projected,   Actual,	Actual to Projected %
 
 Mod
-Projected   Actual	Actual to Projected %
+Projected,   Actual,	Actual to Projected %
 
 Total
-Projected   Actual	Actual to Projected %
+Projected,   Actual,	Actual to Projected %

@@ -1,4 +1,4 @@
-#' @import openxlsx
+#' @import rio
 #' @import zoo
 
 # An R interface for accessing HUD EXCHANGE (US Department of Housing and Urban Development)
@@ -20,14 +20,14 @@
 #' @name hud_cdbg
 #' @title hud_cdbg
 #' @description This will grab data from
-#' https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG
-#' and format it into a dataframe. It will unroll each column to replace
-#' NA values with the first non-NA value above it.
+#'   https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG
+#'   and format it into a dataframe. It will unroll each column to replace
+#'   NA values with the first non-NA value above it.
 #' @param file The specific file needed. Currently you can specify 1 -> 4. Will default to 1:
-#' 1) DR CDBG CDBG-DR Financial Report by Appropriation (xlsx - 0.1 MB - 1/1/2022)
-#' 2) DR CDBG CDBG-DR Financial Report by Grantee (xlsx - 0.1 MB - 1/1/2022)
-#' 3) DR CDBG CDBG-DR Financial Report Monthly Summary (xlsx - 0.1 MB - 1/1/2022)
-#' 4) DR CDBG CDBG-DR Performance by Activity (xlsx - 2.2 MB - 1/1/2022)
+#'   1) DR CDBG CDBG-DR Financial Report by Appropriation (xlsx - 0.1 MB - 1/1/2022)
+#'   2) DR CDBG CDBG-DR Financial Report by Grantee (xlsx - 0.1 MB - 1/1/2022)
+#'   3) DR CDBG CDBG-DR Financial Report Monthly Summary (xlsx - 0.1 MB - 1/1/2022)
+#'   4) DR CDBG CDBG-DR Performance by Activity (xlsx - 2.2 MB - 1/1/2022)
 #' @returns A dataframe.
 #' @export
 hud_cdbg <- function(file = 1) {
@@ -35,9 +35,9 @@ hud_cdbg <- function(file = 1) {
   if(as.integer(file) > 4 || as.integer(file) < 1) stop("File number out of range.")
 
   if(as.integer(file) == 1) {
-    data <- read.xlsx("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Appropriation.xlsx")
+    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Appropriation.xlsx")
 
-    # Rename first two rows to their 'apropriate' names.
+    # Rename first two rows to their 'appropriate' names.
     colnames(data)[1] <- "Appropriation Abbreviation"
     colnames(data)[2] <- "Appropriation"
 
@@ -48,7 +48,7 @@ hud_cdbg <- function(file = 1) {
 
     data <- data[-which(data$Grantee == "Total"), ]
   } else if(as.integer(file) == 2) {
-    data <- read.xlsx("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Grantee.xlsx")
+    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Grantee.xlsx")
 
     # Rename first two rows to their 'apropriate' names.
     colnames(data)[2] <- "Appropriation Abbreviation"
@@ -65,9 +65,9 @@ hud_cdbg <- function(file = 1) {
     data <- data[-which(data$Grantee == "Total"), ]
     data <- data[-which(data$`Appropriation Abbreviation` == "Total"), ]
   } else if(as.integer(file) == 3) {
-    data <- read.xlsx("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20Monthly%20Summary.xlsx")
+    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20Monthly%20Summary.xlsx")
   } else if(as.integer(file) == 4) {
-    data <- read.xlsx("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Performance%20by%20Activity.xlsx")
+    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Performance%20by%20Activity.xlsx")
     colnames(data)[1] <- "Appropriation Abbreviation"
     colnames(data)[2] <- "Appropriation"
 

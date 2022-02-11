@@ -69,16 +69,3 @@ hud_get_key()
 ```
 
 It is now setup for the rest of the R session.
-
-You can now access the API from HUD User. I recommend taking a look at the other
-articles to get a better sense of how to access specific datasets. For more 
-details on what datasets are available and their official documentation, go to
-https://www.huduser.gov/portal/datasets/update-schedule.html
-
-You can also check available datasets shown at 
-https://www.huduser.gov/portal/datasets/update-schedule.html and those
-which this library currently supports.
-
-```{r, eval=FALSE}
-hud_data_sets()
-```

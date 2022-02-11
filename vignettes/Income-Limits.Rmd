@@ -18,6 +18,9 @@ knitr::opts_chunk$set(
 
 "The Department of Housing and Urban Development (HUD) sets income limits that determine eligibility for assisted housing programs including the Public Housing, Section 8 project-based, Section 8 Housing Choice Voucher, Section 202 housing for the elderly, and Section 811 housing for persons with disabilities programs. HUD develops income limits based on Median Family Income estimates and Fair Market Rent area definitions for each metropolitan area, parts of some metropolitan areas, and each non-metropolitan county(https://www.huduser.gov/portal/datasets/il.html)."
 
+query: Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.
+
+year: Gets the year that this data was recorded. Can specify multiple years. Default is the latest year.
 
 ### Example
 
@@ -29,11 +32,9 @@ Querying a state or (fips + subdivision 10 digit fips) both return a single row 
 ```{r, eval=FALSE}
 library(hudr)
 
-# This selects the first 6 rows and the first four columns.
-head(hud_il(query = 'VA', year = '2021'))[ ,c(1,2,3,4,5,6)]
+hud_il(query = 'VA', year = '2021')
 
-# Getting a county requires a county fip + state fip + census tract. Get first 6 columns.
-hud_il(query = '0100199999', year = '2017')[ ,c(1,2,3,4,5,6)]
+hud_il(query = '0100199999', year = '2017')
 ```
 
 ### Income Limits Data Fields

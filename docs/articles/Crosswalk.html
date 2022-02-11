@@ -68,9 +68,6 @@
     <li>
       <a href="../articles/Community-Development-Block-Grant.html">Community Development Block Grant - Disaster Recovery</a>
     </li>
-    <li>
-      <a href="../articles/Neighborhood-Stabilization-Program.html">Neighborhood Stabilization Program</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -116,8 +113,11 @@
 <p>"One of the many challenges that social science researchers and practitioners face is the difficulty of relating United States Postal Service (USPS) ZIP codes to Census Bureau geographies. There are valuable data available only at the ZIP code level that, when combined with demographic data tabulated at various Census geography levels, could open up new avenues of exploration.</p>
 <p>While some acceptable methods of combining ZIP codes and Census geography exist, they have limitations. To provide additional avenues for merging these data, PD&amp;R has released the HUD-USPS Crosswalk Files. These unique files are derived from data in the quarterly USPS Vacancy Data. They originate directly from the USPS; are updated quarterly, making them highly responsive to changes in ZIP code configurations; and reflect the locations of both business and residential addresses. The latter feature is of particular interest to housing researchers because many of the phenomena that they study are based on housing unit or address. By using an allocation method based on residential addresses rather than by area or by population, analysts can take into account not only the spatial distribution of population, but also the spatial distribution of residences. This enables a slightly more nuanced approach to allocating data between disparate geographies(<a href="https://www.huduser.gov/portal/datasets/usps_crosswalk.html" class="external-link uri">https://www.huduser.gov/portal/datasets/usps_crosswalk.html</a>)."</p>
 <p>This journal article describes the problem and proposed solution in more detail: Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S. Department of Housing and Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277 – 294. <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf</a></p>
-<p>type: Must be a number between 1 and 12 depending on the Crosswalk type. 1) zip-tract 2) zip-county 3) zip-cbsa 4) zip-cbsadiv (Available 4th Quarter 2017 onwards) 5) zip-cd 6) tract-zip 7) county-zip 8) cbsa-zip 9) cbsadiv-zip (Available 4th Quarter 2017 onwards) 10) cd-zip 11) zip-countysub (Available 2nd Quarter 2018 onwards) 12) countysub-zip (Available 2nd Quarter 2018 onwards)</p>
 <p>The first half of the ‘type’ argument describes the specific region we want to query. The second half of the ‘type’ argument describe a secondary region and how much it ‘intersects’ with the first region. For example, in type 7, we might have a county called 22301 which has zip codes 35213, 13132, and 22411 which are either fully or partially inside the county 22301. Each individual observation describes how much ‘intersection’ the second half geoid has with the first half geoid. Intersection is describe in the % of residental, business, and other buildings in the second half geoid that are in the first half geoid. For example, 50% of residential buildings in 35213 are also inside the county 22301.</p>
+<p>type: Must be a number between 1 and 12 depending on the Crosswalk type. 1) zip-tract 2) zip-county 3) zip-cbsa 4) zip-cbsadiv (Available 4th Quarter 2017 onwards) 5) zip-cd 6) tract-zip 7) county-zip 8) cbsa-zip 9) cbsadiv-zip (Available 4th Quarter 2017 onwards) 10) cd-zip 11) zip-countysub (Available 2nd Quarter 2018 onwards) 12) countysub-zip (Available 2nd Quarter 2018 onwards)</p>
+<p>query: Depending on the type selected, 1-5 must specify a zip code. 6 must specify a tract. 7 must specify a county fip. 8-9 must specify a cbsa code. 10 must specify a county district code. 11 must be a zip code. 12 must be a county sub district.</p>
+<p>year: Year range of the data to retrieve. Default is latest year.</p>
+<p>quarter: The quarters in the year to retrieve.</p>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -126,8 +126,6 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
 
-<span class="co"># Type 7 (county-zip) corresponds zip level data which intersects with this county. </span>
-<span class="co"># The year and quarter specifies when these measurements are made.</span>
 <span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">7</span>, query <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">

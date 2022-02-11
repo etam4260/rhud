@@ -24,6 +24,9 @@ Fair Market Rent prices are set for each county and metro area across the countr
 
 Fair Market Rent (FMR) is defined as the 40th percentile of rents paid by recent movers (renters who moved in the last 24 months) in a given FMR area. This means FMR rent prices are slightly below the median price (https://www.rentdata.org/articles/what-is-fair-market-rent)."
 
+query: Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.
+
+year: Gets the year that this data was recorded. Can specify multiple years. Default is the latest year.
 
 ### Example
 
@@ -37,7 +40,7 @@ county.
 library(hudr)
 
 # This selects the first few rows and the first four columns.
-head(hud_fmr(query = 'VA', year = '2021'))[ ,c(1,2,3,4)]
+hud_fmr(query = 'VA', year = '2021')
 
 # Getting a county requires a county fip + state fip + census tract.
 hud_fmr(query = '0100199999', year = '2017')

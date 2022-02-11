@@ -62,32 +62,10 @@ The APIs and datasets which this library interfaces with:
 
 1.  HUD User
 
-    API Based:
-
     -   Crosswalk
     -   Fair Markets Rent
     -   Income Limits
     -   Comprehensive Housing and Affordability Strategy
-
-    File Based:
-
-    -   Neighborhood Stabilization Program
-    -   Low-Income Housing Tax Credit
-    -   Annual Adjustment Factors (AAFs)
-    -   Difficult Development Areas (DDA)
-    -   Homeowner Assistance Fund (HAF) Income Limits
-    -   50th percentile (or median)
-    -   Housing Affordability Data System (HADS)
-    -   Components of Inventory Change (CINCH) report
-    -   Point-In-Time (PIT) count
-    -   Housing Inventory Count (HIC)
-    -   HOME Investment Partnerships Program (HOME) and Housing Trust
-    -   Fund (HTF) Homeownership Value Limits
-    -   Multifamily Tax Subsidy Projects (MTSP) Income Limits
-    -   Utility Allowance Factors (UAFs)
-    -   Renewal Funding Inflation Factors
-    -   Small Area Fair Market Rents (SAFMRs)
-    -   Assisted Housing: Local and Global
 
 2.  HUD Exchange
 

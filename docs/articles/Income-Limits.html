@@ -68,9 +68,6 @@
     <li>
       <a href="../articles/Community-Development-Block-Grant.html">Community Development Block Grant - Disaster Recovery</a>
     </li>
-    <li>
-      <a href="../articles/Neighborhood-Stabilization-Program.html">Neighborhood Stabilization Program</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -114,6 +111,8 @@
 <h3 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
 </h3>
 <p>“The Department of Housing and Urban Development (HUD) sets income limits that determine eligibility for assisted housing programs including the Public Housing, Section 8 project-based, Section 8 Housing Choice Voucher, Section 202 housing for the elderly, and Section 811 housing for persons with disabilities programs. HUD develops income limits based on Median Family Income estimates and Fair Market Rent area definitions for each metropolitan area, parts of some metropolitan areas, and each non-metropolitan county(<a href="https://www.huduser.gov/portal/datasets/il.html" class="external-link uri">https://www.huduser.gov/portal/datasets/il.html</a>).”</p>
+<p>query: Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.</p>
+<p>year: Gets the year that this data was recorded. Can specify multiple years. Default is the latest year.</p>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -123,11 +122,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
 
-<span class="co"># This selects the first 6 rows and the first four columns.</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/hud_il.html">hud_il</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'VA'</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span><span class="op">)</span><span class="op">[</span> ,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="../reference/hud_il.html">hud_il</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'VA'</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
 
-<span class="co"># Getting a county requires a county fip + state fip + census tract. Get first 6 columns.</span>
-<span class="fu"><a href="../reference/hud_il.html">hud_il</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span><span class="op">[</span> ,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<span class="fu"><a href="../reference/hud_il.html">hud_il</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="income-limits-data-fields">Income Limits Data Fields<a class="anchor" aria-label="anchor" href="#income-limits-data-fields"></a>

@@ -47,7 +47,8 @@ state FIPS + Congressional District code. Eg: 7200 for type 10
 or
 10-digit GEOID for the County sub Eg: 4606720300 for type 12}
 
-\item{year}{Gets the year that this data was recorded. Default is the
+\item{year}{Gets the year that this data was recorded.
+Can specify multiple years. Default is the
 latest year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.

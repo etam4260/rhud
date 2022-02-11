@@ -4,14 +4,14 @@
 \alias{hud_fmr}
 \title{hud_fmr}
 \usage{
-hud_fmr(query, year = 2021, key = Sys.getenv("HUD_KEY"))
+hud_fmr(query, year = c(2021), key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{query}{Can provide either a 10 digit FIPS code including county
 subdivision, or state abbreviation.}
 
 \item{year}{Gets the year that this data was recorded.
-Default is the latest year.}
+Can specify multiple years. Default is the latest year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}
