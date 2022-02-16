@@ -26,11 +26,12 @@ Urban Development datasets within R. The goal of this project is to
 provide an easy to use interface to access various open source APIs
 provided by HUD.
 
-HUD has two main websites for gaining access to various different
-datasets: HUD User and Exchange.
+HUD has two main websites for gaining access to various different data
+sets: HUD User and Exchange.
 
-HUD User: <https://www.huduser.gov/portal/datasets> HUD Exchange:
-<https://www.hudexchange.info/programs/drgr/>
+HUD User: <https://www.huduser.gov/portal/datasets>
+
+HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
 
 “HUD User is an information source containing reports and reference
 documents for the U.S. Department of Housing and Urban Development. HUD
@@ -52,20 +53,28 @@ lenders, and brokers involved in HUD’s multifamily loan programs”
 
 The DRGR Disaster Recovery Grant Reporting System which HUD Exchange
 uses to supply public data does not have an active API for retrieving
-information. However, there does exist datasets freely available online
+information. However, there does exist data sets freely available online
 which can be directly downloadable into R. This package provides the
 ability to directly get such data.
 
 ## Available Data
 
-The APIs and datasets which this library interfaces with:
+The APIs and datasets which this library interfaces are listed below.
+The HUD also provide miscellaneous supplemental APIs under them.
 
 1.  HUD User
 
     -   Crosswalk
     -   Fair Markets Rent
+        -   Small Areas Fair Markets Rent
+        -   List Counties
+        -   List States
+        -   List Small Areas
     -   Income Limits
     -   Comprehensive Housing and Affordability Strategy
+        -   List Counties in State
+        -   List MCDs in State
+        -   List All Cities in State
 
 2.  HUD Exchange
 

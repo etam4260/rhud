@@ -46,34 +46,13 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/hud_50p.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_adjf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_ash.html</loc>
-  </url>
-  <url>
     <loc>/reference/hud_cdbg.html</loc>
   </url>
   <url>
     <loc>/reference/hud_chas.html</loc>
   </url>
   <url>
-    <loc>/reference/hud_cinch.html</loc>
-  </url>
-  <url>
     <loc>/reference/hud_cw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_data_sets.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_dda.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_fif.html</loc>
   </url>
   <url>
     <loc>/reference/hud_fmr.html</loc>
@@ -82,37 +61,7 @@
     <loc>/reference/hud_get_key.html</loc>
   </url>
   <url>
-    <loc>/reference/hud_hads.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_haf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_hic.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_hvl.html</loc>
-  </url>
-  <url>
     <loc>/reference/hud_il.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_lithtc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_msil.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_muaf.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_nsp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_pit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hud_sfmr.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>

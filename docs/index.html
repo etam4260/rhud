@@ -107,24 +107,38 @@
 
 <p><img src="https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true" width="1250" height="200"></p>
 <p>This package contains an interface to the US Department of Housing and Urban Development datasets within R. The goal of this project is to provide an easy to use interface to access various open source APIs provided by HUD.</p>
-<p>HUD has two main websites for gaining access to various different datasets: HUD User and Exchange.</p>
-<p>HUD User: <a href="https://www.huduser.gov/portal/datasets" class="external-link uri">https://www.huduser.gov/portal/datasets</a> HUD Exchange: <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
+<p>HUD has two main websites for gaining access to various different data sets: HUD User and Exchange.</p>
+<p>HUD User: <a href="https://www.huduser.gov/portal/datasets" class="external-link uri">https://www.huduser.gov/portal/datasets</a></p>
+<p>HUD Exchange: <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
 <p>“HUD User is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD’s Office of Policy Development and Research in 1978.”</p>
 <p>HUD User maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a dataframe like object. Although there exist file downloadables, R users may want to be able to extract specific bits of the data into memory.</p>
 <p>“The Department of Housing and Urban Development has a website known as HUD Exchange which is a comprehensive online platform that provides tools, resources, and contact information for the organizations and individuals that partner with HUD. These often include nonprofit groups and state and municipal governments, but also include borrowers, lenders, and brokers involved in HUD’s multifamily loan programs”</p>
-<p>The DRGR Disaster Recovery Grant Reporting System which HUD Exchange uses to supply public data does not have an active API for retrieving information. However, there does exist datasets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.</p>
+<p>The DRGR Disaster Recovery Grant Reporting System which HUD Exchange uses to supply public data does not have an active API for retrieving information. However, there does exist data sets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.</p>
 <div class="section level2">
 <h2 id="available-data">Available Data<a class="anchor" aria-label="anchor" href="#available-data"></a>
 </h2>
-<p>The APIs and datasets which this library interfaces with:</p>
+<p>The APIs and datasets which this library interfaces are listed below. The HUD also provide miscellaneous supplemental APIs under them.</p>
 <ol style="list-style-type: decimal">
 <li>
 <p>HUD User</p>
 <ul>
 <li>Crosswalk</li>
-<li>Fair Markets Rent</li>
+<li>Fair Markets Rent
+<ul>
+<li>Small Areas Fair Markets Rent</li>
+<li>List Counties</li>
+<li>List States</li>
+<li>List Small Areas</li>
+</ul>
+</li>
 <li>Income Limits</li>
-<li>Comprehensive Housing and Affordability Strategy</li>
+<li>Comprehensive Housing and Affordability Strategy
+<ul>
+<li>List Counties in State</li>
+<li>List MCDs in State</li>
+<li>List All Cities in State</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
