@@ -69,6 +69,8 @@
 hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
                    key = Sys.getenv("HUD_KEY")) {
 
+  if(key == "") stop("Did you forget to set the key?")
+
   alltypes <- c("zip-tract","zip-county","zip-cbsa",
                 "zip-cbsadiv","zip-cd","tract-zip",
                 "county-zip","cbsa-zip","cbsadiv-zip",
@@ -85,9 +87,11 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
   # Removing leading and ending spaces and converting all integer inputs to characters
   type <- paste(str_trim(as.character(type), side = "both"))
   query <- paste(str_trim(as.character(query), side = "both"))
-  year <- paste(str_trim(as.character(year), side = "both"))
-  quarter <- paste(str_trim(as.character(quarter), side = "both"))
+  year <- unique(paste(str_trim(as.character(year), side = "both")))
+  quarter <- unique(paste(str_trim(as.character(quarter), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
+
+  if(!all(as.character(quarter) %in% c("1","2","3","4"))) stop("Quarters must be from 1 to 4.")
 
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
@@ -100,7 +104,7 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
 
   ifelse(TRUE %in% as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1]),
          stop("The year specified seems to be in the future?"), "")
-  ifelse(as.integer(type) < 1 || as.integer(type) >= 12,
+  ifelse(as.integer(type) < 1 || as.integer(type) > 12,
          stop("The type input is not in the range of 1-12"), "")
 
   # Need to make sure query is a zip code of 5 digits.
@@ -126,22 +130,33 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
     if(nchar(query) != 10) stop("Query input is not of length 10")
   }
 
-  allqueries <- data.frame(type = type, query = query, year = year, quarter = quarter)
+  allqueries <- expand.grid(year = year, quarter = quarter)
+  allqueries$type = type
+  allqueries$query = query
+
   list_res <- c()
   for(i in 1:nrow(allqueries)) {
     URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, "&year=", allqueries$year[i], "&quarter=", allqueries$quarter[i], sep="") #build URL
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
     cont<-try(content(call), silent = TRUE) #parse returned data
-    res <-as.data.frame(do.call(rbind, cont$data$results))
-    res$type <- allqueries$type[i]
-    res$query <- allqueries$query[i]
-    res$year <- allqueries$year[i]
-    res$quarter <- allqueries$quarter[i]
-    list_res[[i]] <- res
+    if(cont[[1]]["error"] != "NULL") {
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], " ,and quarter equals ", allqueries$quarter[i], sep = ""))
+    } else {
+      res <- as.data.frame(do.call(rbind, cont$data$results))
+      res$type <- allqueries$type[i]
+      res$query <- allqueries$query[i]
+      res$year <- allqueries$year[i]
+      res$quarter <- allqueries$quarter[i]
+      list_res[[i]] <- res
+    }
   }
-  allres <- do.call(rbind, list_res)
-  colnames(allres)[1] <- rhgeoid
-  colnames(allres)[7] <- lhgeoid
+
+  allres <- NULL
+  if(length(list_res) != 0) {
+    allres <- do.call(rbind, list_res)
+    colnames(allres)[1] <- rhgeoid
+    colnames(allres)[7] <- lhgeoid
+  }
   return(allres)
 }
 
@@ -175,7 +190,7 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
   # Removing leading and ending spaces and converting all integer inputs
   # to characters
   query <- paste(str_trim(as.character(query), side = "both"))
-  year <- paste(str_trim(as.character(year), side = "both"))
+  year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
   numbers_only <- function(x) !grepl("\\D", x)
 
@@ -247,7 +262,7 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
 
   # Removing leading and ending spaces and converting all integer inputs to characters
   query <- paste(str_trim(as.character(query), side = "both"))
-  year <- paste(str_trim(as.character(year), side = "both"))
+  year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
   numbers_only <- function(x) !grepl("\\D", x)
 
@@ -329,7 +344,7 @@ hud_chas <- function(type, stateId = "", entityId = "", year = "2014-2018", key 
   type <- paste(str_trim(as.character(type), side = "both"))
   stateId <- paste(str_trim(as.character(stateId), side = "both"))
   entityId <- paste(str_trim(as.character(entityId), side = "both"))
-  year <- paste(str_trim(as.character(year), side = "both"))
+  year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
 
   # Build the URL for querying the data.
