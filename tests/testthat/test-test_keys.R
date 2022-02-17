@@ -1,7 +1,13 @@
 
-# Multiple stress tests on the the API. Determine if this can get and
-# process data in a timely manner.
+test_that("Setting Key", {
 
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+})
+
+test_that("Getting Key", {
+
+})
+
+test_that("Using Invalid Key", {
+  # If invalid key, might want to warn user.
+
 })

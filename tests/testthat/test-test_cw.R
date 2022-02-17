@@ -56,7 +56,7 @@ test_that("Crosswalk All Types", {
   # Must be a core base statistical area division code which apply to
   # metropolitan areas.
   cbsadiv_zip = hud_cw(type = 9, query = '10380',
-                                     year = c('2019', '2021'), quarter = c('2','1','3'))
+                                     year = c('2017'), quarter = c('4'))
 
   expect_true(nrow(cbsadiv_zip) >= 1)
   # Must be state fip + congressional district code
@@ -101,11 +101,13 @@ test_that("Different Quarters", {
 
 
 test_that("Wrong Queries", {
-  expect_error(hud_cw(type = 7, query = '22031241231',
-                                year = c('2010', '2011'), quarter = c('1','2','3','4','5')))
 
-  expect_error(hud_cw(type = 7, query = '22031',
-                                year = c('2010', '2011'), quarter = c('_1','1','2','3','4')))
+  expect_error(hud_cw(type = 7, query = '22031241231',
+                                year = c('2010', '2011'), quarter = c('1','2','3','4')))
+
+  # No zip code named 99999
+  expect_warning(hud_cw(type = 1, query = '99999',
+                                year = c('2010', '2011'), quarter = c('1','1','2','3','4')))
 })
 
 

@@ -91,19 +91,19 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
   quarter <- unique(paste(str_trim(as.character(quarter), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
 
-  if(!all(as.character(quarter) %in% c("1","2","3","4"))) stop("Quarters must be from 1 to 4.")
-
-  lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
-  rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
-
   numbers_only <- function(x) !grepl("\\D", x)
   if(FALSE %in% numbers_only(type)) stop("Type input must only be numbers.")
   if(FALSE %in% numbers_only(query)) stop("Query input must only be numbers.")
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   if(FALSE %in% numbers_only(quarter)) stop("Quarter input must only be numbers.")
 
-  ifelse(TRUE %in% as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1]),
-         stop("The year specified seems to be in the future?"), "")
+  if(!all(as.character(quarter) %in% c("1","2","3","4"))) stop("Quarters must be from 1 to 4.")
+
+  lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
+  rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
+
+  ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
+         stop("A year specified seems to be in the future?"), "")
   ifelse(as.integer(type) < 1 || as.integer(type) > 12,
          stop("The type input is not in the range of 1-12"), "")
 
