@@ -1,4 +1,5 @@
 #' @import httr
+pkg.env <- new.env(parent = emptyenv())
 
 # Misc APIs provided by the HUD to gain insights into what the user
 # can query for in the main APIs
@@ -17,16 +18,20 @@
 #' @export
 #' @returns A dataframe containing details of all the states in the US
 hud_states <- function(key = Sys.getenv("HUD_KEY")) {
+  if(key == "") stop("Did you forget to set the key?")
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listStates") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   states <- as.data.frame(do.call(rbind, cont))
-  states$state_num <- as.character(as.integer(states$state_num))
-  return(states)
-}
 
-pkg.env <- new.env(parent = emptyenv())
-pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  # A very ambiguous check. Assume that error and only errors return 1 row of
+  # text explaining so error.
+  if(nrow(states) > 1) {
+    states$state_num <- as.character(as.integer(states$state_num))
+    return(states)
+  }
+  stop("The key used might be invalid.")
+}
 
 #' @name hud_metropolitan
 #' @title hud_metropolitan
@@ -37,10 +42,18 @@ pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
 #' @export
 #' @returns A dataframe containing details of metropolitan areas in US
 hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
+  if(key == "") stop("Did you forget to set the key?")
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(do.call(rbind, cont)))
+  metro<-as.data.frame(do.call(rbind, cont))
+
+  # A very ambiguous check. Assume that error and only errors return 1 row of
+  # text explaining so error.
+  if(nrow(metro) > 1) {
+    return(metro)
+  }
+  stop("The key used might be invalid.")
 }
 
 
@@ -54,6 +67,8 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns A dataframe containing all counties within a state
 hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
+  if(key == "") stop("Did you forget to set the key?")
+  pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
   # Allow user to supply state name or state abbr or state fips as inputs.
@@ -64,7 +79,14 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/", unlist(fip_code), sep = "") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(do.call(rbind, cont)))
+  counties <- as.data.frame(do.call(rbind, cont))
+
+  # A very ambiguous check. Assume that error and only errors return 1 row of
+  # text explaining so error.
+  if(nrow(counties) > 1) {
+    return(counties)
+  }
+  stop("The key used might be invalid.")
 }
 
 #' @name hud_cities
@@ -77,17 +99,22 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns A dataframe containing details of cities in a state
 hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
-
+  if(key == "") stop("Did you forget to set the key?")
+  pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
   # Allow user to supply state name or state abbr or state fips as inputs.
+
   if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name == as.character(state),][3]
   if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
   URL <- paste("https://www.huduser.gov/hudapi/public/chas/listCities/", unlist(fip_code), sep = "") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  View(cont)
-  return(as.data.frame(do.call(rbind, cont)))
+  cities <- as.data.frame(do.call(rbind, cont))
+  if(nrow(cities) > 1) {
+    return(cities)
+  }
+  stop("The key used might be invalid.")
 }
 
 #' @name hud_minor_civil_divisions
@@ -100,7 +127,8 @@ hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns A dataframe containing details of minor civil divisions in a state
 hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
-
+  if(key == "") stop("Did you forget to set the key?")
+  pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
   # Allow user to supply state name or state abbr or state fips as inputs.
@@ -111,5 +139,10 @@ hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   URL <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/", unlist(fip_code), sep = "") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(do.call(rbind, cont)))
+  mcd <- as.data.frame(do.call(rbind, cont))
+  if(nrow(mcd) > 1) {
+    return(mcd)
+  }
+
+  stop("The key used might be invalid.")
 }

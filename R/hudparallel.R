@@ -30,7 +30,7 @@ pkg.env$recommendcores <- 1
 determine_optimal_core_count <- function() {
   # Deal with loading initial package
   if(nrow(pkg.env$metric) == 0) {
-      sys.time
+      
   } else {
     
   }
