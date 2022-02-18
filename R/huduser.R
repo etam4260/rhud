@@ -210,38 +210,29 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
   allqueries <- data.frame(query = query, year = year)
   list_res <- c()
 
-  if (length(cont$data) == 0){
-    # check to see if results exist - if not warn use of errors in their input
-    # values
-    stop("The query did not return any results. Please check if these input
-    values follow the rules stated for each parameter. Maybe your authorization
-    key is wrong? Maybe there hasn't been data recorded for this particular
-    time period?")
-  } else {
-    for(i in 1:nrow(allqueries)) {
-      # Build the URL for querying the data.
-      URL <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
-        "statedata/" else "data/", query, "?year=", allqueries$year[i], sep="") #build URL
-      call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
-                                                         as.character(key)))),
-                silent = TRUE) #try to make call
+  for(i in 1:nrow(allqueries)) {
+    # Build the URL for querying the data.
+    URL <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
+      "statedata/" else "data/", query, "?year=", allqueries$year[i], sep="") #build URL
+    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+                                                       as.character(key)))),
+              silent = TRUE) #try to make call
 
-      cont<-try(content(call), silent = TRUE) #parse returned data
-      if(cont[[1]]["error"] != "NULL") {
-        warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
-      } else {
-        if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
-        res$query <- allqueries$query[i]
-        res$year <- allqueries$year[i]
-        list_res[[i]] <- res
-      }
+    cont<-try(content(call), silent = TRUE) #parse returned data
+    if(cont[[1]]["error"] != "NULL") {
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
+    } else {
+      if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
+      res$query <- allqueries$query[i]
+      res$year <- allqueries$year[i]
+      list_res[[i]] <- res
     }
-
-    if(length(list_res) != 0) {
-      return(do.call(rbind, list_res))
-    }
-    return(NULL)
   }
+
+  if(length(list_res) != 0) {
+    return(do.call(rbind, list_res))
+  }
+  return(NULL)
 }
 
 
@@ -291,38 +282,30 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
   allqueries <- data.frame(query = query, year = year)
   list_res <- c()
 
-  # check to see if results exist - if not warn use of errors in their input values
-  if (length(cont$data) == 0){
-    stop("The query did not return any results. Please check if these input
-    values follow the rules stated for each parameter. Maybe your authorization
-    key is wrong? Maybe there hasn't been data recorded for this particular\
-    time period.")
-  } else {
+  for(i in 1:nrow(allqueries)) {
+    # Build the URL for querying the data.
+    URL <- paste("https://www.huduser.gov/hudapi/public/il/",
+                 if(!numbers_only(query)) "statedata/" else "data/", query,
+                 "?year=", allqueries$year[i], sep="")
+    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+                                                       as.character(key)))),
+              silent = TRUE) #try to make call
 
-    for(i in 1:nrow(allqueries)) {
-      # Build the URL for querying the data.
-      URL <- paste("https://www.huduser.gov/hudapi/public/il/",
-                   if(!numbers_only(query)) "statedata/" else "data/", query,
-                   "?year=", allqueries$year[i], sep="")
-      call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
-                                                         as.character(key)))),
-                silent = TRUE) #try to make call
-
-      cont<-try(content(call), silent = TRUE) #parse returned data
-      if(cont[[1]]["error"] != "NULL") {
-        warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
-      } else {
-        if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
-        res$query <- allqueries$query[i]
-        res$year <- allqueries$year[i]
-        list_res[[i]] <- res
-      }
+    cont<-try(content(call), silent = TRUE) #parse returned data
+    if(cont[[1]]["error"] != "NULL") {
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
+    } else {
+      if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
+      res$query <- allqueries$query[i]
+      res$year <- allqueries$year[i]
+      list_res[[i]] <- res
     }
-    if(length(list_res) != 0) {
-      return(do.call(rbind, list_res))
-    }
-    return(NULL)
   }
+  if(length(list_res) != 0) {
+    return(do.call(rbind, list_res))
+  }
+  return(NULL)
+
 }
 
 
@@ -399,13 +382,6 @@ hud_chas <- function(type, stateId = "", entityId = "", year = c("2014-2018"), k
 
 
   list_res <- c()
-
-  if(length(cont) == 0) {
-    stop("The query did not return any results. Please check if these input
-    values follow the rules stated for each parameter. Maybe your authorization
-    key is wrong? Maybe there hasn't been data recorded for this particular
-    time period.")
-  }
 
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.

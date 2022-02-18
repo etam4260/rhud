@@ -139,10 +139,10 @@ hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   URL <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/", unlist(fip_code), sep = "") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
+
   mcd <- as.data.frame(do.call(rbind, cont))
   if(nrow(mcd) > 1) {
     return(mcd)
   }
-
   stop("The key used might be invalid.")
 }

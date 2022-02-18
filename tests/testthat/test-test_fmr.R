@@ -30,7 +30,7 @@ test_that("Small Area FMR Queries", {
 
 
 test_that("Fair Markets Rent Different Years", {
-  y1 <- hud_fmr("AL", year=c(2024))
+  y1 <- hud_fmr("AL", year=c(2020))
   expect_true(nrow(y1) >= 1)
   y2 <- hud_fmr("AL", year=c(2021, 2020, 2019, 2018))
   expect_true(nrow(y2) >= 1)
