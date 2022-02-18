@@ -187,6 +187,8 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
   call <- NULL
   cont <- NULL
 
+  if(key == "") stop("Did you forget to set the key?")
+
   # Removing leading and ending spaces and converting all integer inputs
   # to characters
   query <- paste(str_trim(as.character(query), side = "both"))
@@ -196,8 +198,10 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
 
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
-  ifelse(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1]),
-         stop("The year specified seems to be in the future?"), "")
+  if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
+
+  ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
+         stop("A year specified seems to be in the future?"), "")
   ifelse(!numbers_only(query) && nchar(query) != 2,
          stop("The inputted query for state abbreviation is not right."), "")
   ifelse(numbers_only(query) && nchar(query) != 10,
@@ -223,14 +227,20 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
                 silent = TRUE) #try to make call
 
       cont<-try(content(call), silent = TRUE) #parse returned data
-
-      if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
-      res$query <- allqueries$query[i]
-      res$year <- allqueries$year[i]
-      list_res[[i]] <- res
+      if(cont[[1]]["error"] != "NULL") {
+        warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
+      } else {
+        if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
+        res$query <- allqueries$query[i]
+        res$year <- allqueries$year[i]
+        list_res[[i]] <- res
+      }
     }
 
-    return(do.call(rbind, list_res))
+    if(length(list_res) != 0) {
+      return(do.call(rbind, list_res))
+    }
+    return(NULL)
   }
 }
 
@@ -260,20 +270,26 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
   call <- NULL
   cont <- NULL
 
+  if(key == "") stop("Did you forget to set the key?")
+
   # Removing leading and ending spaces and converting all integer inputs to characters
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
   numbers_only <- function(x) !grepl("\\D", x)
 
+  if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
-  ifelse(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1]),
-         stop("The year specified seems to be in the future?"), "")
+  ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
+         stop("A year specified seems to be in the future?"), "")
   ifelse(!numbers_only(query) && nchar(query) != 2,
          stop("The inputted query for state abbreviation is not right."), "")
   ifelse(numbers_only(query) && nchar(query) != 10,
          stop("The inputted query input is not a 10 digit fips."), "")
+
+  allqueries <- data.frame(query = query, year = year)
+  list_res <- c()
 
   # check to see if results exist - if not warn use of errors in their input values
   if (length(cont$data) == 0){
@@ -293,14 +309,19 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
                 silent = TRUE) #try to make call
 
       cont<-try(content(call), silent = TRUE) #parse returned data
-
-      if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
-      res$query <- allqueries$query[i]
-      res$year <- allqueries$year[i]
-      list_res[[i]] <- res
+      if(cont[[1]]["error"] != "NULL") {
+        warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
+      } else {
+        if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
+        res$query <- allqueries$query[i]
+        res$year <- allqueries$year[i]
+        list_res[[i]] <- res
+      }
     }
-
-    return(as.data.frame(cont$data))
+    if(length(list_res) != 0) {
+      return(do.call(rbind, list_res))
+    }
+    return(NULL)
   }
 }
 
@@ -334,11 +355,13 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns This function returns a dataframe containing CHAS data for a
 #'   particular state. For more details about these measurements, go to
-#'   https://www.huduser.gov/portal/dataset/fmr-api.html
-hud_chas <- function(type, stateId = "", entityId = "", year = "2014-2018", key = Sys.getenv("HUD_KEY")) {
+#'   https://www.huduser.gov/portal/dataset/chas-api.html
+hud_chas <- function(type, stateId = "", entityId = "", year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) {
   URL <- NULL
   call <- NULL
   cont <- NULL
+
+  if(key == "") stop("Did you forget to set the key?")
 
   # Removing leading and ending spaces and converting all integer inputs to characters
   type <- paste(str_trim(as.character(type), side = "both"))
@@ -347,36 +370,61 @@ hud_chas <- function(type, stateId = "", entityId = "", year = "2014-2018", key 
   year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
 
-  # Build the URL for querying the data.
+  # Check for if years are proper input
+  if(!all(year %in% c("2014-2018","2013-2017","2012-2016","2011-2015","2010-2014","2009-2013","2008-2012","2007-2011","2006-2010"))) stop("Years specified are not allowed. Check the documentation.")
+  ifelse(as.integer(type) < 1 || as.integer(type) > 5,
+         stop("The type input is not in the range of 1-5"), "")
+
+
   if(type == "1") {
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
                  "&year=", year,  sep="") #build URL
+    allqueries <- data.frame(url = URL, year = year)
   }
   if(type == "2") {
     if(is.null(stateId)) stop("You need to specify a stateId for this type.")
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
                  "&stateId=", stateId, "&year=", year,  sep="") #build URL
+    allqueries <- data.frame(url = URL, year = year, stateId = stateId)
   }
   if(type == "3" || type == "4" || type == "5") {
     if(is.null(stateId) || is.null(entityId)) stop("You need to specify a
-                                                   stateId and entityId
-                                                   for this type.")
+                                                 stateId and entityId
+                                                 for this type.")
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
                  type, "&stateId=", stateId, "&entityId", entityId,
                  "&year=", year,  sep="") #build URL
+    allqueries <- data.frame(url = URL, year = year, stateId = stateId, entityId = entityId)
   }
 
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
-                                                     as.character(key)))),
-            silent = TRUE) #try to make call
-  cont<-try(content(call), silent = TRUE) #parse returned data
+
+  list_res <- c()
 
   if(length(cont) == 0) {
     stop("The query did not return any results. Please check if these input
     values follow the rules stated for each parameter. Maybe your authorization
     key is wrong? Maybe there hasn't been data recorded for this particular
     time period.")
-  } else {
-    return(as.data.frame(cont))
   }
+
+  for(i in 1:nrow(allqueries)) {
+    # Build the URL for querying the data.
+
+    call<-try(GET(allqueries$URL[i], add_headers(Authorization=paste("Bearer ",
+                                                       as.character(key)))),
+              silent = TRUE) #try to make call
+
+    cont<-try(content(call), silent = TRUE) #parse returned data
+
+    if(cont[[1]]["error"] != "NULL") {
+      warning(paste("Could not find data for inputted type where type equals", type, " ,year equals ",allqueries$year[i], sep = ""))
+    } else {
+      list_res[[i]] <- as.data.frame(cont)
+    }
+  }
+
+  if(length(list_res) != 0) {
+    return(do.call(rbind, list_res))
+  }
+  return(NULL)
 }

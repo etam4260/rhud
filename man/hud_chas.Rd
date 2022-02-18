@@ -8,7 +8,7 @@ hud_chas(
   type,
   stateId = "",
   entityId = "",
-  year = "2014-2018",
+  year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY")
 )
 }
@@ -42,7 +42,7 @@ account and request for an API key.}
 \value{
 This function returns a dataframe containing CHAS data for a
 particular state. For more details about these measurements, go to
-https://www.huduser.gov/portal/dataset/fmr-api.html
+https://www.huduser.gov/portal/dataset/chas-api.html
 }
 \description{
 This function queries the CHAS API provided by US Department of Housing and Urban Development
