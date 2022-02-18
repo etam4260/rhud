@@ -23,7 +23,6 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   states <- as.data.frame(do.call(rbind, cont))
-
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
   if(nrow(states) > 1) {

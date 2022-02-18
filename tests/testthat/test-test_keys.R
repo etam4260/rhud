@@ -9,4 +9,5 @@ test_that("Using Invalid Key", {
   # If invalid key, might want to warn user.
   Sys.setenv("HUD_KEY" = "Weird Key")
   expect_error(hud_fmr("VA", year=c(2021)))
+  Sys.setenv("HUD_KEY" = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjhmOTJkOWUxYTE4MTdjNzliMTJhZDljMGI1OWVkMTYwYWY1MTAxOGZhZjRhZGM0NTc1MjZkZjE0YmQ4ODY4MTA5ZGQ3YjhiODgxYmE0OTMzIn0.eyJhdWQiOiI2IiwianRpIjoiOGY5MmQ5ZTFhMTgxN2M3OWIxMmFkOWMwYjU5ZWQxNjBhZjUxMDE4ZmFmNGFkYzQ1NzUyNmRmMTRiZDg4NjgxMDlkZDdiOGI4ODFiYTQ5MzMiLCJpYXQiOjE2NDUwNzA0MjksIm5iZiI6MTY0NTA3MDQyOSwiZXhwIjoxOTYwNjAzMjI5LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Kc6EJW68m7tjs6Oa0ecOWqAbp0qa1tp9uCb25JhmAhBu-g9JM44bFOKixiCSRUauZb63vAf6t9o-rEHFn-Lsew")
 })
