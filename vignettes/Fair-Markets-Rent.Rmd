@@ -79,11 +79,11 @@ hud_fmr(query = '0100199999', year = '2017')
 
 # I recommend first running to first determine full county codes that can
 # be queried for a state. 
-hud_counties('56') 
+hud_counties('VA') 
 
 # You can also check for CBSA codes which can also be supplied in hud_fmr()
 # query field.
-hud_metropolitan('56') 
+hud_metropolitan('VA') 
 ```
 
 ### Input Arguments

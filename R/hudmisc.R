@@ -20,7 +20,9 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listStates") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(cont))
+  states <- as.data.frame(do.call(rbind, cont))
+  states$state_num <- as.character(as.integer(states$state_num))
+  return(states)
 }
 
 pkg.env <- new.env(parent = emptyenv())
@@ -38,7 +40,7 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(cont))
+  return(as.data.frame(do.call(rbind, cont)))
 }
 
 
@@ -52,17 +54,17 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns A dataframe containing all counties within a state
 hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
-  if(!any(state == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
+  if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state[1] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
-  if(nrow(pkg.env$state[pkg.env$state[2] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
-  if(nrow(pkg.env$state[pkg.env$state[3] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name == as.character(state),][2]
+  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][2]
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][2]
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/", state) #build URL
+  URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/", unlist(fip_code), sep = "") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(cont))
+  return(as.data.frame(do.call(rbind, cont)))
 }
 
 #' @name hud_cities
@@ -76,17 +78,16 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of cities in a state
 hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
 
-  if(!any(state == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
-
+  if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state[1] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
-  if(nrow(pkg.env$state[pkg.env$state[2] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
-  if(nrow(pkg.env$state[pkg.env$state[3] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
-
-  URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCities/", state) #build URL
+  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name == as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
+  URL <- paste("https://www.huduser.gov/hudapi/public/chas/listCities/", unlist(fip_code), sep = "") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(cont))
+  View(cont)
+  return(as.data.frame(do.call(rbind, cont)))
 }
 
 #' @name hud_minor_civil_divisions
@@ -100,15 +101,15 @@ hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of minor civil divisions in a state
 hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
 
-  if(!any(state == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
+  if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state[1] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
-  if(nrow(pkg.env$state[pkg.env$state[2] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
-  if(nrow(pkg.env$state[pkg.env$state[3] == state,]) != 0) fip_code <- pkg.env$state[pkg.env$state[1] == state,][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name == as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMCDs/", state) #build URL
+  URL <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/", unlist(fip_code), sep = "") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  return(as.data.frame(cont))
+  return(as.data.frame(do.call(rbind, cont)))
 }

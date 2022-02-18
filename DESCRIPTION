@@ -23,11 +23,11 @@ Suggests:
 Imports:
     httr,
     stringr,
-    data.table,
-    openxlsx,
-    rvest,
     devtools,
     tidyverse,
-    zoo
+    zoo,
+    rio,
+    future,
+    furrr
 Config/testthat/edition: 3
 VignetteBuilder: knitr

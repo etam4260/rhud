@@ -52,6 +52,12 @@
     <loc>/reference/hud_chas.html</loc>
   </url>
   <url>
+    <loc>/reference/hud_cities.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_counties.html</loc>
+  </url>
+  <url>
     <loc>/reference/hud_cw.html</loc>
   </url>
   <url>
@@ -62,6 +68,15 @@
   </url>
   <url>
     <loc>/reference/hud_il.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_metropolitan.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_minor_civil_divisions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_states.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
