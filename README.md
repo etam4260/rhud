@@ -67,7 +67,6 @@ The HUD also provide miscellaneous supplemental APIs under them.
     -   Crosswalk
     -   Fair Markets Rent
         -   Small Areas Fair Markets Rent
-        -   List Counties
         -   List States
         -   List Small Areas
     -   Income Limits

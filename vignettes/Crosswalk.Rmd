@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-### About
+### Documentation
 
 "One of the many challenges that social science researchers and practitioners
 face is the difficulty of relating United States Postal Service (USPS) ZIP codes
@@ -35,21 +35,34 @@ than by area or by population, analysts can take into account not only the
 spatial distribution of population, but also the spatial distribution of
 residences. This enables a slightly more nuanced approach to allocating
 data between disparate 
-geographies(https://www.huduser.gov/portal/datasets/usps_crosswalk.html)."
+geographies (U.S Department of Housing and Urban Development, n.d.)."
 
-This journal article describes the problem and proposed solution in more detail: 
-Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S. Department of Housing and Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277 – 294. https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf
+These journal articles describe the problem and proposed solution in more detail: 
 
-The first half of the 'type' argument describes the specific region we want to query. 
-The second half of the 'type' argument describe a secondary region and how much it 'intersects' with the
-first region. For example, in type 7, we might have a county called 22301 which has zip
-codes 35213, 13132, and 22411 which are either fully or partially inside the county 22301.
-Each individual observation describes how much 'intersection' the second half geoid has with 
-the first half geoid. Intersection is describe in the % of residental, business, and other buildings
-in the second half geoid that are in the first half geoid. For example, 50% of residential buildings
-in 35213 are also inside the county 22301.
+Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S.
+  Department of Housing and Urban Development’s ZIP Code Crosswalk Files,” 
+  Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277 – 294.     
+  https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf
 
-type: Must be a number between 1 and 12 depending on the Crosswalk type.
+Din, Alexander and Wilson, Ron, 2020. "Crosswalking ZIP Codes to Census Geographies:
+  Geoprocessing the U.S. Department of Housing & Urban Development’s ZIP Code 
+  Crosswalk Files," Cityscape: A Journal of Policy Development and Research, Volume 22, Number 1,              https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf
+
+### Example
+
+This is a basic example which shows you how to query the Crosswalk API.
+
+```{r, eval = FALSE}
+library(hudr)
+
+hud_cw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1'))
+```
+
+
+## Input Arguments
+
+
+TYPE: Must be a number between 1 and 12 depending on the Crosswalk type.
  1) zip-tract
  2) zip-county
  3) zip-cbsa
@@ -63,25 +76,27 @@ type: Must be a number between 1 and 12 depending on the Crosswalk type.
  11) zip-countysub (Available 2nd Quarter 2018 onwards)
  12) countysub-zip (Available 2nd Quarter 2018 onwards)
 
-query: Depending on the type selected, 1-5 must specify a zip code. 6 must specify
+The first half of the 'type' argument describes the specific GEOID type we want to query. 
+The second half of the 'type' argument describe a secondary GEOID type and how much it 
+'intersects' with the first region. For example, in type 7, we might have a county 
+called 22301 which has zip codes 35213, 13132, and 22411 which are either fully or 
+partially inside the county 22301. Intersection is describe in the % of residental,
+business, and other buildings in the second half geoid that are in the first half geoid. 
+
+For example, 37% (A random number) of residential buildings in 22301 are from 35213
+If all percentages of residential buildings in county 22301 are added up, it 
+should make up 100% consisting of (for example) 37% from 3513, 45% from 13132, 
+and 18% from 22411. 
+
+QUERY: Depending on the type selected, 1-5 must specify a zip code. 6 must specify
 a tract. 7 must specify a county fip. 8-9 must specify a cbsa code. 10 must specify
 a county district code. 11 must be a zip code. 12 must be a county sub district.
 
-year: Year range of the data to retrieve. Default is latest year.
+YEAR: Year range of the data to retrieve. Defaults to the previous year.
 
-quarter: The quarters in the year to retrieve. 
+QUARTER: The quarters in the year to retrieve. Defaults to all quarters.
 
-### Example
-
-This is a basic example which shows you how to query the Crosswalk API.
-
-```{r, eval = FALSE}
-library(hudr)
-
-hud_cw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1'))
-```
-
-### Data Fields
+### Output Data 
 
 1) zip/county/fipstract/CBSA/Congressional District/County Subdistrict
     * The first half of the 'type' argument
@@ -116,4 +131,15 @@ The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the t
 
 8) tot_ratio 
     * The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5) The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10)
+
+
+### References
+
+Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S. Department of Housing and Urban    Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 20   Number 2, 277 – 294.
+
+Din, Alexander and Wilson, Ron, 2020. "Crosswalking ZIP Codes to Census Geographies: Geoprocessing the U.S.    Department of Housing & Urban Development’s ZIP Code Crosswalk Files," Cityscape: A Journal of Policy        Development and Research, Volume 22, Number 1,                       
+  https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf
+
+U.S Department of Housing and Urban Development. (n.d.). HUD USPS ZIP Code Crosswalk Files | HUD USER. HUD     USPS ZIP CODE CROSSWALK FILES. Retrieved February 17, 2022, from     
+  https://www.huduser.gov/portal/datasets/usps_crosswalk.html
 
