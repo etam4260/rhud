@@ -14,12 +14,35 @@ knitr::opts_chunk$set(
 )
 ```
 
-### About
+### Program Overview
 
-"Each year, the U.S. Department of Housing and Urban Development (HUD) receives custom tabulations of American Community Survey (ACS) data from the U.S. Census Bureau. These data, known as the "CHAS" data (Comprehensive Housing Affordability Strategy), demonstrate the extent of housing problems and housing needs, particularly for low income households. The CHAS data are used by local governments to plan how to spend HUD funds, and may also be used by HUD to distribute grant funds (https://www.huduser.gov/portal/datasets/cp.html)."
+"Each year, the U.S. Department of Housing and Urban Development (HUD) receives
+custom tabulations of American Community Survey (ACS) data from the U.S. Census
+Bureau. These data, known as the "CHAS" data (Comprehensive Housing
+Affordability Strategy), demonstrate the extent of housing problems and housing
+needs, particularly for low income households. The CHAS data are used by local
+governments to plan how to spend HUD funds, and may also be used by HUD to
+distribute grant funds ("Consolidated Planning/CHAS Data | HUD USER")."
+  
+### Example
 
+This is a basic example showing you how to query the Comprehensive Housing and
+Affordability API.
 
-type: Must be a number between 1 and 5 depending on the specificity of the region.
+This function returns a single row dataframe.
+
+```{r, eval=FALSE}
+library(hudr)
+
+hud_chas(type = '2', stateId ='56', year = '2014-2018')
+
+hud_chas(type = '3', stateId ='51', entityId = "59", year = '2014-2018')
+```
+
+### Input Arguments
+
+TYPE: Must be a number between 1 and 5 depending on the specificity of the
+region.
 
 1) Nation
 2) State
@@ -27,11 +50,12 @@ type: Must be a number between 1 and 5 depending on the specificity of the regio
 4) MCD
 5) Place
 
-stateId: If type is 2-5, you must specify the state fips code from 0-56.
+STATEID: If type is 2-5, you must specify the state fips code from 0-56.
 
-entityId: If type is 3-5, you must specify either the county, mcd, or place, respectively.
+ENTITYID: If type is 3-5, you must specify either the county, mcd, or place,
+respectively.
 
-year: Year range of the data to retrieve. Default is latest year range.
+YEAR: Year range of the data to retrieve. Default is latest year range.
 
   * 2014-2018
   * 2013-2017
@@ -42,23 +66,12 @@ year: Year range of the data to retrieve. Default is latest year range.
   * 2008-2012
   * 2007-2011
   * 2006-2010
-  
-### Example
 
-This is a basic example showing you how to query the Comprehensive Housing and Affordability API.
 
-This function returns a single row dataframe.
+### Output Data
 
-```{r, eval=FALSE}
-library(hudr)
-
-hud_chas(type = '2', stateId ='56', year = '2014-2018')
-```
-
-### Data Fields
-
-I recommend checking out https://www.huduser.gov/portal/dataset/chas-api.html for more
-details as the fields return require some level of domain knowledge.
+I recommend checking out https://www.huduser.gov/portal/dataset/chas-api.html
+for more details as the fields returned require a fair level of domain knowledge.
 
 A1	Household Income <= 30% HAMFI (Owner Occupied)
 
@@ -332,3 +345,7 @@ J16	Total (Owners only) and Cost burden > 30%
 
 J17	Total (Owners only) and Cost burden > 50%
 
+### References
+
+"Consolidated Planning/CHAS Data | HUD USER." Www.huduser.gov,
+www.huduser.gov/portal/datasets/cp.html.

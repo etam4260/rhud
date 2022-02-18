@@ -4,7 +4,11 @@
 \alias{hud_metropolitan}
 \title{hud_metropolitan}
 \usage{
-hud_metropolitan()
+hud_metropolitan(key = Sys.getenv("HUD_KEY"))
+}
+\arguments{
+\item{key}{The API key for this user. You must go to HUD and sign up for
+an account and request for an API key.}
 }
 \value{
 A dataframe containing details of metropolitan areas in US

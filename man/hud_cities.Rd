@@ -4,7 +4,13 @@
 \alias{hud_cities}
 \title{hud_cities}
 \usage{
-hud_cities(state)
+hud_cities(state, key = Sys.getenv("HUD_KEY"))
+}
+\arguments{
+\item{state}{The state to get all cities}
+
+\item{key}{The API key for this user. You must go to HUD and sign up for
+an account and request for an API key.}
 }
 \value{
 A dataframe containing details of cities in a state

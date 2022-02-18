@@ -1,7 +1,4 @@
 
-# Multiple stress tests on the the API. Determine if this can get and
-# process data in a timely manner.
-
 test_that("Fair Markets Rent State Queries", {
   VA <- hud_fmr("VA", year=c(2021))
   expect_true(nrow(VA) >= 1)
@@ -14,7 +11,14 @@ test_that("Fair Markets Rent State Queries", {
 })
 
 test_that("Fair Markets Rent County Queries", {
-  expect_equal(2 * 2, 4)
+  VA <- hud_fmr("VA", year=c(2021))
+  expect_true(nrow(VA) >= 1)
+  MD <- hud_fmr("MD", year=c('2021'))
+  expect_true(nrow(MD) >= 1)
+  CA <- hud_fmr("CA", year=c(2021))
+  expect_true(nrow(CA) >= 1)
+  AL <- hud_fmr("AL", year=c(2021))
+  expect_true(nrow(AL) >= 1)
 })
 
 test_that("Fair Markets Rent CBSA", {

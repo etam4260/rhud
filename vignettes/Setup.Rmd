@@ -68,4 +68,4 @@ To check whether hudr can gain access to this environment variable...
 hud_get_key()
 ```
 
-It is now setup for the rest of the R session.
+It is now set up for the rest of the R session.

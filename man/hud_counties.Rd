@@ -4,7 +4,13 @@
 \alias{hud_counties}
 \title{hud_counties}
 \usage{
-hud_counties(state)
+hud_counties(state, key = Sys.getenv("HUD_KEY"))
+}
+\arguments{
+\item{state}{The state to get all counties}
+
+\item{key}{The API key for this user. You must go to HUD and sign up for
+an account and request for an API key.}
 }
 \value{
 A dataframe containing all counties within a state

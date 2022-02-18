@@ -16,18 +16,27 @@ knitr::opts_chunk$set(
 
 ### About
 
-"The Community Development Block Grant (CDBG) Program has Disaster Recovery grants to rebuild the affected areas and provide crucial seed money to start the recovery process. These flexible grants help cities, counties, and States recover from Presidentially declared disasters, especially in low-income areas, subject to availability of supplemental appropriations. Since CDBG Disaster Recovery (CDBG-DR) assistance may fund a broad range of recovery activities, HUD can help communities and neighborhoods that otherwise might not recover due to limited resources (https://www.hud.gov/program_offices/comm_planning/cdbg-dr)."
+"The Community Development Block Grant (CDBG) Program has Disaster Recovery
+grants to rebuild the affected areas and provide crucial seed money to start the
+recovery process. These flexible grants help cities, counties, and States
+recover from Presidentially declared disasters, especially in low-income areas,
+subject to availability of supplemental appropriations. Since CDBG Disaster
+Recovery (CDBG-DR) assistance may fund a broad range of recovery activities, HUD
+can help communities and neighborhoods that otherwise might not recover due to
+limited resources (https://www.hud.gov/program_offices/comm_planning/cdbg-dr)."
 
-The datasets which this function deals with are located at https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG
+The datasets which this function deals with are located at
+https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG. 
 The first two datasets are the same, but are organized in a different manner.
 
-Querying the HUD Exchange website for data is a bit different than HUD User. 
+Querying the HUD Exchange website for data is a bit different than HUD User.
 These datasets do not need a key.
 
-1) DR CDBG CDBG-DR Financial Report by Appropriation
-2) DR CDBG CDBG-DR Financial Report by Grantee
-3) DR CDBG CDBG-DR Financial Report Monthly Summary
-4) DR CDBG CDBG-DR Performance by Activity
+FILE
+  1) DR CDBG CDBG-DR Financial Report by Appropriation
+  2) DR CDBG CDBG-DR Financial Report by Grantee
+  3) DR CDBG CDBG-DR Financial Report Monthly Summary
+  4) DR CDBG CDBG-DR Performance by Activity
 
 ### Example
 
@@ -40,39 +49,39 @@ library(hudr)
 head(hud_cdbg(file = 1))
 ```
 
-#### Data Fields
+#### Output Data
 
-1) Appropriation Abbreviation
+Appropriation Abbreviation
 
-2) Appropriation 
+Appropriation 
 
-3) Grantee	
+Grantee	
 
-4) Grant	
+Grant	
 
-5) Grant Status	
+Grant Status	
 
-6) Grant $ (Grant Level)	
+Grant $ (Grant Level)	
 
-7) Grant Obligated $	
+Grant Obligated $	
 
-8) Obligated %	
+Obligated %	
 
-9) Grant Disbursed $	
+Grant Disbursed $	
 
-10) Disbursed %	
+Disbursed %	
 
-11) Remaining Balance
+Remaining Balance
 
 #### CDBG CDBG-DR Financial Report by Grantee
 
-This is an example grabbing the second file, DR CDBG CDBG-DR Financial Report by Grantee, 
-and displaying the first 6 rows.
+This is an example grabbing the second file, DR CDBG CDBG-DR Financial Report by
+Grantee, and displaying the first 6 rows.
 ```{r, eval=FALSE}
 head(hud_cdbg(file = 2))
 ```
 
-#### Data Fields
+#### Output Data
 
 Grantee State
 
@@ -97,13 +106,14 @@ Remaining Balance
 
 #### CDBG-DR Financial Report Monthly Summary
 
-This is an example grabbing the third file, DR CDBG CDBG-DR Financial Report Monthly Summary, 
-and displaying the first 6 rows. The data provides grants that were given in the last month.
+This is an example grabbing the third file, DR CDBG CDBG-DR Financial Report
+Monthly Summary, and displaying the first 6 rows. The data provides grants that
+were given in the last month.
 ```{r, eval=FALSE}
 head(hud_cdbg(file = 3))
 ```
 
-#### Data Fields
+#### Output Data
 
 Grantee State
 
@@ -129,13 +139,13 @@ Remaining Balance
 
 #### DR CDBG CDBG-DR Performance by Activity
 
-This is an example grabbing the fourth file, DR CDBG CDBG-DR Performance by Activity, 
-and displaying the first 6 rows.
+This is an example grabbing the fourth file, DR CDBG CDBG-DR Performance by
+Activity, and displaying the first 6 rows.
 ```{r, eval=FALSE}
 head(hud_cdbg(file = 4))
 ```
 
-#### Data Fields
+#### Output Data
 
 Appropriation		
 
@@ -155,11 +165,20 @@ Activity Status
 
 Activity Measure Category	
 
-Low			
-Projected,   Actual,	Actual to Projected %
+Low Projected
 
-Mod
-Projected,   Actual,	Actual to Projected %
+Low Actual
 
-Total
-Projected,   Actual,	Actual to Projected %
+Low Actual to Projected %
+
+Mod Projected
+
+Mod Actual
+
+Mod Actual to Projected %
+
+Total Projected
+
+Total Actual
+
+Total Actual to Projected %

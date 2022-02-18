@@ -14,39 +14,89 @@ knitr::opts_chunk$set(
 )
 ```
 
-### About
+### Program Overview
 
-"Fair Market Rent is the rent amount, including utilities (except telephone), to rent privately owned, existing, decent, safe and sanitary rental housing of modest (non-luxury) nature with suitable amenities.
+"Fair Market Rent is the rent amount, including utilities (except telephone),
+to rent privately owned, existing, decent, safe and sanitary rental housing of 
+modest (non-luxury) nature with suitable amenities.
 
-The Fair Market Rent rate established by Department of Housing and Urban Development (HUD) to be used as a basis for paying federal housing assistance programs like the Housing Choice Voucher Program.
+The Fair Market Rent rate established by Department of Housing and Urban 
+Development (HUD) to be used as a basis for paying federal housing assistance
+programs like the Housing Choice Voucher Program.
 
-Fair Market Rent prices are set for each county and metro area across the country. Rates are set for zero-bedroom studios or efficiencies all the way up to 4-bedroom homes.
+Fair Market Rent prices are set for each county and metro area across the
+country. Rates are set for zero-bedroom studios or efficiency all the way
+up to 4-bedroom homes.
 
-Fair Market Rent (FMR) is defined as the 40th percentile of rents paid by recent movers (renters who moved in the last 24 months) in a given FMR area. This means FMR rent prices are slightly below the median price (https://www.rentdata.org/articles/what-is-fair-market-rent)."
+Fair Market Rent (FMR) is defined as the 40th percentile of rents paid by 
+recent movers (renters who moved in the last 24 months) in a given FMR area. 
+This means FMR rent prices are slightly below the median price 
+("What Is Fair Market Rent? | RentData.org")."
 
-query: Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.
 
-year: Gets the year that this data was recorded. Can specify multiple years. Default is the latest year.
+"Fair Market Rents (FMRs) are used to determine payment standard amounts for the
+Housing Choice Voucher program, to determine initial renewal rents for some
+expiring project-based Section 8 contracts, to determine initial rents for
+housing assistance payment (HAP) contracts in the Moderate Rehabilitation Single
+Room Occupancy program (Mod Rehab), rent ceilings for rental units in both the
+HOME Investment Partnerships program and the Emergency Solution Grants program,
+calculation of maximum award amounts for Continuum of Care recipients and the
+maximum amount of rent a recipient may pay for property leased with Continuum of
+Care funds, and calculation of flat rents in Public Housing units. The U.S.
+Department of Housing and Urban Development (HUD) annually estimates FMRs for
+Office of Management and Budget (OMB) defined metropolitan areas, some HUD
+defined subdivisions of OMB metropolitan areas and each nonmetropolitan county.
+42 USC 1437f requires FMRs be posted at least 30 days before they are effective
+and that they are effective at the start of the federal fiscal year (generally
+October 1). Fair Market Rents, as defined in 24 CFR 888.113 are estimates of
+40th percentile gross rents for standard quality units within a metropolitan
+area or nonmetropolitan county ("Fair Market Rents | HUD USER")."
 
 ### Example
 
 This is a basic example to show you how to query the Fair Markets Rent API. 
 
-Querying a state will return a dataframe with rows representing counties within the state.
-A (state fip + county fip + county subdivision) 10 digit code will return a 1 row dataframe for that
-county.
+Querying a state will return a dataframe with rows representing counties 
+within the state. A (state fip + county fip + county subdivision) 10 digit code
+will return a 1 row dataframe for that county.
+
+For records corresponding to parts of or entire place entities that do not
+overlap any 2010 urban area, the urban area code is 99999, the urban area name
+is “Not in a 2010 urban area”, and the urban area population, housing unit
+count, total area, and land area values are null. The percent values relating to
+the urban area are also null.
 
 ```{r, eval=FALSE}
 library(hudr)
 
-# This selects the first few rows and the first four columns.
+# This gets FMR data for the state of Virginia in 2021.
 hud_fmr(query = 'VA', year = '2021')
 
-# Getting a county requires a county fip + state fip + census tract.
+# Getting a county requires a county fip + state fip + area code.
+# The 99999 corresponding to parts of or entire place entities that do not
+# overlap any 2010 urban area.
 hud_fmr(query = '0100199999', year = '2017')
+
+# I recommend first running to first determine full county codes that can
+# be queried for a state. 
+hud_counties('56') 
+
+# You can also check for CBSA codes which can also be supplied in hud_fmr()
+# query field.
+hud_metropolitan('56') 
 ```
 
-### Data Fields
+### Input Arguments
+
+QUERY: Can provide either a 10 digit FIPS code including county 
+subdivision, or state abbreviation. Can also provide a CBSA code.
+
+YEAR: Gets the year that this data was recorded. Can specify multiple years.
+Defaults to the previous year.
+
+KEY: The API key.
+
+### Output Data 
 
 1) state/county or CBSA 
     * Name of the county if it is a county.
@@ -57,7 +107,8 @@ hud_fmr(query = '0100199999', year = '2017')
 
 
 3) counties_msa 
-    * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
+    * Names of all counties belonging to the Metro Area if it is a Metro Area
+    (MSA).
 
 
 4) town_name 
@@ -65,7 +116,8 @@ hud_fmr(query = '0100199999', year = '2017')
 
 
 5) metro_status 
-    * value will be "1" if it is a metropolitan county. Otherwise value will be "0".
+    * value will be "1" if it is a metropolitan county. Otherwise value will be
+    "0".
 
 
 6) metro_name 
@@ -94,3 +146,12 @@ hud_fmr(query = '0100199999', year = '2017')
 
 12) Four-Bedroom 
     * 4-bedroom FMR in US Dollars
+    
+
+### References
+
+"What Is Fair Market Rent? | RentData.org." Www.rentdata.org,
+www.rentdata.org/articles/what-is-fair-market-rent. Accessed 18 Feb. 2022.
+
+"Fair Market Rents | HUD USER." Huduser.gov, U.S Department of Housing and Urban
+Development, 2017, www.huduser.gov/portal/datasets/fmr.html.

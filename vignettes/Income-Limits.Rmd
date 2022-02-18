@@ -14,20 +14,23 @@ knitr::opts_chunk$set(
 )
 ```
 
-### About
+### Program Overview
 
-"The Department of Housing and Urban Development (HUD) sets income limits that determine eligibility for assisted housing programs including the Public Housing, Section 8 project-based, Section 8 Housing Choice Voucher, Section 202 housing for the elderly, and Section 811 housing for persons with disabilities programs. HUD develops income limits based on Median Family Income estimates and Fair Market Rent area definitions for each metropolitan area, parts of some metropolitan areas, and each non-metropolitan county(https://www.huduser.gov/portal/datasets/il.html)."
-
-query: Can provide either a 10 digit FIPS code including county subdivision, or state abbreviation.
-
-year: Gets the year that this data was recorded. Can specify multiple years. Default is the latest year.
+"The Department of Housing and Urban Development (HUD) sets income limits that
+determine eligibility for assisted housing programs including the Public
+Housing, Section 8 project-based, Section 8 Housing Choice Voucher, Section 202
+housing for the elderly, and Section 811 housing for persons with disabilities
+programs. HUD develops income limits based on Median Family Income estimates and
+Fair Market Rent area definitions for each metropolitan area, parts of some
+metropolitan areas, and each non-metropolitan
+county("Income Limits | HUD USER")."
 
 ### Example
 
 This is a basic example showing you how to query the Income Limits API.
 
-This works similarly to the FMR API.
-Querying a state or (fips + subdivision 10 digit fips) both return a single row dataframe.
+This works similarly to the FMR API. Querying a state or (fips + subdivision 10
+digit fips) both return a single row dataframe.
 
 ```{r, eval=FALSE}
 library(hudr)
@@ -37,7 +40,17 @@ hud_il(query = 'VA', year = '2021')
 hud_il(query = '0100199999', year = '2017')
 ```
 
-### Income Limits Data Fields
+### Input Arguments
+
+QUERY: Can provide either a 10 digit FIPS code including county subdivision, or
+state abbreviation.
+
+YEAR: Gets the year that this data was recorded. Can specify multiple years.
+Defaults to the previous year.
+
+KEY: The API key.
+
+### Output Data
 
 1) county_name 
     * Name of the county if it is a county.
@@ -80,3 +93,8 @@ hud_il(query = '0100199999', year = '2017')
 10) Low 
     * (80%) Income Limits
     * For more details on il80 check the website.
+    
+### References
+
+"Income Limits | HUD USER." Huduser.gov, 2015,
+www.huduser.gov/portal/datasets/il.html.
