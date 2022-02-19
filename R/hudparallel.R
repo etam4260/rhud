@@ -1,5 +1,4 @@
 #' @import furrr
-#' @import microbenchmark
 #' @import httr
 
 # Modern computers contain multiple cores which can be utilized for parallel
@@ -9,15 +8,12 @@
 
 # One of the many problems with parallel computing is determining the optimal
 # number of cores for a particular task. Where does the overhead of adding more
-# cores begin to deteriorate overall performance time? Instead of doing
-# benchmark testing during installation/compilation time, the hope is to
-# dynamically determine optimal core count as the user makes API calls.
-
+# cores begin to deteriorate overall performance time pertaining to API calls?
 
 #' @name parallelize_api_calls
 #' @title parallelize_api_calls
 #' @description Make API calls using multiple cores.
-#' @param urls A list of urls to query for.
+#' @param allqueries All queries
 #' @param cores The number of CPU cores to use when processing the requests.
 #' @keywords parallel
 #' @returns The dataframe collection of all the response bodies.
@@ -37,7 +33,7 @@ api_call <- function(listed) {
   call<-try(GET(as.character(listed['url']), add_headers(Authorization=paste("Bearer ", listed['key']))),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   if(cont[[1]]["error"] != "NULL") {
-    warning(paste("Could not find data for inputted query, year, or quarter where query equals ", listed['query'], " ,year equals ",listed['year'], " ,and quarter equals ", listed['quarter'], ". It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
+    warning(paste("Could not find data for inputted query, year, or quarter where query equals ", listed['query'], " ,year equals ",listed['year'], " ,and quarter equals ", listed['quarter'], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
   } else {
     res <- as.data.frame(do.call(rbind, cont$data$results))
     res$type <- as.character(listed['type'])

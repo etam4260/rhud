@@ -7,9 +7,9 @@
 parallelize_api_calls(allqueries, cores = 1)
 }
 \arguments{
-\item{cores}{The number of CPU cores to use when processing the requests.}
+\item{allqueries}{All queries}
 
-\item{urls}{A list of urls to query for.}
+\item{cores}{The number of CPU cores to use when processing the requests.}
 }
 \value{
 The dataframe collection of all the response bodies.

@@ -5,7 +5,6 @@
 #' @import tidyverse
 #' @import future
 
-
 # Implementation thought process was adapted from:
 # https://github.com/dteck/HUD
 # Inspiration to build an API came from:
@@ -146,8 +145,8 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
     URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, "&year=", allqueries$year[i], "&quarter=", allqueries$quarter[i], sep="") #build URL
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
     cont<-try(content(call), silent = TRUE) #parse returned data
-    if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], " ,and quarter equals ", allqueries$quarter[i], "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
+    if('error' %in% names(cont[[1]])) {
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], " ,and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$results))
       res$type <- allqueries$type[i]
@@ -218,7 +217,7 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
   allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
     "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
 
-  if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
+  #if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
 
   list_res <- c()
 
@@ -231,8 +230,9 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
-    if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
+
+    if('error' %in% names(cont)) {
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
       res$query <- allqueries$query[i]
@@ -297,7 +297,7 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
 
   list_res <- c()
 
-  if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
+  #f(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
 
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
@@ -309,10 +309,18 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
-    if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i],  "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
+    if('error' %in% names(cont)) {
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i],  ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
-      if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
+
+      if(!numbers_only(query)) {
+        res <- as.data.frame(do.call(cbind, list(as.data.frame(cont$data$very_low), as.data.frame(cont$data$extremely_low), as.data.frame(cont$data$very_low))))
+      } else {
+        res <- as.data.frame(cont$data)
+      }
+      res$statecode <- cont$data$statecode
+      res$stateID <- cont$data$stateID
+      res$median_income <- cont$data$median_income
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
       list_res[[i]] <- res
@@ -369,6 +377,7 @@ hud_chas <- function(type, stateId = "", entityId = "", year = c("2014-2018"), k
   entityId <- paste(str_trim(as.character(entityId), side = "both"))
   year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
+  numbers_only <- function(x) !grepl("\\D", x)
 
   # Check for if years are proper input
   if(!all(year %in% c("2014-2018","2013-2017","2012-2016","2011-2015","2010-2014","2009-2013","2008-2012","2007-2011","2006-2010"))) stop("Years specified are not allowed. Check the documentation.")
@@ -396,30 +405,31 @@ hud_chas <- function(type, stateId = "", entityId = "", year = c("2014-2018"), k
                  "&year=", year,  sep="") #build URL
     allqueries <- data.frame(url = URL, year = year, stateId = stateId, entityId = entityId)
   }
-  allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
-    "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
-  if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
+
+  # allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
+  #   "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
+  #if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
 
   list_res <- c()
 
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
 
-    call<-try(GET(allqueries$URL[i], add_headers(Authorization=paste("Bearer ",
+    call<-try(GET(allqueries$url[i], add_headers(Authorization=paste("Bearer ",
                                                        as.character(key)))),
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
 
-    if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted type where type equals", type, " ,year equals ",allqueries$year[i],  "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
+    if('error' %in% names(cont)) {
+      warning(paste("Could not find data for inputted type where type equals", type, " ,year equals ",allqueries$year[i],  ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
-      list_res[[i]] <- as.data.frame(cont)
+      list_res[[i]] <- cont[[1]]
     }
   }
 
   if(length(list_res) != 0) {
-    return(do.call(rbind, list_res))
+    return(as.data.frame(do.call(rbind, list_res)))
   }
   return(NULL)
 }
