@@ -3,6 +3,8 @@
 #' @import httr
 #' @import stringr
 #' @import tidyverse
+#' @import future
+
 
 # Implementation thought process was adapted from:
 # https://github.com/dteck/HUD
@@ -131,8 +133,13 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
   }
 
   allqueries <- expand.grid(year = year, quarter = quarter)
-  allqueries$type = type
-  allqueries$query = query
+  allqueries$type <- type
+  allqueries$query <- query
+
+  # allqueries$url <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, as.vector(outer(paste('&year=', year, sep = ""), paste('&quarter=', quarter, sep = ""), paste, sep="")), sep="") #build URL
+  # allqueries$key <- key
+  # if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries) else use_cores <- availableCores() - 1
+  # return(parallelize_api_calls(allqueries, use_cores))
 
   list_res <- c()
   for(i in 1:nrow(allqueries)) {
@@ -140,7 +147,7 @@ hud_cw <- function(type, query, year = c("2021"), quarter = c("1","2","3","4"),
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
     cont<-try(content(call), silent = TRUE) #parse returned data
     if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], " ,and quarter equals ", allqueries$quarter[i], sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], " ,and quarter equals ", allqueries$quarter[i], "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$results))
       res$type <- allqueries$type[i]
@@ -208,6 +215,11 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
          stop("The inputted query input is not a 10 digit fips."), "")
 
   allqueries <- data.frame(query = query, year = year)
+  allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
+    "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
+
+  if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
+
   list_res <- c()
 
   for(i in 1:nrow(allqueries)) {
@@ -220,7 +232,7 @@ hud_fmr <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
 
     cont<-try(content(call), silent = TRUE) #parse returned data
     if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
       res$query <- allqueries$query[i]
@@ -280,7 +292,12 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
          stop("The inputted query input is not a 10 digit fips."), "")
 
   allqueries <- data.frame(query = query, year = year)
+  allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
+    "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
+
   list_res <- c()
+
+  if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
 
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
@@ -293,7 +310,7 @@ hud_il <- function(query, year = c(2021), key = Sys.getenv("HUD_KEY")) {
 
     cont<-try(content(call), silent = TRUE) #parse returned data
     if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i],  "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       if(!numbers_only(query)) res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
       res$query <- allqueries$query[i]
@@ -379,7 +396,9 @@ hud_chas <- function(type, stateId = "", entityId = "", year = c("2014-2018"), k
                  "&year=", year,  sep="") #build URL
     allqueries <- data.frame(url = URL, year = year, stateId = stateId, entityId = entityId)
   }
-
+  allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
+    "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
+  if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
 
   list_res <- c()
 
@@ -393,7 +412,7 @@ hud_chas <- function(type, stateId = "", entityId = "", year = c("2014-2018"), k
     cont<-try(content(call), silent = TRUE) #parse returned data
 
     if(cont[[1]]["error"] != "NULL") {
-      warning(paste("Could not find data for inputted type where type equals", type, " ,year equals ",allqueries$year[i], sep = ""))
+      warning(paste("Could not find data for inputted type where type equals", type, " ,year equals ",allqueries$year[i],  "It is possible that your key maybe invalid, there isn't any data for these paramters or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       list_res[[i]] <- as.data.frame(cont)
     }

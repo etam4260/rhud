@@ -4,15 +4,15 @@
 \alias{parallelize_api_calls}
 \title{parallelize_api_calls}
 \usage{
-parallelize_api_calls(urls, cores = 1)
+parallelize_api_calls(allqueries, cores = 1)
 }
 \arguments{
-\item{urls}{A list of urls to query for.}
-
 \item{cores}{The number of CPU cores to use when processing the requests.}
+
+\item{urls}{A list of urls to query for.}
 }
 \value{
-The response body provided by the API call.
+The dataframe collection of all the response bodies.
 }
 \description{
 Make API calls using multiple cores.
