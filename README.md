@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![Project Status: WIP - Initial development is in progress, but there
-has not yet been a stable, usable release suitable for the
-public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R-CMD-check](https://github.com/etam4260/hudr/workflows/R-CMD-check/badge.svg)](https://github.com/etam4260/hudr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/etam4260/hudr/branch/main/graph/badge.svg)](https://codecov.io/gh/etam4260/hudr?branch=main)
@@ -36,11 +36,11 @@ HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
 “HUD User is an information source containing reports and reference
 documents for the U.S. Department of Housing and Urban Development. HUD
 USER was established by the HUD’s Office of Policy Development and
-Research in 1978.”
+Research in 1978 (Wikipedia contributors, 2021).”
 
 HUD User maintains an API to gain access to their data. However, their
 API system can be rather confusing and provides their information in
-JSON format rather than a dataframe like object. Although there exist
+JSON format rather than a data frame like object. Although there exist
 file downloadables, R users may want to be able to extract specific bits
 of the data into memory.
 
@@ -49,7 +49,8 @@ HUD Exchange which is a comprehensive online platform that provides
 tools, resources, and contact information for the organizations and
 individuals that partner with HUD. These often include nonprofit groups
 and state and municipal governments, but also include borrowers,
-lenders, and brokers involved in HUD’s multifamily loan programs”
+lenders, and brokers involved in HUD’s multifamily loan programs
+(Disaster Recovery Grant Reporting System, 2022).”
 
 The DRGR Disaster Recovery Grant Reporting System which HUD Exchange
 uses to supply public data does not have an active API for retrieving
@@ -109,3 +110,12 @@ bar.
     <https://github.com/etam4260/hudr/issues>
 -   This is open source, so please fork and introduce some pull
     requests!
+
+## References
+
+Disaster Recovery Grant Reporting System. (2022). HUD Exchange.
+Retrieved February 19, 2022, from
+<https://www.hudexchange.info/programs/drgr/>
+
+Wikipedia contributors. (2021, December 22). HUD USER. Wikipedia.
+<https://en.wikipedia.org/wiki/HUD_USER>
