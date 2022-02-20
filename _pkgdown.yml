@@ -1,6 +1,6 @@
 navbar:
   structure:
-    left:  [intro, setup, articles, reference, tutorials, news]
+    left:  [intro, setup, articles, reference, changelog]
     right: [search, github]
   components:
    setup:
@@ -26,5 +26,5 @@ navbar:
     text: Reference
     href: reference/index.html
    changelog:   
-    text: Changelog
+    text: News
     href: news/index.html
