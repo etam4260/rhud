@@ -64,8 +64,14 @@ hud_metropolitan()
 
 **QUERY**: Can provide either a 10 digit FIPS code which is almost always
   state fips + county fips + 99999, or state abbreviation. 
-  Can also provide a CBSA code. This CBSA code requires the additional METRO tag 
-  well as the M tag at the end.
+  Can also provide a CBSA code. This CBSA code requires both itself and its
+  corresponding division code. You are only allowed to query for metropolitan areas.
+  
+  Run hud_states() to get a list of counties
+  
+  Run hud_metropolitan() to get a list of metropolitan areas.
+  
+  Run hud_counties("MD") to get list of counties in MD
   
   * query = '5100199999'
   * query = 'MD'

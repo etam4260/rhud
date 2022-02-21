@@ -87,18 +87,18 @@ hud_cw(type = 12, query = '4606720300 ', year = c('2019', '2019', '2019'), quart
 
 **TYPE**: Must be a number between 1 and 12 depending on the Crosswalk type.
  
- 1) zip-tract
- 2) zip-county
- 3) zip-cbsa
- 4) zip-cbsadiv (Available 4th Quarter 2017 onwards)
- 5) zip-cd
- 6) tract-zip
- 7) county-zip
- 8) cbsa-zip
- 9) cbsadiv-zip (Available 4th Quarter 2017 onwards)
- 10) cd-zip
- 11) zip-countysub (Available 2nd Quarter 2018 onwards)
- 12) countysub-zip (Available 2nd Quarter 2018 onwards)
+1) zip-tract
+2) zip-county
+3) zip-cbsa
+4) zip-cbsadiv (Available 4th Quarter 2017 onwards)
+5) zip-cd
+6) tract-zip
+7) county-zip
+8) cbsa-zip
+9) cbsadiv-zip (Available 4th Quarter 2017 onwards)
+10) cd-zip
+11) zip-countysub (Available 2nd Quarter 2018 onwards)
+12) countysub-zip (Available 2nd Quarter 2018 onwards)
 
 The first half of the 'type' argument describes the specific GEOID type we want
 to query. The second half of the 'type' argument describe a secondary GEOID type
@@ -115,21 +115,33 @@ it should make up 100% consisting of (for example) 37% from 35213, 45% from
 
 **QUERY**: Depending on the type selected:
   
-  1) 1-5 and 11 must specify a 5 digit zip code. 
-    * query = 22031
-  2) 6 must specify a 11 digit consisting of state FIPS + county FIPS + tract code tract. 
-    * query = 51059461700
-  3) 7 must specify a 5 digit county fip. 
-    * query = 51600
-  4) 8-9 must specify a micropolitan and metropolitan cbsa code. 
-    * query = 10380
-      I recommend typing hud_metropolitan() to see a list of metropolitan CBSA codes.
-      For example, a code of METRO22900N40079 needs 22900 inside as the input argument.
-  5) 10 must be a state fips code + congressional district 4 digit number 
-    * query = 7200
-  6) 12 must be a 10 digit consisting of 5 digit county fip + 5 digit county sub district.
-    * query = 4606720300  
-    
+1) 1-5 and 11 must specify a 5 digit zip code. 
+
+  * query = 22031
+
+2) 6 must specify a 11 digit consisting of state FIPS + county FIPS + tract code tract. 
+  
+  * query = 51059461700
+
+3) 7 must specify a 5 digit county fip. 
+  
+  * query = 51600
+
+4) 8-9 must specify a micropolitan and metropolitan cbsa code. 
+  
+  * query = 10380
+
+I recommend typing hud_metropolitan() to see a list of metropolitan CBSA codes.
+For example, a code of METRO22900N40079 needs 22900 inside as the input argument.
+
+5) 10 must be a state fips code + congressional district 4 digit number 
+  
+  * query = 7200
+
+6) 12 must be a 10 digit consisting of 5 digit county fip + 5 digit county sub district.
+  
+  * query = 4606720300  
+  
 **YEAR**: Year range of the data to retrieve. Defaults to current year. Make sure 
 the years provided follow the rules provided by the TYPE argument.
 

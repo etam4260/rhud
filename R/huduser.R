@@ -77,6 +77,22 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
                 "county-zip","cbsa-zip","cbsadiv-zip",
                 "cd-zip","zip-countysub","countysub-zip")
 
+  # Allow user to specify the full string too.
+  type = switch(tolower(type),
+                "zip-tract" = 1,
+                "zip-county" = 2,
+                "zip-cbsa" = 3,
+                "zip-cbsadiv" = 4,
+                "zip-cd" = 5,
+                "tract-zip" = 6,
+                "county-zip" = 7,
+                "cbsa-zip" = 8,
+                "cbsadiv-zip" = 9,
+                "cd-zip" = 10,
+                "zip-countysub" = 11,
+                "countysub-zip" = 12,
+                type
+                )
 
   lhgeoid <- NULL
   rhgeoid <- NULL
@@ -196,15 +212,27 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   call <- NULL
   cont <- NULL
   querytype <- NULL
+  numbers_only <- function(x) !grepl("\\D", x)
 
   if(key == "") stop("Did you forget to set the key?")
+  if(nchar(query) == 2) {
+    query = toupper(query)
+    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    if(!any(as.character(query) == pkg.env$state)) stop("There is no matching code for this inputted state.")
 
+    if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
+    if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
+    if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
+    query = unlist(query)
+
+  }
+  if(nchar(query) > 2) query = capitalize(query)
   # Removing leading and ending spaces and converting all integer inputs
   # to characters
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
-  numbers_only <- function(x) !grepl("\\D", x)
+
 
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
@@ -284,6 +312,18 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
   querytype <- NULL
 
   if(key == "") stop("Did you forget to set the key?")
+  if(nchar(query) == 2) {
+    query = toupper(query)
+    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    if(!any(as.character(query) == pkg.env$state)) stop("There is no matching code for this inputted state.")
+
+    if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
+    if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
+    if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
+    query = unlist(query)
+  }
+
+  if(nchar(query) > 2) query = capitalize(query)
 
   # Removing leading and ending spaces and converting all integer inputs to characters
   query <- paste(str_trim(as.character(query), side = "both"))
@@ -392,6 +432,17 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
 
   if(key == "") stop("Did you forget to set the key?")
 
+  # Allow user to specify the string too.
+  type = switch(tolower(type),
+                "Nation" = 1,
+                "State" = 2,
+                "County" = 3,
+                "MCD" = 4,
+                "Minor Civil Division" = 4,
+                "Place" = 5,
+                "City" = 5,
+                type
+  )
 
   # Removing leading and ending spaces and converting all integer inputs to characters
   type <- paste(str_trim(as.character(type), side = "both"))
@@ -437,7 +488,6 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
 
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
-    print(allqueries$url[i])
     call<-try(GET(allqueries$url[i], add_headers(Authorization=paste("Bearer ",
                                                        as.character(key))), timeout(30)),
               silent = TRUE) #try to make call

@@ -42,6 +42,8 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of metropolitan areas in US
 hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key?")
+
+
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas") #build URL
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
@@ -67,6 +69,10 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing all counties within a state
 hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key?")
+
+  if(nchar(state) == 2) state = toupper(state)
+  if(nchar(state) > 2) state = capitalize(state)
+
   pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
@@ -99,6 +105,10 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of cities in a state
 hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key?")
+
+  if(nchar(state) == 2) state = toupper(state)
+  if(nchar(state) > 2) state = capitalize(state)
+
   pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
   # Allow user to supply state name or state abbr or state fips as inputs.
@@ -127,6 +137,10 @@ hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of minor civil divisions in a state
 hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key?")
+
+  if(nchar(state) == 2) state = toupper(state)
+  if(nchar(state) > 2) state = capitalize(state)
+
   pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
