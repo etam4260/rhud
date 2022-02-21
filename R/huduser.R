@@ -4,6 +4,7 @@
 #' @import stringr
 #' @import tidyverse
 #' @import future
+#' @import R.utils
 
 # Implementation thought process was adapted from:
 # https://github.com/dteck/HUD

@@ -29,6 +29,7 @@ Imports:
     zoo,
     rio,
     future,
-    furrr
+    furrr,
+    R.utils
 Config/testthat/edition: 3
 VignetteBuilder: knitr
