@@ -19,15 +19,15 @@ test_that("Fair Markets Rent County Queries", {
   expect_true(nrow(c3) >= 1)
 })
 
-# Unimplemented for SMALL Areas
-# test_that("Small Area FMR Queries", {
-#   sa1 <- hud_fmr("METRO47900M47900", year=c(2018))
-#   expect_true(nrow(sa1) >= 1)
-#   sa2 <- hud_fmr("METRO29180N22001", year=c(2019))
-#   expect_true(nrow(sa2) >= 1)
-#   sa3 <- hud_fmr("METRO10380M10380", year=c(2020))
-#   expect_true(nrow(sa3) >= 1)
-# })
+
+test_that("Small Area FMR Queries", {
+  sa1 <- hud_fmr("METRO47900M47900", year=c(2018))
+  expect_true(nrow(sa1) >= 1)
+  sa2 <- hud_fmr("METRO29180N22001", year=c(2019))
+  expect_true(nrow(sa2) >= 1)
+  sa3 <- hud_fmr("METRO10380M10380", year=c(2020))
+  expect_true(nrow(sa3) >= 1)
+})
 
 
 test_that("Fair Markets Rent Different Years", {

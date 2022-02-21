@@ -7,8 +7,8 @@
 hud_cw(
   type,
   query,
-  year = c("2021"),
-  quarter = c("1", "2", "3", "4"),
+  year = format(Sys.Date(), "\%Y"),
+  quarter = 1,
   key = Sys.getenv("HUD_KEY")
 )
 }
@@ -49,10 +49,10 @@ or
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
-latest year.}
+current year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
-Defaults to the latest quarter.}
+Defaults to the first quarter of the year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}

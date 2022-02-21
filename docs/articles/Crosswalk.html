@@ -119,63 +119,128 @@
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
-<p>This is a basic example which shows you how to query the Crosswalk API.</p>
+<p>These are basic examples which shows you how to query the Crosswalk API.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">7</span>, query <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">1</span>, query <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'2'</span>, query <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2016'</span>, <span class="st">'2020'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">3</span>, query <span class="op">=</span> <span class="fl">35213</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2012'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'3'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">4</span>, query <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span>, <span class="st">'2019'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'5'</span>, query <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2011</span>, <span class="st">'2012'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span>,<span class="st">'2'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">6</span>, query <span class="op">=</span> <span class="st">'48201223100'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span>, <span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span>,<span class="st">'2'</span>,<span class="st">'3'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">7</span>, query <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">8</span>, query <span class="op">=</span> <span class="st">'10140'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span>,<span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">9</span>, query <span class="op">=</span> <span class="st">'10380'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">10</span>, query <span class="op">=</span> <span class="st">'2202'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span>, <span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span>,<span class="st">'3'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">11</span>, query <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2019'</span>, <span class="st">'2020'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span>,<span class="st">'3'</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">12</span>, query <span class="op">=</span> <span class="st">'4606720300 '</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2019'</span>, <span class="st">'2019'</span>, <span class="st">'2019'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span>,<span class="st">'4'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="input-arguments">Input Arguments<a class="anchor" aria-label="anchor" href="#input-arguments"></a>
 </h3>
-<p>TYPE: Must be a number between 1 and 12 depending on the Crosswalk type. 1) zip-tract 2) zip-county 3) zip-cbsa 4) zip-cbsadiv (Available 4th Quarter 2017 onwards) 5) zip-cd 6) tract-zip 7) county-zip 8) cbsa-zip 9) cbsadiv-zip (Available 4th Quarter 2017 onwards) 10) cd-zip 11) zip-countysub (Available 2nd Quarter 2018 onwards) 12) countysub-zip (Available 2nd Quarter 2018 onwards)</p>
+<p><strong>TYPE</strong>: Must be a number between 1 and 12 depending on the Crosswalk type.</p>
+<ol style="list-style-type: decimal">
+<li>zip-tract</li>
+<li>zip-county</li>
+<li>zip-cbsa</li>
+<li>zip-cbsadiv (Available 4th Quarter 2017 onwards)</li>
+<li>zip-cd</li>
+<li>tract-zip</li>
+<li>county-zip</li>
+<li>cbsa-zip</li>
+<li>cbsadiv-zip (Available 4th Quarter 2017 onwards)</li>
+<li>cd-zip</li>
+<li>zip-countysub (Available 2nd Quarter 2018 onwards)</li>
+<li>countysub-zip (Available 2nd Quarter 2018 onwards)</li>
+</ol>
 <p>The first half of the ‘type’ argument describes the specific GEOID type we want to query. The second half of the ‘type’ argument describe a secondary GEOID type and how much it ‘intersects’ with the first region. For example, in type 7, we might have a county called 22301 which has zip codes 35213, 13132, and 22411 which are either fully or partially inside the county 22301. Intersection is describe in the % of residental, business, and other buildings in the second half geoid that are in the first half geoid.</p>
-<p>For example, 37% (A random number) of residential buildings in 22301 are from 35213 If all percentages of residential buildings in county 22301 are added up, it should make up 100% consisting of (for example) 37% from 3513, 45% from 13132, and 18% from 22411.</p>
-<p>QUERY: Depending on the type selected, 1-5 must specify a zip code. 6 must specify a tract. 7 must specify a county fip. 8-9 must specify a cbsa code. 10 must specify a county district code. 11 must be a zip code. 12 must be a county sub district.</p>
-<p>YEAR: Year range of the data to retrieve. Defaults to the previous year.</p>
-<p>KEY: The API key.</p>
-<p>QUARTER: The quarters in the year to retrieve. Defaults to all quarters.</p>
+<p>For example, 37% (A random number) of residential buildings in 22301 are from 35213 If all percentages of residential buildings in county 22301 are added up, it should make up 100% consisting of (for example) 37% from 35213, 45% from 13132, and 18% from 22411.</p>
+<p><strong>QUERY</strong>: Depending on the type selected:</p>
+<ol style="list-style-type: decimal">
+<li>1-5 and 11 must specify a 5 digit zip code. * query = 22031</li>
+<li>6 must specify a 11 digit consisting of state FIPS + county FIPS + tract code tract. * query = 51059461700</li>
+<li>7 must specify a 5 digit county fip. * query = 51600</li>
+<li>8-9 must specify a micropolitan and metropolitan cbsa code. * query = 10380 I recommend typing hud_metropolitan() to see a list of metropolitan CBSA codes. For example, a code of METRO22900N40079 needs 22900 inside as the input argument.</li>
+<li>10 must be a state fips code + congressional district 4 digit number * query = 7200</li>
+<li>12 must be a 10 digit consisting of 5 digit county fip + 5 digit county sub district. * query = 4606720300</li>
+</ol>
+<p><strong>YEAR</strong>: Year range of the data to retrieve. Defaults to current year. Make sure the years provided follow the rules provided by the TYPE argument.</p>
+<ul>
+<li>year = c(2019, 2018, 2021)</li>
+<li>year = c(2016, 2017, 2022)</li>
+<li>year = c(2021)</li>
+</ul>
+<p><strong>QUARTER</strong>: The quarters in the year to retrieve. Defaults to the first quarter.</p>
+<ul>
+<li>quarter = c(1,2,3,4)</li>
+<li>quarter = c(1)</li>
+<li>quarter = 4</li>
+</ul>
+<p><strong>KEY</strong>: The API key provided by HUD.</p>
+<ul>
+<li>key = “wqokqo2138jdi13wfwwfwcytjyr”</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="output-data">Output Data<a class="anchor" aria-label="anchor" href="#output-data"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>zip/county/fipstract/CBSA/Congressional District/County Subdistrict
+<li>
+<strong>zip/county/fipstract/CBSA/Congressional District/County Subdistrict</strong>
 <ul>
 <li>The first half of the ‘type’ argument</li>
 </ul>
 </li>
-<li>year
+<li>
+<strong>year</strong>
 <ul>
 <li>Year the measurement was taken.</li>
 </ul>
 </li>
-<li>quarter
+<li>
+<strong>quarter</strong>
 <ul>
 <li>Quarter of year when measurement was taken.</li>
 </ul>
 </li>
-<li>zip/county/fipstract/CBSA/Congressional District/County Subdistrict
+<li>
+<strong>zip/county/fipstract/CBSA/Congressional District/County Subdistrict</strong>
 <ul>
 <li>The second half of the ‘type’ argument</li>
 </ul>
 </li>
-<li>res_ratio
+<li>
+<strong>res_ratio</strong>
 <ul>
 <li>The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to the total number of residential addresses in the entire ZIP. (for type 1-5) The ratio of residential addresses in the Zip, Tract, County, or CBSA - ZIP part to the total number of residential addresses in the entire Zip, Tract, County, or CBSA. (for type 6-10)</li>
 </ul>
 </li>
-<li>bus_ratio
+<li>
+<strong>bus_ratio</strong>
 <ul>
 <li>The ratio of business addresses in the ZIP – Tract, County, or CBSA part to the total number of business addresses in the entire ZIP. (for type 1-5). The ratio of business addresses in the Tract, County, or CBSA – ZIP part to the total number of business addresses in the entire Tract, County, or CBSA. (for type 6-10)</li>
 </ul>
 </li>
-<li>oth_ratio
+<li>
+<strong>oth_ratio</strong>
 <ul>
 <li>The ratio of other addresses in the ZIP – Tract to the total number of other addresses in the entire ZIP. (for type 1-5). The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the total number of other addresses in the entire Tract, County, or CBSA. (for type 6-10)</li>
 </ul>
 </li>
-<li>tot_ratio
+<li>
+<strong>tot_ratio</strong>
 <ul>
 <li>The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5) The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10)</li>
 </ul>

@@ -116,18 +116,29 @@
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
 <p>This is a basic example showing you how to query the Comprehensive Housing and Affordability API.</p>
-<p>This function returns a single row dataframe.</p>
+<p>This function returns a single row dataframe for each query.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'2'</span>, stateId <span class="op">=</span><span class="st">'56'</span>, year <span class="op">=</span> <span class="st">'2014-2018'</span><span class="op">)</span>
+<span class="co"># Nation</span>
+<span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>
 
-<span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">'3'</span>, stateId <span class="op">=</span><span class="st">'51'</span>, entityId <span class="op">=</span> <span class="st">"59"</span>, year <span class="op">=</span> <span class="st">'2014-2018'</span><span class="op">)</span></code></pre></div>
+<span class="co"># State</span>
+<span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span><span class="st">'2'</span>, stateId <span class="op">=</span> <span class="st">'56'</span><span class="op">)</span>
+
+<span class="co"># County</span>
+<span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span><span class="st">'3'</span>,<span class="st">'51'</span>,<span class="st">'199'</span><span class="op">)</span>
+
+<span class="co"># MCD</span>
+<span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span><span class="st">'4'</span>, <span class="st">'51'</span>, <span class="fl">94087</span><span class="op">)</span>
+
+<span class="co"># City(Place)</span>
+<span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span><span class="st">'5'</span>, <span class="st">'51'</span>, <span class="fl">48996</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="input-arguments">Input Arguments<a class="anchor" aria-label="anchor" href="#input-arguments"></a>
 </h3>
-<p>TYPE: Must be a number between 1 and 5 depending on the specificity of the region.</p>
+<p><strong>TYPE</strong> Must be a number between 1 and 5 depending on the specificity of the region.</p>
 <ol style="list-style-type: decimal">
 <li>Nation</li>
 <li>State</li>
@@ -135,19 +146,31 @@
 <li>MCD</li>
 <li>Place</li>
 </ol>
-<p>STATEID: If type is 2-5, you must specify the state fips code from 0-56.</p>
-<p>ENTITYID: If type is 3-5, you must specify either the county, mcd, or place, respectively.</p>
-<p>YEAR: Year range of the data to retrieve. Default is latest year range.</p>
+<p><strong>STATEID</strong> If type is 2-5, you must specify the state fips code from 0-56.</p>
+<pre><code><span class="va">stateId</span> <span class="op">=</span> <span class="fl">34</span>
+<span class="va">stateId</span> <span class="op">=</span> <span class="fl">30</span>
+<span class="va">stateId</span> <span class="op">=</span> <span class="fl">1</span></code></pre>
+<p><strong>ENTITYID</strong> If type is 3-5, you must specify either the county, mcd, or place, respectively.</p>
+<pre><code>- This will correspond to the county fips code of 039
+- Use hud_counties("VA") to find fips codes for the state of Virginia
+entityId = 39
+
+- Use hud_minor_civil_divisions("VA") to find MCD codes for the state of Virginia
+entityId = 93927
+
+Use hud_cities("VA") to find city codes for the state of Virginia
+entityId = 48996</code></pre>
+<p><strong>YEAR</strong> Year range of the data to retrieve. Default is latest year range.</p>
 <ul>
-<li>2014-2018</li>
-<li>2013-2017</li>
-<li>2012-2016</li>
-<li>2011-2015</li>
-<li>2010-2014</li>
-<li>2009-2013</li>
-<li>2008-2012</li>
-<li>2007-2011</li>
-<li>2006-2010</li>
+<li>year = “2014-2018”</li>
+<li>year = “2013-2017”</li>
+<li>year = “2012-2016”</li>
+<li>year = “2011-2015”</li>
+<li>year = “2010-2014”</li>
+<li>year = “2009-2013”</li>
+<li>year = “2008-2012”</li>
+<li>year = “2007-2011”</li>
+<li>year = “2006-2010”</li>
 </ul>
 </div>
 <div class="section level3">

@@ -30,7 +30,7 @@ parallelize_api_calls <- function(allqueries, cores = 1) {
 #' @keywords call
 #' @returns The dataframe collection of all the response bodies.
 api_call <- function(listed) {
-  call<-try(GET(as.character(listed['url']), add_headers(Authorization=paste("Bearer ", listed['key']))),silent = TRUE) #try to make call
+  call<-try(GET(as.character(listed['url']), add_headers(Authorization=paste("Bearer ", listed['key'])), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   if(cont[[1]]["error"] != "NULL") {
     warning(paste("Could not find data for inputted query, year, or quarter where query equals ", listed['query'], " ,year equals ",listed['year'], " ,and quarter equals ", listed['quarter'], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))

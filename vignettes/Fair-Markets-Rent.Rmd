@@ -58,7 +58,8 @@ This is a basic example to show you how to query the Fair Markets Rent API.
 
 Querying a state will return a dataframe with rows representing counties 
 within the state. A (state fip + county fip + county subdivision) 10 digit code
-will return a 1 row dataframe for that county.
+will return a 1 row dataframe for that county. A CBSA code will also return a 1 
+row dataframe for that area.
 
 For records corresponding to parts of or entire place entities that do not
 overlap any 2010 urban area, the urban area code is 99999, the urban area name
@@ -69,82 +70,98 @@ the urban area are also null.
 ```{r, eval=FALSE}
 library(hudr)
 
+# A list of states and some associated metadata can be provided by:
+hud_states()
+
 # This gets FMR data for the state of Virginia in 2021.
 hud_fmr(query = 'VA', year = '2021')
 
-# Getting a county requires a county fip + state fip + area code.
-# The 99999 corresponding to parts of or entire place entities that do not
-# overlap any 2010 urban area.
-hud_fmr(query = '0100199999', year = '2017')
+# A list of counties and associated metadata can be provided by:
+# This queries counties for Virginia.
+hud_counties("VA")
 
-# I recommend first running to first determine full county codes that can
-# be queried for a state. 
-hud_counties('VA') 
+# Getting a county requires a state fip + county fip + 99999
+hud_fmr(query = '0100199999', year = '2017')
 
 # You can also check for CBSA codes which can also be supplied in hud_fmr()
 # query field.
-hud_metropolitan('VA') 
+hud_fmr("METRO47900M47900", year=c(2018))
+
+# A list of metropolitan areas(CBSA) and associated metadata can be provided by:
+hud_metropolitan()
 ```
 
 ### Input Arguments
 
-QUERY: Can provide either a 10 digit FIPS code including county 
-subdivision, or state abbreviation. Can also provide a CBSA code.
+**QUERY**: Can provide either a 10 digit FIPS code which is almost always
+  state fips + county fips + 99999, or state abbreviation. 
+  Can also provide a CBSA code. This CBSA code requires the additional METRO tag 
+  well as the M tag at the end.
+  
+  * query = '5100199999'
+  * query = 'MD'
+  * query = 'METRO12700M12700'
 
-YEAR: Gets the year that this data was recorded. Can specify multiple years.
-Defaults to the previous year.
+**YEAR**: Year range of the data to retrieve. Defaults to current year. Make sure 
+the years provided follow the rules provided by the TYPE argument.
 
-KEY: The API key.
+  * year = c(2019, 2018, 2021)
+  * year = c(2016, 2017, 2022)
+  * year = c(2021)
 
+**KEY**: The API key.
+
+  * key = "wqokqo2138jdi13wfwwfwcytjyr"
+  
 ### Output Data 
 
-1) state/county or CBSA 
+1) **state/county or CBSA**
     * Name of the county if it is a county.
 
 
-2) year 
+2) **year** 
     * Value of year
 
 
-3) counties_msa 
+3) **counties_msa**
     * Names of all counties belonging to the Metro Area if it is a Metro Area
     (MSA).
 
 
-4) town_name 
+4) **town_name**
     * Town name - applicable for North East regions
 
 
-5) metro_status 
+5) **metro_status**
     * value will be "1" if it is a metropolitan county. Otherwise value will be
     "0".
 
 
-6) metro_name 
+6) **metro_name** 
     * Metro area name if metro_status is "1"
 
 
-7) smallarea_status 
+7) **smallarea_status** 
     * value will be "1" if it is a small area. Otherwise value will be "0".
 
 
-8) Efficiency(A studio apartment) 
+8) **Efficiency(A studio apartment)** 
     * Efficiency FMR in US Dollars
 
 
-9) One-Bedroom 
+9) **One-Bedroom** 
     * 1-bedroom FMR in US Dollars
 
 
-10) Two-Bedroom 
+10) **Two-Bedroom** 
     * 2-bedroom FMR in US Dollars
 
 
-11) Three-Bedroom 
+11) **Three-Bedroom** 
     * 3-bedroom FMR in US Dollars
 
 
-12) Four-Bedroom 
+12) **Four-Bedroom** 
     * 4-bedroom FMR in US Dollars
     
 

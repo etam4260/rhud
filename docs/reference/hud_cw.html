@@ -86,8 +86,8 @@ US Department of Housing and Urban Development.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hud_cw</span><span class="op">(</span>
   <span class="va">type</span>,
   <span class="va">query</span>,
-  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2021"</span><span class="op">)</span>,
-  quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"4"</span><span class="op">)</span>,
+  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span>,
+  quarter <span class="op">=</span> <span class="fl">1</span>,
   key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -129,10 +129,10 @@ or
 <dt>year</dt>
 <dd><p>Gets the year that this data was recorded.
 Can specify multiple years. Default is the
-latest year.</p></dd>
+current year.</p></dd>
 <dt>quarter</dt>
 <dd><p>Gets the quarter of the year that this data was recorded.
-Defaults to the latest quarter.</p></dd>
+Defaults to the first quarter of the year.</p></dd>
 <dt>key</dt>
 <dd><p>The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.</p></dd>

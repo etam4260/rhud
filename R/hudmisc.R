@@ -20,7 +20,7 @@ pkg.env <- new.env(parent = emptyenv())
 hud_states <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key?")
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listStates") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   states <- as.data.frame(do.call(rbind, cont))
   # A very ambiguous check. Assume that error and only errors return 1 row of
@@ -43,7 +43,7 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key?")
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   metro<-as.data.frame(do.call(rbind, cont))
 
@@ -76,7 +76,7 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][2]
 
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/", unlist(fip_code), sep = "") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   counties <- as.data.frame(do.call(rbind, cont))
 
@@ -107,7 +107,7 @@ hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
   URL <- paste("https://www.huduser.gov/hudapi/public/chas/listCities/", unlist(fip_code), sep = "") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   cities <- as.data.frame(do.call(rbind, cont))
   if(nrow(cities) > 1) {
@@ -136,7 +136,7 @@ hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
 
   URL <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/", unlist(fip_code), sep = "") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key)))),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
 
   mcd <- as.data.frame(do.call(rbind, cont))

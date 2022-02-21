@@ -6,13 +6,13 @@ test_that("All CHAS Types", {
   s <- hud_chas('2', stateId = '56')
   expect_true(nrow(s) >= 1)
   # County
-  c <- hud_chas('3','51','59')
+  c <- hud_chas('3','51','199')
   expect_true(nrow(c) >= 1)
   # MCD
-  mcd <- hud_chas('4', '51', '6')
+  mcd <- hud_chas('4', '51', 94087)
   expect_true(nrow(mcd) >= 1)
   # City(Place)
-  city <- hud_chas('5', '24', 'Baltimore')
+  city <- hud_chas('5', '51', 48996)
   expect_true(nrow(city) >= 1)
 })
 

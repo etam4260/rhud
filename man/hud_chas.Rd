@@ -6,14 +6,14 @@
 \usage{
 hud_chas(
   type,
-  stateId = "",
-  entityId = "",
+  stateId = NULL,
+  entityId = NULL,
   year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY")
 )
 }
 \arguments{
-\item{type}{Queries the data based off
+\item{type}{Queries the data based off:
 1 - Nation
 2 - State
 3 - County
@@ -24,8 +24,8 @@ hud_chas(
 
 \item{entityId}{For types 3,4,5, you must provide a fips code}
 
-\item{year}{Gets the year that this data was recorded. Defaults to 2014-2018. There are specific year ranges
-that are only accepted.
+\item{year}{Gets the year that this data was recorded. Defaults to 2014-2018.
+There are specific year ranges that are only accepted.
 2014-2018
 2013-2017
 2012-2016
@@ -45,7 +45,8 @@ particular state. For more details about these measurements, go to
 https://www.huduser.gov/portal/dataset/chas-api.html
 }
 \description{
-This function queries the CHAS API provided by US Department of Housing and Urban Development
+This function queries the CHAS API provided by US Department
+of Housing and Urban Development
 }
 \keyword{(CHAS)}
 \keyword{API}

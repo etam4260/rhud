@@ -52,18 +52,41 @@ https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf
 
 ### Example
 
-This is a basic example which shows you how to query the Crosswalk API.
+These are basic examples which shows you how to query the Crosswalk API.
 
 ```{r, eval = FALSE}
 library(hudr)
 
+hud_cw(type = 1, query = '35213', year = c('2010', '2011'), quarter = c('1'))
+
+hud_cw(type = '2', query = '35213', year = c('2016', '2020'), quarter = c('2'))
+
+hud_cw(type = 3, query = 35213, year = c('2012', '2011'), quarter = c('3'))
+
+hud_cw(type = 4, query = '22031', year = c('2017', '2019'), quarter = c('4'))
+
+hud_cw(type = '5', query = '35213', year = c(2011, '2012'), quarter = c('1','2'))
+
+hud_cw(type = 6, query = '48201223100', year = c('2017', '2010'), quarter = c('1','2','3'))
+
 hud_cw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1'))
+
+hud_cw(type = 8, query = '10140', year = c('2010', '2011'), quarter = c('2','1'))
+
+hud_cw(type = 9, query = '10380', year = c('2017'), quarter = c('4'))
+
+hud_cw(type = 10, query = '2202', year = c('2010', '2011'), quarter = c('4','3'))
+
+hud_cw(type = 11, query = '35213', year = c('2019', '2020'), quarter = c('2','3'))
+
+hud_cw(type = 12, query = '4606720300 ', year = c('2019', '2019', '2019'), quarter = c('4','4'))
 ```
 
 
 ### Input Arguments
 
-TYPE: Must be a number between 1 and 12 depending on the Crosswalk type.
+**TYPE**: Must be a number between 1 and 12 depending on the Crosswalk type.
+ 
  1) zip-tract
  2) zip-county
  3) zip-cbsa
@@ -87,39 +110,62 @@ half geoid that are in the first half geoid.
 
 For example, 37% (A random number) of residential buildings in 22301 are from
 35213 If all percentages of residential buildings in county 22301 are added up,
-it should make up 100% consisting of (for example) 37% from 3513, 45% from
+it should make up 100% consisting of (for example) 37% from 35213, 45% from
 13132, and 18% from 22411.
 
-QUERY: Depending on the type selected, 1-5 must specify a zip code. 6 must
-specify a tract. 7 must specify a county fip. 8-9 must specify a cbsa code. 10
-must specify a county district code. 11 must be a zip code. 12 must be a county
-sub district.
+**QUERY**: Depending on the type selected:
+  
+  1) 1-5 and 11 must specify a 5 digit zip code. 
+    * query = 22031
+  2) 6 must specify a 11 digit consisting of state FIPS + county FIPS + tract code tract. 
+    * query = 51059461700
+  3) 7 must specify a 5 digit county fip. 
+    * query = 51600
+  4) 8-9 must specify a micropolitan and metropolitan cbsa code. 
+    * query = 10380
+      I recommend typing hud_metropolitan() to see a list of metropolitan CBSA codes.
+      For example, a code of METRO22900N40079 needs 22900 inside as the input argument.
+  5) 10 must be a state fips code + congressional district 4 digit number 
+    * query = 7200
+  6) 12 must be a 10 digit consisting of 5 digit county fip + 5 digit county sub district.
+    * query = 4606720300  
+    
+**YEAR**: Year range of the data to retrieve. Defaults to current year. Make sure 
+the years provided follow the rules provided by the TYPE argument.
 
-YEAR: Year range of the data to retrieve. Defaults to the previous year.
+  * year = c(2019, 2018, 2021)
+  * year = c(2016, 2017, 2022)
+  * year = c(2021)
 
-KEY: The API key.
+**QUARTER**: The quarters in the year to retrieve. Defaults to the first quarter.
+  
+  * quarter = c(1,2,3,4)
+  * quarter = c(1)
+  * quarter = 4
+  
+**KEY**: The API key provided by HUD.
 
-QUARTER: The quarters in the year to retrieve. Defaults to all quarters.
+  * key = "wqokqo2138jdi13wfwwfwcytjyr"
 
 ### Output Data 
 
-1) zip/county/fipstract/CBSA/Congressional District/County Subdistrict
+1) **zip/county/fipstract/CBSA/Congressional District/County Subdistrict**
     * The first half of the 'type' argument
 
 
-2) year 
+2) **year**
     * Year the measurement was taken.
 
 
-3) quarter 
+3) **quarter** 
     * Quarter of year when measurement was taken.
 
 
-4) zip/county/fipstract/CBSA/Congressional District/County Subdistrict
+4) **zip/county/fipstract/CBSA/Congressional District/County Subdistrict**
     * The second half of the 'type' argument
 
 
-5) res_ratio  
+5) **res_ratio**  
     * The ratio of residential addresses in the ZIP – Tract, County, or CBSA
     part to the total number of residential addresses in the entire ZIP. (for
     type 1-5) The ratio of residential addresses in the Zip, Tract, County, or
@@ -127,7 +173,7 @@ QUARTER: The quarters in the year to retrieve. Defaults to all quarters.
     Zip, Tract, County, or CBSA. (for type 6-10)
 
 
-6) bus_ratio 
+6) **bus_ratio**
     * The ratio of business addresses in the ZIP – Tract, County, or CBSA part
     to the total number of business addresses in the entire ZIP. (for type 1-5).
     The ratio of business addresses in the Tract, County, or CBSA – ZIP part to
@@ -135,14 +181,14 @@ QUARTER: The quarters in the year to retrieve. Defaults to all quarters.
     (for type 6-10)
 
 
-7) oth_ratio 
+7) **oth_ratio** 
     * The ratio of other addresses in the ZIP – Tract to the total number of
     other addresses in the entire ZIP. (for type 1-5). The ratio of other 
     addresses in the Tract, County, or CBSA – ZIP part to the total number of
     other addresses in the entire Tract, County, or CBSA. (for type 6-10)
 
 
-8) tot_ratio 
+8) **tot_ratio** 
     * The ratio of all addresses in the ZIP – Tract to the total number of 
     all types of addresses in the entire ZIP. (for type 1-5) The ratio of all
     addresses in the Tract, County, or CBSA-ZIP part to the total number of all
