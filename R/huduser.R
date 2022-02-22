@@ -182,7 +182,7 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
     colnames(allres)[1] <- rhgeoid
     colnames(allres)[7] <- lhgeoid
   }
-  return(allres)
+  return(as.data.frame(allres))
 }
 
 
@@ -280,7 +280,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   }
 
   if(length(list_res) != 0) {
-    return(do.call(rbind, list_res))
+    return(as.data.frame(do.call(rbind, list_res)))
   }
   return(NULL)
 }
@@ -387,7 +387,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
     }
   }
   if(length(list_res) != 0) {
-    return(do.call(rbind, list_res))
+    return(as.data.frame(do.call(rbind, list_res)))
   }
   return(NULL)
 

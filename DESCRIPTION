@@ -33,3 +33,4 @@ Imports:
     R.utils
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+ByteCompile: true
