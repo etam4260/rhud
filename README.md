@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hudr
+# hudr <img src='man/figures/logo.png' align="right" width="139"/>
 
 <!-- badges: start -->
 
@@ -20,8 +20,6 @@ checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs
 [![rstudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 <!-- badges: end -->
-
-<img src="https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true" width="1250" height="200"/>
 
 This package contains an interface to the US Department of Housing and
 Urban Development datasets within R. The goal of this project is to

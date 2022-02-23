@@ -13,7 +13,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-# hudr
+# hudr <img src='man/figures/logo.png' align="right" width="139"/>
+
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -24,7 +25,6 @@ knitr::opts_chunk$set(
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 <!-- badges: end -->
 
-<img src="https://github.com/etam4260/hudr/blob/main/man/figures/HUD.jpg?raw=true" width="1250" height="200"/>
 
 This package contains an interface to the US Department of Housing and Urban 
 Development datasets within R. The goal of this project is to provide an 

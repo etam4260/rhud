@@ -1,0 +1,13 @@
+^hudr\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^LICENSE\.md$
+^\.github$
+^\.docs
+^codecov\.yml$
+^doc$
+^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^CITATION\.cff$
