@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 
 **Source:**   *inst/CITATION*
 
-Tam E, Reilly A, Ghaedi H, (2022). hudr: An R Interface to the HUD (US
+Tam E., Reilly A., Ghaedi H., (2022). hudr: An R Interface to the HUD (US
 Department of Housing and Urban Development) APIs. R package version 0.0.0.9000.
 https://github.com/etam4260/hudr.
 
