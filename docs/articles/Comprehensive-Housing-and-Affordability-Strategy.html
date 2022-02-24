@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Comprehensive-Housing-and-Affordability-Strategy • hudr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -13,6 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Comprehensive-Housing-and-Affordability-Strategy">
 <meta property="og:description" content="hudr">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -139,27 +146,20 @@
 <h3 id="input-arguments">Input Arguments<a class="anchor" aria-label="anchor" href="#input-arguments"></a>
 </h3>
 <p><strong>TYPE</strong> Must be a number between 1 and 5 depending on the specificity of the region.</p>
-<ol style="list-style-type: decimal">
-<li>Nation</li>
-<li>State</li>
-<li>County</li>
-<li>MCD</li>
-<li>Place</li>
-</ol>
+<pre><code>1) Nation
+2) State
+3) County
+4) MCD
+5) Place</code></pre>
 <p><strong>STATEID</strong> If type is 2-5, you must specify the state fips code from 0-56.</p>
-<pre><code><span class="va">stateId</span> <span class="op">=</span> <span class="fl">34</span>
-<span class="va">stateId</span> <span class="op">=</span> <span class="fl">30</span>
-<span class="va">stateId</span> <span class="op">=</span> <span class="fl">1</span></code></pre>
+<p>stateId = 34 stateId = 30 stateId = 1</p>
 <p><strong>ENTITYID</strong> If type is 3-5, you must specify either the county, mcd, or place, respectively.</p>
-<pre><code>- This will correspond to the county fips code of 039
-- Use hud_counties("VA") to find fips codes for the state of Virginia
-entityId = 39
-
-- Use hud_minor_civil_divisions("VA") to find MCD codes for the state of Virginia
-entityId = 93927
-
-Use hud_cities("VA") to find city codes for the state of Virginia
-entityId = 48996</code></pre>
+<ul>
+<li><p>This will correspond to the county fips code of 039</p></li>
+<li><p>Use hud_counties(“VA”) to find fips codes for the state of Virginia entityId = 39</p></li>
+<li><p>Use hud_minor_civil_divisions(“VA”) to find MCD codes for the state of Virginia entityId = 93927</p></li>
+</ul>
+<p>Use hud_cities(“VA”) to find city codes for the state of Virginia entityId = 48996</p>
 <p><strong>YEAR</strong> Year range of the data to retrieve. Default is latest year range.</p>
 <ul>
 <li>year = “2014-2018”</li>
