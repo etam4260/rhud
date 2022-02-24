@@ -21,28 +21,27 @@ checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs
 downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 <!-- badges: end -->
 
-This package contains an interface to the US Department of Housing and
-Urban Development datasets within R. The goal of this project is to
-provide an easy to use interface to access various open source APIs
-provided by HUD.
+The goal of this project is to provide an easy to use interface to
+access various open source APIs using the RESTFUL interface provided by
+HUD.
 
 HUD has two main websites for gaining access to various different data
 sets: HUD User and Exchange.
 
-HUD User: <https://www.huduser.gov/portal/datasets>
-
-HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
+## HUD User: <https://www.huduser.gov/portal/datasets>
 
 “HUD User is an information source containing reports and reference
 documents for the U.S. Department of Housing and Urban Development. HUD
 USER was established by the HUD’s Office of Policy Development and
-Research in 1978 (Wikipedia contributors, 2021).”
+Research in 1978 (HUD User Home Page \| HUD USER).”
 
 HUD User maintains an API to gain access to their data. However, their
 API system can be rather confusing and provides their information in
 JSON format rather than a data frame like object. Although there exist
 file downloadables, R users may want to be able to extract specific bits
 of the data into memory.
+
+## HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
 
 “The Department of Housing and Urban Development has a website known as
 HUD Exchange which is a comprehensive online platform that provides
@@ -91,12 +90,14 @@ devtools::install_github("etam4260/hudr")
 ```
 
 For more details on how to setup and utilize this package. Please go to
-<https://etam4260.github.io/hudr/>. Select ‘Setup’ in the navigation
+<https://etam4260.github.io/hudr/>. Select \[Setup\] in the navigation
 bar.
 
 ## Contributors
 
--   Emmet Tam(<https://github.com/etam4260>)
+-   Emmet Tam(<https://github.com/etam4260>)\[<emmet_tam@yahoo.com>\]
+-   Allison Reilly()\[<areilly2@umd.edu>\]
+-   Hamed Ghaedi()\[<hghaedi@terpmail.umd.edu>\]
 
 ## Disclaimers
 
@@ -117,5 +118,6 @@ Disaster Recovery Grant Reporting System. (2022). HUD Exchange.
 Retrieved February 19, 2022, from
 <https://www.hudexchange.info/programs/drgr/>
 
-Wikipedia contributors. (2021, December 22). HUD USER. Wikipedia.
-<https://en.wikipedia.org/wiki/HUD_USER>
+HUD User Home Page: HUD USER. HUD User Home Page \| HUD USER. (n.d.).
+Retrieved February 24, 2022, from
+<https://www.huduser.gov/portal/home.html>

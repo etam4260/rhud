@@ -1,16 +1,10 @@
-citHeader("To cite hudr in publications use:")
+year <- format(Sys.Date(), "%Y")
 
-citEntry(
-  entry    = "Misc",
-  title    = "hudr: Accessing HUD User APIs",
-  author   = as.person("Emmet Tam"),
-  journal  = "",
-  year     = 2022,
-  volume   = "",
-  number   = "",
-  pages    = "",
-  url      = "https://github.com/etam4260/hudr",
-  textVersion = paste(
-    "Tam, Emmet. 2022. hudr: Accessing HUD User APIs. Available at https://github.com/etam4260/hudr"
-  )
-)
+bibentry(bibtype = "Manual",
+         title = "hudr: An R Interface to the HUD (US Department of Housing and Urban Development) APIs",
+         author = c(person("Emmet", "Tam"),
+                    person("Allison", "Reilly"),
+                    person("Hamed", "Ghaedi")),
+         year = year,
+         note = "0.0.0.9000",
+         url = "https://github.com/etam4260/hudr/")

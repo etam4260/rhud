@@ -8,29 +8,39 @@ message: 'To cite package "hudr" in publications use:'
 type: software
 license: MIT
 title: 'hudr: An R interface for accessing HUD (US Department of Housing and Urban
-  Development)'
+  Development) APIs'
 version: 0.0.0.9000
 abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
   API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits,
-  and the Comprehensive Housing Affordability Strategy. Interfaces with the HUD DRGR
-  reporting system part which is part of HUD Exchange.
+  and the Comprehensive Housing Affordability Strategy.
 authors:
 - family-names: Tam
   given-names: Emmet
   email: emmet_tam@yahoo.com
+- family-names: Reilly
+  given-names: Allison
+  email: areilly2@umd.edu
+- family-names: Ghaedi
+  given-names: Hamed
+  email: hghaedi@terpmail.umd.edu
 preferred-citation:
   type: manual
   title: 'hudr: An R interface for accessing HUD (US Department of Housing and Urban
-    Development)'
+    Development) APIs'
   authors:
   - family-names: Tam
     given-names: Emmet
     email: emmet_tam@yahoo.com
+  - family-names: Reilly
+    given-names: Allison
+    email: areilly2@umd.edu
+  - family-names: Ghaedi
+    given-names: Hamed
+    email: hghaedi@terpmail.umd.edu
   version: 0.0.0.9000
   abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
     API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income
-    Limits, and the Comprehensive Housing Affordability Strategy. Interfaces with
-    the HUD DRGR reporting system part which is part of HUD Exchange.
+    Limits, and the Comprehensive Housing Affordability Strategy.
   repository-code: https://github.com/etam4260/hudr
   url: https://github.com/etam4260/hudr
   contact:
@@ -45,10 +55,6 @@ preferred-citation:
   - fairmarketsrent
   - hud
   - incomelimits
-  - nsp
-  - r
-  - r-package
-  - rstats
   license: MIT
   year: '2022'
 repository-code: https://github.com/etam4260/hudr
@@ -65,10 +71,6 @@ keywords:
 - fairmarketsrent
 - hud
 - incomelimits
-- nsp
-- r
-- r-package
-- rstats
 references:
 - type: software
   title: covr
@@ -161,3 +163,96 @@ references:
     email: hadley@rstudio.com
   year: '2022'
   url: https://CRAN.R-project.org/package=stringr
+- type: software
+  title: devtools
+  abstract: 'devtools: Tools to Make Developing R Packages Easier'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Chang
+    given-names: Winston
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@rstudio.com
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2022'
+  url: https://CRAN.R-project.org/package=devtools
+- type: software
+  title: tidyverse
+  abstract: 'tidyverse: Easily Install and Load the ''Tidyverse'''
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=tidyverse
+- type: software
+  title: zoo
+  abstract: 'zoo: S3 Infrastructure for Regular and Irregular Time Series (Z''s Ordered
+    Observations)'
+  notes: Imports
+  authors:
+  - family-names: Zeileis
+    given-names: Achim
+    email: Achim.Zeileis@R-project.org
+    orcid: https://orcid.org/0000-0003-0918-3766
+  - family-names: Grothendieck
+    given-names: Gabor
+    email: ggrothendieck@gmail.com
+  - family-names: Ryan
+    given-names: Jeffrey A.
+    email: jeff.a.ryan@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=zoo
+- type: software
+  title: rio
+  abstract: 'rio: A Swiss-Army Knife for Data I/O'
+  notes: Imports
+  authors:
+  - family-names: Chan
+    given-names: Chung-hong
+    email: chainsawtiney@gmail.com
+    orcid: https://orcid.org/0000-0002-6232-7530
+  - family-names: Leeper
+    given-names: Thomas J.
+    email: thosjleeper@gmail.com
+    orcid: https://orcid.org/0000-0003-4097-6326
+  year: '2022'
+  url: https://CRAN.R-project.org/package=rio
+- type: software
+  title: future
+  abstract: 'future: Unified Parallel and Distributed Processing in R for Everyone'
+  notes: Imports
+  authors:
+  - family-names: Bengtsson
+    given-names: Henrik
+    email: henrikb@braju.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=future
+- type: software
+  title: furrr
+  abstract: 'furrr: Apply Mapping Functions in Parallel using Futures'
+  notes: Imports
+  authors:
+  - family-names: Vaughan
+    given-names: Davis
+    email: davis@rstudio.com
+  - family-names: Dancho
+    given-names: Matt
+    email: mdancho@business-science.io
+  year: '2022'
+  url: https://CRAN.R-project.org/package=furrr
+- type: software
+  title: R.utils
+  abstract: 'R.utils: Various Programming Utilities'
+  notes: Imports
+  authors:
+  - family-names: Bengtsson
+    given-names: Henrik
+    email: henrikb@braju.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=R.utils

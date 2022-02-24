@@ -2,12 +2,13 @@ Package: hudr
 Title: An R interface for accessing HUD (US Department of Housing and Urban Development) APIs
 Version: 0.0.0.9000
 Authors@R: 
-    person("Emmet", "Tam", , "emmet_tam@yahoo.com", role = c("aut", "cre"))
+    c(person("Emmet", "Tam", ,"emmet_tam@yahoo.com", role = c("aut", "cre")),
+    person("Allison", "Reilly", ,"areilly2@umd.edu", role = c("ctr")),
+    person("Hamed", "Ghaedi", ,"hghaedi@terpmail.umd.edu", role = c("ctr")))
 Description: 
 	An R interface for accessing HUD (US Department of Housing and Urban Development) API.
 	The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent,
 	Income Limits, and the Comprehensive Housing Affordability Strategy.
-	Interfaces with the HUD DRGR reporting system part which is part of HUD Exchange.
 License: MIT + file LICENSE
 Language: en-US
 Encoding: UTF-8
