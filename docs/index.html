@@ -21,8 +21,7 @@
 <meta property="og:description" content="
 	An R interface for accessing HUD (US Department of Housing and Urban Development) API.
 	The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent,
-	Income Limits, and the Comprehensive Housing Affordability Strategy.
-	Interfaces with the HUD DRGR reporting system part which is part of HUD Exchange.">
+	Income Limits, and the Comprehensive Housing Affordability Strategy.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -112,14 +111,28 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>This package contains an interface to the US Department of Housing and Urban Development datasets within R. The goal of this project is to provide an easy to use interface to access various open source APIs provided by HUD.</p>
+<p>The goal of this project is to provide an easy to use interface to access various open source APIs using the RESTFUL interface provided by HUD.</p>
 <p>HUD has two main websites for gaining access to various different data sets: HUD User and Exchange.</p>
-<p>HUD User: <a href="https://www.huduser.gov/portal/datasets" class="external-link uri">https://www.huduser.gov/portal/datasets</a></p>
-<p>HUD Exchange: <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
-<p>“HUD User is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD’s Office of Policy Development and Research in 1978 (Wikipedia contributors, 2021).”</p>
+<div class="section level2">
+<h2 id="hud-user-httpswwwhudusergovportaldatasets">HUD User: <a href="https://www.huduser.gov/portal/datasets" class="external-link uri">https://www.huduser.gov/portal/datasets</a>
+<a class="anchor" aria-label="anchor" href="#hud-user-httpswwwhudusergovportaldatasets"></a>
+</h2>
+<p>“HUD User is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD’s Office of Policy Development and Research in 1978 (HUD User Home Page | HUD USER).”</p>
 <p>HUD User maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a data frame like object. Although there exist file downloadables, R users may want to be able to extract specific bits of the data into memory.</p>
+</div>
+<div class="section level2">
+<h2 id="hud-exchange-httpswwwhudexchangeinfoprogramsdrgr">HUD Exchange: <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a>
+<a class="anchor" aria-label="anchor" href="#hud-exchange-httpswwwhudexchangeinfoprogramsdrgr"></a>
+</h2>
 <p>“The Department of Housing and Urban Development has a website known as HUD Exchange which is a comprehensive online platform that provides tools, resources, and contact information for the organizations and individuals that partner with HUD. These often include nonprofit groups and state and municipal governments, but also include borrowers, lenders, and brokers involved in HUD’s multifamily loan programs (Disaster Recovery Grant Reporting System, 2022).”</p>
 <p>The DRGR Disaster Recovery Grant Reporting System which HUD Exchange uses to supply public data does not have an active API for retrieving information. However, there does exist data sets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.</p>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>Please cite this package using:</p>
+<p>Tam E., Reilly A., Ghaedi H., (2022). hudr: An R Interface to the HUD (US Department of Housing and Urban Development) APIs. R package version 0.0.0.9000. <a href="https://github.com/etam4260/hudr" class="external-link uri">https://github.com/etam4260/hudr</a>.</p>
+</div>
 <div class="section level2">
 <h2 id="available-data">Available Data<a class="anchor" aria-label="anchor" href="#available-data"></a>
 </h2>
@@ -161,13 +174,15 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"etam4260/hudr"</span><span class="op">)</span></code></pre></div>
-<p>For more details on how to setup and utilize this package. Please go to <a href="https://etam4260.github.io/hudr/" class="external-link uri">https://etam4260.github.io/hudr/</a>. Select ‘Setup’ in the navigation bar.</p>
+<p>For more details on how to setup and utilize this package. Please go to <a href="https://etam4260.github.io/hudr/" class="external-link uri">https://etam4260.github.io/hudr/</a>. Select [Setup] in the navigation bar.</p>
 </div>
 <div class="section level2">
 <h2 id="contributors">Contributors<a class="anchor" aria-label="anchor" href="#contributors"></a>
 </h2>
 <ul>
-<li>Emmet Tam(<a href="https://github.com/etam4260" class="external-link uri">https://github.com/etam4260</a>)</li>
+<li>Emmet Tam(<a href="https://github.com/etam4260" class="external-link uri">https://github.com/etam4260</a>)[<a href="mailto:emmet_tam@yahoo.com" class="email">emmet_tam@yahoo.com</a>]</li>
+<li>Allison Reilly()[<a href="mailto:areilly2@umd.edu" class="email">areilly2@umd.edu</a>]</li>
+<li>Hamed Ghaedi()[<a href="mailto:hghaedi@terpmail.umd.edu" class="email">hghaedi@terpmail.umd.edu</a>]</li>
 </ul>
 </div>
 <div class="section level2">
@@ -187,7 +202,7 @@
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <p>Disaster Recovery Grant Reporting System. (2022). HUD Exchange. Retrieved February 19, 2022, from <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
-<p>Wikipedia contributors. (2021, December 22). HUD USER. Wikipedia. <a href="https://en.wikipedia.org/wiki/HUD_USER" class="external-link uri">https://en.wikipedia.org/wiki/HUD_USER</a></p>
+<p>HUD User Home Page: HUD USER. HUD User Home Page | HUD USER. (n.d.). Retrieved February 24, 2022, from <a href="https://www.huduser.gov/portal/home.html" class="external-link uri">https://www.huduser.gov/portal/home.html</a></p>
 </div>
 </div>
   </div>
@@ -227,6 +242,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Emmet Tam <br><small class="roles"> Author, maintainer </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 

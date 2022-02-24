@@ -61,9 +61,9 @@ ability to directly get such data.
 
 Please cite this package using:
 
-Tam E., Reilly A., Ghaedi H., (2022). hudr: An R Interface to the HUD
-(US Department of Housing and Urban Development) APIs. R package version
-0.0.0.9000. <https://github.com/etam4260/hudr>.
+Tam, E., Reilly, A., & Ghaedi, H. (2022). hudr: An R interface for
+accessing HUD (US Department of Housing and Urban Development) APIs
+(Version 0.0.0.9000). <https://github.com/etam4260/hudr>
 
 ## Available Data
 

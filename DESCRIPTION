@@ -3,8 +3,8 @@ Title: An R interface for accessing HUD (US Department of Housing and Urban Deve
 Version: 0.0.0.9000
 Authors@R: 
     c(person("Emmet", "Tam", ,"emmet_tam@yahoo.com", role = c("aut", "cre")),
-    person("Allison", "Reilly", ,"areilly2@umd.edu", role = c("ctr")),
-    person("Hamed", "Ghaedi", ,"hghaedi@terpmail.umd.edu", role = c("ctr")))
+    person("Allison", "Reilly", ,"areilly2@umd.edu", role = c("ctb")),
+    person("Hamed", "Ghaedi", ,"hghaedi@terpmail.umd.edu", role = c("ctb")))
 Description: 
 	An R interface for accessing HUD (US Department of Housing and Urban Development) API.
 	The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent,
