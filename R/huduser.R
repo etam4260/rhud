@@ -61,7 +61,7 @@
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
-#' @exportd
+#' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
