@@ -1,5 +1,4 @@
 #' @import httr
-pkg.env <- new.env(parent = emptyenv())
 
 # Misc APIs provided by the HUD to gain insights into what the user
 # can query for in the main APIs
@@ -8,6 +7,9 @@ pkg.env <- new.env(parent = emptyenv())
 # List Counties in State
 # List MCDs in State
 # List All Cities in State
+
+# Create a package environment for storing state level data.
+pkg.env <- new.env(parent = emptyenv())
 
 #' @name hud_states
 #' @title hud_states
@@ -68,12 +70,13 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns A dataframe containing all counties within a state
 hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
+  if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
 
   if(nchar(state) == 2) state = toupper(state)
   if(nchar(state) > 2) state = capitalize(state)
 
-  pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
   # Allow user to supply state name or state abbr or state fips as inputs.
@@ -104,12 +107,13 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns A dataframe containing details of cities in a state
 hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
+  if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
 
   if(nchar(state) == 2) state = toupper(state)
   if(nchar(state) > 2) state = capitalize(state)
 
-  pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
   # Allow user to supply state name or state abbr or state fips as inputs.
 
@@ -136,12 +140,13 @@ hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @export
 #' @returns A dataframe containing details of minor civil divisions in a state
 hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
+  if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
 
   if(nchar(state) == 2) state = toupper(state)
   if(nchar(state) > 2) state = capitalize(state)
 
-  pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
   if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
   # Allow user to supply state name or state abbr or state fips as inputs.

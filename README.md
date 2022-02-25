@@ -72,13 +72,17 @@ The HUD also provide miscellaneous supplemental APIs under them.
 
 1.  HUD User
 
-    -   Crosswalk
+    -   USPS Crosswalk
+        (<https://www.huduser.gov/portal/dataset/uspszip-api.html>)
     -   Fair Markets Rent
+        (<https://www.huduser.gov/portal/dataset/fmr-api.html>)
         -   Small Areas Fair Markets Rent
         -   List States
         -   List Small Areas
     -   Income Limits
+        (<https://www.huduser.gov/portal/dataset/fmr-api.html>)
     -   Comprehensive Housing and Affordability Strategy
+        (<https://www.huduser.gov/portal/dataset/chas-api.html>)
         -   List Counties in State
         -   List MCDs in State
         -   List All Cities in State
@@ -86,6 +90,7 @@ The HUD also provide miscellaneous supplemental APIs under them.
 2.  HUD Exchange
 
     -   Community Development Block Grant - Disaster Recovery
+        (<https://drgr.hud.gov/public/index.html>)
 
 ## Installation
 

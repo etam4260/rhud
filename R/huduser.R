@@ -1,5 +1,3 @@
-#library for http requests
-#library to sanitize strings
 #' @import httr
 #' @import stringr
 #' @import tidyverse
@@ -63,14 +61,14 @@
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
-#' @export
+#' @exportd
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
                    key = Sys.getenv("HUD_KEY")) {
-
+  if(!is.vector(type) || !is.vector(query) || !is.vector(year) || !is.vector(quarter) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
 
   alltypes <- c("zip-tract","zip-county","zip-cbsa",
@@ -165,7 +163,7 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
     cont<-try(content(call), silent = TRUE) #parse returned data
     if('error' %in% names(cont[[1]])) {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], " ,and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ", and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$results))
       res$type <- allqueries$type[i]
@@ -209,6 +207,7 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
 #'   data, but will return a dataframe with the individual measurements for each
 #'   individual county within the state.
 hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD_KEY")) {
+  if(!is.vector(query) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   URL <- NULL
   call <- NULL
   cont <- NULL
@@ -218,7 +217,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   if(key == "") stop("Did you forget to set the key?")
   if(nchar(query) == 2) {
     query = toupper(query)
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
     if(!any(as.character(query) == pkg.env$state)) stop("There is no matching code for this inputted state.")
 
     if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
@@ -270,7 +269,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
 
     cont<-try(content(call), silent = TRUE) #parse returned data
     if('error' %in% names(cont)) {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, " ,year equals ",allqueries$year[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       if(querytype == "state") res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
       res$query <- allqueries$query[i]
@@ -307,6 +306,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
 #'   about these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/fmr-api.html
 hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD_KEY")) {
+  if(!is.vector(query) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   URL <- NULL
   call <- NULL
   cont <- NULL
@@ -315,7 +315,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
   if(key == "") stop("Did you forget to set the key?")
   if(nchar(query) == 2) {
     query = toupper(query)
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
     if(!any(as.character(query) == pkg.env$state)) stop("There is no matching code for this inputted state.")
 
     if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
@@ -367,7 +367,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
     cont<-try(content(call), silent = TRUE) #parse returned data
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for inputted query, year, or quarter where query equals ",
-                    query, " ,year equals ",allqueries$year[i],
+                    query, ", year equals ",allqueries$year[i],
                     ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
 
@@ -427,6 +427,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
 #'   https://www.huduser.gov/portal/dataset/chas-api.html
 hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"),
                      key = Sys.getenv("HUD_KEY")) {
+  if(!is.vector(type) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   URL <- NULL
   call <- NULL
   cont <- NULL
@@ -463,18 +464,21 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
   if(type == "1") {
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
                  "&year=", year,  sep="") #build URL
+    if(!is.vector(stateId)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
     allqueries <- data.frame(url = URL, year = year)
   }
   if(type == "2") {
     if(is.null(stateId)) stop("You need to specify a stateId for this type.")
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
                  "&stateId=", stateId, "&year=", year,  sep="") #build URL
+    if(!is.vector(stateId) || !is.vector(entityId)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
     allqueries <- data.frame(url = URL, year = year, stateId = stateId)
   }
   if(type == "3" || type == "4" || type == "5") {
     if(is.null(stateId) || is.null(entityId)) stop("You need to specify a
                                                  stateId and entityId
                                                  for this type.")
+    if(!is.vector(stateId) || !is.vector(entityId)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
                  type, "&stateId=", stateId, "&entityId=", entityId,
                  "&year=", year,  sep="") #build URL
@@ -497,7 +501,7 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
 
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for inputted type where type equals",
-                    type, " ,year equals ",allqueries$year[i],
+                    type, ", year equals ",allqueries$year[i],
                     ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
       list_res[[i]] <- cont[[1]]

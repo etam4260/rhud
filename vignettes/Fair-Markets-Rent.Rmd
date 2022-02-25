@@ -83,11 +83,10 @@ hud_counties("VA")
 # Getting a county requires a state fip + county fip + 99999
 hud_fmr(query = '0100199999', year = '2017')
 
-# You can also check for CBSA codes which can also be supplied in hud_fmr()
-# query field.
+# Gets FMR data for METRO area.
 hud_fmr("METRO47900M47900", year=c(2018))
 
-# A list of metropolitan areas(CBSA) and associated metadata can be provided by:
+# You can also check for metropolitan codes.
 hud_metropolitan()
 ```
 
@@ -104,16 +103,16 @@ hud_metropolitan()
   
   Run hud_counties("MD") to get list of counties in MD.
   
-  * query = '5100199999'
-  * query = 'MD'
   * query = 'METRO12700M12700'
+  * query = 'MD'
+  * query = '5100199999'
 
 **YEAR**: Year range of the data to retrieve. Defaults to current year. Make sure 
 the years provided follow the rules provided by the TYPE argument. 
 
   * year = c(2019, 2018, 2021)
-  * year = c(2016, 2017, 2022)
-  * year = c(2021)
+  * year = c(2016)
+  * year = 2021
 
 **KEY**: The API key.
 

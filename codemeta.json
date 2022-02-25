@@ -2,8 +2,8 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "hudr",
-  "description": " An R interface for accessing HUD (US Department of Housing and Urban Development) API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits, and the Comprehensive Housing Affordability Strategy. Interfaces with the HUD DRGR reporting system part which is part of HUD Exchange.",
-  "name": "hudr: An R interface for accessing HUD (US Department of Housing and Urban Development)",
+  "description": " An R interface for accessing HUD (US Department of Housing and Urban Development) API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits, and the Comprehensive Housing Affordability Strategy.",
+  "name": "hudr: An R interface for accessing HUD (US Department of Housing and Urban Development) APIs",
   "codeRepository": "https://github.com/etam4260/hudr",
   "issueTracker": "https://github.com/etam4260/hudr/issues",
   "license": "https://spdx.org/licenses/MIT",
@@ -20,6 +20,20 @@
       "givenName": "Emmet",
       "familyName": "Tam",
       "email": "emmet_tam@yahoo.com"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Allison",
+      "familyName": "Reilly",
+      "email": "areilly2@umd.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Hamed",
+      "familyName": "Ghaedi",
+      "email": "hghaedi@terpmail.umd.edu"
     }
   ],
   "maintainer": [
@@ -106,27 +120,122 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringr"
     },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "devtools",
+      "name": "devtools",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=devtools"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyverse",
+      "name": "tidyverse",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tidyverse"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "zoo",
+      "name": "zoo",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=zoo"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "rio",
+      "name": "rio",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rio"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "future",
+      "name": "future",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=future"
+    },
+    "8": {
+      "@type": "SoftwareApplication",
+      "identifier": "furrr",
+      "name": "furrr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=furrr"
+    },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "R.utils",
+      "name": "R.utils",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=R.utils"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "43650.761KB",
+  "fileSize": "279.932KB",
   "citation": [
     {
-      "@type": "CreativeWork",
+      "@type": "SoftwareSourceCode",
       "datePublished": "2022",
       "author": [
         {
           "@type": "Person",
           "givenName": "Emmet",
           "familyName": "Tam"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Allison",
+          "familyName": "Reilly"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Hamed",
+          "familyName": "Ghaedi"
         }
       ],
-      "name": "hudr: Accessing HUD User APIs",
-      "url": "https://github.com/etam4260/hudr"
+      "name": "hudr: An R Interface to the HUD (US Department of Housing and Urban Development) APIs",
+      "url": "https://github.com/etam4260/hudr/",
+      "description": "0.0.0.9000"
     }
   ],
   "releaseNotes": "https://github.com/etam4260/hudr/blob/master/NEWS.md",
   "readme": "https://github.com/etam4260/hudr/blob/main/README.md",
   "contIntegration": ["https://github.com/etam4260/hudr/actions", "https://codecov.io/gh/etam4260/hudr?branch=main"],
-  "developmentStatus": "https://www.repostatus.org/#wip",
-  "keywords": ["hud", "crosswalk", "incomelimits", "fairmarketsrent", "chas", "api", "r", "rstats", "r-package", "cdbg-dr", "nsp"]
+  "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
+  "keywords": ["hud", "crosswalk", "incomelimits", "fairmarketsrent", "chas", "api", "cdbg-dr"]
 }

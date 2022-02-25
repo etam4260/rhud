@@ -145,11 +145,10 @@
 <span class="co"># Getting a county requires a state fip + county fip + 99999</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span>
 
-<span class="co"># You can also check for CBSA codes which can also be supplied in hud_fmr()</span>
-<span class="co"># query field.</span>
+<span class="co"># Gets FMR data for METRO area.</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span><span class="st">"METRO47900M47900"</span>, year<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">)</span><span class="op">)</span>
 
-<span class="co"># A list of metropolitan areas(CBSA) and associated metadata can be provided by:</span>
+<span class="co"># You can also check for metropolitan codes.</span>
 <span class="fu"><a href="../reference/hud_metropolitan.html">hud_metropolitan</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">
@@ -160,15 +159,15 @@
 <p>Run hud_metropolitan() to get a list of metropolitan areas.</p>
 <p>Run hud_counties(“MD”) to get list of counties in MD.</p>
 <ul>
-<li>query = ‘5100199999’</li>
-<li>query = ‘MD’</li>
 <li>query = ‘METRO12700M12700’</li>
+<li>query = ‘MD’</li>
+<li>query = ‘5100199999’</li>
 </ul>
 <p><strong>YEAR</strong>: Year range of the data to retrieve. Defaults to current year. Make sure the years provided follow the rules provided by the TYPE argument.</p>
 <ul>
 <li>year = c(2019, 2018, 2021)</li>
-<li>year = c(2016, 2017, 2022)</li>
-<li>year = c(2021)</li>
+<li>year = c(2016)</li>
+<li>year = 2021</li>
 </ul>
 <p><strong>KEY</strong>: The API key.</p>
 <ul>

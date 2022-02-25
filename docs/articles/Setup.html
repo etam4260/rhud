@@ -123,13 +123,13 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"etam4260/hudr"</span><span class="op">)</span></code></pre></div>
 <p>The US Department of Housing and Urban Development for HUD USER requires users to gain an access key before querying their systems. You must go to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a> and follow the instructions for making an account.</p>
-<p>HUD Exchange has data stored in files and does not have a readily available API system for gaining access to their data.</p>
 <p>From there you need to make a new token. Make sure to save the token somewhere as you will only be able to view it once. However, you can use it as many times as you want. You can now supply the ‘key’ argument to the function calls. However, it is <strong>NOT RECOMMENDED</strong> to do this. Rather, to reduce the need to supply the key argument in every function call, you can use the Sys.setenv() function to save the key to the user environment.</p>
+<p>HUD Exchange has data stored in files and does not have a readily available API system for gaining access to their data. Furthermore, this only supports the public data portal.</p>
 </div>
 <div class="section level2">
-<h2 id="key-setup">Key Setup<a class="anchor" aria-label="anchor" href="#key-setup"></a>
+<h2 id="interactive-key-setup">Interactive Key Setup<a class="anchor" aria-label="anchor" href="#interactive-key-setup"></a>
 </h2>
-<p>There are various method of setting up a key. However, I recommend using THE Sys.setenv() function. You can also choose to save it into your .Rprofile or .Renviron files.</p>
+<p>There are various method of setting up a key. However, I recommend using the Sys.setenv() function.</p>
 <div class="section level3">
 <h3 id="using-sys-setenv-during-an-interactive-session">Using Sys.setenv() during an interactive session<a class="anchor" aria-label="anchor" href="#using-sys-setenv-during-an-interactive-session"></a>
 </h3>
@@ -141,12 +141,23 @@
 <p>To set the key…</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span> <span class="op">=</span> <span class="st">"2yeuduhq72ueajk"</span><span class="op">)</span>
+<span class="co"># "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register for a key and replace it here.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span></code></pre></div>
 <p>To check whether hudr can gain access to this environment variable…</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_key.html">hud_get_key</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>It is now set up for the rest of the R session.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="rprofile">Rprofile<a class="anchor" aria-label="anchor" href="#rprofile"></a>
+</h2>
+<p>You also choose to save it into your .Rprofile to save the key between R session.</p>
+<p>Every time R starts it looks for .Rprofile files in different locations:</p>
+<p><em>R_HOME the directory in which R is installed, </em>HOME the user’s home directory, <em>R’s current working directory. </em>R only loads one .Rprofile file per session and thus an .Rprofile file at the project-level overrides files in other locations.</p>
+<p>The .Rprofile file is an R script that is launch each time R starts. Sometimes they might not be in these locations. You can just create one and put it at the root of your project and type the following in it:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>HUD_KEY <span class="ot">=</span> <span class="st">"2yeuduhq72ueajk"</span><span class="er">)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register for a key and replace it here.</span></span></code></pre></div>
 </div>
   </div>
 
