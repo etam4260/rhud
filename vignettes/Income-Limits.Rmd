@@ -29,10 +29,10 @@ county("Income Limits | HUD USER")."
 
 This is a basic example showing you how to query the Income Limits API.
 
-Querying a state will return a dataframe with rows representing counties 
+Querying a state will return a data frame with rows representing counties 
 within the state. A (state fip + county fip + county subdivision) 10 digit code
-will return a 1 row dataframe for that county. A CBSA code will also return a 1 
-row dataframe for that area.
+will return a 1 row data frame for that county. A CBSA code will also return a 1 
+row data frame for that area.
 
 This works similarly to the FMR API.
 
