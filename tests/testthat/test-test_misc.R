@@ -4,7 +4,7 @@ test_that("All MCD In State Query", {
 })
 
 test_that("All Cities in State Query", {
-  cities <- hud_cities("NY")
+  cities <- hud_places("NY")
   expect_true(nrow(cities) >= 1)
 })
 
