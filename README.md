@@ -21,6 +21,9 @@ checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs
 downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 <!-- badges: end -->
 
+-   This interface uses the HUD User Data API but is not endorsed or
+    certified by HUD User.
+
 The goal of this project is to provide an easy to use interface to
 access various open source APIs using the RESTFUL interface provided by
 HUD.
@@ -31,6 +34,8 @@ sets: HUD User and Exchange.
 Please read
 <https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
 all terms of service.
+
+According to HUD USER:
 
 All services, which utilize or access the API, should display the
 following notice prominently within the application: “This product uses
