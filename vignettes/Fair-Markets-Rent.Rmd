@@ -99,7 +99,7 @@ hud_metropolitan()
 ```
 
 #### State Level Fair Markets Rent
-This is an example which shows you how to query the Fari Markets Rent on
+This is an example which shows you how to query the Fair Markets Rent on
 a state level basis. You can use the abbreviation, state name, or fips code. It
 will return all counties in the state and their Fair Markets Rents.
 ```{r, eval=FALSE}
@@ -134,7 +134,7 @@ micropolitan yet. I recommend
 taking a look at [US Metropolitan Areas][] to determine what counties are available.
 ```{r, eval=FALSE}
 # Gets FMR data for METRO area.
-hud_fmr("METRO47900M47900", year=c(2018))
+hud_fmr(query = "METRO47900M47900", year=c(2018))
 ```
 
 ### Input Arguments

@@ -97,16 +97,16 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   stop("The key used might be invalid.")
 }
 
-#' @name hud_cities
-#' @title hud_cities
-#' @description Get a list of all cities in a state
-#' @param state The state to get all cities
+#' @name hud_places
+#' @title hud_places
+#' @description Get a list of all places in a state
+#' @param state The state to get all places
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
-#' @keywords Cities
+#' @keywords places
 #' @export
-#' @returns A dataframe containing details of cities in a state
-hud_cities <- function(state, key = Sys.getenv("HUD_KEY")) {
+#' @returns A dataframe containing details of places in a state
+hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
 
