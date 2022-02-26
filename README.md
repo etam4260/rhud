@@ -28,6 +28,18 @@ HUD.
 HUD has two main websites for gaining access to various different data
 sets: HUD User and Exchange.
 
+Please read
+<https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
+all terms of service.
+
+All services, which utilize or access the API, should display the
+following notice prominently within the application: “This product uses
+the HUD User Data API but is not endorsed or certified by HUD User.” You
+may use the HUD User name in order to identify the source of API content
+subject to these rules. You may not use the HUD User name, or the like
+to imply endorsement of any product, service, or entity, not-for-profit,
+commercial or otherwise.
+
 ## HUD User: <https://www.huduser.gov/portal/datasets>
 
 “HUD User is an information source containing reports and reference
