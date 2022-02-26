@@ -214,25 +214,30 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   querytype <- NULL
   numbers_only <- function(x) !grepl("\\D", x)
 
-  if(key == "") stop("Did you forget to set the key?")
-  if(nchar(query) == 2) {
-    query = toupper(query)
-    if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-    if(!any(as.character(query) == pkg.env$state)) stop("There is no matching code for this inputted state.")
-
-    if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
-    if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
-    if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
-    query = unlist(query)
-
-  }
-  if(nchar(query) > 2) query = capitalize(query)
   # Removing leading and ending spaces and converting all integer inputs
   # to characters
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
 
+  if(key == "") stop("Did you forget to set the key?")
+  if(nchar(query) == 2) query = toupper(query)
+  if(nchar(query) > 2) query = capitalize(query)
+  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+
+  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) {
+    query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
+    querytype <- TRUE
+  }
+  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) {
+    query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
+    querytype <- TRUE
+  }
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) {
+    query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
+    querytype <- TRUE
+  }
+  query = unlist(query[[1]])
 
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
@@ -248,7 +253,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   } else if(nchar(as.character(query)) == 16) {
     querytype = "cbsa"
   } else {
-    stop("Query input does not seem to match the length expected.")
+    stop("Query doesn't seem to be a county+tract code, state code, or cbsa code.")
   }
 
   allqueries <- data.frame(query = query, year = year)
@@ -271,7 +276,21 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
-      if(querytype == "state") res <- as.data.frame(do.call(rbind, cont$data$counties)) else res <- as.data.frame(cont$data)
+      if(querytype == "state") {
+        res <- as.data.frame(do.call(rbind, cont$data$counties))
+      } else if(querytype == "county"){
+        res <- as.data.frame(cont$data)
+      } else {
+        res <- as.data.frame(do.call(rbind, cont$data$basicdata))
+        res$county_name <- cont$data$county_name
+        res$counties_msa <- cont$data$counties_msa
+        res$town_name <- cont$data$town_name
+        res$metro_status <- cont$data$metro_status
+        res$metro_name <- cont$data$metro_name
+        res$area_area <- cont$data$area_area
+        res$smallarea_status <- cont$data$smallarea_status
+      }
+
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
       list_res[[i]] <- res
@@ -312,25 +331,30 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
   cont <- NULL
   querytype <- NULL
 
-  if(key == "") stop("Did you forget to set the key?")
-  if(nchar(query) == 2) {
-    query = toupper(query)
-    if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-    if(!any(as.character(query) == pkg.env$state)) stop("There is no matching code for this inputted state.")
-
-    if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
-    if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
-    if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
-    query = unlist(query)
-  }
-
-  if(nchar(query) > 2) query = capitalize(query)
-
   # Removing leading and ending spaces and converting all integer inputs to characters
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- unique(paste(str_trim(as.character(year), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
   numbers_only <- function(x) !grepl("\\D", x)
+
+  if(key == "") stop("Did you forget to set the key?")
+  if(nchar(query) == 2) query = toupper(query)
+  if(nchar(query) > 2) query = capitalize(query)
+  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+
+  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) {
+    query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
+    querytype <- TRUE
+  }
+  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) {
+    query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
+    querytype <- TRUE
+  }
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) {
+    query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
+    querytype <- TRUE
+  }
+  query = unlist(query[[1]])
 
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   # Check year and query input to see if they fit within
@@ -345,7 +369,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
   } else if(nchar(as.character(query)) == 16) {
     querytype = "cbsa"
   } else {
-    stop("Query input does not seem to match the length expected.")
+    stop("There is no matching code for this inputted state.")
   }
 
   allqueries <- data.frame(query = query, year = year)
@@ -375,11 +399,13 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
         res <- as.data.frame(do.call(cbind, list(as.data.frame(cont$data$very_low),
                                                  as.data.frame(cont$data$extremely_low),
                                                  as.data.frame(cont$data$very_low))))
+        res$statecode <- cont$data$statecode
+        res$stateID <- cont$data$stateID
+      } else if(querytype == "county") {
+        res <- as.data.frame(cont$data)
       } else {
         res <- as.data.frame(cont$data)
       }
-      res$statecode <- cont$data$statecode
-      res$stateID <- cont$data$stateID
       res$median_income <- cont$data$median_income
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]

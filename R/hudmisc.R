@@ -25,10 +25,10 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   states <- as.data.frame(do.call(rbind, cont))
+  states$state_num <- as.character(as.integer(states$state_num))
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
   if(nrow(states) > 1) {
-    states$state_num <- as.character(as.integer(states$state_num))
     return(states)
   }
   stop("The key used might be invalid.")

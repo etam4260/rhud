@@ -45,49 +45,96 @@ maximum amount of rent a recipient may pay for property leased with Continuum of
 Care funds, and calculation of flat rents in Public Housing units. The U.S.
 Department of Housing and Urban Development (HUD) annually estimates FMRs for
 Office of Management and Budget (OMB) defined metropolitan areas, some HUD
-defined subdivisions of OMB metropolitan areas and each nonmetropolitan county.
+defined subdivisions of OMB metropolitan areas and each non metropolitan county.
 42 USC 1437f requires FMRs be posted at least 30 days before they are effective
 and that they are effective at the start of the federal fiscal year (generally
 October 1). Fair Market Rents, as defined in 24 CFR 888.113 are estimates of
 40th percentile gross rents for standard quality units within a metropolitan
-area or nonmetropolitan county ("Fair Market Rents | HUD USER")."
+area or non metropolitan county ("Fair Market Rents | HUD USER")."
 
-### Example
+### Examples
 
-This is a basic example to show you how to query the Fair Markets Rent API. 
+This is a basic examples to show you how to query the Fair Markets Rent API. Before
+looking at the outputted data I RECOMMEND first taking a look at [Input Arguments][]
+as well as [Output Data][] located at the bottom of the page.
 
-Querying a state will return a dataframe with rows representing counties 
+DISCLAIMER: The output tables are too large to be displayed here so we choose to
+leave them out.
+
+Querying a state will return a data frame with rows representing counties 
 within the state. A (state fip + county fip + county subdivision) 10 digit code
-will return a 1 row dataframe for that county. A CBSA code will also return a 1 
-row dataframe for that area.
+will return a 1 row data frame for that county. A CBSA code will also return a 1 
+row data frame for that area. 
 
-For records corresponding to parts of or entire place entities that do not
-overlap any 2010 urban area, the urban area code is 99999, the urban area name
-is “Not in a 2010 urban area”, and the urban area population, housing unit
-count, total area, and land area values are null. The percent values relating to
-the urban area are also null.
+```{r, echo=FALSE} 
+Sys.setenv("HUD_KEY" = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjhmOTJkOWUxYTE4MTdjNzliMTJhZDljMGI1OWVkMTYwYWY1MTAxOGZhZjRhZGM0NTc1MjZkZjE0YmQ4ODY4MTA5ZGQ3YjhiODgxYmE0OTMzIn0.eyJhdWQiOiI2IiwianRpIjoiOGY5MmQ5ZTFhMTgxN2M3OWIxMmFkOWMwYjU5ZWQxNjBhZjUxMDE4ZmFmNGFkYzQ1NzUyNmRmMTRiZDg4NjgxMDlkZDdiOGI4ODFiYTQ5MzMiLCJpYXQiOjE2NDUwNzA0MjksIm5iZiI6MTY0NTA3MDQyOSwiZXhwIjoxOTYwNjAzMjI5LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Kc6EJW68m7tjs6Oa0ecOWqAbp0qa1tp9uCb25JhmAhBu-g9JM44bFOKixiCSRUauZb63vAf6t9o-rEHFn-Lsew")
+```
 
+#### US States
+This is an example to show you how to query for all states in the US.
 ```{r, eval=FALSE}
 library(hudr)
-
-# A list of states and some associated metadata can be provided by:
 hud_states()
+```
 
+#### US Counties 
+This is an example to show you how to query for all counties in MD,
+Virginia, and California, respectively.
+```{r, eval=FALSE}
+hud_counties("MD")
+
+hud_counties("Virginia")
+
+# If you choose to specify state fips code, you need truncate the 
+# extra leading zero from the 2 digit code. For example,
+# 06 turns into 6 but...
+# 56 just turns in 56. You can supply numeric or character types.
+hud_counties("6")
+```
+
+#### US Metropolitan Areas
+This is an example to show you how to query for all metropolitan areas in US.
+```{r, eval=FALSE}
+hud_metropolitan()
+```
+
+#### State Level Fair Markets Rent
+This is an example which shows you how to query the Fari Markets Rent on
+a state level basis. You can use the abbreviation, state name, or fips code. It
+will return all counties in the state and their Fair Markets Rents.
+```{r, eval=FALSE}
 # This gets FMR data for the state of Virginia in 2021.
 hud_fmr(query = 'VA', year = '2021')
 
-# A list of counties and associated metadata can be provided by:
-# This queries counties for Virginia.
-hud_counties("VA")
+hud_fmr(query= "Virginia", year = '2021')
 
-# Getting a county requires a state fip + county fip + 99999
+# If you choose to specify state fips code, you need truncate the 
+# extra leading zero from the 2 digit code. For example,
+# 06 turns into 6 but...
+# 56 just turns in 56. You can supply numeric or character types.
+hud_fmr(query= "51", year = '2021')
+```
+
+#### County Level Fair Markets Rent
+This is an example which shows you how to query the Fair Markets Rent on a
+county level basis. These are defined with a 2 digit state code + 3 digit county code.
+You also need a 99999 code added onto the end. We currently don't know why the 
+extra 99999 is included and have not found any cases where its different. I recommend
+taking a look at [US Counties][] to determine what counties are available.
+```{r, eval=FALSE}
+# Getting a county requires a 2 digit state fip + 3 digit county fip + 99999
 hud_fmr(query = '0100199999', year = '2017')
+```
 
+#### Small Areas Fair Markets Rent
+This is an example which shows you how to query the Small Areas Fair Markets Rent.
+Small Areas are defined as metropolitan and micropolitan areas which are defined in
+CBSA codes. Currently we know how to query for metropolitan, but not sure for 
+micropolitan yet. I recommend
+taking a look at [US Metropolitan Areas][] to determine what counties are available.
+```{r, eval=FALSE}
 # Gets FMR data for METRO area.
 hud_fmr("METRO47900M47900", year=c(2018))
-
-# You can also check for metropolitan codes.
-hud_metropolitan()
 ```
 
 ### Input Arguments
@@ -107,8 +154,7 @@ hud_metropolitan()
   * query = 'MD'
   * query = '5100199999'
 
-**YEAR**: Year range of the data to retrieve. Defaults to current year. Make sure 
-the years provided follow the rules provided by the TYPE argument. 
+**YEAR**: Year range of the data to retrieve. Defaults to current year. 
 
   * year = c(2019, 2018, 2021)
   * year = c(2016)

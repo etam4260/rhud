@@ -29,7 +29,7 @@ distribute grant funds ("Consolidated Planning/CHAS Data | HUD USER")."
 This is a basic example showing you how to query the Comprehensive Housing and
 Affordability API.
 
-This function returns a single row dataframe for each query.
+This function returns a single row data frame for each query.
 
 ```{r, eval=FALSE}
 library(hudr)
