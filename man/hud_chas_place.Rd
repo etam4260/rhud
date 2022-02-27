@@ -5,12 +5,15 @@
 \title{hud_chas_place}
 \usage{
 hud_chas_place(
+  state,
   place,
-  year = format(Sys.Date(), "\%Y"),
+  year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY")
 )
 }
 \arguments{
+\item{state}{The state name, abbreviation, or fips code. Make sure if state fips is 1 digit number, do not include leading 0.}
+
 \item{place}{The place(Usually just cities) to query for. Must supply as a 5 digit geoid.}
 
 \item{year}{The years to query for.

@@ -94,7 +94,7 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(nrow(counties) > 1) {
     return(counties)
   }
-  stop("The key used might be invalid.")
+  stop("The key used might be invalid or could not find this county")
 }
 
 #' @name hud_places

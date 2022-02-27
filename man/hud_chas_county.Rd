@@ -4,11 +4,7 @@
 \alias{hud_chas_county}
 \title{hud_chas_county}
 \usage{
-hud_chas_county(
-  county,
-  year = format(Sys.Date(), "\%Y"),
-  key = Sys.getenv("HUD_KEY")
-)
+hud_chas_county(county, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{county}{The county to query for. Must supply a geoid. 2 digit state fip + 3 digit county fip. hud_counties() will show an extra 99999 at the end. Just remove that.}

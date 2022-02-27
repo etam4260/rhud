@@ -4,11 +4,7 @@
 \alias{hud_chas_state}
 \title{hud_chas_state}
 \usage{
-hud_chas_state(
-  state,
-  year = format(Sys.Date(), "\%Y"),
-  key = Sys.getenv("HUD_KEY")
-)
+hud_chas_state(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{state}{The state to query for. Can supply as abbreviation, whole name, or as geoid.}

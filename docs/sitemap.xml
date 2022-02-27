@@ -58,6 +58,21 @@
     <loc>/reference/hud_chas.html</loc>
   </url>
   <url>
+    <loc>/reference/hud_chas_county.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_chas_mcd.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_chas_nation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_chas_place.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_chas_state.html</loc>
+  </url>
+  <url>
     <loc>/reference/hud_cities.html</loc>
   </url>
   <url>
@@ -116,6 +131,9 @@
   </url>
   <url>
     <loc>/reference/hud_minor_civil_divisions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_places.html</loc>
   </url>
   <url>
     <loc>/reference/hud_states.html</loc>

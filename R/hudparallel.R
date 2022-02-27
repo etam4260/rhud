@@ -17,6 +17,7 @@
 #' @param cores The number of CPU cores to use when processing the requests.
 #' @keywords parallel
 #' @returns The dataframe collection of all the response bodies.
+#' @noRd
 parallelize_api_calls <- function(allqueries, cores = 1) {
   plan(multicore, workers = cores)
   comb = future_map(split(allqueries, seq(nrow(allqueries))), api_call)
@@ -29,6 +30,7 @@ parallelize_api_calls <- function(allqueries, cores = 1) {
 #' @param listed Each individual entry url to query for as well as index an meta data.
 #' @keywords call
 #' @returns The dataframe collection of all the response bodies.
+#' @noRd
 api_call <- function(listed) {
   call<-try(GET(as.character(listed['url']), add_headers(Authorization=paste("Bearer ", listed['key'])), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data

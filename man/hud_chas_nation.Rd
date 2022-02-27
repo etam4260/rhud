@@ -4,7 +4,7 @@
 \alias{hud_chas_nation}
 \title{hud_chas_nation}
 \usage{
-hud_chas_nation(year = format(Sys.Date(), "\%Y"), key = Sys.getenv("HUD_KEY"))
+hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{year}{The years to query for.
