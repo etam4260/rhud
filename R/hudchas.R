@@ -38,7 +38,7 @@ chas_input_check_cleansing <- function(query, year, key) {
 #' @param key The key obtain from HUD USER website.
 #' @returns A dataframe of all the response bodies.
 #' @noRd
-chas_do_query_calls <- function(allqueries) {
+chas_do_query_calls <- function(allqueries, key) {
   list_res <- c()
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
