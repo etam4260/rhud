@@ -15,22 +15,22 @@
 cw_input_check_cleansing <- function(query, year, quarter, key) {
   if(!is.vector(query) || !is.vector(year) || !is.vector(quarter) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
-  
+
   query <- paste(str_trim(as.character(query), side = "both"))
   year <- unique(paste(str_trim(as.character(year), side = "both")))
   quarter <- unique(paste(str_trim(as.character(quarter), side = "both")))
   key <- paste(str_trim(as.character(key), side = "both"))
-  
+
   numbers_only <- function(x) !grepl("\\D", x)
   if(FALSE %in% numbers_only(query)) stop("Query input must only be numbers.")
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   if(FALSE %in% numbers_only(quarter)) stop("Quarter input must only be numbers.")
-  
+
   if(!all(as.character(quarter) %in% c("1","2","3","4"))) stop("Quarters must be from 1 to 4.")
-  
+
   ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
          stop("A year specified seems to be in the future?"), "")
-  
+
   return(list(query, year, quarter, key))
 }
 
@@ -65,10 +65,10 @@ create_queries <- function(query, year, quarter) {
 #' @noRd
 cw_do_query_calls <- function(allqueries, type, primary_geoid, secondary_geoid, key) {
   list_res <- c()
- 
+
   for(i in 1:nrow(allqueries)) {
     URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", allqueries$query[i], "&year=", allqueries$year[i], "&quarter=", allqueries$quarter[i], sep="") #build URL
-  
+
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)), silent = TRUE) #try to make call
     cont<-try(content(call), silent = TRUE) #parse returned data
 
@@ -116,13 +116,13 @@ cw_do_query_calls <- function(allqueries, type, primary_geoid, secondary_geoid, 
 hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "tract"
-  
+
   args <- cw_input_check_cleansing(zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(zip) != 5) stop("Query input is not of length 5")
 
   # Create dataframe with all queries needed.
@@ -156,15 +156,15 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, 
 hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "county"
-  
+
   args <- cw_input_check_cleansing(zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(zip) != 5) stop("Query input is not of length 5")
-  
+
   # Create dataframe with all queries needed.
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -195,15 +195,15 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1,
 hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cbsa"
-  
+
   args <- cw_input_check_cleansing(zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(zip) != 5) stop("Query input is not of length 5")
-  
+
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -233,15 +233,15 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, k
 hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cbsadiv"
-  
+
   args <- cw_input_check_cleansing(zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(zip) != 5) stop("Query input is not of length 5")
-  
+
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -271,15 +271,15 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1
 hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cd"
-  
+
   args <- cw_input_check_cleansing(zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(zip) != 5) stop("Query input is not of length 5")
-  
+
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -310,15 +310,15 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key
 hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "tract"
   secondary_geoid <- "zip"
-  
+
   args <- cw_input_check_cleansing(tract, year, quarter, key)
   tract <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(tract) != 11) stop("Query input is not of length 11")
-  
+
   allqueries <- create_queries(tract, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -350,15 +350,15 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1
 hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "county"
   secondary_geoid <- "zip"
-  
+
   args <- cw_input_check_cleansing(county, year, quarter, key)
   county <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(county) != 5) stop("Query input is not of length 5")
-  
+
   allqueries <- create_queries(county, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -390,15 +390,15 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter =
 hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cbsa"
   secondary_geoid <- "zip"
-  
+
   args <- cw_input_check_cleansing(cbsa, year, quarter, key)
   cbsa <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(cbsa) != 5) stop("Query input is not of length 5")
-  
+
   allqueries <- create_queries(cbsa, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -428,15 +428,15 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, 
 hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cbsadiv"
   secondary_geoid <- "zip"
-  
+
   args <- cw_input_check_cleansing(cbsadiv, year, quarter, key)
   cbsadiv <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(cbsadiv) != 5) stop("Query input is not of length 5")
-  
+
   allqueries <- create_queries(cbsadiv, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -467,15 +467,15 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter
 hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cd"
   secondary_geoid <- "zip"
-  
+
   args <- cw_input_check_cleansing(cd, year, quarter, key)
   cd <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(cd) != 4) stop("Query input is not of length 4")
-  
+
   allqueries <- create_queries(cd, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -505,15 +505,15 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, key 
 hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "countysub"
-  
+
   args <- cw_input_check_cleansing(zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
+
   if(nchar(zip) != 5) stop("Query input is not of length 5")
-  
+
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
@@ -543,15 +543,15 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter =
 hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "countysub"
   secondary_geoid <- "zip"
-  
+
   args <- cw_input_check_cleansing(countysub, year, quarter, key)
   countysub <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
   key <- args[[4]]
-  
-  if(nchar(countysub) != 10) stop("Query input is not of length 5")
-  
+
+  if(nchar(countysub) != 10) stop("Query input is not of length 10")
+
   allqueries <- create_queries(countysub, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.

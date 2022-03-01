@@ -19,10 +19,11 @@ URL: https://github.com/etam4260/hudr
 BugReports: https://github.com/etam4260/hudr/issues
 Suggests: 
     covr,
+    httptest,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
-Imports:
+Imports: 
     httr,
     stringr,
     devtools,
