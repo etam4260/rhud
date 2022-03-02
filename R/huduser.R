@@ -1,8 +1,5 @@
 #' @import httr
-#' @import stringr
-#' @import tidyverse
 #' @import future
-#' @import R.utils
 
 # Implementation thought process was adapted from:
 # https://github.com/dteck/HUD
@@ -17,6 +14,20 @@
 # Fair Markets Rent
 # Income Limits
 # Comprehensive and Housing Affordability Strategy
+
+# capitalize should be in another folder.
+
+
+#' @name capitalize
+#' @title capitalize
+#' @description Returns first character capitalized in string.
+#' @param string A character
+#' @returns A string with only first letter in string capitalized. Does not capitalize all words in a sentence.
+#' @noRd
+capitalize <- function(string) {
+  return(paste(toupper(substr(string,1,1)), substr(string, 2, nchar(string)), sep = ""))
+}
+
 
 #' @name hud_cw
 #' @title hud_cw
@@ -103,11 +114,11 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
   thisyear <- NULL
 
   # Removing leading and ending spaces and converting all integer inputs to characters
-  type <- paste(str_trim(as.character(type), side = "both"))
-  query <- paste(str_trim(as.character(query), side = "both"))
-  year <- unique(paste(str_trim(as.character(year), side = "both")))
-  quarter <- unique(paste(str_trim(as.character(quarter), side = "both")))
-  key <- paste(str_trim(as.character(key), side = "both"))
+  type <- paste(trimws(as.character(type), which = "both"))
+  query <- paste(trimws(as.character(query), which = "both"))
+  year <- unique(paste(trimws(as.character(year), which = "both")))
+  quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
+  key <- paste(trimws(as.character(key), which = "both"))
 
   numbers_only <- function(x) !grepl("\\D", x)
   if(FALSE %in% numbers_only(type)) stop("Type input must only be numbers.")
@@ -120,7 +131,7 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
 
-  ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
+  ifelse(any(as.integer(year) > as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
          stop("A year specified seems to be in the future?"), "")
   ifelse(as.integer(type) < 1 || as.integer(type) > 12,
          stop("The type input is not in the range of 1-12"), "")
@@ -152,6 +163,7 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
   allqueries$type <- type
   allqueries$query <- query
 
+  # Technical Debt: This bit of code is for making a call for parallel compute. Just experiemental...
   # allqueries$url <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, as.vector(outer(paste('&year=', year, sep = ""), paste('&quarter=', quarter, sep = ""), paste, sep="")), sep="") #build URL
   # allqueries$key <- key
   # if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries) else use_cores <- availableCores() - 1
@@ -216,9 +228,9 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
 
   # Removing leading and ending spaces and converting all integer inputs
   # to characters
-  query <- paste(str_trim(as.character(query), side = "both"))
-  year <- unique(paste(str_trim(as.character(year), side = "both")))
-  key <- paste(str_trim(as.character(key), side = "both"))
+  query <- paste(trimws(as.character(query), which = "both"))
+  year <- unique(paste(trimws(as.character(year), which = "both")))
+  key <- paste(trimws(as.character(key), which = "both"))
 
   if(key == "") stop("Did you forget to set the key?")
   if(nchar(query) == 2) query = toupper(query)
@@ -243,7 +255,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   # the "range" of acceptable values.
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
 
-  ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
+  ifelse(any(as.integer(year) > as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
          stop("A year specified seems to be in the future?"), "")
 
   if(nchar(as.character(query)) == 10) {
@@ -260,6 +272,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
     "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
 
+  # Technical Debt: This bit of code is for making a call for parallel compute. Just experiemental...
   #if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
 
   list_res <- c()
@@ -332,9 +345,9 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
   querytype <- NULL
 
   # Removing leading and ending spaces and converting all integer inputs to characters
-  query <- paste(str_trim(as.character(query), side = "both"))
-  year <- unique(paste(str_trim(as.character(year), side = "both")))
-  key <- paste(str_trim(as.character(key), side = "both"))
+  query <- paste(trimws(as.character(query), which = "both"))
+  year <- unique(paste(trimws(as.character(year), which = "both")))
+  key <- paste(trimws(as.character(key), which = "both"))
   numbers_only <- function(x) !grepl("\\D", x)
 
   if(key == "") stop("Did you forget to set the key?")
@@ -359,7 +372,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
-  ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
+  ifelse(any(as.integer(year) > as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
          stop("A year specified seems to be in the future?"), "")
 
   if(nchar(as.character(query)) == 10) {
@@ -378,6 +391,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
 
   list_res <- c()
 
+  # Technical Debt: This bit of code is for making a call for parallel compute. Just experimental...
   #f(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
 
   for(i in 1:nrow(allqueries)) {
@@ -473,11 +487,11 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
   )
 
   # Removing leading and ending spaces and converting all integer inputs to characters
-  type <- paste(str_trim(as.character(type), side = "both"))
-  stateId <- paste(str_trim(as.character(stateId), side = "both"))
-  entityId <- paste(str_trim(as.character(entityId), side = "both"))
-  year <- unique(paste(str_trim(as.character(year), side = "both")))
-  key <- paste(str_trim(as.character(key), side = "both"))
+  type <- paste(trimws(as.character(type), which = "both"))
+  stateId <- paste(trimws(as.character(stateId), which = "both"))
+  entityId <- paste(trimws(as.character(entityId), which = "both"))
+  year <- unique(paste(trimws(as.character(year), which = "both")))
+  key <- paste(trimws(as.character(key), which = "both"))
   numbers_only <- function(x) !grepl("\\D", x)
 
   # Check for if years are proper input
@@ -511,6 +525,7 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
     allqueries <- data.frame(url = URL, year = year, stateId = stateId, entityId = entityId)
   }
 
+  # Technical Debt: This bit of code is for making a call for parallel compute. Just experiemental...
   # allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
   #   "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
   #if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)

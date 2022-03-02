@@ -1,5 +1,4 @@
 #' @import httr
-#' @import stringr
 
 #' @name cw_input_check_cleansing
 #' @title cw_input_check_cleansing
@@ -16,10 +15,10 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
   if(!is.vector(query) || !is.vector(year) || !is.vector(quarter) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
 
-  query <- paste(str_trim(as.character(query), side = "both"))
-  year <- unique(paste(str_trim(as.character(year), side = "both")))
-  quarter <- unique(paste(str_trim(as.character(quarter), side = "both")))
-  key <- paste(str_trim(as.character(key), side = "both"))
+  query <- paste(trimws(as.character(query), which = "both"))
+  year <- unique(paste(trimws(as.character(year), which = "both")))
+  quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
+  key <- paste(trimws(as.character(key), which = "both"))
 
   numbers_only <- function(x) !grepl("\\D", x)
   if(FALSE %in% numbers_only(query)) stop("Query input must only be numbers.")
@@ -28,7 +27,7 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
 
   if(!all(as.character(quarter) %in% c("1","2","3","4"))) stop("Quarters must be from 1 to 4.")
 
-  ifelse(any(as.integer(year) > as.integer(str_split(Sys.Date(), "-")[[1]][1])),
+  ifelse(any(as.integer(year) > as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
          stop("A year specified seems to be in the future?"), "")
 
   return(list(query, year, quarter, key))

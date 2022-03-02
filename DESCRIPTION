@@ -15,7 +15,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2.9000
-URL: https://github.com/etam4260/hudr
+URL: https://github.com/etam4260/hudr, https://etam4260.github.io/hudr/index.html
 BugReports: https://github.com/etam4260/hudr/issues
 Suggests: 
     covr,
@@ -25,14 +25,12 @@ Suggests:
     testthat (>= 3.0.0)
 Imports: 
     httr,
-    stringr,
     devtools,
     tidyverse,
     zoo,
     rio,
     future,
-    furrr,
-    R.utils
+    furrr
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 ByteCompile: true

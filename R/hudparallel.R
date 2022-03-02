@@ -4,11 +4,14 @@
 # Modern computers contain multiple cores which can be utilized for parallel
 # computing. Making multiple API calls is a good example of where
 # parallel computing can be exploited or else we would be wasting
-# compute power. Even Raspberry Pis have 4 cores.
+# compute power.
 
 # One of the many problems with parallel computing is determining the optimal
 # number of cores for a particular task. Where does the overhead of adding more
 # cores begin to deteriorate overall performance time pertaining to API calls?
+
+# Technical Debt: This file of code is for making a call for parallel compute.
+# Just experimental right now... Should make a separate branch for it.
 
 #' @name parallelize_api_calls
 #' @title parallelize_api_calls

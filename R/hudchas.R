@@ -1,5 +1,4 @@
 #' @import httr
-#' @import stringr
 
 #' @name chas_input_check_cleansing
 #' @title chas_input_check_cleansing
@@ -15,15 +14,15 @@ chas_input_check_cleansing <- function(query, year, key) {
   if(!is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key?")
 
-  year <- unique(paste(str_trim(as.character(year), side = "both")))
-  key <- paste(str_trim(as.character(key), side = "both"))
+  year <- unique(paste(trimws(as.character(year), which = "both")))
+  key <- paste(trimws(as.character(key), which = "both"))
   if(!all(year %in% c("2014-2018","2013-2017","2012-2016","2011-2015","2010-2014",
                       "2009-2013","2008-2012","2007-2011","2006-2010"))) stop("Years specified are not allowed. Check the documentation.")
 
   if(!missing(query)) {
     if(!is.vector(query)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
 
-    query <- paste(str_trim(as.character(query), side = "both"))
+    query <- paste(trimws(as.character(query), which = "both"))
     return(list(query, year, key))
   }
   return(list(year, key))
