@@ -25,8 +25,8 @@ Suggests:
     testthat (>= 3.0.0)
 Imports: 
     httr,
+    stringr,
     devtools,
-    tidyverse,
     zoo,
     rio,
     future,

@@ -8,6 +8,7 @@ hud_cw_cbsadiv_zip(
   cbsadiv,
   year = format(Sys.Date(), "\%Y"),
   quarter = 1,
+  minimal = FALSE,
   key = Sys.getenv("HUD_KEY")
 )
 }

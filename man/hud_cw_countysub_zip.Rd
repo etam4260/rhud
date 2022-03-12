@@ -8,6 +8,7 @@ hud_cw_countysub_zip(
   countysub,
   year = format(Sys.Date(), "\%Y"),
   quarter = 1,
+  minimal = FALSE,
   key = Sys.getenv("HUD_KEY")
 )
 }

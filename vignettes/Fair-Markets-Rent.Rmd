@@ -66,10 +66,6 @@ within the state. A (state fip + county fip + county subdivision) 10 digit code
 will return a 1 row data frame for that county. A CBSA code will also return a 1 
 row data frame for that area. 
 
-```{r, echo=FALSE} 
-Sys.setenv("HUD_KEY" = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjhmOTJkOWUxYTE4MTdjNzliMTJhZDljMGI1OWVkMTYwYWY1MTAxOGZhZjRhZGM0NTc1MjZkZjE0YmQ4ODY4MTA5ZGQ3YjhiODgxYmE0OTMzIn0.eyJhdWQiOiI2IiwianRpIjoiOGY5MmQ5ZTFhMTgxN2M3OWIxMmFkOWMwYjU5ZWQxNjBhZjUxMDE4ZmFmNGFkYzQ1NzUyNmRmMTRiZDg4NjgxMDlkZDdiOGI4ODFiYTQ5MzMiLCJpYXQiOjE2NDUwNzA0MjksIm5iZiI6MTY0NTA3MDQyOSwiZXhwIjoxOTYwNjAzMjI5LCJzdWIiOiIyOTA3NCIsInNjb3BlcyI6W119.Kc6EJW68m7tjs6Oa0ecOWqAbp0qa1tp9uCb25JhmAhBu-g9JM44bFOKixiCSRUauZb63vAf6t9o-rEHFn-Lsew")
-```
-
 #### US States
 This is an example to show you how to query for all states in the US.
 ```{r, eval=FALSE}

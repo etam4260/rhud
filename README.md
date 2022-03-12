@@ -25,8 +25,13 @@ downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.
     certified by HUD User.
 
 The goal of this project is to provide an easy to use interface to
-access various open source APIs using the RESTFUL interface provided by
-HUD.
+access various open source APIs provided by the U.S Housing and Urban
+Development. These include the USPS Crosswalk Files, Fair Markets Rent,
+Income Limits, and Comprehensive Housing and Affordability Strategy.
+Although HUD does provide datasets for other programs, they are
+currently not supported by an API.
+
+Hopefully they will implement the other ones.
 
 HUD has two main websites for gaining access to various different data
 sets: HUD User and Exchange.

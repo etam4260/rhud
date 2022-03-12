@@ -78,6 +78,11 @@ cw_do_query_calls <- function(allqueries, type, primary_geoid, secondary_geoid, 
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
       res$quarter <- allqueries$quarter[i]
+      res[1] <- unlist(res[1])
+      res[2] <- unlist(res[2])
+      res[3] <- unlist(res[3])
+      res[4] <- unlist(res[4])
+      res[5] <- unlist(res[5])
       list_res[[i]] <- res
     }
   }
@@ -104,6 +109,7 @@ cw_do_query_calls <- function(allqueries, type, primary_geoid, secondary_geoid, 
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -112,7 +118,7 @@ cw_do_query_calls <- function(allqueries, type, primary_geoid, secondary_geoid, 
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "tract"
 
@@ -128,7 +134,8 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, 
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "1", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "1", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "1", primary_geoid, secondary_geoid, key)$tract)
 }
 
 
@@ -144,6 +151,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -152,7 +160,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "county"
 
@@ -168,7 +176,8 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1,
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "2", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "2", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "2", primary_geoid, secondary_geoid, key)$county)
 }
 
 #' @name hud_cw_zip_cbsa
@@ -183,6 +192,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1,
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -191,7 +201,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1,
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cbsa"
 
@@ -206,7 +216,8 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, k
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "3", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "3", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "3", primary_geoid, secondary_geoid, key)$cbsa)
 }
 
 #' @name hud_cw_zip_cbsadiv
@@ -221,6 +232,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, k
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -229,7 +241,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, k
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cbsadiv"
 
@@ -244,7 +256,8 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "4", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "4", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "4", primary_geoid, secondary_geoid, key)$cbsadiv)
 }
 
 #' @name hud_cw_zip_cd
@@ -259,6 +272,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -267,7 +281,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cd"
 
@@ -282,7 +296,8 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "5", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "5", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "5", primary_geoid, secondary_geoid, key)$cd)
 }
 
 #' @name hud_cw_tract_zip
@@ -298,6 +313,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -306,7 +322,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "tract"
   secondary_geoid <- "zip"
 
@@ -321,7 +337,8 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1
   allqueries <- create_queries(tract, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "6", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "6", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "6", primary_geoid, secondary_geoid, key)$zip)
 }
 
 
@@ -338,6 +355,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -346,7 +364,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "county"
   secondary_geoid <- "zip"
 
@@ -361,7 +379,8 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter =
   allqueries <- create_queries(county, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "7", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "7", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "7", primary_geoid, secondary_geoid, key)$zip)
 }
 
 
@@ -378,6 +397,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter =
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -386,7 +406,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter =
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cbsa"
   secondary_geoid <- "zip"
 
@@ -401,7 +421,8 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, 
   allqueries <- create_queries(cbsa, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "8", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "8", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "8", primary_geoid, secondary_geoid, key)$zip)
 }
 
 #' @name hud_cw_cbsadiv_zip
@@ -416,6 +437,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -424,7 +446,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cbsadiv"
   secondary_geoid <- "zip"
 
@@ -439,7 +461,8 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter
   allqueries <- create_queries(cbsadiv, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "9", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "9", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "9", primary_geoid, secondary_geoid, key)$zip)
 }
 
 #' @name hud_cw_cd_zip
@@ -455,6 +478,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -463,7 +487,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cd"
   secondary_geoid <- "zip"
 
@@ -478,7 +502,8 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, key 
   allqueries <- create_queries(cd, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "10", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "10", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "10", primary_geoid, secondary_geoid, key)$zip)
 }
 
 #' @name hud_cw_zip_countysub
@@ -493,6 +518,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, key 
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -501,7 +527,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, key 
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "countysub"
 
@@ -516,7 +542,8 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter =
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "11", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "11", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "11", primary_geoid, secondary_geoid, key)$countysub)
 }
 
 #' @name hud_cw_countysub_zip
@@ -531,6 +558,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter =
 #'   current year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -539,7 +567,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter =
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date(), "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "countysub"
   secondary_geoid <- "zip"
 
@@ -554,5 +582,11 @@ hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date(), "%Y"), qua
   allqueries <- create_queries(countysub, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
   # The functions in this file should follow that order.
-  return(cw_do_query_calls(allqueries, "12", primary_geoid, secondary_geoid, key))
+  if(!minimal) return(cw_do_query_calls(allqueries, "12", primary_geoid, secondary_geoid, key))
+  return(cw_do_query_calls(allqueries, "12", primary_geoid, secondary_geoid, key)$zip)
 }
+
+
+
+
+
