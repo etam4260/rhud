@@ -348,6 +348,15 @@
 <span class="co">#&gt;     zip res_ratio bus_ratio oth_ratio tot_ratio  countysub year quarter</span>
 <span class="co">#&gt; 1 57376         1         1         0         1 4606720300 2019       4</span></code></pre></div>
 </div>
+<div class="section level4">
+<h4 id="querying-for-only-the-crosswalked-geoids">Querying for only the Crosswalked GEOIDs<a class="anchor" aria-label="anchor" href="#querying-for-only-the-crosswalked-geoids"></a>
+</h4>
+<p>If you just want the crosswalked GEOIDs, you can set the MINIMAL argument to TRUE. This will return a vector containing the crosswalked GEOIDs without the extra metadata.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_county_zip.html">hud_cw_county_zip</a></span><span class="op">(</span>county <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>, minimal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt;  [1] "71052" "71078" "71049" "71032" "71027" "71030" "71046" "71063" "71419"</span>
+<span class="co">#&gt; [10] "71065"</span></code></pre></div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="input-arguments">Input Arguments<a class="anchor" aria-label="anchor" href="#input-arguments"></a>
@@ -421,6 +430,7 @@
 <li>quarter = c(1)</li>
 <li>quarter = 4</li>
 </ul>
+<p><strong>MINIMAL</strong>: If TRUE, returns just the intersecting GEOIDs that are crosswalked with the queried geoid.</p>
 <p><strong>KEY</strong>: The API key provided by HUD.</p>
 <ul>
 <li>key = “wqokqo2138jdi13wfwwfwcytjyr”</li>

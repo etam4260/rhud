@@ -31,54 +31,52 @@ Affordability API.
 
 This function returns a single row data frame for each query.
 
+#### CHAS for Nation
 ```{r, eval=FALSE}
-library(hudr)
+  library(hudr)
+  hud_chas_nation(year=c("2014-2018"))
+```
+#### CHAS for State
+```{r, eval=FALSE}
+  # Queries for CHAS in a state
+  hud_chas_state("Maryland", year=c("2012-2016"))
+```
 
-# Nation
-hud_chas(1)
+#### CHAS for County
+```{r, eval=FALSE}
+  # Query a county in Virginia
+  hud_chas_county("51999", year=c("2014-2018"))
+```
 
-# State
-hud_chas('2', stateId = '56')
+#### CHAS for MCD
+```{r, eval=FALSE}
+  # Queries for Virginia MCD
+  hud_chas_mcd("VA", "94087")
+```
 
-# County
-hud_chas('3','51','199')
-
-# MCD
-hud_chas('4', '51', 94087)
-
-# City(Place)
-hud_chas('5', '51', 48996)
+#### CHAS for Place
+```{r, eval=FALSE}
+  # Queries for place in Virginia
+  hud_chas_place("51", 48996)
 ```
 
 ### Input Arguments
 
-**TYPE** Must be a number between 1 and 5 depending on the specificity of the
-region.
-
-    1) Nation
-    2) State
-    3) County
-    4) MCD
-    5) Place
-
-**STATEID** If type is 2-5, you must specify the state fips code from 0-56.
+**STATEID** If querying for state, county, place, or MCD, you must specify the state either as abbreviation, state name, or state code.
 
   stateId = 34
-  stateId = 30
-  stateId = 1
+  stateId = "VA"
+  stateId = "Virginia"
 
-**ENTITYID** If type is 3-5, you must specify either the county, mcd, or place,
-respectively.
+**ENTITYID** If querying for county, place, or MCD, you must specify either the county, mcd, or place,
+respectively using their codes.
     
-  - This will correspond to the county fips code of 039
-  - Use hud_counties("VA") to find fips codes for the state of Virginia
-  entityId = 39
-  
-  - Use hud_minor_civil_divisions("VA") to find MCD codes for the state of Virginia
-  entityId = 93927
-  
-  Use hud_cities("VA") to find city codes for the state of Virginia
-  entityId = 48996
+  - 51999 Corresponds to a County in Virginia
+  - Run hud_counties("VA") to get all counties in Virginia
+  - 94087 Corresponds to a MCD in Virginia
+  - Run hud_minor_civil_divisions("VA") to get all minor civil divisions in Virginia
+  - 48996 Corresponds to a Place in Virginia
+  - Run hud_places("VA") to get all places in Virginia
     
 **YEAR** Year range of the data to retrieve. Default is latest year range.
 
@@ -91,11 +89,20 @@ respectively.
   * year = "2008-2012"
   * year = "2007-2011"
   * year = "2006-2010"
+  
+**KEY**: The API key provided by HUD.
+
+  * key = "wqokqo2138jdi13wfwwfwcytjyr"
 
 ### Output Data
 
 I recommend checking out https://www.huduser.gov/portal/dataset/chas-api.html
 for more details as the fields returned require a fair level of domain knowledge.
+
+"HAMFI means HUD area median family income. This is the median family income
+calculated by HUD for each jurisdiction, in order to determine fair market rents
+and income limits for HUD programs
+(https://www.lawinsider.com/dictionary/hamfi)."
 
 A1	Household Income <= 30% HAMFI (Owner Occupied)
 

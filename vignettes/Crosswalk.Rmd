@@ -140,6 +140,15 @@ hud_cw_zip_countysub(zip = '35213', year = c('2019'), quarter = c('2'))
 hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019'), quarter = c('4','4'))
 ```
 
+#### Querying for only the Crosswalked GEOIDs
+
+If you just want the crosswalked GEOIDs, you can set the MINIMAL argument to TRUE.
+This will return a vector containing the crosswalked GEOIDs without the extra metadata.
+
+```{r, eval = TRUE}
+hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'), minimal = TRUE)
+```
+
 ### Input Arguments
 
 1) zip-tract [Zip -> Tract][]
@@ -215,6 +224,9 @@ quarter. (Can be type of character or numeric)
   * quarter = c(1,2,3,4)
   * quarter = c(1)
   * quarter = 4
+
+**MINIMAL**: If TRUE, returns just the intersecting GEOIDs that are 
+crosswalked with the queried geoid.   
   
 **KEY**: The API key provided by HUD.
 
