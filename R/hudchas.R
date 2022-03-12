@@ -51,12 +51,13 @@ chas_do_query_calls <- function(allqueries, key) {
       warning(paste("Could not find data for query:", allqueries[i],
                     ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
-      list_res[[i]] <- cont[[1]]
+      list_res[[i]] <- unlist(cont[[1]])
     }
   }
 
   if(length(list_res) != 0) {
-    return(as.data.frame(do.call(rbind, list_res)))
+    res <- as.data.frame(do.call(rbind, list_res))
+    return(res)
   }
   return(NULL)
 }

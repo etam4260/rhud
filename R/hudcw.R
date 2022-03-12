@@ -585,8 +585,3 @@ hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date(), "%Y"), qua
   if(!minimal) return(cw_do_query_calls(allqueries, "12", primary_geoid, secondary_geoid, key))
   return(cw_do_query_calls(allqueries, "12", primary_geoid, secondary_geoid, key)$zip)
 }
-
-
-
-
-

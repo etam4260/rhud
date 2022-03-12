@@ -182,6 +182,11 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
       res$quarter <- allqueries$quarter[i]
+      res[1] <- unlist(res[1])
+      res[2] <- unlist(res[2])
+      res[3] <- unlist(res[3])
+      res[4] <- unlist(res[4])
+      res[5] <- unlist(res[5])
       list_res[[i]] <- res
     }
   }
@@ -545,12 +550,13 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
                     type, ", year equals ",allqueries$year[i],
                     ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
     } else {
-      list_res[[i]] <- cont[[1]]
+      list_res[[i]] <- unlist(cont[[1]])
     }
   }
 
   if(length(list_res) != 0) {
-    return(as.data.frame(do.call(rbind, list_res)))
+    res <- do.call(rbind, list_res)
+    return(as.data.frame(res))
   }
   return(NULL)
 }
