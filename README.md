@@ -136,7 +136,7 @@ bar.
 
 ## Disclaimers
 
--   License: MIT
+-   License: GPL &gt;= 2
 -   To get citation information for hudr in R, type citation(package =
     ‘hudr’)
 -   This interface uses the HUD User Data API but is not endorsed or

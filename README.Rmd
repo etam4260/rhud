@@ -129,7 +129,7 @@ https://etam4260.github.io/hudr/. Select [Setup] in the navigation bar.
 
 ## Disclaimers
 
-* License: MIT
+* License: GPL >= 2
 * To get citation information for hudr in R, type citation(package = 'hudr')
 * This interface uses the HUD User Data API but is not endorsed or certified by HUD User.
 * The limit on the maximum number of API calls is 1200 queries a min.
