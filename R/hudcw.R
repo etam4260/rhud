@@ -20,7 +20,6 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
   quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
-  numbers_only <- function(x) !grepl("\\D", x)
   if(FALSE %in% numbers_only(query)) stop("Query input must only be numbers.")
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   if(FALSE %in% numbers_only(quarter)) stop("Quarter input must only be numbers.")
@@ -546,6 +545,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"), qua
   if(!minimal) return(cw_do_query_calls(allqueries, "11", primary_geoid, secondary_geoid, key))
   return(cw_do_query_calls(allqueries, "11", primary_geoid, secondary_geoid, key)$countysub)
 }
+
 
 #' @name hud_cw_countysub_zip
 #' @title hud_cw_countysub_zip

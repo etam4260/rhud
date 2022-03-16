@@ -120,7 +120,6 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter =
   quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
-  numbers_only <- function(x) !grepl("\\D", x)
   if(FALSE %in% numbers_only(type)) stop("Type input must only be numbers.")
   if(FALSE %in% numbers_only(query)) stop("Query input must only be numbers.")
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
@@ -228,7 +227,6 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.gete
   call <- NULL
   cont <- NULL
   querytype <- NULL
-  numbers_only <- function(x) !grepl("\\D", x)
 
   # Removing leading and ending spaces and converting all integer inputs
   # to characters
@@ -352,7 +350,6 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.geten
   query <- paste(trimws(as.character(query), which = "both"))
   year <- unique(paste(trimws(as.character(year), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
-  numbers_only <- function(x) !grepl("\\D", x)
 
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
   if(nchar(query) == 2) query = toupper(query)
@@ -496,7 +493,6 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
   entityId <- paste(trimws(as.character(entityId), which = "both"))
   year <- unique(paste(trimws(as.character(year), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
-  numbers_only <- function(x) !grepl("\\D", x)
 
   # Check for if years are proper input
   if(!all(year %in% c("2014-2018","2013-2017","2012-2016","2011-2015","2010-2014",

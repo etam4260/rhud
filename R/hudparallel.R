@@ -30,7 +30,7 @@ parallelize_api_calls <- function(allqueries, cores = 1) {
 #' @name api_call
 #' @title api_call
 #' @description Make API calls.
-#' @param listed Each individual entry url to query for as well as index an meta data.
+#' @param listed Each individual entry url to query for as well as index as meta data.
 #' @keywords call
 #' @returns The dataframe collection of all the response bodies.
 #' @noRd

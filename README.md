@@ -13,13 +13,18 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 [![R-CMD-check](https://github.com/etam4260/hudr/workflows/R-CMD-check/badge.svg)](https://github.com/etam4260/hudr/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/etam4260/hudr/branch/main/graph/badge.svg)](https://codecov.io/gh/etam4260/hudr?branch=main)
+<br/> <br/> [![devel
+version](https://img.shields.io/badge/devel%20version-0.0.0.9000-yellow)]()
 [![cran
 version](https://www.r-pkg.org/badges/version/hudr)](https://cran.r-project.org/package=hudr)
 [![cran
 checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs/hudr)
-[![rstudio mirror
+<br/> <br/> [![rstudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
+
 <!-- badges: end -->
+
+## Housing and Urban Development in R
 
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
@@ -30,8 +35,6 @@ Development. These include the USPS Crosswalk Files, Fair Markets Rent,
 Income Limits, and Comprehensive Housing and Affordability Strategy.
 Although HUD does provide datasets for other programs, they are
 currently not supported by an API.
-
-Hopefully they will implement the other ones.
 
 HUD has two main websites for gaining access to various different data
 sets: HUD User and Exchange.

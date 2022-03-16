@@ -52,6 +52,18 @@
     <loc>/reference/api_call.html</loc>
   </url>
   <url>
+    <loc>/reference/crosswalk.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fix_county_fips.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fix_fips.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fix_state_fips.html</loc>
+  </url>
+  <url>
     <loc>/reference/hud_cdbg.html</loc>
   </url>
   <url>
@@ -142,6 +154,12 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/numbers_only.html</loc>
+  </url>
+  <url>
     <loc>/reference/parallelize_api_calls.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simple_detect_geoid_in_data.html</loc>
   </url>
 </urlset>
