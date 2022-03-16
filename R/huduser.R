@@ -33,7 +33,7 @@ capitalize <- function(string) {
 #' @title hud_cw
 #' @description This function queries the Crosswalks API provided by
 #'   US Department of Housing and Urban Development.
-#' @param type Must be a number between 1 and 12 depending on the Crosswalk type.
+#' @param type Must be a number between 1 and 12 depending on the Crosswalk type. You can also supply the string name.
 #'   1) zip-tract
 #'   2) zip-county
 #'   3) zip-cbsa
@@ -66,7 +66,7 @@ capitalize <- function(string) {
 #'   10-digit GEOID for the County sub Eg: 4606720300 for type 12
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up for
@@ -77,10 +77,10 @@ capitalize <- function(string) {
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
+hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter = 1,
                    key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(type) || !is.vector(query) || !is.vector(year) || !is.vector(quarter) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
   alltypes <- c("zip-tract","zip-county","zip-cbsa",
                 "zip-cbsadiv","zip-cd","tract-zip",
@@ -172,10 +172,10 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
   list_res <- c()
   for(i in 1:nrow(allqueries)) {
     URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, "&year=", allqueries$year[i], "&quarter=", allqueries$quarter[i], sep="") #build URL
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
+    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
     cont<-try(content(call), silent = TRUE) #parse returned data
     if('error' %in% names(cont[[1]])) {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ", and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ", and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$results))
       res$type <- allqueries$type[i]
@@ -209,7 +209,7 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
 #'   state abbreviation, or CBSA code.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @keywords Crosswalks API
@@ -223,7 +223,7 @@ hud_cw <- function(type, query, year = format(Sys.Date(), "%Y"), quarter = 1,
 #'   For state level data, these measurements will be the same as county level
 #'   data, but will return a dataframe with the individual measurements for each
 #'   individual county within the state.
-hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD_KEY")) {
+hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(query) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   URL <- NULL
   call <- NULL
@@ -237,7 +237,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
   year <- unique(paste(trimws(as.character(year), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
   if(nchar(query) == 2) query = toupper(query)
   if(nchar(query) > 2) query = capitalize(query)
   if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
@@ -287,12 +287,12 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
     URL <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(querytype == "state")
       "statedata/" else "data/", query, "?year=", allqueries$year[i], sep="") #build URL
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
-                                                       as.character(key))), timeout(30)),
+                                                       as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
     if('error' %in% names(cont)) {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
       if(querytype == "state") {
         res <- as.data.frame(do.call(rbind, cont$data$counties))
@@ -331,7 +331,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
 #'   state abbreviation, or CBSA code.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Income Limits API
@@ -342,7 +342,7 @@ hud_fmr <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HU
 #'   year, median_income, very_low+, extremely_low+, and low+. For more details
 #'   about these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/fmr-api.html
-hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD_KEY")) {
+hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(query) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   URL <- NULL
   call <- NULL
@@ -355,7 +355,7 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
   key <- paste(trimws(as.character(key), which = "both"))
   numbers_only <- function(x) !grepl("\\D", x)
 
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
   if(nchar(query) == 2) query = toupper(query)
   if(nchar(query) > 2) query = capitalize(query)
   if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
@@ -404,14 +404,14 @@ hud_il <- function(query, year = format(Sys.Date(), "%Y"), key = Sys.getenv("HUD
     URL <- paste("https://www.huduser.gov/hudapi/public/il/", if(querytype == "state")
       "statedata/" else "data/", query, "?year=", allqueries$year[i], sep="") #build URL
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
-                                                       as.character(key))), timeout(30)),
+                                                       as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for inputted query, year, or quarter where query equals ",
                     query, ", year equals ",allqueries$year[i],
-                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
 
       if(querytype == "state") {
@@ -477,7 +477,7 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
   call <- NULL
   cont <- NULL
 
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
   # Allow user to specify the string too.
   type = switch(tolower(type),
@@ -540,7 +540,7 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
     call<-try(GET(allqueries$url[i], add_headers(Authorization=paste("Bearer ",
-                                                       as.character(key))), timeout(30)),
+                                                       as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
@@ -548,7 +548,7 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for inputted type where type equals",
                     type, ", year equals ",allqueries$year[i],
-                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
       list_res[[i]] <- unlist(cont[[1]])
     }

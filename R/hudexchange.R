@@ -1,21 +1,18 @@
 #' @import rio
 #' @import zoo
 
-# An R interface for accessing HUD EXCHANGE (US Department of Housing and Urban Development)
+# A R interface for accessing HUD EXCHANGE (US Department of Housing and Urban Development)
 # DRGR Datasets at https://drgr.hud.gov/public/index.html#
 # The HUD EXCHANGE has three main datasets:
 # CDBG-DR (Community Development Block Grant - Disaster Recovery)
 # NSP (Neighborhood Stabilization Program)
 # RIF (Rural Innovation Fund)
 
-# We don't cover NSP here because it is covered in the HUD USER.
-
 # Currently there is no data for RIF (Rural Innovation Fund) and therefore
 # there are no functions to grab that data. A main issue with these datasets
 # is that the information is not provided in a tabular format, but rather as
 # dictionary-like. These scripts will unroll those fields and format it into
 # a dataframe.
-
 
 #' @name hud_cdbg
 #' @title hud_cdbg

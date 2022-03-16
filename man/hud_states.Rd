@@ -11,9 +11,9 @@ hud_states(key = Sys.getenv("HUD_KEY"))
 an account and request for an API key.}
 }
 \value{
-A dataframe containing details of all the states in the US
+A dataframe containing details of all the states in the US.
 }
 \description{
-Get a list of state along with the corresponding FIPs code and abbreviation
+Get a list of state along with the corresponding FIPs code and abbreviation.
 }
 \keyword{States}

@@ -1,5 +1,6 @@
 #' @import httr
 
+
 # Misc APIs provided by the HUD to gain insights into what the user
 # can query for in the main APIs
 # List States
@@ -13,16 +14,16 @@ pkg.env <- new.env(parent = emptyenv())
 
 #' @name hud_states
 #' @title hud_states
-#' @description Get a list of state along with the corresponding FIPs code and abbreviation
+#' @description Get a list of state along with the corresponding FIPs code and abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords States
 #' @export
-#' @returns A dataframe containing details of all the states in the US
+#' @returns A dataframe containing details of all the states in the US.
 hud_states <- function(key = Sys.getenv("HUD_KEY")) {
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listStates") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   states <- as.data.frame(do.call(rbind, cont))
   states$state_num <- as.character(as.integer(states$state_num))
@@ -36,18 +37,18 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_metropolitan
 #' @title hud_metropolitan
-#' @description Get a list of all metropolitan areas in the US along with its name and CBSA code
+#' @description Get a list of all metropolitan areas in the US along with its name and CBSA code.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
 #' @keywords CBSA
 #' @export
-#' @returns A dataframe containing details of metropolitan areas in US
+#' @returns A dataframe containing details of metropolitan areas in US.
 hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
 
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   metro<-as.data.frame(do.call(rbind, cont))
 
@@ -62,8 +63,8 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_counties
 #' @title hud_counties
-#' @description Get a list of all counties within a state
-#' @param state The state to get all counties
+#' @description Get a list of all counties within a state.
+#' @param state The state to get all counties.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
 #' @keywords Counties
@@ -71,7 +72,7 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing all counties within a state
 hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
   if(nchar(state) == 2) state = toupper(state)
   if(nchar(state) > 2) state = capitalize(state)
@@ -85,7 +86,7 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][2]
 
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/", unlist(fip_code), sep = "") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   counties <- as.data.frame(do.call(rbind, cont))
 
@@ -99,16 +100,16 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_places
 #' @title hud_places
-#' @description Get a list of all places in a state
-#' @param state The state to get all places
+#' @description Get a list of all places in a state.
+#' @param state The state to get all places.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
-#' @keywords places
+#' @keywords places.
 #' @export
-#' @returns A dataframe containing details of places in a state
+#' @returns A dataframe containing details of places in a state.
 hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
   if(nchar(state) == 2) state = toupper(state)
   if(nchar(state) > 2) state = capitalize(state)
@@ -121,7 +122,7 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
   URL <- paste("https://www.huduser.gov/hudapi/public/chas/listCities/", unlist(fip_code), sep = "") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   cities <- as.data.frame(do.call(rbind, cont))
   if(nrow(cities) > 1) {
@@ -133,15 +134,15 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @name hud_minor_civil_divisions
 #' @title hud_minor_civil_divisions
 #' @description Get a list of all minor civil divisions in a state
-#' @param state The state to get all MCD
+#' @param state The state to get all MCD.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
 #' @keywords CBSA
 #' @export
-#' @returns A dataframe containing details of minor civil divisions in a state
+#' @returns A dataframe containing details of minor civil divisions in a state.
 hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
   if(nchar(state) == 2) state = toupper(state)
   if(nchar(state) > 2) state = capitalize(state)
@@ -155,7 +156,7 @@ hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
 
   URL <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/", unlist(fip_code), sep = "") #build URL
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
 
   mcd <- as.data.frame(do.call(rbind, cont))

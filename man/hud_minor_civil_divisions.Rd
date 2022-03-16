@@ -7,13 +7,13 @@
 hud_minor_civil_divisions(state, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{state}{The state to get all MCD}
+\item{state}{The state to get all MCD.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}
 }
 \value{
-A dataframe containing details of minor civil divisions in a state
+A dataframe containing details of minor civil divisions in a state.
 }
 \description{
 Get a list of all minor civil divisions in a state

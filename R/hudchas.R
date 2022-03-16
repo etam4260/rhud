@@ -5,14 +5,14 @@
 #' @description Helper function used to clean user inputted variables for all
 #' CHAS functions.
 #' @param query
-#'   The inputted GEOID
+#'   The inputted GEOID.
 #' @param year The years to query for.
 #' @param key The key obtain from HUD USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
 chas_input_check_cleansing <- function(query, year, key) {
   if(!is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
   year <- unique(paste(trimws(as.character(year), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
@@ -42,14 +42,14 @@ chas_do_query_calls <- function(allqueries, key) {
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
     call<-try(GET(allqueries$url[i], add_headers(Authorization=paste("Bearer ",
-                                                                     as.character(key))), timeout(30)),
+                                                                     as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
 
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for query:", allqueries[i],
-                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
       list_res[[i]] <- unlist(cont[[1]])
     }

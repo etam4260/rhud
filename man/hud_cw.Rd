@@ -7,13 +7,13 @@
 hud_cw(
   type,
   query,
-  year = format(Sys.Date(), "\%Y"),
+  year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   key = Sys.getenv("HUD_KEY")
 )
 }
 \arguments{
-\item{type}{Must be a number between 1 and 12 depending on the Crosswalk type.
+\item{type}{Must be a number between 1 and 12 depending on the Crosswalk type. You can also supply the string name.
 \enumerate{
 \item zip-tract
 \item zip-county
@@ -49,7 +49,7 @@ or
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
-current year.}
+previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}

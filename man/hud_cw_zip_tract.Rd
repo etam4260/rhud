@@ -6,37 +6,38 @@
 \usage{
 hud_cw_zip_tract(
   zip,
-  year = format(Sys.Date(), "\%Y"),
+  year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   minimal = FALSE,
   key = Sys.getenv("HUD_KEY")
 )
 }
 \arguments{
-\item{zip}{5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .}
+\item{zip}{5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+1 to 5 and 11 .}
 
-\item{year}{Gets the year that this data was recorded.
-Can specify multiple years. Default is the
-current year.}
+\item{year}{Gets the year that this data was recorded. Can specify multiple
+years. Default is the previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return all fields.}
+\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
+all fields.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The API key for this user. You must go to HUD and sign up for an
+account and request for an API key.}
 }
 \value{
-This function returns a dataframe containing CROSSWALK data for
-a particular GEOID. These measurements include res-ratio, bus-ratio,
+This function returns a dataframe containing CROSSWALK data for a
+particular GEOID. These measurements include res-ratio, bus-ratio,
 oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html
 }
 \description{
-This function queries the Crosswalks API provided by
-US Department of Housing and Urban Development. This
-returns the crosswalk for zip to tract.
+This function queries the Crosswalks API provided by US
+Department of Housing and Urban Development. This returns the crosswalk for
+zip to tract.
 }
 \keyword{API}
 \keyword{Crosswalks}

@@ -4,7 +4,11 @@
 \alias{hud_fmr}
 \title{hud_fmr}
 \usage{
-hud_fmr(query, year = format(Sys.Date(), "\%Y"), key = Sys.getenv("HUD_KEY"))
+hud_fmr(
+  query,
+  year = format(Sys.Date() - 365, "\%Y"),
+  key = Sys.getenv("HUD_KEY")
+)
 }
 \arguments{
 \item{query}{Can provide either a 5 digit FIPS code + 99999 at end,
@@ -12,7 +16,7 @@ state abbreviation, or CBSA code.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
-current year.}
+previous year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}

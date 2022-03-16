@@ -6,7 +6,7 @@
 \usage{
 hud_cw_cbsadiv_zip(
   cbsadiv,
-  year = format(Sys.Date(), "\%Y"),
+  year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   minimal = FALSE,
   key = Sys.getenv("HUD_KEY")
@@ -17,7 +17,7 @@ hud_cw_cbsadiv_zip(
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
-current year.}
+previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}

@@ -11,9 +11,9 @@ hud_metropolitan(key = Sys.getenv("HUD_KEY"))
 an account and request for an API key.}
 }
 \value{
-A dataframe containing details of metropolitan areas in US
+A dataframe containing details of metropolitan areas in US.
 }
 \description{
-Get a list of all metropolitan areas in the US along with its name and CBSA code
+Get a list of all metropolitan areas in the US along with its name and CBSA code.
 }
 \keyword{CBSA}

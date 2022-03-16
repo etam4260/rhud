@@ -7,15 +7,15 @@
 hud_places(state, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{state}{The state to get all places}
+\item{state}{The state to get all places.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}
 }
 \value{
-A dataframe containing details of places in a state
+A dataframe containing details of places in a state.
 }
 \description{
-Get a list of all places in a state
+Get a list of all places in a state.
 }
-\keyword{places}
+\keyword{places.}

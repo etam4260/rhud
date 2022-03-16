@@ -5,7 +5,7 @@
 #' @description Helper function used to clean user inputted variables for all
 #' Crosswalk functions.
 #' @param query
-#'   The inputted GEOID
+#'   The inputted GEOID.
 #' @param year The years to query for.
 #' @param quarter The quarters to query for.
 #' @param key The key obtain from HUD USER website.
@@ -13,7 +13,7 @@
 #' @noRd
 cw_input_check_cleansing <- function(query, year, quarter, key) {
   if(!is.vector(query) || !is.vector(year) || !is.vector(quarter) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key?")
+  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
   query <- paste(trimws(as.character(query), which = "both"))
   year <- unique(paste(trimws(as.character(year), which = "both")))
@@ -35,29 +35,30 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
 
 #' @name create_queries
 #' @title create_queries
-#' @description Helper function for creating a dataframe of all the parameters needed
-#'   for querying.
+#' @description Helper function for creating a dataframe of all the parameters
+#'   needed for querying.
 #' @param query
 #'   The inputted GEOID
 #' @param year The years to query for.
 #' @param quarter The quarters to query for.
-#' @returns A dataframe consisting of all combinations of year and quarter as well as
-#'   the associated GEOID.
+#' @returns A dataframe consisting of all combinations of year and quarter as
+#'   well as the associated GEOID.
 #' @noRd
 create_queries <- function(query, year, quarter) {
-  allqueries <- expand.grid(year = year, quarter = quarter)
-  allqueries$query <- query
+  allqueries <- expand.grid(query = query, year = year, quarter = quarter)
   return(allqueries)
 }
 
 #' @name cw_do_query_calls
 #' @title cw_do_query_calls
-#' @description Helper function for making all the queries provided by the allqueries input.
-#' @param allqueries
-#'   Dataframe consisting of the queried GEOID, years, and quarters.
-#' @param type HUD defines different crosswalk files into types. It goes from 1-12,
-#'   the function calls in this file should follow that order.
-#' @param primary_geoid The first geoid part of a function call. For example, hud_cw_zip_tract() has zip as first GEOID and tract as second GEOID.
+#' @description Helper function for making all the queries provided by the
+#'   allqueries input.
+#' @param allqueries Dataframe consisting of the queried GEOID, years, and
+#'   quarters.
+#' @param type HUD defines different crosswalk files into types. It goes from
+#'   1-12, the function calls in this file should follow that order.
+#' @param primary_geoid The first geoid part of a function call. For example,
+#'   hud_cw_zip_tract() has zip as first GEOID and tract as second GEOID.
 #' @param secondary_geoid The second geoid part of a function call.
 #' @param key The key needed to query the HUD API
 #' @returns A data frame of all the results made from the query.
@@ -68,11 +69,11 @@ cw_do_query_calls <- function(allqueries, type, primary_geoid, secondary_geoid, 
   for(i in 1:nrow(allqueries)) {
     URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", allqueries$query[i], "&year=", allqueries$year[i], "&quarter=", allqueries$quarter[i], sep="") #build URL
 
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), timeout(30)), silent = TRUE) #try to make call
+    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)), silent = TRUE) #try to make call
     cont<-try(content(call), silent = TRUE) #parse returned data
 
     if('error' %in% names(cont[[1]])) {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", allqueries$query[i], ", year equals ",allqueries$year[i], ", and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute.", sep = ""))
+      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", allqueries$query[i], ", year equals ",allqueries$year[i], ", and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$results))
       res$query <- allqueries$query[i]
@@ -99,26 +100,26 @@ cw_do_query_calls <- function(allqueries, type, primary_geoid, secondary_geoid, 
 
 #' @name hud_cw_zip_tract
 #' @title hud_cw_zip_tract
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for zip to tract.
-#' @param zip
-#'   5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .
-#' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
-#'   current year.
+#' @description This function queries the Crosswalks API provided by US
+#'   Department of Housing and Urban Development. This returns the crosswalk for
+#'   zip to tract.
+#' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+#'   1 to 5 and 11 .
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#'   all fields.
+#' @param key The API key for this user. You must go to HUD and sign up for an
+#'   account and request for an API key.
 #' @keywords Crosswalks API
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing CROSSWALK data for a
+#'   particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "tract"
 
@@ -128,7 +129,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, 
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(zip) != 5) stop("Query input is not of length 5")
+  if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
   # Create dataframe with all queries needed.
   allqueries <- create_queries(zip, year, quarter)
@@ -148,7 +149,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -160,7 +161,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "county"
 
@@ -170,7 +171,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1,
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(zip) != 5) stop("Query input is not of length 5")
+  if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
   # Create dataframe with all queries needed.
   allqueries <- create_queries(zip, year, quarter)
@@ -189,7 +190,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1,
 #'   5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -201,7 +202,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1,
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cbsa"
 
@@ -211,7 +212,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, m
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(zip) != 5) stop("Query input is not of length 5")
+  if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -229,7 +230,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, m
 #'   5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -241,7 +242,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, m
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cbsadiv"
 
@@ -251,7 +252,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(zip) != 5) stop("Query input is not of length 5")
+  if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -269,7 +270,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -281,7 +282,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "cd"
 
@@ -291,7 +292,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, min
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(zip) != 5) stop("Query input is not of length 5")
+  if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -310,7 +311,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, min
 #'   state FIPS + county FIPS + tract code. Eg: 51059461700  for type 6
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -322,7 +323,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, min
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "tract"
   secondary_geoid <- "zip"
 
@@ -332,7 +333,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(tract) != 11) stop("Query input is not of length 11")
+  if(any(nchar(tract) != 11)) stop("Query input is not of length 11")
 
   allqueries <- create_queries(tract, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -352,7 +353,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   state FIPS + county FIPS. Eg: 51600 for type 7
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -364,7 +365,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date(), "%Y"), quarter = 1
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "county"
   secondary_geoid <- "zip"
 
@@ -374,7 +375,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter =
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(county) != 5) stop("Query input is not of length 5")
+  if(any(nchar(county) != 5)) stop("Query input is not of length 5")
 
   allqueries <- create_queries(county, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -394,7 +395,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter =
 #'   5 digit CBSA code for Micropolitan and Metropolitan Areas Eg: 10380 for type 8
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -406,7 +407,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date(), "%Y"), quarter =
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cbsa"
   secondary_geoid <- "zip"
 
@@ -416,7 +417,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, 
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(cbsa) != 5) stop("Query input is not of length 5")
+  if(any(nchar(cbsa) != 5)) stop("Query input is not of length 5")
 
   allqueries <- create_queries(cbsa, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -434,7 +435,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   5-digit CBSA Division code which only applies to Metropolitan Areas.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -446,7 +447,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date(), "%Y"), quarter = 1, 
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cbsadiv"
   secondary_geoid <- "zip"
 
@@ -456,7 +457,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(cbsadiv) != 5) stop("Query input is not of length 5")
+  if(any(nchar(cbsadiv) != 5)) stop("Query input is not of length 5")
 
   allqueries <- create_queries(cbsadiv, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -475,7 +476,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter
 #'  state FIPS + Congressional District code. Eg: 7200 for type 10
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -487,7 +488,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date(), "%Y"), quarter
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "cd"
   secondary_geoid <- "zip"
 
@@ -497,7 +498,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, mini
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(cd) != 4) stop("Query input is not of length 4")
+  if(any(nchar(cd) != 4)) stop("Query input is not of length 4")
 
   allqueries <- create_queries(cd, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -515,7 +516,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, mini
 #'   5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -527,7 +528,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date(), "%Y"), quarter = 1, mini
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "zip"
   secondary_geoid <- "countysub"
 
@@ -537,7 +538,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter =
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(zip) != 5) stop("Query input is not of length 5")
+  if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
   allqueries <- create_queries(zip, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
@@ -555,7 +556,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter =
 #'   10-digit GEOID for the County sub Eg: 4606720300 for type 12
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
-#'   current year.
+#'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return all fields.
@@ -567,7 +568,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date(), "%Y"), quarter =
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
-hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date(), "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date() - 365, "%Y"), quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   primary_geoid <- "countysub"
   secondary_geoid <- "zip"
 
@@ -577,7 +578,7 @@ hud_cw_countysub_zip <- function(countysub, year = format(Sys.Date(), "%Y"), qua
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if(nchar(countysub) != 10) stop("Query input is not of length 10")
+  if(any(nchar(countysub) != 10)) stop("Query input is not of length 10")
 
   allqueries <- create_queries(countysub, year, quarter)
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to zip_county...
