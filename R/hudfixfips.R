@@ -17,7 +17,7 @@ fix_fips <- function(fips) {
 #' @name fix_state_fips
 #' @title fix_state_fips
 #' @description Sometimes when loading in fips data from an excel file it truncates the leading 0's. This attempts to re-add those.
-#' @param fips A column or vector of fips data which should be 2 characters long.
+#' @param state_fips A column or vector of fips data which should be 2 characters long.
 #' @returns A dataframe with only the corrected state fips.
 fix_state_fips <- function(state_fips) {
   for(i in 1:length(state_fips)) {
@@ -32,7 +32,7 @@ fix_state_fips <- function(state_fips) {
 #' @name fix_county_fips
 #' @title fix_county_fips
 #' @description Sometimes when loading in fips data from an excel file it truncates the leading 0's. This attempts to re-add those.
-#' @param fips A column or vector of fips data which should be 3 characters long.
+#' @param county_fips A column or vector of fips data which should be 3 characters long.
 #' @returns A dataframe with the corrected county fips.
 fix_county_fips <- function(county_fips) {
   for(i in 1:length(county_fips)) {

@@ -7,7 +7,7 @@
 fix_state_fips(state_fips)
 }
 \arguments{
-\item{fips}{A column or vector of fips data which should be 2 characters long.}
+\item{state_fips}{A column or vector of fips data which should be 2 characters long.}
 }
 \value{
 A dataframe with only the corrected state fips.

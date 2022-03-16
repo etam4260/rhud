@@ -7,7 +7,7 @@
 fix_county_fips(county_fips)
 }
 \arguments{
-\item{fips}{A column or vector of fips data which should be 3 characters long.}
+\item{county_fips}{A column or vector of fips data which should be 3 characters long.}
 }
 \value{
 A dataframe with the corrected county fips.

@@ -86,7 +86,7 @@ ability to directly get such data.
 
 Please cite this package using:
 
-Tam, E., Reilly, A., & Ghaedi, H. (2022). hudr: An R interface for
+Tam, E., Reilly, A., & Ghaedi, H. (2022). hudr: A R interface for
 accessing HUD (US Department of Housing and Urban Development) APIs
 (Version 0.0.0.9000). <https://github.com/etam4260/hudr>
 
@@ -145,6 +145,7 @@ bar.
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
 -   The limit on the maximum number of API calls is 1200 queries a min.
+    Each function call does not correspond to a single API call!
 -   This is a WIP so please report any issues or bugs to:
     <https://github.com/etam4260/hudr/issues>
 -   This is open source, so please fork and introduce some pull

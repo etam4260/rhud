@@ -1,7 +1,7 @@
 year <- format(Sys.Date(), "%Y")
 
 bibentry(bibtype = "Manual",
-         title = "hudr: An R Interface to the HUD (US Department of Housing and Urban Development) APIs",
+         title = "hudr: A R Interface to the HUD (US Department of Housing and Urban Development) APIs",
          author = c(person("Emmet", "Tam"),
                     person("Allison", "Reilly"),
                     person("Hamed", "Ghaedi")),
