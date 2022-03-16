@@ -159,9 +159,8 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter =
     if(nchar(query) != 10) stop("Query input is not of length 10")
   }
 
-  allqueries <- expand.grid(year = year, quarter = quarter)
+  allqueries <- expand.grid(query = query, year = year, quarter = quarter)
   allqueries$type <- type
-  allqueries$query <- query
 
   # Technical Debt: This bit of code is for making a call for parallel compute. Just experiemental...
   # allqueries$url <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, as.vector(outer(paste('&year=', year, sep = ""), paste('&quarter=', quarter, sep = ""), paste, sep="")), sep="") #build URL
