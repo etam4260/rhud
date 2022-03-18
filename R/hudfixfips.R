@@ -1,43 +1,57 @@
-#' @name fix_fips
-#' @title fix_fips
+#' @name add_leading_zeros
+#' @title add_leading_zeros
 #' @description Sometimes when loading in fips data from an excel file it truncates the leading 0's. This attempts to re-add those.
-#' @param fips A column or vector of fips data which should be 5 characters long.
-#' @returns A dataframe with the corrected fips.
-fix_fips <- function(fips) {
-  for(i in 1:length(fips)) {
-    # Assume that if it is 4 characters long, then it could be truncated fips...
-    print(nchar(fips[i]))
-    if(!is.na(fips[i]) && !is.null(fips[i]) && !is.nan(fips[i]) && nchar(fips[i]) == 4 && numbers_only(fips[i])) {
-      fips[i] <- paste("0", fips[i], sep = "")
-    }
+#' @param geoid_type What geoid type to add leading 0s to
+#' 1) zip -> Must be 5 digit zip code
+#' 2) county -> Must be a 5 digit county fips code
+#' 3) cbsa -> Must be a 5 digit cbsa code
+#' 4) cbsa-div -> Must be a 5 digit cbsa code
+#' 5) countysub -> Must be a 10 digit countysub code
+#' 6) cd -> Must be a 4 digit cd code
+#' @param geoids A vector or column of geoids that need leading zeros to be processed properly.
+#' @param num_chars If you don't know what geoid_type you are looking at, you can specify the length this geoid should be.
+#' @returns A dataframe with the corrected geoids.
+add_leading_zeros <- function(geoid_type = "zip", geoids, num_chars = -Inf) {
+  if(geoid_type == "zip") {
+    return(fix_geoid(geoids, 5))
+  } else if(geoid_type == "county") {
+    return(fix_geoid(geoids, 5))
+  } else if(geoid_type == "cbsa") {
+    return(fix_geoid(geoids, 5))
+  } else if(geoid_type == "cbsadiv") {
+    return(fix_geoid(geoids, 5))
+  } else if(geoid_type == "countysub") {
+    return(fix_geoid(geoids, 10))
+  } else if(geoid_type == "cd") {
+    return(fix_geoid(geoids, 4))
+  } else if(geoid_type == "tract") {
+    return(fix_geoid(geoids, 11))
   }
-  return(fips)
 }
 
-#' @name fix_state_fips
-#' @title fix_state_fips
-#' @description Sometimes when loading in fips data from an excel file it truncates the leading 0's. This attempts to re-add those.
-#' @param state_fips A column or vector of fips data which should be 2 characters long.
-#' @returns A dataframe with only the corrected state fips.
-fix_state_fips <- function(state_fips) {
-  for(i in 1:length(state_fips)) {
-    if(!is.na(state_fips[i]) && !is.null(state_fips[i]) && !is.nan(state_fips[i]) && nchar(state_fips[i]) == 1 && numbers_only(fips[i])) {
-      state_fips[i] <- paste("0", state_fips[i], sep = "")
+
+#' @name fix_geoid
+#' @title fix_geoid
+#' @description This is helper function for adding leading zeros back to a dataset.
+#' @param geoid_type What geoid type to add leading 0s to
+#' 1) zip -> Must be 5 digit zip code
+#' 2) county -> Must be a 5 digit county fips code
+#' 3) cbsa -> Must be a 5 digit cbsa code
+#' 4) cbsa-div -> Must be a 5 digit cbsa code
+#' 5) countysub -> Must be a 10 digit countysub code
+#' 6) cd -> Must be a 4 digit cd code
+#' @param geoids A vector or column of geoids that need leading zeros to be processed properly.
+#' @param num_chars The number of leading zeros this geoid needs.
+#' @returns A dataframe with the corrected geoids
+#' @noRd
+fix_geoid <- function(geoids, num_char) {
+  for(i in 1:length(geoids)) {
+    if(!is.null(geoids[i]) && !is.na(geoids[i]) && !is.nan(geoids[i]) && numbers_only(geoids[i])) {
+      len_geo <- nchar(geoids[i])
+      zeros <- num_char - len_geo
+
+      geoids[i] <- paste(rep(0, zeros), geoids[i], collapse = "", sep = "")
     }
   }
-  return(state_fips)
-}
-
-
-#' @name fix_county_fips
-#' @title fix_county_fips
-#' @description Sometimes when loading in fips data from an excel file it truncates the leading 0's. This attempts to re-add those.
-#' @param county_fips A column or vector of fips data which should be 3 characters long.
-#' @returns A dataframe with the corrected county fips.
-fix_county_fips <- function(county_fips) {
-  for(i in 1:length(county_fips)) {
-    if(!is.na(county_fips[i]) && !is.null(county_fips[i]) && !is.nan(county_fips[i]) && nchar(county_fips[i]) == 2 && numbers_only(fips[i])) {
-      county_fips[i] <- paste("0", county_fips[i], sep = "")
-    }
-  }
+  return(geoids)
 }
