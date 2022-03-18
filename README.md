@@ -14,7 +14,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 [![Codecov test
 coverage](https://codecov.io/gh/etam4260/hudr/branch/main/graph/badge.svg)](https://codecov.io/gh/etam4260/hudr?branch=main)
 <br/> <br/> [![devel
-version](https://img.shields.io/badge/devel%20version-0.0.0.9000-yellow)]()
+version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
 [![cran
 version](https://www.r-pkg.org/badges/version/hudr)](https://cran.r-project.org/package=hudr)
 [![cran

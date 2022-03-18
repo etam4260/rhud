@@ -79,6 +79,16 @@
 <h2 class="page-header" data-toc-text="0.0.0.9000" id="hudr-0009000">hudr 0.0.0.9000<a class="anchor" aria-label="anchor" href="#hudr-0009000"></a></h2>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.1.0.9000" id="hudr-0109000">hudr 0.1.0.9000<a class="anchor" aria-label="anchor" href="#hudr-0109000"></a></h2>
+<ul><li><p>The USPS Crosswalk query functions are now working. Both the base hud_cw() function and its decomposed function calls can now accept multiple years, quarters, and geoids to query for.</p></li>
+<li><p>The Fair Markets Rent query functions are now working. Does not currently support multiple geoid query calls yet, but does work for multiple years and quarters.</p></li>
+<li><p>The Income Limits query functions are now working. Does not currently support multiple geoid query calls yet, but does work for multiple years and quarters.</p></li>
+<li><p>The Comprehensive Housing and Affordability functions are now working. Can query for multiple years but not yet for multiple geoids.</p></li>
+<li><p>The website has been updated to include examples for the decomposed CW(Crosswalk) and CHAS(Comprehensive Housing and Affordability) function calls as well as providing more rich detail for getting data from different geographic resolutions.</p></li>
+<li><p>Development for the crosswalk() function has reached a workable state but has not yet been released. It’s main functionality is to crosswalk an entire dataset.</p></li>
+<li><p>Development for machine learning approach for a dataset geoid detection function (the ability to detect geographic identifers in a dataset and convert them into a format understood by mapping tools) has begun. The hope is that this will be applied to some of the major mapping tools and software available that allows easy and consistent transformation into different geographic data structures. This is likely to be in a separate package, but may be applied directly here.</p></li>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
