@@ -4,26 +4,22 @@
 \alias{add_leading_zeros}
 \title{add_leading_zeros}
 \usage{
-add_leading_zeros(geoid_type = "zip", geoids, num_chars = -Inf)
+add_leading_zeros(geoid_type = "zip", geoids)
 }
 \arguments{
-\item{geoid_type}{What geoid type to add leading 0s to
-\enumerate{
-\item zip -> Must be 5 digit zip code
-\item county -> Must be a 5 digit county fips code
-\item cbsa -> Must be a 5 digit cbsa code
-\item cbsa-div -> Must be a 5 digit cbsa code
-\item countysub -> Must be a 10 digit countysub code
-\item cd -> Must be a 4 digit cd code
-}}
+\item{geoid_type}{What geoid type to add leading 0s to 1) zip -> Must be 5
+digit zip code 2) county -> Must be a 5 digit county fips code 3) cbsa ->
+Must be a 5 digit cbsa code 5) countysub -> Must be a 10 digit countysub
+code 6) cd -> Must be a 4 digit cd code. If you specify a number, it will
+make the geoid of that length.}
 
-\item{geoids}{A vector or column of geoids that need leading zeros to be processed properly.}
-
-\item{num_chars}{If you don't know what geoid_type you are looking at, you can specify the length this geoid should be.}
+\item{geoids}{A vector or column of geoids that need leading zeros to be
+processed properly.}
 }
 \value{
 A dataframe with the corrected geoids.
 }
 \description{
-Sometimes when loading in fips data from an excel file it truncates the leading 0's. This attempts to re-add those.
+Sometimes when loading in fips data from an excel file it
+truncates the leading 0's. This attempts to re-add those.
 }

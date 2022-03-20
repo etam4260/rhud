@@ -9,7 +9,8 @@ crosswalk(
   type,
   geoid_col,
   crosswalkable_fields = NA,
-  method = "tot",
+  ratio = "tot",
+  round = FALSE,
   year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   key = Sys.getenv("HUD_KEY")
@@ -40,9 +41,9 @@ crosswalk(
 crosswalked. Should only be numeric values in them. If not specified, will
 assume all fields that are of type numeric double or integer are
 crosswalkable. This may be problematic if numbers are used as categorical
-data such as a customer ID.}
+data such as a customer ID. You can choose to not include or include columns.}
 
-\item{method}{Can either choose residential, business, others, or total
+\item{ratio}{Can either choose residential, business, others, or total
 ratios. If one is supplied it will apply to all crosswalk able fields. If
 the same length is provided, will crosswalk it with those specific ratios
 for each column respectively. Defaults to the total ratio of buildings.
@@ -52,6 +53,9 @@ for each column respectively. Defaults to the total ratio of buildings.
 \item "oth"
 \item "tot"
 }}
+
+\item{round}{Since numbers are multiplied by a ratio, discrete integers will
+become continuous.}
 
 \item{year}{The years to query for.}
 

@@ -24,25 +24,44 @@
 #'   crosswalked. Should only be numeric values in them. If not specified, will
 #'   assume all fields that are of type numeric double or integer are
 #'   crosswalkable. This may be problematic if numbers are used as categorical
-#'   data such as a customer ID.
-#' @param method Can either choose residential, business, others, or total
+#'   data such as a customer ID. You can choose to not include or include columns.
+#' @param ratio Can either choose residential, business, others, or total
 #'   ratios. If one is supplied it will apply to all crosswalk able fields. If
 #'   the same length is provided, will crosswalk it with those specific ratios
 #'   for each column respectively. Defaults to the total ratio of buildings.
 #'   1) "res"
 #'   2) "bus"
 #'   3) "oth"
-#'   4) "tot"
+#' 4) "tot"
+#' @param round Since numbers are multiplied by a ratio, discrete integers will
+#'   become continuous.
 #' @param key The key obtained at HUD User.
 #' @returns The entire dataset crosswalked to a different geoid.
-crosswalk <- function(dataset, type, geoid_col, crosswalkable_fields = NA, method = "tot", year = format(Sys.Date() - 365, "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+crosswalk <- function(dataset, type, geoid_col, crosswalkable_fields = NA, ratio = "tot", round = FALSE, year = format(Sys.Date() - 365, "%Y"), quarter = 1, key = Sys.getenv("HUD_KEY")) {
+  # Check for the key set.
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
-  if(any(method != "tot" && method != "res" && method != "bus" && method != "oth")) stop("Fields in method should only be 'tot', 'res', 'bus', or 'oth'")
-  if(length(method) != length(crosswalkable_fields) && length(method) != 1) stop("Length of method and crosswalkable_fields should be equal or method should only be of length 1.")
+  # Check if user specified the right ratio types that they want
+  if(any(ratio != "tot" && ratio != "res" && ratio != "bus" && ratio != "oth")) stop("Fields in ratio should only be 'tot', 'res', 'bus', or 'oth'.")
+
+  # Make sure length of ratio specified is same as length of
+  # crosswalkable_fields. Or can can be length 1 to be applied to all fields.
+  if(length(ratio) != length(crosswalkable_fields) && length(ratio) != 1) stop("Length of ratio and crosswalkable_fields should be equal or ratio should only be of length 1.")
+
+  # If negative values specified in crosswalkable_fields, make sure its
+  # positive version is in range of the dataset.
+  if(all(is.integer(crosswalkable_fields) || is.double(crosswalkable_fields)) && all(is.negative(crosswalkable_fields)) && !all(-crosswalkable_fields %in% rep(1:ncol(dataset)))) stop("If you are choosing to choose columns to not crosswalk, please make sure their positive value corresponds to an existing column index.")
+
+  # If positive values, make sure they are of integer or double types. Make sure
+  # they are all positive. Make sure that the indices specified are in the
+  # length of the number of columns in dataset.
+  if(all(is.integer(crosswalkable_fields) || is.double(crosswalkable_fields)) && all(!is.negative(crosswalkable_fields)) && !all(crosswalkable_fields %in% rep(1:ncol(dataset)))) stop("Column numbers for crosswalkable_fields are out of bounds.")
+
+  # Make sure length of ratio specified is same as length of
+  # crosswalkable_fields. Or can can be length 1 to be applied to all fields.
+  if(all(is.character(crosswalkable_fields) && !all(crosswalkable_fields %in% colnames(dataset)))) stop("If column name inputs for crosswalkable_fields, they should be column names in the dataset.")
 
   # I want to generalize this function to not need a geoid_col. Is there a way
   # to detect if certain columns specify a geographic identifer?
-
 
   # Make sure type field has white space trimmed.
   type <- paste(trimws(as.character(type), which = "both"))
@@ -61,31 +80,43 @@ crosswalk <- function(dataset, type, geoid_col, crosswalkable_fields = NA, metho
   # a 0 at the front.
   dataset <- crosswalk_function_input_check_cleansing(dataset, type, geoid_col)
 
-  message("Making the API calls to HUD...")
+  message("Making the API calls to HUD. This might take a bit...")
   if(type == "1" || type == "zip-tract") {
-    crosswalk_dataset <- hud_cw_zip_tract(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_zip_tract(unlist(unique(dataset[[geoid_col]])),
+                                          year = year, quarter = quarter)
   } else if(type == "2" || type == "zip-county") {
-    crosswalk_dataset <- hud_cw_zip_county(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_zip_county(unlist(unique(dataset[[geoid_col]])),
+                                           year = year, quarter = quarter)
   } else if(type == "3" || type == "zip-cbsa") {
-    crosswalk_dataset <- hud_cw_zip_cbsa(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_zip_cbsa(unlist(unique(dataset[[geoid_col]])),
+                                         year = year, quarter = quarter)
   } else if(type == "4" || type == "zip-cbsadiv") {
-    crosswalk_dataset <- hud_cw_zip_cbsadiv(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_zip_cbsadiv(unlist(unique(dataset[[geoid_col]])),
+                                            year = year, quarter = quarter)
   } else if(type == "5" || type == "zip-cd") {
-    crosswalk_dataset <- hud_cw_zip_cd(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_zip_cd(unlist(unique(dataset[[geoid_col]])),
+                                       year = year, quarter = quarter)
   } else if(type == "6" || type == "tract-zip") {
-    crosswalk_dataset <- hud_cw_tract_zip(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_tract_zip(unlist(unique(dataset[[geoid_col]])),
+                                          year = year, quarter = quarter)
   } else if(type == "7" || type == "county-zip") {
-    crosswalk_dataset <- hud_cw_county_zip(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_county_zip(unlist(unique(dataset[[geoid_col]])),
+                                           year = year, quarter = quarter)
   } else if(type == "8" || type == "cbsa-zip") {
-    crosswalk_dataset <- hud_cw_cbsa_zip(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_cbsa_zip(unlist(unique(dataset[[geoid_col]])),
+                                         year = year, quarter = quarter)
   } else if(type == "9" || type == "cbsadiv-zip") {
-    crosswalk_dataset <- hud_cw_cbsadiv_zip(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_cbsadiv_zip(unlist(unique(dataset[[geoid_col]])),
+                                            year = year, quarter = quarter)
   } else if(type == "10" || type == "cd-zip") {
-    crosswalk_dataset <- hud_cw_cd_zip(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_cd_zip(unlist(unique(dataset[[geoid_col]])),
+                                       year = year, quarter = quarter)
   } else if(type == "11" || type == "zip-countysub") {
-    crosswalk_dataset <- hud_cw_zip_countysub(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_zip_countysub(unlist(unique(dataset[[geoid_col]])),
+                                              year = year, quarter = quarter)
   } else if(type == "12" || type == "countysub-zip") {
-    crosswalk_dataset <- hud_cw_countysub_zip(unlist(unique(dataset[[geoid_col]])), year = year, quarter = quarter)
+    crosswalk_dataset <- hud_cw_countysub_zip(unlist(unique(dataset[[geoid_col]])),
+                                              year = year, quarter = quarter)
   } else {
     stop("You did not specify a valid value in the type argument.")
   }
@@ -93,9 +124,9 @@ crosswalk <- function(dataset, type, geoid_col, crosswalkable_fields = NA, metho
   message("Crosswalking the dataset...")
 
   # Merge the two datasets...
-  crosswalked <- merge(crosswalk_dataset[c(strsplit(type, "-")[[1]][1], strsplit(type, "-")[[1]][2], paste(method, "_ratio", sep=""))],
-                       dataset, by.x = 1,
-                       by.y = as.numeric(geoid_col), all.x = TRUE, all.y = FALSE, sort = TRUE)
+  crosswalked <- merge(crosswalk_dataset[c(strsplit(type, "-")[[1]][1], strsplit(type, "-")[[1]][2], paste(ratio, "_ratio", sep=""))],
+                       dataset, by.x = 1, by.y = as.numeric(geoid_col),
+                       all.x = TRUE, all.y = FALSE, sort = TRUE)
 
   # For convertable_cols, should be able to supply both the names of the columns
   # as well as the column numbers... Will go through the dataset and find those
@@ -106,12 +137,21 @@ crosswalk <- function(dataset, type, geoid_col, crosswalkable_fields = NA, metho
     crosswalkable_fields <- as.vector(which(crosswalkable_fields == "double" | crosswalkable_fields == "integer" | crosswalkable_fields == "numeric"))
   }
 
+  # If crosswalkable fields supplied as negative, return the all the columns
+  # but not the ones marked as negative.
+  if(all(is.negative(crosswalkable_fields))) crosswalkable_fields <- rep(1:ncol(dataset))[-c(1,2)]
+
   # Multiply the crosswalkable fields in dataset by the tot ratio and return...
   # For now a very inefficient for loop, should be optimized for parallel
   # computations.
+  # An issue is that we can't assume numeric data is continuous, it might be ordinal or nominal...
   for(i in 1:nrow(crosswalked)) {
     for(j in crosswalkable_fields[3:length(crosswalkable_fields)]) {
-      crosswalked[i, j] <- crosswalked[i, j] * crosswalked[i, 3]
+      if(round) {
+        crosswalked[i, j] <- eval(round(crosswalked[i, j] * crosswalked[i, 3]), baseenv())
+      } else {
+        crosswalked[i, j] <- crosswalked[i, j] * crosswalked[i, 3]
+      }
     }
   }
 
@@ -121,7 +161,8 @@ crosswalk <- function(dataset, type, geoid_col, crosswalkable_fields = NA, metho
 
 #' @name crosswalk_function_input_check_cleansing
 #' @title crosswalk_function_input_check_cleansing
-#' @description Helper function used to clean user inputted variables for the crosswalk function.
+#' @description Helper function used to clean user inputted dataset which could
+#'   contain geoid formats which are not identifiable by the computer.
 #' @param geoid The geoid the current dataset has.
 #' @param column The column of geoids.
 #' @returns A dataframe with only the valid geoids.
@@ -143,25 +184,29 @@ crosswalk_function_input_check_cleansing <- function(dataset, geoid, column) {
 
   if(geoid == "zip" || geoid == "zip-county"|| geoid == "zip-cbsa"||
      geoid == "zip-cd"|| geoid == "zip-cbsadiv" || geoid == "zip-countysub") {
-
+    dataset[[column]] <- add_leading_zeros("zip", dataset[[column]])
     dataset <- dataset[!fivenumbers(dataset[[column]]), ]
-
   } else if(geoid == "tract-zip") {
+    dataset[[column]] <- add_leading_zeros("tract", dataset[[column]])
     dataset <- dataset[!elevennumbers(dataset[[column]]), ]
   } else if(geoid == "cbsa-zip") {
+    dataset[[column]] <- add_leading_zeros("cbsa", dataset[[column]])
     dataset <- dataset[!fivenumbers(dataset[[column]]), ]
   } else if(geoid == "cbsadiv-zip") {
+    dataset[[column]] <- add_leading_zeros("cbsadiv", dataset[[column]])
     dataset <- dataset[!fivenumbers(dataset[[column]]), ]
   } else if(geoid == "cd-zip") {
+    # Try to fix cd entries which should be a 4 digit number...
+    dataset[[column]] <- add_leading_zeros("cd", dataset[[column]])
     dataset <- dataset[!fournumbers(dataset[[column]]), ]
   } else if(geoid == "county-zip") {
-
     # Try to fix entries in the column dataset that should specify a 5 digit
     # county number but may have truncated zeros at the front.
     dataset[[column]] <- add_leading_zeros("county", dataset[[column]])
     dataset <- dataset[!fivenumbers(dataset[[column]]), ]
-
   } else if(geoid == "countysub-zip") {
+    # Try to fix countysub entries which should be 10 digit number.
+    dataset[[column]] <- add_leading_zeros("countysub", dataset[[column]])
     dataset <- dataset[!tennumbers(dataset[[column]]), ]
   }
   return(dataset)
@@ -182,12 +227,12 @@ data_types <- function(dataset, sample = 1) {
   names(types) <- colnames(dataset)
 
   # Sample data from each column of dataset and determine the most common
-  # datatype this is likely the data type of column. Need to vectorize this.
-  for(i in 1:ncol(dataset)) {
-    sampled_data <- sample.int(nrow(dataset), sample)
-    the_types <- sapply(dataset[sampled_data, i], typeof)
-    types[i] <- names(sort(table(the_types), decreasing = TRUE)[1])
-  }
+  # datatype this is likely the data type of column.
+  types <- sapply(dataset, function(i) {
+    sampled_data <- sample.int(length(i), sample)
+    the_types <- sapply(i[sampled_data], typeof)
+    names(sort(table(the_types), decreasing = TRUE)[1])
+  })
 
   return(types)
 }

@@ -1,3 +1,14 @@
+#' @name decimal_num
+#' @title decimal_num
+#' @description Detect string or number is a decimal
+#' @param x A string or a number
+#' @returns TRUE if string is a decimal number, FALSE if not.
+#' @noRd
+#' @noMd
+decimal_num <- function(x) grepl("[0-9]*\\.[0-9]+", x)
+
+
+
 #' @name numbers_only
 #' @title numbers_only
 #' @description Detect whether string contains only numbers.
@@ -53,3 +64,25 @@ fournumbers <- function(x) !grepl("[0-9]{4}", x)
 #' @noRd
 #' @noMd
 tennumbers <- function(x) !grepl("[0-9]{10}",x)
+
+
+
+#' @name is.negative
+#' @title is.negative
+#' @description Detect whether number is negative
+#' @param x A number
+#' @returns TRUE if negative number, NA if 0, and FALSE if negative.
+#' @noRd
+#' @noMd
+is.negative <- function(x) {
+  if(x > 0) {
+    return(FALSE)
+  } else if(x == 0) {
+    return(NA)
+  } else {
+    return(TRUE)
+  }
+}
+
+
+
