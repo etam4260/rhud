@@ -9,7 +9,7 @@ type: software
 license: GPL >= 2
 title: 'hudr: A R interface for accessing HUD (US Department of Housing and Urban
   Development) APIs'
-version: 0.0.0.9000
+version: 0.1.0.9000
 abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
   API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits,
   and the Comprehensive Housing Affordability Strategy.

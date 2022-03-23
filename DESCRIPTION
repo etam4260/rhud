@@ -1,6 +1,6 @@
 Package: hudr
 Title: A R interface for accessing HUD (US Department of Housing and Urban Development) APIs
-Version: 0.0.0.9000
+Version: 0.1.0.9000
 Authors@R: 
     c(person("Emmet", "Tam", ,"emmet_tam@yahoo.com", role = c("aut", "cre", "cph")),
     person("Allison", "Reilly", ,"areilly2@umd.edu", role = c("ctb")),
