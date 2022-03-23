@@ -37,20 +37,44 @@ chas_input_check_cleansing <- function(query, year, key) {
 #' @param key The key obtain from HUD USER website.
 #' @returns A dataframe of all the response bodies.
 #' @noRd
-chas_do_query_calls <- function(allqueries, key) {
+chas_do_query_calls <- function(allqueries, type, key) {
+  # Form all query calls...
+
+  if(type == "nation") {
+    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
+                 "&year=", allqueries$year,  sep="") #build URL
+  } else if(type == "state") {
+    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2", "&stateId=", allqueries$fip_code, "&year=", allqueries$year,  sep="") #build URL
+  } else if(type == "county") {
+    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
+                 "3", "&stateId=", allqueries$state_fip, "&entityId=", allqueries$county_fip,
+                 "&year=", allqueries$year,  sep="") #build URL
+  } else if(type == "mcd") {
+    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
+                 "4", "&stateId=", allqueries$fip_code, "&entityId=", allqueries$mcd,
+                 "&year=", allqueries$year,  sep="") #build URL
+  } else if(type == "place") {
+    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
+                 "5", "&stateId=", allqueries$fip_code, "&entityId=", allqueries$place,
+                 "&year=", allqueries$year,  sep="") #build URL
+  }
+
   list_res <- c()
-  for(i in 1:nrow(allqueries)) {
+  for(i in 1:length(URL)) {
     # Build the URL for querying the data.
-    call<-try(GET(allqueries$url[i], add_headers(Authorization=paste("Bearer ",
+    url <- URL[i]
+
+    call<-try(GET(url, add_headers(Authorization=paste("Bearer ",
                                                                      as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE) #try to make call
 
     cont<-try(content(call), silent = TRUE) #parse returned data
 
-    if('error' %in% names(cont)) {
+    if('error' %in% names(cont) || length(cont) == 0) {
       warning(paste("Could not find data for query:", allqueries[i],
                     ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
+
       list_res[[i]] <- unlist(cont[[1]])
     }
   }
@@ -83,11 +107,9 @@ hud_chas_nation <- function(year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) 
   year <- args[[1]]
   key <- args[[2]]
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
-               "&year=", year,  sep="") #build URL
 
-  allqueries <- data.frame(url = URL)
-  return(chas_do_query_calls(allqueries, key))
+  allqueries <- data.frame(year = year)
+  return(chas_do_query_calls(allqueries = allqueries, type = "nation", key = key))
 }
 
 #' @name hud_chas_state
@@ -114,22 +136,24 @@ hud_chas_state <- function(state, year = c("2014-2018"), key = Sys.getenv("HUD_K
 
   # Assume abbreviation or fips code if length of 2. Captitalize does not affect numbers.
   # Assume full state name if length more than 2
-  if(nchar(state) == 2) state = toupper(state)
-  if(nchar(state) > 2) state = capitalize(state)
+  if(all(nchar(state) == 2)) state = toupper(state)
+  if(all(nchar(state) > 2)) state = capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-  if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
+
+  for(i in 1:length(state)) {
+    if(!any(as.character(state[i]) == pkg.env$state)) stop("There is no matching fips code for one of the inputted states.")
+  }
 
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name == as.character(state),][3]
-  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_name %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name %in% as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_code %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code %in% as.character(state),][3]
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num %in% as.character(state),][3]
+  fip_code <- unlist(fip_code)
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
-               "&stateId=", fip_code, "&year=", year,  sep="") #build URL
+  allqueries <- expand.grid(fip_code = fip_code, year = year)
 
-  allqueries <- data.frame(url = URL, key)
-  return(chas_do_query_calls(allqueries, key))
+  return(chas_do_query_calls(allqueries = allqueries, type = "state", key = key))
 }
 
 #' @name hud_chas_county
@@ -154,29 +178,28 @@ hud_chas_county <- function(county, year = c("2014-2018"), key = Sys.getenv("HUD
   year <- args[[2]]
   key <- args[[3]]
 
-  if(nchar(county) == 5) {
-    state_fip <- substr(county, 1,2)
-    county_fip <- substr(county, 3,5)
-  } else {
-    state_fip <- substr(county, 1,1)
-    county_fip <- substr(county, 2,4)
-    county = paste("0", county, sep = "")
-  }
+  # Try to fix the counties that have lost leading zeros in them...
+  county <- add_leading_zeros(geoid_type = "county", county)
 
-  # Don't know what the 99999 means, but it seems like every fips code has this tacked onto the end within
-  # hud_counties() function call.
+  # The first 2 are state fip. Last 3 are county fip.
+  state_fip <- substr(county, 1,2)
+  county_fip <- substr(county, 3,5)
+
+  # Don't know what the 99999 means, but it seems like every fips code has this
+  # tacked onto the end within hud_counties() function call.
   check_county <- paste(county, "99999", sep="")
+
+  # Grab all possible states if the package doesn't have a state dataset to query from.
   if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+
   # Check if first two numbers of county code inputted is a valid state.
+  if(!all(as.character(state_fip) %in% pkg.env$state$state_num)) stop("There is no matching state FIPs code for one of the inputted states.")
+  if(!all(as.character(check_county) %in% hud_counties(state_fip)$fips_codes)) stop(paste("There is no matching county FIPs code for one of the inputted counties", sep = ""))
 
-  if(!any(as.character(state_fip) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
-  if(!any(as.character(check_county) == hud_counties(state_fip))) stop(paste("There is no matching FIPs code for ", county, sep = ""))
+  allqueries <- expand.grid(state_fip = state_fip, county_fip = county_fip, year = year)
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
-               "3", "&stateId=", state_fip, "&entityId=", county_fip,
-               "&year=", year,  sep="") #build URL
-  allqueries <- data.frame(url = URL)
-  return(chas_do_query_calls(allqueries, key))
+
+  return(chas_do_query_calls(allqueries, "county", key))
 }
 
 #' @name hud_chas_mcd
@@ -202,23 +225,30 @@ hud_chas_mcd <- function(state, mcd, year = c("2014-2018"), key = Sys.getenv("HU
   year <- args[[2]]
   key <- args[[3]]
 
-  if(nchar(state) == 2) state = toupper(state)
-  if(nchar(state) > 2) state = capitalize(state)
+  if(length(state) != length(mcd)) stop("Length of states specified should be equal to length of MCDs specified.")
+  if(all(nchar(state) == 2)) state = toupper(state)
+  if(all(nchar(state) > 2)) state = capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-  if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
-  if(!any(as.character(mcd) == hud_minor_civil_divisions(state))) stop("There is no matching FIPs code for this inputted state.")
+
+  for(i in 1:length(state)) {
+    if(!any(as.character(state[i]) == pkg.env$state)) stop("There is no matching fips code for one of the inputted states.")
+  }
+
+  # Need to allow support for checking multiple minor civil divisions
+  # if(!any(as.character(mcd) %in% hud_minor_civil_divisions(state))) stop("There is no matching minor civil division for one of the inputted states.)
 
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name == as.character(state),][3]
-  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_name %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name %in% as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_code %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code %in% as.character(state),][3]
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num %in% as.character(state),][3]
+  fip_code <- unlist(fip_code)
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
-               "4", "&stateId=", fip_code, "&entityId=", mcd,
-               "&year=", year,  sep="") #build URL
-  allqueries <- data.frame(url = URL)
-  return(chas_do_query_calls(allqueries, key))
+  # We have to assume both
+  allqueries <- expand.grid(fip_code = fip_code, year = year)
+  allqueries$mcd <- mcd
+
+  return(chas_do_query_calls(allqueries, "mcd", key))
 }
 
 #' @name hud_chas_place
@@ -244,26 +274,27 @@ hud_chas_place <- function(state, place, year = c("2014-2018"), key = Sys.getenv
   year <- args[[2]]
   key <- args[[3]]
 
+  if(length(state) != length(place)) stop("Length of states specified should be equal to length of places specified.")
   if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-  # Check if first two numbers of county code inputted is a valid state.
-  if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
 
-  if(nchar(state) == 2) state = toupper(state)
-  if(nchar(state) > 2) state = capitalize(state)
+  if(all(nchar(state) == 2)) state = toupper(state)
+  if(all(nchar(state) > 2)) state = capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-  if(!any(as.character(state) == pkg.env$state)) stop("There is no matching FIPs code for this inputted state.")
-  if(!any(as.character(place) == hud_places(state))) stop("There is no matching FIPs code for this inputted state.")
+  for(i in 1:length(state)) {
+    if(!any(as.character(state[i]) == pkg.env$state)) stop("There is no matching fips code for one of the inputted states.")
+  }
+
+  #if(!all(as.character(place) %in% hud_places(state))) stop("There is no matching FIPs code for this inputted state.")
 
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name == as.character(state),][3]
-  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code == as.character(state),][3]
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num == as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_name %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name %in% as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_code %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code %in% as.character(state),][3]
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num %in% as.character(state),][3]
+  fip_code <- unlist(fip_code)
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
-               "5", "&stateId=", fip_code, "&entityId=", place,
-               "&year=", year,  sep="") #build URL
+  allqueries <- expand.grid(fip_code = fip_code, year = year)
+  allqueries$place <- place
 
-  allqueries <- data.frame(url = URL)
-  return(chas_do_query_calls(allqueries, key))
+  return(chas_do_query_calls(allqueries, "place", key))
 }
