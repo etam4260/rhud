@@ -57,9 +57,6 @@ This chart provided by the US Census Bureau gives a good example of the
 relationships among different geographies. The crosswalk files only support a
 subset of these.
 
-<img src="../man/figures/geo1.webp" align="center"/>
-Available at https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counties-places-tracts-and-more.html
-(Katy Rossiter, 2014)
 
 ### Examples
 

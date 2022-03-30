@@ -25,13 +25,14 @@ chas_do_query_calls <- function(URL, key) {
       warning(paste("Could not find data for query:", URL
                     , ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
-      list_res[[i]] <- cont[[1]]
+      list_res[[i]] <- unlist(cont[[1]])
     }
   }
 
 
   if(length(list_res) != 0) {
     res <- as.data.frame(do.call("rbind", list_res))
+
     return(res)
   }
   return(NULL)
