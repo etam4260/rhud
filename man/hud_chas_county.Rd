@@ -28,5 +28,5 @@ hud_chas_county(county, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 Returns a dataframe with CHAS data for a particular county.
 }
 \description{
-Returns CHAS data for a county.
+Returns CHAS data for counties.
 }

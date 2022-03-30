@@ -1,5 +1,4 @@
 #' @import httr
-#' @import future
 
 # Implementation thought process was adapted from:
 # https://github.com/dteck/HUD
@@ -9,24 +8,17 @@
 # An R interface for accessing HUD USER
 # (US Department of Housing and Urban Development) APIs.
 
-# HUD USER has four main APIs
+# HUD USER has four main APIs. These functions declared below follow the
+# structure of the API very closely, but provide the additional ability to query
+# for multiple geoids as well as multiple years inputs.
+
+# For more intuitive querying withing the need to specify type, check out the
+# decomposed functions in the hudcw.R and hudchas.R files.
+
 # Crosswalk
 # Fair Markets Rent
 # Income Limits
 # Comprehensive and Housing Affordability Strategy
-
-# capitalize should be in another folder.
-
-
-#' @name capitalize
-#' @title capitalize
-#' @description Returns first character capitalized in string.
-#' @param string A character
-#' @returns A string with only first letter in string capitalized. Does not capitalize all words in a sentence.
-#' @noRd
-capitalize <- function(string) {
-  return(paste(toupper(substr(string,1,1)), substr(string, 2, nchar(string)), sep = ""))
-}
 
 
 #' @name hud_cw
@@ -79,13 +71,19 @@ capitalize <- function(string) {
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter = 1,
                    key = Sys.getenv("HUD_KEY")) {
-  if(!is.vector(type) || !is.vector(query) || !is.vector(year) || !is.vector(quarter) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
+  args <- cw_input_check_cleansing(query, year, quarter, key)
+
+  query <- args[[1]]
+  year <- args[[2]]
+  quarter <- args[[3]]
+  key <- args[[4]]
 
   alltypes <- c("zip-tract","zip-county","zip-cbsa",
                 "zip-cbsadiv","zip-cd","tract-zip",
                 "county-zip","cbsa-zip","cbsadiv-zip",
                 "cd-zip","zip-countysub","countysub-zip")
+
+  if(length(type) != 1) stop("Only one crosswalk type can be specified.")
 
   # Allow user to specify the full string too.
   type = switch(tolower(type),
@@ -104,36 +102,14 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter =
                 type
                 )
 
-  lhgeoid <- NULL
-  rhgeoid <- NULL
-
-  URL <- NULL
-  call <- NULL
-  cont <- NULL
-  res <- NULL
-  thisyear <- NULL
-
-  # Removing leading and ending spaces and converting all integer inputs to characters
+  # Check if type argument follows proper structure.
   type <- paste(trimws(as.character(type), which = "both"))
-  query <- paste(trimws(as.character(query), which = "both"))
-  year <- unique(paste(trimws(as.character(year), which = "both")))
-  quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
-  key <- paste(trimws(as.character(key), which = "both"))
-
-  if(FALSE %in% numbers_only(type)) stop("Type input must only be numbers.")
-  if(FALSE %in% numbers_only(query)) stop("Query input must only be numbers.")
-  if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
-  if(FALSE %in% numbers_only(quarter)) stop("Quarter input must only be numbers.")
-
-  if(!all(as.character(quarter) %in% c("1","2","3","4"))) stop("Quarters must be from 1 to 4.")
+  if(FALSE %in% numbers_only(type)) stop("Type input must be a single number or the exact name of crosswalk file.")
+  ifelse(as.integer(type) < 1 || as.integer(type) > 12,
+         stop("The type input is not in the range of 1-12"), "")
 
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
-
-  ifelse(any(as.integer(year) > as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
-         stop("A year specified seems to be in the future?"), "")
-  ifelse(as.integer(type) < 1 || as.integer(type) > 12,
-         stop("The type input is not in the range of 1-12"), "")
 
   # Need to make sure query is a zip code of 5 digits.
   if(as.integer(type) >= 1 && as.integer(type) <= 5 || as.integer(type) == 11){
@@ -159,43 +135,10 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter =
   }
 
   allqueries <- expand.grid(query = query, year = year, quarter = quarter)
-  allqueries$type <- type
+  allqueries$type <- type[[1]]
+  URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", allqueries$type, "&query=", allqueries$query, "&year=", allqueries$year, "&quarter=", allqueries$quarter, sep="")
 
-  # Technical Debt: This bit of code is for making a call for parallel compute. Just experiemental...
-  # allqueries$url <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, as.vector(outer(paste('&year=', year, sep = ""), paste('&quarter=', quarter, sep = ""), paste, sep="")), sep="") #build URL
-  # allqueries$key <- key
-  # if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries) else use_cores <- availableCores() - 1
-  # return(parallelize_api_calls(allqueries, use_cores))
-
-  list_res <- c()
-  for(i in 1:nrow(allqueries)) {
-    URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", type, "&query=", query, "&year=", allqueries$year[i], "&quarter=", allqueries$quarter[i], sep="") #build URL
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
-    cont<-try(content(call), silent = TRUE) #parse returned data
-    if('error' %in% names(cont[[1]])) {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ", and quarter equals ", allqueries$quarter[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
-    } else {
-      res <- as.data.frame(do.call(rbind, cont$data$results))
-      res$type <- allqueries$type[i]
-      res$query <- allqueries$query[i]
-      res$year <- allqueries$year[i]
-      res$quarter <- allqueries$quarter[i]
-      res[1] <- unlist(res[1])
-      res[2] <- unlist(res[2])
-      res[3] <- unlist(res[3])
-      res[4] <- unlist(res[4])
-      res[5] <- unlist(res[5])
-      list_res[[i]] <- res
-    }
-  }
-
-  allres <- NULL
-  if(length(list_res) != 0) {
-    allres <- do.call(rbind, list_res)
-    colnames(allres)[1] <- rhgeoid
-    colnames(allres)[7] <- lhgeoid
-  }
-  return(as.data.frame(allres))
+  return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, lhgeoid, rhgeoid, key))
 }
 
 
@@ -222,72 +165,25 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter =
 #'   data, but will return a dataframe with the individual measurements for each
 #'   individual county within the state.
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
-  if(!is.vector(query) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  URL <- NULL
-  call <- NULL
-  cont <- NULL
-  querytype <- NULL
+  args <- fmr_il_input_check_cleansing(query, year, key)
+  query <- args[[1]]
+  year <- args[[2]]
+  key <- args[[3]]
+  querytype <- args[[4]]
 
-  # Removing leading and ending spaces and converting all integer inputs
-  # to characters
-  query <- paste(trimws(as.character(query), which = "both"))
-  year <- unique(paste(trimws(as.character(year), which = "both")))
-  key <- paste(trimws(as.character(key), which = "both"))
-
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
-  if(nchar(query) == 2) query = toupper(query)
-  if(nchar(query) > 2) query = capitalize(query)
-  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-
-  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) {
-    query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
-    querytype <- TRUE
-  }
-  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) {
-    query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
-    querytype <- TRUE
-  }
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) {
-    query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
-    querytype <- TRUE
-  }
-  query = unlist(query[[1]])
-
-  # Check year and query input to see if they fit within
-  # the "range" of acceptable values.
-  if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
-
-  ifelse(any(as.integer(year) > as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
-         stop("A year specified seems to be in the future?"), "")
-
-  if(nchar(as.character(query)) == 10) {
-    querytype = "county"
-  } else if(nchar(as.character(query)) == 2) {
-    querytype = "state"
-  } else if(nchar(as.character(query)) == 16) {
-    querytype = "cbsa"
-  } else {
-    stop("Query doesn't seem to be a county+tract code, state code, or cbsa code.")
-  }
-
-  allqueries <- data.frame(query = query, year = year)
-  allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
-    "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
-
-  # Technical Debt: This bit of code is for making a call for parallel compute. Just experiemental...
-  #if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
+  # Create all combinations of query and year...
+  allqueries <- expand.grid(query = query, year = year)
 
   list_res <- c()
-
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
     URL <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(querytype == "state")
-      "statedata/" else "data/", query, "?year=", allqueries$year[i], sep="") #build URL
+      "statedata/" else "data/", allqueries$query[i], "?year=", allqueries$year[i], sep="")
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
                                                        as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
-              silent = TRUE) #try to make call
+              silent = TRUE)
 
-    cont<-try(content(call), silent = TRUE) #parse returned data
+    cont<-try(content(call), silent = TRUE)
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ",allqueries$year[i], ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
@@ -315,6 +211,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.gete
   if(length(list_res) != 0) {
     return(as.data.frame(do.call(rbind, list_res)))
   }
+
   return(NULL)
 }
 
@@ -340,70 +237,25 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.gete
 #'   about these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/fmr-api.html
 hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
-  if(!is.vector(query) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  URL <- NULL
-  call <- NULL
-  cont <- NULL
-  querytype <- NULL
+  args <- fmr_il_input_check_cleansing(query, year, key)
+  query <- args[[1]]
+  year <- args[[2]]
+  key <- args[[3]]
+  querytype <- args[[4]]
 
-  # Removing leading and ending spaces and converting all integer inputs to characters
-  query <- paste(trimws(as.character(query), which = "both"))
-  year <- unique(paste(trimws(as.character(year), which = "both")))
-  key <- paste(trimws(as.character(key), which = "both"))
-
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
-  if(nchar(query) == 2) query = toupper(query)
-  if(nchar(query) > 2) query = capitalize(query)
-  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-
-  if(nrow(pkg.env$state[pkg.env$state$state_name == as.character(query),]) != 0) {
-    query <- pkg.env$state[pkg.env$state$state_name == as.character(query),][2]
-    querytype <- TRUE
-  }
-  if(nrow(pkg.env$state[pkg.env$state$state_code == as.character(query),]) != 0) {
-    query <- pkg.env$state[pkg.env$state$state_code == as.character(query),][2]
-    querytype <- TRUE
-  }
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) == as.character(query),]) != 0) {
-    query <- pkg.env$state[pkg.env$state$state_num == as.character(query),][2]
-    querytype <- TRUE
-  }
-  query = unlist(query[[1]])
-
-  if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
-  # Check year and query input to see if they fit within
-  # the "range" of acceptable values.
-  ifelse(any(as.integer(year) > as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
-         stop("A year specified seems to be in the future?"), "")
-
-  if(nchar(as.character(query)) == 10) {
-    querytype = "county"
-  } else if(nchar(as.character(query)) == 2) {
-    querytype = "state"
-  } else if(nchar(as.character(query)) == 16) {
-    querytype = "cbsa"
-  } else {
-    stop("There is no matching code for this inputted state.")
-  }
-
-  allqueries <- data.frame(query = query, year = year)
-  allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
-    "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
+  allqueries <- expand.grid(query = query, year = year)
 
   list_res <- c()
-
-  # Technical Debt: This bit of code is for making a call for parallel compute. Just experimental...
-  #f(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
-
   for(i in 1:nrow(allqueries)) {
     # Build the URL for querying the data.
     URL <- paste("https://www.huduser.gov/hudapi/public/il/", if(querytype == "state")
-      "statedata/" else "data/", query, "?year=", allqueries$year[i], sep="") #build URL
+      "statedata/" else "data/", allqueries$query[i], "?year=", allqueries$year[i], sep="")
     call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
                                                        as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
-              silent = TRUE) #try to make call
+              silent = TRUE)
 
-    cont<-try(content(call), silent = TRUE) #parse returned data
+    cont<-try(content(call), silent = TRUE)
+
     if('error' %in% names(cont)) {
       warning(paste("Could not find data for inputted query, year, or quarter where query equals ",
                     query, ", year equals ",allqueries$year[i],
@@ -421,19 +273,20 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.geten
       } else {
         res <- as.data.frame(cont$data)
       }
+
       res$median_income <- cont$data$median_income
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
       list_res[[i]] <- res
     }
   }
+
   if(length(list_res) != 0) {
     return(as.data.frame(do.call(rbind, list_res)))
   }
+
   return(NULL)
-
 }
-
 
 
 #' @name hud_chas
@@ -469,9 +322,6 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.geten
 hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"),
                      key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(type) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  URL <- NULL
-  call <- NULL
-  cont <- NULL
 
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
@@ -497,61 +347,39 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"
   # Check for if years are proper input
   if(!all(year %in% c("2014-2018","2013-2017","2012-2016","2011-2015","2010-2014",
                       "2009-2013","2008-2012","2007-2011","2006-2010"))) stop("Years specified are not allowed. Check the documentation.")
+
   ifelse(as.integer(type) < 1 || as.integer(type) > 5,
          stop("The type input is not in the range of 1-5"), "")
 
 
   if(type == "1") {
-    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
-                 "&year=", year,  sep="") #build URL
-    if(!is.vector(stateId)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-    allqueries <- data.frame(url = URL, year = year)
+    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
+                 "&year=", year,  sep="")
   }
+
   if(type == "2") {
     if(is.null(stateId)) stop("You need to specify a stateId for this type.")
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
-                 "&stateId=", stateId, "&year=", year,  sep="") #build URL
-    if(!is.vector(stateId) || !is.vector(entityId)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-    allqueries <- data.frame(url = URL, year = year, stateId = stateId)
+                 "&stateId=", stateId, "&year=", year,  sep="")
+    if(!is.vector(stateId)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
+
+    allqueries <- expand.grid(fip_code = stateId, year = year)
+    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2", "&stateId=", allqueries$fip_code, "&year=", allqueries$year,  sep="")
   }
+
   if(type == "3" || type == "4" || type == "5") {
     if(is.null(stateId) || is.null(entityId)) stop("You need to specify a
                                                  stateId and entityId
                                                  for this type.")
     if(!is.vector(stateId) || !is.vector(entityId)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
+    if(length(stateId) != length(entityId)) stop("You need to make sure stateId and entityId are of same length.")
+
+    allqueries <- expand.grid(state_fip = stateId, year = year)
+    allqueries$entityId <- entityId
+
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
-                 type, "&stateId=", stateId, "&entityId=", entityId,
-                 "&year=", year,  sep="") #build URL
-    allqueries <- data.frame(url = URL, year = year, stateId = stateId, entityId = entityId)
+                 type, "&stateId=", allqueries$state_fip, "&entityId=", allqueries$entityId,
+                 "&year=", allqueries$year,  sep="")
   }
-
-  # Technical Debt: This bit of code is for making a call for parallel compute. Just experiemental...
-  # allqueries$url <- paste("https://www.huduser.gov/hudapi/public/fmr/", if(!numbers_only(query))
-  #   "statedata/" else "data/", query, "?year=", allqueries$year, sep="") #build URL
-  #if(nrow(allqueries) < pkg.env$cores) use_cores <- nrow(allqueries)
-
-  list_res <- c()
-
-  for(i in 1:nrow(allqueries)) {
-    # Build the URL for querying the data.
-    call<-try(GET(allqueries$url[i], add_headers(Authorization=paste("Bearer ",
-                                                       as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
-              silent = TRUE) #try to make call
-
-    cont<-try(content(call), silent = TRUE) #parse returned data
-
-    if('error' %in% names(cont)) {
-      warning(paste("Could not find data for inputted type where type equals",
-                    type, ", year equals ",allqueries$year[i],
-                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
-    } else {
-      list_res[[i]] <- unlist(cont[[1]])
-    }
-  }
-
-  if(length(list_res) != 0) {
-    res <- do.call(rbind, list_res)
-    return(as.data.frame(res))
-  }
-  return(NULL)
+  return(chas_do_query_calls(URL, key = key))
 }

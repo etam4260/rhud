@@ -1,4 +1,4 @@
-test_that("test hud_chas() nation", {
+test_that("test hud_chas_nation()", {
   # First make simple query call to hud_chas_nation() with no arguments.
   # Will choose default 2014-2018.
   one_year <- hud_chas_nation()
@@ -10,13 +10,13 @@ test_that("test hud_chas() nation", {
   expect_true(nrow(two_years) == 2)
 
   # Try querying a year which is not allowed... should expect warning
-  expect_warning(hud_chas_nation(year = c("2017-2022", "2321-142131")))
+  expect_error(hud_chas_nation(year = c("2017-2022", "2321-142131")))
 
   # Try integer inputs. It should also throw warning.
-  expect_warning(hud_chas_nation(year = c(2018, 2019)))
+  expect_error(hud_chas_nation(year = c(2018, 2019)))
 })
 
-test_that("test hud_state()" ,{
+test_that("test hud_chas_state" ,{
   # Try querying for a state using abbreviation...
   # Try lowercase too... Try uppercase too...
   # Try weird cases...
@@ -47,7 +47,7 @@ test_that("test hud_state()" ,{
   expect_true(nrow(test) == 1)
 })
 
-test_that("test hud_county()",{
+test_that("test hud_chas_county()",{
   # Simple query only a single county.
   test <- hud_chas_county(county = "06105")
   expect_true(nrow(test) == 1)
@@ -55,17 +55,17 @@ test_that("test hud_county()",{
   # Need to deal with cases when leading zero might get truncated.
 
   test <- hud_chas_county(county = c(06105, 06113))
-  expect_true(nrow(test) == 1)
+  expect_true(nrow(test) == 2)
   # Query multiple character counties
 
   test <- hud_chas_county(county = c("06105","06115"))
-  expect_true(nrow(test) == 1)
+  expect_true(nrow(test) == 2)
   # Query multiple counties with multiple years.
   test <- hud_chas_county(county = c("06105","06115"), year = c("2013-2017", "2014-2018"))
-  expect_true(nrow(test) == 1)
+  expect_true(nrow(test) == 4)
 })
 
-test_that("test hud_mcd()",{
+test_that("test hud_chas_mcd()",{
   # Simple query
   test <- hud_chas_mcd("VA", "94135")
   expect_true(nrow(test) == 1)
@@ -78,13 +78,13 @@ test_that("test hud_mcd()",{
   expect_true(nrow(test) == 1)
   # Try dealing with multiple years
   test <- hud_chas_mcd("VA", "94135", year = c("2014-2018","2013-2017"))
-  expect_true(nrow(test) == 1)
+  expect_true(nrow(test) == 2)
   # Need to make sure states correspond to the right MCDs...
   test <- hud_chas_mcd(c("MD", "VA"), c("90812", "94135"))
-  expect_true(nrow(test) == 1)
+  expect_true(nrow(test) == 2)
 })
 
-test_that("test hud_places()",{
+test_that("test hud_chas_place()",{
   # Simple query
   test <- hud_chas_place("VA", "48996")
   expect_true(nrow(test) == 1)
@@ -96,14 +96,14 @@ test_that("test hud_places()",{
   expect_true(nrow(test) == 1)
   # Try dealing with multiple years
   test <- hud_chas_place("MD", 53625, year = c("2014-2018","2013-2017"))
-  expect_true(nrow(test) == 1)
+  expect_true(nrow(test) == 2)
   # Need to make sure states correspond to the right places...
 
   # Right now CA doesn't work. It seems like those states with leading 0 doesn't seem to be found...
   # Furthermore, the format of the place should all be the same. Cant mix abbreviation and code in it...
   # might keep it that way...
-  test <-  hud_chas_place(c("MD", "VA"), c("53700", "48952"))
-  expect_true(nrow(test) == 1)
+  test <- hud_chas_place(c("MD", "VA"), c("53700", "48952"))
+  expect_true(nrow(test) == 2)
 })
 
 

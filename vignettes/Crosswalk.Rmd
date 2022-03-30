@@ -50,6 +50,17 @@ ZIP Code Crosswalk Files," Cityscape: A Journal of Policy Development and
 Research, Volume 22, Number 1,
 https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf
 
+
+### Census Geographies
+
+This chart provided by the US Census Bureau gives a good example of the
+relationships among different geographies. The crosswalk files only support a
+subset of these.
+
+<img src="../man/figures/geo1.webp" align="center"/>
+Available at https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counties-places-tracts-and-more.html
+(Katy Rossiter, 2014)
+
 ### Examples
 
 There are 12 different function for the Crosswalk files:
@@ -282,17 +293,19 @@ crosswalked with the queried geoid.
 
 ### References
 
-Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S.
-Department of Housing and Urban Development’s ZIP Code Crosswalk Files,”
-Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277
-– 294.
-
 Din, Alexander and Wilson, Ron, 2020. "Crosswalking ZIP Codes to Census 
 Geographies: Geoprocessing the U.S. Department of Housing & Urban Development’s
 ZIP Code Crosswalk Files," Cityscape: A Journal of Policy Development and
 Research, Volume 22, Number 1, https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf
 
+Katy Rossiter, K. R. (2014, July 31). Standard Hierarchy of Census Bereau Geographies [Photograph]. Understanding Geographic Relationships: Counties, Places, Tracts and More. https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counties-places-tracts-and-more.html
+
 U.S Department of Housing and Urban Development. (n.d.). HUD USPS ZIP
 Code Crosswalk Files | HUD USER. HUD  USPS ZIP CODE CROSSWALK FILES.
 Retrieved February 17, 2022, from 
 https://www.huduser.gov/portal/datasets/usps_crosswalk.html
+
+Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S.
+Department of Housing and Urban Development’s ZIP Code Crosswalk Files,”
+Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277
+– 294.

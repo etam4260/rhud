@@ -15,12 +15,6 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 coverage](https://codecov.io/gh/etam4260/hudr/branch/main/graph/badge.svg)](https://codecov.io/gh/etam4260/hudr?branch=main)
 <br/> <br/> [![devel
 version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
-[![cran
-version](https://www.r-pkg.org/badges/version/hudr)](https://cran.r-project.org/package=hudr)
-[![cran
-checks](https://cranchecks.info/badges/worst/hudr)](https://cranchecks.info/pkgs/hudr)
-<br/> <br/> [![rstudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/hudr?color=C9A115)](https://github.com/r-hub/cranlogs.app)
 
 <!-- badges: end -->
 
@@ -95,7 +89,7 @@ accessing HUD (US Department of Housing and Urban Development) APIs
 The APIs and datasets which this library interfaces are listed below.
 The HUD also provide miscellaneous supplemental APIs under them.
 
-1.  HUD User
+1)  HUD User
 
     -   USPS Crosswalk
         (<https://www.huduser.gov/portal/dataset/uspszip-api.html>)
@@ -112,7 +106,7 @@ The HUD also provide miscellaneous supplemental APIs under them.
         -   List MCDs in State
         -   List All Cities in State
 
-2.  HUD Exchange
+2)  HUD Exchange
 
     -   Community Development Block Grant - Disaster Recovery
         (<https://drgr.hud.gov/public/index.html>)
@@ -139,7 +133,7 @@ bar.
 
 ## Disclaimers
 
--   License: GPL &gt;= 2
+-   License: GPL \>= 2
 -   To get citation information for hudr in R, type citation(package =
     ‘hudr’)
 -   This interface uses the HUD User Data API but is not endorsed or
