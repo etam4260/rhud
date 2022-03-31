@@ -25,12 +25,9 @@ Suggests:
     testthat (>= 3.0.0)
 Imports: 
     httr,
-    stringr,
     devtools,
     zoo,
-    rio,
-    future,
-    furrr
+    rio
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 ByteCompile: true

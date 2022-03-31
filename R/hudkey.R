@@ -8,3 +8,12 @@
 hud_get_key <- function() {
   return(Sys.getenv("HUD_KEY"))
 }
+
+#' @name hud_set_key
+#' @title hud_set_key
+#' @description A wrapper around Sys.getenv() to set HUD_KEY environment variable.
+#' @export
+hud_set_key <- function(key) {
+  Sys.getenv("HUD_KEY" = key)
+  message("... setting HUD_KEY")
+}

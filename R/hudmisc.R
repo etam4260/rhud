@@ -109,7 +109,7 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
     return(counties)
   }
 
-  stop("The key used might be invalid or could not find this county")
+  stop("The key used might be invalid or could not find counties for this state.")
 }
 
 #' @name hud_places
@@ -150,7 +150,7 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
     places$placename <- unlist(places$placename)
     return(places)
   }
-  stop("The key used might be invalid.")
+  stop("The key used might be invalid or could not find places for this state.")
 }
 
 #' @name hud_minor_civil_divisions
@@ -189,5 +189,5 @@ hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
     mcd$mcdname <- unlist(mcd$mcdname)
     return(mcd)
   }
-  stop("The key used might be invalid.")
+  stop("The key used might be invalid or could not find mcds for this state")
 }
