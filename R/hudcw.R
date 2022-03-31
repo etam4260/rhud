@@ -40,6 +40,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter
 }
 
 
+
 #' @name hud_cw_zip_county
 #' @title hud_cw_zip_county
 #' @description This function queries the Crosswalks API provided by
@@ -83,6 +84,8 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarte
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$county)
 }
 
+
+
 #' @name hud_cw_zip_cbsa
 #' @title hud_cw_zip_cbsa
 #' @description This function queries the Crosswalks API provided by
@@ -124,6 +127,8 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter 
   if(!minimal) return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key))
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$cbsa)
 }
+
+
 
 #' @name hud_cw_zip_cbsadiv
 #' @title hud_cw_zip_cbsadiv
@@ -167,6 +172,8 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"), quart
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$cbsadiv)
 }
 
+
+
 #' @name hud_cw_zip_cd
 #' @title hud_cw_zip_cd
 #' @description This function queries the Crosswalks API provided by
@@ -208,6 +215,8 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"), quarter = 
   if(!minimal) return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key))
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$cd)
 }
+
+
 
 #' @name hud_cw_tract_zip
 #' @title hud_cw_tract_zip
@@ -251,6 +260,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"), quart
   if(!minimal) return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key))
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$zip)
 }
+
 
 
 #' @name hud_cw_county_zip
@@ -340,6 +350,8 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"), quarter
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$zip)
 }
 
+
+
 #' @name hud_cw_cbsadiv_zip
 #' @title hud_cw_cbsadiv_zip
 #' @description This function queries the Crosswalks API provided by
@@ -381,6 +393,8 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"), q
   if(!minimal) return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key))
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$zip)
 }
+
+
 
 #' @name hud_cw_cd_zip
 #' @title hud_cw_cd_zip
@@ -424,6 +438,8 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"), quarter = 1
   if(!minimal) return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key))
   return(cw_do_query_calls(URL, allqueries$query, allqueries$year, allqueries$quarter, primary_geoid, secondary_geoid, key)$zip)
 }
+
+
 
 #' @name hud_cw_zip_countysub
 #' @title hud_cw_zip_countysub

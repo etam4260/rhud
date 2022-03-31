@@ -32,11 +32,11 @@ hud_cdbg <- function(file = 1) {
   if(as.integer(file) > 4 || as.integer(file) < 1) stop("File number out of range.")
 
   if(as.integer(file) == 1) {
-    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Appropriation.xlsx")
+    data <- suppressMessages(import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Appropriation.xlsx"))
 
     # Rename first two rows to their 'appropriate' names.
-    colnames(data)[1] <- "Appropriation Abbreviation"
-    colnames(data)[2] <- "Appropriation"
+    names(data)[1] <- "Appropriation Abbreviation"
+    names(data)[2] <- "Appropriation"
 
     # First column is just totals. Get rid of that.
     data <- data[-1, ]
@@ -45,7 +45,7 @@ hud_cdbg <- function(file = 1) {
 
     data <- data[-which(data$Grantee == "Total"), ]
   } else if(as.integer(file) == 2) {
-    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Grantee.xlsx")
+    data <- suppressMessages(import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20by%20Grantee.xlsx"))
 
     # Rename first two rows to their 'apropriate' names.
     colnames(data)[2] <- "Appropriation Abbreviation"
@@ -62,9 +62,9 @@ hud_cdbg <- function(file = 1) {
     data <- data[-which(data$Grantee == "Total"), ]
     data <- data[-which(data$`Appropriation Abbreviation` == "Total"), ]
   } else if(as.integer(file) == 3) {
-    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20Monthly%20Summary.xlsx")
+    data <- suppressMessages(import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Financial%20Report%20Monthly%20Summary.xlsx"))
   } else if(as.integer(file) == 4) {
-    data <- import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Performance%20by%20Activity.xlsx")
+    data <- suppressMessages(import("https://drgr.hud.gov/public/downloads/DR-CDBG/CDBG-DR%20Performance%20by%20Activity.xlsx"))
     colnames(data)[1] <- "Appropriation Abbreviation"
     colnames(data)[2] <- "Appropriation"
 

@@ -23,7 +23,8 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
-  states <- as.data.frame(do.call(rbind, cont))
+
+  states <- as.data.frame(do.call("rbind", cont))
   states$state_num <- as.character(as.integer(states$state_num))
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
@@ -48,7 +49,6 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of metropolitan areas in US.
 hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
-
 
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas")
   call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
