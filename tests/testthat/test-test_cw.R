@@ -1,6 +1,7 @@
 # Should allow user to provide county name/state names/abbreviations.
 # All string inputs that can be numeric inputs can be supplied as a numeric input.
 test_that("Crosswalk All Types", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # For these tests, none of  the Crosswalk queries should throw an error.
   # Need to also check for if these queries result a satiable result; need
   # to add least have 1 row or more in data frame returned.
@@ -101,7 +102,7 @@ test_that("Different Quarters", {
 
 
 test_that("Wrong Queries", {
-
+  skip_if(Sys.getenv("HUD_KEY") == "")
   expect_error(hud_cw(type = 7, query = '22031241231',
                                 year = c('2010', '2011'), quarter = c('1','2','3','4')))
 
@@ -113,6 +114,7 @@ test_that("Wrong Queries", {
 
 test_that("Not Convertable to Integer", {
   # Character arguments that aren't numbers in any of them. Throws errors.
+  skip_if(Sys.getenv("HUD_KEY") == "")
   expect_error(hud_cw(type = 'dwqji', query = '22031',
                                    year = c('2010', '2011'), quarter = c('1','2','3','4')))
 

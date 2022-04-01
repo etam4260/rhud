@@ -1,4 +1,5 @@
 test_that("test hud_chas_nation()", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # First make simple query call to hud_chas_nation() with no arguments.
   # Will choose default 2014-2018.
   one_year <- hud_chas_nation()
@@ -17,6 +18,7 @@ test_that("test hud_chas_nation()", {
 })
 
 test_that("test hud_chas_state" ,{
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Try querying for a state using abbreviation...
   # Try lowercase too... Try uppercase too...
   # Try weird cases...
@@ -48,6 +50,7 @@ test_that("test hud_chas_state" ,{
 })
 
 test_that("test hud_chas_county()",{
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Simple query only a single county.
   test <- hud_chas_county(county = "06105")
   expect_true(nrow(test) == 1)
@@ -66,6 +69,7 @@ test_that("test hud_chas_county()",{
 })
 
 test_that("test hud_chas_mcd()",{
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Simple query
   test <- hud_chas_mcd("VA", "94135")
   expect_true(nrow(test) == 1)
@@ -85,6 +89,7 @@ test_that("test hud_chas_mcd()",{
 })
 
 test_that("test hud_chas_place()",{
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Simple query
   test <- hud_chas_place("VA", "48996")
   expect_true(nrow(test) == 1)

@@ -97,54 +97,54 @@ looking at the outputted data I RECOMMEND first taking a look at [Input Argument
 as well as [Output Data][] located at the bottom of the page.
 
 #### Zip -> Tract
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 library(hudr)
 # Four digits for printed output. 
 options (digits=4)
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
 #### Zip -> County
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_county(zip = 35213, year = c('2020'), quarter = c('2'))
 ```
 #### Zip -> CBSA (Core Base Statistical Areas)
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsa(zip = 35213, year = c('2011'), quarter = c('3'))
 ```
 #### Zip -> CBSAdiv (Core Base Statistical Areas Division)
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsadiv(zip = '22031', year = c('2019'), quarter = c('4'))
 ```
 #### ZIP -> CD (Congressional District)
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cd(zip = '35213', year = c(2011), quarter = c(1))
 ```
 #### Tract -> Zip 
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 ```
 #### County -> Zip 
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'))
 ```
 #### CBSA (Core Based Statistical Areas) -> Zip 
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsa_zip(cbsa = '10140', year = c('2017'), quarter = c('2'))
 ```
 #### CBSAdiv (Core Based Statistical Areas Division) -> Zip
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('4'))
 ```
 #### CD (Congressional District) -> Zip
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cd_zip(cd = '2202', year = c('2010'), quarter = c('4'))
 ```
 #### Zip -> County Subdistrict
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_countysub(zip = '35213', year = c('2019'), quarter = c('2'))
 ```
 #### County Subdistrict -> Zip
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019'), quarter = c('4','4'))
 ```
 
@@ -153,7 +153,7 @@ hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019')
 If you just want the crosswalked GEOIDs, you can set the MINIMAL argument to TRUE.
 This will return a vector containing the crosswalked GEOIDs without the extra metadata.
 
-```{r, eval = TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
 hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'), minimal = TRUE)
 ```
 
