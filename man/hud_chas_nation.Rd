@@ -28,3 +28,12 @@ Returns a dataframe with CHAS data for the entire nation.
 \description{
 Returns CHAS data for the entire nation.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_chas_nation()
+}
+}

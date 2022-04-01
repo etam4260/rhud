@@ -24,3 +24,17 @@ https://drgr.hud.gov/public/data_downloads.html?programName=DR\%20CDBG
 and format it into a dataframe. It will unroll each column to replace
 NA values with the first non-NA value above it.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+hud_cdbg(1)
+
+hud_cdbg(2)
+
+hud_cdbg(file = 3)
+
+hud_cdbg(file = 4)
+}
+}

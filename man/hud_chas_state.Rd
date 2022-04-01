@@ -30,3 +30,14 @@ Returns a dataframe with CHAS data for a particular state.
 \description{
 Returns CHAS data for a state.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_chas_state("CA")
+hud_chas_state("New York")
+hud_chas_state("51")
+}
+}

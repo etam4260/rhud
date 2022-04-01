@@ -19,6 +19,7 @@ hud_get_key <- function() {
 #' @name hud_set_key
 #' @title hud_set_key
 #' @description A wrapper around Sys.getenv() to set HUD_KEY environment variable.
+#' @param key key obtained at https://www.huduser.gov/hudapi/public/register?comingfrom=1
 #' @export
 #' @examples
 #' \dontrun{

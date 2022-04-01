@@ -36,5 +36,18 @@ individual county within the state.
 This function queries the Fair Markets Rent API provided by
 US Department of Housing and Urban Development.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_fmr("VA", year=c(2021))
+
+hud_fmr("5100199999", year=c(2021))
+
+hud_fmr("METRO47900M47900", year=c(2018))
+}
+}
 \keyword{API}
 \keyword{Crosswalks}

@@ -38,5 +38,14 @@ This function queries the Crosswalks API provided by
 US Department of Housing and Urban Development. This
 returns the crosswalk for countysub to zip.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019'), quarter = c('4','4'))
+
+hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019'), quarter = c('1'), minimal = TRUE)
+}
+}
 \keyword{API}
 \keyword{Crosswalks}

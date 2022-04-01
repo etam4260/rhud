@@ -8,6 +8,11 @@
 # List All Cities in State
 
 
+# Need to allow filtering by state. For example, if given
+# state = NA, will query for everything
+# state = c(VA, MD) will query for VA or MD
+# state = c(51,52)
+
 #' @name hud_states
 #' @title hud_states
 #' @description Get a list of state along with the corresponding FIPs code and abbreviation.
@@ -16,6 +21,14 @@
 #' @keywords States
 #' @export
 #' @returns A dataframe containing details of all the states in the US.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_states()
+#' }
 hud_states <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
@@ -39,6 +52,8 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
   stop("The key used might be invalid.")
 }
 
+# Need to allow user to filter metropolitan areas similar to place, county, mcds.
+
 #' @name hud_metropolitan
 #' @title hud_metropolitan
 #' @description Get a list of all metropolitan areas in the US along with its name and CBSA code.
@@ -47,6 +62,14 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 #' @keywords CBSA
 #' @export
 #' @returns A dataframe containing details of metropolitan areas in US.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_metropolitan()
+#' }
 hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
 
@@ -76,6 +99,16 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 #' @keywords Counties
 #' @export
 #' @returns A dataframe containing all counties within a state
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_places("CA")
+#' hud_places("Virginia")
+#' hud_places("51")
+#' }
 hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
@@ -121,6 +154,16 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @keywords places.
 #' @export
 #' @returns A dataframe containing details of places in a state.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_places("CA")
+#' hud_places("Virginia")
+#' hud_places("51")
+#' }
 hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
@@ -162,6 +205,16 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @keywords CBSA
 #' @export
 #' @returns A dataframe containing details of minor civil divisions in a state.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_minor_civil_divisions("CA")
+#' hud_minor_civil_divisions("Virginia")
+#' hud_minor_civil_divisions("51")
+#' }
 hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
   if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")

@@ -27,6 +27,19 @@
 #'   4) DR CDBG CDBG-DR Performance by Activity (xlsx - 2.2 MB - 1/1/2022)
 #' @returns A dataframe.
 #' @export
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#' hud_cdbg(1)
+#'
+#' hud_cdbg(2)
+#'
+#' hud_cdbg(file = 3)
+#'
+#' hud_cdbg(file = 4)
+#' }
 hud_cdbg <- function(file = 1) {
 
   if(as.integer(file) > 4 || as.integer(file) < 1) stop("File number out of range.")

@@ -48,6 +48,23 @@ https://www.huduser.gov/portal/dataset/chas-api.html
 This function queries the CHAS API provided by US Department
 of Housing and Urban Development
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_chas(1)
+
+hud_chas('2', stateId = '56')
+
+hud_chas('3','51','199')
+
+hud_chas('4', '51', 94087)
+
+hud_chas('5', '51', 48996)
+}
+}
 \keyword{(CHAS)}
 \keyword{API}
 \keyword{Affordability}

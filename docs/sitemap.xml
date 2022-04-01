@@ -49,6 +49,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/pull_request_template.html</loc>
+  </url>
+  <url>
     <loc>/reference/add_leading_zeros.html</loc>
   </url>
   <url>
@@ -151,10 +154,16 @@
     <loc>/reference/hud_places.html</loc>
   </url>
   <url>
+    <loc>/reference/hud_set_key.html</loc>
+  </url>
+  <url>
     <loc>/reference/hud_states.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/misc_do_query_call.html</loc>
   </url>
   <url>
     <loc>/reference/numbers_only.html</loc>

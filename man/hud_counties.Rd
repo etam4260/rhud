@@ -18,4 +18,15 @@ A dataframe containing all counties within a state
 \description{
 Get a list of all counties within a state.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_places("CA")
+hud_places("Virginia")
+hud_places("51")
+}
+}
 \keyword{Counties}

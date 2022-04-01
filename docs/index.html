@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">hudr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
       </span>
     </div>
 
@@ -107,7 +107,8 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="hudr-">hudr <img src="reference/figures/logo.png" align="right" width="139"><a class="anchor" aria-label="anchor" href="#hudr-"></a>
+<div class="page-header"><h1 id="hudr-">hudr
+<img src="reference/figures/logo.png" align="right" width="139"><a class="anchor" aria-label="anchor" href="#hudr-"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -116,38 +117,72 @@
 <h2 id="housing-and-urban-development-in-r">Housing and Urban Development in R<a class="anchor" aria-label="anchor" href="#housing-and-urban-development-in-r"></a>
 </h2>
 <ul>
-<li>This interface uses the HUD User Data API but is not endorsed or certified by HUD User.</li>
+<li>This interface uses the HUD User Data API but is not endorsed or
+certified by HUD User.</li>
 </ul>
-<p>The goal of this project is to provide an easy to use interface to access various open source APIs provided by the U.S Housing and Urban Development. These include the USPS Crosswalk Files, Fair Markets Rent, Income Limits, and Comprehensive Housing and Affordability Strategy. Although HUD does provide datasets for other programs, they are currently not supported by an API.</p>
-<p>HUD has two main websites for gaining access to various different data sets: HUD User and Exchange.</p>
-<p>Please read <a href="https://www.huduser.gov/portal/dataset/api-terms-of-service.html" class="external-link uri">https://www.huduser.gov/portal/dataset/api-terms-of-service.html</a> for all terms of service.</p>
+<p>The goal of this project is to provide an easy to use interface to
+access various open source APIs provided by the U.S Housing and Urban
+Development. These include the USPS Crosswalk Files, Fair Markets Rent,
+Income Limits, and Comprehensive Housing and Affordability Strategy.
+Although HUD does provide datasets for other programs, they are
+currently not supported by an API.</p>
+<p>HUD has two main websites for gaining access to various different
+data sets: HUD User and Exchange.</p>
+<p>Please read <a href="https://www.huduser.gov/portal/dataset/api-terms-of-service.html" class="external-link uri">https://www.huduser.gov/portal/dataset/api-terms-of-service.html</a>
+for all terms of service.</p>
 <p>According to HUD USER:</p>
-<p>All services, which utilize or access the API, should display the following notice prominently within the application: “This product uses the HUD User Data API but is not endorsed or certified by HUD User.” You may use the HUD User name in order to identify the source of API content subject to these rules. You may not use the HUD User name, or the like to imply endorsement of any product, service, or entity, not-for-profit, commercial or otherwise.</p>
+<p>All services, which utilize or access the API, should display the
+following notice prominently within the application: “This product uses
+the HUD User Data API but is not endorsed or certified by HUD User.” You
+may use the HUD User name in order to identify the source of API content
+subject to these rules. You may not use the HUD User name, or the like
+to imply endorsement of any product, service, or entity, not-for-profit,
+commercial or otherwise.</p>
 </div>
 <div class="section level2">
 <h2 id="hud-user-httpswwwhudusergovportaldatasets">HUD User: <a href="https://www.huduser.gov/portal/datasets" class="external-link uri">https://www.huduser.gov/portal/datasets</a>
 <a class="anchor" aria-label="anchor" href="#hud-user-httpswwwhudusergovportaldatasets"></a>
 </h2>
-<p>“HUD User is an information source containing reports and reference documents for the U.S. Department of Housing and Urban Development. HUD USER was established by the HUD’s Office of Policy Development and Research in 1978 (HUD User Home Page | HUD USER).”</p>
-<p>HUD User maintains an API to gain access to their data. However, their API system can be rather confusing and provides their information in JSON format rather than a data frame like object. Although there exist file downloadables, R users may want to be able to extract specific bits of the data into memory.</p>
+<p>“HUD User is an information source containing reports and reference
+documents for the U.S. Department of Housing and Urban Development. HUD
+USER was established by the HUD’s Office of Policy Development and
+Research in 1978 (HUD User Home Page | HUD USER).”</p>
+<p>HUD User maintains an API to gain access to their data. However,
+their API system can be rather confusing and provides their information
+in JSON format rather than a data frame like object. Although there
+exist file downloadables, R users may want to be able to extract
+specific bits of the data into memory.</p>
 </div>
 <div class="section level2">
 <h2 id="hud-exchange-httpswwwhudexchangeinfoprogramsdrgr">HUD Exchange: <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a>
 <a class="anchor" aria-label="anchor" href="#hud-exchange-httpswwwhudexchangeinfoprogramsdrgr"></a>
 </h2>
-<p>“The Department of Housing and Urban Development has a website known as HUD Exchange which is a comprehensive online platform that provides tools, resources, and contact information for the organizations and individuals that partner with HUD. These often include nonprofit groups and state and municipal governments, but also include borrowers, lenders, and brokers involved in HUD’s multifamily loan programs (Disaster Recovery Grant Reporting System, 2022).”</p>
-<p>The DRGR Disaster Recovery Grant Reporting System which HUD Exchange uses to supply public data does not have an active API for retrieving information. However, there does exist data sets freely available online which can be directly downloadable into R. This package provides the ability to directly get such data.</p>
+<p>“The Department of Housing and Urban Development has a website known
+as HUD Exchange which is a comprehensive online platform that provides
+tools, resources, and contact information for the organizations and
+individuals that partner with HUD. These often include nonprofit groups
+and state and municipal governments, but also include borrowers,
+lenders, and brokers involved in HUD’s multifamily loan programs
+(Disaster Recovery Grant Reporting System, 2022).”</p>
+<p>The DRGR Disaster Recovery Grant Reporting System which HUD Exchange
+uses to supply public data does not have an active API for retrieving
+information. However, there does exist data sets freely available online
+which can be directly downloadable into R. This package provides the
+ability to directly get such data.</p>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h2>
 <p>Please cite this package using:</p>
-<p>Tam, E., Reilly, A., &amp; Ghaedi, H. (2022). hudr: A R interface for accessing HUD (US Department of Housing and Urban Development) APIs (Version 0.0.0.9000). <a href="https://github.com/etam4260/hudr" class="external-link uri">https://github.com/etam4260/hudr</a></p>
+<p>Tam, E., Reilly, A., &amp; Ghaedi, H. (2022). hudr: A R interface for
+accessing HUD (US Department of Housing and Urban Development) APIs
+(Version 0.0.0.9000). <a href="https://github.com/etam4260/hudr" class="external-link uri">https://github.com/etam4260/hudr</a></p>
 </div>
 <div class="section level2">
 <h2 id="available-data">Available Data<a class="anchor" aria-label="anchor" href="#available-data"></a>
 </h2>
-<p>The APIs and datasets which this library interfaces are listed below. The HUD also provide miscellaneous supplemental APIs under them.</p>
+<p>The APIs and datasets which this library interfaces are listed below.
+The HUD also provide miscellaneous supplemental APIs under them.</p>
 <ol style="list-style-type: decimal">
 <li>
 <p>HUD User</p>
@@ -185,7 +220,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"etam4260/hudr"</span><span class="op">)</span></code></pre></div>
-<p>For more details on how to setup and utilize this package. Please go to <a href="https://etam4260.github.io/hudr/" class="external-link uri">https://etam4260.github.io/hudr/</a>. Select [Setup] in the navigation bar.</p>
+<p>For more details on how to setup and utilize this package. Please go
+to <a href="https://etam4260.github.io/hudr/" class="external-link uri">https://etam4260.github.io/hudr/</a>. Select [Setup] in the
+navigation bar.</p>
 </div>
 <div class="section level2">
 <h2 id="contributors">Contributors<a class="anchor" aria-label="anchor" href="#contributors"></a>
@@ -201,19 +238,25 @@
 </h2>
 <ul>
 <li>License: GPL &gt;= 2</li>
-<li>To get citation information for hudr in R, type citation(package = ‘hudr’)</li>
-<li>This interface uses the HUD User Data API but is not endorsed or certified by HUD User.</li>
-<li>The limit on the maximum number of API calls is 1200 queries a min. Each function call does not correspond to a single API call!</li>
+<li>To get citation information for hudr in R, type citation(package =
+‘hudr’)</li>
+<li>This interface uses the HUD User Data API but is not endorsed or
+certified by HUD User.</li>
+<li>The limit on the maximum number of API calls is 1200 queries a min.
+Each function call does not correspond to a single API call!</li>
 <li>This is a WIP so please report any issues or bugs to: <a href="https://github.com/etam4260/hudr/issues" class="external-link uri">https://github.com/etam4260/hudr/issues</a>
 </li>
-<li>This is open source, so please fork and introduce some pull requests!</li>
+<li>This is open source, so please fork and introduce some pull
+requests!</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>Disaster Recovery Grant Reporting System. (2022). HUD Exchange. Retrieved February 19, 2022, from <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
-<p>HUD User Home Page: HUD USER. HUD User Home Page | HUD USER. (n.d.). Retrieved February 24, 2022, from <a href="https://www.huduser.gov/portal/home.html" class="external-link uri">https://www.huduser.gov/portal/home.html</a></p>
+<p>Disaster Recovery Grant Reporting System. (2022). HUD Exchange.
+Retrieved February 19, 2022, from <a href="https://www.hudexchange.info/programs/drgr/" class="external-link uri">https://www.hudexchange.info/programs/drgr/</a></p>
+<p>HUD User Home Page: HUD USER. HUD User Home Page | HUD USER. (n.d.).
+Retrieved February 24, 2022, from <a href="https://www.huduser.gov/portal/home.html" class="external-link uri">https://www.huduser.gov/portal/home.html</a></p>
 </div>
 </div>
   </div>
@@ -222,6 +265,7 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=hudr" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/etam4260/hudr/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/etam4260/hudr/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -265,7 +309,6 @@
 <li><a href="https://github.com/etam4260/hudr/actions" class="external-link"><img src="https://github.com/etam4260/hudr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/gh/etam4260/hudr?branch=main" class="external-link"><img src="https://codecov.io/gh/etam4260/hudr/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href=""><img src="https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow" alt="devel version"></a></li>
-<li><a href="https://github.com/r-hub/cranlogs.app" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/hudr?color=C9A115" alt="rstudio mirror downloads"></a></li>
 </ul>
 </div>
 
@@ -280,7 +323,8 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>

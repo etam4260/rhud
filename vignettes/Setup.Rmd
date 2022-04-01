@@ -47,7 +47,7 @@ Sys.setenv() function.
 ### Using Sys.setenv() during an interactive session
 One method of setting the API key is to use environment variables. This library
 searches for HUD_KEY in the user environment to check if a key has been defined.
-If no key has been defined, an empty string is outputted.
+If no key has been defined, an empty string is outputted. 
 
 ```{r, eval=FALSE}
 library(hudr)
@@ -63,6 +63,12 @@ Sys.setenv("HUD_KEY" = "2yeuduhq72ueajk")
 Sys.getenv("HUD_KEY")
 ```
 
+You can also use the quicker to type hud_set_key()
+
+```{r, eval=FALSE}
+hud_set_key("2yeuduhq72ueajk")
+```
+
 To check whether hudr can gain access to this environment variable...
 
 ```{r, eval=FALSE}
@@ -73,16 +79,16 @@ It is now set up for the rest of the R session.
 
 ## Rprofile
 
-You also choose to save it into your .Rprofile to save the key between R session.
+You also choose to save it into your .Rprofile to save the key in between R session.
 
-Every time R starts it looks for .Rprofile files in different locations:
+When R starts it looks for .Rprofile files in different locations:
 
-*R_HOME the directory in which R is installed,
-*HOME the user’s home directory,
-*R’s current working directory.
+*R_HOME: which is the directory in that R is installed,
+*HOME: the user's home directory,
+*The current working directory for R
 *R only loads one .Rprofile file per session and thus an .Rprofile file at the project-level overrides files in other locations.
 
-The .Rprofile file is an R script that is launch each time R starts. Sometimes they
+The .Rprofile file is an R script that is launch each time R starts. Sometimes it
 might not be in these locations. You can just create one and put it at
 the root of your project and type the following in it:
 

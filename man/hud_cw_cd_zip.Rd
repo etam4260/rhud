@@ -39,5 +39,14 @@ This function queries the Crosswalks API provided by
 US Department of Housing and Urban Development. This
 returns the crosswalk for cbsadiv to zip.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+hud_cw_cd_zip(cd = 2202, year = c('2017'), quarter = c('1'))
+
+hud_cw_cd_zip(cd = '2202', year = c('2010'), quarter = c('1'), minimal = TRUE)
+}
+}
 \keyword{API}
 \keyword{Crosswalks}

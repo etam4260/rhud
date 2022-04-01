@@ -8,6 +8,7 @@
 #' @param key The key obtain from HUD USER website.
 #' @returns A dataframe of all the response bodies.
 #' @noRd
+#' @noMd
 chas_do_query_calls <- function(URL, key) {
   # Form all query calls...
   list_res <- c()
@@ -49,6 +50,7 @@ chas_do_query_calls <- function(URL, key) {
 #' @param key The key needed to query the HUD API
 #' @returns A data frame of all the results made from the query.
 #' @noRd
+#' @noMd
 cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid, secondary_geoid, key) {
   list_res <- c()
 
@@ -96,6 +98,8 @@ cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid, secondar
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @returns A dataframe containing all queried rows.
+#' @noRd
+#' @noMd
 misc_do_query_call <- function(URL, key) {
   list_res <- c()
   for(i in 1:length(URL)) {

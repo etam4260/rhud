@@ -105,5 +105,3 @@ test_that("test hud_chas_place()",{
   test <- hud_chas_place(c("MD", "VA"), c("53700", "48952"))
   expect_true(nrow(test) == 2)
 })
-
-

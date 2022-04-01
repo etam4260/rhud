@@ -33,6 +33,19 @@ https://www.huduser.gov/portal/dataset/fmr-api.html
 This function queries the Income Limits API provided by
 US Department of Housing and Urban Development
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_il("VA", year=c(2021))
+
+hud_il("5100199999", year=c(2021))
+
+hud_il("METRO47900M47900", year=c(2018))
+}
+}
 \keyword{API}
 \keyword{Income}
 \keyword{Limits}

@@ -1,4 +1,3 @@
-
 #' @name hud_chas_nation
 #' @title hud_chas_nation
 #' @param year The years to query for.
@@ -14,6 +13,14 @@
 #' @param key The key obtain from HUD USER website.
 #' @description Returns CHAS data for the entire nation.
 #' @returns Returns a dataframe with CHAS data for the entire nation.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_chas_nation()
+#' }
 hud_chas_nation <- function(year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) {
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -40,6 +47,16 @@ hud_chas_nation <- function(year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) 
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular state.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_chas_state("CA")
+#' hud_chas_state("New York")
+#' hud_chas_state("51")
+#' }
 hud_chas_state <- function(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) {
   args <- chas_input_check_cleansing(state, year, key)
   state <- args[[1]]
@@ -85,6 +102,15 @@ hud_chas_state <- function(state, year = c("2014-2018"), key = Sys.getenv("HUD_K
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular county.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_chas_county(county = c(06105, 06113))
+#' hud_chas_county(county = c("06105", "06113"))
+#' }
 hud_chas_county <- function(county, year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) {
   args <- chas_input_check_cleansing(county, year, key)
   county <- args[[1]]
@@ -137,6 +163,18 @@ hud_chas_county <- function(county, year = c("2014-2018"), key = Sys.getenv("HUD
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular minor civil division(mcd).
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_chas_mcd("VA", "94135", year = c("2014-2018","2013-2017"))
+#'
+#' hud_chas_mcd(c("MD", "VA"), c("90812", "94135"))
+#'
+#' hud_chas_mcd("California", "93140")
+#' }
 hud_chas_mcd <- function(state, mcd, year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) {
   args <- chas_input_check_cleansing(mcd, year, key)
   mcd <- args[[1]]
@@ -189,6 +227,18 @@ hud_chas_mcd <- function(state, mcd, year = c("2014-2018"), key = Sys.getenv("HU
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular place (Usually just cities).
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_chas_place("MD", 53625, year = c("2014-2018","2013-2017"))
+#'
+#' hud_chas_place("6", "17727")
+#'
+#' hud_chas_place(51, 48996)
+#' }
 hud_chas_place <- function(state, place, year = c("2014-2018"), key = Sys.getenv("HUD_KEY")) {
   args <- chas_input_check_cleansing(place, year, key)
   place <- args[[1]]

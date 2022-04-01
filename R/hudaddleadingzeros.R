@@ -1,6 +1,6 @@
 #' @name add_leading_zeros
 #' @title add_leading_zeros
-#' @description Sometimes when loading in fips data from an excel file it
+#' @description Sometimes when loading in data from an excel file it
 #'   truncates the leading 0's. This attempts to re-add those.
 #' @param geoid_type What geoid type to add leading 0s to 1) zip -> Must be 5
 #'   digit zip code 2) county -> Must be a 5 digit county fips code 3) cbsa ->
@@ -10,6 +10,18 @@
 #' @param geoids A vector or column of geoids that need leading zeros to be
 #'   processed properly.
 #' @returns A dataframe with the corrected geoids.
+#' @export
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#' zip <- c(02102, 11032, 01232)
+#'
+#' zip <- add_leading_zeros("zip", zip)
+#'
+#' cbsa <- c(02102, 11032, 01232)
+#'
+#' cbsa <- add_leading_zeros("cbsa", cbsa)
+#' }
 add_leading_zeros <- function(geoid_type = "zip", geoids) {
   if(!numbers_only(geoid_type)) {
     if(geoid_type == "zip") {

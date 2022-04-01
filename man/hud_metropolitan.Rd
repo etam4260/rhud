@@ -16,4 +16,13 @@ A dataframe containing details of metropolitan areas in US.
 \description{
 Get a list of all metropolitan areas in the US along with its name and CBSA code.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_metropolitan()
+}
+}
 \keyword{CBSA}

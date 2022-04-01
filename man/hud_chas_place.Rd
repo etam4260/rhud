@@ -37,3 +37,16 @@ Returns a dataframe with CHAS data for a particular place (Usually just cities).
 \description{
 Returns CHAS data for place.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_chas_place("MD", 53625, year = c("2014-2018","2013-2017"))
+
+hud_chas_place("6", "17727")
+
+hud_chas_place(51, 48996)
+}
+}

@@ -32,3 +32,16 @@ Returns a dataframe with CHAS data for a particular minor civil division(mcd).
 \description{
 Returns CHAS data for an mcd.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_chas_mcd("VA", "94135", year = c("2014-2018","2013-2017"))
+
+hud_chas_mcd(c("MD", "VA"), c("90812", "94135"))
+
+hud_chas_mcd("California", "93140")
+}
+}

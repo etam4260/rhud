@@ -16,4 +16,13 @@ A dataframe containing details of all the states in the US.
 \description{
 Get a list of state along with the corresponding FIPs code and abbreviation.
 }
+\examples{
+\dontrun{
+library(hudr)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_states()
+}
+}
 \keyword{States}

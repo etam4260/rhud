@@ -69,6 +69,36 @@
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_cw(type = 1, query = '35213', year = c('2010', '2011'), quarter = c('1'))
+#'
+#' hud_cw(type = '2', query = '35213', year = c('2016', '2020'), quarter = c('2'))
+#'
+#' hud_cw(type = 3, query = 35213, year = c('2012', '2011'), quarter = c('3'))
+#'
+#' hud_cw(type = 4, query = '22031', year = c('2017', '2019'), quarter = c('4'))
+#'
+#' hud_cw(type = '5', query = '35213', year = c(2011, '2012'), quarter = c('1','2'))
+#'
+#' hud_cw(type = 6, query = '48201223100', year = c('2017', '2010'), quarter = c('1','2','3'))
+#'
+#' hud_cw(type = 7, query = '22031', year = c('2010', '2011'), quarter = c('1','2','3','4'))
+#'
+#' hud_cw(type = 8, query = '10140', year = c('2010', '2011'), quarter = c('2','1'))
+#'
+#' hud_cw(type = 9, query = '10380', year = c('2017'), quarter = c('4'))
+#'
+#' hud_cw(type = 10, query = '2202', year = c('2010', '2011'), quarter = c('4','3'))
+#'
+#' hud_cw(type = 11, query = '35213', year = c('2019', '2020'), quarter = c('2','3'))
+#'
+#' hud_cw(type = 12, query = '4606720300 ', year = c('2019', '2019', '2019'), quarter = c('4','4'))
+#' }
 hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter = 1,
                    key = Sys.getenv("HUD_KEY")) {
   args <- cw_input_check_cleansing(query, year, quarter, key)
@@ -164,6 +194,18 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"), quarter =
 #'   For state level data, these measurements will be the same as county level
 #'   data, but will return a dataframe with the individual measurements for each
 #'   individual county within the state.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_fmr("VA", year=c(2021))
+#'
+#' hud_fmr("5100199999", year=c(2021))
+#'
+#' hud_fmr("METRO47900M47900", year=c(2018))
+#' }
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
@@ -236,6 +278,18 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.gete
 #'   year, median_income, very_low+, extremely_low+, and low+. For more details
 #'   about these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/fmr-api.html
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_il("VA", year=c(2021))
+#'
+#' hud_il("5100199999", year=c(2021))
+#'
+#' hud_il("METRO47900M47900", year=c(2018))
+#' }
 hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
@@ -319,6 +373,22 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"), key = Sys.geten
 #' @returns This function returns a dataframe containing CHAS data for a
 #'   particular state. For more details about these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/chas-api.html
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+#'
+#' hud_chas(1)
+#'
+#' hud_chas('2', stateId = '56')
+#'
+#' hud_chas('3','51','199')
+#'
+#' hud_chas('4', '51', 94087)
+#'
+#' hud_chas('5', '51', 48996)
+#' }
 hud_chas <- function(type, stateId = NULL, entityId = NULL, year = c("2014-2018"),
                      key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(type) || !is.vector(year) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")

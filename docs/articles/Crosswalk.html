@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">hudr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
       </span>
     </div>
 
@@ -117,11 +117,44 @@
 <div class="section level3">
 <h3 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
 </h3>
-<p>"One of the many challenges that social science researchers and practitioners face is the difficulty of relating United States Postal Service (USPS) ZIP codes to Census Bureau geographies. There are valuable data available only at the ZIP code level that, when combined with demographic data tabulated at various Census geography levels, could open up new avenues of exploration.</p>
-<p>While some acceptable methods of combining ZIP codes and Census geography exist, they have limitations. To provide additional avenues for merging these data, PD&amp;R has released the HUD-USPS Crosswalk Files. These unique files are derived from data in the quarterly USPS Vacancy Data. They originate directly from the USPS; are updated quarterly, making them highly responsive to changes in ZIP code configurations; and reflect the locations of both business and residential addresses. The latter feature is of particular interest to housing researchers because many of the phenomena that they study are based on housing unit or address. By using an allocation method based on residential addresses rather than by area or by population, analysts can take into account not only the spatial distribution of population, but also the spatial distribution of residences. This enables a slightly more nuanced approach to allocating data between disparate geographies (U.S Department of Housing and Urban Development, n.d.)."</p>
-<p>These journal articles describe the problem and proposed solution in more detail:</p>
-<p>Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S. Department of Housing and Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277 – 294. <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf</a></p>
-<p>Din, Alexander and Wilson, Ron, 2020. “Crosswalking ZIP Codes to Census Geographies: Geoprocessing the U.S. Department of Housing &amp; Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 22, Number 1, <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf</a></p>
+<p>“One of the many challenges that social science researchers and
+practitioners face is the difficulty of relating United States Postal
+Service (USPS) ZIP codes to Census Bureau geographies. There are
+valuable data available only at the ZIP code level that, when combined
+with demographic data tabulated at various Census geography levels,
+could open up new avenues of exploration.</p>
+<p>While some acceptable methods of combining ZIP codes and Census
+geography exist, they have limitations. To provide additional avenues
+for merging these data, PD&amp;R has released the HUD-USPS Crosswalk
+Files. These unique files are derived from data in the quarterly USPS
+Vacancy Data. They originate directly from the USPS; are updated
+quarterly, making them highly responsive to changes in ZIP code
+configurations; and reflect the locations of both business and
+residential addresses. The latter feature is of particular interest to
+housing researchers because many of the phenomena that they study are
+based on housing unit or address. By using an allocation method based on
+residential addresses rather than by area or by population, analysts can
+take into account not only the spatial distribution of population, but
+also the spatial distribution of residences. This enables a slightly
+more nuanced approach to allocating data between disparate geographies
+(U.S Department of Housing and Urban Development, n.d.).”</p>
+<p>These journal articles describe the problem and proposed solution in
+more detail:</p>
+<p>Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing
+the U.S. Department of Housing and Urban Development’s ZIP Code
+Crosswalk Files,” Cityscape: A Journal of Policy Development and
+Research, Volume 20 Number 2, 277 – 294. <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf</a></p>
+<p>Din, Alexander and Wilson, Ron, 2020. “Crosswalking ZIP Codes to
+Census Geographies: Geoprocessing the U.S. Department of Housing &amp;
+Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of
+Policy Development and Research, Volume 22, Number 1, <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf</a></p>
+</div>
+<div class="section level3">
+<h3 id="census-geographies">Census Geographies<a class="anchor" aria-label="anchor" href="#census-geographies"></a>
+</h3>
+<p>This chart provided by the US Census Bureau gives a good example of
+the relationships among different geographies. The crosswalk files only
+support a subset of these.</p>
 </div>
 <div class="section level3">
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -132,32 +165,53 @@
 </li>
 <li>zip-county <a href="#zip---county">Zip -&gt; County</a>
 </li>
-<li>zip-cbsa <a href="#zip---cbsa-core-base-statistical-areas">Zip -&gt; CBSA (Core Base Statistical Areas)</a>
+<li>zip-cbsa <a href="#zip---cbsa-core-base-statistical-areas">Zip -&gt;
+CBSA (Core Base Statistical Areas)</a>
 </li>
-<li>zip-cbsadiv (Available 4th Quarter 2017 onwards) <a href="#zip---cbsadiv-core-base-statistical-areas-division">Zip -&gt; CBSAdiv (Core Base Statistical Areas Division)</a>
+<li>zip-cbsadiv (Available 4th Quarter 2017 onwards) <a href="#zip---cbsadiv-core-base-statistical-areas-division">Zip -&gt;
+CBSAdiv (Core Base Statistical Areas Division)</a>
 </li>
-<li>zip-cd <a href="#zip---cd-congressional-district">ZIP -&gt; CD (Congressional District)</a>
+<li>zip-cd <a href="#zip---cd-congressional-district">ZIP -&gt; CD
+(Congressional District)</a>
 </li>
 <li>tract-zip <a href="#tract---zip">Tract -&gt; Zip</a>
 </li>
 <li>county-zip <a href="#county---zip">County -&gt; Zip</a>
 </li>
-<li>cbsa-zip <a href="#cbsa-core-based-statistical-areas---zip">CBSA (Core Based Statistical Areas) -&gt; Zip</a>
+<li>cbsa-zip <a href="#cbsa-core-based-statistical-areas---zip">CBSA
+(Core Based Statistical Areas) -&gt; Zip</a>
 </li>
-<li>cbsadiv-zip (Available 4th Quarter 2017 onwards) <a href="#cbsadiv-core-based-statistical-areas-division---zip">CBSAdiv (Core Based Statistical Areas Division) -&gt; Zip</a>
+<li>cbsadiv-zip (Available 4th Quarter 2017 onwards) <a href="#cbsadiv-core-based-statistical-areas-division---zip">CBSAdiv
+(Core Based Statistical Areas Division) -&gt; Zip</a>
 </li>
-<li>cd-zip <a href="#cd-congressional-district---zip">CD (Congressional District) -&gt; Zip</a>
+<li>cd-zip <a href="#cd-congressional-district---zip">CD (Congressional
+District) -&gt; Zip</a>
 </li>
 <li>zip-countysub (Available 2nd Quarter 2018 onwards) <a href="#zip---county-subdistrict">Zip -&gt; County Subdistrict</a>
 </li>
 <li>countysub-zip (Available 2nd Quarter 2018 onwards) <a href="#county-subdistrict---zip">County Subdistrict -&gt; Zip</a>
 </li>
 </ol>
-<p>The first GEOID type in the function call is what we want to query for. For example in #1 above ‘zip’ is the first GEOID and ‘tract’ is the second GEOID.</p>
-<p>The second GEOID in the function call describes the GEOID which we want to determine ‘intersection’ with the first GEOID where intersection is described as the % of residential, business, other, and total buildings that overlap.</p>
-<p>For example, in function call #7, we might have a county called 22031 which has zip codes 71052, 71078, 71049, 71032 … where the residential % of each zip is 0.38, 0.21, 0.11 … respectively. Of all these zips, when added up will equal 1, signaling these grouping of zip codes make up 100% of residential address in the county with each zip taking up their respective percentage.</p>
-<p>Disclaimer: Although there exists inverse relationships in the Crosswalk Files, the measurements are NOT DIRECTLY inverse – for reasons stated within the papers above.</p>
-<p>These are basic examples which shows you to query the Crosswalk API. Before looking at the outputted data I RECOMMEND first taking a look at <a href="#input-arguments">Input Arguments</a> as well as <a href="#output-data">Output Data</a> located at the bottom of the page.</p>
+<p>The first GEOID type in the function call is what we want to query
+for. For example in #1 above ‘zip’ is the first GEOID and ‘tract’ is the
+second GEOID.</p>
+<p>The second GEOID in the function call describes the GEOID which we
+want to determine ‘intersection’ with the first GEOID where intersection
+is described as the % of residential, business, other, and total
+buildings that overlap.</p>
+<p>For example, in function call #7, we might have a county called 22031
+which has zip codes 71052, 71078, 71049, 71032 … where the residential %
+of each zip is 0.38, 0.21, 0.11 … respectively. Of all these zips, when
+added up will equal 1, signaling these grouping of zip codes make up
+100% of residential address in the county with each zip taking up their
+respective percentage.</p>
+<p>Disclaimer: Although there exists inverse relationships in the
+Crosswalk Files, the measurements are NOT DIRECTLY inverse – for reasons
+stated within the papers above.</p>
+<p>These are basic examples which shows you to query the Crosswalk API.
+Before looking at the outputted data I RECOMMEND first taking a look at
+<a href="#input-arguments">Input Arguments</a> as well as <a href="#output-data">Output Data</a> located at the bottom of the
+page.</p>
 <div class="section level4">
 <h4 id="zip---tract">Zip -&gt; Tract<a class="anchor" aria-label="anchor" href="#zip---tract"></a>
 </h4>
@@ -351,7 +405,9 @@
 <div class="section level4">
 <h4 id="querying-for-only-the-crosswalked-geoids">Querying for only the Crosswalked GEOIDs<a class="anchor" aria-label="anchor" href="#querying-for-only-the-crosswalked-geoids"></a>
 </h4>
-<p>If you just want the crosswalked GEOIDs, you can set the MINIMAL argument to TRUE. This will return a vector containing the crosswalked GEOIDs without the extra metadata.</p>
+<p>If you just want the crosswalked GEOIDs, you can set the MINIMAL
+argument to TRUE. This will return a vector containing the crosswalked
+GEOIDs without the extra metadata.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_county_zip.html">hud_cw_county_zip</a></span><span class="op">(</span>county <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>, minimal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt;  [1] "71052" "71078" "71049" "71032" "71027" "71030" "71046" "71063" "71419"</span>
@@ -366,21 +422,27 @@
 </li>
 <li>zip-county <a href="#zip---county">Zip -&gt; County</a>
 </li>
-<li>zip-cbsa <a href="#zip---cbsa-core-base-statistical-areas">Zip -&gt; CBSA (Core Base Statistical Areas)</a>
+<li>zip-cbsa <a href="#zip---cbsa-core-base-statistical-areas">Zip -&gt;
+CBSA (Core Base Statistical Areas)</a>
 </li>
-<li>zip-cbsadiv (Available 4th Quarter 2017 onwards) <a href="#zip---cbsadiv-core-base-statistical-areas-division">Zip -&gt; CBSAdiv (Core Base Statistical Areas Division)</a>
+<li>zip-cbsadiv (Available 4th Quarter 2017 onwards) <a href="#zip---cbsadiv-core-base-statistical-areas-division">Zip -&gt;
+CBSAdiv (Core Base Statistical Areas Division)</a>
 </li>
-<li>zip-cd <a href="#zip---cd-congressional-district">ZIP -&gt; CD (Congressional District)</a>
+<li>zip-cd <a href="#zip---cd-congressional-district">ZIP -&gt; CD
+(Congressional District)</a>
 </li>
 <li>tract-zip <a href="#tract---zip">Tract -&gt; Zip</a>
 </li>
 <li>county-zip <a href="#county---zip">County -&gt; Zip</a>
 </li>
-<li>cbsa-zip <a href="#cbsa-core-based-statistical-areas---zip">CBSA (Core Based Statistical Areas) -&gt; Zip</a>
+<li>cbsa-zip <a href="#cbsa-core-based-statistical-areas---zip">CBSA
+(Core Based Statistical Areas) -&gt; Zip</a>
 </li>
-<li>cbsadiv-zip (Available 4th Quarter 2017 onwards) <a href="#cbsadiv-core-based-statistical-areas-division---zip">CBSAdiv (Core Based Statistical Areas Division) -&gt; Zip</a>
+<li>cbsadiv-zip (Available 4th Quarter 2017 onwards) <a href="#cbsadiv-core-based-statistical-areas-division---zip">CBSAdiv
+(Core Based Statistical Areas Division) -&gt; Zip</a>
 </li>
-<li>cd-zip <a href="#cd-congressional-district---zip">CD (Congressional District) -&gt; Zip</a>
+<li>cd-zip <a href="#cd-congressional-district---zip">CD (Congressional
+District) -&gt; Zip</a>
 </li>
 <li>zip-countysub (Available 2nd Quarter 2018 onwards) <a href="#zip---county-subdistrict">Zip -&gt; County Subdistrict</a>
 </li>
@@ -388,49 +450,70 @@
 </li>
 </ol>
 <p><strong>QUERY</strong></p>
-<p>The query argument name is the first geoid in the function call. For example, zip-county would have the ‘zip’ argument name as the query.</p>
-<p>Functions #1-5 and #11 must specify a 5 digit zip code in the <strong>zip</strong> function argument. (Can be type of character or numeric)</p>
+<p>The query argument name is the first geoid in the function call. For
+example, zip-county would have the ‘zip’ argument name as the query.</p>
+<p>Functions #1-5 and #11 must specify a 5 digit zip code in the
+<strong>zip</strong> function argument. (Can be type of character or
+numeric)</p>
 <ul>
 <li>zip = 22031</li>
 </ul>
-<p>Function #6 must specify a 11 digit number consisting of state FIPS + county FIPS + tract code tract in the <strong>tract</strong> function argument (Can be type of character or numeric)</p>
+<p>Function #6 must specify a 11 digit number consisting of state FIPS +
+county FIPS + tract code tract in the <strong>tract</strong> function
+argument (Can be type of character or numeric)</p>
 <ul>
 <li>tract = 51059461700</li>
 </ul>
-<p>Function #7 must specify a 5 digit county fip in the <strong>county</strong> function argument (Can be type of character or numeric)</p>
+<p>Function #7 must specify a 5 digit county fip in the
+<strong>county</strong> function argument (Can be type of character or
+numeric)</p>
 <ul>
 <li>county = 51600</li>
 </ul>
-<p>Function #8 must specify a micropolitan or metropolitan cbsa code in the <strong>cbsa</strong> function argument. (Can be type of character or numeric)</p>
+<p>Function #8 must specify a micropolitan or metropolitan cbsa code in
+the <strong>cbsa</strong> function argument. (Can be type of character
+or numeric)</p>
 <ul>
 <li>cbsa = 10380</li>
 </ul>
-<p>Function #9 must specify a metropolitan cbsa division code in the <strong>cbsadiv</strong> function argument. (Can be type of character or numeric)</p>
+<p>Function #9 must specify a metropolitan cbsa division code in the
+<strong>cbsadiv</strong> function argument. (Can be type of character or
+numeric)</p>
 <ul>
 <li>cbsadiv = 35614</li>
 </ul>
-<p>I recommend typing hud_metropolitan() to see a list of metropolitan CBSA codes. For example, a code of METRO22900N40079 needs 22900 inside as the input argument. Micropolitan CBSA codes are allowed. However, HUD does not provide an API to search available ones.</p>
-<p>Function #10 must be a 2 digit state fips code + 2 digit congressional district in the <strong>cd</strong> function argument. (Can be type of character or numeric)</p>
+<p>I recommend typing hud_metropolitan() to see a list of metropolitan
+CBSA codes. For example, a code of METRO22900N40079 needs 22900 inside
+as the input argument. Micropolitan CBSA codes are allowed. However, HUD
+does not provide an API to search available ones.</p>
+<p>Function #10 must be a 2 digit state fips code + 2 digit
+congressional district in the <strong>cd</strong> function argument.
+(Can be type of character or numeric)</p>
 <ul>
 <li>cd = 7200</li>
 </ul>
-<p>Function #12 must be a 10 digit consisting of 5 digit county fip + 5 digit county sub district in the <strong>countysub</strong> argument. (Can be type of character or numeric)</p>
+<p>Function #12 must be a 10 digit consisting of 5 digit county fip + 5
+digit county sub district in the <strong>countysub</strong> argument.
+(Can be type of character or numeric)</p>
 <ul>
 <li>countysub = 4606720300</li>
 </ul>
-<p><strong>YEAR</strong>: Year range of the data to retrieve. Defaults to current year. (Can be type of character or numeric)</p>
+<p><strong>YEAR</strong>: Year range of the data to retrieve. Defaults
+to current year. (Can be type of character or numeric)</p>
 <ul>
 <li>year = c(2019, 2018, 2021)</li>
 <li>year = c(2016)</li>
 <li>year = 2021</li>
 </ul>
-<p><strong>QUARTER</strong>: The quarters in the year to retrieve. Defaults to the first quarter. (Can be type of character or numeric)</p>
+<p><strong>QUARTER</strong>: The quarters in the year to retrieve.
+Defaults to the first quarter. (Can be type of character or numeric)</p>
 <ul>
 <li>quarter = c(1,2,3,4)</li>
 <li>quarter = c(1)</li>
 <li>quarter = 4</li>
 </ul>
-<p><strong>MINIMAL</strong>: If TRUE, returns just the intersecting GEOIDs that are crosswalked with the queried geoid.</p>
+<p><strong>MINIMAL</strong>: If TRUE, returns just the intersecting
+GEOIDs that are crosswalked with the queried geoid.</p>
 <p><strong>KEY</strong>: The API key provided by HUD.</p>
 <ul>
 <li>key = “wqokqo2138jdi13wfwwfwcytjyr”</li>
@@ -449,25 +532,42 @@
 <li>
 <strong>res_ratio</strong>
 <ul>
-<li>The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to the total number of residential addresses in the entire ZIP. (for type 1-5) The ratio of residential addresses in the Zip, Tract, County, or CBSA - ZIP part to the total number of residential addresses in the entire Zip, Tract, County, or CBSA. (for type 6-10)</li>
+<li>The ratio of residential addresses in the ZIP – Tract, County, or
+CBSA part to the total number of residential addresses in the entire
+ZIP. (for type 1-5) The ratio of residential addresses in the Zip,
+Tract, County, or CBSA - ZIP part to the total number of residential
+addresses in the entire Zip, Tract, County, or CBSA. (for type
+6-10)</li>
 </ul>
 </li>
 <li>
 <strong>bus_ratio</strong>
 <ul>
-<li>The ratio of business addresses in the ZIP – Tract, County, or CBSA part to the total number of business addresses in the entire ZIP. (for type 1-5). The ratio of business addresses in the Tract, County, or CBSA – ZIP part to the total number of business addresses in the entire Tract, County, or CBSA. (for type 6-10)</li>
+<li>The ratio of business addresses in the ZIP – Tract, County, or CBSA
+part to the total number of business addresses in the entire ZIP. (for
+type 1-5). The ratio of business addresses in the Tract, County, or CBSA
+– ZIP part to the total number of business addresses in the entire
+Tract, County, or CBSA. (for type 6-10)</li>
 </ul>
 </li>
 <li>
 <strong>oth_ratio</strong>
 <ul>
-<li>The ratio of other addresses in the ZIP – Tract to the total number of other addresses in the entire ZIP. (for type 1-5). The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the total number of other addresses in the entire Tract, County, or CBSA. (for type 6-10)</li>
+<li>The ratio of other addresses in the ZIP – Tract to the total number
+of other addresses in the entire ZIP. (for type 1-5). The ratio of other
+addresses in the Tract, County, or CBSA – ZIP part to the total number
+of other addresses in the entire Tract, County, or CBSA. (for type
+6-10)</li>
 </ul>
 </li>
 <li>
 <strong>tot_ratio</strong>
 <ul>
-<li>The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5) The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10)</li>
+<li>The ratio of all addresses in the ZIP – Tract to the total number of
+all types of addresses in the entire ZIP. (for type 1-5) The ratio of
+all addresses in the Tract, County, or CBSA-ZIP part to the total number
+of all types of addresses in the entire Tract, County, or CBSA. (for
+type 6-10)</li>
 </ul>
 </li>
 <li>
@@ -493,9 +593,20 @@
 <div class="section level3">
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h3>
-<p>Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S. Department of Housing and Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277 – 294.</p>
-<p>Din, Alexander and Wilson, Ron, 2020. “Crosswalking ZIP Codes to Census Geographies: Geoprocessing the U.S. Department of Housing &amp; Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and Research, Volume 22, Number 1, <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf</a></p>
-<p>U.S Department of Housing and Urban Development. (n.d.). HUD USPS ZIP Code Crosswalk Files | HUD USER. HUD USPS ZIP CODE CROSSWALK FILES. Retrieved February 17, 2022, from <a href="https://www.huduser.gov/portal/datasets/usps_crosswalk.html" class="external-link uri">https://www.huduser.gov/portal/datasets/usps_crosswalk.html</a></p>
+<p>Din, Alexander and Wilson, Ron, 2020. “Crosswalking ZIP Codes to
+Census Geographies: Geoprocessing the U.S. Department of Housing &amp;
+Urban Development’s ZIP Code Crosswalk Files,” Cityscape: A Journal of
+Policy Development and Research, Volume 22, Number 1, <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf</a></p>
+<p>Katy Rossiter, K. R. (2014, July 31). Standard Hierarchy of Census
+Bereau Geographies [Photograph]. Understanding Geographic Relationships:
+Counties, Places, Tracts and More. <a href="https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counties-places-tracts-and-more.html" class="external-link uri">https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counties-places-tracts-and-more.html</a></p>
+<p>U.S Department of Housing and Urban Development. (n.d.). HUD USPS ZIP
+Code Crosswalk Files | HUD USER. HUD USPS ZIP CODE CROSSWALK FILES.
+Retrieved February 17, 2022, from <a href="https://www.huduser.gov/portal/datasets/usps_crosswalk.html" class="external-link uri">https://www.huduser.gov/portal/datasets/usps_crosswalk.html</a></p>
+<p>Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing
+the U.S. Department of Housing and Urban Development’s ZIP Code
+Crosswalk Files,” Cityscape: A Journal of Policy Development and
+Research, Volume 20 Number 2, 277 – 294.</p>
 </div>
   </div>
 
@@ -514,7 +625,8 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
       </footer>
