@@ -6,7 +6,7 @@
 cff-version: 1.2.0
 message: 'To cite package "hudr" in publications use:'
 type: software
-license: GPL >= 2
+license: GPL-2.0-or-later
 title: 'hudr: A R interface for accessing HUD (US Department of Housing and Urban
   Development) APIs'
 version: 0.1.0.9000
@@ -17,48 +17,24 @@ authors:
 - family-names: Tam
   given-names: Emmet
   email: emmet_tam@yahoo.com
-- family-names: Reilly
-  given-names: Allison
-  email: areilly2@umd.edu
-- family-names: Ghaedi
-  given-names: Hamed
-  email: hghaedi@terpmail.umd.edu
 preferred-citation:
   type: manual
-  title: 'hudr: An R interface for accessing HUD (US Department of Housing and Urban
-    Development) APIs'
+  title: 'hudr: A R Interface to the HUD (US Department of Housing and Urban Development)
+    APIs'
   authors:
   - family-names: Tam
     given-names: Emmet
     email: emmet_tam@yahoo.com
   - family-names: Reilly
     given-names: Allison
-    email: areilly2@umd.edu
   - family-names: Ghaedi
     given-names: Hamed
-    email: hghaedi@terpmail.umd.edu
-  version: 0.0.0.9000
-  abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
-    API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income
-    Limits, and the Comprehensive Housing Affordability Strategy.
-  repository-code: https://github.com/etam4260/hudr
-  url: https://github.com/etam4260/hudr
-  contact:
-  - family-names: Tam
-    given-names: Emmet
-    email: emmet_tam@yahoo.com
-  keywords:
-  - api
-  - cdbg-dr
-  - chas
-  - crosswalk
-  - fairmarketsrent
-  - hud
-  - incomelimits
-  license: GPL >= 2
   year: '2022'
+  notes: 0.1.0.9000
+  url: https://github.com/etam4260/hudr/
+repository: https://CRAN.R-project.org/package=hudr
 repository-code: https://github.com/etam4260/hudr
-url: https://github.com/etam4260/hudr
+url: https://etam4260.github.io/hudr/index.html
 contact:
 - family-names: Tam
   given-names: Emmet
@@ -82,6 +58,16 @@ references:
     email: james.f.hester@gmail.com
   year: '2022'
   url: https://CRAN.R-project.org/package=covr
+- type: software
+  title: httptest
+  abstract: 'httptest: A Test Environment for HTTP Requests'
+  notes: Suggests
+  authors:
+  - family-names: Richardson
+    given-names: Neal
+    email: neal.p.richardson@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=httptest
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -154,16 +140,6 @@ references:
   year: '2022'
   url: https://CRAN.R-project.org/package=httr
 - type: software
-  title: stringr
-  abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
-  notes: Imports
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=stringr
-- type: software
   title: devtools
   abstract: 'devtools: Tools to Make Developing R Packages Easier'
   notes: Imports
@@ -180,16 +156,6 @@ references:
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2022'
   url: https://CRAN.R-project.org/package=devtools
-- type: software
-  title: tidyverse
-  abstract: 'tidyverse: Easily Install and Load the ''Tidyverse'''
-  notes: Imports
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=tidyverse
 - type: software
   title: zoo
   abstract: 'zoo: S3 Infrastructure for Regular and Irregular Time Series (Z''s Ordered
@@ -223,36 +189,3 @@ references:
     orcid: https://orcid.org/0000-0003-4097-6326
   year: '2022'
   url: https://CRAN.R-project.org/package=rio
-- type: software
-  title: future
-  abstract: 'future: Unified Parallel and Distributed Processing in R for Everyone'
-  notes: Imports
-  authors:
-  - family-names: Bengtsson
-    given-names: Henrik
-    email: henrikb@braju.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=future
-- type: software
-  title: furrr
-  abstract: 'furrr: Apply Mapping Functions in Parallel using Futures'
-  notes: Imports
-  authors:
-  - family-names: Vaughan
-    given-names: Davis
-    email: davis@rstudio.com
-  - family-names: Dancho
-    given-names: Matt
-    email: mdancho@business-science.io
-  year: '2022'
-  url: https://CRAN.R-project.org/package=furrr
-- type: software
-  title: R.utils
-  abstract: 'R.utils: Various Programming Utilities'
-  notes: Imports
-  authors:
-  - family-names: Bengtsson
-    given-names: Henrik
-    email: henrikb@braju.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=R.utils
