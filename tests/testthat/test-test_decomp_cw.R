@@ -169,14 +169,12 @@ test_that("Query hud_cw_zip_countysub", {
 })
 
 test_that("Query hud_cw_countysub_zip", {
-<<<<<<< HEAD
+
+  skip_if(Sys.getenv("HUD_KEY") == "")
   res <- hud_cw_countysub_zip(countysub = '4606720300 ',
                               year = c('2019', '2019', '2019'),
                               quarter = c('4','4'))
-=======
-  skip_if(Sys.getenv("HUD_KEY") == "")
-  res <- hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019'), quarter = c('4','4'))
->>>>>>> 120ebe8d5a038124ec31a95221b695af7880db4d
+
   expect_true(nrow(res) >= 1)
 
   expect_error(hud_cw_countysub_zip(countysub = '3521334',
