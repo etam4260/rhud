@@ -125,13 +125,13 @@ test_that("Not Convertable to Integer", {
                       year = c('2010', '2011'),
                       quarter = c('1','2','3','4')))
 
-  expect_error(hud_cw(type = '7', query = '22031',
+  expect_error(hud_cw(type = '7', query = '22031ada',
                       year = c('2010', '2011'),
                       quarter = c('1','2','3','4')))
 
   expect_error(hud_cw(type = '7', query = '22031',
-                      year = c('2010', '2011'),
-                      quarter = c('1','2','3','4')))
+                      year = c('2010', '2011adaadda'),
+                      quarter = c('1','2ada','3','4')))
 
   expect_error(hud_cw(type = 7, query = '22031',
                       year = c('2010', '2011'),
