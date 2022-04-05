@@ -70,6 +70,7 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 #' @title hud_metropolitan
 #' @description Get a list of all metropolitan areas in the US along with its
 #'   name and CBSA code.
+#' @param state The state to get all the metropolitan areas.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords CBSA
@@ -83,7 +84,7 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 #'
 #' hud_metropolitan()
 #' }
-hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
+hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(key == "") {
     stop(paste("Did you forget to set the key?",
                "Please go to https://www.huduser.gov/",
@@ -93,13 +94,75 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
   }
 
+  # The 'area_name' column gives information on the metropolitan place, the
+  # abbreviation of state, and the stating that it is a MSA(metro stat areas)
+
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas")
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+  call <- try(GET(URL, add_headers(Authorization=paste("Bearer ",
                                                      as.character(key))),
                 user_agent("https://github.com/etam4260/hudr"),
                 timeout(30)),silent = TRUE) #try to make call
-  cont<-try(content(call), silent = TRUE) #parse returned data
-  metro<-as.data.frame(do.call(rbind, cont))
+
+  cont <- try(content(call), silent = TRUE) #parse returned data
+  metro <- as.data.frame(do.call(rbind, cont))
+
+  # Do a regular expression of the area name column to parse it into
+  # the name, the state location, and whether is is a HUD small areas...
+  reged <- regexec("^.*,\\s([^ ]*)\\s(.*)", metro$area_name)
+
+  met_name <- c()
+  parsed_states <- c()
+  classifications <- c()
+  for(i in seq_len(length(reged))) {
+    met_name <- c(met_name, substr(metro$area_name[i], 1,
+                                   reged[[i]][2] - 2))
+    parsed_states <- c(parsed_states, substr(metro$area_name[i], reged[[i]][2],
+                             reged[[i]][2] + 1))
+    classifications <- c(classifications, substr(metro$area_name[i],
+                                                 reged[[i]][3],
+                                                 nchar(metro$area_name[i])))
+  }
+  # Remove the area_name column.
+  metro <- metro[,c(1,3)]
+
+  # Add new columns.
+  metro$metro_name <- met_name
+  metro$metro_state <- parsed_states
+  metro$classifications <- classifications
+
+  if(all(nchar(state) == 2)) state <- toupper(state)
+  if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
+
+  if(is.null(pkg.env$state)) {
+    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  }
+
+  for(i in seq_len(length(state))) {
+    if(!any(as.character(state[i]) == pkg.env$state)) {
+      stop("There is no matching fips code for one of the inputted states.")
+    }
+  }
+
+  # Filter now based on state input.
+  # Allow user to supply state name or state abbr or state fips as inputs.
+  if(nrow(pkg.env$state[pkg.env$state$state_name %in%
+                        as.character(state),]) != 0) {
+    state_abbr <- pkg.env$state[pkg.env$state$state_name %in%
+                                as.character(state),][2]
+  }
+  if(nrow(pkg.env$state[pkg.env$state$state_code %in%
+                        as.character(state),]) != 0) {
+    state_abbr <- pkg.env$state[pkg.env$state$state_code %in%
+                                as.character(state),][2]
+  }
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
+                        as.character(state),]) != 0) {
+    state_abbr <- pkg.env$state[pkg.env$state$state_num %in%
+                                as.character(state),][2]
+  }
+  state_abbr <- unlist(state_abbr)
+
+  metro <- metro[metro$metro_state == state_abbr, ]
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
@@ -109,6 +172,7 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
     metro$category <- unlist(metro$category)
     return(metro)
   }
+
   stop("The key used might be invalid.")
 }
 
