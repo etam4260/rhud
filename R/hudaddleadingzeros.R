@@ -42,7 +42,10 @@ add_leading_zeros <- function(geoid_type = "zip", geoids) {
   } else if(numbers_only(geoid_type)) {
     return(fix_geoid(geoids, geoid_type))
   } else {
-    stop("Not a valid input argument for geoid_type. You can specify either a number as the expected length of the geoid or the name of the geoid lowercase.")
+    stop(paste("Not a valid input argument for geoid_type. ",
+          "You can specify either a number as the expected ",
+          "length of the geoid or the name of the geoid lowercase.",
+          sep = ""))
   }
 
 }
@@ -65,8 +68,11 @@ add_leading_zeros <- function(geoid_type = "zip", geoids) {
 #' @noMd
 fix_geoid <- function(geoids, num_char) {
   geoids <- sapply(geoids, function(geoids) {
-    if(!is.null(geoids) && !is.na(geoids) && !is.nan(geoids) && numbers_only(geoids)) {
+    if(!is.null(geoids) && !is.na(geoids) && !is.nan(geoids) &&
+       numbers_only(geoids)) {
+
       paste(rep(0, num_char - nchar(geoids)), geoids, collapse = "", sep = "")
+
     }
   })
   return(geoids)

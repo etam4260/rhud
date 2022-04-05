@@ -15,9 +15,10 @@
 
 #' @name hud_states
 #' @title hud_states
-#' @description Get a list of state along with the corresponding FIPs code and abbreviation.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
+#' @description Get a list of state along with the corresponding FIPs code and
+#'   abbreviation.
+#' @param key The API key for this user. You must go to HUD and sign up for an
+#'   account and request for an API key.
 #' @keywords States
 #' @export
 #' @returns A dataframe containing details of all the states in the US.
@@ -30,11 +31,22 @@
 #' hud_states()
 #' }
 hud_states <- function(key = Sys.getenv("HUD_KEY")) {
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
+  if(key == "") {
+    stop(paste("Did you forget to set the key?",
+               "Please go to https://www.huduser.gov/",
+               "hudapi/public/register?comingfrom=1 to",
+               "and sign up and get a token. Then save",
+               "this to your environment using",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+  }
 
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listStates")
 
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+                                                     as.character(key))),
+                user_agent("https://github.com/etam4260/hudr"),
+                timeout(30)),silent = TRUE) #try to make call
+
   cont<-try(content(call), silent = TRUE) #parse returned data
 
   states <- as.data.frame(do.call("rbind", cont))
@@ -56,9 +68,10 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_metropolitan
 #' @title hud_metropolitan
-#' @description Get a list of all metropolitan areas in the US along with its name and CBSA code.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'  an account and request for an API key.
+#' @description Get a list of all metropolitan areas in the US along with its
+#'   name and CBSA code.
+#' @param key The API key for this user. You must go to HUD and sign up for an
+#'   account and request for an API key.
 #' @keywords CBSA
 #' @export
 #' @returns A dataframe containing details of metropolitan areas in US.
@@ -71,10 +84,20 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
 #' hud_metropolitan()
 #' }
 hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
+  if(key == "") {
+    stop(paste("Did you forget to set the key?",
+               "Please go to https://www.huduser.gov/",
+               "hudapi/public/register?comingfrom=1 to",
+               "and sign up and get a token. Then save",
+               "this to your environment using",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+  }
 
   URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas")
-  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),silent = TRUE) #try to make call
+  call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+                                                     as.character(key))),
+                user_agent("https://github.com/etam4260/hudr"),
+                timeout(30)),silent = TRUE) #try to make call
   cont<-try(content(call), silent = TRUE) #parse returned data
   metro<-as.data.frame(do.call(rbind, cont))
 
@@ -110,25 +133,57 @@ hud_metropolitan <- function(key = Sys.getenv("HUD_KEY")) {
 #' hud_places("51")
 #' }
 hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
-  if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
+  if(!is.vector(state) || !is.vector(key)) {
+    stop(paste("Make sure all inputs are of type vector. ",
+               "Check types with typeof([variable]). ",
+               "If list try unlist([variable]); ",
+               "if matrix try as.vector([variable])", sep = ""))
+  }
 
-  if(all(nchar(state) == 2)) state = toupper(state)
-  if(all(nchar(state) > 2)) state = capitalize(tolower(state))
+  if(key == "") {
+    stop(paste("Did you forget to set the key?",
+               "Please go to https://www.huduser.gov/",
+               "hudapi/public/register?comingfrom=1 to",
+               "and sign up and get a token. Then save",
+               "this to your environment using",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+  }
 
-  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-  for(i in 1:length(state)) {
-    if(!any(as.character(state[i]) == pkg.env$state)) stop("There is no matching fips code for one of the inputted states.")
+  if(all(nchar(state) == 2)) state <- toupper(state)
+  if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
+
+  if(is.null(pkg.env$state)) {
+    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  }
+
+  for(i in seq_len(length(state))) {
+    if(!any(as.character(state[i]) == pkg.env$state)) {
+      stop("There is no matching fips code for one of the inputted states.")
+    }
   }
 
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state$state_name %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name %in% as.character(state),][2]
-  if(nrow(pkg.env$state[pkg.env$state$state_code %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code %in% as.character(state),][2]
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num %in% as.character(state),][2]
+  if(nrow(pkg.env$state[pkg.env$state$state_name %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_name %in%
+                                as.character(state),][2]
+  }
+  if(nrow(pkg.env$state[pkg.env$state$state_code %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_code %in%
+                                as.character(state),][2]
+  }
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_num %in%
+                                as.character(state),][2]
+  }
 
-  # Allow the user to specify multiple years states to query for... Just stack them.
+  # Allow the user to specify multiple years states to query for... Just stack
+  # them.
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/", unlist(fip_code), sep = "")
+  URL <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/",
+               unlist(fip_code), sep = "")
   counties <- misc_do_query_call(URL, key)
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
@@ -165,25 +220,56 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' hud_places("51")
 #' }
 hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
-  if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
+  if(!is.vector(state) || !is.vector(key)) {
+    stop(paste("Make sure all inputs are of type vector. ",
+               "Check types with typeof([variable]). ",
+               "If list try unlist([variable]); ",
+               "if matrix try as.vector([variable])", sep = ""))
+  }
 
-  if(all(nchar(state) == 2)) state = toupper(state)
-  if(all(nchar(state) > 2)) state = capitalize(tolower(state))
+  if(key == "") {
+    stop(paste("Did you forget to set the key?",
+               "Please go to https://www.huduser.gov/",
+               "hudapi/public/register?comingfrom=1 to",
+               "and sign up and get a token. Then save",
+               "this to your environment using",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+  }
 
-  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-  for(i in 1:length(state)) {
-    if(!any(as.character(state[i]) == pkg.env$state)) stop("There is no matching fips code for one of the inputted states.")
+  if(all(nchar(state) == 2)) state <- toupper(state)
+  if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
+
+  if(is.null(pkg.env$state)) {
+    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  }
+
+  for(i in seq_len(length(state))) {
+    if(!any(as.character(state[i]) == pkg.env$state)) {
+      stop("There is no matching fips code for one of the inputted states.")
+    }
   }
 
 
   # Allow user to supply state name or state abbr or state fips as inputs.
+  if(nrow(pkg.env$state[pkg.env$state$state_name %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_name %in%
+                                as.character(state),][3]
+  }
+  if(nrow(pkg.env$state[pkg.env$state$state_code %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_code %in%
+                                as.character(state),][3]
+  }
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_num %in%
+                                as.character(state),][3]
+  }
 
-  if(nrow(pkg.env$state[pkg.env$state$state_name %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name %in% as.character(state),][3]
-  if(nrow(pkg.env$state[pkg.env$state$state_code %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code %in% as.character(state),][3]
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num %in% as.character(state),][3]
-
-  URL <- paste("https://www.huduser.gov/hudapi/public/chas/listCities/", unlist(fip_code), sep = "")
+  URL <- paste("https://www.huduser.gov/hudapi/public/chas/listCities/",
+               unlist(fip_code),
+               sep = "")
 
   places <- misc_do_query_call(URL, key)
 
@@ -216,23 +302,55 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' hud_minor_civil_divisions("51")
 #' }
 hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
-  if(!is.vector(state) || !is.vector(key)) stop("Make sure all inputs are of type vector. Check types with typeof([variable]). If list try unlist([variable]); if matrix try as.vector([variable])")
-  if(key == "") stop("Did you forget to set the key? Please go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 to and sign up and get a token. Then save this to your environment using Sys.setenv('HUD_KEY' = YOUR_KEY)")
+  if(!is.vector(state) || !is.vector(key)) {
+    stop(paste("Make sure all inputs are of type vector. ",
+               "Check types with typeof([variable]). ",
+               "If list try unlist([variable]); ",
+               "if matrix try as.vector([variable])", sep = ""))
+  }
 
-  if(all(nchar(state) == 2)) state = toupper(state)
-  if(all(nchar(state) > 2)) state = capitalize(tolower(state))
+  if(key == "") {
+    stop(paste("Did you forget to set the key?",
+               "Please go to https://www.huduser.gov/",
+               "hudapi/public/register?comingfrom=1 to",
+               "and sign up and get a token. Then save",
+               "this to your environment using",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+  }
 
-  if(is.null(pkg.env$state)) pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
-  for(i in 1:length(state)) {
-    if(!any(as.character(state[i]) == pkg.env$state)) stop("There is no matching fips code for one of the inputted states.")
+  if(all(nchar(state) == 2)) state <- toupper(state)
+  if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
+
+  if(is.null(pkg.env$state)) {
+    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+  }
+
+  for(i in seq_len(length(state))) {
+    if(!any(as.character(state[i]) == pkg.env$state)) {
+      stop("There is no matching fips code for one of the inputted states.")
+    }
   }
 
   # Allow user to supply state name or state abbr or state fips as inputs.
-  if(nrow(pkg.env$state[pkg.env$state$state_name %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_name %in% as.character(state),][3]
-  if(nrow(pkg.env$state[pkg.env$state$state_code %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_code %in% as.character(state),][3]
-  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in% as.character(state),]) != 0) fip_code <- pkg.env$state[pkg.env$state$state_num %in% as.character(state),][3]
+  if(nrow(pkg.env$state[pkg.env$state$state_name %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_name %in%
+                                as.character(state),][3]
+  }
+  if(nrow(pkg.env$state[pkg.env$state$state_code %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_code %in%
+                                as.character(state),][3]
+  }
+  if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
+                        as.character(state),]) != 0) {
+    fip_code <- pkg.env$state[pkg.env$state$state_num %in%
+                                as.character(state),][3]
+  }
 
-  URL <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/", unlist(fip_code), sep = "")
+  URL <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/",
+               unlist(fip_code),
+               sep = "")
 
   mcd <- misc_do_query_call(URL, key)
 

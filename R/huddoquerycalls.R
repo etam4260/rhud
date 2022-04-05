@@ -12,19 +12,25 @@
 chas_do_query_calls <- function(URL, key) {
   # Form all query calls...
   list_res <- c()
-  for(i in 1:length(URL)) {
+  for(i in seq_len(length(URL))) {
 
     url <- URL[i]
 
     call<-try(GET(url, add_headers(Authorization=paste("Bearer ",
-                                                       as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                                                       as.character(key))),
+                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont) || length(cont) == 0) {
-      warning(paste("Could not find data for query:", URL
-                    , ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
+      warning(paste("Could not find data for query:", URL,
+                    "  It is possible that your key maybe invalid,",
+                    "there isn't any data for these parameters,",
+                    "or you have reached the maximum number of API",
+                    "calls per minute. If you think this is wrong please",
+                    "report it at https://github.com/etam4260/hudr/issues.",
+                    sep = " "))
     } else {
       list_res[[i]] <- unlist(cont[[1]])
     }
@@ -51,17 +57,31 @@ chas_do_query_calls <- function(URL, key) {
 #' @returns A data frame of all the results made from the query.
 #' @noRd
 #' @noMd
-cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid, secondary_geoid, key) {
+cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid,
+                              secondary_geoid, key) {
   list_res <- c()
 
-  for(i in 1:length(URL)) {
+  for(i in seq_len(length(URL))) {
     url <- URL[i]
 
-    call<-try(GET(url, add_headers(Authorization=paste("Bearer ", as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)), silent = TRUE)
+    call<-try(GET(url, add_headers(Authorization=paste("Bearer ",
+                                                       as.character(key))),
+                  user_agent("https://github.com/etam4260/hudr"),
+                  timeout(30)), silent = TRUE)
+
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont[[1]])) {
-      warning(paste("Could not find data for inputted query, year, or quarter where query equals ", query, ", year equals ", year, ", and quarter equals ", quarter, ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
+      warning(paste("Could not find data for inputted query, year,
+                    or quarter where query equals ", query,
+                    ", year equals ", year,
+                    ", and quarter equals ", quarter,
+                    ". It is possible that your key maybe invalid, ",
+                    "there isn't any data for these parameters, ",
+                    "or you have reached the maximum number of API calls ",
+                    "per minute. If you think this is wrong please report ",
+                    "it at https://github.com/etam4260/hudr/issues.",
+                    sep = ""))
     } else {
 
       res <- as.data.frame(do.call(rbind, cont$data$results))
@@ -102,19 +122,24 @@ cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid, secondar
 #' @noMd
 misc_do_query_call <- function(URL, key) {
   list_res <- c()
-  for(i in 1:length(URL)) {
+  for(i in seq_len(length(URL))) {
 
     url <- URL[i]
 
     call<-try(GET(url, add_headers(Authorization=paste("Bearer ",
-                                                       as.character(key))), user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                                                       as.character(key))),
+                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont) || length(cont) == 0) {
       warning(paste("Could not find data for query:", URL,
-                    ". It is possible that your key maybe invalid, there isn't any data for these parameters, or you have reached the maximum number of API calls per minute. If you think this is wrong please report it at https://github.com/etam4260/hudr/issues.", sep = ""))
+                    ". It is possible that your key maybe invalid, ",
+                    "there isn't any data for these parameters, ",
+                    "or you have reached the maximum number of API calls per ",
+                    "minute. If you think this is wrong please report",
+                    "it at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
       list_res[[i]] <- as.data.frame(do.call(rbind, cont))
     }

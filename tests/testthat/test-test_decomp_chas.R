@@ -61,7 +61,8 @@ test_that("test hud_chas_county()",{
   test <- hud_chas_county(county = c("06105","06115"))
   expect_true(nrow(test) == 2)
   # Query multiple counties with multiple years.
-  test <- hud_chas_county(county = c("06105","06115"), year = c("2013-2017", "2014-2018"))
+  test <- hud_chas_county(county = c("06105","06115"),
+                          year = c("2013-2017", "2014-2018"))
   expect_true(nrow(test) == 4)
 })
 
@@ -99,9 +100,9 @@ test_that("test hud_chas_place()",{
   expect_true(nrow(test) == 2)
   # Need to make sure states correspond to the right places...
 
-  # Right now CA doesn't work. It seems like those states with leading 0 doesn't seem to be found...
-  # Furthermore, the format of the place should all be the same. Cant mix abbreviation and code in it...
-  # might keep it that way...
+  # Right now CA doesn't work. It seems like those states with leading 0 doesn't
+  # seem to be found... Furthermore, the format of the place should all be the
+  # same. Cant mix abbreviation and code in it... might keep it that way...
   test <- hud_chas_place(c("MD", "VA"), c("53700", "48952"))
   expect_true(nrow(test) == 2)
 })

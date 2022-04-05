@@ -29,9 +29,11 @@ fivenumbers <- function(x) !grepl("[0-9]{5}", x)
 
 #' @name fivenumsthenfournums
 #' @title fivenumsthenfournums
-#' @description Detect whether string contains only 5 numbers a delimiter and then 4 numbers.
+#' @description Detect whether string contains only 5 numbers a delimiter and
+#'   then 4 numbers.
 #' @param x A string.
-#' @returns TRUE if string is 5 numbers, delimiter, then 4 numbers, FALSE if not.
+#' @returns TRUE if string is 5 numbers, delimiter, then 4 numbers, FALSE if
+#'   not.
 #' @noRd
 #' @noMd
 fivenumsthenfournums <- function(x) grepl("[0-9]{5}.?[0-9]{4}", x)
