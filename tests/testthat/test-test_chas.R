@@ -1,4 +1,5 @@
 test_that("All CHAS Types", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Nation
   n <- hud_chas(1)
   expect_true(nrow(n) >= 1)
@@ -17,6 +18,7 @@ test_that("All CHAS Types", {
 })
 
 test_that("Different Years CHAS", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Only checking entire Nation CHAS and varying different year inputs.
 
   # 2014-2018

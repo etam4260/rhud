@@ -1,5 +1,6 @@
 
 test_that("Fair Markets Rent State Queries", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   VA <- hud_fmr("VA", year=c(2021))
   expect_true(nrow(VA) >= 1)
   MD <- hud_fmr("MD", year=c('2021'))
@@ -11,6 +12,7 @@ test_that("Fair Markets Rent State Queries", {
 })
 
 test_that("Fair Markets Rent County Queries", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   c1 <- hud_fmr("5100199999", year=c(2021))
   expect_true(nrow(c1) >= 1)
   c2 <- hud_fmr("5100199999", year=c('2021'))
@@ -21,6 +23,7 @@ test_that("Fair Markets Rent County Queries", {
 
 
 test_that("Small Area FMR Queries", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   sa1 <- hud_fmr("METRO47900M47900", year=c(2018))
   expect_true(nrow(sa1) >= 1)
   sa2 <- hud_fmr("METRO29180N22001", year=c(2019))
@@ -31,6 +34,7 @@ test_that("Small Area FMR Queries", {
 
 
 test_that("Fair Markets Rent Different Years", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   y1 <- hud_fmr("AL", year=c(2020))
   expect_true(nrow(y1) >= 1)
   y2 <- hud_fmr("AL", year=c(2021, 2020, 2019, 2018))

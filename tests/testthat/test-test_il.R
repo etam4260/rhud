@@ -1,5 +1,6 @@
 
 test_that("Income Limits State Queries", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   VA <- hud_il("VA", year=c(2021))
   expect_true(nrow(VA) >= 1)
   MD <- hud_il("MD", year=c('2021'))
@@ -11,6 +12,7 @@ test_that("Income Limits State Queries", {
 })
 
 test_that("Income Limits Rent County Queries", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   c1 <- hud_il("5100199999", year=c(2021))
   expect_true(nrow(c1) >= 1)
   c2 <- hud_il("5100199999", year=c('2021'))
@@ -21,6 +23,7 @@ test_that("Income Limits Rent County Queries", {
 
 
 test_that("Small Area IL Queries", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   sa1 <- hud_il("METRO47900M47900", year=c(2018))
   expect_true(nrow(sa1) >= 1)
   sa2 <- hud_il("METRO29180N22001", year=c(2019))
@@ -30,6 +33,7 @@ test_that("Small Area IL Queries", {
 })
 
 test_that("Income Limits Different Years", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   y1 <- hud_il("VA", year=c(2021))
   expect_true(nrow(y1) >= 1)
   y2 <- hud_il("WY", year=c(2021, '2019'))
