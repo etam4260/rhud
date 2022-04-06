@@ -7,12 +7,13 @@
 hud_cdbg(file = 1)
 }
 \arguments{
-\item{file}{The specific file needed. Currently you can specify 1 -> 4. Will default to 1:
-\enumerate{
-\item DR CDBG CDBG-DR Financial Report by Appropriation (xlsx - 0.1 MB - 1/1/2022)
-\item DR CDBG CDBG-DR Financial Report by Grantee (xlsx - 0.1 MB - 1/1/2022)
-\item DR CDBG CDBG-DR Financial Report Monthly Summary (xlsx - 0.1 MB - 1/1/2022)
-\item DR CDBG CDBG-DR Performance by Activity (xlsx - 2.2 MB - 1/1/2022)
+\item{file}{The specific file needed. Currently you can specify 1 -> 4. Will
+default to 1: 1) DR CDBG CDBG-DR Financial Report by Appropriation (xlsx -
+0.1 MB - 1/1/2022) 2) DR CDBG CDBG-DR Financial Report by Grantee (xlsx -
+0.1 MB - 1/1/2022) 3) DR CDBG CDBG-DR Financial Report Monthly Summary
+(xlsx - 0.1 MB - 1/1/2022) 4) DR CDBG CDBG-DR Performance by Activity (xlsx
+\itemize{
+\item 2.2 MB - 1/1/2022)
 }}
 }
 \value{
@@ -20,9 +21,9 @@ A dataframe.
 }
 \description{
 This will grab data from
-https://drgr.hud.gov/public/data_downloads.html?programName=DR\%20CDBG
-and format it into a dataframe. It will unroll each column to replace
-NA values with the first non-NA value above it.
+https://drgr.hud.gov/public/data_downloads.html?programName=DR\%20CDBG and
+format it into a dataframe. It will unroll each column to replace NA values
+with the first non-NA value above it.
 }
 \examples{
 \dontrun{

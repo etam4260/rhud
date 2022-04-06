@@ -118,7 +118,7 @@ add_delimiters <- function(input) {
 #'   6) cd -> Must be a 4 digit cd code.
 #' @param geoids A vector or column of geoids that need leading zeros to be
 #'   processed properly.
-#' @param num_chars The number of leading zeros this geoid needs.
+#' @param num_chars The number of leading zeros thyis geoid needs.
 #' @returns A vector with the corrected geoids.
 #' @noRd
 #' @noMd
@@ -140,7 +140,6 @@ fix_geoid <- function(geoids, num_char) {
 #'   1) abbr
 #'   2) fullname
 #'   3) fipcode
-#' @export
 #' @returns A vector with all stateids in a vector translated to abbr, fullname,
 #'   or fipcode.
 #' @noRd

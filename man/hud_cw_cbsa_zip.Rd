@@ -13,19 +13,20 @@ hud_cw_cbsa_zip(
 )
 }
 \arguments{
-\item{cbsa}{5 digit CBSA code for Micropolitan and Metropolitan Areas Eg: 10380 for type 8}
+\item{cbsa}{5 digit CBSA code for Micropolitan and Metropolitan Areas Eg:
+10380 for type 8}
 
-\item{year}{Gets the year that this data was recorded.
-Can specify multiple years. Default is the
-previous year.}
+\item{year}{Gets the year that this data was recorded. Can specify multiple
+years. Default is the previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return all fields.}
+\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
+all fields.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The API key for this user. You must go to HUD and sign up for an
+account and request for an API key.}
 }
 \value{
 This function returns a dataframe containing CROSSWALK data for
@@ -44,7 +45,8 @@ library(hudr)
 
 hud_cw_cbsa_zip(cbsa = 10140, year = c('2017'), quarter = c('1'))
 
-hud_cw_cbsa_zip(cbsa = '10140', year = c('2010'), quarter = c('1'), minimal = TRUE)
+hud_cw_cbsa_zip(cbsa = '10140', year = c('2010'), quarter = c('1'),
+   minimal = TRUE)
 }
 }
 \keyword{API}

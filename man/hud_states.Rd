@@ -7,14 +7,15 @@
 hud_states(key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The API key for this user. You must go to HUD and sign up for an
+account and request for an API key.}
 }
 \value{
 A dataframe containing details of all the states in the US.
 }
 \description{
-Get a list of state along with the corresponding FIPs code and abbreviation.
+Get a list of state along with the corresponding FIPs code and
+abbreviation.
 }
 \examples{
 \dontrun{

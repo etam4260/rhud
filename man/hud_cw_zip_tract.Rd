@@ -45,7 +45,8 @@ library(hudr)
 
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 
-hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'), minimal = TRUE)
+hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
+   minimal = TRUE)
 }
 }
 \keyword{API}

@@ -7,10 +7,12 @@
 hud_set_key(key)
 }
 \arguments{
-\item{key}{key obtained at https://www.huduser.gov/hudapi/public/register?comingfrom=1}
+\item{key}{key obtained at
+https://www.huduser.gov/hudapi/public/register?comingfrom=1}
 }
 \description{
-A wrapper around Sys.getenv() to set HUD_KEY environment variable.
+A wrapper around Sys.getenv() to set HUD_KEY environment
+variable.
 }
 \examples{
 \dontrun{

@@ -4,17 +4,20 @@
 \alias{hud_metropolitan}
 \title{hud_metropolitan}
 \usage{
-hud_metropolitan(key = Sys.getenv("HUD_KEY"))
+hud_metropolitan(state, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{state}{The state to get all the metropolitan areas.}
+
+\item{key}{The API key for this user. You must go to HUD and sign up for an
+account and request for an API key.}
 }
 \value{
 A dataframe containing details of metropolitan areas in US.
 }
 \description{
-Get a list of all metropolitan areas in the US along with its name and CBSA code.
+Get a list of all metropolitan areas in the US along with its
+name and CBSA code.
 }
 \examples{
 \dontrun{

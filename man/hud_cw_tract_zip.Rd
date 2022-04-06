@@ -16,28 +16,28 @@ hud_cw_tract_zip(
 \item{tract}{11 digit unique 2000 or 2010 Census tract GEOID consisting of
 state FIPS + county FIPS + tract code. Eg: 51059461700  for type 6}
 
-\item{year}{Gets the year that this data was recorded.
-Can specify multiple years. Default is the
-previous year.}
+\item{year}{Gets the year that this data was recorded. Can specify multiple
+years. Default is the previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return all fields.}
+\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
+all fields.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The API key for this user. You must go to HUD and sign up for an
+account and request for an API key.}
 }
 \value{
-This function returns a dataframe containing CROSSWALK data for
-a particular GEOID. These measurements include res-ratio, bus-ratio,
+This function returns a dataframe containing CROSSWALK data for a
+particular GEOID. These measurements include res-ratio, bus-ratio,
 oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html
 }
 \description{
-This function queries the Crosswalks API provided by
-US Department of Housing and Urban Development. This
-returns the crosswalk for tract to zip.
+This function queries the Crosswalks API provided by US
+Department of Housing and Urban Development. This returns the crosswalk for
+tract to zip.
 }
 \examples{
 \dontrun{
@@ -45,7 +45,8 @@ library(hudr)
 
 hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 
-hud_cw_tract_zip(tract = '48201223100', year = c('2010'), quarter = c('1'), minimal = TRUE)
+hud_cw_tract_zip(tract = '48201223100', year = c('2010'), quarter = c('1'),
+   minimal = TRUE)
 }
 }
 \keyword{API}

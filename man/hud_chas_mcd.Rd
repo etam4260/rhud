@@ -27,7 +27,8 @@ hud_chas_mcd(state, mcd, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 \item{key}{The key obtain from HUD USER website.}
 }
 \value{
-Returns a dataframe with CHAS data for a particular minor civil division(mcd).
+Returns a dataframe with CHAS data for a particular minor civil
+division(mcd).
 }
 \description{
 Returns CHAS data for an mcd.

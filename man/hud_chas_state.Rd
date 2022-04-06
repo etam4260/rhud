@@ -7,7 +7,8 @@
 hud_chas_state(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{state}{The state to query for. Can supply as abbreviation, whole name, or as geoid.}
+\item{state}{The state to query for. Can supply as abbreviation, whole name,
+or as geoid.}
 
 \item{year}{The years to query for.
 \itemize{

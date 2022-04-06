@@ -13,7 +13,8 @@ hud_cw_zip_county(
 )
 }
 \arguments{
-\item{zip}{5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .}
+\item{zip}{5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+1 to 5 and 11 .}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
@@ -22,10 +23,11 @@ previous year.}
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return all fields.}
+\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
+all fields.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The API key for this user. You must go to HUD and sign up for an
+account and request for an API key.}
 }
 \value{
 This function returns a dataframe containing CROSSWALK data for
@@ -44,7 +46,8 @@ library(hudr)
 
 hud_cw_zip_county(zip = '35213', year = c('2010'), quarter = c('1'))
 
-hud_cw_zip_county(zip = '35213', year = c('2010'), quarter = c('1'), minimal = TRUE)
+hud_cw_zip_county(zip = '35213', year = c('2010'), quarter = c('1'),
+   minimal = TRUE)
 }
 }
 \keyword{API}
