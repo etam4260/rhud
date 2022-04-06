@@ -23,15 +23,15 @@ version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
 
-The goal of this project is to provide an easy to use interface to
-access various open source APIs provided by the U.S Housing and Urban
+The goal of this project is to provide an easy-to-use interface to
+access various open-source APIs provided by the U.S Housing and Urban
 Development. These include the USPS Crosswalk Files, Fair Markets Rent,
 Income Limits, and Comprehensive Housing and Affordability Strategy.
 Although HUD does provide datasets for other programs, they are
 currently not supported by an API.
 
-HUD has two main websites for gaining access to various different data
-sets: HUD User and Exchange.
+HUD has two websites for gaining access to various data sets: HUD User
+and Exchange.
 
 Please read
 <https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
@@ -49,26 +49,26 @@ commercial or otherwise.
 
 ## HUD User: <https://www.huduser.gov/portal/datasets>
 
-“HUD User is an information source containing reports and reference
-documents for the U.S. Department of Housing and Urban Development. HUD
-USER was established by the HUD’s Office of Policy Development and
-Research in 1978 (HUD User Home Page \| HUD USER).”
+According to (HUD User Home Page \| HUD USER), HUD User is a U.S.
+Department of Housing and Urban Development information source that
+includes reports and reference documents. HUD USER was founded in 1978
+by the Department of Housing and Urban Development’s Office of Policy
+Development and Research.
 
 HUD User maintains an API to gain access to their data. However, their
-API system can be rather confusing and provides their information in
-JSON format rather than a data frame like object. Although there exist
-file downloadables, R users may want to be able to extract specific bits
-of the data into memory.
+API system can be confusing and provides their information in JSON
+format rather than a data-frame like object. Although there exist file
+downloadables, R users may want to be able to extract specific bits of
+the data into memory.
 
 ## HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
 
-“The Department of Housing and Urban Development has a website known as
-HUD Exchange which is a comprehensive online platform that provides
-tools, resources, and contact information for the organizations and
-individuals that partner with HUD. These often include nonprofit groups
-and state and municipal governments, but also include borrowers,
-lenders, and brokers involved in HUD’s multifamily loan programs
-(Disaster Recovery Grant Reporting System, 2022).”
+According to (Disaster Recovery Grant Reporting System, 2022), HUD
+Exchange is a comprehensive online platform that provides tools,
+resources, and contact information for organizations and individuals who
+engage with HUD. Nonprofit organizations and state and municipal
+governments are frequently included, but borrowers, lenders, and brokers
+involved in HUD’s multifamily loan programs are also included.
 
 The DRGR Disaster Recovery Grant Reporting System which HUD Exchange
 uses to supply public data does not have an active API for retrieving
@@ -133,24 +133,27 @@ bar.
 
 ## Disclaimers
 
--   License: GPL \>= 2
--   To get citation information for hudr in R, type citation(package =
-    ‘hudr’)
+-   License: GPL \>= 2 \* To get citation information for hudr in R,
+    type citation(package = ‘hudr’)
+
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
+
 -   The limit on the maximum number of API calls is 1200 queries a min.
     Each function call does not correspond to a single API call!
+
 -   This is a WIP so please report any issues or bugs to:
     <https://github.com/etam4260/hudr/issues>
+
 -   This is open source, so please fork and introduce some pull
     requests!
 
 ## References
 
 Disaster Recovery Grant Reporting System. (2022). HUD Exchange.
-Retrieved February 19, 2022, from
+Retrieved <br />     February 19, 2022, from
 <https://www.hudexchange.info/programs/drgr/>
 
 HUD User Home Page: HUD USER. HUD User Home Page \| HUD USER. (n.d.).
-Retrieved February 24, 2022, from
+Retrieved <br />     February 24, 2022, from
 <https://www.huduser.gov/portal/home.html>

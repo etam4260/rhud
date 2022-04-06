@@ -50,7 +50,7 @@
   <a href="../articles/Setup.html">Setup</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -117,21 +117,33 @@
 <div class="section level3">
 <h3 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
 </h3>
-<p>“Each year, the U.S. Department of Housing and Urban Development
-(HUD) receives custom tabulations of American Community Survey (ACS)
-data from the U.S. Census Bureau. These data, known as the”CHAS” data
-(Comprehensive Housing Affordability Strategy), demonstrate the extent
-of housing problems and housing needs, particularly for low income
-households. The CHAS data are used by local governments to plan how to
-spend HUD funds, and may also be used by HUD to distribute grant funds
-(“Consolidated Planning/CHAS Data | HUD USER”).”</p>
+<p>According to (Consolidated Planning/CHAS Data | HUD USER), the United
+States Department of Housing and Urban Development (HUD) gets custom
+tabulations of American Community Survey (ACS) data from the United
+States Census Bureau every year. These figures, dubbed “CHAS”
+(Comprehensive Housing Affordability Strategy), show the scope of
+housing issues and needs, particularly among low-income households.
+Local governments utilize the CHAS data to plan how they will spend HUD
+monies, and HUD may use the data to distribute grant funds.</p>
 </div>
 <div class="section level3">
-<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
-<p>This is a basic example showing you how to query the Comprehensive
+<p>These are basic examples showing you how to query the Comprehensive
 Housing and Affordability API.</p>
-<p>This function returns a single row data frame for each query.</p>
+<p>Each geoid query represents a CHAS measurement for that particular
+geographic resolution.</p>
+<p>The functions below are the main functions for querying the CHAS API
+at different geographic resolutions. The package also contains a omni
+function which encapsulates the capabilities of all the main function
+calls mentioned below. <a href="#using-the-omni-function-for-querying">onmi-function</a></p>
+<ol style="list-style-type: decimal">
+<li><a href="#chas-for-nation">nation</a></li>
+<li><a href="#chas-for-state">state</a></li>
+<li><a href="#chas-for-county">county</a></li>
+<li><a href="#chas-for-mcd">mcd</a></li>
+<li><a href="#chas-for-place">place</a></li>
+</ol>
 <div class="section level4">
 <h4 id="chas-for-nation">CHAS for Nation<a class="anchor" aria-label="anchor" href="#chas-for-nation"></a>
 </h4>
@@ -169,6 +181,21 @@ Housing and Affordability API.</p>
 </div>
 </div>
 <div class="section level3">
+<h3 id="using-the-omni-function-for-querying">Using the omni function for querying<a class="anchor" aria-label="anchor" href="#using-the-omni-function-for-querying"></a>
+</h3>
+<p>The omni function requires specifying the type which can be from
+1-12. The type argument follows the number scheme described at <a href="#input-arguments">Input Arguments</a>. You also must use the
+‘query’ argument for inputting geoids instead of the specific geoid
+names (i.e county = 22031, cd = 7200) used by the other functions.</p>
+<p>The input arguments for the omni function closely follow the API
+arguments provided by HUD USER. Please type in ‘?hud_chas’ into your
+terminal to get more details on how to use this.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+
+  <span class="fu"><a href="../reference/hud_chas.html">hud_chas</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">2</span>, <span class="fl">51</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level3">
 <h3 id="input-arguments">Input Arguments<a class="anchor" aria-label="anchor" href="#input-arguments"></a>
 </h3>
 <p><strong>STATEID</strong> If querying for state, county, place, or
@@ -179,13 +206,14 @@ state code.</p>
 must specify either the county, mcd, or place, respectively using their
 codes.</p>
 <ul>
-<li>51999 Corresponds to a County in Virginia</li>
-<li>Run hud_counties(“VA”) to get all counties in Virginia</li>
-<li>94087 Corresponds to a MCD in Virginia</li>
-<li>Run hud_minor_civil_divisions(“VA”) to get all minor civil divisions
-in Virginia</li>
-<li>48996 Corresponds to a Place in Virginia</li>
-<li>Run hud_places(“VA”) to get all places in Virginia</li>
+<li><p>51999 Corresponds to a County in Virginia</p></li>
+<li><p>Run hud_counties(“VA”) to get all counties in Virginia</p></li>
+<li><p>94087 Corresponds to a (Minor Civil Division) MCD in
+Virginia</p></li>
+<li><p>Run hud_minor_civil_divisions(“VA”) to get all minor civil
+divisions in Virginia</p></li>
+<li><p>48996 Corresponds to a Place in Virginia</p></li>
+<li><p>Run hud_places(“VA”) to get all places in Virginia</p></li>
 </ul>
 <p><strong>YEAR</strong> Year range of the data to retrieve. Default is
 latest year range.</p>
@@ -211,9 +239,9 @@ latest year range.</p>
 <p>I recommend checking out <a href="https://www.huduser.gov/portal/dataset/chas-api.html" class="external-link uri">https://www.huduser.gov/portal/dataset/chas-api.html</a> for
 more details as the fields returned require a fair level of domain
 knowledge.</p>
-<p>“HAMFI means HUD area median family income. This is the median family
-income calculated by HUD for each jurisdiction, in order to determine
-fair market rents and income limits for HUD programs (<a href="https://www.lawinsider.com/dictionary/hamfi" class="external-link uri">https://www.lawinsider.com/dictionary/hamfi</a>).”</p>
+<p>HAMFI stands for HUD area median family income, according to (<a href="https://www.lawinsider.com/dictionary/hamfi" class="external-link uri">https://www.lawinsider.com/dictionary/hamfi</a>). HUD
+calculates the median family income in each jurisdiction to estimate
+fair market rents and income limitations for HUD programs.</p>
 <p>A1 Household Income &lt;= 30% HAMFI (Owner Occupied)</p>
 <p>A2 Household Income &lt;= 30% HAMFI (Renter Occupied)</p>
 <p>A3, Household Income &lt;= 30% HAMFI (Total)</p>
@@ -442,7 +470,7 @@ Cost burden &gt; 50%</p>
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h3>
 <p>“Consolidated Planning/CHAS Data | HUD USER.” Www.huduser.gov,
-www.huduser.gov/portal/datasets/cp.html.</p>
+<br>     www.huduser.gov/portal/datasets/cp.html.</p>
 </div>
   </div>
 

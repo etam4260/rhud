@@ -50,7 +50,7 @@
   <a href="../articles/Setup.html">Setup</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -117,55 +117,56 @@
 <div class="section level3">
 <h3 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
 </h3>
-<p>“Fair Market Rent is the rent amount, including utilities (except
-telephone), to rent privately owned, existing, decent, safe and sanitary
-rental housing of modest (non-luxury) nature with suitable
-amenities.</p>
-<p>The Fair Market Rent rate established by Department of Housing and
-Urban Development (HUD) to be used as a basis for paying federal housing
-assistance programs like the Housing Choice Voucher Program.</p>
-<p>Fair Market Rent prices are set for each county and metro area across
-the country. Rates are set for zero-bedroom studios or efficiency all
-the way up to 4-bedroom homes.</p>
-<p>Fair Market Rent (FMR) is defined as the 40th percentile of rents
-paid by recent movers (renters who moved in the last 24 months) in a
-given FMR area. This means FMR rent prices are slightly below the median
-price (“What Is Fair Market Rent? | RentData.org”).”</p>
-<p>“Fair Market Rents (FMRs) are used to determine payment standard
-amounts for the Housing Choice Voucher program, to determine initial
-renewal rents for some expiring project-based Section 8 contracts, to
-determine initial rents for housing assistance payment (HAP) contracts
-in the Moderate Rehabilitation Single Room Occupancy program (Mod
-Rehab), rent ceilings for rental units in both the HOME Investment
-Partnerships program and the Emergency Solution Grants program,
-calculation of maximum award amounts for Continuum of Care recipients
-and the maximum amount of rent a recipient may pay for property leased
-with Continuum of Care funds, and calculation of flat rents in Public
-Housing units. The U.S. Department of Housing and Urban Development
-(HUD) annually estimates FMRs for Office of Management and Budget (OMB)
-defined metropolitan areas, some HUD defined subdivisions of OMB
-metropolitan areas and each non metropolitan county. 42 USC 1437f
-requires FMRs be posted at least 30 days before they are effective and
-that they are effective at the start of the federal fiscal year
-(generally October 1). Fair Market Rents, as defined in 24 CFR 888.113
-are estimates of 40th percentile gross rents for standard quality units
-within a metropolitan area or non metropolitan county (”Fair Market
-Rents | HUD USER”).”</p>
+<p>According to (“What Is Fair Market Rent? | RentData.org”), Fair
+Market Rent refers to the monthly rent, including utilities (excluding
+phone), for privately owned, existing, adequate, safe, and sanitary
+rental accommodation of a moderate (non-luxury) kind with appropriate
+facilities.</p>
+<p>The Department of Housing and Urban Development (HUD) established the
+Fair Market Rent rate to be used as a foundation for funding federal
+housing assistance programs like the Housing Choice Voucher Program.</p>
+<p>Each county and metro area in the United States has its own set of
+Fair Market Rent pricing. The prices range from zero-bedroom studios or
+efficiency units to four-bedroom residences.</p>
+<p>The 40th percentile of rentals paid by recent movers (renters who
+relocated within the last 24 months) in a specific FMR location is
+defined as Fair Market Rent (FMR). FMR rent costs are slightly lower
+than the median.</p>
+<p>According to (Fair Market Rents | HUD USER), Fair Market Rents (FMRs)
+are used to calculate payment standard amounts for the Housing Choice
+Voucher program, initial renewal rents for some expiring project-based
+Section 8 contracts, initial rents for housing assistance payment (HAP)
+contracts in the Moderate Rehabilitation Single Room Occupancy program
+(Mod Rehab), rent ceilings for rental units in both the HOME Investment
+Partnerships program and the Emergency Solution Grants program, and rent
+ceilings for rental units in both the HOME Investment Partnerships
+program and the Emergency Solution Grant.</p>
+<p>Furthermore, the United States Department of Housing and Urban
+Development (HUD) calculates FMRs for metropolitan areas defined by the
+Office of Management and Budget (OMB), some HUD-designated subdivisions
+of OMB metropolitan areas, and each non-metropolitan county on an annual
+basis. FMRs must be posted at least 30 days before they go into effect,
+and they must go into force at the beginning of the federal fiscal year
+(usually October 1). Fair Market Rentals are estimates of the 40th
+percentile gross rents for standard quality units within a metropolitan
+region or non-metropolitan county, as described in 24 CFR 888.113.</p>
 </div>
 <div class="section level3">
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
-<p>This is a basic examples to show you how to query the Fair Markets
-Rent API. Before looking at the outputted data I RECOMMEND first taking
-a look at <a href="#input-arguments">Input Arguments</a> as well as <a href="#output-data">Output Data</a> located at the bottom of the
+<p>These are basic examples to show you how to query the Fair Markets
+Rent API. Before looking at the outputted data I RECOMMEND first looking
+at <a href="#input-arguments">Input Arguments</a> as well as <a href="#output-data">Output Data</a> located at the bottom of the
 page.</p>
-<p>DISCLAIMER: The output tables are too large to be displayed here so
-we choose to leave them out.</p>
-<p>Querying a state will return a data frame with rows representing
-counties within the state. A (state fip + county fip + county
-subdivision) 10 digit code will return a 1 row data frame for that
-county. A CBSA code will also return a 1 row data frame for that
-area.</p>
+<p><strong>DISCLAIMER:</strong> The output tables are too large to be
+displayed here so we choose to leave them out.</p>
+<p>Querying a state will return a data frame with rows each with a
+county and its associated FMR. A (state fipscode + county fipscode +
+county subdivision code) 10 digit code will return a 1 row data frame
+for that county. A CBSA code will also return a 1 row data frame for
+that area.</p>
+<p>This is different from the hud_il() for state queries, as FMR is not
+defined at a state resolution.</p>
 <div class="section level4">
 <h4 id="us-states">US States<a class="anchor" aria-label="anchor" href="#us-states"></a>
 </h4>
@@ -185,37 +186,29 @@ Virginia, and California, respectively.</p>
 
 <span class="fu"><a href="../reference/hud_counties.html">hud_counties</a></span><span class="op">(</span><span class="st">"Virginia"</span><span class="op">)</span>
 
-<span class="co"># If you choose to specify state fips code, you need truncate the </span>
-<span class="co"># extra leading zero from the 2 digit code. For example,</span>
-<span class="co"># 06 turns into 6 but...</span>
-<span class="co"># 56 just turns in 56. You can supply numeric or character types.</span>
 <span class="fu"><a href="../reference/hud_counties.html">hud_counties</a></span><span class="op">(</span><span class="st">"6"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="us-metropolitan-areas">US Metropolitan Areas<a class="anchor" aria-label="anchor" href="#us-metropolitan-areas"></a>
 </h4>
-<p>This is an example to show you how to query for all metropolitan
-areas in US.</p>
+<p>This is an example to show you how to query for metropolitan areas in
+US.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hud_metropolitan.html">hud_metropolitan</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_metropolitan.html">hud_metropolitan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WY"</span>, <span class="st">"NY"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="state-level-fair-markets-rent">State Level Fair Markets Rent<a class="anchor" aria-label="anchor" href="#state-level-fair-markets-rent"></a>
 </h4>
 <p>This is an example which shows you how to query the Fair Markets Rent
-on a state level basis. You can use the abbreviation, state name, or
-fips code. It will return all counties in the state and their Fair
+API for a state. You can use the state abbreviation, state name, or
+state fips code. It will return all counties in the state and their Fair
 Markets Rents.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># This gets FMR data for the state of Virginia in 2021.</span>
+<code class="sourceCode R"><span class="co"># These functions gets FMR data for the state of Virginia in 2021.</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'VA'</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query<span class="op">=</span> <span class="st">"Virginia"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
 
-<span class="co"># If you choose to specify state fips code, you need truncate the </span>
-<span class="co"># extra leading zero from the 2 digit code. For example,</span>
-<span class="co"># 06 turns into 6 but...</span>
-<span class="co"># 56 just turns in 56. You can supply numeric or character types.</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query<span class="op">=</span> <span class="st">"51"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
@@ -228,7 +221,7 @@ currently don’t know why the extra 99999 is included and have not found
 any cases where its different. I recommend taking a look at <a href="#us-counties">US Counties</a> to determine what counties are
 available.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Getting a county requires a 2 digit state fip + 3 digit county fip + 99999</span>
+<code class="sourceCode R"><span class="co"># Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
@@ -250,11 +243,11 @@ determine what counties are available.</p>
 </h3>
 <p><strong>QUERY</strong>: Can provide either a 10 digit FIPS code which
 is almost always state fips + county fips + 99999, or state
-abbreviation. Can also provide a CBSA code. This CBSA code requires both
-itself and its corresponding division code. You are only allowed to
+abbreviation. Can also provide a CBSA code. You are only allowed to
 query for metropolitan areas.</p>
 <p>Run hud_states() to get a list of counties.</p>
-<p>Run hud_metropolitan() to get a list of metropolitan areas.</p>
+<p>Run hud_metropolitan(“MD”) to get a list of metropolitan areas in
+MD.</p>
 <p>Run hud_counties(“MD”) to get list of counties in MD.</p>
 <ul>
 <li>query = ‘METRO12700M12700’</li>
@@ -358,10 +351,10 @@ will be “0”.</li>
 <h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h3>
 <p>“What Is Fair Market Rent? | RentData.org.” Www.rentdata.org,
-www.rentdata.org/articles/what-is-fair-market-rent. Accessed 18
-Feb. 2022.</p>
+<br>     www.rentdata.org/articles/what-is-fair-market-rent. Accessed
+18 Feb. 2022.</p>
 <p>“Fair Market Rents | HUD USER.” Huduser.gov, U.S Department of
-Housing and Urban Development, 2017,
+Housing and Urban <br>     Development, 2017,
 www.huduser.gov/portal/datasets/fmr.html.</p>
 </div>
   </div>

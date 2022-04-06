@@ -16,27 +16,26 @@ knitr::opts_chunk$set(
 
 ### Program Overview
 
-"The Department of Housing and Urban Development (HUD) sets income limits that
-determine eligibility for assisted housing programs including the Public
-Housing, Section 8 project-based, Section 8 Housing Choice Voucher, Section 202
-housing for the elderly, and Section 811 housing for persons with disabilities
-programs. HUD develops income limits based on Median Family Income estimates and
-Fair Market Rent area definitions for each metropolitan area, parts of some
-metropolitan areas, and each non-metropolitan
-county("Income Limits | HUD USER")."
+According to (Income Limits | HUD USER), HUD establishes income restrictions for
+assisted housing programs such as Public Housing, Section 8 project-based,
+Section 8 Housing Choice Voucher, Section 202 housing for the elderly, and
+Section 811 housing for persons with disabilities. For each metropolitan region,
+parts of some metropolitan areas, and non-metropolitan county, HUD creates
+income limitations based on Median Family Income estimates and Fair Market Rent
+area criteria.
 
-### Example
+### Examples
 
-This is a basic examples to show you how to query the Income Limits API. Before
+This page contains basic examples of how to query the HUD Income Limits API. Before
 looking at the outputted data I RECOMMEND first taking a look at [Input Arguments][]
 as well as [Output Data][] located at the bottom of the page.
 
-DISCLAIMER: The output tables are too large to be displayed here so we choose to
+**DISCLAIMER:** The output tables are too large to be displayed here so we choose to
 leave them out.
 
-Querying a state will return a data frame with rows representing counties 
-within the state. A (state fip + county fip + county subdivision) 10 digit code
-will return a 1 row data frame for that county. A CBSA code will also return a 1 
+Querying a state will return a single row containing the Income Limits for that
+state. A (state fipscode + county fipscode + county subdivision) 10 digit code
+will return a 1-row data-frame for that county. A CBSA code will also return a 1 
 row data frame for that area. 
 
 #### US States
@@ -54,53 +53,57 @@ hud_counties("MD")
 
 hud_counties("Virginia")
 
-# If you choose to specify state fips code, you need truncate the 
-# extra leading zero from the 2 digit code. For example,
-# 06 turns into 6 but...
-# 56 just turns in 56. You can supply numeric or character types.
 hud_counties("6")
 ```
 
 #### US Metropolitan Areas
-This is an example to show you how to query for all metropolitan areas in US.
+This is an example to show you how to query for metropolitan areas in US.
 ```{r, eval=FALSE}
-hud_metropolitan()
+# Get all metropolitan areas in Maryland and Virginia.
+hud_metropolitan(c("MD", "VA"))
 ```
 
 #### State Level Income Limits
-This is an example which shows you how to query the Income Limits on
-a state level basis. You can use the abbreviation, state name, or fips code. It
-will return all counties in the state and their Income Limits.
+These are examples which show you how to query the Income Limits on a state
+level basis. You can use the state abbreviation, state name, or state fipscode.
+It will return a single row indicating the income limits for that particular
+state.
+
+**DISCLAIMER:** Querying for states in Income Limits is a little different from
+that of hud_fmr(). Querying for states in hud_fmr() will return all counties and
+their associated Fair Markets Rent. Fair Markets is not defined at a state
+resolution whereas Income Limits is.
+
 ```{r, eval=FALSE}
-# This gets FMR data for the state of Virginia in 2021.
+# These function calls gets income limits data for the state of Virginia in 2021.
 hud_il(query = 'VA', year = '2021')
 
 hud_il(query= "Virginia", year = '2021')
 
-# If you choose to specify state fips code, you need truncate the 
-# extra leading zero from the 2 digit code. For example,
-# 06 turns into 6 but...
-# 56 just turns in 56. You can supply numeric or character types.
 hud_fmr(query= "51", year = '2021')
+
+# You can also choose to query for multiple states or multiple years.
+hud_fmr(query = c('VA', 'MD'), year = c('2021', '2019'))
 ```
 
 #### County Level Income Limits
-This is an example which shows you how to query the Income Limits on a
-county level basis. These are defined with a 2 digit state code + 3 digit county code.
-You also need a 99999 code added onto the end. We currently don't know why the 
-extra 99999 is included and have not found any cases where its different. I recommend
-taking a look at [US Counties][] to determine what counties are available.
+These are examples that show you how to query the Income Limits on a county-level basis: counties are defined with a 2 digit state fipscode + 3 digit county fipscode.
+You also need a 99999 code added to the end. We currently don't know why the
+extra 99999 is included and have not found any cases where it's different. I
+recommend looking at [US Counties][] to determine what counties are
+available for particular states.
 ```{r, eval=FALSE}
 # Getting a county requires a 2 digit state fip + 3 digit county fip + 99999
+# This queries for Income Limits in 2017.
 hud_il(query = '0100199999', year = '2017')
 ```
 
 #### Small Areas Income Limits
-This is an example which shows you how to query the Small Areas Income Limits.
-Small Areas are defined as metropolitan and micropolitan areas which are defined in
-CBSA codes. Currently we know how to query for metropolitan, but not sure for 
-micropolitan yet. I recommend
-taking a look at [US Metropolitan Areas][] to determine what counties are available.
+These are examples that show you how to query the Small Areas Income Limits.
+Small Areas are defined as metropolitan and micropolitan areas specified using
+CBSA codes. Currently, we know how to query for metropolitan small areas, but
+are not sure for micropolitan yet. I recommend looking at 
+[US Metropolitan Areas][] to determine what counties are available.
 ```{r, eval=FALSE}
 # Gets FMR data for METRO area.
 hud_il(query = "METRO47900M47900", year=c(2018))
@@ -108,23 +111,21 @@ hud_il(query = "METRO47900M47900", year=c(2018))
 
 ### Input Arguments
 
-**QUERY**: Can provide either a 10 digit FIPS code which is almost always
-  state fips + county fips + 99999, or state abbreviation. 
-  Can also provide a CBSA code. This CBSA code requires both itself and its
-  corresponding division code. You are only allowed to query for metropolitan areas.
+**QUERY**: Can provide either a 10 digit FIPS code which is almost always state
+fips + county fips + 99999, or state abbreviation. Can also provide a CBSA code.
+Currently, you are only allowed to query for metropolitan areas.
   
-  Run hud_states() to get a list of counties
+  Run hud_states() to get a list of states in the US.
   
-  Run hud_metropolitan() to get a list of metropolitan areas.
+  Run hud_metropolitan("MD") to get a list of metropolitan areas in MD.
   
-  Run hud_counties("MD") to get list of counties in MD
+  Run hud_counties("MD") to get list of counties in MD.
   
   * query = '5100199999'
   * query = 'MD'
   * query = 'METRO12700M12700'
 
-**YEAR**: Year range of the data to retrieve. Defaults to current year. Make sure 
-the years provided follow the rules provided by the TYPE argument.
+**YEAR**: Year range of the data to retrieve: defaults to current year. 
 
   * year = c(2019, 2018, 2021)
   * year = c(2016, 2017, 2022)
@@ -181,4 +182,4 @@ the years provided follow the rules provided by the TYPE argument.
 ### References
 
 "Income Limits | HUD USER." Huduser.gov, 2015,
-www.huduser.gov/portal/datasets/il.html.
+<br />&nbsp;&nbsp;&nbsp;&nbsp; www.huduser.gov/portal/datasets/il.html.

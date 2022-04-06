@@ -50,7 +50,7 @@
   <a href="../articles/Setup.html">Setup</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -122,20 +122,17 @@
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"etam4260/hudr"</span><span class="op">)</span></code></pre></div>
-<p>The US Department of Housing and Urban Development for HUD USER
-requires users to gain an access key before querying their systems. You
-must go to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a>
+<p>The US Department of Housing and Urban Development HUD USER requires
+users to gain an access key before querying their systems. You must go
+to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a>
 and follow the instructions for making an account.</p>
-<p>From there you need to make a new token. Make sure to save the token
-somewhere as you will only be able to view it once. However, you can use
-it as many times as you want. You can now supply the ‘key’ argument to
-the function calls. However, it is <strong>NOT RECOMMENDED</strong> to
-do this. Rather, to reduce the need to supply the key argument in every
-function call, you can use the Sys.setenv() function to save the key to
-the user environment.</p>
-<p>HUD Exchange has data stored in files and does not have a readily
-available API system for gaining access to their data. Furthermore, this
-only supports the public data portal.</p>
+<p>From the website, you need to make a new token. Make sure to save the
+token somewhere as you will only be able to view it once. However, you
+can use it as many times as you want. You can now supply the ‘key’
+argument to the function calls. However, it is <strong>NOT
+RECOMMENDED</strong> to do this. To reduce the need to supply the key
+argument in every function call you can use the Sys.setenv() function to
+save the key to the user environment.</p>
 </div>
 <div class="section level2">
 <h2 id="interactive-key-setup">Interactive Key Setup<a class="anchor" aria-label="anchor" href="#interactive-key-setup"></a>
@@ -158,7 +155,8 @@ outputted.</p>
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span> <span class="op">=</span> <span class="st">"2yeuduhq72ueajk"</span><span class="op">)</span>
 <span class="co"># "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register for a key and replace it here.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span></code></pre></div>
-<p>You can also use the quicker to type hud_set_key()</p>
+<p>You can also use the hud_set_key() function which is quicker to type
+and more intuitive.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_key.html">hud_set_key</a></span><span class="op">(</span><span class="st">"2yeuduhq72ueajk"</span><span class="op">)</span></code></pre></div>
 <p>To check whether hudr can gain access to this environment
@@ -175,13 +173,16 @@ variable…</p>
 between R session.</p>
 <p>When R starts it looks for .Rprofile files in different
 locations:</p>
-<p><em>R_HOME: which is the directory in that R is installed, </em>HOME:
-the user’s home directory, <em>The current working directory for R
-</em>R only loads one .Rprofile file per session and thus an .Rprofile
-file at the project-level overrides files in other locations.</p>
+<ul>
+<li>R_HOME: which is the directory in that R is installed,</li>
+<li>HOME: the user’s home directory,</li>
+<li>The current working directory for R</li>
+<li>R only loads one .Rprofile file per session and thus an .Rprofile
+file at the project-level overrides files in other locations.</li>
+</ul>
 <p>The .Rprofile file is an R script that is launch each time R starts.
 Sometimes it might not be in these locations. You can just create one
-and put it at the root of your project and type the following in it:</p>
+and put it at the root of your project and type the following in:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">HUD_KEY</span> <span class="op">=</span> <span class="st">"2yeuduhq72ueajk"</span>
 <span class="co"># "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register for a key and replace it here.</span></code></pre></div>

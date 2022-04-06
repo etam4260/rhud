@@ -50,7 +50,7 @@
   <a href="../articles/Setup.html">Setup</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -115,7 +115,7 @@
     
     
 <div class="section level3">
-<h3 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
+<h3 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
 </h3>
 <p>“The Community Development Block Grant (CDBG) Program has Disaster
 Recovery grants to rebuild the affected areas and provide crucial seed
@@ -131,9 +131,9 @@ The first two datasets are the same, but are organized in a different
 manner.</p>
 <p>Querying the HUD Exchange website for data is a bit different than
 HUD User. These datasets do not need a key.</p>
-<p>FILE 1) DR CDBG CDBG-DR Financial Report by Appropriation 2) DR CDBG
-CDBG-DR Financial Report by Grantee 3) DR CDBG CDBG-DR Financial Report
-Monthly Summary 4) DR CDBG CDBG-DR Performance by Activity</p>
+<p>Files: 1) DR CDBG CDBG-DR Financial Report by Appropriation 2) DR
+CDBG CDBG-DR Financial Report by Grantee 3) DR CDBG CDBG-DR Financial
+Report Monthly Summary 4) DR CDBG CDBG-DR Performance by Activity</p>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -150,17 +150,19 @@ Report by Appropriation, and displaying the first 6 rows.</p>
 <div class="section level4">
 <h4 id="output-data">Output Data<a class="anchor" aria-label="anchor" href="#output-data"></a>
 </h4>
-<p>Appropriation Abbreviation</p>
-<p>Appropriation</p>
-<p>Grantee</p>
-<p>Grant</p>
-<p>Grant Status</p>
-<p>Grant $ (Grant Level)</p>
-<p>Grant Obligated $</p>
-<p>Obligated %</p>
-<p>Grant Disbursed $</p>
-<p>Disbursed %</p>
-<p>Remaining Balance</p>
+<ol style="list-style-type: decimal">
+<li><p>Appropriation Abbreviation</p></li>
+<li><p>Appropriation</p></li>
+<li><p>Grantee</p></li>
+<li><p>Grant</p></li>
+<li><p>Grant Status</p></li>
+<li><p>Grant $ (Grant Level)</p></li>
+<li><p>Grant Obligated $</p></li>
+<li><p>Obligated %</p></li>
+<li><p>Grant Disbursed $</p></li>
+<li><p>Disbursed %</p></li>
+<li><p>Remaining Balance</p></li>
+</ol>
 </div>
 <div class="section level4">
 <h4 id="cdbg-cdbg-dr-financial-report-by-grantee">CDBG CDBG-DR Financial Report by Grantee<a class="anchor" aria-label="anchor" href="#cdbg-cdbg-dr-financial-report-by-grantee"></a>
@@ -173,16 +175,18 @@ Financial Report by Grantee, and displaying the first 6 rows.</p>
 <div class="section level4">
 <h4 id="output-data-1">Output Data<a class="anchor" aria-label="anchor" href="#output-data-1"></a>
 </h4>
-<p>Grantee State</p>
-<p>Appropriation</p>
-<p>Grantee Grant</p>
-<p>Grant Status</p>
-<p>Grant $ (Grant Level)</p>
-<p>Grant Obligated $</p>
-<p>Obligated %</p>
-<p>Grant Disbursed $</p>
-<p>Disbursed %</p>
-<p>Remaining Balance</p>
+<ol style="list-style-type: decimal">
+<li><p>Grantee State</p></li>
+<li><p>Appropriation</p></li>
+<li><p>Grantee Grant</p></li>
+<li><p>Grant Status</p></li>
+<li><p>Grant $ (Grant Level)</p></li>
+<li><p>Grant Obligated $</p></li>
+<li><p>Obligated %</p></li>
+<li><p>Grant Disbursed $</p></li>
+<li><p>Disbursed %</p></li>
+<li><p>Remaining Balance</p></li>
+</ol>
 </div>
 <div class="section level4">
 <h4 id="cdbg-dr-financial-report-monthly-summary">CDBG-DR Financial Report Monthly Summary<a class="anchor" aria-label="anchor" href="#cdbg-dr-financial-report-monthly-summary"></a>
@@ -196,17 +200,19 @@ provides grants that were given in the last month.</p>
 <div class="section level4">
 <h4 id="output-data-2">Output Data<a class="anchor" aria-label="anchor" href="#output-data-2"></a>
 </h4>
-<p>Grantee State</p>
-<p>Grantee</p>
-<p>Grant</p>
-<p>Grant $ (deprecated)</p>
-<p>Activity Budget $</p>
-<p>% Budget</p>
-<p>Activity Obligation $</p>
-<p>% Obligated</p>
-<p>Activity Drawn $</p>
-<p>Activity Budget Disbursed %</p>
-<p>Remaining Balance</p>
+<ol style="list-style-type: decimal">
+<li><p>Grantee State</p></li>
+<li><p>Grantee</p></li>
+<li><p>Grant</p></li>
+<li><p>Grant $ (deprecated)</p></li>
+<li><p>Activity Budget $</p></li>
+<li><p>% Budget</p></li>
+<li><p>Activity Obligation $</p></li>
+<li><p>% Obligated</p></li>
+<li><p>Activity Drawn $</p></li>
+<li><p>Activity Budget Disbursed %</p></li>
+<li><p>Remaining Balance</p></li>
+</ol>
 </div>
 <div class="section level4">
 <h4 id="dr-cdbg-cdbg-dr-performance-by-activity">DR CDBG CDBG-DR Performance by Activity<a class="anchor" aria-label="anchor" href="#dr-cdbg-cdbg-dr-performance-by-activity"></a>
@@ -219,24 +225,26 @@ Performance by Activity, and displaying the first 6 rows.</p>
 <div class="section level4">
 <h4 id="output-data-3">Output Data<a class="anchor" aria-label="anchor" href="#output-data-3"></a>
 </h4>
-<p>Appropriation</p>
-<p>Grantee</p>
-<p>Grant</p>
-<p>Activity Responsible Org</p>
-<p>Activity Type</p>
-<p>Activity Number</p>
-<p>Activity Title</p>
-<p>Activity Status</p>
-<p>Activity Measure Category</p>
-<p>Low Projected</p>
-<p>Low Actual</p>
-<p>Low Actual to Projected %</p>
-<p>Mod Projected</p>
-<p>Mod Actual</p>
-<p>Mod Actual to Projected %</p>
-<p>Total Projected</p>
-<p>Total Actual</p>
-<p>Total Actual to Projected %</p>
+<ol style="list-style-type: decimal">
+<li><p>Appropriation</p></li>
+<li><p>Grantee</p></li>
+<li><p>Grant</p></li>
+<li><p>Activity Responsible Org</p></li>
+<li><p>Activity Type</p></li>
+<li><p>Activity Number</p></li>
+<li><p>Activity Title</p></li>
+<li><p>Activity Status</p></li>
+<li><p>Activity Measure Category</p></li>
+<li><p>Low Projected</p></li>
+<li><p>Low Actual</p></li>
+<li><p>Low Actual to Projected %</p></li>
+<li><p>Mod Projected</p></li>
+<li><p>Mod Actual</p></li>
+<li><p>Mod Actual to Projected %</p></li>
+<li><p>Total Projected</p></li>
+<li><p>Total Actual</p></li>
+<li><p>Total Actual to Projected %</p></li>
+</ol>
 </div>
 </div>
   </div>

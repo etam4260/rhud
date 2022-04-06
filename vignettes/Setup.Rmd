@@ -24,20 +24,16 @@ library(devtools)
 devtools::install_github("etam4260/hudr")
 ```
 
-The US Department of Housing and Urban Development for HUD USER requires users 
-to gain an  access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and follow the 
+The US Department of Housing and Urban Development HUD USER requires users 
+to gain an access key before querying their systems. You must go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and follow the 
 instructions for making an account.
 
-From there you need to make a new token. Make sure to save the token somewhere 
-as you will only be able to view it once. However, you can use it as many times 
-as you want. You can now supply the 'key' argument to the function calls. 
-However, it is **NOT RECOMMENDED** to do this. Rather, to reduce the need to 
-supply the key argument in every function call, you can use the Sys.setenv() 
+From the website, you need to make a new token. Make sure to save the token
+somewhere as you will only be able to view it once. However, you can use it as
+many times as you want. You can now supply the 'key' argument to the function
+calls. However, it is **NOT RECOMMENDED** to do this. To reduce the need to
+supply the key argument in every function call you can use the Sys.setenv()
 function to save the key to the user environment.
-
-HUD Exchange has data stored in files and does not have a readily available API
-system for gaining access to their data. Furthermore, this only supports the 
-public data portal.
 
 ## Interactive Key Setup
 
@@ -63,7 +59,8 @@ Sys.setenv("HUD_KEY" = "2yeuduhq72ueajk")
 Sys.getenv("HUD_KEY")
 ```
 
-You can also use the quicker to type hud_set_key()
+You can also use the hud_set_key() function which is quicker to type and more
+intuitive.
 
 ```{r, eval=FALSE}
 hud_set_key("2yeuduhq72ueajk")
@@ -83,14 +80,14 @@ You also choose to save it into your .Rprofile to save the key in between R sess
 
 When R starts it looks for .Rprofile files in different locations:
 
-*R_HOME: which is the directory in that R is installed,
-*HOME: the user's home directory,
-*The current working directory for R
-*R only loads one .Rprofile file per session and thus an .Rprofile file at the project-level overrides files in other locations.
+* R_HOME: which is the directory in that R is installed,
+* HOME: the user's home directory,
+* The current working directory for R
+* R only loads one .Rprofile file per session and thus an .Rprofile file at the project-level overrides files in other locations.
 
-The .Rprofile file is an R script that is launch each time R starts. Sometimes it
-might not be in these locations. You can just create one and put it at
-the root of your project and type the following in it:
+The .Rprofile file is an R script that is launch each time R starts. Sometimes
+it might not be in these locations. You can just create one and put it at the
+root of your project and type the following in:
 
 ```{r, eval=FALSE}
 HUD_KEY = "2yeuduhq72ueajk"

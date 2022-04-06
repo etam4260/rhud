@@ -28,7 +28,7 @@ returns the crosswalk for zip to county."><meta property="og:image" content="/lo
   <a href="../articles/Setup.html">Setup</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -97,7 +97,8 @@ returns the crosswalk for zip to county.</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>zip</dt>
-<dd><p>5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type 1 to 5 and 11 .</p></dd>
+<dd><p>5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+1 to 5 and 11 .</p></dd>
 <dt>year</dt>
 <dd><p>Gets the year that this data was recorded.
 Can specify multiple years. Default is the
@@ -106,10 +107,11 @@ previous year.</p></dd>
 <dd><p>Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.</p></dd>
 <dt>minimal</dt>
-<dd><p>Return just the crosswalked GEOIDs if true. Otherwise, return all fields.</p></dd>
+<dd><p>Return just the crosswalked GEOIDs if true. Otherwise, return
+all fields.</p></dd>
 <dt>key</dt>
-<dd><p>The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.</p></dd>
+<dd><p>The API key for this user. You must go to HUD and sign up for an
+account and request for an API key.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -126,7 +128,8 @@ https://www.huduser.gov/portal/dataset/uspszip-api.html</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">hud_cw_zip_county</span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">hud_cw_zip_county</span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>, minimal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">hud_cw_zip_county</span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>,</span>
+<span class="r-in">   minimal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>
@@ -142,7 +145,7 @@ https://www.huduser.gov/portal/dataset/uspszip-api.html</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
 2.0.2.</p>
 </div>
 

@@ -16,26 +16,39 @@ knitr::opts_chunk$set(
 
 ### Program Overview
 
-"Each year, the U.S. Department of Housing and Urban Development (HUD) receives
-custom tabulations of American Community Survey (ACS) data from the U.S. Census
-Bureau. These data, known as the "CHAS" data (Comprehensive Housing
-Affordability Strategy), demonstrate the extent of housing problems and housing
-needs, particularly for low income households. The CHAS data are used by local
-governments to plan how to spend HUD funds, and may also be used by HUD to
-distribute grant funds ("Consolidated Planning/CHAS Data | HUD USER")."
+According to (Consolidated Planning/CHAS Data | HUD USER), the United States
+Department of Housing and Urban Development (HUD) gets custom tabulations of
+American Community Survey (ACS) data from the United States Census Bureau every
+year. These figures, dubbed "CHAS" (Comprehensive Housing Affordability
+Strategy), show the scope of housing issues and needs, particularly among
+low-income households. Local governments utilize the CHAS data to plan how they
+will spend HUD monies, and HUD may use the data to distribute grant funds.
   
-### Example
+### Examples
 
-This is a basic example showing you how to query the Comprehensive Housing and
+These are basic examples showing you how to query the Comprehensive Housing and
 Affordability API.
 
-This function returns a single row data frame for each query.
+Each geoid query represents a CHAS measurement for that particular 
+geographic resolution.
+
+The functions below are the main functions for querying the CHAS API at
+different geographic resolutions. The package also contains a omni function
+which encapsulates the capabilities of all the main function calls mentioned
+below. [onmi-function][Using the omni function for querying]
+
+1) [nation][CHAS for Nation]
+2) [state][CHAS for State]
+3) [county][CHAS for County]
+4) [mcd][CHAS for MCD] 
+5) [place][CHAS for Place]
 
 #### CHAS for Nation
 ```{r, eval=FALSE}
   library(hudr)
   hud_chas_nation(year=c("2014-2018"))
 ```
+
 #### CHAS for State
 ```{r, eval=FALSE}
   # Queries for CHAS in a state
@@ -60,21 +73,41 @@ This function returns a single row data frame for each query.
   hud_chas_place("51", 48996)
 ```
 
+### Using the omni function for querying
+
+The omni function requires specifying the type which can be from 1-12. The type
+argument follows the number scheme described at [Input Arguments][]. You also 
+must use the 'query' argument for inputting geoids instead of the specific 
+geoid names (i.e county = 22031, cd = 7200) used by the other functions.
+
+The input arguments for the omni function closely follow the API arguments
+provided by HUD USER. Please type in '?hud_chas' into your terminal to get more
+details on how to use this.
+
+```{r, eval = FALSE}
+  hud_chas(type = 1)
+
+  hud_chas(type = 2, 51)
+```
+
 ### Input Arguments
 
-**STATEID** If querying for state, county, place, or MCD, you must specify the state either as abbreviation, state name, or state code.
+**STATEID** If querying for state, county, place, or MCD, you must specify the
+state either as abbreviation, state name, or state code.
 
   stateId = 34
   stateId = "VA"
   stateId = "Virginia"
 
-**ENTITYID** If querying for county, place, or MCD, you must specify either the county, mcd, or place,
-respectively using their codes.
+**ENTITYID** If querying for county, place, or MCD, you must specify either the
+county, mcd, or place, respectively using their codes.
     
   - 51999 Corresponds to a County in Virginia
   - Run hud_counties("VA") to get all counties in Virginia
-  - 94087 Corresponds to a MCD in Virginia
+  
+  - 94087 Corresponds to a (Minor Civil Division) MCD in Virginia
   - Run hud_minor_civil_divisions("VA") to get all minor civil divisions in Virginia
+  
   - 48996 Corresponds to a Place in Virginia
   - Run hud_places("VA") to get all places in Virginia
     
@@ -99,10 +132,10 @@ respectively using their codes.
 I recommend checking out https://www.huduser.gov/portal/dataset/chas-api.html
 for more details as the fields returned require a fair level of domain knowledge.
 
-"HAMFI means HUD area median family income. This is the median family income
-calculated by HUD for each jurisdiction, in order to determine fair market rents
-and income limits for HUD programs
-(https://www.lawinsider.com/dictionary/hamfi)."
+HAMFI stands for HUD area median family income, according to
+(https://www.lawinsider.com/dictionary/hamfi). HUD calculates the median family
+income in each jurisdiction to estimate fair market rents and income limitations
+for HUD programs.
 
 A1	Household Income <= 30% HAMFI (Owner Occupied)
 
@@ -379,4 +412,4 @@ J17	Total (Owners only) and Cost burden > 50%
 ### References
 
 "Consolidated Planning/CHAS Data | HUD USER." Www.huduser.gov,
-www.huduser.gov/portal/datasets/cp.html.
+<br />&nbsp;&nbsp;&nbsp;&nbsp; www.huduser.gov/portal/datasets/cp.html.

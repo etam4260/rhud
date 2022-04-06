@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-### About
+### Program Overview
 
 "The Community Development Block Grant (CDBG) Program has Disaster Recovery
 grants to rebuild the affected areas and provide crucial seed money to start the
@@ -32,7 +32,7 @@ The first two datasets are the same, but are organized in a different manner.
 Querying the HUD Exchange website for data is a bit different than HUD User.
 These datasets do not need a key.
 
-FILE
+Files:
   1) DR CDBG CDBG-DR Financial Report by Appropriation
   2) DR CDBG CDBG-DR Financial Report by Grantee
   3) DR CDBG CDBG-DR Financial Report Monthly Summary
@@ -51,27 +51,27 @@ head(hud_cdbg(file = 1))
 
 #### Output Data
 
-Appropriation Abbreviation
+1) Appropriation Abbreviation
 
-Appropriation 
+2) Appropriation 
 
-Grantee	
+3) Grantee	
 
-Grant	
+4) Grant	
 
-Grant Status	
+5) Grant Status	
 
-Grant $ (Grant Level)	
+6) Grant $ (Grant Level)	
 
-Grant Obligated $	
+7) Grant Obligated $	
 
-Obligated %	
+8) Obligated %	
 
-Grant Disbursed $	
+9) Grant Disbursed $	
 
-Disbursed %	
+10) Disbursed %	
 
-Remaining Balance
+11) Remaining Balance
 
 #### CDBG CDBG-DR Financial Report by Grantee
 
@@ -83,26 +83,25 @@ head(hud_cdbg(file = 2))
 
 #### Output Data
 
-Grantee State
+1) Grantee State
 
-Appropriation		
+2) Appropriation		
 
-Grantee	Grant	
+3) Grantee	Grant	
 
-Grant Status	
+4) Grant Status	
 
-Grant $ (Grant Level)	
+5) Grant $ (Grant Level)	
 
-Grant Obligated $	
+6) Grant Obligated $	
 
-Obligated %	
+7) Obligated %	
 
-Grant Disbursed $	
+8) Grant Disbursed $	
 
-Disbursed %	
+9) Disbursed %	
 
-Remaining Balance
-
+10) Remaining Balance
 
 #### CDBG-DR Financial Report Monthly Summary
 
@@ -115,27 +114,27 @@ head(hud_cdbg(file = 3))
 
 #### Output Data
 
-Grantee State
+1) Grantee State
 
-Grantee	
+2) Grantee	
 
-Grant	
+3) Grant	
 
-Grant $ (deprecated)
+4) Grant $ (deprecated)
 
-Activity Budget $	
+5) Activity Budget $	
 
-% Budget	
+6) % Budget	
 
-Activity Obligation $	
+7) Activity Obligation $	
 
-% Obligated	
+8) % Obligated	
 
-Activity Drawn $	
+9) Activity Drawn $	
 
-Activity Budget Disbursed %	
+10) Activity Budget Disbursed %	
 
-Remaining Balance
+11) Remaining Balance
 
 #### DR CDBG CDBG-DR Performance by Activity
 
@@ -147,38 +146,38 @@ head(hud_cdbg(file = 4))
 
 #### Output Data
 
-Appropriation		
+1) Appropriation		
 
-Grantee	
+2) Grantee	
 
-Grant	
+3) Grant	
 
-Activity Responsible Org	
+4) Activity Responsible Org	
 
-Activity Type	
+5) Activity Type	
 
-Activity Number	
+6) Activity Number	
 
-Activity Title	
+7) Activity Title	
 
-Activity Status	
+8) Activity Status	
 
-Activity Measure Category	
+9) Activity Measure Category	
 
-Low Projected
+10) Low Projected
 
-Low Actual
+11) Low Actual
 
-Low Actual to Projected %
+12) Low Actual to Projected %
 
-Mod Projected
+13) Mod Projected
 
-Mod Actual
+14) Mod Actual
 
-Mod Actual to Projected %
+15) Mod Actual to Projected %
 
-Total Projected
+16) Total Projected
 
-Total Actual
+17) Total Actual
 
-Total Actual to Projected %
+18) Total Actual to Projected %
