@@ -268,11 +268,22 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     "at https://github.com/etam4260/hudr/issues.", sep = ""))
     } else {
       if(querytype == "state") {
+
+        # Right now only supports getting the county level data. Need to
+        # extend this into the small areas too. How should it be outputted?
         res <- as.data.frame(do.call(rbind, cont$data$counties))
       } else if(querytype == "county"){
+
         res <- as.data.frame(cont$data)
       } else {
+
         res <- as.data.frame(do.call(rbind, cont$data$basicdata))
+        res$zip_code <- unlist(res$zip_code)
+        res$Efficiency <-  unlist(res$Efficiency)
+        res$`One-Bedroom` <- unlist(res$`One-Bedroom`)
+        res$`Two-Bedroom` <- unlist(res$`Two-Bedroom`)
+        res$`Three-Bedroom` <- unlist(res$`Three-Bedroom`)
+        res$`Four-Bedroom` <- unlist(res$`Four-Bedroom`)
         res$county_name <- cont$data$county_name
         res$counties_msa <- cont$data$counties_msa
         res$town_name <- cont$data$town_name
@@ -281,15 +292,17 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
         res$area_area <- cont$data$area_area
         res$smallarea_status <- cont$data$smallarea_status
       }
-
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
       list_res[[i]] <- res
     }
   }
 
+
   if(length(list_res) != 0) {
-    return(as.data.frame(do.call(rbind, list_res)))
+    res <- as.data.frame(do.call(rbind, list_res))
+    res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+    return(res)
   }
 
   return(NULL)
@@ -384,7 +397,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   }
 
   if(length(list_res) != 0) {
-    return(as.data.frame(do.call(rbind, list_res)))
+    res <- as.data.frame(do.call(rbind, list_res))
+    return(res)
   }
 
   return(NULL)

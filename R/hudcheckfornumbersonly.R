@@ -85,6 +85,3 @@ is.negative <- function(x) {
     return(TRUE)
   }
 }
-
-
-

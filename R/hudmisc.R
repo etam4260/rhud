@@ -13,6 +13,7 @@
 # state = c(VA, MD) will query for VA or MD
 # state = c(51,52)
 
+
 #' @name hud_states
 #' @title hud_states
 #' @description Get a list of state along with the corresponding FIPs code and
@@ -64,7 +65,8 @@ hud_states <- function(key = Sys.getenv("HUD_KEY")) {
   stop("The key used might be invalid.")
 }
 
-# Need to allow user to filter metropolitan areas similar to place, county, mcds.
+# Need to allow user to filter metropolitan areas similar to place, county,
+# mcds.
 
 #' @name hud_metropolitan
 #' @title hud_metropolitan
@@ -122,6 +124,7 @@ hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
                                                  reged[[i]][3],
                                                  nchar(metro$area_name[i])))
   }
+
   # Remove the area_name column.
   metro <- metro[,c(1,3)]
 
@@ -160,6 +163,7 @@ hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
     state_abbr <- pkg.env$state[pkg.env$state$state_num %in%
                                 as.character(state),][2]
   }
+
   state_abbr <- unlist(state_abbr)
 
   metro <- metro[metro$metro_state == state_abbr, ]
