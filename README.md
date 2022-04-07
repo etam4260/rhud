@@ -133,8 +133,10 @@ bar.
 
 ## Disclaimers
 
--   License: GPL \>= 2 \* To get citation information for hudr in R,
-    type citation(package = ‘hudr’)
+-   License: GPL \>= 2
+
+-   To get citation information for hudr in R, type citation(package =
+    ‘hudr’)
 
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.

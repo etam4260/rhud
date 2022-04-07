@@ -237,6 +237,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
+  message(query)
   year <- args[[2]]
   key <- args[[3]]
   querytype <- args[[4]]
@@ -273,17 +274,9 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
         # extend this into the small areas too. How should it be outputted?
         res <- as.data.frame(do.call(rbind, cont$data$counties))
       } else if(querytype == "county"){
-
-        res <- as.data.frame(cont$data)
-      } else {
-
-        res <- as.data.frame(do.call(rbind, cont$data$basicdata))
-        res$zip_code <- unlist(res$zip_code)
-        res$Efficiency <-  unlist(res$Efficiency)
-        res$`One-Bedroom` <- unlist(res$`One-Bedroom`)
-        res$`Two-Bedroom` <- unlist(res$`Two-Bedroom`)
-        res$`Three-Bedroom` <- unlist(res$`Three-Bedroom`)
-        res$`Four-Bedroom` <- unlist(res$`Four-Bedroom`)
+        View(cont)
+        res <- as.data.frame(do.call(cbind, cont$data$basicdata))
+        View(res)
         res$county_name <- cont$data$county_name
         res$counties_msa <- cont$data$counties_msa
         res$town_name <- cont$data$town_name
@@ -291,6 +284,44 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
         res$metro_name <- cont$data$metro_name
         res$area_area <- cont$data$area_area
         res$smallarea_status <- cont$data$smallarea_status
+        View(res)
+      } else {
+        View(cont)
+
+        # BUG: If getting an area is a small area status true, then the structure
+        # will be different. Small areas will have nested zip codes inside the
+        # basicdata. This means small areas define FMR at a
+        # zip code level. Whereas, non small areas will define
+        # only FMR at that metro level.
+
+        # If 0 in smallarea_status then it should be easy to parse.
+        # If 1, then there will be lots of nested data zipcode level
+        # data inside basicdata.
+        if(cont$data$smallarea_status == "0") {
+          res <- as.data.frame(do.call(cbind, cont$data$basicdata))
+          res$zip_code <- unlist(res$zip_code)
+          res$Efficiency <-  unlist(res$Efficiency)
+          res$`One-Bedroom` <- unlist(res$`One-Bedroom`)
+          res$`Two-Bedroom` <- unlist(res$`Two-Bedroom`)
+          res$`Three-Bedroom` <- unlist(res$`Three-Bedroom`)
+          res$`Four-Bedroom` <- unlist(res$`Four-Bedroom`)
+          res$county_name <- cont$data$county_name
+          res$counties_msa <- cont$data$counties_msa
+          res$town_name <- cont$data$town_name
+          res$metro_status <- cont$data$metro_status
+          res$metro_name <- cont$data$metro_name
+          res$area_area <- cont$data$area_area
+          res$smallarea_status <- cont$data$smallarea_status
+          # Add an empty zip code for this metro area which is not small area
+          # to get zip code level resolution data, depending if
+          # some of the query calls have small area codes.
+          res$zip_code <- ""
+        } else {
+          # Deal with those that are small areas...
+
+
+
+        }
       }
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
@@ -301,7 +332,9 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
   if(length(list_res) != 0) {
     res <- as.data.frame(do.call(rbind, list_res))
-    res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+    if(querytype == "state") {
+      res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+    }
     return(res)
   }
 

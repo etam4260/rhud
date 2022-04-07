@@ -143,19 +143,20 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
                         as.character(query),]) != 0) {
     query <- pkg.env$state[pkg.env$state$state_name %in%
                              as.character(query),][2]
+    query <- unlist(query[[1]])
   }
   if(nrow(pkg.env$state[pkg.env$state$state_code %in%
                         as.character(query),]) != 0) {
     query <- pkg.env$state[pkg.env$state$state_code %in%
                              as.character(query),][2]
+    query <- unlist(query[[1]])
   }
   if(nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
                         as.character(query),]) != 0) {
     query <- pkg.env$state[pkg.env$state$state_num %in%
                              as.character(query),][2]
+    query <- unlist(query[[1]])
   }
-
-  query <- unlist(query[[1]])
 
   if(FALSE %in% numbers_only(year)) stop("Year input must only be numbers.")
   # Check year and query input to see if they fit within
