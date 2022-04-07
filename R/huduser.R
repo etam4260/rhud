@@ -297,31 +297,25 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
         # If 0 in smallarea_status then it should be easy to parse.
         # If 1, then there will be lots of nested data zipcode level
         # data inside basicdata.
-        if(cont$data$smallarea_status == "0") {
-          res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-          res$zip_code <- unlist(res$zip_code)
-          res$Efficiency <-  unlist(res$Efficiency)
-          res$`One-Bedroom` <- unlist(res$`One-Bedroom`)
-          res$`Two-Bedroom` <- unlist(res$`Two-Bedroom`)
-          res$`Three-Bedroom` <- unlist(res$`Three-Bedroom`)
-          res$`Four-Bedroom` <- unlist(res$`Four-Bedroom`)
-          res$county_name <- cont$data$county_name
-          res$counties_msa <- cont$data$counties_msa
-          res$town_name <- cont$data$town_name
-          res$metro_status <- cont$data$metro_status
-          res$metro_name <- cont$data$metro_name
-          res$area_area <- cont$data$area_area
-          res$smallarea_status <- cont$data$smallarea_status
-          # Add an empty zip code for this metro area which is not small area
-          # to get zip code level resolution data, depending if
-          # some of the query calls have small area codes.
-          res$zip_code <- ""
-        } else {
-          # Deal with those that are small areas...
 
-
-
-        }
+        res <- as.data.frame(do.call(cbind, cont$data$basicdata))
+        res$zip_code <- unlist(res$zip_code)
+        res$Efficiency <-  unlist(res$Efficiency)
+        res$`One-Bedroom` <- unlist(res$`One-Bedroom`)
+        res$`Two-Bedroom` <- unlist(res$`Two-Bedroom`)
+        res$`Three-Bedroom` <- unlist(res$`Three-Bedroom`)
+        res$`Four-Bedroom` <- unlist(res$`Four-Bedroom`)
+        res$county_name <- cont$data$county_name
+        res$counties_msa <- cont$data$counties_msa
+        res$town_name <- cont$data$town_name
+        res$metro_status <- cont$data$metro_status
+        res$metro_name <- cont$data$metro_name
+        res$area_area <- cont$data$area_area
+        res$smallarea_status <- cont$data$smallarea_status
+        # Add an empty zip code for this metro area which is not small area
+        # to get zip code level resolution data, depending if
+        # some of the query calls have small area codes.
+        res$zip_code <- ""
       }
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
