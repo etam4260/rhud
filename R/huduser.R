@@ -274,9 +274,9 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
         # extend this into the small areas too. How should it be outputted?
         res <- as.data.frame(do.call(rbind, cont$data$counties))
       } else if(querytype == "county"){
-        View(cont)
+
         res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-        View(res)
+
         res$county_name <- cont$data$county_name
         res$counties_msa <- cont$data$counties_msa
         res$town_name <- cont$data$town_name
@@ -284,9 +284,9 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
         res$metro_name <- cont$data$metro_name
         res$area_area <- cont$data$area_area
         res$smallarea_status <- cont$data$smallarea_status
-        View(res)
+
       } else {
-        View(cont)
+
 
         # BUG: If getting an area is a small area status true, then the structure
         # will be different. Small areas will have nested zip codes inside the
