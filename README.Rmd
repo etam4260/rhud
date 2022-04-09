@@ -154,4 +154,5 @@ and introduce some pull requests!
 Disaster Recovery Grant Reporting System. (2022). HUD Exchange. Retrieved
 <br />&nbsp;&nbsp;&nbsp;&nbsp; February 19, 2022, from https://www.hudexchange.info/programs/drgr/
 
-HUD User Home Page: HUD USER. HUD User Home Page | HUD USER. (n.d.). Retrieved        <br />&nbsp;&nbsp;&nbsp;&nbsp; February 24, 2022, from https://www.huduser.gov/portal/home.html 
+HUD User Home Page: HUD USER. HUD User Home Page | HUD USER. (n.d.). Retrieved        
+<br />&nbsp;&nbsp;&nbsp;&nbsp; February 24, 2022, from https://www.huduser.gov/portal/home.html 

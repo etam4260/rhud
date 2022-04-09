@@ -160,32 +160,32 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 
   # Need to make sure query is a zip code of 5 digits.
   if(as.integer(type) >= 1 && as.integer(type) <= 5 || as.integer(type) == 11){
-    if(nchar(query) != 5) stop("Query input is not of length 5")
+    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is a fips code of 5 digits.
   } else if(as.integer(type) == 7) {
-    if(nchar(query) != 5) stop("Query input is not of length 5")
+    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is a fips code
     # with census tract attached onto it 11 digits.
   } else if(as.integer(type) == 6) {
-    if(nchar(query) != 11) stop("Query input is not of length 11")
+    if(any(nchar(query) != 11)) stop("Query input is not of length 11")
     # Need to make sure query is CBSA code for
     # micropolitan/metropolitan areas: 5 digits.
   } else if(as.integer(type) == 8) {
-    if(nchar(query) != 5) stop("Query input is not of length 5")
+    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is CBSA division code for
     # metropolitan areas: 5 digits.
   } else if(as.integer(type) == 9) {
-    if(nchar(query) != 5) stop("Query input is not of length 5")
+    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is 4 digit GEOID for
     # congressional districts: 4 digits.
   } else if(as.integer(type) == 10) {
-    if(nchar(query) != 4) stop("Query input is not of length 4")
+    if(any(nchar(query) != 4)) stop("Query input is not of length 4")
     # Need to make sure query is 10 digits for county subdistrict
   } else if(as.integer(type) == 12) {
-    if(nchar(query) != 10) stop("Query input is not of length 10")
+    if(any(nchar(query) != 10)) stop("Query input is not of length 10")
   }
 
-  allqueries <- expand.grid(query = query, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = query, year = year, quarter = quarter, stringsAsFactors = FALSE)
   allqueries$type <- type[[1]]
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=",
                allqueries$type,
@@ -237,13 +237,12 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
-  message(query)
   year <- args[[2]]
   key <- args[[3]]
   querytype <- args[[4]]
 
   # Create all combinations of query and year...
-  allqueries <- expand.grid(query = query, year = year)
+  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
 
   list_res <- c()
   for(i in seq_len(nrow(allqueries))) {
@@ -270,23 +269,24 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
     } else {
       if(querytype == "state") {
 
-        # Right now only supports getting the county level data. Need to
-        # extend this into the small areas too. How should it be outputted?
+        # Right now only supports getting the county level data.
+        # (For some reason this doesn't return a mix) Need to
+        # extend this into the small areas too. For example, FMR returns a mix
+        # of county and metrocode code level data. How should both of them be
+        # combined? If the metrocode, also is small areas, then it will return
+        # zip code level data...
+
+        # It might be best to convert everything into zip code level when
+        # querying for state level data...
         res <- as.data.frame(do.call(rbind, cont$data$counties))
       } else if(querytype == "county"){
 
-        res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-
-        res$county_name <- cont$data$county_name
-        res$counties_msa <- cont$data$counties_msa
-        res$town_name <- cont$data$town_name
-        res$metro_status <- cont$data$metro_status
-        res$metro_name <- cont$data$metro_name
-        res$area_area <- cont$data$area_area
-        res$smallarea_status <- cont$data$smallarea_status
+        # BUG: When querying for county level data, if county resides in a small area
+        # then it will return zip code level data. If county does not reside
+        # in small area, then it will not return zip code level data.
+        # Need to try and adjust for this.
 
       } else {
-
 
         # BUG: If getting an area is a small area status true, then the structure
         # will be different. Small areas will have nested zip codes inside the
@@ -296,26 +296,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
         # If 0 in smallarea_status then it should be easy to parse.
         # If 1, then there will be lots of nested data zipcode level
-        # data inside basicdata.
-
-        res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-        res$zip_code <- unlist(res$zip_code)
-        res$Efficiency <-  unlist(res$Efficiency)
-        res$`One-Bedroom` <- unlist(res$`One-Bedroom`)
-        res$`Two-Bedroom` <- unlist(res$`Two-Bedroom`)
-        res$`Three-Bedroom` <- unlist(res$`Three-Bedroom`)
-        res$`Four-Bedroom` <- unlist(res$`Four-Bedroom`)
-        res$county_name <- cont$data$county_name
-        res$counties_msa <- cont$data$counties_msa
-        res$town_name <- cont$data$town_name
-        res$metro_status <- cont$data$metro_status
-        res$metro_name <- cont$data$metro_name
-        res$area_area <- cont$data$area_area
-        res$smallarea_status <- cont$data$smallarea_status
-        # Add an empty zip code for this metro area which is not small area
-        # to get zip code level resolution data, depending if
-        # some of the query calls have small area codes.
-        res$zip_code <- ""
+        # inside basicdata.
       }
       res$query <- allqueries$query[i]
       res$year <- allqueries$year[i]
@@ -326,6 +307,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
   if(length(list_res) != 0) {
     res <- as.data.frame(do.call(rbind, list_res))
+
     if(querytype == "state") {
       res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
     }
@@ -376,7 +358,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   key <- args[[3]]
   querytype <- args[[4]]
 
-  allqueries <- expand.grid(query = query, year = year)
+
+  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
 
   list_res <- c()
   for(i in seq_len(nrow(allqueries))) {
@@ -416,15 +399,17 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
         res <- as.data.frame(cont$data)
       }
 
-      res$median_income <- cont$data$median_income
-      res$query <- allqueries$query[i]
-      res$year <- allqueries$year[i]
+      oth <- data.frame(query = allqueries$query[i],
+                        year = allqueries$year[i],
+                        median_income = cont$data$median_income, stringsAsFactors = FALSE)
+      res <- cbind(oth, res)
+
       list_res[[i]] <- res
     }
   }
 
   if(length(list_res) != 0) {
-    res <- as.data.frame(do.call(rbind, list_res))
+    res <- do.call(rbind, list_res)
     return(res)
   }
 
@@ -544,7 +529,7 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL,
                  "if matrix try as.vector([variable])", sep = ""))
     }
 
-    allqueries <- expand.grid(fip_code = stateId, year = year)
+    allqueries <- expand.grid(fip_code = stateId, year = year, stringsAsFactors = FALSE)
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
                  "&stateId=", allqueries$fip_code,
                  "&year=", allqueries$year,  sep="")
@@ -560,11 +545,13 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL,
            "If list try unlist([variable]); ",
            "if matrix try as.vector([variable])", sep = ""))
     }
+
     if(length(stateId) != length(entityId)) {
       stop("You need to make sure stateId and entityId are of same length.")
     }
 
-    allqueries <- expand.grid(state_fip = stateId, year = year)
+    allqueries <- expand.grid(state_fip = stateId, year = year,
+                              stringsAsFactors = FALSE)
     allqueries$entityId <- entityId
 
     URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,

@@ -24,7 +24,7 @@ chas_do_query_calls <- function(URL, key) {
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont) || length(cont) == 0) {
-      warning(paste("Could not find data for query:", URL,
+      warning(paste("Could not find data for query:", url,
                     "  It is possible that your key maybe invalid,",
                     "there isn't any data for these parameters,",
                     "or you have reached the maximum number of API",
@@ -32,12 +32,14 @@ chas_do_query_calls <- function(URL, key) {
                     "report it at https://github.com/etam4260/hudr/issues.",
                     sep = " "))
     } else {
+
       list_res[[i]] <- unlist(cont[[1]])
     }
   }
 
 
   if(length(list_res) != 0) {
+
     res <- as.data.frame(do.call("rbind", list_res))
 
     return(res)
@@ -134,7 +136,7 @@ misc_do_query_call <- function(URL, key) {
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont) || length(cont) == 0) {
-      warning(paste("Could not find data for query:", URL,
+      warning(paste("Could not find data for query:", url,
                     ". It is possible that your key maybe invalid, ",
                     "there isn't any data for these parameters, ",
                     "or you have reached the maximum number of API calls per ",

@@ -98,7 +98,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   }
   fip_code <- unlist(fip_code)
 
-  allqueries <- expand.grid(fip_code = fip_code, year = year)
+  allqueries <- expand.grid(fip_code = fip_code, year = year, stringsAsFactors = FALSE)
 
   URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
                "&stateId=", allqueries$fip_code, "&year=", allqueries$year,
@@ -145,7 +145,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 
   # The first 2 are state fip. Last 3 are county fip.
   state_fip <- as.integer(substr(county, 1,2))
-  county_fip <- substr(county, 3,5)
+  county_fip <- as.integer(substr(county, 3,5))
 
   # Don't know what the 99999 means, but it seems like every fips code has this
   # tacked onto the end within hud_counties() function call.
@@ -170,7 +170,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
                sep = ""))
   }
 
-  allqueries <- expand.grid(state_fip = state_fip, year = year)
+  allqueries <- expand.grid(state_fip = state_fip, year = year, stringsAsFactors = FALSE)
   allqueries$county_fip <- county_fip
   URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
                "3",
@@ -188,7 +188,6 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' @title hud_chas_mcd
 #' @description Returns CHAS data for an mcd.
 #' @param state The state name, abbreviation, or fips code.
-#' @param mcd The mcd to query for. Must supply as 5 digit geoid.
 #' @param year The years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"
@@ -200,8 +199,8 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
-#' @returns Returns a dataframe with CHAS data for a particular minor civil
-#'   division(mcd).
+#' @returns Returns a dataframe with CHAS data for minor civil divisions in
+#'  a state.
 #' @examples
 #' \dontrun{
 #' library(hudr)
@@ -214,18 +213,12 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'
 #' hud_chas_mcd("California", "93140")
 #' }
-hud_chas_mcd <- function(state, mcd, year = c("2014-2018"),
+hud_chas_mcd <- function(state, year = c("2014-2018"),
                          key = Sys.getenv("HUD_KEY")) {
-  args <- chas_input_check_cleansing(mcd, year, key)
-  mcd <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
+  args <- chas_input_check_cleansing(year = year, key = key)
+  year <- args[[1]]
+  key <- args[[2]]
 
-  if(length(state) != length(mcd)) {
-    stop(paste("Length of states specified should",
-               "be equal to length of MCDs specified.",
-               sep = ""))
-  }
 
   if(all(nchar(state) == 2)) state <- toupper(state)
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
@@ -257,15 +250,20 @@ hud_chas_mcd <- function(state, mcd, year = c("2014-2018"),
 
   fip_code <- unlist(fip_code)
 
-  # We have to assume both
-  allqueries <- expand.grid(fip_code = fip_code, year = year)
-  allqueries$mcd <- mcd
+  # Get all MCDs in these states...
+  all_mcd_in_states <- hud_minor_civil_divisions(fip_code)
+  all_queries = data.frame()
+  for(i in year) {
+    all_mcd_in_states$year <- year
+    all_queries <- rbind(all_queries, all_mcd_in_states)
+  }
 
+  # Query for all of them
   URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
                "4",
-               "&stateId=", allqueries$fip_code,
-               "&entityId=", allqueries$mcd,
-               "&year=", allqueries$year,  sep="")
+               "&stateId=", all_queries$statecode,
+               "&entityId=", all_queries$entityId,
+               "&year=", all_queries$year,  sep="")
 
   res <- chas_do_query_calls(URL, key)
 
@@ -304,18 +302,11 @@ hud_chas_mcd <- function(state, mcd, year = c("2014-2018"),
 #'
 #' hud_chas_place(51, 48996)
 #' }
-hud_chas_place <- function(state, place, year = c("2014-2018"),
+hud_chas_place <- function(state, year = c("2014-2018"),
                            key = Sys.getenv("HUD_KEY")) {
-  args <- chas_input_check_cleansing(place, year, key)
-  place <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
-
-  if(length(state) != length(place)) {
-    stop(paste("Length of states specified should",
-               "be equal to length of places specified.",
-               sep = ""))
-  }
+  args <- chas_input_check_cleansing(year = year, key = key)
+  year <- args[[1]]
+  key <- args[[2]]
 
   if(is.null(pkg.env$state)) {
     pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
@@ -351,15 +342,25 @@ hud_chas_place <- function(state, place, year = c("2014-2018"),
 
   fip_code <- unlist(fip_code)
 
-  allqueries <- expand.grid(fip_code = fip_code, year = year)
-  allqueries$place <- place
+  # Get all places in these states...
+  all_places_in_states <- hud_places(fip_code)
+  all_queries = data.frame()
+  for(i in year) {
+    all_places_in_states$year <- year
+    all_queries <- rbind(all_queries, all_places_in_states)
+  }
+
+  # all_queries <- all_queries[c(1,2,3,4,5), ]
+  # all_queries$entityId <- add_leading_zeros(5, all_queries$entityId)
+
   URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=",
                "5",
-               "&stateId=", allqueries$fip_code,
-               "&entityId=", allqueries$place,
-               "&year=", allqueries$year,  sep="")
+               "&stateId=", all_queries$statecode,
+               "&entityId=", all_queries$entityId,
+               "&year=", all_queries$year,  sep="")
 
   res <- chas_do_query_calls(URL, key)
+
 
   return(res)
 }

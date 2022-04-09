@@ -123,12 +123,10 @@ add_delimiters <- function(input) {
 #' @noRd
 #' @noMd
 fix_geoid <- function(geoids, num_char) {
-  geoids <- sapply(geoids, function(geoids) {
-    if(!is.null(geoids) && !is.na(geoids) && !is.nan(geoids) &&
-       numbers_only(geoids)) {
-      paste(rep(0, num_char - nchar(geoids)), geoids, collapse = "", sep = "")
-    }
-  })
+  for(i in seq_len(length(geoids))) {
+      diff = num_char - nchar(geoids[i])
+      geoids[i] <- paste(paste(rep(0, diff), collapse = ""), geoids[i], sep = "")
+  }
   return(geoids)
 }
 

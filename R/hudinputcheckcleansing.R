@@ -1,7 +1,7 @@
 #' @name chas_input_check_cleansing
 #' @title chas_input_check_cleansing
 #' @description Helper function used to clean user inputted variables for all
-#' decomposed CHAS functions.
+#'    decomposed CHAS functions.
 #' @param query
 #'   The inputted GEOID.
 #' @param year The years to query for.
@@ -100,7 +100,7 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
                as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
          stop("A year specified seems to be in the future?"), "")
 
-  return(list(query, year, quarter, key))
+  return(list(query, as.integer(year), as.integer(quarter), key))
 }
 
 
@@ -168,6 +168,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
   # Assume length of inputted query as indicator that this is a certain geoid.
   if(all(nchar(as.character(query)) == 10)) {
     querytype <- "county"
+    # Coerce back to integer for user processing...
   } else if(all(nchar(as.character(query)) == 2)) {
     querytype <- "state"
   } else if(all(nchar(as.character(query)) == 16)) {
@@ -176,7 +177,8 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
     stop("There is no matching code for this inputted state.")
   }
 
-  return(list(query, year, key, querytype))
+  # Make sure to coerce year back to character for user processing.
+  return(list(query, as.integer(year), key, querytype))
 }
 
 

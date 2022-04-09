@@ -43,7 +43,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
-  allqueries <- expand.grid(query = zip, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = zip, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 1,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -108,7 +108,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
   # Create dataframe with all queries needed.
-  allqueries <- expand.grid(query = zip, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = zip, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 2,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -173,7 +173,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to
   # zip_county... The functions in this file should follow that order.
-  allqueries <- expand.grid(query = zip, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = zip, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 3,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -234,7 +234,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
-  allqueries <- expand.grid(query = zip, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = zip, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 4,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -296,7 +296,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
-  allqueries <- expand.grid(query = zip, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = zip, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 5,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -359,7 +359,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(tract) != 11)) stop("Query input is not of length 11")
 
-  allqueries <- expand.grid(query = tract, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = tract, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 6,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -423,7 +423,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(county) != 5)) stop("Query input is not of length 5")
 
-  allqueries <- expand.grid(query = county, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = county, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 7,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -486,7 +486,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(cbsa) != 5)) stop("Query input is not of length 5")
 
-  allqueries <- expand.grid(query = cbsa, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = cbsa, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 8,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -549,7 +549,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(cbsadiv) != 5)) stop("Query input is not of length 5")
 
-  allqueries <- expand.grid(query = cbsadiv, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = cbsadiv, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 9,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -614,7 +614,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(cd) != 4)) stop("Query input is not of length 4")
 
-  allqueries <- expand.grid(query = cd, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = cd, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 10,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -677,7 +677,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   if(any(nchar(zip) != 5)) stop("Query input is not of length 5")
 
-  allqueries <- expand.grid(query = zip, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = zip, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 11,
                "&query=", allqueries$query,
                "&year=", allqueries$year,
@@ -742,7 +742,7 @@ hud_cw_countysub_zip <- function(countysub,
 
   if(any(nchar(countysub) != 10)) stop("Query input is not of length 10")
 
-  allqueries <- expand.grid(query = countysub, year = year, quarter = quarter)
+  allqueries <- expand.grid(query = countysub, year = year, quarter = quarter, stringsAsFactors = FALSE)
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 12,
                "&query=", allqueries$query,
                "&year=", allqueries$year,

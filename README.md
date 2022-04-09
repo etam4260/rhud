@@ -20,6 +20,10 @@ version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
 
 ## Housing and Urban Development in R
 
+<button>
+Add Cheese
+</button>
+
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
 
@@ -81,8 +85,8 @@ ability to directly get such data.
 Please cite this package using:
 
 Tam, E., Reilly, A., & Ghaedi, H. (2022). hudr: A R interface for
-accessing HUD (US Department of Housing and Urban Development) APIs
-(Version 0.1.0.9000). <https://github.com/etam4260/hudr>
+accessing HUD <br/>     (US Department of Housing and Urban Development)
+APIs (Version 0.1.0.9000). <https://github.com/etam4260/hudr>
 
 ## Available Data
 
@@ -157,5 +161,6 @@ Retrieved <br />     February 19, 2022, from
 <https://www.hudexchange.info/programs/drgr/>
 
 HUD User Home Page: HUD USER. HUD User Home Page \| HUD USER. (n.d.).
-Retrieved <br />     February 24, 2022, from
+Retrieved  
+<br />     February 24, 2022, from
 <https://www.huduser.gov/portal/home.html>

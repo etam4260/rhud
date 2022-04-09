@@ -48,6 +48,11 @@ test_that("Crosswalk All Types", {
 
   expect_true(nrow(county_zip) >= 1)
 
+  # Try all counties in MD
+  county_zip <- hud_cw(type = 7, query = substr(hud_counties("md")$fips_code,1,5),
+                       year = c('2010'), quarter = c('1'))
+  expect_true(nrow(county_zip) >= 1)
+
   # A core based Statistical Area to zip crosswalk.
   # CBSA defines Micropolitan and Metropolitan
   cbsa_zip <- hud_cw(type = 8, query = '10140',
