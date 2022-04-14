@@ -20,9 +20,6 @@ version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
 
 ## Housing and Urban Development in R
 
-<button>
-Add Cheese
-</button>
 
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
