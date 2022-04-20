@@ -20,7 +20,6 @@ version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
 
 ## Housing and Urban Development in R
 
-
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
 
@@ -82,7 +81,7 @@ ability to directly get such data.
 Please cite this package using:
 
 Tam, E., Reilly, A., & Ghaedi, H. (2022). hudr: A R interface for
-accessing HUD <br/>     (US Department of Housing and Urban Development)
+accessing HUD <br/>   (US Department of Housing and Urban Development)
 APIs (Version 0.1.0.9000). <https://github.com/etam4260/hudr>
 
 ## Available Data
@@ -90,7 +89,7 @@ APIs (Version 0.1.0.9000). <https://github.com/etam4260/hudr>
 The APIs and datasets which this library interfaces are listed below.
 The HUD also provide miscellaneous supplemental APIs under them.
 
-1)  HUD User
+1.  HUD User
 
     -   USPS Crosswalk
         (<https://www.huduser.gov/portal/dataset/uspszip-api.html>)
@@ -107,7 +106,7 @@ The HUD also provide miscellaneous supplemental APIs under them.
         -   List MCDs in State
         -   List All Cities in State
 
-2)  HUD Exchange
+2.  HUD Exchange
 
     -   Community Development Block Grant - Disaster Recovery
         (<https://drgr.hud.gov/public/index.html>)
@@ -134,7 +133,7 @@ bar.
 
 ## Disclaimers
 
--   License: GPL \>= 2
+-   License: GPL >= 2
 
 -   To get citation information for hudr in R, type citation(package =
     ‘hudr’)
@@ -154,10 +153,9 @@ bar.
 ## References
 
 Disaster Recovery Grant Reporting System. (2022). HUD Exchange.
-Retrieved <br />     February 19, 2022, from
+Retrieved <br />  February 19, 2022, from
 <https://www.hudexchange.info/programs/drgr/>
 
 HUD User Home Page: HUD USER. HUD User Home Page \| HUD USER. (n.d.).
-Retrieved  
-<br />     February 24, 2022, from
+Retrieved <br />  February 24, 2022, from
 <https://www.huduser.gov/portal/home.html>
