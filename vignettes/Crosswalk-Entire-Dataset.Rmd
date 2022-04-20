@@ -22,7 +22,7 @@ function is available.
 
 First load the data into the global environment ...
 
-```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else FALSE}
 library(hudr)
 
 data(samp_individual_assist)
@@ -30,7 +30,7 @@ data(samp_individual_assist)
 
 Try to clean the data ...
 
-```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else FALSE}
 
 # Remove NA, NULL values from the GEOID...
 samp_individual_assist <- samp_individual_assist[!is.na(samp_individual_assist$FIPS)]
@@ -56,7 +56,7 @@ Supplying NA to both cw_geoid_col and method means
 the crosswalk fields will get merged with the passed in data set without any
 calculations.
 
-```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else FALSE}
 
 crosswalk(data = samp_individual_assist, geoid = "county", geoid_col = "FIPS", 
           cw_geoid = "zip", cw_geoid_col = NA, method = NA, year = 2021
