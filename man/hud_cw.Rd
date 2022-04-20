@@ -9,6 +9,7 @@ hud_cw(
   query,
   year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
+  minimal = FALSE,
   key = Sys.getenv("HUD_KEY")
 )
 }
@@ -56,6 +57,9 @@ previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
+
+\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
+all fields. This does not remove duplicates.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}

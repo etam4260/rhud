@@ -64,6 +64,8 @@
 #'   previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
+#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
 #' @keywords Crosswalks API
@@ -115,7 +117,7 @@
 #'    quarter = c('4','4'))
 #' }
 hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
-                   quarter = 1, key = Sys.getenv("HUD_KEY")) {
+                   quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
   args <- cw_input_check_cleansing(query, year, quarter, key)
 
   query <- args[[1]]
@@ -185,7 +187,8 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
     if(any(nchar(query) != 10)) stop("Query input is not of length 10")
   }
 
-  allqueries <- expand.grid(query = query, year = year, quarter = quarter, stringsAsFactors = FALSE)
+  allqueries <- expand.grid(query = query, year = year, quarter = quarter,
+                            stringsAsFactors = FALSE)
   allqueries$type <- type[[1]]
   URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=",
                allqueries$type,
@@ -194,8 +197,10 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
                "&quarter=", allqueries$quarter,
                sep="")
 
-  return(cw_do_query_calls(URL, allqueries$query, allqueries$year,
+  if(!minimal) return(cw_do_query_calls(URL, allqueries$query, allqueries$year,
                            allqueries$quarter, lhgeoid, rhgeoid, key))
+  return(cw_do_query_calls(URL, allqueries$query, allqueries$year,
+                           allqueries$quarter, lhgeoid, rhgeoid, key)[[1]])
 }
 
 
@@ -210,7 +215,7 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
-#' @keywords Crosswalks API
+#' @keywords Fair Markets Rent API
 #' @export
 #' @returns This function returns a dataframe containing FAIR MARKETS RENT data
 #'   for a particular county or state. For county level data, these measurements
@@ -235,6 +240,9 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY")) {
+
+  # If state query, will provide data at metro and county level
+
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
   year <- args[[2]]
@@ -242,80 +250,24 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
   querytype <- args[[4]]
 
   # Create all combinations of query and year...
-  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
+  allqueries <- expand.grid(query = query, year = year,
+                            stringsAsFactors = FALSE)
 
-  list_res <- c()
-  for(i in seq_len(nrow(allqueries))) {
-    # Build the URL for querying the data.
-    URL <- paste("https://www.huduser.gov/hudapi/public/fmr/",
-                 if(querytype == "state") "statedata/" else "data/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep="")
-
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
-              silent = TRUE)
-
-    cont<-try(content(call), silent = TRUE)
-    if('error' %in% names(cont)) {
-      warning(paste("Could not find data for inputted query, year, ",
-                    "or quarter where query equals ",
-                    query, ", year equals ",allqueries$year[i],
-                    ". It is possible that your key maybe invalid, ",
-                    "there isn't any data for these parameters, ",
-                    "or you have reached the maximum number of API calls per ",
-                    "minute. If you think this is wrong please report it ",
-                    "at https://github.com/etam4260/hudr/issues.", sep = ""))
-    } else {
-      if(querytype == "state") {
-
-        # Right now only supports getting the county level data.
-        # (For some reason this doesn't return a mix) Need to
-        # extend this into the small areas too. For example, FMR returns a mix
-        # of county and metrocode code level data. How should both of them be
-        # combined? If the metrocode, also is small areas, then it will return
-        # zip code level data...
-
-        # It might be best to convert everything into zip code level when
-        # querying for state level data...
-        res <- as.data.frame(do.call(rbind, cont$data$counties))
-      } else if(querytype == "county"){
-
-        # BUG: When querying for county level data, if county resides in a small area
-        # then it will return zip code level data. If county does not reside
-        # in small area, then it will not return zip code level data.
-        # Need to try and adjust for this.
-
-      } else {
-
-        # BUG: If getting an area is a small area status true, then the structure
-        # will be different. Small areas will have nested zip codes inside the
-        # basicdata. This means small areas define FMR at a
-        # zip code level. Whereas, non small areas will define
-        # only FMR at that metro level.
-
-        # If 0 in smallarea_status then it should be easy to parse.
-        # If 1, then there will be lots of nested data zipcode level
-        # inside basicdata.
-      }
-      res$query <- allqueries$query[i]
-      res$year <- allqueries$year[i]
-      list_res[[i]] <- res
-    }
+  # Call helper functions...
+  if(querytype == "state") {
+      # Merge county level data with metroarea data.
+      return(list(counties = hud_fmr_state_counties(query, year, key),
+                  metroareas = hud_fmr_state_metroareas(query, year, key)))
+  } else if(querytype == "cbsa") {
+      # Returns zip level data.
+      return(hud_fmr_metroarea_zip(query, year, key))
+  } else if(querytype == "county") {
+      # Returns zip level data.
+      return(hud_fmr_county_zip(query, year, key))
   }
 
-
-  if(length(list_res) != 0) {
-    res <- as.data.frame(do.call(rbind, list_res))
-
-    if(querytype == "state") {
-      res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-    }
-    return(res)
-  }
-
-  return(NULL)
 }
+
 
 
 
@@ -358,6 +310,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   key <- args[[3]]
   querytype <- args[[4]]
 
+  errorURLs <- c()
 
   allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
 
@@ -376,14 +329,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont)) {
-      warning(paste("Could not find data for inputted query, year, ",
-                    "or quarter where query equals ",
-                    query, ", year equals ", allqueries$year[i],
-                    ". It is possible that your key maybe invalid, ",
-                    "there isn't any data for these parameters, ",
-                    "or you have reached the maximum number of API calls per ",
-                    "minute. If you think this is wrong please report it at ",
-                    "https://github.com/etam4260/hudr/issues.", sep = ""))
+      errorURLs <- c(errorURLs, URL)
     } else {
 
       if(querytype == "state") {
@@ -406,6 +352,19 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
       list_res[[i]] <- res
     }
+  }
+
+
+  if(length(errorURLs) != 0) {
+    # Spit out error messages to user after all
+    # queries are done.
+    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+                  "It is possible that your key maybe invalid,",
+                  "there isn't any data for these parameters,",
+                  "or you have reached the maximum number of API",
+                  "calls per minute. If you think this is wrong please",
+                  "report it at https://github.com/etam4260/hudr/issues.",
+                  sep = " "))
   }
 
   if(length(list_res) != 0) {

@@ -91,8 +91,7 @@ determine 'intersection' with the first GEOID where intersection is described
 as the % of residential, business, other, and total buildings that overlap. 
 
 For example, in function call #7, we might have a county called 22031 which has zip codes
-71052, 71078, 71049, 71032 ... where the residential % of each zip is 0.38,
-0.21, 0.11, 0.05... respectively. Of all these zips, when added up will equal 1,
+71052, 71078, 71049, 71032 ... where the residential % (res_ratio) of each zip is 0.38, 0.21, 0.11, 0.05 ... respectively. Of all these zips, when added up will equal 1,
 signaling these grouping of zip codes make up 100% of residential address in the
 county with each zip taking up their respective residential percentage.
 
@@ -158,8 +157,8 @@ hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019')
 
 #### Querying for only the Crosswalked GEOIDs
 
-If you just want the crosswalked GEOIDs, you can set the MINIMAL argument to TRUE.
-This will return a vector containing the crosswalked GEOIDs without the extra metadata.
+If you just want the crosswalked GEOIDs, you can set the MINIMAL argument 
+to TRUE. This will return a vector containing the crosswalked GEOIDs without the extra metadata.
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
 hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'), minimal = TRUE)
@@ -167,10 +166,11 @@ hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'), minimal 
 
 ### Using the omni function for querying
 
-The omni function requires specifying the type which can be from 1-12. The type
-argument follows the number scheme described at [Input Arguments][]. You also 
-must use the 'query' argument for inputting geoids instead of the specific 
-geoid names (i.e county = 22031, cd = 7200) used by the other functions.
+The omni function is a redundant implementation of the functions shown above
+that requires specifying the type which can be from 1-12. The type argument
+follows the number scheme described at [Input Arguments][]. You also 
+must use the 'query' argument (i.e query = 22031) for inputting geoids instead 
+of the specific geoid names (i.e county = 22031, cd = 7200) used by the other functions.
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
 hud_cw(type = 7, query = '22031', year = c('2010'), quarter = c('1'))

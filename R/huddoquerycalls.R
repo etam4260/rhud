@@ -12,6 +12,25 @@
 chas_do_query_calls <- function(URL, key) {
   # Form all query calls...
   list_res <- c()
+  errorURLs <- c()
+
+  `%notin%` <- Negate(`%in%`)
+  all_measurements <- c("geoname", "sumlevel", "year", "A1", "A2", "A3", "A4", "A5",
+                        "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15",
+                        "A16", "A17", "A18", "B1", "B2", "B3", "B4", "B5", "B6", "B7",
+                        "B8", "B9", "C1", "C2", "C3", "C4", "C5", "C6", "D1", "D2", "D3",
+                        "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "E1",
+                        "E2", "E3", "E5", "E6", "E7", "E9", "E10", "E11", "E13", "E14",
+                        "E15", "E17", "E18", "E19", "E21", "E22", "E23", "F1", "F2",
+                        "F3", "F5", "F6", "F7", "F9", "F10", "F11", "F13", "F14", "F15",
+                        "F17", "F18", "F19", "F21", "F22", "F23", "G1", "G2", "G3", "G5",
+                        "G6", "G7", "G9", "G10", "G11", "G13", "G14", "G15", "G17", "G18",
+                        "G19", "H1", "H2", "H4", "H5", "H7", "H8", "H10", "H11", "H13",
+                        "H14", "H16", "I1", "I2", "I4", "I5", "I7", "I8", "I10", "I11",
+                        "I13", "I14", "I16", "J1", "J2", "J4", "J5", "J7", "J8", "J10",
+                        "J11", "J13", "J14", "J16")
+
+
   for(i in seq_len(length(URL))) {
 
     url <- URL[i]
@@ -24,26 +43,44 @@ chas_do_query_calls <- function(URL, key) {
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont) || length(cont) == 0) {
-      warning(paste("Could not find data for query:", url,
-                    "  It is possible that your key maybe invalid,",
-                    "there isn't any data for these parameters,",
-                    "or you have reached the maximum number of API",
-                    "calls per minute. If you think this is wrong please",
-                    "report it at https://github.com/etam4260/hudr/issues.",
-                    sep = " "))
+      # Need to output a single error message instead of a bunch when
+      # something bad occurs. Append to list of errored URLs.
+      errorURLs <- c(errorURLs, url)
     } else {
+      not_measured <- all_measurements[all_measurements %notin% names(unlist(cont[[1]]))]
+        # Check this CHAS data does not have data defined for
+        # all expected fields. If so fill them in with 0's.
+      if(length(not_measured) >= 1) {
+        extra_mes <- rep(0, length(not_measured))
+        names(extra_mes) <- not_measured
 
-      list_res[[i]] <- unlist(cont[[1]])
+        list_res[[i]] <- c(unlist(cont[[1]]), extra_mes)
+      } else {
+        list_res[[i]] <- unlist(cont[[1]])
+      }
     }
   }
 
 
+  # Spit out error messages to user after all
+  # queries are done.
+  if(length(errorURLs) != 0) {
+    # Spit out error messages to user after all
+    # queries are done.
+    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+                  "It is possible that your key maybe invalid,",
+                  "there isn't any data for these parameters,",
+                  "or you have reached the maximum number of API",
+                  "calls per minute. If you think this is wrong please",
+                  "report it at https://github.com/etam4260/hudr/issues.",
+                  sep = " "))
+  }
+
   if(length(list_res) != 0) {
-
     res <- as.data.frame(do.call("rbind", list_res))
-
     return(res)
   }
+
   return(NULL)
 }
 
@@ -62,6 +99,7 @@ chas_do_query_calls <- function(URL, key) {
 cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid,
                               secondary_geoid, key) {
   list_res <- c()
+  errorURLs <- c()
 
   for(i in seq_len(length(URL))) {
     url <- URL[i]
@@ -74,18 +112,10 @@ cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid,
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont[[1]])) {
-      warning(paste("Could not find data for inputted query, year,
-                    or quarter where query equals ", query,
-                    ", year equals ", year,
-                    ", and quarter equals ", quarter,
-                    ". It is possible that your key maybe invalid, ",
-                    "there isn't any data for these parameters, ",
-                    "or you have reached the maximum number of API calls ",
-                    "per minute. If you think this is wrong please report ",
-                    "it at https://github.com/etam4260/hudr/issues.",
-                    sep = ""))
+      # Need to output a single error message instead of a bunch when
+      # something bad occurs. Append to list of errored URLs.
+      errorURLs <- c(errorURLs, url)
     } else {
-
       res <- as.data.frame(do.call(rbind, cont$data$results))
 
       res$query <- query[i]
@@ -102,8 +132,28 @@ cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid,
     }
   }
 
+  # Spit out error messages to user after all
+  # queries are done.
+  if(length(errorURLs) != 0) {
+    # Spit out error messages to user after all
+    # queries are done.
+    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+                  "It is possible that your key maybe invalid,",
+                  "there isn't any data for these parameters,",
+                  "or you have reached the maximum number of API",
+                  "calls per minute. If you think this is wrong please",
+                  "report it at https://github.com/etam4260/hudr/issues.",
+                  sep = " "))
+  }
+
+
+
   allres <- NULL
   if(length(list_res) != 0) {
+    # Some years may not contain all the measurements, fill those in with NA
+    # first before combining.
+
+
     allres <- do.call(rbind, list_res)
     colnames(allres)[6] <- primary_geoid
     colnames(allres)[1] <- secondary_geoid
@@ -124,6 +174,8 @@ cw_do_query_calls <- function(URL, query, year, quarter, primary_geoid,
 #' @noMd
 misc_do_query_call <- function(URL, key) {
   list_res <- c()
+  errorURLs <- c()
+
   for(i in seq_len(length(URL))) {
 
     url <- URL[i]
@@ -136,15 +188,25 @@ misc_do_query_call <- function(URL, key) {
     cont<-try(content(call), silent = TRUE)
 
     if('error' %in% names(cont) || length(cont) == 0) {
-      warning(paste("Could not find data for query:", url,
-                    ". It is possible that your key maybe invalid, ",
-                    "there isn't any data for these parameters, ",
-                    "or you have reached the maximum number of API calls per ",
-                    "minute. If you think this is wrong please report",
-                    "it at https://github.com/etam4260/hudr/issues.", sep = ""))
+      # Need to output a single error message instead of a bunch when
+      # something bad occurs. Append to list of errored URLs.
+      errorURLs <- c(errorURLs, url)
+
     } else {
       list_res[[i]] <- as.data.frame(do.call(rbind, cont))
     }
+  }
+
+  if(length(errorURLs) != 0) {
+    # Spit out error messages to user after all
+    # queries are done.
+    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+                  "It is possible that your key maybe invalid,",
+                  "there isn't any data for these parameters,",
+                  "or you have reached the maximum number of API",
+                  "calls per minute. If you think this is wrong please",
+                  "report it at https://github.com/etam4260/hudr/issues.",
+                  sep = " "))
   }
 
   if(length(list_res) != 0) {

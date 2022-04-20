@@ -73,7 +73,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -154,7 +154,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
   # Grab all possible states if the package doesn't have a state dataset to
   # query from.
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   # Check if first two numbers of county code inputted is a valid state.
@@ -224,7 +224,7 @@ hud_chas_mcd <- function(state, year = c("2014-2018"),
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -309,14 +309,14 @@ hud_chas_place <- function(state, year = c("2014-2018"),
   key <- args[[2]]
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   if(all(nchar(state) == 2)) state <- toupper(state)
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {

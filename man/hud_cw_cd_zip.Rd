@@ -24,7 +24,7 @@ previous year.}
 Defaults to the first quarter of the year.}
 
 \item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
-all fields.}
+all fields. This does not remove duplicates.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for an
 account and request for an API key.}

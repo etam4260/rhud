@@ -1,4 +1,3 @@
-
 #' @name hud_cw_zip_tract
 #' @title hud_cw_zip_tract
 #' @description This function queries the Crosswalks API provided by US
@@ -11,7 +10,7 @@
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -75,7 +74,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -139,7 +138,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -194,7 +193,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @title hud_cw_zip_cbsadiv
 #' @description This function queries the Crosswalks API provided by US
 #'   Department of Housing and Urban Development. This returns the crosswalk for
-#'   zip to cbsadiv.
+#'   zip to cbsadiv. (Available 4th Quarter 2017 onwards)
 #' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded. Can specify multiple
@@ -202,7 +201,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -264,7 +263,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -327,7 +326,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -391,7 +390,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -454,7 +453,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -509,15 +508,15 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #' @title hud_cw_cbsadiv_zip
 #' @description This function queries the Crosswalks API provided by
 #'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for cbsadiv to zip.
+#'   returns the crosswalk for cbsadiv to zip.  (Available 4th Quarter 2017 onwards)
 #' @param cbsadiv
-#' 5-digit CBSA Division code which only applies to Metropolitan Areas.
+#'   5-digit CBSA Division code which only applies to Metropolitan Areas.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -582,7 +581,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -637,7 +636,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #' @title hud_cw_zip_countysub
 #' @description This function queries the Crosswalks API provided by US
 #'   Department of Housing and Urban Development. This returns the crosswalk for
-#'   zip to countysub.
+#'   zip to countysub. (Available 2nd Quarter 2018 onwards)
 #' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded. Can specify multiple
@@ -645,7 +644,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
@@ -699,7 +698,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @title hud_cw_countysub_zip
 #' @description This function queries the Crosswalks API provided by
 #'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for countysub to zip.
+#'   returns the crosswalk for countysub to zip. (Available 2nd Quarter 2018 onwards)
 #' @param countysub
 #'   10-digit GEOID for the County sub Eg: 4606720300 for type 12
 #' @param year Gets the year that this data was recorded.
@@ -708,7 +707,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
-#'   all fields.
+#'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API

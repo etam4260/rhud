@@ -14,24 +14,24 @@
 # state = c(51,52)
 
 
-#' @name hud_states
-#' @title hud_states
-#' @description Get a list of state along with the corresponding FIPs code and
+#' @title hud_states_territories
+#' @description Get a list of state and US territories
+#'   along with the corresponding FIPs code and
 #'   abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords States
 #' @export
-#' @returns A dataframe containing details of all the states in the US.
+#' @returns A dataframe containing details of all the states and territories in the US.
 #' @examples
 #' \dontrun{
 #' library(hudr)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_states()
+#' hud_states_territories()
 #' }
-hud_states <- function(key = Sys.getenv("HUD_KEY")) {
+hud_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") {
     stop(paste("Did you forget to set the key?",
                "Please go to https://www.huduser.gov/",
@@ -137,7 +137,7 @@ hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -221,7 +221,7 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -308,7 +308,7 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -390,7 +390,7 @@ hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {

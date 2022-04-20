@@ -38,7 +38,7 @@ test_that("Income Limits State Queries", {
   expect_error(hud_il("DC"))
 
   # Try to query for all states... filter out US territories...
-  hudstates <- hud_states()
+  hudstates <- hud_states_territories()
   hudstates <- hudstates[as.numeric(hudstates$state_num) < 57, ]
   hudstates <- hudstates[hudstates$state_code != 'DC', ]
 

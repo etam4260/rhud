@@ -1,0 +1,70 @@
+---
+title: "Crosswalk-Entire-Dataset"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Crosswalk-Entire-Dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Crosswalk
+
+For those who need a more powerful tool for crosswalking large datasets and
+allocating fields based on the provided ratios, the crosswalk() 
+function is available.
+
+First load the data into the global environment ...
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
+library(hudr)
+
+data(samp_individual_assist)
+```
+
+Try to clean the data ...
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
+
+# Remove NA, NULL values from the GEOID...
+samp_individual_assist <- samp_individual_assist[!is.na(samp_individual_assist$FIPS)]
+
+samp_individual_assist <- samp_individual_assist[!is.null(samp_individual_assist$FIPS)]
+
+
+# Deal with truncated zeros in the GEOID... tn this case we want county fips that
+# are of length 5, but some of them might be in length 4.
+# In this case we just remove them but might be more realistic to try
+# and fix them.
+samp_individual_assist <- samp_individual_assist[length(samp_individual_assist$FIPS) == 5]
+
+```
+
+Once the GEOID column is cleaned, crosswalking should be simple ...
+Pass in the entire dataset, specifying the current geographic resolution
+this dataset is in, the column name where geoid is located,
+the geoid to crosswalk to, along with the columns where data will be cross walked,
+the method used, year and auarter of crosswalk data.
+
+Supplying NA to both cw_geoid_col and method means 
+the crosswalk fields will get merged with the passed in data set without any
+calculations.
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
+
+crosswalk(data = samp_individual_assist, geoid = "county", geoid_col = "FIPS", 
+          cw_geoid = "zip", cw_geoid_col = NA, method = NA, year = 2021
+          , quarter = 1)
+```
+
+
+To reallocate data for a particular column, you must specify cw_geoid_col and 
+method arguments.
+
+

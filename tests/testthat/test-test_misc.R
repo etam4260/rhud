@@ -28,7 +28,7 @@ test_that("All Cities in State Query", {
 
 test_that("List States Query", {
   skip_if(Sys.getenv("HUD_KEY") == "")
-  states <- hud_states()
+  states <- hud_states_territories()
   expect_true(nrow(states) >= 1)
   expect_error(hud_states("qdqdwq"))
 })

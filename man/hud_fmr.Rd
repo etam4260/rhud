@@ -50,4 +50,6 @@ hud_fmr("METRO47900M47900", year=c(2018))
 }
 }
 \keyword{API}
-\keyword{Crosswalks}
+\keyword{Fair}
+\keyword{Markets}
+\keyword{Rent}

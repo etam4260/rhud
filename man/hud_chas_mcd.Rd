@@ -4,12 +4,10 @@
 \alias{hud_chas_mcd}
 \title{hud_chas_mcd}
 \usage{
-hud_chas_mcd(state, mcd, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
+hud_chas_mcd(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{state}{The state name, abbreviation, or fips code.}
-
-\item{mcd}{The mcd to query for. Must supply as 5 digit geoid.}
 
 \item{year}{The years to query for.
 \itemize{
@@ -27,8 +25,8 @@ hud_chas_mcd(state, mcd, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 \item{key}{The key obtain from HUD USER website.}
 }
 \value{
-Returns a dataframe with CHAS data for a particular minor civil
-division(mcd).
+Returns a dataframe with CHAS data for minor civil divisions in
+a state.
 }
 \description{
 Returns CHAS data for an mcd.
