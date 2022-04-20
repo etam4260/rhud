@@ -164,7 +164,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
 
   # Try to convert input into state code.
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   if(nrow(pkg.env$state[pkg.env$state$state_name %in%

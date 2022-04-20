@@ -38,7 +38,7 @@ test_that("Income Limits State Queries", {
   expect_error(hud_il("DC"))
 
   # Try to query for all states... filter out US territories...
-  hudstates <- hud_states_territories()
+  hudstates <- hud_nation_states_territories()
   hudstates <- hudstates[as.numeric(hudstates$state_num) < 57, ]
   hudstates <- hudstates[hudstates$state_code != 'DC', ]
 
@@ -79,7 +79,7 @@ test_that("Income Limits Rent County Queries", {
   c3 <- NULL
 
   # Get all income limits for the state of Maryland, at county level
-  all_md_counties <- hud_counties("MD")
+  all_md_counties <- hud_state_counties("MD")
   all_md <- hud_il(all_md_counties$fips_code)
   expect_true(nrow(all_md) == length(all_md_counties$fips_code))
   expect_true(check_is_not_list(all_md))
@@ -104,7 +104,7 @@ test_that("Small Area IL Queries", {
 
   # Get all metropolitan areas in the state of Maryland and query
   # their income limits.
-  all_md_metro <- hud_metropolitan("MD")
+  all_md_metro <- hud_state_metropolitan("MD")
   all_md <- hud_il(all_md_metro$cbsa_code)
 
   expect_true(nrow(all_md) == length(all_md_metro$cbsa_code))

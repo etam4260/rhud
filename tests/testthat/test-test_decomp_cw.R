@@ -111,7 +111,7 @@ test_that("Query hud_cw_county_zip()", {
   # It looks like HUD only provides support for querying all counties in a state
   # but, not any other smaller geographies.
 
-  all_md_counties <- hud_counties("md")
+  all_md_counties <- hud_state_counties("md")
   all_md <- hud_cw_county_zip(county = substr(all_md_counties$fips_code,1,5), year = c('2010'), quarter = c('1'))
   expect_true(check_is_not_list(all_md))
 })

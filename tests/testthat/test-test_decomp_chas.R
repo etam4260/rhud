@@ -7,7 +7,7 @@ test_that("test hud_chas_nation()", {
   expect_true(nrow(one_year) == 1)
   expect_true(check_is_not_list(one_year))
 
-  # Try querying multiple years from the nation.s
+  # Try querying multiple years from the nations
   two_years <- hud_chas_nation(year = c("2014-2018", "2012-2016"))
   expect_true(nrow(two_years) == 2)
   expect_true(check_is_not_list(two_years))
@@ -51,13 +51,13 @@ test_that("test hud_chas_state" ,{
   expect_true(nrow(test) == 1)
 
   # Try querying for all states in nation
-  hudstates <- hud_states_territories()
+  hudstates <- hud_nation_states_territories()
   hudstates <- hudstates[as.numeric(hudstates$state_num) < 57, ]
   hudstates <- hudstates[hudstates$state_code != 'DC', ]
 
-  #all_states_full <- hud_chas_state(hudstates$state_name)
-  #expect_true(nrow(all_states_full) >= 1)
-  #expect_true(check_is_not_list(all_states_full))
+  # all_states_full <- hud_chas_state(hudstates$state_name)
+  # expect_true(nrow(all_states_full) >= 1)
+  # expect_true(check_is_not_list(all_states_full))
 
   # Try to query for all state codes?
   all_state_abbr <- hud_chas_state(hudstates$state_code)
@@ -93,7 +93,7 @@ test_that("test hud_chas_county()",{
   expect_true(nrow(test) == 4)
 
   # Query for all counties in Maryland.
-  all_md_counties <- hud_counties("MD")
+  all_md_counties <- hud_state_counties("MD")
 
   # Only use the first 5 numbers in fips code.
   all_md <- hud_chas_county(county = substr(all_md_counties$fips_code,0,5))
@@ -101,23 +101,23 @@ test_that("test hud_chas_county()",{
   expect_true(check_is_not_list(all_md))
 })
 
-test_that("test hud_chas_mcd()",{
+test_that("test hud_chas_state_mcd()",{
 
   #skip_if(Sys.getenv("HUD_KEY") == "")
 
   # This will take a while...
-  #all_md <- hud_chas_mcd("md")
+  #all_md <- hud_chas_state_mcd("md")
 
   #expect_true(nrow(all_md) >= 1)
   #expect_true(check_is_not_list(all_md))
 
 })
 
-test_that("test hud_chas_place()",{
+test_that("test hud_chas_state_place()",{
   #skip_if(Sys.getenv("HUD_KEY") == "").
 
   # This will take a while...
-  #all_md <- hud_chas_place("md")
+  #all_md <- hud_chas_state_place("md")
 
   #expect_true(nrow(all_md) >= 1)
   #expect_true(check_is_not_list(all_md))

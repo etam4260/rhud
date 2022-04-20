@@ -35,6 +35,7 @@
 #' @param year The year measurement was taken.
 #' @param quarter The quarter of year measurement was taken.
 #' @param key The key obtain from HUD USER website.
+#' @export
 #' @returns A dataframe containing the crosswalked dataset.
 crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                       method = NA,
@@ -71,22 +72,22 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
   # there are only unique queries.
   if(geoid == "zip" && cw_geoid %in% c("county", "countysub", "tract",
                                        "cbsa", "cbsadiv", "cd")) {
-    if(cwgeoid == "county") {
+    if(cw_geoid == "county") {
       cw_data <- hud_cw_zip_county(data[,geoid_col], year = year,
                                    quarter = quarter, key = key)
-    } else if(cwgeoid == "countysub") {
+    } else if(cw_geoid == "countysub") {
       cw_data <- hud_cw_zip_countysub(data[,geoid_col], year = year,
                                       quarter = quarter, key = key)
-    } else if(cwgeoid == "cd") {
+    } else if(cw_geoid == "cd") {
       cw_data <- hud_cw_zip_cd(data[,geoid_col], year = year,
                                quarter = quarter, key = key)
-    } else if(cwgeoid == "tract") {
+    } else if(cw_geoid == "tract") {
       cw_data <- hud_cw_zip_tract(data[,geoid_col], year = year,
                                   quarter = quarter, key = key)
-    } else if(cwgeoid == "cbsa") {
+    } else if(cw_geoid == "cbsa") {
       cw_data <- hud_cw_zip_cbsa(data[,geoid_col], year = year,
                                  quarter = quarter, key = key)
-    } else if(cwgeoid == "cbsadiv") {
+    } else if(cw_geoid == "cbsadiv") {
       cw_data <- hud_cw_zip_cbsadiv(data[,geoid_col], year = year,
                                     quarter = quarter, key = key)
     }
@@ -111,7 +112,7 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
   } else {
     stop(paste("Crosswalk from",
                geoid,
-               cwgeoid,
+               cw_geoid,
                "is not supported. Type ?crosswalk to see information on
                what is available.",
                sep = " "))

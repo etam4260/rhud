@@ -1,20 +1,9 @@
 #' @import httr
 
 # Misc APIs provided by the HUD provide:
-# List States
-# List Small Areas
-# List Counties in State
-# List MCDs in State
-# List All Cities in State
 
 
-# Need to allow filtering by state. For example, if given
-# state = NA, will query for everything
-# state = c(VA, MD) will query for VA or MD
-# state = c(51,52)
-
-
-#' @title hud_states_territories
+#' @title hud_nation_states_territories
 #' @description Get a list of state and US territories
 #'   along with the corresponding FIPs code and
 #'   abbreviation.
@@ -29,9 +18,9 @@
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_states_territories()
+#' hud_nation_states_territories()
 #' }
-hud_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
+hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
   if(key == "") {
     stop(paste("Did you forget to set the key?",
                "Please go to https://www.huduser.gov/",
@@ -68,8 +57,8 @@ hud_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 # Need to allow user to filter metropolitan areas similar to place, county,
 # mcds.
 
-#' @name hud_metropolitan
-#' @title hud_metropolitan
+#' @name hud_state_metropolitan
+#' @title hud_state_metropolitan
 #' @description Get a list of all metropolitan areas in the US along with its
 #'   name and CBSA code.
 #' @param state The state to get all the metropolitan areas.
@@ -84,9 +73,9 @@ hud_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_metropolitan()
+#' hud_state_metropolitan("VA")
 #' }
-hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
+hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(key == "") {
     stop(paste("Did you forget to set the key?",
                "Please go to https://www.huduser.gov/",
@@ -137,7 +126,7 @@ hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -181,8 +170,8 @@ hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 }
 
 
-#' @name hud_counties
-#' @title hud_counties
+#' @name hud_state_counties
+#' @title hud_state_counties
 #' @description Get a list of all counties within a state.
 #' @param state The state to get all counties.
 #' @param key The API key for this user. You must go to HUD and sign up for
@@ -196,11 +185,11 @@ hud_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_places("CA")
-#' hud_places("Virginia")
-#' hud_places("51")
+#' hud_state_counties("CA")
+#' hud_state_counties("Virginia")
+#' hud_state_counties("51")
 #' }
-hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
+hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) {
     stop(paste("Make sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -221,7 +210,7 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -268,8 +257,8 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   stop("The key used might be invalid or could not find counties for this state.")
 }
 
-#' @name hud_places
-#' @title hud_places
+#' @name hud_state_places
+#' @title hud_state_places
 #' @description Get a list of all places in a state.
 #' @param state The state to get all places.
 #' @param key The API key for this user. You must go to HUD and sign up for
@@ -283,11 +272,11 @@ hud_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_places("CA")
-#' hud_places("Virginia")
-#' hud_places("51")
+#' hud_state_places("CA")
+#' hud_state_places("Virginia")
+#' hud_state_places("51")
 #' }
-hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
+hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) {
     stop(paste("Make sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -308,7 +297,7 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -350,8 +339,8 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   stop("The key used might be invalid or could not find places for this state.")
 }
 
-#' @name hud_minor_civil_divisions
-#' @title hud_minor_civil_divisions
+#' @name hud_state_minor_civil_divisions
+#' @title hud_state_minor_civil_divisions
 #' @description Get a list of all minor civil divisions in a state
 #' @param state The state to get all MCD.
 #' @param key The API key for this user. You must go to HUD and sign up for
@@ -365,11 +354,11 @@ hud_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_minor_civil_divisions("CA")
-#' hud_minor_civil_divisions("Virginia")
-#' hud_minor_civil_divisions("51")
+#' hud_state_minor_civil_divisions("CA")
+#' hud_state_minor_civil_divisions("Virginia")
+#' hud_state_minor_civil_divisions("51")
 #' }
-hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
+hud_state_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(!is.vector(state) || !is.vector(key)) {
     stop(paste("Make sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -390,7 +379,7 @@ hud_minor_civil_divisions <- function(state, key = Sys.getenv("HUD_KEY")) {
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {

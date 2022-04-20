@@ -49,7 +49,7 @@ test_that("Crosswalk All Types", {
   expect_true(nrow(county_zip) >= 1)
 
   # Try all counties in MD
-  county_zip <- hud_cw(type = 7, query = substr(hud_counties("md")$fips_code,1,5),
+  county_zip <- hud_cw(type = 7, query = substr(hud_state_counties("md")$fips_code,1,5),
                        year = c('2010'), quarter = c('1'))
   expect_true(nrow(county_zip) >= 1)
 

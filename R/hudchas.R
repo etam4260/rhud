@@ -13,6 +13,7 @@
 #' @param key The key obtain from HUD USER website.
 #' @description Returns CHAS data for the entire nation.
 #' @returns Returns a dataframe with CHAS data for the entire nation.
+#' @export
 #' @examples
 #' \dontrun{
 #' library(hudr)
@@ -50,6 +51,7 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular state.
+#' @export
 #' @examples
 #' \dontrun{
 #' library(hudr)
@@ -73,7 +75,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -124,6 +126,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular county.
+#' @export
 #' @examples
 #' \dontrun{
 #' library(hudr)
@@ -154,7 +157,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
   # Grab all possible states if the package doesn't have a state dataset to
   # query from.
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   # Check if first two numbers of county code inputted is a valid state.
@@ -164,7 +167,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
                sep = ""))
   }
 
-  if(!all(as.character(check_county) %in% hud_counties(state_fip)$fips_code)) {
+  if(!all(as.character(check_county) %in% hud_state_counties(state_fip)$fips_code)) {
     stop(paste("There is no matching county FIPs code for",
                "one of the inputted counties",
                sep = ""))
@@ -184,8 +187,8 @@ hud_chas_county <- function(county, year = c("2014-2018"),
   return(res)
 }
 
-#' @name hud_chas_mcd
-#' @title hud_chas_mcd
+#' @name hud_chas_state_mcd
+#' @title hud_chas_state_mcd
 #' @description Returns CHAS data for an mcd.
 #' @param state The state name, abbreviation, or fips code.
 #' @param year The years to query for.
@@ -201,19 +204,17 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for minor civil divisions in
 #'  a state.
+#' @export
 #' @examples
 #' \dontrun{
 #' library(hudr)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_chas_mcd("VA", "94135", year = c("2014-2018","2013-2017"))
+#' hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
 #'
-#' hud_chas_mcd(c("MD", "VA"), c("90812", "94135"))
-#'
-#' hud_chas_mcd("California", "93140")
 #' }
-hud_chas_mcd <- function(state, year = c("2014-2018"),
+hud_chas_state_mcd <- function(state, year = c("2014-2018"),
                          key = Sys.getenv("HUD_KEY")) {
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -224,7 +225,7 @@ hud_chas_mcd <- function(state, year = c("2014-2018"),
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -251,7 +252,7 @@ hud_chas_mcd <- function(state, year = c("2014-2018"),
   fip_code <- unlist(fip_code)
 
   # Get all MCDs in these states...
-  all_mcd_in_states <- hud_minor_civil_divisions(fip_code)
+  all_mcd_in_states <- hud_state_minor_civil_divisions(fip_code)
   all_queries = data.frame()
   for(i in year) {
     all_mcd_in_states$year <- year
@@ -270,8 +271,8 @@ hud_chas_mcd <- function(state, year = c("2014-2018"),
   return(res)
 }
 
-#' @name hud_chas_place
-#' @title hud_chas_place
+#' @name hud_chas_state_place
+#' @title hud_chas_state_place
 #' @description Returns CHAS data for place.
 #' @param state The state name, abbreviation, or fips code. Make sure if state
 #'   fips is 1 digit number, do not include leading 0.
@@ -288,33 +289,31 @@ hud_chas_mcd <- function(state, year = c("2014-2018"),
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular place (Usually
 #'   just cities).
+#' @export
 #' @examples
 #' \dontrun{
 #' library(hudr)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_chas_place("MD", 53625, year = c("2014-2018","2013-2017"))
+#' hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
 #'
-#' hud_chas_place("6", "17727")
-#'
-#' hud_chas_place(51, 48996)
 #' }
-hud_chas_place <- function(state, year = c("2014-2018"),
+hud_chas_state_place <- function(state, year = c("2014-2018"),
                            key = Sys.getenv("HUD_KEY")) {
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
   key <- args[[2]]
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   if(all(nchar(state) == 2)) state <- toupper(state)
   if(all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if(is.null(pkg.env$state)) {
-    pkg.env$state <- hud_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
   }
 
   for(i in seq_len(length(state))) {
@@ -341,7 +340,7 @@ hud_chas_place <- function(state, year = c("2014-2018"),
   fip_code <- unlist(fip_code)
 
   # Get all places in these states...
-  all_places_in_states <- hud_places(fip_code)
+  all_places_in_states <- hud_state_places(fip_code)
   all_queries = data.frame()
   for(i in year) {
     all_places_in_states$year <- year
