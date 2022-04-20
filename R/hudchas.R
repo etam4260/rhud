@@ -275,8 +275,6 @@ hud_chas_mcd <- function(state, year = c("2014-2018"),
 #' @description Returns CHAS data for place.
 #' @param state The state name, abbreviation, or fips code. Make sure if state
 #'   fips is 1 digit number, do not include leading 0.
-#' @param place The place(Usually just cities) to query for. Must supply as a 5
-#'   digit geoid.
 #' @param year The years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"

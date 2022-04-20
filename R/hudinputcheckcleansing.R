@@ -29,13 +29,7 @@ chas_input_check_cleansing <- function(query, year, key) {
                "sign up and get a token. Save",
                "this to your environment using",
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = " "))
-    # Give interactive key setting...
-    if(interactive()) {
-      Sys.setenv("HUD_KEY" = rstudioapi::showPrompt("HUD_KEY System Environment Variable",
-                                             "HUD_KEY System Environment Variable"))
-      # Try to test the key for user...
-      # Set the HUD_KEY given the response
-    }
+
 
   }
 
@@ -99,12 +93,7 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
                "and sign up and get a token. Then save",
                "this to your environment using",
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = " "))
-    if(interactive()) {
-      Sys.setenv("HUD_KEY" = rstudioapi::showPrompt("HUD_KEY System Environment Variable",
-                                                    "HUD_KEY System Environment Variable"))
-      # Try to test the key for user...
-      # Set the HUD_KEY given the response
-    }
+
   }
 
   query <- unique(paste(trimws(as.character(query), which = "both")))
@@ -163,12 +152,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
                "and sign up and get a token. Then save",
                "this to your environment using",
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = " "))
-    if(interactive()) {
-      Sys.setenv("HUD_KEY" = rstudioapi::showPrompt("HUD_KEY System Environment Variable",
-                                                    "HUD_KEY System Environment Variable"))
-      # Try to test the key for user...
-      # Set the HUD_KEY given the response
-    }
+
   }
 
   # Try to fix case
@@ -280,12 +264,6 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
                "and sign up and get a token. Then save",
                "this to your environment using",
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = " "))
-    if(interactive()) {
-      Sys.setenv("HUD_KEY" = rstudioapi::showPrompt("HUD_KEY System Environment Variable",
-                                                    "HUD_KEY System Environment Variable"))
-      # Try to test the key for user...
-      # Set the HUD_KEY given the response
-    }
   }
 
   if(length(data) > 1 && length(geoid) > 1 &&  length(geoid_col) > 1

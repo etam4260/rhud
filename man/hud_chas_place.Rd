@@ -24,9 +24,6 @@ fips is 1 digit number, do not include leading 0.}
 }}
 
 \item{key}{The key obtain from HUD USER website.}
-
-\item{place}{The place(Usually just cities) to query for. Must supply as a 5
-digit geoid.}
 }
 \value{
 Returns a dataframe with CHAS data for a particular place (Usually
