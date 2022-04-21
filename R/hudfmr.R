@@ -185,7 +185,6 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), ke
       if(cont$data$smallarea_status == '0') {
         # Returns just county
         res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-        res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
         res$query <- allqueries$query[i]
         res$year <- allqueries$year[i]
@@ -299,7 +298,6 @@ hud_fmr_metroarea_zip <- function(metroarea, year = format(Sys.Date() - 365, "%Y
       if(cont$data$smallarea_status == '0') {
         # Returns just county
         res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-        res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
         res$query <- allqueries$query[i]
         res$year <- allqueries$year[i]
