@@ -26,11 +26,10 @@ fips is 1 digit number, do not include leading 0.}
 \item{key}{The key obtain from HUD USER website.}
 }
 \value{
-Returns a dataframe with CHAS data for a particular place (Usually
-just cities).
+Returns a dataframe with CHAS data for places.
 }
 \description{
-Returns CHAS data for place.
+Returns CHAS for all places in a state.
 }
 \examples{
 \dontrun{

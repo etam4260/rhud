@@ -207,7 +207,11 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #' @name hud_fmr
 #' @title hud_fmr
 #' @description This function queries the Fair Markets Rent API provided by
-#'   US Department of Housing and Urban Development.
+#'   US Department of Housing and Urban Development. Querying a
+#'   state provides a list containing two dataframes: one with fmr at a county
+#'   level resolutionn and the other fmr at a metroarea level resolution.
+#'   Querying a county or cbsa will provide data at a zip code resolution
+#'   if geoids are classified as a small area.
 #' @param query Can provide either a 5 digit FIPS code + 99999 at end,
 #'   state abbreviation, or CBSA code.
 #' @param year Gets the year that this data was recorded.
@@ -274,9 +278,11 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' @name hud_il
 #' @title hud_il
 #' @description This function queries the Income Limits API provided by
-#'   US Department of Housing and Urban Development
-#' @param query Can provide either a 5 digit FIPS code + 99999 at end,
-#'   state abbreviation, or CBSA code.
+#'   US Department of Housing and Urban Development.
+#' @param query  Querying a
+#'   state provides the IL measurement for that state level resolution. Querying
+#'   Querying a county or cbsa will provide data at a county and
+#'   cbsa resolution, respectively.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.

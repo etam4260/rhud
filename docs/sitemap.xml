@@ -25,6 +25,9 @@
     <loc>/articles/Comprehensive-Housing-and-Affordability-Strategy.html</loc>
   </url>
   <url>
+    <loc>/articles/Crosswalk-Entire-Dataset.html</loc>
+  </url>
+  <url>
     <loc>/articles/Crosswalk.html</loc>
   </url>
   <url>
@@ -94,6 +97,12 @@
     <loc>/reference/hud_chas_state.html</loc>
   </url>
   <url>
+    <loc>/reference/hud_chas_state_mcd.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_chas_state_place.html</loc>
+  </url>
+  <url>
     <loc>/reference/hud_cities.html</loc>
   </url>
   <url>
@@ -142,6 +151,18 @@
     <loc>/reference/hud_fmr.html</loc>
   </url>
   <url>
+    <loc>/reference/hud_fmr_county_zip.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_fmr_metroarea_zip.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_fmr_state_counties.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_fmr_state_metroareas.html</loc>
+  </url>
+  <url>
     <loc>/reference/hud_get_key.html</loc>
   </url>
   <url>
@@ -154,10 +175,25 @@
     <loc>/reference/hud_minor_civil_divisions.html</loc>
   </url>
   <url>
+    <loc>/reference/hud_nation_states_territories.html</loc>
+  </url>
+  <url>
     <loc>/reference/hud_places.html</loc>
   </url>
   <url>
     <loc>/reference/hud_set_key.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_state_counties.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_state_metropolitan.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_state_minor_civil_divisions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hud_state_places.html</loc>
   </url>
   <url>
     <loc>/reference/hud_states.html</loc>
@@ -182,6 +218,9 @@
   </url>
   <url>
     <loc>/reference/remove_leading_zeros.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rhud_website.html</loc>
   </url>
   <url>
     <loc>/reference/simple_detect_geoid_in_data.html</loc>

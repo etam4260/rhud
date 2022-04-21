@@ -1,12 +1,12 @@
-#' @name hudr_website
-#' @title hudr_website
+#' @name rhud_website
+#' @title rhud_website
 #' @description Quickly get documentation for the hudr package by opening up
 #'   the websites associated with it. Currently supports Unix and Windows OS.
 #' @param website The websites available.
 #'   1) "github-pages"
 #'   2) "github"
 #' @export
-hudr_website <- function(website = c("github-pages", "github")) {
+rhud_website <- function(website = c("github-pages", "github")) {
   github_pages <- "https://etam4260.github.io/hudr/"
   github <- "https://github.com/etam4260/hudr"
 

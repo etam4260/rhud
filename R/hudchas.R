@@ -112,8 +112,8 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' @title hud_chas_county
 #' @description Returns CHAS data for counties.
 #' @param county The county to query for. Must supply a geoid. 2 digit state fip
-#'   + 3 digit county fip. hud_counties() will show an extra 99999 at the end.
-#'   Just remove that.
+#'   + 3 digit county fip. hud_state_counties() will show an extra 99999 at the
+#'   end. Just remove that.
 #' @param year The years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"
@@ -125,7 +125,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
-#' @returns Returns a dataframe with CHAS data for a particular county.
+#' @returns Returns a dataframe with CHAS data for counties.
 #' @export
 #' @examples
 #' \dontrun{
@@ -189,7 +189,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 
 #' @name hud_chas_state_mcd
 #' @title hud_chas_state_mcd
-#' @description Returns CHAS data for an mcd.
+#' @description Returns CHAS data for all mcds in a state.
 #' @param state The state name, abbreviation, or fips code.
 #' @param year The years to query for.
 #'  * year = "2014-2018"
@@ -202,8 +202,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
-#' @returns Returns a dataframe with CHAS data for minor civil divisions in
-#'  a state.
+#' @returns Returns a dataframe with CHAS data for mcds.
 #' @export
 #' @examples
 #' \dontrun{
@@ -273,7 +272,7 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 
 #' @name hud_chas_state_place
 #' @title hud_chas_state_place
-#' @description Returns CHAS data for place.
+#' @description Returns CHAS for all places in a state.
 #' @param state The state name, abbreviation, or fips code. Make sure if state
 #'   fips is 1 digit number, do not include leading 0.
 #' @param year The years to query for.
@@ -287,8 +286,7 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
-#' @returns Returns a dataframe with CHAS data for a particular place (Usually
-#'   just cities).
+#' @returns Returns a dataframe with CHAS data for places.
 #' @export
 #' @examples
 #' \dontrun{

@@ -2,16 +2,16 @@
 
 # Misc APIs provided by the HUD provide:
 
-
 #' @title hud_nation_states_territories
 #' @description Get a list of state and US territories
-#'   along with the corresponding FIPs code and
+#'   along with the corresponding fips code and
 #'   abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords States
 #' @export
-#' @returns A dataframe containing details of all the states and territories in the US.
+#' @returns A dataframe containing details of all the states and territories
+#'   in the US.
 #' @examples
 #' \dontrun{
 #' library(hudr)
@@ -59,7 +59,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_state_metropolitan
 #' @title hud_state_metropolitan
-#' @description Get a list of all metropolitan areas in the US along with its
+#' @description Get a list of all metropolitan areas for this state with its
 #'   name and CBSA code.
 #' @param state The state to get all the metropolitan areas.
 #' @param key The API key for this user. You must go to HUD and sign up for an

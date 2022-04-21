@@ -25,7 +25,7 @@ Fair markets rent for counties
 }
 \description{
 This function queries for a state and returns the FMR calculation
-at a county resolution.
+at a county resolution for all counties in this state.
 }
 \keyword{API}
 \keyword{Fair}

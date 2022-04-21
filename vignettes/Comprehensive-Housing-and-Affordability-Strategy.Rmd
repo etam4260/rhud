@@ -57,20 +57,20 @@ below. [onmi-function][Using the omni function for querying]
 
 #### CHAS for County
 ```{r, eval=FALSE}
-  # Query a county in Virginia
+  # Queries a county in Virginia
   hud_chas_county("51999", year=c("2014-2018"))
 ```
 
 #### CHAS for MCD
 ```{r, eval=FALSE}
-  # Queries for Virginia MCD
-  hud_chas_mcd("VA", "94087")
+  # Queries for CHAS for all mcds in Virginia
+  hud_chas_state_mcd("VA", "94087")
 ```
 
 #### CHAS for Place
 ```{r, eval=FALSE}
-  # Queries for place in Virginia
-  hud_chas_place("51", 48996)
+  # Queries for CHAS for all places in state fips code 51.
+  hud_chas_state_place("51", 48996)
 ```
 
 ### Using the omni function for querying

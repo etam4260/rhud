@@ -61,40 +61,49 @@ as well as [Output Data][] located at the bottom of the page.
 **DISCLAIMER:** The output tables are too large to be displayed here so we choose to
 leave them out.
 
-Querying a state will return a data frame with rows each with a county and its
-associated FMR. A (state fipscode + county fipscode + county subdivision code) 10 digit code will return a 1 row data frame for that county. A CBSA code will also return a 1 row data frame for that area. 
+Querying a county or cbsa code that are considered small areas will 
+return data at a zip code level. If they are not small areas, then it will 
+give the measurement for that entire county or cbsa. 
 
-This is different from the hud_il() for state queries, as FMR is not defined 
-at a state resolution.
+Lets say we are working with county level data.
+
+When mixing them together (counties that are small areas and not small areas)
+those counties that are not small areas will have an NA in the zip_code, 
+meaning this measurement is defined at a county level. Those counties that 
+are small areas will return data in the zip_code field.
 
 #### US States
 This is an example to show you how to query for all states in the US.
+
 ```{r, eval=FALSE}
 library(hudr)
-hud_states()
+hud_nation_states_territories()
 ```
 
 #### US Counties 
 This is an example to show you how to query for all counties in MD,
 Virginia, and California, respectively.
+
 ```{r, eval=FALSE}
-hud_counties("MD")
+hud_state_counties("MD")
 
-hud_counties("Virginia")
+hud_state_counties("Virginia")
 
-hud_counties("6")
+hud_state_counties("6")
 ```
 
 #### US Metropolitan Areas
-This is an example to show you how to query for metropolitan areas in US.
+This is an example to show you how to query for metropolitan areas in Wyoming
+and New York.
 ```{r, eval=FALSE}
-hud_metropolitan(c("WY", "NY"))
+hud_state_metropolitan(c("WY", "NY"))
 ```
 
 #### State Level Fair Markets Rent
 This is an example which shows you how to query the Fair Markets Rent API for a
 state. You can use the state abbreviation, state name, or state fips code. It
-will return all counties in the state and their Fair Markets Rents.
+will return all counties in the state and their Fair Markets Rents as well
+as all metroareas in the state and their Fair Markets Rent.
 ```{r, eval=FALSE}
 # These functions gets FMR data for the state of Virginia in 2021.
 hud_fmr(query = 'VA', year = '2021')
@@ -121,7 +130,8 @@ This is an example which shows you how to query the Small Areas Fair Markets Ren
 Small Areas are defined as metropolitan and micropolitan areas which are defined in
 CBSA codes. Currently we know how to query for metropolitan, but not sure for 
 micropolitan yet. I recommend
-taking a look at [US Metropolitan Areas][] to determine what counties are available.
+taking a look at [US Metropolitan Areas][] to determine what metroareas
+are available.
 ```{r, eval=FALSE}
 # Gets FMR data for METRO area.
 hud_fmr(query = "METRO47900M47900", year=c(2018))

@@ -11,8 +11,10 @@ hud_il(
 )
 }
 \arguments{
-\item{query}{Can provide either a 5 digit FIPS code + 99999 at end,
-state abbreviation, or CBSA code.}
+\item{query}{Querying a
+state provides the IL measurement for that state level resolution. Querying
+Querying a county or cbsa will provide data at a county and
+cbsa resolution, respectively.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
@@ -31,7 +33,7 @@ https://www.huduser.gov/portal/dataset/fmr-api.html
 }
 \description{
 This function queries the Income Limits API provided by
-US Department of Housing and Urban Development
+US Department of Housing and Urban Development.
 }
 \examples{
 \dontrun{

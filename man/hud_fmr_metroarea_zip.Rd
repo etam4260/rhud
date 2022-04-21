@@ -24,12 +24,11 @@ for an account and request for an API key.}
 
 }
 \description{
-This function queries a metroarea and returns the FMR
-calculation at a zip level resolution. If not small areas will
-return data for that metroarea.
-If the metroarea is considered
-a small area, then it will return data at a zip code level.
-ONLY ALLOWS SINGLE QUERIES.
+This function queries for a metroarea and returns
+FMR calculation. If the metroarea is not
+a small area, it will return only single
+measurement for that metroarea. If the metrarea is considered a
+small area, it will return data at a zip code level.
 }
 \keyword{API}
 \keyword{Fair}

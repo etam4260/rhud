@@ -25,7 +25,7 @@ Fair markets rent for metroareas.
 }
 \description{
 This function queries for a state and returns the FMR calculation
-at a metroarea resolution.
+at a metroarea resolution for all metroareas in this state.
 }
 \keyword{API}
 \keyword{Fair}

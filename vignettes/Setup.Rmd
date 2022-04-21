@@ -59,7 +59,7 @@ Sys.setenv("HUD_KEY" = "2yeuduhq72ueajk")
 Sys.getenv("HUD_KEY")
 ```
 
-You can also use the hud_set_key() function which is quicker to type and more
+You can also use the hud_set_key() function -- this is quicker to type and more
 intuitive.
 
 ```{r, eval=FALSE}
@@ -76,14 +76,16 @@ It is now set up for the rest of the R session.
 
 ## Rprofile
 
-You also choose to save it into your .Rprofile to save the key in between R session.
+You also choose to save it into your .Rprofile to save the key in between 
+R session.
 
 When R starts it looks for .Rprofile files in different locations:
 
 * R_HOME: which is the directory in that R is installed,
 * HOME: the user's home directory,
 * The current working directory for R
-* R only loads one .Rprofile file per session and thus an .Rprofile file at the project-level overrides files in other locations.
+* R only loads one .Rprofile file per session and thus an .Rprofile 
+file at the project-level overrides files in other locations.
 
 The .Rprofile file is an R script that is launch each time R starts. Sometimes
 it might not be in these locations. You can just create one and put it at the
@@ -91,5 +93,66 @@ root of your project and type the following in:
 
 ```{r, eval=FALSE}
 HUD_KEY = "2yeuduhq72ueajk"
-# "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register for a key and replace it here.
+# "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register 
+#for a key and replace it here.
 ```
+
+
+## Understanding the Syntax
+
+A noticeable issue with querying geographic data is determining what resolution
+the data is returned in. Therefore, understanding the syntax of 
+these function calls should easily help you determine what you are querying 
+and what data is returned.
+
+The general syntax for these functions within the package follow this pattern
+where *,^, and $ are placeholders:
+
+
+hud_*_^_$
+
+
+*: This symbol represents the dataset to query for. So for example if you want
+fair markets rent data, this will be 'fmr'. If you want data from the crosswalk
+files, this will be 'cw'.
+
+^: This symbol represents the geographic resolution to query for. 
+For example, if the function requires that you input state(s), then this 
+will be named as 'state.' If the function requires that you input
+county(s) then this will be 'county'.
+
+$: This symbol represented the output geographic resolution. So for example,
+if we want data at a zip code level, then this will have 'zip'.
+
+For those that do not have the ^ and $, these are omni functions which 
+are capable of performing all queries under *, but these functions are
+harder to understand.
+
+For those that do not have the $, it inherits the ^. This means that 
+if ^ is requires a state input, then the resolution of the output data is also
+as a state.
+
+A quick example:
+
+```{r, eval=FALSE}
+hud_cw_county_zip(county = 22031, year = c('2017'), quarter = c('1'))
+```
+
+The first part of the function begins with 'hud'.
+
+The second part is 'cw' meaning we are querying the crosswalk files.
+
+The third part is 'county' meaning we need to input county(s)
+
+The fourth part is the 'zip' meaning the data will be returned 
+at a zip code resolution.
+
+If you ever get confused or need help you can easily revisit this website 
+through:
+
+```{r, eval=FALSE}
+rhud_website()
+```
+
+This will quickly open up this website on your web browser
+as well as the github repository where you can submit issues.

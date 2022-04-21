@@ -24,11 +24,11 @@ for an account and request for an API key.}
 
 }
 \description{
-This function queries for a county and returns FMR calculation
-at a zip level resolution. If not small areas will return only single
-measurement for that county. Only allows querying for one metro
-area at a time. If the county is considered a small area, it will return
-data  at a zip code level. ONLY ALLOWS SINGLE QUERIES.
+This function queries for a county and returns FMR calculation.
+If the county is not
+a small area, it will return only single
+measurement for that county. If the county is considered a small area,
+it will return data at a zip code level.
 }
 \keyword{API}
 \keyword{Fair}

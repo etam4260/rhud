@@ -11,11 +11,12 @@ hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
 account and request for an API key.}
 }
 \value{
-A dataframe containing details of all the states and territories in the US.
+A dataframe containing details of all the states and territories
+in the US.
 }
 \description{
 Get a list of state and US territories
-along with the corresponding FIPs code and
+along with the corresponding fips code and
 abbreviation.
 }
 \examples{

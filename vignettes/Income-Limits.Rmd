@@ -26,41 +26,40 @@ area criteria.
 
 ### Examples
 
-This page contains basic examples of how to query the HUD Income Limits API. Before
-looking at the outputted data I RECOMMEND first taking a look at [Input Arguments][]
-as well as [Output Data][] located at the bottom of the page.
+This page contains basic examples of how to query the HUD Income Limits API.
+Before looking at the outputted data I RECOMMEND first taking a look at [Input Arguments][] as well as [Output Data][] located at the bottom of the page.
 
-**DISCLAIMER:** The output tables are too large to be displayed here so we choose to
-leave them out.
+**DISCLAIMER:** The output tables are too large to be displayed here so we
+choose to leave them out.
 
 Querying a state will return a single row containing the Income Limits for that
-state. A (state fipscode + county fipscode + county subdivision) 10 digit code
-will return a 1-row data-frame for that county. A CBSA code will also return a 1 
-row data frame for that area. 
+state. Querying for a county will return the IL measurement for that county.
+Querying for a cbsa will return the measurement for that cbsa.
 
 #### US States
-This is an example to show you how to query for all states in the US.
+This is an example to show you how to query for all states and territories
+in the US.
 ```{r, eval=FALSE}
 library(hudr)
-hud_states()
+hud_nation_states_territories()
 ```
 
 #### US Counties 
 This is an example to show you how to query for all counties in MD,
 Virginia, and California, respectively.
 ```{r, eval=FALSE}
-hud_counties("MD")
+hud_state_counties("MD")
 
-hud_counties("Virginia")
+hud_state_counties("Virginia")
 
-hud_counties("6")
+hud_state_counties("6")
 ```
 
 #### US Metropolitan Areas
-This is an example to show you how to query for metropolitan areas in US.
+This is an example to show you how to query for metropolitan areas for a state.
 ```{r, eval=FALSE}
 # Get all metropolitan areas in Maryland and Virginia.
-hud_metropolitan(c("MD", "VA"))
+hud_state_metropolitan(c("MD", "VA"))
 ```
 
 #### State Level Income Limits
@@ -69,29 +68,24 @@ level basis. You can use the state abbreviation, state name, or state fipscode.
 It will return a single row indicating the income limits for that particular
 state.
 
-**DISCLAIMER:** Querying for states in Income Limits is a little different from
-that of hud_fmr(). Querying for states in hud_fmr() will return all counties and
-their associated Fair Markets Rent. Fair Markets is not defined at a state
-resolution whereas Income Limits is.
-
 ```{r, eval=FALSE}
 # These function calls gets income limits data for the state of Virginia in 2021.
 hud_il(query = 'VA', year = '2021')
 
 hud_il(query= "Virginia", year = '2021')
 
-hud_fmr(query= "51", year = '2021')
+hud_il(query= "51", year = '2021')
 
 # You can also choose to query for multiple states or multiple years.
-hud_fmr(query = c('VA', 'MD'), year = c('2021', '2019'))
+hud_il(query = c('VA', 'MD'), year = c('2021', '2019'))
 ```
 
 #### County Level Income Limits
-These are examples that show you how to query the Income Limits on a county-level basis: counties are defined with a 2 digit state fipscode + 3 digit county fipscode.
-You also need a 99999 code added to the end. We currently don't know why the
-extra 99999 is included and have not found any cases where it's different. I
-recommend looking at [US Counties][] to determine what counties are
-available for particular states.
+These are examples that show you how to query the Income Limits on a 
+county-level basis: counties are defined with a 2 digit state fipscode + 3 digit county fipscode. You also need a 99999 code added to the end. We currently 
+don't know why the extra 99999 is included and have not found any cases where it's different. I recommend looking at [US Counties][] to determine what counties 
+are available for particular states.
+
 ```{r, eval=FALSE}
 # Getting a county requires a 2 digit state fip + 3 digit county fip + 99999
 # This queries for Income Limits in 2017.

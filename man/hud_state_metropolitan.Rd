@@ -16,7 +16,7 @@ account and request for an API key.}
 A dataframe containing details of metropolitan areas in US.
 }
 \description{
-Get a list of all metropolitan areas in the US along with its
+Get a list of all metropolitan areas for this state with its
 name and CBSA code.
 }
 \examples{

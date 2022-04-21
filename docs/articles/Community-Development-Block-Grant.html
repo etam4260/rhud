@@ -117,23 +117,10 @@
 <div class="section level3">
 <h3 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
 </h3>
-<p>“The Community Development Block Grant (CDBG) Program has Disaster
-Recovery grants to rebuild the affected areas and provide crucial seed
-money to start the recovery process. These flexible grants help cities,
-counties, and States recover from Presidentially declared disasters,
-especially in low-income areas, subject to availability of supplemental
-appropriations. Since CDBG Disaster Recovery (CDBG-DR) assistance may
-fund a broad range of recovery activities, HUD can help communities and
-neighborhoods that otherwise might not recover due to limited resources
-(<a href="https://www.hud.gov/program_offices/comm_planning/cdbg-dr" class="external-link uri">https://www.hud.gov/program_offices/comm_planning/cdbg-dr</a>).”</p>
-<p>The datasets which this function deals with are located at <a href="https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG" class="external-link uri">https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG</a>.
-The first two datasets are the same, but are organized in a different
-manner.</p>
-<p>Querying the HUD Exchange website for data is a bit different than
-HUD User. These datasets do not need a key.</p>
-<p>Files: 1) DR CDBG CDBG-DR Financial Report by Appropriation 2) DR
-CDBG CDBG-DR Financial Report by Grantee 3) DR CDBG CDBG-DR Financial
-Report Monthly Summary 4) DR CDBG CDBG-DR Performance by Activity</p>
+<p>“The Community Development Block Grant (CDBG) Program has Disaster Recovery grants to rebuild the affected areas and provide crucial seed money to start the recovery process. These flexible grants help cities, counties, and States recover from Presidentially declared disasters, especially in low-income areas, subject to availability of supplemental appropriations. Since CDBG Disaster Recovery (CDBG-DR) assistance may fund a broad range of recovery activities, HUD can help communities and neighborhoods that otherwise might not recover due to limited resources (<a href="https://www.hud.gov/program_offices/comm_planning/cdbg-dr" class="external-link uri">https://www.hud.gov/program_offices/comm_planning/cdbg-dr</a>).”</p>
+<p>The datasets which this function deals with are located at <a href="https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG" class="external-link uri">https://drgr.hud.gov/public/data_downloads.html?programName=DR%20CDBG</a>. The first two datasets are the same, but are organized in a different manner.</p>
+<p>Querying the HUD Exchange website for data is a bit different than HUD User. These datasets do not need a key.</p>
+<p>Files: 1) DR CDBG CDBG-DR Financial Report by Appropriation 2) DR CDBG CDBG-DR Financial Report by Grantee 3) DR CDBG CDBG-DR Financial Report Monthly Summary 4) DR CDBG CDBG-DR Performance by Activity</p>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -141,8 +128,7 @@ Report Monthly Summary 4) DR CDBG CDBG-DR Performance by Activity</p>
 <div class="section level4">
 <h4 id="cdbg-dr-financial-report-by-appropriation">CDBG-DR Financial Report by Appropriation<a class="anchor" aria-label="anchor" href="#cdbg-dr-financial-report-by-appropriation"></a>
 </h4>
-<p>This is an example grabbing the first file, DR CDBG CDBG-DR Financial
-Report by Appropriation, and displaying the first 6 rows.</p>
+<p>This is an example grabbing the first file, DR CDBG CDBG-DR Financial Report by Appropriation, and displaying the first 6 rows.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/hudr" class="external-link">hudr</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/hud_cdbg.html">hud_cdbg</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -167,8 +153,7 @@ Report by Appropriation, and displaying the first 6 rows.</p>
 <div class="section level4">
 <h4 id="cdbg-cdbg-dr-financial-report-by-grantee">CDBG CDBG-DR Financial Report by Grantee<a class="anchor" aria-label="anchor" href="#cdbg-cdbg-dr-financial-report-by-grantee"></a>
 </h4>
-<p>This is an example grabbing the second file, DR CDBG CDBG-DR
-Financial Report by Grantee, and displaying the first 6 rows.</p>
+<p>This is an example grabbing the second file, DR CDBG CDBG-DR Financial Report by Grantee, and displaying the first 6 rows.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/hud_cdbg.html">hud_cdbg</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
@@ -191,9 +176,7 @@ Financial Report by Grantee, and displaying the first 6 rows.</p>
 <div class="section level4">
 <h4 id="cdbg-dr-financial-report-monthly-summary">CDBG-DR Financial Report Monthly Summary<a class="anchor" aria-label="anchor" href="#cdbg-dr-financial-report-monthly-summary"></a>
 </h4>
-<p>This is an example grabbing the third file, DR CDBG CDBG-DR Financial
-Report Monthly Summary, and displaying the first 6 rows. The data
-provides grants that were given in the last month.</p>
+<p>This is an example grabbing the third file, DR CDBG CDBG-DR Financial Report Monthly Summary, and displaying the first 6 rows. The data provides grants that were given in the last month.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/hud_cdbg.html">hud_cdbg</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
@@ -217,8 +200,7 @@ provides grants that were given in the last month.</p>
 <div class="section level4">
 <h4 id="dr-cdbg-cdbg-dr-performance-by-activity">DR CDBG CDBG-DR Performance by Activity<a class="anchor" aria-label="anchor" href="#dr-cdbg-cdbg-dr-performance-by-activity"></a>
 </h4>
-<p>This is an example grabbing the fourth file, DR CDBG CDBG-DR
-Performance by Activity, and displaying the first 6 rows.</p>
+<p>This is an example grabbing the fourth file, DR CDBG CDBG-DR Performance by Activity, and displaying the first 6 rows.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/hud_cdbg.html">hud_cdbg</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
@@ -264,8 +246,7 @@ Performance by Activity, and displaying the first 6 rows.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

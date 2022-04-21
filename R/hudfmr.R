@@ -1,7 +1,7 @@
 #' @name hud_fmr_state_metroareas
 #' @title hud_fmr_state_metroareas
 #' @description This function queries for a state and returns the FMR calculation
-#'   at a metroarea resolution.
+#'   at a metroarea resolution for all metroareas in this state.
 #' @param state The state to query for.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
@@ -71,7 +71,7 @@ hud_fmr_state_metroareas <- function(state,  year = format(Sys.Date() - 365, "%Y
 #' @name hud_fmr_state_counties
 #' @title hud_fmr_state_counties
 #' @description This function queries for a state and returns the FMR calculation
-#'   at a county resolution.
+#'   at a county resolution for all counties in this state.
 #' @param state The state to query for.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
@@ -141,11 +141,11 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 
 #' @name hud_fmr_county_zip
 #' @title hud_fmr_county_zip
-#' @description This function queries for a county and returns FMR calculation
-#'    at a zip level resolution. If not small areas will return only single
-#'    measurement for that county. Only allows querying for one metro
-#'    area at a time. If the county is considered a small area, it will return
-#'    data  at a zip code level. ONLY ALLOWS SINGLE QUERIES.
+#' @description This function queries for a county and returns FMR calculation.
+#'    If the county is not
+#'    a small area, it will return only single
+#'    measurement for that county. If the county is considered a small area,
+#'    it will return data at a zip code level.
 #' @param county A county to query for.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
@@ -165,8 +165,6 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), ke
   errorURLs <- c()
 
   allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
-
-
 
   list_res <- c()
   for(i in seq_len(nrow(allqueries))) {
@@ -256,12 +254,11 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), ke
 
 #' @name hud_fmr_metroarea_zip
 #' @title hud_fmr_metroarea_zip
-#' @description This function queries a metroarea and returns the FMR
-#'   calculation at a zip level resolution. If not small areas will
-#'   return data for that metroarea.
-#'   If the metroarea is considered
-#'   a small area, then it will return data at a zip code level.
-#'   ONLY ALLOWS SINGLE QUERIES.
+#' @description This function queries for a metroarea and returns
+#'    FMR calculation. If the metroarea is not
+#'    a small area, it will return only single
+#'    measurement for that metroarea. If the metrarea is considered a
+#'    small area, it will return data at a zip code level.
 #' @param metroarea A metroarea to query for.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
