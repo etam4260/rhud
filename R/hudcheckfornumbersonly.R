@@ -7,8 +7,6 @@
 #' @noMd
 decimal_num <- function(x) grepl("[0-9]*\\.[0-9]+", x)
 
-
-
 #' @name numbers_only
 #' @title numbers_only
 #' @description Detect whether string contains only numbers.
@@ -65,7 +63,7 @@ fournumbers <- function(x) !grepl("[0-9]{4}", x)
 #' @returns TRUE if string is 10 numbers, FALSE if not.
 #' @noRd
 #' @noMd
-tennumbers <- function(x) !grepl("[0-9]{10}",x)
+tennumbers <- function(x) !grepl("[0-9]{10}", x)
 
 
 
@@ -77,9 +75,9 @@ tennumbers <- function(x) !grepl("[0-9]{10}",x)
 #' @noRd
 #' @noMd
 is.negative <- function(x) {
-  if(x > 0) {
+  if (x > 0) {
     return(FALSE)
-  } else if(x == 0) {
+  } else if (x == 0) {
     return(NA)
   } else {
     return(TRUE)

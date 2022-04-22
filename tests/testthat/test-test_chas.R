@@ -4,16 +4,16 @@ test_that("All CHAS Types", {
   n <- hud_chas(1)
   expect_true(nrow(n) >= 1)
   # State
-  s <- hud_chas('2', stateId = '56')
+  s <- hud_chas("2", state_id = "56")
   expect_true(nrow(s) >= 1)
   # County
-  c <- hud_chas('3','51','199')
+  c <- hud_chas("3", "51", "199")
   expect_true(nrow(c) >= 1)
   # MCD
-  mcd <- hud_chas('4', '51', 94087)
+  mcd <- hud_chas("4", "51", 94087)
   expect_true(nrow(mcd) >= 1)
-  # City(Place)
-  city <- hud_chas('5', '51', 48996)
+  # place
+  city <- hud_chas("5", "51", 48996)
   expect_true(nrow(city) >= 1)
 })
 
@@ -42,5 +42,3 @@ test_that("Different Years CHAS", {
   y5 <- hud_chas(1, year = c("2014-2018", "2013-2017"))
   expect_true(nrow(y5) >= 1)
 })
-
-

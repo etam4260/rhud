@@ -80,41 +80,41 @@
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
-#' hud_cw(type = 1, query = '35213', year = c('2010', '2011'),
-#'    quarter = c('1'))
+#' hud_cw(type = 1, query = "35213", year = c("2010", "2011"),
+#'    quarter = c("1"))
 #'
-#' hud_cw(type = '2', query = '35213', year = c('2016', '2020'),
-#'    quarter = c('2'))
+#' hud_cw(type = "2", query = "35213", year = c("2016", "2020"),
+#'    quarter = c("2"))
 #'
-#' hud_cw(type = 3, query = 35213, year = c('2012', '2011'),
-#'    quarter = c('3'))
+#' hud_cw(type = 3, query = 35213, year = c("2012", "2011"),
+#'    quarter = c("3"))
 #'
-#' hud_cw(type = 4, query = '22031', year = c('2017', '2019'),
-#'    quarter = c('4'))
+#' hud_cw(type = 4, query = "22031", year = c("2017", "2019"),
+#'    quarter = c("4"))
 #'
-#' hud_cw(type = '5', query = '35213', year = c(2011, '2012'),
-#'    quarter = c('1','2'))
+#' hud_cw(type = "5", query = "35213", year = c(2011, "2012"),
+#'    quarter = c("1", "2"))
 #'
-#' hud_cw(type = 6, query = '48201223100', year = c('2017', '2010'),
-#'    quarter = c('1','2','3'))
+#' hud_cw(type = 6, query = "48201223100", year = c("2017", "2010"),
+#'    quarter = c("1", "2", "3"))
 #'
-#' hud_cw(type = 7, query = '22031', year = c('2010', '2011'),
-#'    quarter = c('1','2','3','4'))
+#' hud_cw(type = 7, query = "22031", year = c("2010", "2011"),
+#'    quarter = c("1", "2", "3"))
 #'
-#' hud_cw(type = 8, query = '10140', year = c('2010', '2011'),
-#'    quarter = c('2','1'))
+#' hud_cw(type = 8, query = "10140", year = c("2010", "2011"),
+#'    quarter = c("1", "2"))
 #'
-#' hud_cw(type = 9, query = '10380', year = c('2017'),
-#'    quarter = c('4'))
+#' hud_cw(type = 9, query = "10380", year = c("2017"),
+#'    quarter = c("1", "2", "3"))
 #'
-#' hud_cw(type = 10, query = '2202', year = c('2010', '2011'),
-#'    quarter = c('4','3'))
+#' hud_cw(type = 10, query = "2202", year = c("2010", "2011"),
+#'    quarter = c("4", "3"))
 #'
-#' hud_cw(type = 11, query = '35213', year = c('2019', '2020'),
-#'    quarter = c('2','3'))
+#' hud_cw(type = 11, query = "35213", year = c("2019", "2020"),
+#'    quarter = c("2", "3"))
 #'
-#' hud_cw(type = 12, query = '4606720300 ', year = c('2019', '2019', '2019'),
-#'    quarter = c('4','4'))
+#' hud_cw(type = 12, query = "4606720300 ", year = c("2019", "2019", "2019"),
+#'    quarter = c("4", "4"))
 #' }
 hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
                    quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
@@ -125,12 +125,12 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  alltypes <- c("zip-tract","zip-county","zip-cbsa",
-                "zip-cbsadiv","zip-cd","tract-zip",
-                "county-zip","cbsa-zip","cbsadiv-zip",
-                "cd-zip","zip-countysub","countysub-zip")
+  alltypes <- c("zip-tract", "zip-county", "zip-cbsa",
+                "zip-cbsadiv", "zip-cd", "tract-zip",
+                "county-zip", "cbsa-zip", "cbsadiv-zip",
+                "cd-zip", "zip-countysub", "countysub-zip")
 
-  if(length(type) != 1) stop("Only one crosswalk type can be specified.")
+  if (length(type) != 1) stop("Only one crosswalk type can be specified.")
 
   # Allow user to specify the full string too.
   type <- switch(tolower(type),
@@ -151,7 +151,7 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 
   # Check if type argument follows proper structure.
   type <- paste(trimws(as.character(type), which = "both"))
-  if(FALSE %in% numbers_only(type)) {
+  if (FALSE %in% numbers_only(type)) {
     stop("Type input must be a single number or the name of crosswalk file.")
   }
   ifelse(as.integer(type) < 1 || as.integer(type) > 12,
@@ -161,46 +161,48 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
 
   # Need to make sure query is a zip code of 5 digits.
-  if(as.integer(type) >= 1 && as.integer(type) <= 5 || as.integer(type) == 11){
-    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
+  if (as.integer(type) >= 1 && as.integer(type) <= 5 ||
+      as.integer(type) == 11) {
+    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is a fips code of 5 digits.
-  } else if(as.integer(type) == 7) {
-    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
+  } else if (as.integer(type) == 7) {
+    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is a fips code
     # with census tract attached onto it 11 digits.
-  } else if(as.integer(type) == 6) {
-    if(any(nchar(query) != 11)) stop("Query input is not of length 11")
+  } else if (as.integer(type) == 6) {
+    if (any(nchar(query) != 11)) stop("Query input is not of length 11")
     # Need to make sure query is CBSA code for
     # micropolitan/metropolitan areas: 5 digits.
-  } else if(as.integer(type) == 8) {
-    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
+  } else if (as.integer(type) == 8) {
+    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is CBSA division code for
     # metropolitan areas: 5 digits.
-  } else if(as.integer(type) == 9) {
-    if(any(nchar(query) != 5)) stop("Query input is not of length 5")
+  } else if (as.integer(type) == 9) {
+    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
     # Need to make sure query is 4 digit GEOID for
     # congressional districts: 4 digits.
-  } else if(as.integer(type) == 10) {
-    if(any(nchar(query) != 4)) stop("Query input is not of length 4")
+  } else if (as.integer(type) == 10) {
+    if (any(nchar(query) != 4)) stop("Query input is not of length 4")
     # Need to make sure query is 10 digits for county subdistrict
-  } else if(as.integer(type) == 12) {
-    if(any(nchar(query) != 10)) stop("Query input is not of length 10")
+  } else if (as.integer(type) == 12) {
+    if (any(nchar(query) != 10)) stop("Query input is not of length 10")
   }
 
-  allqueries <- expand.grid(query = query, year = year, quarter = quarter,
+  all_queries <- expand.grid(query = query, year = year, quarter = quarter,
                             stringsAsFactors = FALSE)
-  allqueries$type <- type[[1]]
-  URL <- paste("https://www.huduser.gov/hudapi/public/usps?type=",
-               allqueries$type,
-               "&query=", allqueries$query,
-               "&year=", allqueries$year,
-               "&quarter=", allqueries$quarter,
-               sep="")
+  all_queries$type <- type[[1]]
+  urls <- paste("https://www.huduser.gov/hudapi/public/usps?type=",
+               all_queries$type,
+               "&query=", all_queries$query,
+               "&year=", all_queries$year,
+               "&quarter=", all_queries$quarter,
+               sep = "")
 
-  if(!minimal) return(cw_do_query_calls(URL, allqueries$query, allqueries$year,
-                           allqueries$quarter, lhgeoid, rhgeoid, key))
-  return(cw_do_query_calls(URL, allqueries$query, allqueries$year,
-                           allqueries$quarter, lhgeoid, rhgeoid, key)[[1]])
+  if (!minimal) return(cw_do_query_calls(urls, all_queries$query,
+                                         all_queries$year,
+                           all_queries$quarter, lhgeoid, rhgeoid, key))
+  return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
+                           all_queries$quarter, lhgeoid, rhgeoid, key)[[1]])
 }
 
 
@@ -244,32 +246,25 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY")) {
-
-  # If state query, will provide data at metro and county level
-
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
   year <- args[[2]]
   key <- args[[3]]
   querytype <- args[[4]]
 
-  # Create all combinations of query and year...
-  allqueries <- expand.grid(query = query, year = year,
-                            stringsAsFactors = FALSE)
-
+  # If state query, will provide data at metro and county level
   # Call helper functions...
-  if(querytype == "state") {
+  if (querytype == "state") {
       # Merge county level data with metroarea data.
       return(list(counties = hud_fmr_state_counties(query, year, key),
                   metroareas = hud_fmr_state_metroareas(query, year, key)))
-  } else if(querytype == "cbsa") {
+  } else if (querytype == "cbsa") {
       # Returns zip level data.
       return(hud_fmr_metroarea_zip(query, year, key))
-  } else if(querytype == "county") {
+  } else if (querytype == "county") {
       # Returns zip level data.
       return(hud_fmr_county_zip(query, year, key))
   }
-
 }
 
 
@@ -316,44 +311,46 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   key <- args[[3]]
   querytype <- args[[4]]
 
-  errorURLs <- c()
+  error_urls <- c()
 
-  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
+  all_queries <- expand.grid(query = query, year = year,
+                            stringsAsFactors = FALSE)
 
   list_res <- c()
-  for(i in seq_len(nrow(allqueries))) {
-    # Build the URL for querying the data.
-    URL <- paste("https://www.huduser.gov/hudapi/public/il/",
-                 if(querytype == "state") "statedata/" else "data/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep="")
+  for (i in seq_len(nrow(all_queries))) {
+    # Build the urls for querying the data.
+    urls <- paste("https://www.huduser.gov/hudapi/public/il/",
+                 if (querytype == "state") "statedata/" else "data/",
+                 all_queries$query[i], "?year=", all_queries$year[i], sep = "")
 
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
                   user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
-    cont<-try(content(call), silent = TRUE)
+    cont <- try(content(call), silent = TRUE)
 
-    if('error' %in% names(cont)) {
-      errorURLs <- c(errorURLs, URL)
+    if ("error" %in% names(cont)) {
+      error_urls <- c(error_urls, urls)
     } else {
 
-      if(querytype == "state") {
+      if (querytype == "state") {
         res <- as.data.frame(do.call(cbind,
                                      list(as.data.frame(cont$data$very_low),
                                           as.data.frame(cont$data$extremely_low),
                                           as.data.frame(cont$data$very_low))))
         res$statecode <- cont$data$statecode
-        res$stateID <- cont$data$stateID
-      } else if(querytype == "county") {
+        res$stateid <- cont$data$stateID
+      } else if (querytype == "county") {
         res <- as.data.frame(cont$data)
       } else {
         res <- as.data.frame(cont$data)
       }
 
-      oth <- data.frame(query = allqueries$query[i],
-                        year = allqueries$year[i],
-                        median_income = cont$data$median_income, stringsAsFactors = FALSE)
+      oth <- data.frame(query = all_queries$query[i],
+                        year = all_queries$year[i],
+                        median_income = cont$data$median_income,
+                        stringsAsFactors = FALSE)
       res <- cbind(oth, res)
 
       list_res[[i]] <- res
@@ -361,10 +358,11 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   }
 
 
-  if(length(errorURLs) != 0) {
+  if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+    warning(paste("Could not find data for queries:", paste(error_urls,
+                                                            collapse = "\n"),
                   "It is possible that your key maybe invalid,",
                   "there isn't any data for these parameters,",
                   "or you have reached the maximum number of API",
@@ -373,7 +371,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
                   sep = " "))
   }
 
-  if(length(list_res) != 0) {
+  if (length(list_res) != 0) {
     res <- do.call(rbind, list_res)
     return(res)
   }
@@ -392,8 +390,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   3 - County
 #'   4 - MCD
 #'   5 - Place
-#' @param stateId For types 2,3,4,5, you must provide a stateId. For 3,4,5
-#' @param entityId For types 3,4,5, you must provide a fips code
+#' @param state_id For types 2,3,4,5, you must provide a stateId. For 3,4,5
+#' @param entity_id For types 3,4,5, you must provide a fips code
 #' @param year Gets the year that this data was recorded. Defaults to 2014-2018.
 #'   There are specific year ranges that are only accepted.
 #'   2014-2018
@@ -420,7 +418,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' hud_chas(1)
 #'
-#' hud_chas('2', stateId = '56')
+#' hud_chas('2', state_id = '56')
 #'
 #' hud_chas('3','51','199')
 #'
@@ -428,17 +426,17 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' hud_chas('5', '51', 48996)
 #' }
-hud_chas <- function(type, stateId = NULL, entityId = NULL,
+hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                      year = c("2014-2018"),
                      key = Sys.getenv("HUD_KEY")) {
-  if(!is.vector(type) || !is.vector(year) || !is.vector(key)) {
+  if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {
     stop(paste("Make sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
                "if matrix try as.vector([variable])", sep = ""))
   }
 
-  if(key == "") {
+  if (key == "") {
     stop(paste("Did you forget to set the key?",
                "Please go to https://www.huduser.gov/",
                "hudapi/public/register?comingfrom=1 to",
@@ -462,14 +460,14 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL,
   # Removing leading and ending spaces and converting all integer inputs to
   # characters.
   type <- paste(trimws(as.character(type), which = "both"))
-  stateId <- paste(trimws(as.character(stateId), which = "both"))
-  entityId <- paste(trimws(as.character(entityId), which = "both"))
+  state_id <- paste(trimws(as.character(state_id), which = "both"))
+  entity_id <- paste(trimws(as.character(entity_id), which = "both"))
   year <- unique(paste(trimws(as.character(year), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
   # Check for if years are proper input
-  if(!all(year %in% c("2014-2018","2013-2017","2012-2016","2011-2015",
-                      "2010-2014","2009-2013","2008-2012","2007-2011",
+  if (!all(year %in% c("2014-2018", "2013-2017", "2012-2016", "2011-2015",
+                      "2010-2014", "2009-2013", "2008-2012", "2007-2011",
                       "2006-2010"))) {
     stop("Years specified are not allowed. Check the documentation.")
   }
@@ -478,52 +476,53 @@ hud_chas <- function(type, stateId = NULL, entityId = NULL,
          stop("The type input is not in the range of 1-5"), "")
 
 
-  if(type == "1") {
-    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
-                 "&year=", year,  sep="")
+  if (type == "1") {
+    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
+                 "&year=", year,  sep = "")
   }
 
-  if(type == "2") {
-    if(is.null(stateId)) stop("You need to specify a stateId for this type.")
-    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
-                 "&stateId=", stateId, "&year=", year,  sep="")
-    if(!is.vector(stateId)) {
+  if (type == "2") {
+    if (is.null(state_id)) stop("You need to specify a stateId for this type.")
+    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
+                 "&stateId=", state_id, "&year=", year,  sep = "")
+    if (!is.vector(state_id)) {
       stop(paste("Make sure all inputs are of type vector. ",
                  "Check types with typeof([variable]). ",
                  "If list try unlist([variable]); ",
                  "if matrix try as.vector([variable])", sep = ""))
     }
 
-    allqueries <- expand.grid(fip_code = stateId, year = year, stringsAsFactors = FALSE)
-    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
-                 "&stateId=", allqueries$fip_code,
-                 "&year=", allqueries$year,  sep="")
+    all_queries <- expand.grid(fip_code = state_id, year = year,
+                              stringsAsFactors = FALSE)
+    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
+                 "&stateId=", all_queries$fip_code,
+                 "&year=", all_queries$year,  sep = "")
   }
 
-  if(type == "3" || type == "4" || type == "5") {
-    if(is.null(stateId) || is.null(entityId)) stop("You need to specify a
+  if (type == "3" || type == "4" || type == "5") {
+    if (is.null(state_id) || is.null(entity_id)) stop("You need to specify a
                                                  stateId and entityId
                                                  for this type.")
-    if(!is.vector(stateId) || !is.vector(entityId)) {
+    if (!is.vector(state_id) || !is.vector(entity_id)) {
       stop(paste("Make sure all inputs are of type vector. ",
            "Check types with typeof([variable]). ",
            "If list try unlist([variable]); ",
            "if matrix try as.vector([variable])", sep = ""))
     }
 
-    if(length(stateId) != length(entityId)) {
+    if (length(state_id) != length(entity_id)) {
       stop("You need to make sure stateId and entityId are of same length.")
     }
 
-    allqueries <- expand.grid(state_fip = stateId, year = year,
+    all_queries <- expand.grid(state_fip = state_id, year = year,
                               stringsAsFactors = FALSE)
-    allqueries$entityId <- entityId
+    all_queries$entity_id <- entity_id
 
-    URL <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
-                 "&stateId=", allqueries$state_fip,
-                 "&entityId=", allqueries$entityId,
-                 "&year=", allqueries$year,
-                 sep="")
+    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
+                 "&stateId=", all_queries$state_fip,
+                 "&entityId=", all_queries$entity_id,
+                 "&year=", all_queries$year,
+                 sep = "")
   }
-  return(chas_do_query_calls(URL, key = key))
+  return(chas_do_query_calls(urls, key = key))
 }

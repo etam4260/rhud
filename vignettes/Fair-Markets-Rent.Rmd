@@ -113,6 +113,28 @@ hud_fmr(query= "Virginia", year = '2021')
 hud_fmr(query= "51", year = '2021')
 ```
 
+If you only need the state level data, then this might work better...
+
+```{r, eval=FALSE}
+# These functions gets FMR data for the state of Virginia in 2021.
+hud_fmr_state_counties(state = 'VA', year = '2021')
+
+hud_fmr_state_counties(state = "Virginia", year = '2021')
+
+hud_fmr_state_counties(state = "51", year = '2021')
+```
+
+If you need just metropolitan data...
+
+```{r, eval=FALSE}
+# These functions gets FMR data for the state of Virginia in 2021.
+hud_fmr_state_metroareas(state = 'VA', year = '2021')
+
+hud_fmr_state_metroareas(state = "Virginia", year = '2021')
+
+hud_fmr_state_metroareas(state = "51", year = '2021')
+```
+
 #### County Level Fair Markets Rent
 This is an example which shows you how to query the Fair Markets Rent on a
 county level basis. These are defined with a 2 digit state code + 3 digit county
@@ -125,23 +147,30 @@ available.
 hud_fmr(query = '0100199999', year = '2017')
 ```
 
+You can also choose to use:
+```{r, eval=FALSE}
+# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
+hud_fmr_county_zip(county = '0100199999', year = '2017')
+```
+
 #### Small Areas Fair Markets Rent
-This is an example which shows you how to query the Small Areas Fair Markets Rent.
-Small Areas are defined as metropolitan and micropolitan areas which are defined in
-CBSA codes. Currently we know how to query for metropolitan, but not sure for 
-micropolitan yet. I recommend
-taking a look at [US Metropolitan Areas][] to determine what metroareas
-are available.
+
 ```{r, eval=FALSE}
 # Gets FMR data for METRO area.
 hud_fmr(query = "METRO47900M47900", year=c(2018))
 ```
 
+You can also choose to use:
+```{r, eval=FALSE}
+# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
+hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
+```
 ### Input Arguments
 
 **QUERY**: Can provide either a 10 digit FIPS code which is almost always
   state fips + county fips + 99999, or state abbreviation. 
-  Can also provide a CBSA code. You are only allowed to query for metropolitan areas.
+  Can also provide a CBSA code. You are only allowed to query for metropolitan
+  areas.
   
   Run hud_states() to get a list of counties.
   

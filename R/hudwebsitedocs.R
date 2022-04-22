@@ -10,11 +10,13 @@ rhud_website <- function(website = c("github-pages", "github")) {
   github_pages <- "https://etam4260.github.io/hudr/"
   github <- "https://github.com/etam4260/hudr"
 
-  if(.Platform$OS.type == "unix") {
-    if("github-pages" %in% website) system(paste("open", github, sep = " "))
-    if("github-pages" %in% website) system(paste("open", github_pages, sep = " "))
-  } else if(.Platform$OS.type == "windows") {
-    if("github-pages" %in% website) system(paste("start", github, sep = " "))
-    if("github-pages" %in% website) system(paste("start", github_pages, sep = " "))
+  if (.Platform$OS.type == "unix") {
+    if ("github" %in% website) system(paste("open", github, sep = " "))
+    if ("github-pages" %in% website) system(paste("open", github_pages,
+                                                 sep = " "))
+  } else if (.Platform$OS.type == "windows") {
+    if ("github" %in% website) system(paste("start", github, sep = " "))
+    if ("github-pages" %in% website) system(paste("start", github_pages,
+                                                 sep = " "))
   }
 }

@@ -42,9 +42,11 @@
 #' }
 hud_cdbg <- function(file = 1) {
 
-  if(as.integer(file) > 4 || as.integer(file) < 1) stop("File number out of range.")
+  if (as.integer(file) > 4 || as.integer(file) < 1) {
+    stop("File number out of range.")
+  }
 
-  if(as.integer(file) == 1) {
+  if (as.integer(file) == 1) {
     data <- suppressMessages(import(paste("https://drgr.hud.gov/public/",
                                           "downloads/DR-CDBG/CDBG-DR",
                                           "%20Financial",
@@ -62,7 +64,7 @@ hud_cdbg <- function(file = 1) {
     data <- na.locf(data)
 
     data <- data[-which(data$Grantee == "Total"), ]
-  } else if(as.integer(file) == 2) {
+  } else if (as.integer(file) == 2) {
     data <- suppressMessages(import(paste("https://drgr.hud.gov/public/",
                                           "downloads/DR-CDBG/CDBG-DR",
                                           "%20Financial",
@@ -84,14 +86,14 @@ hud_cdbg <- function(file = 1) {
 
     data <- data[-which(data$Grantee == "Total"), ]
     data <- data[-which(data$`Appropriation Abbreviation` == "Total"), ]
-  } else if(as.integer(file) == 3) {
+  } else if (as.integer(file) == 3) {
     data <- suppressMessages(import(paste("https://drgr.hud.gov/public/",
                                           "downloads/DR-CDBG/CDBG-DR",
                                           "%20Financial",
                                           "%20Report",
                                           "%20Monthly",
                                           "%20Summary.xlsx", sep = "")))
-  } else if(as.integer(file) == 4) {
+  } else if (as.integer(file) == 4) {
     data <- suppressMessages(import(paste("https://drgr.hud.gov/public/",
                                     "downloads/DR-CDBG/CDBG-DR",
                                     "%20Performance",
@@ -102,24 +104,22 @@ hud_cdbg <- function(file = 1) {
     colnames(data)[2] <- "Appropriation"
 
     cname <- colnames(data)[11]
-    colnames(data)[11] <- paste(cname, data[1,11], sep = ": ")
-    colnames(data)[12] <- paste(cname, data[1,12], sep = ": ")
-    colnames(data)[13] <- paste(cname, data[1,13], sep = ": ")
+    colnames(data)[11] <- paste(cname, data[1, 11], sep = ": ")
+    colnames(data)[12] <- paste(cname, data[1, 12], sep = ": ")
+    colnames(data)[13] <- paste(cname, data[1, 13], sep = ": ")
 
     cname <- colnames(data)[14]
-    colnames(data)[14] <- paste(cname, data[1,14], sep = ": ")
-    colnames(data)[15] <- paste(cname, data[1,15], sep = ": ")
-    colnames(data)[16] <- paste(cname, data[1,16], sep = ": ")
+    colnames(data)[14] <- paste(cname, data[1, 14], sep = ": ")
+    colnames(data)[15] <- paste(cname, data[1, 15], sep = ": ")
+    colnames(data)[16] <- paste(cname, data[1, 16], sep = ": ")
 
     cname <- colnames(data)[17]
-    colnames(data)[17] <- paste(cname, data[1,17], sep = ": ")
-    colnames(data)[18] <- paste(cname, data[1,18], sep = ": ")
-    colnames(data)[19] <- paste(cname, data[1,19], sep = ": ")
+    colnames(data)[17] <- paste(cname, data[1, 17], sep = ": ")
+    colnames(data)[18] <- paste(cname, data[1, 18], sep = ": ")
+    colnames(data)[19] <- paste(cname, data[1, 19], sep = ": ")
 
     data <- na.locf(data)
   }
 
   return(data)
 }
-
-

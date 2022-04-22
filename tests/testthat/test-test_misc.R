@@ -1,15 +1,15 @@
 test_that("All MCD In State Query", {
   skip_if(Sys.getenv("HUD_KEY") == "")
-  mcd <- hud_state_minor_civil_divisions('CA')
+  mcd <- hud_state_minor_civil_divisions("CA")
   expect_true(nrow(mcd) >= 1)
 
-  mcd <- hud_state_minor_civil_divisions('Alabama')
+  mcd <- hud_state_minor_civil_divisions("Alabama")
   expect_true(nrow(mcd) >= 1)
 
   mcd <- hud_state_minor_civil_divisions("6")
   expect_true(nrow(mcd) >= 1)
 
-  expect_error(hud_state_minor_civil_divisions('CA', "qdqdwq"))
+  expect_error(hud_state_minor_civil_divisions("CA", "qdqdwq"))
 })
 
 test_that("All Cities in State Query", {
@@ -23,7 +23,7 @@ test_that("All Cities in State Query", {
   cities <- hud_state_places("8")
   expect_true(nrow(cities) >= 1)
 
-  expect_error(hud_state_places('CA', "qdqdwq"))
+  expect_error(hud_state_places("CA", "qdqdwq"))
 })
 
 test_that("List States Query", {
@@ -35,16 +35,16 @@ test_that("List States Query", {
 
 test_that("List Counties Query", {
   skip_if(Sys.getenv("HUD_KEY") == "")
-  counties <- hud_state_counties('MD')
+  counties <- hud_state_counties("MD")
   expect_true(nrow(counties) >= 1)
 
-  counties <- hud_state_counties('Michigan')
+  counties <- hud_state_counties("Michigan")
   expect_true(nrow(counties) >= 1)
 
-  counties <- hud_state_counties('Washington')
+  counties <- hud_state_counties("Washington")
   expect_true(nrow(counties) >= 1)
 
-  expect_error(hud_state_counties('CA', "qdqdwq"))
+  expect_error(hud_state_counties("CA", "qdqdwq"))
 })
 
 test_that("List Small Areas Query", {

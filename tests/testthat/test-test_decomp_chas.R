@@ -19,7 +19,7 @@ test_that("test hud_chas_nation()", {
   expect_error(hud_chas_nation(year = c(2018, 2019)))
 })
 
-test_that("test hud_chas_state" ,{
+test_that("test hud_chas_state", {
   skip_if(Sys.getenv("HUD_KEY") == "")
   # Try querying for a state using abbreviation...
   # Try lowercase too... Try uppercase too...
@@ -53,11 +53,7 @@ test_that("test hud_chas_state" ,{
   # Try querying for all states in nation
   hudstates <- hud_nation_states_territories()
   hudstates <- hudstates[as.numeric(hudstates$state_num) < 57, ]
-  hudstates <- hudstates[hudstates$state_code != 'DC', ]
-
-  # all_states_full <- hud_chas_state(hudstates$state_name)
-  # expect_true(nrow(all_states_full) >= 1)
-  # expect_true(check_is_not_list(all_states_full))
+  hudstates <- hudstates[hudstates$state_code != "DC", ]
 
   # Try to query for all state codes?
   all_state_abbr <- hud_chas_state(hudstates$state_code)
@@ -73,7 +69,7 @@ test_that("test hud_chas_state" ,{
   expect_true(identical(all_state_num, all_state_abbr))
 })
 
-test_that("test hud_chas_county()",{
+test_that("test hud_chas_county()", {
   skip_if(Sys.getenv("HUD_KEY") == "")
   # Simple query only a single county.
   test <- hud_chas_county(county = "06105")
@@ -85,10 +81,10 @@ test_that("test hud_chas_county()",{
   expect_true(nrow(test) == 2)
   # Query multiple character counties
 
-  test <- hud_chas_county(county = c("06105","06115"))
+  test <- hud_chas_county(county = c("06105", "06115"))
   expect_true(nrow(test) == 2)
 
-  test <- hud_chas_county(county = c("06105","06115"),
+  test <- hud_chas_county(county = c("06105", "06115"),
                           year = c("2013-2017", "2014-2018"))
   expect_true(nrow(test) == 4)
 
@@ -96,30 +92,17 @@ test_that("test hud_chas_county()",{
   all_md_counties <- hud_state_counties("MD")
 
   # Only use the first 5 numbers in fips code.
-  all_md <- hud_chas_county(county = substr(all_md_counties$fips_code,0,5))
+  all_md <- hud_chas_county(county = substr(all_md_counties$fips_code, 0, 5))
   expect_true(nrow(all_md) >= 1)
   expect_true(check_is_not_list(all_md))
 })
 
-test_that("test hud_chas_state_mcd()",{
-
-  #skip_if(Sys.getenv("HUD_KEY") == "")
-
-  # This will take a while...
-  #all_md <- hud_chas_state_mcd("md")
-
-  #expect_true(nrow(all_md) >= 1)
-  #expect_true(check_is_not_list(all_md))
-
-})
-
-test_that("test hud_chas_state_place()",{
-  #skip_if(Sys.getenv("HUD_KEY") == "").
+test_that("test hud_chas_state_mcd()", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
 
   # This will take a while...
-  #all_md <- hud_chas_state_place("md")
+  all_md <- hud_chas_state_mcd("md")
 
-  #expect_true(nrow(all_md) >= 1)
-  #expect_true(check_is_not_list(all_md))
-
+  expect_true(nrow(all_md) >= 1)
+  expect_true(check_is_not_list(all_md))
 })

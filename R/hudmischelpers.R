@@ -31,23 +31,23 @@
 #' some_geoid <- hud_add_leading_zeros(10, some_geoid)
 #' }
 add_leading_zeros <- function(geoid_type = "zip", input) {
-  if(!numbers_only(geoid_type)) {
-    if(geoid_type == "zip") {
+  if (!numbers_only(geoid_type)) {
+    if (geoid_type == "zip") {
       return(fix_geoid(input, 5))
-    } else if(geoid_type == "county") {
+    } else if (geoid_type == "county") {
       return(fix_geoid(input, 5))
-    } else if(geoid_type == "cbsa") {
+    } else if (geoid_type == "cbsa") {
       return(fix_geoid(input, 5))
-    } else if(geoid_type == "cbsadiv") {
+    } else if (geoid_type == "cbsadiv") {
       return(fix_geoid(input, 5))
-    } else if(geoid_type == "countysub") {
+    } else if (geoid_type == "countysub") {
       return(fix_geoid(input, 10))
-    } else if(geoid_type == "cd") {
+    } else if (geoid_type == "cd") {
       return(fix_geoid(input, 4))
-    } else if(geoid_type == "tract") {
+    } else if (geoid_type == "tract") {
       return(fix_geoid(input, 11))
     }
-  } else if(numbers_only(geoid_type)) {
+  } else if (numbers_only(geoid_type)) {
     return(fix_geoid(input, geoid_type))
   } else {
     stop(paste("Not a valid input argument for geoid_type. ",
@@ -123,9 +123,10 @@ add_delimiters <- function(input) {
 #' @noRd
 #' @noMd
 fix_geoid <- function(geoids, num_char) {
-  for(i in seq_len(length(geoids))) {
-      diff = num_char - nchar(geoids[i])
-      geoids[i] <- paste(paste(rep(0, diff), collapse = ""), geoids[i], sep = "")
+  for (i in seq_len(length(geoids))) {
+      diff <- num_char - nchar(geoids[i])
+      geoids[i] <- paste(paste(rep(0, diff), collapse = ""),
+                         geoids[i], sep = "")
   }
   return(geoids)
 }
@@ -142,7 +143,9 @@ fix_geoid <- function(geoids, num_char) {
 #'   or fipcode.
 #' @noRd
 #' @noMd
-translate_stateid <- function (stateids,
-                                   encoding = c("abbr", "fullname", "fipcode")) {
+translate_stateid <- function(stateids,
+                                   encoding = c("abbr",
+                                                "fullname",
+                                                "fipcode")) {
 
 }

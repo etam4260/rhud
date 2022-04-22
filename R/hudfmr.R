@@ -1,6 +1,7 @@
 #' @name hud_fmr_state_metroareas
 #' @title hud_fmr_state_metroareas
-#' @description This function queries for a state and returns the FMR calculation
+#' @description This function queries for a state and returns the
+#'   FMR calculation
 #'   at a metroarea resolution for all metroareas in this state.
 #' @param state The state to query for.
 #' @param year Gets the year that this data was recorded.
@@ -11,32 +12,35 @@
 #' @keywords Fair Markets Rent API
 #' @export
 #' @returns Fair markets rent for metroareas.
-hud_fmr_state_metroareas <- function(state,  year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
+hud_fmr_state_metroareas <- function(state,
+                                     year = format(Sys.Date() - 365, "%Y"),
+                                     key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
   year <- args[[2]]
   key <- args[[3]]
 
-  errorURLs <- c()
+  error_urls <- c()
 
   # Create all combinations of query and year...
-  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
+  allqueries <- expand.grid(query = query, year = year,
+                            stringsAsFactors = FALSE)
 
   list_res <- c()
-  for(i in seq_len(nrow(allqueries))) {
-    # Build the URL for querying the data.
-    URL <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+  for (i in seq_len(nrow(allqueries))) {
+    # Build the urls for querying the data.
+    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
                  "statedata/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep="")
+                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
                   user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
-    cont<-try(content(call), silent = TRUE)
-    if('error' %in% names(cont)) {
-      errorURLs <- c(errorURLs, URL)
+    cont <- try(content(call), silent = TRUE)
+    if ("error" %in% names(cont)) {
+      error_urls <- c(error_urls, urls)
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$metroareas))
       res$query <- allqueries$query[i]
@@ -45,10 +49,11 @@ hud_fmr_state_metroareas <- function(state,  year = format(Sys.Date() - 365, "%Y
     }
   }
 
-  if(length(errorURLs) != 0) {
+  if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+    warning(paste("Could not find data for queries:", paste(error_urls,
+                                                            collapse = "\n"),
                   "It is possible that your key maybe invalid,",
                   "there isn't any data for these parameters,",
                   "or you have reached the maximum number of API",
@@ -58,7 +63,7 @@ hud_fmr_state_metroareas <- function(state,  year = format(Sys.Date() - 365, "%Y
   }
 
 
-  if(length(list_res) != 0) {
+  if (length(list_res) != 0) {
     res <- as.data.frame(do.call(rbind, list_res))
     res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
@@ -70,7 +75,8 @@ hud_fmr_state_metroareas <- function(state,  year = format(Sys.Date() - 365, "%Y
 
 #' @name hud_fmr_state_counties
 #' @title hud_fmr_state_counties
-#' @description This function queries for a state and returns the FMR calculation
+#' @description This function queries for a state and returns the
+#'   FMR calculation
 #'   at a county resolution for all counties in this state.
 #' @param state The state to query for.
 #' @param year Gets the year that this data was recorded.
@@ -81,32 +87,34 @@ hud_fmr_state_metroareas <- function(state,  year = format(Sys.Date() - 365, "%Y
 #' @keywords Fair Markets Rent API
 #' @export
 #' @returns Fair markets rent for counties
-hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
+hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
+                                   key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
   year <- args[[2]]
   key <- args[[3]]
 
-  errorURLs <- c()
+  error_urls <- c()
 
   # Create all combinations of query and year...
-  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
+  allqueries <- expand.grid(query = query, year = year,
+                            stringsAsFactors = FALSE)
 
   list_res <- c()
-  for(i in seq_len(nrow(allqueries))) {
-    # Build the URL for querying the data.
-    URL <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+  for (i in seq_len(nrow(allqueries))) {
+    # Build the urls for querying the data.
+    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
                  "statedata/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep="")
+                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
                   user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
-    cont<-try(content(call), silent = TRUE)
-    if('error' %in% names(cont)) {
-      errorURLs <- c(errorURLs, URL)
+    cont <- try(content(call), silent = TRUE)
+    if ("error" %in% names(cont)) {
+      error_urls <- c(error_urls, urls)
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$counties))
       res$query <- allqueries$query[i]
@@ -116,10 +124,11 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
   }
 
 
-  if(length(errorURLs) != 0) {
+  if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+    warning(paste("Could not find data for queries:", paste(error_urls,
+                                                            collapse = "\n"),
                   "It is possible that your key maybe invalid,",
                   "there isn't any data for these parameters,",
                   "or you have reached the maximum number of API",
@@ -129,7 +138,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
   }
 
 
-  if(length(list_res) != 0) {
+  if (length(list_res) != 0) {
     res <- as.data.frame(do.call(rbind, list_res))
     res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
@@ -155,40 +164,42 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' @keywords Fair Markets Rent API
 #' @export
 #' @returns
-hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
-  # A major issue is that counties that are not small area don't return zip code level data.
+hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
+                               key = Sys.getenv("HUD_KEY")) {
+
   args <- fmr_il_input_check_cleansing(county, year, key)
   query <- args[[1]]
   year <- args[[2]]
   key <- args[[3]]
 
-  errorURLs <- c()
+  error_urls <- c()
 
-  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
+  allqueries <- expand.grid(query = query, year = year,
+                            stringsAsFactors = FALSE)
 
   list_res <- c()
-  for(i in seq_len(nrow(allqueries))) {
-    # Build the URL for querying the data.
-    URL <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+  for (i in seq_len(nrow(allqueries))) {
+    # Build the urls for querying the data.
+    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
                  "data/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep="")
+                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
                   user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
-    cont<-try(content(call), silent = TRUE)
-    if('error' %in% names(cont)) {
-      errorURLs <- c(errorURLs, URL)
+    cont <- try(content(call), silent = TRUE)
+    if ("error" %in% names(cont)) {
+      error_urls <- c(error_urls, urls)
     } else {
-      if(cont$data$smallarea_status == '0') {
+      if (cont$data$smallarea_status == "0") {
         # Returns just county
         res <- as.data.frame(do.call(cbind, cont$data$basicdata))
 
         res$query <- allqueries$query[i]
         res$year <- allqueries$year[i]
-        res$zip_code <- ''
+        res$zip_code <- ""
 
         res$county_name <- cont$data$county_name
         res$counties_msa <- cont$data$counties_msa
@@ -224,10 +235,11 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), ke
   }
 
 
-  if(length(errorURLs) != 0) {
+  if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+    warning(paste("Could not find data for queries:", paste(error_urls,
+                                                            collapse = "\n"),
                   "It is possible that your key maybe invalid,",
                   "there isn't any data for these parameters,",
                   "or you have reached the maximum number of API",
@@ -237,8 +249,8 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), ke
   }
 
 
-  if(length(list_res) != 0) {
-    if(length(list_res) != 1) {
+  if (length(list_res) != 0) {
+    if (length(list_res) != 1) {
       res <- as.data.frame(do.call(rbind, list_res))
       res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
@@ -267,41 +279,43 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"), ke
 #' @keywords Fair Markets Rent API
 #' @export
 #' @returns
-hud_fmr_metroarea_zip <- function(metroarea, year = format(Sys.Date() - 365, "%Y"), key = Sys.getenv("HUD_KEY")) {
-  # A major issue that that metroareas that are not small areas dont return zip level data.
+hud_fmr_metroarea_zip <- function(metroarea,
+                                  year = format(Sys.Date() - 365, "%Y"),
+                                  key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(metroarea, year, key)
   query <- args[[1]]
   year <- args[[2]]
   key <- args[[3]]
 
-  errorURLs <- c()
+  error_urls <- c()
 
-  allqueries <- expand.grid(query = query, year = year, stringsAsFactors = FALSE)
+  allqueries <- expand.grid(query = query, year = year,
+                            stringsAsFactors = FALSE)
 
   list_res <- c()
-  for(i in seq_len(nrow(allqueries))) {
-    # Build the URL for querying the data.
-    URL <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+  for (i in seq_len(nrow(allqueries))) {
+    # Build the urls for querying the data.
+    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
                  "data/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep="")
+                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call<-try(GET(URL, add_headers(Authorization=paste("Bearer ",
+    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
                   user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
-    cont<-try(content(call), silent = TRUE)
-    if('error' %in% names(cont)) {
-      errorURLs <- c(errorURLs, URL)
+    cont <- try(content(call), silent = TRUE)
+    if ("error" %in% names(cont)) {
+      error_urls <- c(error_urls, urls)
     } else {
 
-      if(cont$data$smallarea_status == '0') {
+      if (cont$data$smallarea_status == "0") {
         # Returns just county
         res <- as.data.frame(do.call(cbind, cont$data$basicdata))
 
         res$query <- allqueries$query[i]
         res$year <- allqueries$year[i]
-        res$zip_code <- ''
+        res$zip_code <- ""
 
         res$county_name <- cont$data$county_name
         res$counties_msa <- cont$data$counties_msa
@@ -335,10 +349,11 @@ hud_fmr_metroarea_zip <- function(metroarea, year = format(Sys.Date() - 365, "%Y
   }
 
 
-  if(length(errorURLs) != 0) {
+  if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(errorURLs, collapse = "\n"),
+    warning(paste("Could not find data for queries:", paste(error_urls,
+                                                            collapse = "\n"),
                   "It is possible that your key maybe invalid,",
                   "there isn't any data for these parameters,",
                   "or you have reached the maximum number of API",
@@ -347,9 +362,9 @@ hud_fmr_metroarea_zip <- function(metroarea, year = format(Sys.Date() - 365, "%Y
                   sep = " "))
   }
 
-  if(length(list_res) != 0) {
+  if (length(list_res) != 0) {
 
-    if(length(list_res) != 1) {
+    if (length(list_res) != 1) {
       res <- as.data.frame(do.call(rbind, list_res))
       res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
@@ -359,4 +374,3 @@ hud_fmr_metroarea_zip <- function(metroarea, year = format(Sys.Date() - 365, "%Y
   }
   return(NULL)
 }
-

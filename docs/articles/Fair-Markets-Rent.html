@@ -169,22 +169,45 @@
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query<span class="op">=</span> <span class="st">"Virginia"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query<span class="op">=</span> <span class="st">"51"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span></code></pre></div>
+<p>If you only need the state level data, then this might work better…</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># These functions gets FMR data for the state of Virginia in 2021.</span>
+<span class="fu"><a href="../reference/hud_fmr_state_counties.html">hud_fmr_state_counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">'VA'</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_fmr_state_counties.html">hud_fmr_state_counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"Virginia"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_fmr_state_counties.html">hud_fmr_state_counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"51"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span></code></pre></div>
+<p>If you need just metropolitan data…</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># These functions gets FMR data for the state of Virginia in 2021.</span>
+<span class="fu"><a href="../reference/hud_fmr_state_metroareas.html">hud_fmr_state_metroareas</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">'VA'</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_fmr_state_metroareas.html">hud_fmr_state_metroareas</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"Virginia"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_fmr_state_metroareas.html">hud_fmr_state_metroareas</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"51"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="county-level-fair-markets-rent">County Level Fair Markets Rent<a class="anchor" aria-label="anchor" href="#county-level-fair-markets-rent"></a>
 </h4>
 <p>This is an example which shows you how to query the Fair Markets Rent on a county level basis. These are defined with a 2 digit state code + 3 digit county code. You also need a 99999 code added onto the end. We currently don’t know why the extra 99999 is included and have not found any cases where its different. I recommend taking a look at <a href="#us-counties">US Counties</a> to determine what counties are available.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span></code></pre></div>
+<p>You can also choose to use:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999</span>
+<span class="fu"><a href="../reference/hud_fmr_county_zip.html">hud_fmr_county_zip</a></span><span class="op">(</span>county <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="small-areas-fair-markets-rent">Small Areas Fair Markets Rent<a class="anchor" aria-label="anchor" href="#small-areas-fair-markets-rent"></a>
 </h4>
-<p>This is an example which shows you how to query the Small Areas Fair Markets Rent. Small Areas are defined as metropolitan and micropolitan areas which are defined in CBSA codes. Currently we know how to query for metropolitan, but not sure for micropolitan yet. I recommend taking a look at <a href="#us-metropolitan-areas">US Metropolitan Areas</a> to determine what metroareas are available.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Gets FMR data for METRO area.</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"METRO47900M47900"</span>, year<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>You can also choose to use:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999</span>
+<span class="fu"><a href="../reference/hud_fmr_metroarea_zip.html">hud_fmr_metroarea_zip</a></span><span class="op">(</span>metroarea <span class="op">=</span> <span class="st">'METRO47900M47900'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div class="section level3">

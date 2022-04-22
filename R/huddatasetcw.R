@@ -29,7 +29,8 @@
 #'   according to method ratio.
 #'   If method is empty, no allocation method will be applied --
 #'   the crosswalk file will just be attached to the dataset.
-#' @param method The allocation method to use: residential, business, other, or total.
+#' @param method The allocation method to use: residential,
+#'   business, other, or total.
 #'   If method is empty, no allocation method will be applied --
 #'   the crosswalk file will just be attached to the dataset.
 #' @param year The year measurement was taken.
@@ -50,9 +51,7 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
   # Tell user that this it will take 1 second per 20 rows in the dataframe.
   message(paste("Message:\nCrosswalking this dataset will take around:",
-                nrow(data)/20 ,"seconds", sep = " "))
-
-  #data <- data
+                nrow(data) / 20, "seconds", sep = " "))
 
   geoid <- args[[1]]
   geoid_col <- args[[2]]
@@ -70,44 +69,44 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
   # need to show user how long it'll take.
   # The hud_cw_zip_county will take care to make sure
   # there are only unique queries.
-  if(geoid == "zip" && cw_geoid %in% c("county", "countysub", "tract",
+  if (geoid == "zip" && cw_geoid %in% c("county", "countysub", "tract",
                                        "cbsa", "cbsadiv", "cd")) {
-    if(cw_geoid == "county") {
-      cw_data <- hud_cw_zip_county(data[,geoid_col], year = year,
+    if (cw_geoid == "county") {
+      cw_data <- hud_cw_zip_county(data[, geoid_col], year = year,
                                    quarter = quarter, key = key)
-    } else if(cw_geoid == "countysub") {
-      cw_data <- hud_cw_zip_countysub(data[,geoid_col], year = year,
+    } else if (cw_geoid == "countysub") {
+      cw_data <- hud_cw_zip_countysub(data[, geoid_col], year = year,
                                       quarter = quarter, key = key)
-    } else if(cw_geoid == "cd") {
-      cw_data <- hud_cw_zip_cd(data[,geoid_col], year = year,
+    } else if (cw_geoid == "cd") {
+      cw_data <- hud_cw_zip_cd(data[, geoid_col], year = year,
                                quarter = quarter, key = key)
-    } else if(cw_geoid == "tract") {
-      cw_data <- hud_cw_zip_tract(data[,geoid_col], year = year,
+    } else if (cw_geoid == "tract") {
+      cw_data <- hud_cw_zip_tract(data[, geoid_col], year = year,
                                   quarter = quarter, key = key)
-    } else if(cw_geoid == "cbsa") {
-      cw_data <- hud_cw_zip_cbsa(data[,geoid_col], year = year,
+    } else if (cw_geoid == "cbsa") {
+      cw_data <- hud_cw_zip_cbsa(data[, geoid_col], year = year,
                                  quarter = quarter, key = key)
-    } else if(cw_geoid == "cbsadiv") {
-      cw_data <- hud_cw_zip_cbsadiv(data[,geoid_col], year = year,
+    } else if (cw_geoid == "cbsadiv") {
+      cw_data <- hud_cw_zip_cbsadiv(data[, geoid_col], year = year,
                                     quarter = quarter, key = key)
     }
-  } else if(geoid == "county" && cw_geoid == "zip") {
-    cw_data <- hud_cw_county_zip(data[,geoid_col], year = year,
+  } else if (geoid == "county" && cw_geoid == "zip") {
+    cw_data <- hud_cw_county_zip(data[, geoid_col], year = year,
                                  quarter = quarter, key = key)
-  } else if(geoid == "countysub"  && cw_geoid == "zip") {
-    cw_data <- hud_cw_countysub_zip(data[,geoid_col], year = year,
+  } else if (geoid == "countysub"  && cw_geoid == "zip") {
+    cw_data <- hud_cw_countysub_zip(data[, geoid_col], year = year,
                                     quarter = quarter, key = key)
-  } else if(geoid == "cd"  && cw_geoid == "zip") {
-    cw_data <- hud_cw_cd_zip(data[,geoid_col], year = year,
+  } else if (geoid == "cd"  && cw_geoid == "zip") {
+    cw_data <- hud_cw_cd_zip(data[, geoid_col], year = year,
                              quarter = quarter, key = key)
-  } else if(geoid == "tract"  && cw_geoid == "zip") {
-    cw_data <- hud_cw_tract_zip(data[,geoid_col], year = year,
+  } else if (geoid == "tract"  && cw_geoid == "zip") {
+    cw_data <- hud_cw_tract_zip(data[, geoid_col], year = year,
                                 quarter = quarter, key = key)
-  } else if(geoid == "cbsa" && cw_geoid == "zip") {
-    cw_data <- hud_cw_cbsa_zip(data[,geoid_col], year = year,
+  } else if (geoid == "cbsa" && cw_geoid == "zip") {
+    cw_data <- hud_cw_cbsa_zip(data[, geoid_col], year = year,
                                quarter = quarter, key = key)
-  } else if(geoid == "cbsadiv" && cw_geoid == "zip") {
-    cw_data <- hud_cw_cbsadiv_zip(data[,geoid_col], year = year,
+  } else if (geoid == "cbsadiv" && cw_geoid == "zip") {
+    cw_data <- hud_cw_cbsadiv_zip(data[, geoid_col], year = year,
                                   quarter = quarter, key = key)
   } else {
     stop(paste("Crosswalk from",
@@ -120,10 +119,10 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
   # If no columns are provides, assume just want to merge...
   # If not method is provided, assume just merge...
-  if(is.na(cw_geoid_col) || is.na(method)) {
+  if (is.na(cw_geoid_col) || is.na(method)) {
 
     return(merge(cw_data, data, by.x = 6, by.y = geoid_col))
-  } else if(!is.na(cw_geoid_col) && !is.na(method)) {
+  } else if (!is.na(cw_geoid_col) && !is.na(method)) {
     merged <- merge(cw_data, data, by.x = 6, by.y = geoid_col)
 
     # Clear memory
@@ -131,21 +130,25 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
     data <- NULL
 
     # Apply method to columns specified.
-    if(method == "residential" || method == "res" || "res_ratio") {
-      for(i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] * merged[i, "res_ratio"]
+    if (method == "residential" || method == "res" || "res_ratio") {
+      for (i in seq_len(nrow(merged))) {
+        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
+          merged[i, "res_ratio"]
       }
-    } else if(method == "business" || method == "bus" || "bus_ratio") {
-      for(i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] * merged[i, "bus_ratio"]
+    } else if (method == "business" || method == "bus" || "bus_ratio") {
+      for (i in seq_len(nrow(merged))) {
+        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
+          merged[i, "bus_ratio"]
       }
-    } else if(method == "other" || method == "oth" || "oth_ratio") {
-      for(i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] * merged[i, "oth_ratio"]
+    } else if (method == "other" || method == "oth" || "oth_ratio") {
+      for (i in seq_len(nrow(merged))) {
+        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
+          merged[i, "oth_ratio"]
       }
-    } else if(method == "total" || method == "tot" || "tot_ratio") {
-      for(i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] * merged[i, "tot_ratio"]
+    } else if (method == "total" || method == "tot" || "tot_ratio") {
+      for (i in seq_len(nrow(merged))) {
+        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
+          merged[i, "tot_ratio"]
       }
     }
   }
