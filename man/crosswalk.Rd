@@ -37,7 +37,8 @@ according to method ratio.
 If method is empty, no allocation method will be applied --
 the crosswalk file will just be attached to the dataset.}
 
-\item{method}{The allocation method to use: residential, business, other, or total.
+\item{method}{The allocation method to use: residential,
+business, other, or total.
 If method is empty, no allocation method will be applied --
 the crosswalk file will just be attached to the dataset.}
 

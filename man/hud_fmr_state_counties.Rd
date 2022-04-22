@@ -24,7 +24,8 @@ for an account and request for an API key.}
 Fair markets rent for counties
 }
 \description{
-This function queries for a state and returns the FMR calculation
+This function queries for a state and returns the
+FMR calculation
 at a county resolution for all counties in this state.
 }
 \keyword{API}

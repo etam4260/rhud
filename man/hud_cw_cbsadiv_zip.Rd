@@ -36,7 +36,8 @@ https://www.huduser.gov/portal/dataset/uspszip-api.html
 \description{
 This function queries the Crosswalks API provided by
 US Department of Housing and Urban Development. This
-returns the crosswalk for cbsadiv to zip.  (Available 4th Quarter 2017 onwards)
+returns the crosswalk for cbsadiv to zip.
+(Available 4th Quarter 2017 onwards)
 }
 \examples{
 \dontrun{

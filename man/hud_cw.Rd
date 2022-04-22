@@ -80,41 +80,41 @@ library(hudr)
 
 Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
-hud_cw(type = 1, query = '35213', year = c('2010', '2011'),
-   quarter = c('1'))
+hud_cw(type = 1, query = "35213", year = c("2010", "2011"),
+   quarter = c("1"))
 
-hud_cw(type = '2', query = '35213', year = c('2016', '2020'),
-   quarter = c('2'))
+hud_cw(type = "2", query = "35213", year = c("2016", "2020"),
+   quarter = c("2"))
 
-hud_cw(type = 3, query = 35213, year = c('2012', '2011'),
-   quarter = c('3'))
+hud_cw(type = 3, query = 35213, year = c("2012", "2011"),
+   quarter = c("3"))
 
-hud_cw(type = 4, query = '22031', year = c('2017', '2019'),
-   quarter = c('4'))
+hud_cw(type = 4, query = "22031", year = c("2017", "2019"),
+   quarter = c("4"))
 
-hud_cw(type = '5', query = '35213', year = c(2011, '2012'),
-   quarter = c('1','2'))
+hud_cw(type = "5", query = "35213", year = c(2011, "2012"),
+   quarter = c("1", "2"))
 
-hud_cw(type = 6, query = '48201223100', year = c('2017', '2010'),
-   quarter = c('1','2','3'))
+hud_cw(type = 6, query = "48201223100", year = c("2017", "2010"),
+   quarter = c("1", "2", "3"))
 
-hud_cw(type = 7, query = '22031', year = c('2010', '2011'),
-   quarter = c('1','2','3','4'))
+hud_cw(type = 7, query = "22031", year = c("2010", "2011"),
+   quarter = c("1", "2", "3"))
 
-hud_cw(type = 8, query = '10140', year = c('2010', '2011'),
-   quarter = c('2','1'))
+hud_cw(type = 8, query = "10140", year = c("2010", "2011"),
+   quarter = c("1", "2"))
 
-hud_cw(type = 9, query = '10380', year = c('2017'),
-   quarter = c('4'))
+hud_cw(type = 9, query = "10380", year = c("2017"),
+   quarter = c("1", "2", "3"))
 
-hud_cw(type = 10, query = '2202', year = c('2010', '2011'),
-   quarter = c('4','3'))
+hud_cw(type = 10, query = "2202", year = c("2010", "2011"),
+   quarter = c("4", "3"))
 
-hud_cw(type = 11, query = '35213', year = c('2019', '2020'),
-   quarter = c('2','3'))
+hud_cw(type = 11, query = "35213", year = c("2019", "2020"),
+   quarter = c("2", "3"))
 
-hud_cw(type = 12, query = '4606720300 ', year = c('2019', '2019', '2019'),
-   quarter = c('4','4'))
+hud_cw(type = 12, query = "4606720300 ", year = c("2019", "2019", "2019"),
+   quarter = c("4", "4"))
 }
 }
 \keyword{API}

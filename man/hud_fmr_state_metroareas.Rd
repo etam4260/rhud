@@ -24,7 +24,8 @@ for an account and request for an API key.}
 Fair markets rent for metroareas.
 }
 \description{
-This function queries for a state and returns the FMR calculation
+This function queries for a state and returns the
+FMR calculation
 at a metroarea resolution for all metroareas in this state.
 }
 \keyword{API}

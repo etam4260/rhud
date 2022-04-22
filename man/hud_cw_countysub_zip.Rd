@@ -37,7 +37,8 @@ https://www.huduser.gov/portal/dataset/uspszip-api.html
 \description{
 This function queries the Crosswalks API provided by
 US Department of Housing and Urban Development. This
-returns the crosswalk for countysub to zip. (Available 2nd Quarter 2018 onwards)
+returns the crosswalk for countysub to zip.
+(Available 2nd Quarter 2018 onwards)
 }
 \examples{
 \dontrun{

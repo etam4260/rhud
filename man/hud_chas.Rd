@@ -6,8 +6,8 @@
 \usage{
 hud_chas(
   type,
-  stateId = NULL,
-  entityId = NULL,
+  state_id = NULL,
+  entity_id = NULL,
   year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY")
 )
@@ -20,9 +20,9 @@ hud_chas(
 4 - MCD
 5 - Place}
 
-\item{stateId}{For types 2,3,4,5, you must provide a stateId. For 3,4,5}
+\item{state_id}{For types 2,3,4,5, you must provide a stateId. For 3,4,5}
 
-\item{entityId}{For types 3,4,5, you must provide a fips code}
+\item{entity_id}{For types 3,4,5, you must provide a fips code}
 
 \item{year}{Gets the year that this data was recorded. Defaults to 2014-2018.
 There are specific year ranges that are only accepted.
@@ -56,7 +56,7 @@ Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_chas(1)
 
-hud_chas('2', stateId = '56')
+hud_chas('2', state_id = '56')
 
 hud_chas('3','51','199')
 
