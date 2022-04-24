@@ -147,5 +147,4 @@ translate_stateid <- function(stateids,
                                    encoding = c("abbr",
                                                 "fullname",
                                                 "fipcode")) {
-
 }

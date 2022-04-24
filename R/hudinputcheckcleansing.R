@@ -20,15 +20,13 @@ chas_input_check_cleansing <- function(query, year, key) {
     stop("You only need one key.")
   }
 
-  if (length(key) != 1) stop("There seems to be multiple keys specified.")
-
   if (key == "") {
-    warning(paste("Did you forget to set the key?",
+    stop(paste("Did you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "sign up and get a token. Save",
-               "this to your environment using",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = " "))
+               "hudapi/public/register?comingfrom=1 to ",
+               "sign up and get a token. Save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
 
 
   }
@@ -83,8 +81,6 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
   if (length(key) != 1) {
     stop("You only need one key.")
   }
-
-  if (length(key) != 1) stop("There seems to be multiple keys specified.")
 
   if (key == "") {
     stop(paste("Did you forget to set the key?",
@@ -141,19 +137,17 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
     stop("You only need one key.")
   }
 
-  if (length(key) != 1) stop("There seems to be multiple keys specified.")
-
   query <- unique(paste(trimws(as.character(query), which = "both")))
   year <- unique(paste(trimws(as.character(year), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
   if (key == "") {
-    stop(paste("Did you forget to set the key?",
+    stop(paste("Did you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "and sign up and get a token. Then save",
-               "this to your environment using",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = " "))
+               "hudapi/public/register?comingfrom=1 to ",
+               "and sign up and get a token. Then save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
 
   }
 
@@ -166,7 +160,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
 
   # Try to convert input into state code.
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- hud_nation_states_territories(key = key)
   }
 
   if (nrow(pkg.env$state[pkg.env$state$state_name %in%
@@ -252,6 +246,12 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
           input arguments. i.e 'as.vector(year)'")
   }
 
+  if (length(data) > 1 || length(geoid) > 1 ||  length(geoid_col) > 1
+      && length(cw_geoid) > 1 || length(year) > 1 || length(quarter) > 1) {
+    stop("This function currently only supports crosswalking one dataset
+          at a time. Make sure all input arguments are of length 1.")
+  }
+
   geoid <- unique(paste(trimws(as.character(geoid), which = "both")))
   geoid_col <- unique(paste(trimws(as.character(geoid_col), which = "both")))
   cw_geoid <- unique(paste(trimws(as.character(cw_geoid), which = "both")))
@@ -267,12 +267,6 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
                "and sign up and get a token. Then save",
                "this to your environment using",
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = " "))
-  }
-
-  if (length(data) > 1 && length(geoid) > 1 &&  length(geoid_col) > 1
-     && length(cw_geoid) > 1 && length(year) > 1 && length(quarter) > 1) {
-    stop("This function currently only supports crosswalking one dataset
-          at a time. Make sure all input arguments are of length 1.")
   }
 
 
