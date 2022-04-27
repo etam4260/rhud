@@ -8,7 +8,7 @@
 #'   abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
-#' @keywords States
+#' @keywords States Territories
 #' @export
 #' @returns A dataframe containing details of all the states and territories
 #'   in the US.
@@ -21,6 +21,13 @@
 #' hud_nation_states_territories()
 #' }
 hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
+  if (!is.vector(key)) {
+    stop(paste("Make sure all inputs are of type vector. ",
+               "Check types with typeof([variable]). ",
+               "If list try unlist([variable]); ",
+               "if matrix try as.vector([variable])", sep = ""))
+  }
+
   if (key == "") {
     stop(paste("Did you forget to set the key?",
                "Please go to https://www.huduser.gov/",
@@ -30,7 +37,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
   }
 
-  urls <- paste("https://www.huduser.gov/hudapi/public/fmr/listStates")
+  urls <- "https://www.huduser.gov/hudapi/public/fmr/listStates"
 
   call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                      as.character(key))),
@@ -38,6 +45,9 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
                 timeout(30)), silent = TRUE) #try to make call
 
   cont <- try(content(call), silent = TRUE) #parse returned data
+
+  download_bar(1,1)
+  message("\n")
 
   states <- as.data.frame(do.call("rbind", cont))
   states$state_num <- as.character(as.integer(states$state_num))
@@ -76,6 +86,13 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #' hud_state_metropolitan("VA")
 #' }
 hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
+  if (!is.vector(state) || !is.vector(key)) {
+    stop(paste("Make sure all inputs are of type vector. ",
+               "Check types with typeof([variable]). ",
+               "If list try unlist([variable]); ",
+               "if matrix try as.vector([variable])", sep = ""))
+  }
+
   if (key == "") {
     stop(paste("Did you forget to set the key?",
                "Please go to https://www.huduser.gov/",
@@ -88,13 +105,17 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
   # The 'area_name' column gives information on the metropolitan place, the
   # abbreviation of state, and the stating that it is a MSA(metro stat areas)
 
-  urls <- paste("https://www.huduser.gov/hudapi/public/fmr/listMetroAreas")
+  urls <- "https://www.huduser.gov/hudapi/public/fmr/listMetroAreas"
   call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                      as.character(key))),
                 user_agent("https://github.com/etam4260/hudr"),
                 timeout(30)), silent = TRUE) #try to make call
 
   cont <- try(content(call), silent = TRUE) #parse returned data
+
+  download_bar(1,1)
+  message("\n")
+
   metro <- as.data.frame(do.call(rbind, cont))
 
   # Do a regular expression of the area name column to parse it into

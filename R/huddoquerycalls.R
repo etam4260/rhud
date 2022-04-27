@@ -51,6 +51,8 @@ chas_do_query_calls <- function(urls, key) {
 
     cont <- try(content(call), silent = TRUE)
 
+    download_bar(i, length(urls))
+
     if ("error" %in% names(cont) || length(cont) == 0) {
       # Need to output a single error message instead of a bunch when
       # something bad occurs. Append to list of errored urlss.
@@ -61,7 +63,7 @@ chas_do_query_calls <- function(urls, key) {
         # Check this CHAS data does not have data defined for
         # all expected fields. If so fill them in with 0's.
       if (length(not_measured) >= 1) {
-        extra_mes <- rep(0, length(not_measured))
+        extra_mes <- rep(NA, length(not_measured))
         names(extra_mes) <- not_measured
 
         list_res[[i]] <- c(unlist(cont[[1]]), extra_mes)
@@ -70,7 +72,7 @@ chas_do_query_calls <- function(urls, key) {
       }
     }
   }
-
+  message("\n")
 
   # Spit out error messages to user after all
   # queries are done.
@@ -122,6 +124,8 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
     cont <- try(content(call), silent = TRUE)
 
+    download_bar(i, length(urls))
+
     if ("error" %in% names(cont[[1]])) {
       # Need to output a single error message instead of a bunch when
       # something bad occurs. Append to list of errored urlss.
@@ -142,6 +146,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
       list_res[[i]] <- res
     }
   }
+  message("\n")
 
   # Spit out error messages to user after all
   # queries are done.
@@ -197,6 +202,8 @@ misc_do_query_call <- function(urls, key) {
                   user_agent("https://github.com/etam4260/hudr"), timeout(30)),
               silent = TRUE)
 
+    download_bar(i, length(urls))
+
     cont <- try(content(call), silent = TRUE)
 
     if ("error" %in% names(cont) || length(cont) == 0) {
@@ -208,6 +215,7 @@ misc_do_query_call <- function(urls, key) {
       list_res[[i]] <- as.data.frame(do.call(rbind, cont))
     }
   }
+  message("\n")
 
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all

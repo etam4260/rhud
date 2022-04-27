@@ -330,6 +330,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
     cont <- try(content(call), silent = TRUE)
 
+    download_bar(i, nrow(all_queries))
+
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
     } else {
@@ -356,7 +358,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
       list_res[[i]] <- res
     }
   }
-
+  message("\n")
 
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all

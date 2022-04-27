@@ -39,6 +39,9 @@ hud_fmr_state_metroareas <- function(state,
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
+
+    download_bar(i, nrow(allqueries))
+
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
     } else {
@@ -48,6 +51,7 @@ hud_fmr_state_metroareas <- function(state,
       list_res[[i]] <- res
     }
   }
+  message("\n")
 
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all
@@ -113,6 +117,9 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
+
+    download_bar(i, nrow(allqueries))
+
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
     } else {
@@ -122,6 +129,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
       list_res[[i]] <- res
     }
   }
+  message("\n")
 
 
   if (length(error_urls) != 0) {
@@ -190,6 +198,9 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
+
+    download_bar(i, nrow(allqueries))
+
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
     } else {
@@ -233,6 +244,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
       # Now merge them both
     }
   }
+  message("\n")
 
 
   if (length(error_urls) != 0) {
@@ -305,6 +317,9 @@ hud_fmr_metroarea_zip <- function(metroarea,
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
+
+    download_bar(i, nrow(allqueries))
+
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
     } else {
@@ -347,6 +362,7 @@ hud_fmr_metroarea_zip <- function(metroarea,
       }
     }
   }
+  message("\n")
 
 
   if (length(error_urls) != 0) {
