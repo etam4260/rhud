@@ -2,6 +2,9 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^LICENSE\.md$
+^LICENSE$
+^CODE_OF_CONDUCT.md
+^codemeta.json
 ^\.github$
 ^\.docs
 ^codecov\.yml$
