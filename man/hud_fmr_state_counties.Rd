@@ -21,7 +21,7 @@ previous year.}
 for an account and request for an API key.}
 }
 \value{
-Fair markets rent for counties
+A data frame with fair markets rent for counties in states.
 }
 \description{
 This function queries for a state and returns the

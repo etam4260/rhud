@@ -21,7 +21,7 @@ previous year.}
 for an account and request for an API key.}
 }
 \value{
-
+A data frame with fair markets rent for zip codes in metro areas.
 }
 \description{
 This function queries for a metroarea and returns

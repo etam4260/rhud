@@ -11,7 +11,7 @@
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
 #' @export
-#' @returns Fair markets rent for metroareas.
+#' @returns A data frame with fair markets rent for metro areas in states.
 hud_fmr_state_metroareas <- function(state,
                                      year = format(Sys.Date() - 365, "%Y"),
                                      key = Sys.getenv("HUD_KEY")) {
@@ -90,7 +90,7 @@ hud_fmr_state_metroareas <- function(state,
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
 #' @export
-#' @returns Fair markets rent for counties
+#' @returns A data frame with fair markets rent for counties in states.
 hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                                    key = Sys.getenv("HUD_KEY")) {
   args <- fmr_il_input_check_cleansing(state, year, key)
@@ -171,7 +171,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
 #' @export
-#' @returns
+#' @returns A data frame with fair markets rent for zip codes in counties.
 hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                                key = Sys.getenv("HUD_KEY")) {
 
@@ -290,7 +290,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
 #' @export
-#' @returns
+#' @returns A data frame with fair markets rent for zip codes in metro areas.
 hud_fmr_metroarea_zip <- function(metroarea,
                                   year = format(Sys.Date() - 365, "%Y"),
                                   key = Sys.getenv("HUD_KEY")) {

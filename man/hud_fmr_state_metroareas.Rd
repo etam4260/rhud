@@ -21,7 +21,7 @@ previous year.}
 for an account and request for an API key.}
 }
 \value{
-Fair markets rent for metroareas.
+A data frame with fair markets rent for metro areas in states.
 }
 \description{
 This function queries for a state and returns the
