@@ -80,7 +80,7 @@ remove_leading_zeros <- function(input) {
 }
 
 #' @name remove_delimiters
-#' @title remove_delimites
+#' @title remove_delimiters
 #' @description This is helper function for remove the most common delimiters
 #'   used in character vector data.
 #' @param input A vector or column of characters that need needs delimiters
@@ -91,18 +91,20 @@ remove_delimiters <- function(input) {
 }
 
 
-#' @name remove_delimiters
-#' @title remove_delimites
+#' @name add_delimiters
+#' @title add_delimiters
 #' @description This is helper function for remove the most common delimiters
 #'   used in character vector data.
 #' @param input A vector or column of characters that need needs delimiters
 #'   removed.
-#' @returns A vector with delimiters removed.
+#' @returns A vector with delimiters added
 #' @noRd
 #' @noMd
 add_delimiters <- function(input) {
 
 }
+
+
 
 
 #' @name fix_geoid
@@ -118,7 +120,7 @@ add_delimiters <- function(input) {
 #'   6) cd -> Must be a 4 digit cd code.
 #' @param geoids A vector or column of geoids that need leading zeros to be
 #'   processed properly.
-#' @param num_chars The number of leading zeros thyis geoid needs.
+#' @param num_chars The number of leading zeros this geoid needs.
 #' @returns A vector with the corrected geoids.
 #' @noRd
 #' @noMd
@@ -129,93 +131,4 @@ fix_geoid <- function(geoids, num_char) {
                          geoids[i], sep = "")
   }
   return(geoids)
-}
-
-
-
-
-# Auxiliary functions for splitting GEOIDS into their constituent parts
-# as per the US Census definition of them...
-
-#' @name split_zip
-#' @title split_zip
-#' @param zip A vector of zip codes
-#' @returns Returns a data frame containing the
-#'   decomposed elements of zip codes.
-#' @noRd
-#' @noMd
-split_zip <- function(zip) {
-
-}
-
-
-#' @name split_county
-#' @title split_county
-#' @param county A vector of county fip codes
-#' @returns Returns a data frame containing the
-#'   decomposed elements of county fip codes.
-#' @noRd
-#' @noMd
-split_county <- function(county) {
-
-}
-
-
-#' @name split_cbsa
-#' @title split_cbsa
-#' @param zip A vector of cbsa codes
-#' @returns Returns a data frame containing the
-#'   decomposed elements of cbsa codes.
-#' @noRd
-#' @noMd
-split_cbsa <- function(cbsa) {
-
-}
-
-
-#' @name split_cbsadiv
-#' @title split_cbsadiv
-#' @param zip A vector of cbsadiv codes
-#' @returns Returns a data frame containing the
-#'   decomposed elements of cbsadiv codes.
-#' @noRd
-#' @noMd
-split_cbsadiv <- function(cbsadiv) {
-
-}
-
-
-#' @name split_cd
-#' @title split_cd
-#' @param zip A vector of cd codes
-#' @returns Returns a data frame containing the
-#'   decomposed elements of a cd codes.
-#' @noRd
-#' @noMd
-split_cd <- function(cd) {
-
-}
-
-
-#' @name split_countysub
-#' @title split_countysub
-#' @param zip A vector of countysub codes
-#' @returns Returns a data frame containing the
-#'   decomposed elements of countysub codes.
-#' @noRd
-#' @noMd
-split_countysub <- function(countysub) {
-
-}
-
-
-#' @name split_tract
-#' @title split_tract
-#' @param zip A vector of tract codes
-#' @returns Returns a data frame containing the
-#'   decomposed elements of a tract code.
-#' @noRd
-#' @noMd
-split_tract <- function(tract) {
-
 }

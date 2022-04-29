@@ -48,14 +48,6 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                                             year,
                                             quarter, key)
 
-
-  # Tell user that this it will take 1 second per 20 rows in the dataframe.
-  # TODO: need to make this more sophisticated...
-  # by taking into account current system time in this function call...
-
-  message(paste("Message:\nCrosswalking this dataset will take around:",
-                nrow(data) / 20, "seconds", sep = " "))
-
   geoid <- args[[1]]
   geoid_col <- args[[2]]
   cw_geoid <- args[[3]]
@@ -68,10 +60,6 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
   key <- args[[8]]
 
 
-  # Querying might take a while depending on size of the dataset
-  # need to show user how long it'll take.
-  # The hud_cw_zip_county will take care to make sure
-  # there are only unique queries.
   if (geoid == "zip" && cw_geoid %in% c("county", "countysub", "tract",
                                        "cbsa", "cbsadiv", "cd")) {
     if (cw_geoid == "county") {
