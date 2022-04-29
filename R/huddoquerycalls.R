@@ -79,14 +79,14 @@ chas_do_query_calls <- function(urls, key) {
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(error_urls,
-                                                            collapse = "\n"),
-                  "It is possible that your key maybe invalid,",
-                  "there isn't any data for these parameters,",
-                  "or you have reached the maximum number of API",
-                  "calls per minute. If you think this is wrong please",
+    warning(paste("Could not find data for queries: \n\n",
+                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                  "\n\nIt is possible that your key maybe invalid or ",
+                  "there isn't any data for these parameters, ",
+                  "If you think this is wrong please ",
                   "report it at https://github.com/etam4260/hudr/issues.",
-                  sep = " "))
+                  sep = ""), call. = FALSE)
+
   }
 
   if (length(list_res) != 0) {
@@ -153,14 +153,13 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(error_urls,
-                                                            collapse = "\n"),
-                  "It is possible that your key maybe invalid,",
-                  "there isn't any data for these parameters,",
-                  "or you have reached the maximum number of API",
-                  "calls per minute. If you think this is wrong please",
+    warning(paste("Could not find data for queries: \n\n",
+                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                  "\n\nIt is possible that your key maybe invalid or ",
+                  "there isn't any data for these parameters, ",
+                  "If you think this is wrong please ",
                   "report it at https://github.com/etam4260/hudr/issues.",
-                  sep = " "))
+                  sep = ""), call. = FALSE)
   }
 
 
@@ -220,14 +219,13 @@ misc_do_query_call <- function(urls, key) {
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(error_urls,
-                                                            collapse = "\n"),
-                  "It is possible that your key maybe invalid,",
-                  "there isn't any data for these parameters,",
-                  "or you have reached the maximum number of API",
-                  "calls per minute. If you think this is wrong please",
+    warning(paste("Could not find data for queries: \n\n",
+                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                  "\n\nIt is possible that your key maybe invalid or ",
+                  "there isn't any data for these parameters, ",
+                  "If you think this is wrong please ",
                   "report it at https://github.com/etam4260/hudr/issues.",
-                  sep = " "))
+                  sep = ""), call. = FALSE)
   }
 
   if (length(list_res) != 0) {

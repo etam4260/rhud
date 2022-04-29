@@ -1,10 +1,5 @@
 #' @import httr
-
-# Implementation thought process was adapted from:
-# https://github.com/dteck/HUD
-# Inspiration to build an API came from:
-# https://github.com/ropensci/rnoaa
-
+#'
 # An R interface for accessing HUD USER
 # (US Department of Housing and Urban Development) APIs.
 
@@ -12,14 +7,10 @@
 # structure of the API very closely, but provide the additional ability to query
 # for multiple geoids as well as multiple years inputs.
 
-# For more intuitive querying withing the need to specify type, check out the
-# decomposed functions in the hudcw.R and hudchas.R files.
-
 # Crosswalk
 # Fair Markets Rent
 # Income Limits
 # Comprehensive and Housing Affordability Strategy
-
 
 #' @name hud_cw
 #' @title hud_cw
@@ -130,7 +121,7 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
                 "county-zip", "cbsa-zip", "cbsadiv-zip",
                 "cd-zip", "zip-countysub", "countysub-zip")
 
-  if (length(type) != 1) stop("Only one crosswalk type can be specified.")
+  if (length(type) != 1) stop("\nOnly one crosswalk type can be specified at a time", call. = FALSE)
 
   # Allow user to specify the full string too.
   type <- switch(tolower(type),
@@ -151,11 +142,14 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 
   # Check if type argument follows proper structure.
   type <- paste(trimws(as.character(type), which = "both"))
+
   if (FALSE %in% numbers_only(type)) {
-    stop("Type input must be a single number or the name of crosswalk file.")
+    stop("\nType input must be a single number or the name of crosswalk file.",
+         call. = FALSE)
   }
+
   ifelse(as.integer(type) < 1 || as.integer(type) > 12,
-         stop("The type input is not in the range of 1-12"), "")
+         stop("\nThe type input is not in the range of 1-12", call. = FALSE), "")
 
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
@@ -163,33 +157,41 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
   # Need to make sure query is a zip code of 5 digits.
   if (as.integer(type) >= 1 && as.integer(type) <= 5 ||
       as.integer(type) == 11) {
-    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
+    if (any(nchar(query) != 5)) stop("\nQuery input is not of length 5",
+                                     call. = FALSE)
     # Need to make sure query is a fips code of 5 digits.
   } else if (as.integer(type) == 7) {
-    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
+    if (any(nchar(query) != 5)) stop("\nQuery input is not of length 5",
+                                     call. = FALSE)
     # Need to make sure query is a fips code
     # with census tract attached onto it 11 digits.
   } else if (as.integer(type) == 6) {
-    if (any(nchar(query) != 11)) stop("Query input is not of length 11")
+    if (any(nchar(query) != 11)) stop("\nQuery input is not of length 11",
+                                      call. = FALSE)
     # Need to make sure query is CBSA code for
     # micropolitan/metropolitan areas: 5 digits.
   } else if (as.integer(type) == 8) {
-    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
+    if (any(nchar(query) != 5)) stop("\nQuery input is not of length 5",
+                                     call. = FALSE)
     # Need to make sure query is CBSA division code for
     # metropolitan areas: 5 digits.
   } else if (as.integer(type) == 9) {
-    if (any(nchar(query) != 5)) stop("Query input is not of length 5")
+    if (any(nchar(query) != 5)) stop("\nQuery input is not of length 5",
+                                     call. = FALSE)
     # Need to make sure query is 4 digit GEOID for
     # congressional districts: 4 digits.
   } else if (as.integer(type) == 10) {
-    if (any(nchar(query) != 4)) stop("Query input is not of length 4")
+    if (any(nchar(query) != 4)) stop("\nQuery input is not of length 4",
+                                     call. = FALSE)
     # Need to make sure query is 10 digits for county subdistrict
   } else if (as.integer(type) == 12) {
-    if (any(nchar(query) != 10)) stop("Query input is not of length 10")
+    if (any(nchar(query) != 10)) stop("\nQuery input is not of length 10",
+                                      call. = FALSE)
   }
 
   all_queries <- expand.grid(query = query, year = year, quarter = quarter,
                             stringsAsFactors = FALSE)
+
   all_queries$type <- type[[1]]
   urls <- paste("https://www.huduser.gov/hudapi/public/usps?type=",
                all_queries$type,
@@ -211,7 +213,7 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #' @description This function queries the Fair Markets Rent API provided by
 #'   US Department of Housing and Urban Development. Querying a
 #'   state provides a list containing two dataframes: one with fmr at a county
-#'   level resolutionn and the other fmr at a metroarea level resolution.
+#'   level resolution and the other fmr at a metroarea level resolution.
 #'   Querying a county or cbsa will provide data at a zip code resolution
 #'   if geoids are classified as a small area.
 #' @param query Can provide either a 5 digit FIPS code + 99999 at end,
@@ -363,14 +365,13 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all
     # queries are done.
-    warning(paste("Could not find data for queries:", paste(error_urls,
-                                                            collapse = "\n"),
-                  "It is possible that your key maybe invalid,",
-                  "there isn't any data for these parameters,",
-                  "or you have reached the maximum number of API",
-                  "calls per minute. If you think this is wrong please",
+    warning(paste("Could not find data for queries: \n\n",
+                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                  "\n\nIt is possible that your key maybe invalid or ",
+                  "there isn't any data for these parameters, ",
+                  "If you think this is wrong please ",
                   "report it at https://github.com/etam4260/hudr/issues.",
-                  sep = " "))
+                  sep = ""), call. = FALSE)
   }
 
   if (length(list_res) != 0) {
@@ -432,18 +433,22 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                      year = c("2014-2018"),
                      key = Sys.getenv("HUD_KEY")) {
   if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {
-    stop(paste("Make sure all inputs are of type vector. ",
+    stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""))
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
+  }
+
+  if (length(key) != 1) {
+    stop("\nYou need a key and only 1 key.", call. = FALSE)
   }
 
   if (key == "") {
-    stop(paste("Did you forget to set the key?",
+    stop(paste("\nDid you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "and sign up and get a token. Then save",
-               "this to your environment using",
+               "hudapi/public/register?comingfrom=1 ",
+               "to sign up and get a token. Then save ",
+               "this to your environment using ",
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
   }
 
@@ -471,11 +476,12 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
   if (!all(year %in% c("2014-2018", "2013-2017", "2012-2016", "2011-2015",
                       "2010-2014", "2009-2013", "2008-2012", "2007-2011",
                       "2006-2010"))) {
-    stop("Years specified are not allowed. Check the documentation.")
+    stop("\nOne of the years does not fall in the correct range of values.",
+         call. = FALSE)
   }
 
   ifelse(as.integer(type) < 1 || as.integer(type) > 5,
-         stop("The type input is not in the range of 1-5"), "")
+         stop("\nThe type input is not in the range of 1-5", call. = FALSE), "")
 
 
   if (type == "1") {
@@ -488,10 +494,11 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
     urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
                  "&stateId=", state_id, "&year=", year,  sep = "")
     if (!is.vector(state_id)) {
-      stop(paste("Make sure all inputs are of type vector. ",
+      stop(paste("\nMake sure all inputs are of type vector. ",
                  "Check types with typeof([variable]). ",
                  "If list try unlist([variable]); ",
-                 "if matrix try as.vector([variable])", sep = ""))
+                 "if matrix try as.vector([variable])", sep = ""),
+           call. = FALSE)
     }
 
     all_queries <- expand.grid(fip_code = state_id, year = year,
@@ -506,14 +513,16 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                                                  stateId and entityId
                                                  for this type.")
     if (!is.vector(state_id) || !is.vector(entity_id)) {
-      stop(paste("Make sure all inputs are of type vector. ",
-           "Check types with typeof([variable]). ",
-           "If list try unlist([variable]); ",
-           "if matrix try as.vector([variable])", sep = ""))
+      stop(paste("\nMake sure all inputs are of type vector. ",
+                 "Check types with typeof([variable]). ",
+                 "If list try unlist([variable]); ",
+                 "if matrix try as.vector([variable])", sep = ""),
+           call. = FALSE)
     }
 
     if (length(state_id) != length(entity_id)) {
-      stop("You need to make sure stateId and entityId are of same length.")
+      stop("\nYou need to make sure stateId and entityId are of same length.",
+           call. = FALSE)
     }
 
     all_queries <- expand.grid(state_fip = state_id, year = year,

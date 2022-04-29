@@ -80,7 +80,8 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.")
+      stop("\nThere is no matching fips code for one of the inputted states.",
+           call. = FALSE)
     }
   }
 
@@ -164,16 +165,16 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 
   # Check if first two numbers of county code inputted is a valid state.
   if (!all(as.character(state_fip) %in% pkg.env$state$state_num)) {
-    stop(paste("There is no matching state FIPs code for",
+    stop(paste("\nThere is no matching state FIPs code for",
                "one of the inputted fips",
-               sep = ""))
+               sep = ""), call. = FALSE)
   }
 
   if (!all(as.character(check_county) %in%
            hud_state_counties(state_fip)$fips_code)) {
-    stop(paste("There is no matching county FIPs code for",
+    stop(paste("\nThere is no matching county FIPs code for",
                "one of the inputted counties",
-               sep = ""))
+               sep = ""), call. = FALSE)
   }
 
   all_queries <- expand.grid(state_fip = state_fip, year = year,
@@ -233,7 +234,8 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.")
+      stop("\nThere is no matching fips code for one of the inputted states.",
+           call. = FALSE)
     }
   }
 
@@ -321,7 +323,8 @@ hud_chas_state_place <- function(state, year = c("2014-2018"),
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.")
+      stop("\nThere is no matching fips code for one of the inputted states.",
+           call. = FALSE)
     }
   }
 

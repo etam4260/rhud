@@ -36,7 +36,7 @@ individual county within the state.
 This function queries the Fair Markets Rent API provided by
 US Department of Housing and Urban Development. Querying a
 state provides a list containing two dataframes: one with fmr at a county
-level resolutionn and the other fmr at a metroarea level resolution.
+level resolution and the other fmr at a metroarea level resolution.
 Querying a county or cbsa will provide data at a zip code resolution
 if geoids are classified as a small area.
 }

@@ -50,6 +50,9 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
 
   # Tell user that this it will take 1 second per 20 rows in the dataframe.
+  # TODO: need to make this more sophisticated...
+  # by taking into account current system time in this function call...
+
   message(paste("Message:\nCrosswalking this dataset will take around:",
                 nrow(data) / 20, "seconds", sep = " "))
 
@@ -109,9 +112,9 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
     cw_data <- hud_cw_cbsadiv_zip(data[, geoid_col], year = year,
                                   quarter = quarter, key = key)
   } else {
-    stop(paste("Crosswalk from",
-               geoid,
-               cw_geoid,
+    stop(paste("\nCrosswalk from",
+               toupper(geoid), "to",
+               toupper(w_geoid),
                "is not supported. Type ?crosswalk to see information on
                what is available.",
                sep = " "))
@@ -123,13 +126,14 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
     return(merge(cw_data, data, by.x = 6, by.y = geoid_col))
   } else if (!is.na(cw_geoid_col) && !is.na(method)) {
+
     merged <- merge(cw_data, data, by.x = 6, by.y = geoid_col)
 
-    # Clear memory
+    # clear memory
     cw_data <- NULL
     data <- NULL
 
-    # Apply method to columns specified.
+    # apply method to columns specified.
     if (method == "residential" || method == "res" || "res_ratio") {
       for (i in seq_len(nrow(merged))) {
         merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *

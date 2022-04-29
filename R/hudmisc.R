@@ -22,19 +22,19 @@
 #' }
 hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
   if (!is.vector(key)) {
-    stop(paste("Make sure all inputs are of type vector. ",
+    stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""))
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
   }
 
   if (key == "") {
-    stop(paste("Did you forget to set the key?",
+    stop(paste("\nDid you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "and sign up and get a token. Then save",
-               "this to your environment using",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+               "hudapi/public/register?comingfrom=1 ",
+               "to sign up and get a token. Then save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
   }
 
   urls <- "https://www.huduser.gov/hudapi/public/fmr/listStates"
@@ -61,7 +61,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
     states$category <- unlist(states$category)
     return(states)
   }
-  stop("The key used might be invalid.")
+  stop("\nThe key used might be invalid.", call. = FALSE)
 }
 
 # Need to allow user to filter metropolitan areas similar to place, county,
@@ -87,19 +87,19 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #' }
 hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
   if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("Make sure all inputs are of type vector. ",
+    stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""))
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
   }
 
   if (key == "") {
-    stop(paste("Did you forget to set the key?",
+    stop(paste("\nDid you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "and sign up and get a token. Then save",
-               "this to your environment using",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+               "hudapi/public/register?comingfrom=1 ",
+               "to sign up and get a token. Then save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
   }
 
   # The 'area_name' column gives information on the metropolitan place, the
@@ -187,7 +187,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
     return(metro)
   }
 
-  stop("The key used might be invalid.")
+  stop("\nThe key used might be invalid.", call. = FALSE)
 }
 
 
@@ -212,19 +212,19 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' }
 hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
   if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("Make sure all inputs are of type vector. ",
+    stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""))
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
   }
 
   if (key == "") {
-    stop(paste("Did you forget to set the key?",
+    stop(paste("\nDid you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "and sign up and get a token. Then save",
-               "this to your environment using",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+               "hudapi/public/register?comingfrom=1 ",
+               "to sign up and get a token. Then save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)
@@ -236,7 +236,8 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.")
+      stop("\nThere is no matching fips code for one of the inputted states.",
+           call. = FALSE)
     }
   }
 
@@ -275,8 +276,8 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
     return(counties)
   }
 
-  stop(paste("The key used might be invalid or",
-             "could not find counties for this state."))
+  stop(paste("\nThe key used might be invalid or",
+             "could not find counties for this state."), call. = FALSE)
 }
 
 #' @name hud_state_places
@@ -300,19 +301,19 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' }
 hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
   if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("Make sure all inputs are of type vector. ",
+    stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""))
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
   }
 
   if (key == "") {
-    stop(paste("Did you forget to set the key?",
+    stop(paste("\nDid you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "and sign up and get a token. Then save",
-               "this to your environment using",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+               "hudapi/public/register?comingfrom=1 ",
+               "to sign up and get a token. Then save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)
@@ -324,7 +325,8 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.")
+      stop("\nThere is no matching fips code for one of the inputted states.",
+           call. = FALSE)
     }
   }
 
@@ -358,7 +360,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
     places$placename <- unlist(places$placename)
     return(places)
   }
-  stop("The key used might be invalid or could not find places for this state.")
+  stop("\nThe key used might be invalid or could not find places for this state.", call. = FALSE)
 }
 
 #' @name hud_state_minor_civil_divisions
@@ -383,19 +385,19 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 hud_state_minor_civil_divisions <- function(state,
                                             key = Sys.getenv("HUD_KEY")) {
   if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("Make sure all inputs are of type vector. ",
+    stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""))
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
   }
 
   if (key == "") {
-    stop(paste("Did you forget to set the key?",
+    stop(paste("\nDid you forget to set the key? ",
                "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 to",
-               "and sign up and get a token. Then save",
-               "this to your environment using",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+               "hudapi/public/register?comingfrom=1 ",
+               "to sign up and get a token. Then save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)
@@ -407,7 +409,7 @@ hud_state_minor_civil_divisions <- function(state,
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.")
+      stop("\nThere is no matching fips code for one of the inputted states.", call. = FAlSE)
     }
   }
 
@@ -440,5 +442,6 @@ hud_state_minor_civil_divisions <- function(state,
     mcd$mcdname <- unlist(mcd$mcdname)
     return(mcd)
   }
-  stop("The key used might be invalid or could not find mcds for this state")
+  stop("\nThe key used might be invalid or could not find mcds for this state",
+       call. = FALSE)
 }
