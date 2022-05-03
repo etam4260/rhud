@@ -21,7 +21,7 @@ You can install the development version from GitHub with:
 ```{r, eval=FALSE}
 # install.packages("devtools")
 library(devtools)
-devtools::install_github("etam4260/hudr")
+devtools::install_github("etam4260/rhud")
 ```
 
 The US Department of Housing and Urban Development HUD USER requires users 
@@ -46,7 +46,7 @@ searches for HUD_KEY in the user environment to check if a key has been defined.
 If no key has been defined, an empty string is outputted. 
 
 ```{r, eval=FALSE}
-library(hudr)
+library(rhud)
 
 Sys.getenv("HUD_KEY")
 ```
@@ -87,14 +87,16 @@ When R starts it looks for .Rprofile files in different locations:
 * R only loads one .Rprofile file per session and thus an .Rprofile 
 file at the project-level overrides files in other locations.
 
-The .Rprofile file is an R script that is launch each time R starts. Sometimes
-it might not be in these locations. You can just create one and put it at the
-root of your project and type the following in:
+The .Rprofile file is an R script that is launch each time R starts. 
 
+To set the HUD_KEY in .Rprofile working directory use:
 ```{r, eval=FALSE}
-HUD_KEY = "2yeuduhq72ueajk"
-# "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register 
-#for a key and replace it here.
+hud_set_key("dqdqdqdqd", in_wkdir = TRUE)
+```
+
+To set the HUD_KEY in .Rprofile HOME directory use:
+```{r, eval=FALSE}
+hud_set_key("dqdqdqdqd", in_home = TRUE)
 ```
 
 
@@ -146,6 +148,8 @@ The third part is 'county' meaning we need to input county(s)
 
 The fourth part is the 'zip' meaning the data will be returned 
 at a zip code resolution.
+
+## Additional Help
 
 If you ever get confused or need help you can easily revisit this website 
 through where you can check the all the function definitions in the

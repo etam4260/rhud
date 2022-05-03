@@ -14,7 +14,8 @@
 #' @param input A vector or column of character vectors that need
 #'   leading zeros to be processed properly.
 #' @returns A vector with leading zeros added.
-#' @export
+#' @noRd
+#' @noMd
 #' @examples
 #' \dontrun{
 #' library(hudr)
@@ -63,7 +64,8 @@ add_leading_zeros <- function(geoid_type = "zip", input) {
 #' @param input A vector or column of character vectors that need leading zeros
 #'   removed.
 #' @returns A vector with leading zeros removed.
-#' @export
+#' @noRd
+#' @noMd
 #' @examples
 #' \dontrun{
 #' library(hudr)
@@ -86,6 +88,8 @@ remove_leading_zeros <- function(input) {
 #' @param input A vector or column of characters that need needs delimiters
 #'   removed.
 #' @returns A vector with delimiters removed.
+#' @noRd
+#' @noMd
 remove_delimiters <- function(input) {
   return(gsub("[^1-9A-Za-z]*", "", input))
 }

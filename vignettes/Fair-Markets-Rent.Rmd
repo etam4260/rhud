@@ -58,25 +58,24 @@ These are basic examples to show you how to query the Fair Markets Rent API. Bef
 looking at the outputted data I RECOMMEND first looking at [Input Arguments][]
 as well as [Output Data][] located at the bottom of the page.
 
-**DISCLAIMER:** The output tables are too large to be displayed here so we choose to
-leave them out.
+**DISCLAIMER:** The output tables are too large to be displayed here so we
+choose to leave them out.
 
 Querying a county or cbsa code that are considered small areas will 
 return data at a zip code level. If they are not small areas, then it will 
-give the measurement for that entire county or cbsa. 
+give a singular measurement for that entire county or cbsa. 
 
-Lets say we are working with county level data.
-
-When mixing them together (counties that are small areas and not small areas)
-those counties that are not small areas will have an NA in the zip_code, 
+Lets say we are working with county level data -- when mixing them together 
+(counties that are small areas and not small areas) those counties that are
+not small areas will have an NA in the zip_code, 
 meaning this measurement is defined at a county level. Those counties that 
-are small areas will return data in the zip_code field.
+are small areas will return zip code data in the zip_code field.
 
 #### US States
 This is an example to show you how to query for all states in the US.
 
 ```{r, eval=FALSE}
-library(hudr)
+library(rhud)
 hud_nation_states_territories()
 ```
 

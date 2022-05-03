@@ -1,15 +1,15 @@
 # -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.2.1
+# CITATION file created with {cffr} R package, v0.2.2
 # See also: https://docs.ropensci.org/cffr/
 # -----------------------------------------------------------
  
 cff-version: 1.2.0
-message: 'To cite package "hudr" in publications use:'
+message: 'To cite package "rhud" in publications use:'
 type: software
 license: GPL-2.0-or-later
-title: 'hudr: A R interface for accessing HUD (US Department of Housing and Urban
+title: 'rhud: A R interface for accessing HUD (US Department of Housing and Urban
   Development) APIs'
-version: 0.1.0.9000
+version: 0.2.0.9000
 abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
   API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits,
   and the Comprehensive Housing Affordability Strategy.
@@ -19,7 +19,7 @@ authors:
   email: emmet_tam@yahoo.com
 preferred-citation:
   type: manual
-  title: 'hudr: A R Interface to the HUD (US Department of Housing and Urban Development)
+  title: 'rhud: A R Interface to the HUD (US Department of Housing and Urban Development)
     APIs'
   authors:
   - family-names: Tam
@@ -31,22 +31,13 @@ preferred-citation:
     given-names: Hamed
   year: '2022'
   notes: 0.1.0.9000
-  url: https://github.com/etam4260/hudr/
-repository: https://CRAN.R-project.org/package=hudr
-repository-code: https://github.com/etam4260/hudr
-url: https://etam4260.github.io/hudr/index.html
+  url: https://github.com/etam4260/rhud/
+repository-code: https://github.com/etam4260/rhud
+url: https://etam4260.github.io/rhud/index.html
 contact:
 - family-names: Tam
   given-names: Emmet
   email: emmet_tam@yahoo.com
-keywords:
-- api
-- cdbg-dr
-- chas
-- crosswalk
-- fairmarketsrent
-- hud
-- incomelimits
 references:
 - type: software
   title: covr
@@ -130,19 +121,9 @@ references:
   url: https://CRAN.R-project.org/package=testthat
   version: '>= 3.0.0'
 - type: software
-  title: httr
-  abstract: 'httr: Tools for Working with URLs and HTTP'
-  notes: Imports
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2022'
-  url: https://CRAN.R-project.org/package=httr
-- type: software
   title: devtools
   abstract: 'devtools: Tools to Make Developing R Packages Easier'
-  notes: Imports
+  notes: Suggests
   authors:
   - family-names: Wickham
     given-names: Hadley
@@ -156,6 +137,16 @@ references:
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2022'
   url: https://CRAN.R-project.org/package=devtools
+- type: software
+  title: httr
+  abstract: 'httr: Tools for Working with URLs and HTTP'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=httr
 - type: software
   title: zoo
   abstract: 'zoo: S3 Infrastructure for Regular and Irregular Time Series (Z''s Ordered

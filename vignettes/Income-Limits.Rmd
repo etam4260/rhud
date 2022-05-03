@@ -32,15 +32,16 @@ Before looking at the outputted data I RECOMMEND first taking a look at [Input A
 **DISCLAIMER:** The output tables are too large to be displayed here so we
 choose to leave them out.
 
-Querying a state will return a single row containing the Income Limits for that
-state. Querying for a county will return the IL measurement for that county.
-Querying for a cbsa will return the measurement for that cbsa.
+* Querying a state will return a single row containing the Income Limits for that
+state. 
+* Querying for a county will return the IL measurement for that county.
+* Querying for a cbsa will return the measurement for that cbsa.
 
 #### US States
 This is an example to show you how to query for all states and territories
 in the US.
 ```{r, eval=FALSE}
-library(hudr)
+library(rhud)
 hud_nation_states_territories()
 ```
 

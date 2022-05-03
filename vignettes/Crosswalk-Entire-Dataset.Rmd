@@ -23,7 +23,7 @@ function is available.
 First load the data into the global environment ...
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else FALSE}
-library(hudr)
+library(rhud)
 
 data(samp_individual_assist)
 ```

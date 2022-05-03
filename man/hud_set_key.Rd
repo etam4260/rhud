@@ -4,15 +4,22 @@
 \alias{hud_set_key}
 \title{hud_set_key}
 \usage{
-hud_set_key(key)
+hud_set_key(key, in_wkdir = TRUE, in_home = FALSE)
 }
 \arguments{
 \item{key}{key obtained at
 https://www.huduser.gov/hudapi/public/register?comingfrom=1}
+
+\item{in_wkdir}{set the key in the user's .RProfile in this directory.
+Is defaulted to true.}
+
+\item{in_home}{set the key in the user's HOME directory.
+Is defaulted to false.}
 }
 \description{
 A wrapper around Sys.getenv() to set HUD_KEY environment
-variable.
+variable. Allows the user to also set the key to their .RProfile
+in working or HOME.
 }
 \examples{
 \dontrun{

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hudr <img src='man/figures/logo.png' align="right" width="139"/>
+# rhud <img src='man/figures/logo.png' align="right" width="139"/>
 
 <!-- badges: start -->
 
@@ -10,9 +10,9 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R-CMD-check](https://github.com/etam4260/hudr/workflows/R-CMD-check/badge.svg)](https://github.com/etam4260/hudr/actions)
+[![R-CMD-check](https://github.com/etam4260/rhud/workflows/R-CMD-check/badge.svg)](https://github.com/etam4260/rhud/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/etam4260/hudr/branch/main/graph/badge.svg)](https://codecov.io/gh/etam4260/hudr?branch=main)
+coverage](https://codecov.io/gh/etam4260/rhud/branch/main/graph/badge.svg)](https://codecov.io/gh/etam4260/rhud?branch=main)
 <br/> <br/> [![devel
 version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
 
@@ -29,9 +29,6 @@ Development. These include the USPS Crosswalk Files, Fair Markets Rent,
 Income Limits, and Comprehensive Housing and Affordability Strategy.
 Although HUD does provide datasets for other programs, they are
 currently not supported by an API.
-
-HUD has two websites for gaining access to various data sets: HUD User
-and Exchange.
 
 Please read
 <https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
@@ -61,28 +58,13 @@ format rather than a data-frame like object. Although there exist file
 downloadables, R users may want to be able to extract specific bits of
 the data into memory.
 
-## HUD Exchange: <https://www.hudexchange.info/programs/drgr/>
-
-According to (Disaster Recovery Grant Reporting System, 2022), HUD
-Exchange is a comprehensive online platform that provides tools,
-resources, and contact information for organizations and individuals who
-engage with HUD. Nonprofit organizations and state and municipal
-governments are frequently included, but borrowers, lenders, and brokers
-involved in HUD’s multifamily loan programs are also included.
-
-The DRGR Disaster Recovery Grant Reporting System which HUD Exchange
-uses to supply public data does not have an active API for retrieving
-information. However, there does exist data sets freely available online
-which can be directly downloadable into R. This package provides the
-ability to directly get such data.
-
 ## Citation
 
 Please cite this package using:
 
-Tam, E., Reilly, A., & Ghaedi, H. (2022). hudr: A R interface for
+Tam, E., Reilly, A., & Ghaedi, H. (2022). rhud: A R interface for
 accessing HUD <br/>   (US Department of Housing and Urban Development)
-APIs (Version 0.1.0.9000). <https://github.com/etam4260/hudr>
+APIs (Version 0.2.0.9000). <https://github.com/etam4260/rhud>
 
 ## Available Data
 
@@ -106,11 +88,6 @@ The HUD also provide miscellaneous supplemental APIs under them.
         -   List MCDs in State
         -   List All Cities in State
 
-2.  HUD Exchange
-
-    -   Community Development Block Grant - Disaster Recovery
-        (<https://drgr.hud.gov/public/index.html>)
-
 ## Installation
 
 You can install the development version from
@@ -118,7 +95,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("etam4260/hudr")
+devtools::install_github("etam4260/rhud")
 ```
 
 For more details on how to setup and utilize this package. Please go to
@@ -135,8 +112,8 @@ bar.
 
 -   License: GPL >= 2
 
--   To get citation information for hudr in R, type citation(package =
-    ‘hudr’)
+-   To get citation information for rhud in R, type citation(package =
+    ‘rhud’)
 
 -   This interface uses the HUD User Data API but is not endorsed or
     certified by HUD User.
@@ -145,16 +122,12 @@ bar.
     Each function call does not correspond to a single API call!
 
 -   This is a WIP so please report any issues or bugs to:
-    <https://github.com/etam4260/hudr/issues>
+    <https://github.com/etam4260/rhud/issues>
 
 -   This is open source, so please fork and introduce some pull
     requests!
 
 ## References
-
-Disaster Recovery Grant Reporting System. (2022). HUD Exchange.
-Retrieved <br />  February 19, 2022, from
-<https://www.hudexchange.info/programs/drgr/>
 
 HUD User Home Page: HUD USER. HUD User Home Page \| HUD USER. (n.d.).
 Retrieved <br />  February 24, 2022, from

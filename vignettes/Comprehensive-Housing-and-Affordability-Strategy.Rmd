@@ -45,7 +45,7 @@ below. [onmi-function][Using the omni function for querying]
 
 #### CHAS for Nation
 ```{r, eval=FALSE}
-  library(hudr)
+  library(rhud)
   hud_chas_nation(year=c("2014-2018"))
 ```
 

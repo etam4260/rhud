@@ -1,4 +1,4 @@
 library(testthat)
-library(hudr)
+library(rhud)
 
-test_check("hudr")
+test_check("rhud")

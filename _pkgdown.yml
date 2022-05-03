@@ -18,10 +18,6 @@ navbar:
       href: articles/Income-Limits.html
     - text: Comprehensive Housing and Affordability Strategy
       href: articles/Comprehensive-Housing-and-Affordability-Strategy.html
-    - text: -------
-    - text: "HUD Exchange"
-    - text: Community Development Block Grant - Disaster Recovery
-      href: articles/Community-Development-Block-Grant.html
    reference:
     text: Reference
     href: reference/index.html
