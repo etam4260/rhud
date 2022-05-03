@@ -1,4 +1,4 @@
-# hudr: Pull Request Template
+# rhud: Pull Request Template
 
 ## Description
 
