@@ -14,7 +14,7 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 [![Codecov test
 coverage](https://codecov.io/gh/etam4260/rhud/branch/main/graph/badge.svg)](https://codecov.io/gh/etam4260/rhud?branch=main)
 <br/> <br/> [![devel
-version](https://img.shields.io/badge/devel%20version-0.1.0.9000-yellow)]()
+version](https://img.shields.io/badge/devel%20version-0.2.0.9000-yellow)]()
 
 <!-- badges: end -->
 
@@ -99,7 +99,7 @@ devtools::install_github("etam4260/rhud")
 ```
 
 For more details on how to setup and utilize this package. Please go to
-<https://etam4260.github.io/hudr/>. Select \[Setup\] in the navigation
+<https://etam4260.github.io/rhud/>. Select \[Setup\] in the navigation
 bar.
 
 ## Contributors
