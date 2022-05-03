@@ -2,9 +2,9 @@
 Derived from the CONTRIBUTING.md file for dplyr https://github.com/tidyverse/dplyr/blob/main/.github/CONTRIBUTING.md
 -->
 
-# Contributing to hudr
+# Contributing to rhud
 
-This outlines how to propose changes to hudr...
+This outlines how to propose changes to rhud...
 
 ### Fixing typos
 
