@@ -27,7 +27,8 @@ Suggests:
 Imports: 
     httr,
     zoo,
-    rio
+    rio,
+    curl
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 ByteCompile: true
