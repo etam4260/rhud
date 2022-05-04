@@ -63,8 +63,9 @@ the data into memory.
 Please cite this package using:
 
 Tam, E., Reilly, A., & Ghaedi, H. (2022). rhud: A R interface for
-accessing HUD <br/>   (US Department of Housing and Urban Development)
-APIs (Version 0.2.0.9000). <https://github.com/etam4260/rhud>
+accessing HUD  
+      (US Department of Housing and Urban Development) APIs (Version
+0.2.0.9000). <https://github.com/etam4260/rhud>
 
 ## Available Data
 
@@ -130,5 +131,6 @@ bar.
 ## References
 
 HUD User Home Page: HUD USER. HUD User Home Page \| HUD USER. (n.d.).
-Retrieved <br />  February 24, 2022, from
+Retrieved  
+        February 24, 2022, from
 <https://www.huduser.gov/portal/home.html>

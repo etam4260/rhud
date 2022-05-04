@@ -22,7 +22,7 @@ navbar:
     text: "Case Study"
     menu:
     - text: "Crosswalk a dataset"
-      href: articles/Crosswalk-a-dataset.html
+      href: articles/Crosswalk-a-Dataset.html
    reference:
     text: Reference
     href: reference/index.html
