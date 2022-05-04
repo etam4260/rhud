@@ -24,24 +24,49 @@
 #'   zip, county, countysub, cd,
 #'   tract, cbsa, or cbsadiv geographic id.
 #'   Supply either the name of the column or the index.
+#'   All elements in this column must be numbers only at the proper length.
+#'   For example, zip codes must be 5 digit numbers.
 #' @param cw_geoid The geoid to crosswalk the dataset to.
 #' @param cw_geoid_col The columns in the dataset to distribute
 #'   according to method ratio.
 #'   If method is empty, no allocation method will be applied --
-#'   the crosswalk file will just be attached to the dataset.
+#'   the crosswalk file will just be merged to the dataset.
+#'   All elements in these columns must be numbers only.
 #' @param method The allocation method to use: residential,
 #'   business, other, or total.
 #'   If method is empty, no allocation method will be applied --
-#'   the crosswalk file will just be attached to the dataset.
+#'   the crosswalk file will just be merged to the dataset.
 #' @param year The year measurement was taken.
 #' @param quarter The quarter of year measurement was taken.
 #' @param key The key obtain from HUD USER website.
 #' @export
 #' @returns A dataframe containing the crosswalked dataset.
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#'
+#' sample <- data.frame(population = c(42134, 12413, 13132),
+#'                      county = c(24047, 24045, 24043))
+#'
+#' crosswalk(data = sample, geoid = "county", geoid_col = "county",
+#'           cw_geoid = "zip")
+#'
+#' crosswalk(data = sample, geoid = "county", geoid_col = "county",
+#'           cw_geoid = "zip", cw_geoid_col = "population", method = "res")
+#'
+#' crosswalk(data = sample, geoid = "county", geoid_col = "county",
+#'           cw_geoid = "zip", cw_geoid_col = "population", method = "bus")
+#'
+#' crosswalk(data = sample, geoid = "county", geoid_col = "county",
+#'           cw_geoid = "zip", cw_geoid_col = "population", method = "bus",
+#'           year = 2018, quarter = 1)
+#'
+#' }
 crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                       method = NA,
                       year = format(Sys.Date() - 365, "%Y"),
-                      quarter = 1, key = Sys.getenv("HUD_KEY")) {
+                      quarter = 1,
+                      key = Sys.getenv("HUD_KEY")) {
 
   args <- crosswalk_a_dataset_input_check_cleansing(data, geoid, geoid_col,
                                             cw_geoid, cw_geoid_col, method,
@@ -102,16 +127,16 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
   } else {
     stop(paste("\nCrosswalk from",
                toupper(geoid), "to",
-               toupper(w_geoid),
+               toupper(cw_geoid),
                "is not supported. Type ?crosswalk to see information on
                what is available.",
                sep = " "))
   }
 
   # If no columns are provides, assume just want to merge...
-  # If not method is provided, assume just merge...
+  # If no method is provided, assume merge and crosswalk
   if (is.na(cw_geoid_col) || is.na(method)) {
-
+    message("\n* No method or cw_geoid_col specified: will just merge the datasets.")
     return(merge(cw_data, data, by.x = 6, by.y = geoid_col))
   } else if (!is.na(cw_geoid_col) && !is.na(method)) {
 
@@ -122,28 +147,39 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
     data <- NULL
 
     # apply method to columns specified.
-    if (method == "residential" || method == "res" || "res_ratio") {
+    if (method == "residential" || method == "res" || method == "res_ratio") {
+      message("\n* Applying allocation method based on residential address percentage.")
       for (i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
-          merged[i, "res_ratio"]
-      }
-    } else if (method == "business" || method == "bus" || "bus_ratio") {
-      for (i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
-          merged[i, "bus_ratio"]
-      }
-    } else if (method == "other" || method == "oth" || "oth_ratio") {
-      for (i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
-          merged[i, "oth_ratio"]
-      }
-    } else if (method == "total" || method == "tot" || "tot_ratio") {
-      for (i in seq_len(nrow(merged))) {
-        merged[i, cw_geoid_col] <- merged[i, cw_geoid_col] *
-          merged[i, "tot_ratio"]
-      }
-    }
-  }
 
-  return(merged)
+        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
+          as.numeric(merged[i, "res_ratio"])
+      }
+    } else if (method == "business" || method == "bus" || method == "bus_ratio") {
+      message("\n* Applying allocation method based on business address percentage.")
+      for (i in seq_len(nrow(merged))) {
+
+        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
+          as.numeric(merged[i, "bus_ratio"])
+      }
+    } else if (method == "other" || method == "oth" || method == "oth_ratio") {
+      message("\n* Applying allocation method based on other address percentage.")
+      for (i in seq_len(nrow(merged))) {
+
+        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
+          as.numeric(merged[i, "oth_ratio"])
+      }
+    } else if (method == "total" || method == "tot" || method == "tot_ratio") {
+      message("\n* Applying allocation method based on total address percentage.")
+      for (i in seq_len(nrow(merged))) {
+
+        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
+          as.numeric(merged[i, "tot_ratio"])
+      }
+    } else {
+      stop("\nThe method specified might be invalid. Check the documentation.",
+           call. = FALSE)
+    }
+    return(merged)
+  }
+  return(NULL)
 }

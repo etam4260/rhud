@@ -6,6 +6,13 @@
 #'   1) "github-pages"
 #'   2) "github"
 #' @export
+#' @examples
+#' \dontrun{
+#' library(hudr)
+#' rhud_website("github-pages")
+#' rhud_website("github")
+#' rhud_website()
+#' }
 rhud_website <- function(website = c("github-pages", "github")) {
   github_pages <- "https://etam4260.github.io/hudr/"
   github <- "https://github.com/etam4260/hudr"

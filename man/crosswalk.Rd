@@ -28,19 +28,22 @@ tract, cbsa, or cbsadiv geographic id.}
 \item{geoid_col}{The column containing the geographic identifier; must be
 zip, county, countysub, cd,
 tract, cbsa, or cbsadiv geographic id.
-Supply either the name of the column or the index.}
+Supply either the name of the column or the index.
+All elements in this column must be numbers only at the proper length.
+For example, zip codes must be 5 digit numbers.}
 
 \item{cw_geoid}{The geoid to crosswalk the dataset to.}
 
 \item{cw_geoid_col}{The columns in the dataset to distribute
 according to method ratio.
 If method is empty, no allocation method will be applied --
-the crosswalk file will just be attached to the dataset.}
+the crosswalk file will just be merged to the dataset.
+All elements in these columns must be numbers only.}
 
 \item{method}{The allocation method to use: residential,
 business, other, or total.
 If method is empty, no allocation method will be applied --
-the crosswalk file will just be attached to the dataset.}
+the crosswalk file will just be merged to the dataset.}
 
 \item{year}{The year measurement was taken.}
 
@@ -67,5 +70,27 @@ Currently supported crosswalks:
 \item cd-zip
 \item zip-countysub (Available 2nd Quarter 2018 onwards)
 \item countysub-zip (Available 2nd Quarter 2018 onwards)
+}
+}
+\examples{
+\dontrun{
+library(hudr)
+
+sample <- data.frame(population = c(42134, 12413, 13132),
+                     county = c(24047, 24045, 24043))
+
+crosswalk(data = sample, geoid = "county", geoid_col = "county",
+          cw_geoid = "zip")
+
+crosswalk(data = sample, geoid = "county", geoid_col = "county",
+          cw_geoid = "zip", cw_geoid_col = "population", method = "res")
+
+crosswalk(data = sample, geoid = "county", geoid_col = "county",
+          cw_geoid = "zip", cw_geoid_col = "population", method = "bus")
+
+crosswalk(data = sample, geoid = "county", geoid_col = "county",
+          cw_geoid = "zip", cw_geoid_col = "population", method = "bus",
+          year = 2018, quarter = 1)
+
 }
 }

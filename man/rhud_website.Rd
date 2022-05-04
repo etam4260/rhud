@@ -17,3 +17,11 @@ rhud_website(website = c("github-pages", "github"))
 Quickly get documentation for the hudr package by opening up
 the websites associated with it. Currently supports Unix and Windows OS.
 }
+\examples{
+\dontrun{
+library(hudr)
+rhud_website("github-pages")
+rhud_website("github")
+rhud_website()
+}
+}

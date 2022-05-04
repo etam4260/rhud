@@ -106,8 +106,8 @@ as well as [Output Data][] located at the bottom of the page.
 #### Zip -> Tract
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 library(rhud)
-# Four digits for printed output. 
 options (digits=4)
+
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
 #### Zip -> County

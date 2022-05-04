@@ -251,10 +251,31 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
                 "i.e 'as.vector(year)'", sep = ""), call. = FALSE)
   }
 
-  if (length(data) > 1 || length(geoid) > 1 ||  length(geoid_col) > 1
+
+  # Check if geoid_col exists in dataset or is in valid range
+  # Check if this column is all numbers too.
+  tryCatch({data[[geoid_col]]}, error = function(cond) {stop("\nIf the geoid_col argument is specified with indexes make sure it is within the range of the dataset. If column names are specified, make sure the column name exists in the dataset.", call. = FALSE)})
+
+  # Check if cw_geoid_col (s) exist in the dataset or is in valid range
+  # Check if this column is all numbers too.
+  tryCatch({data[[cw_geoid_col]]}, error = function(cond) {stop("\nIf the cw_geoid_col argument is specified with indexes make sure it is within the range of the dataset. If column names are specified, make sure the column name exists in the dataset.", call. = FALSE)})
+
+
+  if(!all(numbers_only(data[[geoid_col]]))) {
+    stop("\nMake sure all items in the geoid_col are made of numbers only",
+         call. = FALSE)
+  }
+
+  if(!all(numbers_only(data[[cw_geoid_col]]))) {
+    stop("\nMake sure all items in the cw_geoid_col are made of numbers only",
+         call. = FALSE)
+  }
+
+  if (length(geoid) > 1 ||  length(geoid_col) > 1
       && length(cw_geoid) > 1 || length(year) > 1 || length(quarter) > 1) {
-    stop("\nThis function currently only supports crosswalking one dataset
-          at a time. Make sure all input arguments are of length 1.",
+    stop(paste("\nThis function currently only supports crosswalking one dataset ",
+          "at a time. Make sure all input arguments are of length 1: ",
+          "not including the data or cw_geoid_col arguments", sep = ""),
          call. = FALSE)
   }
 

@@ -14,6 +14,11 @@
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_cd()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for a
 #'   particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -40,7 +45,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(zip) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
 
   all_queries <- expand.grid(query = zip, year = year,
@@ -106,7 +111,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(zip) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
 
   # Create dataframe with all queries needed.
@@ -176,7 +181,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(zip) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
 
   # HUD has a list of types. 1 corresponds to zip-tract, 2 corresponds to
@@ -243,7 +248,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(zip) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
 
   all_queries <- expand.grid(query = zip, year = year,
@@ -310,7 +315,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(zip) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
 
   all_queries <- expand.grid(query = zip, year = year,
@@ -378,7 +383,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(tract) != 11)) stop("\nQuery inputs are not all of length 11",
+  if (any(nchar(tract) != 11)) stop("\nTract inputs are not all of length 11",
                                     call. = FALSE)
 
   all_queries <- expand.grid(query = tract, year = year,
@@ -447,7 +452,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(county) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(county) != 5)) stop("\nCounty inputs are not all of length 5",
                                     call. = FALSE)
 
   all_queries <- expand.grid(query = county, year = year,
@@ -515,7 +520,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(cbsa) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(cbsa) != 5)) stop("\nCbsa inputs are not all of length 5",
                                   call. = FALSE)
 
   all_queries <- expand.grid(query = cbsa, year = year,
@@ -584,7 +589,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(cbsadiv) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(cbsadiv) != 5)) stop("\nCbsadiv inputs are not all of length 5",
                                      call. = FALSE)
 
   all_queries <- expand.grid(query = cbsadiv, year = year,
@@ -653,7 +658,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(cd) != 4)) stop("\nQuery input is not of length 4",
+  if (any(nchar(cd) != 4)) stop("\nCd inputs are not all of length 4",
                                 call. = FALSE)
 
   all_queries <- expand.grid(query = cd, year = year, quarter = quarter,
@@ -720,7 +725,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(zip) != 5)) stop("\nQuery inputs are not all of length 5",
+  if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
 
   all_queries <- expand.grid(query = zip, year = year, quarter = quarter,
@@ -790,7 +795,7 @@ hud_cw_countysub_zip <- function(countysub,
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(countysub) != 10)) stop("\nQuery inputs are not all of length 10",
+  if (any(nchar(countysub) != 10)) stop("\nCountysub inputs are not all of length 10",
                                         call. = FALSE)
 
   all_queries <- expand.grid(query = countysub, year = year,
