@@ -21,6 +21,10 @@
 #' hud_nation_states_territories()
 #' }
 hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   if (!is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -86,6 +90,10 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #' hud_state_metropolitan("VA")
 #' }
 hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -211,6 +219,10 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' hud_state_counties("51")
 #' }
 hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -300,6 +312,10 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' hud_state_places("51")
 #' }
 hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -384,6 +400,10 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' }
 hud_state_minor_civil_divisions <- function(state,
                                             key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",

@@ -71,11 +71,23 @@
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Case Study
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/Crosswalk-a-dataset.html">Crosswalk a dataset</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -108,32 +120,33 @@
 
     
     
-<div class="section level3">
-<h3 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
-</h3>
+<div class="section level2">
+<h2 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
+</h2>
 <p>According to (Income Limits | HUD USER), HUD establishes income restrictions for assisted housing programs such as Public Housing, Section 8 project-based, Section 8 Housing Choice Voucher, Section 202 housing for the elderly, and Section 811 housing for persons with disabilities. For each metropolitan region, parts of some metropolitan areas, and non-metropolitan county, HUD creates income limitations based on Median Family Income estimates and Fair Market Rent area criteria.</p>
+<p><br><br><br></p>
 </div>
-<div class="section level3">
-<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
-</h3>
-<p>This page contains basic examples of how to query the HUD Income Limits API. Before looking at the outputted data I RECOMMEND first taking a look at <a href="#input-arguments">Input Arguments</a> as well as <a href="#output-data">Output Data</a> located at the bottom of the page.</p>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<p>This page contains basic examples of how to query the HUD Income Limits API. Before looking at the examples I reccomend first taking a look at <a href="#parameters">the parameters</a> as well as <a href="#returns">output data</a> located at the bottom of the page.</p>
 <p><strong>DISCLAIMER:</strong> The output tables are too large to be displayed here so we choose to leave them out.</p>
 <ul>
 <li>Querying a state will return a single row containing the Income Limits for that state.</li>
 <li>Querying for a county will return the IL measurement for that county.</li>
 <li>Querying for a cbsa will return the measurement for that cbsa.</li>
 </ul>
-<div class="section level4">
-<h4 id="us-states">US States<a class="anchor" aria-label="anchor" href="#us-states"></a>
-</h4>
+<div class="section level3">
+<h3 id="us-states">US States<a class="anchor" aria-label="anchor" href="#us-states"></a>
+</h3>
 <p>This is an example to show you how to query for all states and territories in the US.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/rhud" class="external-link">rhud</a></span><span class="op">)</span>
 <span class="fu"><a href="../reference/hud_nation_states_territories.html">hud_nation_states_territories</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="us-counties">US Counties<a class="anchor" aria-label="anchor" href="#us-counties"></a>
-</h4>
+<div class="section level3">
+<h3 id="us-counties">US Counties<a class="anchor" aria-label="anchor" href="#us-counties"></a>
+</h3>
 <p>This is an example to show you how to query for all counties in MD, Virginia, and California, respectively.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_state_counties.html">hud_state_counties</a></span><span class="op">(</span><span class="st">"MD"</span><span class="op">)</span>
@@ -142,17 +155,17 @@
 
 <span class="fu"><a href="../reference/hud_state_counties.html">hud_state_counties</a></span><span class="op">(</span><span class="st">"6"</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="us-metropolitan-areas">US Metropolitan Areas<a class="anchor" aria-label="anchor" href="#us-metropolitan-areas"></a>
-</h4>
+<div class="section level3">
+<h3 id="us-metropolitan-areas">US Metropolitan Areas<a class="anchor" aria-label="anchor" href="#us-metropolitan-areas"></a>
+</h3>
 <p>This is an example to show you how to query for metropolitan areas for a state.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get all metropolitan areas in Maryland and Virginia.</span>
 <span class="fu"><a href="../reference/hud_state_metropolitan.html">hud_state_metropolitan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MD"</span>, <span class="st">"VA"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="state-level-income-limits">State Level Income Limits<a class="anchor" aria-label="anchor" href="#state-level-income-limits"></a>
-</h4>
+<div class="section level3">
+<h3 id="state-level-income-limits">State Level Income Limits<a class="anchor" aria-label="anchor" href="#state-level-income-limits"></a>
+</h3>
 <p>These are examples which show you how to query the Income Limits on a state level basis. You can use the state abbreviation, state name, or state fipscode. It will return a single row indicating the income limits for that particular state.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># These function calls gets income limits data for the state of Virginia in 2021.</span>
@@ -165,126 +178,173 @@
 <span class="co"># You can also choose to query for multiple states or multiple years.</span>
 <span class="fu"><a href="../reference/hud_il.html">hud_il</a></span><span class="op">(</span>query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'VA'</span>, <span class="st">'MD'</span><span class="op">)</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2021'</span>, <span class="st">'2019'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="county-level-income-limits">County Level Income Limits<a class="anchor" aria-label="anchor" href="#county-level-income-limits"></a>
-</h4>
+<div class="section level3">
+<h3 id="county-level-income-limits">County Level Income Limits<a class="anchor" aria-label="anchor" href="#county-level-income-limits"></a>
+</h3>
 <p>These are examples that show you how to query the Income Limits on a county-level basis: counties are defined with a 2 digit state fipscode + 3 digit county fipscode. You also need a 99999 code added to the end. We currently don’t know why the extra 99999 is included and have not found any cases where it’s different. I recommend looking at <a href="#us-counties">US Counties</a> to determine what counties are available for particular states.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting a county requires a 2 digit state fip + 3 digit county fip + 99999</span>
 <span class="co"># This queries for Income Limits in 2017.</span>
 <span class="fu"><a href="../reference/hud_il.html">hud_il</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="small-areas-income-limits">Small Areas Income Limits<a class="anchor" aria-label="anchor" href="#small-areas-income-limits"></a>
-</h4>
+<div class="section level3">
+<h3 id="small-areas-income-limits">Small Areas Income Limits<a class="anchor" aria-label="anchor" href="#small-areas-income-limits"></a>
+</h3>
 <p>These are examples that show you how to query the Small Areas Income Limits. Small Areas are defined as metropolitan and micropolitan areas specified using CBSA codes. Currently, we know how to query for metropolitan small areas, but are not sure for micropolitan yet. I recommend looking at <a href="#us-metropolitan-areas">US Metropolitan Areas</a> to determine what counties are available.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Gets FMR data for METRO area.</span>
+<code class="sourceCode R"><span class="co"># Gets il data for METRO area.</span>
 <span class="fu"><a href="../reference/hud_il.html">hud_il</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"METRO47900M47900"</span>, year<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><br><br><br></p>
 </div>
 </div>
-<div class="section level3">
-<h3 id="input-arguments">Input Arguments<a class="anchor" aria-label="anchor" href="#input-arguments"></a>
-</h3>
-<p><strong>QUERY</strong>: Can provide either a 10 digit FIPS code which is almost always state fips + county fips + 99999, or state abbreviation. Can also provide a CBSA code. Currently, you are only allowed to query for metropolitan areas.</p>
-<p>Run hud_states() to get a list of states in the US.</p>
-<p>Run hud_metropolitan(“MD”) to get a list of metropolitan areas in MD.</p>
-<p>Run hud_counties(“MD”) to get list of counties in MD.</p>
-<ul>
-<li>query = ‘5100199999’</li>
-<li>query = ‘MD’</li>
-<li>query = ‘METRO12700M12700’</li>
-</ul>
-<p><strong>YEAR</strong>: Year range of the data to retrieve: defaults to current year.</p>
-<ul>
-<li>year = c(2019, 2018, 2021)</li>
-<li>year = c(2016, 2017, 2022)</li>
-<li>year = c(2021)</li>
-</ul>
-<p><strong>KEY</strong>: The API key.</p>
-<ul>
-<li>key = “wqokqo2138jdi13wfwwfwcytjyr”</li>
-</ul>
+<div class="section level2">
+<h2 id="parameters">Parameters<a class="anchor" aria-label="anchor" href="#parameters"></a>
+</h2>
+<p><strong>query:</strong> <strong><em>character double integer or numeric</em></strong></p>
+<div class="line-block">         Can provide either a 10 digit FIPS code which is almost always<br>
+         state fips + county fips + 99999, or state abbreviation.<br>
+         Can also provide a CBSA code. You are only allowed to query for metropolitan<br>
+         areas.<br><br>
+         Run hud_states() to get a list of counties.<br><br>
+         Run hud_metropolitan(“MD”) to get a list of metropolitan areas in MD.<br><br>
+         Run hud_counties(“MD”) to get list of counties in MD.<br><br>
+         * query = ‘METRO12700M12700’<br>
+         * query = ‘MD’<br>
+         * query = ‘5100199999’</div>
+<p><strong>year:</strong> <strong><em>character double integer or numeric</em></strong></p>
+<div class="line-block">         Year range of the data to retrieve: defaults to the current year.<br><br>
+         * year = c(2019, 2018, 2021)<br>
+         * year = c(2016)<br>
+         * year = 2021</div>
+<p><strong>key:</strong> <strong><em>character</em></strong></p>
+<div class="line-block">        The API key provided by HUD USER.<br><br>
+        * key = “wqokqo2138jdi13wfwwfwcytjyr”</div>
+<p><br><br><br></p>
 </div>
-<div class="section level3">
-<h3 id="output-data">Output Data<a class="anchor" aria-label="anchor" href="#output-data"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li>
-<strong>county_name</strong>
-<ul>
-<li>Name of the county if it is a county.</li>
-</ul>
-</li>
-<li>
-<strong>counties_msa</strong>
-<ul>
-<li>Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).</li>
-</ul>
-</li>
-<li>
-<strong>town_name</strong>
-<ul>
-<li>Town name - applicable for North East regions</li>
-</ul>
-</li>
-<li>
-<strong>metro_status</strong>
-<ul>
-<li>value will be “1” if it is a metropolitan county. Otherwise value will be “0”.</li>
-</ul>
-</li>
-<li>
-<strong>metro_name</strong>
-<ul>
-<li>Metro area name if metro_status is “1”</li>
-</ul>
-</li>
-<li>
-<strong>year</strong>
-<ul>
-<li>year of the data</li>
-</ul>
-</li>
-<li>
-<strong>median_income</strong>
-<ul>
-<li>Median Income for the area</li>
-</ul>
-</li>
-<li>
-<strong>Very Low</strong>
-<ul>
-<li>(50%) Income Limits</li>
-<li>For more details on il50 check the website.</li>
-</ul>
-</li>
-<li>
-<strong>Extremely Low</strong>
-<ul>
-<li>(30%) Income Limits</li>
-<li>For more details on il30 check the website.</li>
-</ul>
-</li>
-<li>
-<strong>Low</strong>
-<ul>
-<li>(80%) Income Limits</li>
-<li>For more details on il80 check the website.</li>
-</ul>
-</li>
-</ol>
+<div class="section level2">
+<h2 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a>
+</h2>
+<table class="table">
+<tr>
+<th>
+Data Field
+</th>
+<th>
+Description
+</th>
+</tr>
+<tr>
+<td>
+query
+</td>
+<td>
+Identifier for county, state, or cbsadiv depending on function
+</td>
+</tr>
+<tr>
+<td>
+year
+</td>
+<td>
+Year when measurement was taken.
+</td>
+</tr>
+<tr>
+<td>
+county_name
+</td>
+<td>
+Name of the county if it is a county.
+</td>
+</tr>
+<tr>
+<td>
+counties_msa
+</td>
+<td>
+Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
+</td>
+</tr>
+<tr>
+<td>
+town_name
+</td>
+<td>
+Town name - applicable for North East regions
+</td>
+</tr>
+<tr>
+<td>
+metro_status
+</td>
+<td>
+value will be “1” if it is a metropolitan county. Otherwise value will be “0”.
+</td>
+</tr>
+<tr>
+<td>
+metro_name
+</td>
+<td>
+Metro area name if metro_status is “1”
+</td>
+</tr>
+<tr>
+<td>
+smallarea_status
+</td>
+<td>
+value will be “1” if it is a small area. Otherwise value will be “0”.
+</td>
+</tr>
+<tr>
+<td>
+median_income
+</td>
+<td>
+Efficiency FMR in US Dollars
+</td>
+</tr>
+<tr>
+<td>
+very_low +
+</td>
+<td>
+Very low (50%) Income Limits. For more details on il50 check the associated documentation at <a href="https://www.huduser.gov/portal/dataset/fmr-api.html" class="external-link uri">https://www.huduser.gov/portal/dataset/fmr-api.html</a>
+</td>
+</tr>
+<tr>
+<td>
+extremely_low +
+</td>
+<td>
+Extremely low (30%) Income Limits. For more details on il30 check the associated documentation at <a href="https://www.huduser.gov/portal/dataset/fmr-api.html" class="external-link uri">https://www.huduser.gov/portal/dataset/fmr-api.html</a>
+</td>
+</tr>
+<tr>
+<td>
+low +
+</td>
+<td>
+Low (80%) Income Limits. For more details on il80 check the associated documentation at <a href="https://www.huduser.gov/portal/dataset/fmr-api.html" class="external-link uri">https://www.huduser.gov/portal/dataset/fmr-api.html</a>
+</td>
+</tr>
+</table>
+<p><br><br><br></p>
 </div>
-<div class="section level3">
-<h3 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h3>
-<p>“Income Limits | HUD USER.” Huduser.gov, 2015, <br>     www.huduser.gov/portal/datasets/il.html.</p>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div class="line-block">“Income Limits | HUD USER.” Huduser.gov, 2015,<br>
+        www.huduser.gov/portal/datasets/il.html.</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 

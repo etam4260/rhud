@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-### Program Overview
+## Program Overview
 
 According to (Income Limits | HUD USER), HUD establishes income restrictions for
 assisted housing programs such as Public Housing, Section 8 project-based,
@@ -24,10 +24,14 @@ parts of some metropolitan areas, and non-metropolitan county, HUD creates
 income limitations based on Median Family Income estimates and Fair Market Rent
 area criteria.
 
-### Examples
+<br><br><br>
+
+## Examples
 
 This page contains basic examples of how to query the HUD Income Limits API.
-Before looking at the outputted data I RECOMMEND first taking a look at [Input Arguments][] as well as [Output Data][] located at the bottom of the page.
+Before looking at the examples I reccomend first taking a look at
+[the parameters][Parameters] as well as [output data][Returns] located at
+the bottom of the page.
 
 **DISCLAIMER:** The output tables are too large to be displayed here so we
 choose to leave them out.
@@ -37,7 +41,7 @@ state.
 * Querying for a county will return the IL measurement for that county.
 * Querying for a cbsa will return the measurement for that cbsa.
 
-#### US States
+### US States
 This is an example to show you how to query for all states and territories
 in the US.
 ```{r, eval=FALSE}
@@ -45,7 +49,7 @@ library(rhud)
 hud_nation_states_territories()
 ```
 
-#### US Counties 
+### US Counties 
 This is an example to show you how to query for all counties in MD,
 Virginia, and California, respectively.
 ```{r, eval=FALSE}
@@ -56,14 +60,14 @@ hud_state_counties("Virginia")
 hud_state_counties("6")
 ```
 
-#### US Metropolitan Areas
+### US Metropolitan Areas
 This is an example to show you how to query for metropolitan areas for a state.
 ```{r, eval=FALSE}
 # Get all metropolitan areas in Maryland and Virginia.
 hud_state_metropolitan(c("MD", "VA"))
 ```
 
-#### State Level Income Limits
+### State Level Income Limits
 These are examples which show you how to query the Income Limits on a state
 level basis. You can use the state abbreviation, state name, or state fipscode.
 It will return a single row indicating the income limits for that particular
@@ -81,7 +85,7 @@ hud_il(query= "51", year = '2021')
 hud_il(query = c('VA', 'MD'), year = c('2021', '2019'))
 ```
 
-#### County Level Income Limits
+### County Level Income Limits
 These are examples that show you how to query the Income Limits on a 
 county-level basis: counties are defined with a 2 digit state fipscode + 3 digit county fipscode. You also need a 99999 code added to the end. We currently 
 don't know why the extra 99999 is included and have not found any cases where it's different. I recommend looking at [US Counties][] to determine what counties 
@@ -93,88 +97,120 @@ are available for particular states.
 hud_il(query = '0100199999', year = '2017')
 ```
 
-#### Small Areas Income Limits
+### Small Areas Income Limits
 These are examples that show you how to query the Small Areas Income Limits.
 Small Areas are defined as metropolitan and micropolitan areas specified using
 CBSA codes. Currently, we know how to query for metropolitan small areas, but
 are not sure for micropolitan yet. I recommend looking at 
 [US Metropolitan Areas][] to determine what counties are available.
 ```{r, eval=FALSE}
-# Gets FMR data for METRO area.
+# Gets il data for METRO area.
 hud_il(query = "METRO47900M47900", year=c(2018))
 ```
 
-### Input Arguments
+<br><br><br>
 
-**QUERY**: Can provide either a 10 digit FIPS code which is almost always state
-fips + county fips + 99999, or state abbreviation. Can also provide a CBSA code.
-Currently, you are only allowed to query for metropolitan areas.
-  
-  Run hud_states() to get a list of states in the US.
-  
-  Run hud_metropolitan("MD") to get a list of metropolitan areas in MD.
-  
-  Run hud_counties("MD") to get list of counties in MD.
-  
-  * query = '5100199999'
-  * query = 'MD'
-  * query = 'METRO12700M12700'
+## Parameters
 
-**YEAR**: Year range of the data to retrieve: defaults to current year. 
+**query:** ***character double integer or numeric***
 
-  * year = c(2019, 2018, 2021)
-  * year = c(2016, 2017, 2022)
-  * year = c(2021)
+|          Can provide either a 10 digit FIPS code which is almost always
+|          state fips + county fips + 99999, or state abbreviation. 
+|          Can also provide a CBSA code. You are only allowed to query for metropolitan
+|          areas.
+|
+|          Run hud_states() to get a list of counties.
+|  
+|          Run hud_metropolitan("MD") to get a list of metropolitan areas in MD.
+|  
+|          Run hud_counties("MD") to get list of counties in MD.
+|  
+|          * query = 'METRO12700M12700'
+|          * query = 'MD'
+|          * query = '5100199999'
 
-**KEY**: The API key.
+**year:** ***character double integer or numeric***
 
-  * key = "wqokqo2138jdi13wfwwfwcytjyr"
+|          Year range of the data to retrieve: defaults to the current year.
+|
+|          * year = c(2019, 2018, 2021)
+|          * year = c(2016)
+|          * year = 2021
 
-### Output Data
+**key:** ***character*** 
 
-1) **county_name** 
-    * Name of the county if it is a county.
-
-
-2) **counties_msa**
-    * Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
-
-
-3) **town_name**
-    * Town name - applicable for North East regions
+|         The API key provided by HUD USER.
+|
+|         * key = "wqokqo2138jdi13wfwwfwcytjyr"
 
 
-4) **metro_status**
-    * value will be "1" if it is a metropolitan county. Otherwise value will be "0".
+<br><br><br>
 
+## Returns
 
-5) **metro_name**
-    * Metro area name if metro_status is "1"
+<table>
+	<tr>
+		  <th>Data Field</th>
+		  <th>Description</th>
+ 	</tr>
+ 	 <tr>
+  		<td>query</td>
+   		<td>Identifier for county, state, or cbsadiv depending on function</td>
+ 	</tr>
+ 	<tr>
+  		<td>year</td>
+   		<td>Year when measurement was taken.</td>   
+ 	</tr>
+ 	<tr>
+  		<td>county_name</td>
+   		<td>Name of the county if it is a county.</td>
+ 	</tr>
+	<tr>
+  		<td>counties_msa</td>
+   		<td> Names of all counties belonging to the Metro Area if it is a Metro Area
+      (MSA).</td>
+ 	</tr>
+	<tr>
+  		<td>town_name</td>
+   		<td>Town name - applicable for North East regions</td>
+ 	</tr>
+ 	<tr>
+  		<td>metro_status</td>
+   		<td>value will be "1" if it is a metropolitan county. Otherwise value will be
+       "0".
+      </td>   
+ 	</tr>
+ 	 <tr>
+  		<td>metro_name</td>
+   		<td>Metro area name if metro_status is "1"
+      </td>   
+ 	</tr>
+ 	<tr>
+  		<td>smallarea_status</td>
+   		<td> value will be "1" if it is a small area. Otherwise value will be "0".
+      </td>   
+ 	</tr>
+ 	<tr>
+  		<td>median_income</td>
+   		<td>Efficiency FMR in US Dollars</td>   
+ 	</tr>
+ 	<tr>
+  		<td>very_low + </td>
+   		<td>Very low (50%) Income Limits. For more details on il50 check the associated documentation at https://www.huduser.gov/portal/dataset/fmr-api.html</td>   
+ 	</tr>
+ 	<tr>
+  		<td>extremely_low + </td>
+   		<td>Extremely low (30%) Income Limits. For more details on il30 check the associated documentation at https://www.huduser.gov/portal/dataset/fmr-api.html</td>   
+ 	</tr>
+ 	<tr>
+  		<td>low + </td>
+   		<td>Low (80%) Income Limits. For more details on il80 check the associated documentation at https://www.huduser.gov/portal/dataset/fmr-api.html </td>   
+ 	</tr>
+</table>
 
+<br><br><br>
 
-6) **year**
-    * year of the data
+## References
 
-
-7) **median_income**
-    * Median Income for the area
-    
-    
-8) **Very Low** 
-    * (50%) Income Limits
-    * For more details on il50 check the website.
-
-
-9) **Extremely Low** 
-    * (30%) Income Limits
-    * For more details on il30 check the website.
-    
-    
-10) **Low** 
-    * (80%) Income Limits
-    * For more details on il80 check the website.
-    
-### References
-
-"Income Limits | HUD USER." Huduser.gov, 2015,
-<br />&nbsp;&nbsp;&nbsp;&nbsp; www.huduser.gov/portal/datasets/il.html.
+| "Income Limits | HUD USER." Huduser.gov, 2015,
+|         www.huduser.gov/portal/datasets/il.html.

@@ -49,5 +49,19 @@ hud_cw_zip_countysub(zip = '35213', year = c('2010'), quarter = c('1'),
    minimal = TRUE)
 }
 }
+\keyword{*}
 \keyword{API}
 \keyword{Crosswalks}
+\keyword{[rhud::hud_cw()]}
+\keyword{[rhud::hud_cw_cbsa_zip()]}
+\keyword{[rhud::hud_cw_cbsadiv_zip()]}
+\keyword{[rhud::hud_cw_cd_zip()]}
+\keyword{[rhud::hud_cw_county_zip()]}
+\keyword{[rhud::hud_cw_countysub_zip()]}
+\keyword{[rhud::hud_cw_tract_zip()]}
+\keyword{[rhud::hud_cw_zip_cbsa()]}
+\keyword{[rhud::hud_cw_zip_cbsadiv()]}
+\keyword{[rhud::hud_cw_zip_cd()]}
+\keyword{[rhud::hud_cw_zip_county()]}
+\keyword{[rhud::hud_cw_zip_countysub()]}
+\keyword{[rhud::hud_cw_zip_tract()]}

@@ -15,6 +15,10 @@
 hud_fmr_state_metroareas <- function(state,
                                      year = format(Sys.Date() - 365, "%Y"),
                                      key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
   year <- args[[2]]
@@ -92,6 +96,10 @@ hud_fmr_state_metroareas <- function(state,
 #' @returns A data frame with fair markets rent for counties in states.
 hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                                    key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
   year <- args[[2]]
@@ -172,6 +180,9 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' @returns A data frame with fair markets rent for zip codes in counties.
 hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                                key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
 
   args <- fmr_il_input_check_cleansing(county, year, key)
   query <- args[[1]]
@@ -291,6 +302,10 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 hud_fmr_metroarea_zip <- function(metroarea,
                                   year = format(Sys.Date() - 365, "%Y"),
                                   key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- fmr_il_input_check_cleansing(metroarea, year, key)
   query <- args[[1]]
   year <- args[[2]]

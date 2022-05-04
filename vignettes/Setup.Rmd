@@ -35,6 +35,8 @@ calls. However, it is **NOT RECOMMENDED** to do this. To reduce the need to
 supply the key argument in every function call you can use the Sys.setenv()
 function to save the key to the user environment.
 
+<br><br><br>
+
 ## Interactive Key Setup
 
 There are various method of setting up a key. However, I recommend using the
@@ -74,7 +76,7 @@ hud_get_key()
 
 It is now set up for the rest of the R session.
 
-## Rprofile
+### .Rprofile
 
 You also choose to save it into your .Rprofile to save the key in between 
 R session.
@@ -99,6 +101,7 @@ To set the HUD_KEY in .Rprofile HOME directory use:
 hud_set_key("dqdqdqdqd", in_home = TRUE)
 ```
 
+<br><br><br>
 
 ## Understanding the Syntax
 
@@ -149,11 +152,13 @@ The third part is 'county' meaning we need to input county(s)
 The fourth part is the 'zip' meaning the data will be returned 
 at a zip code resolution.
 
+<br><br><br>
+
 ## Additional Help
 
 If you ever get confused or need help you can easily revisit this website 
 through where you can check the all the function definitions in the
-REFERENCE tab.
+***Reference*** tab.
 
 ```{r, eval=FALSE}
 rhud_website()

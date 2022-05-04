@@ -67,7 +67,8 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                       year = format(Sys.Date() - 365, "%Y"),
                       quarter = 1,
                       key = Sys.getenv("HUD_KEY")) {
-
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   args <- crosswalk_a_dataset_input_check_cleansing(data, geoid, geoid_col,
                                             cw_geoid, cw_geoid_col, method,
                                             year,

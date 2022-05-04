@@ -25,6 +25,9 @@
 hud_chas_nation <- function(year = c("2014-2018"),
                             key = Sys.getenv("HUD_KEY")) {
 
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
   key <- args[[2]]
@@ -64,6 +67,10 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #' }
 hud_chas_state <- function(state, year = c("2014-2018"),
                            key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- chas_input_check_cleansing(state, year, key)
   state <- args[[1]]
   year <- args[[2]]
@@ -141,6 +148,10 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' }
 hud_chas_county <- function(county, year = c("2014-2018"),
                             key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- chas_input_check_cleansing(county, year, key)
   county <- args[[1]]
   year <- args[[2]]
@@ -220,6 +231,10 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' }
 hud_chas_state_mcd <- function(state, year = c("2014-2018"),
                          key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
   key <- args[[2]]
@@ -306,6 +321,10 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #' }
 hud_chas_state_place <- function(state, year = c("2014-2018"),
                            key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
   key <- args[[2]]

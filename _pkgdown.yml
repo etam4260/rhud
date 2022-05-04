@@ -1,6 +1,6 @@
 navbar:
   structure:
-    left:  [intro, setup, articles, reference, changelog]
+    left:  [intro, setup, articles, casestudy, reference, changelog]
     right: [search, github]
   components:
    setup:
@@ -10,17 +10,22 @@ navbar:
     text: Articles
     menu:
     - text: "HUD User"
-    - text: Crosswalk
+    - text: "Crosswalk"
       href: articles/Crosswalk.html
-    - text: Fair Markets Rent
+    - text: "Fair Markets Rent"
       href: articles/Fair-Markets-Rent.html
-    - text: Income Limits
+    - text: "Income Limits"
       href: articles/Income-Limits.html
-    - text: Comprehensive Housing and Affordability Strategy
+    - text: "Comprehensive Housing and Affordability Strategy"
       href: articles/Comprehensive-Housing-and-Affordability-Strategy.html
+   casestudy:
+    text: "Case Study"
+    menu:
+    - text: "Crosswalk a dataset"
+      href: articles/Crosswalk-a-dataset.html
    reference:
     text: Reference
     href: reference/index.html
-   changelog:   
-    text: News
+   changelog:
+    text: Changelog
     href: news/index.html

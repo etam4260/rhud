@@ -1,3 +1,4 @@
+
 #' @name hud_cw_zip_tract
 #' @title hud_cw_zip_tract
 #' @description This function queries the Crosswalks API provided by US
@@ -15,13 +16,22 @@
 #'   account and request for an API key.
 #' @keywords Crosswalks API
 #' @seealso
+#' * [rhud::hud_cw_zip_tract()]
 #' * [rhud::hud_cw_zip_county()]
 #' * [rhud::hud_cw_zip_cbsa()]
 #' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
 #' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for a
-#'   particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for a
+#'   particular geoid. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
@@ -36,6 +46,8 @@
 hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                              quarter = 1, minimal = FALSE,
                              key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "zip"
   secondary_geoid <- "tract"
 
@@ -85,6 +97,20 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -102,6 +128,8 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                               quarter = 1, minimal = FALSE,
                               key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "zip"
   secondary_geoid <- "county"
 
@@ -155,6 +183,20 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for a
 #'   particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -172,6 +214,8 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                             quarter = 1, minimal = FALSE,
                             key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "zip"
   secondary_geoid <- "cbsa"
 
@@ -222,6 +266,20 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -239,6 +297,8 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
                                key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "zip"
   secondary_geoid <- "cbsadiv"
 
@@ -289,6 +349,20 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for a
 #'   particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -306,6 +380,8 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
                           key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "zip"
   secondary_geoid <- "cd"
 
@@ -357,6 +433,20 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for a
 #'   particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -374,6 +464,8 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
                              quarter = 1, minimal = FALSE,
                              key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "tract"
   secondary_geoid <- "zip"
 
@@ -426,6 +518,20 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -443,6 +549,8 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                               quarter = 1, minimal = FALSE,
                               key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "county"
   secondary_geoid <- "zip"
 
@@ -494,6 +602,20 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -511,6 +633,8 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
                             quarter = 1, minimal = FALSE,
                             key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "cbsa"
   secondary_geoid <- "zip"
 
@@ -563,6 +687,20 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -580,6 +718,8 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
                                key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "cbsadiv"
   secondary_geoid <- "zip"
 
@@ -632,6 +772,20 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -649,6 +803,8 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
                           key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
   primary_geoid <- "cd"
   secondary_geoid <- "zip"
 
@@ -699,6 +855,19 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -716,6 +885,9 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                    call. = FALSE)
   primary_geoid <- "zip"
   secondary_geoid <- "countysub"
 
@@ -767,6 +939,20 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Crosswalks API
+#' @seealso
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for a
 #'   particular GEOID. These measurements include res-ratio, bus-ratio,
@@ -786,6 +972,9 @@ hud_cw_countysub_zip <- function(countysub,
                                  year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY")) {
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   primary_geoid <- "countysub"
   secondary_geoid <- "zip"
 

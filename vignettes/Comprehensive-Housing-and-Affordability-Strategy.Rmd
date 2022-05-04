@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-### Program Overview
+## Program Overview
 
 According to (Consolidated Planning/CHAS Data | HUD USER), the United States
 Department of Housing and Urban Development (HUD) gets custom tabulations of
@@ -24,18 +24,23 @@ Strategy), show the scope of housing issues and needs, particularly among
 low-income households. Local governments utilize the CHAS data to plan how they
 will spend HUD monies, and HUD may use the data to distribute grant funds.
   
-### Examples
+<br><br><br>
+
+## Examples
 
 These are basic examples showing you how to query the Comprehensive Housing and
-Affordability API.
+Affordability (CHAS) API.
 
 Each geoid query represents a CHAS measurement for that particular 
-geographic resolution.
+geographic resolution. Before looking at the examples I RECOMMEND first
+looking at [the parameters][Parameters]
+as well as [return data][Returns] located at the bottom of the page.
 
 The functions below are the main functions for querying the CHAS API at
-different geographic resolutions. The package also contains a omni function
-which encapsulates the capabilities of all the main function calls mentioned
-below. [onmi-function][Using the omni function for querying]
+different geographic resolutions. The package also contains an omni function 
+which encapsulates thecapabilities of all the main function calls below --
+[omni-function][Using the omni function for querying]
+
 
 1) [nation][CHAS for Nation]
 2) [state][CHAS for State]
@@ -43,31 +48,31 @@ below. [onmi-function][Using the omni function for querying]
 4) [mcd][CHAS for MCD] 
 5) [place][CHAS for Place]
 
-#### CHAS for Nation
+### CHAS for Nation
 ```{r, eval=FALSE}
   library(rhud)
   hud_chas_nation(year=c("2014-2018"))
 ```
 
-#### CHAS for State
+### CHAS for State
 ```{r, eval=FALSE}
   # Queries for CHAS in a state
   hud_chas_state("Maryland", year=c("2012-2016"))
 ```
 
-#### CHAS for County
+### CHAS for County
 ```{r, eval=FALSE}
   # Queries a county in Virginia
   hud_chas_county("51999", year=c("2014-2018"))
 ```
 
-#### CHAS for MCD
+### CHAS for MCD
 ```{r, eval=FALSE}
   # Queries for CHAS for all mcds in Virginia
   hud_chas_state_mcd("VA", "94087")
 ```
 
-#### CHAS for Place
+### CHAS for Place
 ```{r, eval=FALSE}
   # Queries for CHAS for all places in state fips code 51.
   hud_chas_state_place("51", 48996)
@@ -90,326 +95,9 @@ details on how to use this.
   hud_chas(type = 2, 51)
 ```
 
-### Input Arguments
+<br><br><br>
 
-**STATEID** If querying for state, county, place, or MCD, you must specify the
-state either as abbreviation, state name, or state code.
+## References
 
-  stateId = 34
-  stateId = "VA"
-  stateId = "Virginia"
-
-**ENTITYID** If querying for county, place, or MCD, you must specify either the
-county, mcd, or place, respectively using their codes.
-    
-  - 51999 Corresponds to a County in Virginia
-  - Run hud_counties("VA") to get all counties in Virginia
-  
-  - 94087 Corresponds to a (Minor Civil Division) MCD in Virginia
-  - Run hud_minor_civil_divisions("VA") to get all minor civil divisions in Virginia
-  
-  - 48996 Corresponds to a Place in Virginia
-  - Run hud_places("VA") to get all places in Virginia
-    
-**YEAR** Year range of the data to retrieve. Default is latest year range.
-
-  * year = "2014-2018"
-  * year = "2013-2017"
-  * year = "2012-2016"
-  * year = "2011-2015"
-  * year = "2010-2014"
-  * year = "2009-2013"
-  * year = "2008-2012"
-  * year = "2007-2011"
-  * year = "2006-2010"
-  
-**KEY**: The API key provided by HUD.
-
-  * key = "wqokqo2138jdi13wfwwfwcytjyr"
-
-### Output Data
-
-I recommend checking out https://www.huduser.gov/portal/dataset/chas-api.html
-for more details as the fields returned require a fair level of domain knowledge.
-
-HAMFI stands for HUD area median family income, according to
-(https://www.lawinsider.com/dictionary/hamfi). HUD calculates the median family
-income in each jurisdiction to estimate fair market rents and income limitations
-for HUD programs.
-
-A1	Household Income <= 30% HAMFI (Owner Occupied)
-
-A2	Household Income <= 30% HAMFI (Renter Occupied)
-
-A3,	Household Income <= 30% HAMFI (Total)
-
-A4	Household Income >30% to <=50% HAMFI (Owner Occupied)
-
-A5	Household Income >30% to <=50% HAMFI (Renter Occupied)
-
-A6	Household Income >30% to <=50% HAMFI (Total)
-
-A7	Household Income >50% to <=80% HAMFI (Owner Occupied)
-
-A8	Household Income >50% to <=80% HAMFI (Renter Occupied)
-
-A9	Household Income >50% to <=80% HAMFI (Total)
-
-A10	Household Income >80% to <=100% HAMFI (Owner Occupied)
-
-A11	Household Income >80% to <=100% HAMFI (Renter Occupied)
-
-A12	Household Income >80% to <=100% HAMFI (Total)
-
-A13	Household Income >100% HAMFI (Owner Occupied)
-
-A14	Household Income >100% HAMFI (Renter Occupied)
-
-A15	Household Income >100% HAMFI (Total)
-
-A16	Total Owner Occupied
-
-A17	Total Renter Occupied
-
-A18	Total Occupied housing units
-
-B1	Household has at least 1 of 4 Housing Problems (Owner Occupied)
-
-B2	Household has at least 1 of 4 Housing Problems (Renter Occupied)
-
-B3	Household has at least 1 of 4 Housing Problems (Total)
-
-B4	Household has none of 4 Housing Problems (Owner Occupied)
-
-B5	Household has none of 4 Housing Problems (Renter Occupied)
-
-B6	Household has none of 4 Housing Problems (Total)
-
-B7	Cost burden not available, no other problems (Owner Occupied)
-
-B8	Cost burden not available, no other problems (Renter Occupied)
-
-B9	Cost burden not available, no other problems (Total)
-
-C1	Household has at least 1 of 4 Severe Housing Problems (Owner Occupied)
-
-C2	Household has at least 1 of 4 Severe Housing Problems (Renter Occupied)
-
-C3	Household has at least 1 of 4 Severe Housing Problems (Total)
-
-C4	Household has none of 4 Severe Housing Problems (Owner Occupied)
-
-C5	Household has none of 4 Severe Housing Problems (Renter Occupied)
-
-C6	Household has none of 4 Severe Housing Problems (Total)
-
-D1	Cost Burden <=30% (Owner Occupied)
-
-D2	Cost Burden <=30% (Renter Occupied)
-
-D3	Cost Burden <=30% (Total)
-
-D4	Cost Burden >30% to <=50% (Owner Occupied)
-
-D5	Cost Burden >30% to <=50% (Renter Occupied)
-
-D6	Cost Burden >30% to <=50% (Total)
-
-D7	Cost Burden >50% (Owner Occupied)
-
-D8	Cost Burden >50% (Renter Occupied)
-
-D9	Cost Burden >50% (Total)
-
-D10	Cost Burden not available (Owner Occupied)
-
-D11	Cost Burden not available (Renter Occupied)
-
-D12	Cost Burden not available (Total)
-
-E1	Household Income <= 30% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems
-
-E2	Household Income <= 30% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems
-
-E3	Household Income <= 30% HAMFI (Owners and Renters) and Cost Burden not available, no other housing
-problems
-
-E5	Household Income >30% to <=50% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems
-
-E6	Household Income >30% to <=50% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems
-
-E7	Household Income >30% to <=50% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems
-
-E9	Household Income >50% to <=80% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems
-
-E10	Household Income >50% to <=80% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems
-
-E11	Household Income >50% to <=80% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems
-
-E13	Household Income >80% to <=100% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems
-
-E14	Household Income >80% to <=100% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems
-
-E15	Household Income >80% to <=100% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems
-
-E17	Household Income >100% HAMFI (Owners and Renters) and Household has at least 1 of 4 Housing Problems
-
-E18	Household Income >100% HAMFI (Owners and Renters) and Household has none of 4 Housing Problems
-
-E19	Household Income >100% HAMFI (Owners and Renters) and Cost Burden not available, no other housing problems
-
-E21	Total Household has at least 1 of 4 Housing Problems (Owners and Renters)
-
-E22	Total Household has none of 4 Housing Problems (Owners and Renters)
-
-E23	Total Cost Burden not available, no other housing problems (Owners and Renters)
-
-F1	Household Income <= 30% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems
-
-F2	Household Income <= 30% HAMFI (Renters only) and Household has none of 4 Housing Problems
-
-F3	Household Income <= 30% HAMFI (Renters only) and Cost Burden not available, no other housing problems
-
-F5	Household Income >30% to <=50% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems
-
-F6	Household Income >30% to <=50% HAMFI (Renters only) and Household has none of 4 Housing Problems
-
-F7	Household Income >30% to <=50% HAMFI (Renters only) and Cost Burden not available, no other housing problems
-
-F9	Household Income >50% to <=80% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems
-
-F10	Household Income >50% to <=80% HAMFI (Renters only) and Household has none of 4 Housing Problems
-
-F11	Household Income >50% to <=80% HAMFI (Renters only) and Cost Burden not available, no other housing problems
-
-F13	Household Income >80% to <=100% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems
-
-F14	Household Income >80% to <=100% HAMFI (Renters only) and Household has none of 4 Housing Problems
-
-F15	Household Income >80% to <=100% HAMFI (Renters only) and Cost Burden not available, no other housing problems
-
-F17	Household Income >100% HAMFI (Renters only) and Household has at least 1 of 4 Housing Problems
-
-F18	Household Income >100% HAMFI (Renters only) and Household has none of 4 Housing Problems
-
-F19	Household Income >100% HAMFI (Renters only) and Cost Burden not available, no other housing problems
-
-F21	Total Household has at least 1 of 4 Housing Problems (Renters only)
-
-F22	Total Household has none of 4 Housing Problems (Renters only)
-
-F23	Total Cost Burden not available, no other housing problems (Renters only)
-
-G1	Household Income <= 30% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems
-
-G2	Household Income <= 30% HAMFI (Owners only) and Household has none of 4 Housing Problems
-
-G3	Household Income <= 30% HAMFI (Owners only) and Cost Burden not available, no other housing problems
-
-G5	Household Income >30% to <=50% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems
-
-G6	Household Income >30% to <=50% HAMFI (Owners only) and Household has none of 4 Housing Problems
-
-G7	Household Income >30% to <=50% HAMFI (Owners only) and Cost Burden not available, no other housing problems
-
-G9	Household Income >50% to <=80% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems
-
-G10	Household Income >50% to <=80% HAMFI (Owners only) and Household has none of 4 Housing Problems
-
-G11	Household Income >50% to <=80% HAMFI (Owners only) and Cost Burden not available, no other housing
-problems
-
-G13	Household Income >80% to <=100% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems
-
-G14	Household Income >80% to <=100% HAMFI (Owners only) and Household has none of 4 Housing Problems
-
-G15	Household Income >80% to <=100% HAMFI (Owners only) and Cost Burden not available, no other housing problems
-
-G17	Household Income >100% HAMFI (Owners only) and Household has at least 1 of 4 Housing Problems
-
-G18	Household Income >100% HAMFI (Owners only) and Household has none of 4 Housing Problems
-
-G19	Household Income >100% HAMFI (Owners only) and Cost Burden not available, no other housing problems
-
-G21	Total Household has at least 1 of 4 Housing Problems (Owners only)
-
-G22	Total Household has none of 4 Housing Problems (Owners only)
-
-G23	Total Cost Burden not available, no other housing problems (Owners only)
-
-H1	Household Income <= 30% HAMFI (Owners and Renters) and Cost burden > 30%
-
-H2	Household Income <= 30% HAMFI (Owners and Renters) and Cost burden > 50%
-
-H4	Household Income >30% to <=50% HAMFI (Owners and Renters) and Cost burden > 30%
-
-H5	Household Income >30% to <=50% HAMFI (Owners and Renters) and Cost burden > 50%
-
-H7	Household Income >50% to <=80% HAMFI (Owners and Renters) and Cost burden > 30%
-
-H8	Household Income >50% to <=80% HAMFI (Owners and Renters) and Cost burden > 50%
-
-H10	Household Income >80% to <=100% HAMFI (Owners and Renters) and Cost burden > 30%
-
-H11	Household Income >80% to <=100% HAMFI (Owners and Renters) and Cost burden > 50%
-
-H13	Household Income >100% HAMFI (Owners and Renters) and Cost burden > 30%
-
-H14	Household Income >100% HAMFI (Owners and Renters) and Cost burden > 30%
-
-H16	Total (Owners and Renters) and Cost burden > 30%
-
-H17	Total (Owners and Renters) and Cost burden > 50%
-
-I1	Household Income <= 30% HAMFI (Renters only) and Cost burden > 30%
-
-I2	Household Income <= 30% HAMFI (Renters only) and Cost burden > 50%
-
-I4	Household Income >30% to <=50% HAMFI (Renters only) and Cost burden > 30%
-
-I5	Household Income >30% to <=50% HAMFI (Renters only) and Cost burden > 50%
-
-I7	Household Income >50% to <=80% HAMFI (Renters only) and Cost burden > 30%
-
-I8	Household Income >50% to <=80% HAMFI (Renters only) and Cost burden > 50%
-
-I10	Household Income >80% to <=100% HAMFI (Renters only) and Cost burden > 30%
-
-I11	Household Income >80% to <=100% HAMFI (Renters only) and Cost burden > 50%
-
-I13	Household Income >100% HAMFI (Renters only) and Cost burden > 30%
-
-I14	Household Income >100% HAMFI (Renters only) and Cost burden > 30%
-
-I16	Total (Renters only) and Cost burden > 30%
-
-I17	Total (Renters only) and Cost burden > 50%
-
-J1	Household Income <= 30% HAMFI (Owners only) and Cost burden > 30%
-
-J2	Household Income <= 30% HAMFI (Owners only) and Cost burden > 50%
-
-J4	Household Income >30% to <=50% HAMFI (Owners only) and Cost burden > 30%
-
-J5	Household Income >30% to <=50% HAMFI (Owners only) and Cost burden > 50%
-
-J7	Household Income >50% to <=80% HAMFI (Owners only) and Cost burden > 30%
-
-J8	Household Income >50% to <=80% HAMFI (Owners only) and Cost burden > 50%
-
-J10	Household Income >80% to <=100% HAMFI (Owners only) and Cost burden > 30%
-
-J11	Household Income >80% to <=100% HAMFI (Owners only) and Cost burden > 50%
-
-J13	Household Income >100% HAMFI (Owners only) and Cost burden > 30%
-
-J14	Household Income >100% HAMFI (Owners only) and Cost burden > 30%
-
-J16	Total (Owners only) and Cost burden > 30%
-
-J17	Total (Owners only) and Cost burden > 50%
-
-### References
-
-"Consolidated Planning/CHAS Data | HUD USER." Www.huduser.gov,
-<br />&nbsp;&nbsp;&nbsp;&nbsp; www.huduser.gov/portal/datasets/cp.html.
+| "Consolidated Planning/CHAS Data | HUD USER." Www.huduser.gov,
+|      www.huduser.gov/portal/datasets/cp.html.

@@ -1,5 +1,5 @@
 ---
-title: "Crosswalk-Entire-Dataset"
+title: "Crosswalk-a-Dataset"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Crosswalk-Entire-Dataset}
@@ -14,6 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Obtaining a sample dataset
+
 For those who need a more powerful method for crosswalking semi-large datasets
 and allocating fields based on the provided ratios, the crosswalk() 
 function is available.
@@ -24,7 +26,8 @@ First load the data into the environment or in this case a sample dataset.
 library(rhud)
 options (digits=4)
 
-sample <- data.frame(pop = c(151049, 103609, 52276), county = c("24043", "24045", "24047"))
+sample <- data.frame(pop = c(151049, 103609, 52276),
+                     county = c("24043", "24045", "24047"))
 
 head(sample)
 ```
@@ -33,6 +36,7 @@ This sample dataset contains population information
 for the counties of Washington, Wicomico, and Worchester in Maryland in the
 year 2019 according to the US Census Bureau.
 
+<br><br><br>
 
 ## Merging with a crosswalk file
 
@@ -56,6 +60,8 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
 
 As seen in the data above, each zipcode associated with a county is assigned the
 same population value.
+
+<br><br><br>
 
 ## Merging and applying a crosswalk method
 

@@ -29,8 +29,8 @@ all fields. This does not remove duplicates.}
 account and request for an API key.}
 }
 \value{
-This function returns a dataframe containing CROSSWALK data for a
-particular GEOID. These measurements include res-ratio, bus-ratio,
+This function returns a dataframe containing crosswalk data for a
+particular geoid. These measurements include res-ratio, bus-ratio,
 oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html
 }
@@ -51,10 +51,19 @@ hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
 }
 \seealso{
 \itemize{
+\item \code{\link[=hud_cw_zip_tract]{hud_cw_zip_tract()}}
 \item \code{\link[=hud_cw_zip_county]{hud_cw_zip_county()}}
 \item \code{\link[=hud_cw_zip_cbsa]{hud_cw_zip_cbsa()}}
 \item \code{\link[=hud_cw_zip_cbsadiv]{hud_cw_zip_cbsadiv()}}
+\item \code{\link[=hud_cw_zip_countysub]{hud_cw_zip_countysub()}}
 \item \code{\link[=hud_cw_zip_cd]{hud_cw_zip_cd()}}
+\item \code{\link[=hud_cw_tract_zip]{hud_cw_tract_zip()}}
+\item \code{\link[=hud_cw_county_zip]{hud_cw_county_zip()}}
+\item \code{\link[=hud_cw_cbsa_zip]{hud_cw_cbsa_zip()}}
+\item \code{\link[=hud_cw_cbsadiv_zip]{hud_cw_cbsadiv_zip()}}
+\item \code{\link[=hud_cw_cd_zip]{hud_cw_cd_zip()}}
+\item \code{\link[=hud_cw_countysub_zip]{hud_cw_countysub_zip()}}
+\item \code{\link[=hud_cw]{hud_cw()}}
 }
 }
 \keyword{API}

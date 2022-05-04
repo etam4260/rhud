@@ -109,6 +109,10 @@
 #' }
 hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
                    quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- cw_input_check_cleansing(query, year, quarter, key)
 
   query <- args[[1]]
@@ -121,7 +125,8 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
                 "county-zip", "cbsa-zip", "cbsadiv-zip",
                 "cd-zip", "zip-countysub", "countysub-zip")
 
-  if (length(type) != 1) stop("\nOnly one crosswalk type can be specified at a time", call. = FALSE)
+  if (length(type) != 1) stop("\nOnly one crosswalk type can be specified at a time",
+                              call. = FALSE)
 
   # Allow user to specify the full string too.
   type <- switch(tolower(type),
@@ -248,6 +253,10 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
   year <- args[[2]]
@@ -307,6 +316,10 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
                    key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
   year <- args[[2]]
@@ -432,6 +445,10 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                      year = c("2014-2018"),
                      key = Sys.getenv("HUD_KEY")) {
+
+  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
+                                  call. = FALSE)
+
   if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
