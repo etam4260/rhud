@@ -19,8 +19,8 @@ rhud_website <- function(website = c("github-pages", "github")) {
   if(!curl::has_internet()) stop("You currently do not have internet access.")
   # Check for internet
 
-  github_pages <- "https://etam4260.github.io/hudr/"
-  github <- "https://github.com/etam4260/hudr"
+  github_pages <- "https://etam4260.github.io/rhud/"
+  github <- "https://github.com/etam4260/rhud"
 
   if (.Platform$OS.type == "unix") {
     if ("github" %in% website) system(paste("open", github, sep = " "))
