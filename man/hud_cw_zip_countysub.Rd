@@ -41,7 +41,7 @@ zip to countysub. (Available 2nd Quarter 2018 onwards)
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 hud_cw_zip_countysub(zip = 35213, year = c('2017'), quarter = c('1'))
 

@@ -41,7 +41,7 @@ tract to zip.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 

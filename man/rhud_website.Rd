@@ -19,7 +19,7 @@ the websites associated with it. Currently supports Unix and Windows OS.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 rhud_website("github-pages")
 rhud_website("github")
 rhud_website()

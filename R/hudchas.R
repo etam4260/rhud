@@ -16,7 +16,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -57,7 +57,7 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -139,7 +139,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -222,7 +222,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -312,7 +312,7 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'

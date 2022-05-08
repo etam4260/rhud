@@ -67,7 +67,7 @@
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -241,7 +241,7 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #'   individual county within the state.
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -304,7 +304,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/fmr-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -340,7 +340,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
     call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
@@ -383,7 +383,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
   }
 
@@ -428,7 +428,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/chas-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'

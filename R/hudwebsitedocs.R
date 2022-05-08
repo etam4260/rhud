@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #' rhud_website("github-pages")
 #' rhud_website("github")
 #' rhud_website()

@@ -28,6 +28,14 @@ This function queries for a state and returns the
 FMR calculation
 at a county resolution for all counties in this state.
 }
+\seealso{
+\itemize{
+\item \code{\link[=hud_fmr_state_metroareas]{hud_fmr_state_metroareas()}}
+\item \code{\link[=hud_fmr_state_counties]{hud_fmr_state_counties()}}
+\item \code{\link[=hud_fmr_metroarea_zip]{hud_fmr_metroarea_zip()}}
+\item \code{\link[=hud_fmr_county_zip]{hud_fmr_county_zip()}}
+}
+}
 \keyword{API}
 \keyword{Fair}
 \keyword{Markets}

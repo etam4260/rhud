@@ -46,7 +46,7 @@ chas_do_query_calls <- function(urls, key) {
 
     call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
@@ -84,7 +84,7 @@ chas_do_query_calls <- function(urls, key) {
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
 
   }
@@ -119,7 +119,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
     call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"),
+                  user_agent("https://github.com/etam4260/rhud"),
                   timeout(30)), silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
@@ -158,7 +158,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
   }
 
@@ -198,7 +198,7 @@ misc_do_query_call <- function(urls, key) {
 
     call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
               silent = TRUE)
 
     download_bar(i, length(urls))
@@ -224,7 +224,7 @@ misc_do_query_call <- function(urls, key) {
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
   }
 

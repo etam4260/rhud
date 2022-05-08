@@ -41,7 +41,7 @@ zip to cbsa.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 hud_cw_zip_cbsa(zip = '35213', year = c('2010'), quarter = c('1'))
 

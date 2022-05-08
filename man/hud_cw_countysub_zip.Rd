@@ -42,7 +42,7 @@ returns the crosswalk for countysub to zip.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 hud_cw_countysub_zip(countysub = '4606720300 ',
    year = c('2019', '2019', '2019'), quarter = c('4','4'))

@@ -10,6 +10,11 @@
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
+#' @seealso
+#' * [rhud::hud_fmr_state_metroareas()]
+#' * [rhud::hud_fmr_state_counties()]
+#' * [rhud::hud_fmr_metroarea_zip()]
+#' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for metro areas in states.
 hud_fmr_state_metroareas <- function(state,
@@ -39,7 +44,7 @@ hud_fmr_state_metroareas <- function(state,
 
     call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
@@ -65,7 +70,7 @@ hud_fmr_state_metroareas <- function(state,
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
   }
 
@@ -92,6 +97,11 @@ hud_fmr_state_metroareas <- function(state,
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
+#' @seealso
+#' * [rhud::hud_fmr_state_metroareas()]
+#' * [rhud::hud_fmr_state_counties()]
+#' * [rhud::hud_fmr_metroarea_zip()]
+#' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for counties in states.
 hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
@@ -120,7 +130,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 
     call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
@@ -147,7 +157,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
   }
 
@@ -176,6 +186,11 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
+#' @seealso
+#' * [rhud::hud_fmr_state_metroareas()]
+#' * [rhud::hud_fmr_state_counties()]
+#' * [rhud::hud_fmr_metroarea_zip()]
+#' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for zip codes in counties.
 hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
@@ -203,7 +218,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
     call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
@@ -264,7 +279,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
   }
 
@@ -297,6 +312,11 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
+#' @seealso
+#' * [rhud::hud_fmr_state_metroareas()]
+#' * [rhud::hud_fmr_state_counties()]
+#' * [rhud::hud_fmr_metroarea_zip()]
+#' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for zip codes in metro areas.
 hud_fmr_metroarea_zip <- function(metroarea,
@@ -325,7 +345,7 @@ hud_fmr_metroarea_zip <- function(metroarea,
 
     call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                        as.character(key))),
-                  user_agent("https://github.com/etam4260/hudr"), timeout(30)),
+                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
               silent = TRUE)
 
     cont <- try(content(call), silent = TRUE)
@@ -385,7 +405,7 @@ hud_fmr_metroarea_zip <- function(metroarea,
                   "\n\nIt is possible that your key maybe invalid or ",
                   "there isn't any data for these parameters, ",
                   "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/hudr/issues.",
+                  "report it at https://github.com/etam4260/rhud/issues.",
                   sep = ""), call. = FALSE)
   }
 

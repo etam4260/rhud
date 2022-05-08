@@ -18,7 +18,7 @@
 #' @noMd
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #' zip <- c(02102, 11032, 01232)
 #'
 #' zip <- hud_add_leading_zeros("zip", zip)
@@ -68,7 +68,7 @@ add_leading_zeros <- function(geoid_type = "zip", input) {
 #' @noMd
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #' zip <- c(02102, 11032, 01232)
 #'
 #' zip <- hud_remove_leading_zeros("zip", zip)

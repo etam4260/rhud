@@ -6,7 +6,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -30,7 +30,7 @@ hud_get_key <- function() {
 #' @export
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #' hud_get_key()

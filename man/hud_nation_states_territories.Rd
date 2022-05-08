@@ -21,7 +21,7 @@ abbreviation.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 

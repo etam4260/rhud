@@ -153,7 +153,7 @@
 <li><a href="#converting-zipcode-to-census-tract">zip-tract</a></li>
 <li><a href="#converting-zipcode-to-county-fip">zip-county</a></li>
 <li><a href="#converting-zipcode-to-core-base-statistical-area-cbsa">zip-cbsa (Core Base Statistical Areas)</a></li>
-<li><a href="#converting-zipcode-to-core-based-statistical-area-cbsadiv">zip-cbsadiv (Available 4th Quarter 2017 onwards)</a></li>
+<li><a href="#converting-zipcode-to-core-based-statistical-area-divisioncbsadiv">zip-cbsadiv (Available 4th Quarter 2017 onwards)</a></li>
 <li><a href="#converting-zipcode-to-congressional-district-cd">zip-cd (Congressional District)</a></li>
 <li><a href="#converting-census-tract-to-zipcode">tract-zip</a></li>
 <li><a href="#converting-county-fip-into-zipcode">county-zip</a></li>
@@ -166,7 +166,7 @@
 <p>The first geoid type in the function call is what to query for. For example in 1) above, ‘zip’ is the first geoid and ‘tract’ is the second geoid.</p>
 <p>The second geoid in the function call describes the geoid which we want to determine ‘intersection’ with the first geoid where intersection is described as the % of residential, business, other, and total buildings that overlap.</p>
 <p>For example, in function call #7, we might have a county called 22031 which has zip codes 71052, 71078, 71049, 71032 … where the residential % (res_ratio) of each zip is 0.38, 0.21, 0.11, 0.05 … respectively. Of all these zipcodes’ res_ratios, when added up will equal 1, signaling these grouping of zip codes make up 100% of residential address in the county with each zipcode taking up their respective residential percentage.</p>
-<p>Disclaimer: Although there exists inverse relationships in the Crosswalk Files, the measurements are COMPLETELY inverse – for reasons stated within the papers above.</p>
+<p>Disclaimer: Although there exists inverse relationships in the Crosswalk Files, the measurements are NOT COMPLETELY inverse – for reasons stated within the papers above.</p>
 <p>These are basic examples which shows you to query the Crosswalk API. Before looking at the outputted data I RECOMMEND first taking a look at <a href="#parameters">the parameters</a> as well as <a href="#returns">return data</a> located at the bottom of the page.</p>
 <div class="section level3">
 <h3 id="converting-zipcode-to-census-tract">Converting zipcode to census tract<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-census-tract"></a>
@@ -207,7 +207,7 @@
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 13820         1         1         1         1 35213 2011       3</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-zipcode-to-core-based-statistical-area-cbsadiv">Converting zipcode to core based statistical area (cbsadiv)<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-core-based-statistical-area-cbsadiv"></a>
+<h3 id="converting-zipcode-to-core-based-statistical-area-divisioncbsadiv">Converting zipcode to core based statistical area division(cbsadiv)<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-core-based-statistical-area-divisioncbsadiv"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cbsadiv</span>(<span class="at">zip =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>

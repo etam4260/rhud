@@ -75,7 +75,7 @@ capabilities of all the main function calls below --
 1) [zip-tract][Converting zipcode to census tract]
 2) [zip-county][Converting zipcode to county fip]
 3) [zip-cbsa (Core Base Statistical Areas)][Converting zipcode to core base statistical area (cbsa)]
-4) [zip-cbsadiv (Available 4th Quarter 2017 onwards)][Converting zipcode to core based statistical area (cbsadiv)]
+4) [zip-cbsadiv (Available 4th Quarter 2017 onwards)][Converting zipcode to core based statistical area division(cbsadiv)]
 5) [zip-cd (Congressional District)][Converting zipcode to congressional district (cd)]
 6) [tract-zip][Converting census tract to zipcode]
 7) [county-zip][Converting county fip into zipcode]
@@ -99,9 +99,9 @@ Of all these zipcodes' res_ratios, when added up will equal 1,
 signaling these grouping of zip codes make up 100% of residential address in the
 county with each zipcode taking up their respective residential percentage.
 
-Disclaimer: Although there exists inverse relationships in the Crosswalk Files,
-the measurements are COMPLETELY inverse -- for reasons stated within the papers
-above.
+Disclaimer: Although there exists inverse relationships in the Crosswalk 
+Files, the measurements are NOT COMPLETELY inverse -- for reasons stated
+within the papers above.
 
 These are basic examples which shows you to query the Crosswalk API. Before
 looking at the outputted data I RECOMMEND first taking a look at [the parameters][Parameters]
@@ -122,7 +122,7 @@ hud_cw_zip_county(zip = 35213, year = c('2020'), quarter = c('2'))
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsa(zip = 35213, year = c('2011'), quarter = c('3'))
 ```
-### Converting zipcode to core based statistical area (cbsadiv)
+### Converting zipcode to core based statistical area division(cbsadiv)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsadiv(zip = '22031', year = c('2019'), quarter = c('4'))
 ```

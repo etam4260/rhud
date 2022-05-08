@@ -30,6 +30,14 @@ a small area, it will return only single
 measurement for that county. If the county is considered a small area,
 it will return data at a zip code level.
 }
+\seealso{
+\itemize{
+\item \code{\link[=hud_fmr_state_metroareas]{hud_fmr_state_metroareas()}}
+\item \code{\link[=hud_fmr_state_counties]{hud_fmr_state_counties()}}
+\item \code{\link[=hud_fmr_metroarea_zip]{hud_fmr_metroarea_zip()}}
+\item \code{\link[=hud_fmr_county_zip]{hud_fmr_county_zip()}}
+}
+}
 \keyword{API}
 \keyword{Fair}
 \keyword{Markets}

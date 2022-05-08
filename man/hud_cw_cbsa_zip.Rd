@@ -41,7 +41,7 @@ returns the crosswalk for cbsa to zip.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 hud_cw_cbsa_zip(cbsa = 10140, year = c('2017'), quarter = c('1'))
 

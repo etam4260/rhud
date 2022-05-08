@@ -43,7 +43,7 @@
 #' @returns A dataframe containing the crosswalked dataset.
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' sample <- data.frame(population = c(42134, 12413, 13132),
 #'                      county = c(24047, 24045, 24043))

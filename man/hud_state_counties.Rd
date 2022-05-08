@@ -20,7 +20,7 @@ Get a list of all counties within a state.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 

@@ -36,7 +36,7 @@
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -118,7 +118,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_zip_county(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -204,7 +204,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_zip_cbsa(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -287,7 +287,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_zip_cbsadiv(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -370,7 +370,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_zip_cd(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -454,7 +454,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 #'
@@ -539,7 +539,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_county_zip(county = 22031, year = c('2017'), quarter = c('1'))
 #'
@@ -623,7 +623,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_cbsa_zip(cbsa = 10140, year = c('2017'), quarter = c('1'))
 #'
@@ -708,7 +708,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('1'))
 #'
@@ -793,7 +793,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_cd_zip(cd = 2202, year = c('2017'), quarter = c('1'))
 #'
@@ -875,7 +875,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_zip_countysub(zip = 35213, year = c('2017'), quarter = c('1'))
 #'
@@ -960,7 +960,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' hud_cw_countysub_zip(countysub = '4606720300 ',
 #'    year = c('2019', '2019', '2019'), quarter = c('4','4'))

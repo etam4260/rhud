@@ -30,7 +30,7 @@ Returns CHAS data for the entire nation.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 

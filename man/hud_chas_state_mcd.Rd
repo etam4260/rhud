@@ -32,7 +32,7 @@ Returns CHAS data for all mcds in a state.
 }
 \examples{
 \dontrun{
-library(hudr)
+library(rhud)
 
 Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 

@@ -14,7 +14,7 @@
 #'   in the US.
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -45,7 +45,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 
   call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                      as.character(key))),
-                user_agent("https://github.com/etam4260/hudr"),
+                user_agent("https://github.com/etam4260/rhud"),
                 timeout(30)), silent = TRUE) #try to make call
 
   cont <- try(content(call), silent = TRUE) #parse returned data
@@ -83,7 +83,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of metropolitan areas in US.
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -116,7 +116,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
   urls <- "https://www.huduser.gov/hudapi/public/fmr/listMetroAreas"
   call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
                                                      as.character(key))),
-                user_agent("https://github.com/etam4260/hudr"),
+                user_agent("https://github.com/etam4260/rhud"),
                 timeout(30)), silent = TRUE) #try to make call
 
   cont <- try(content(call), silent = TRUE) #parse returned data
@@ -210,7 +210,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing all counties within a state
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -303,7 +303,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of places in a state.
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
@@ -376,7 +376,8 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
     places$placename <- unlist(places$placename)
     return(places)
   }
-  stop("\nThe key used might be invalid or could not find places for this state.", call. = FALSE)
+  stop("\nThe key used might be invalid or could not find places for this state.",
+       call. = FALSE)
 }
 
 #' @name hud_state_minor_civil_divisions
@@ -390,7 +391,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @returns A dataframe containing details of minor civil divisions in a state.
 #' @examples
 #' \dontrun{
-#' library(hudr)
+#' library(rhud)
 #'
 #' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
