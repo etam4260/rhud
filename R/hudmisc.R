@@ -12,6 +12,12 @@
 #' @export
 #' @returns A dataframe containing details of all the states and territories
 #'   in the US.
+#' @seealso
+#' * [rhud::hud_nation_states_territories()]
+#' * [rhud::hud_state_metropolitan()]
+#' * [rhud::hud_state_counties()]
+#' * [rhud::hud_state_places()]
+#' * [rhud::hud_state_minor_civil_divisions()]
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -81,6 +87,12 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #' @keywords CBSA
 #' @export
 #' @returns A dataframe containing details of metropolitan areas in US.
+#' @seealso
+#' * [rhud::hud_nation_states_territories()]
+#' * [rhud::hud_state_metropolitan()]
+#' * [rhud::hud_state_counties()]
+#' * [rhud::hud_state_places()]
+#' * [rhud::hud_state_minor_civil_divisions()]
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -206,6 +218,12 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
 #' @keywords Counties
+#' @seealso
+#' * [rhud::hud_nation_states_territories()]
+#' * [rhud::hud_state_metropolitan()]
+#' * [rhud::hud_state_counties()]
+#' * [rhud::hud_state_places()]
+#' * [rhud::hud_state_minor_civil_divisions()]
 #' @export
 #' @returns A dataframe containing all counties within a state
 #' @examples
@@ -300,6 +318,12 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #'  an account and request for an API key.
 #' @keywords places.
 #' @export
+#' @seealso
+#' * [rhud::hud_nation_states_territories()]
+#' * [rhud::hud_state_metropolitan()]
+#' * [rhud::hud_state_counties()]
+#' * [rhud::hud_state_places()]
+#' * [rhud::hud_state_minor_civil_divisions()]
 #' @returns A dataframe containing details of places in a state.
 #' @examples
 #' \dontrun{
@@ -388,6 +412,12 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #'  an account and request for an API key.
 #' @keywords CBSA
 #' @export
+#' @seealso
+#' * [rhud::hud_nation_states_territories()]
+#' * [rhud::hud_state_metropolitan()]
+#' * [rhud::hud_state_counties()]
+#' * [rhud::hud_state_places()]
+#' * [rhud::hud_state_minor_civil_divisions()]
 #' @returns A dataframe containing details of minor civil divisions in a state.
 #' @examples
 #' \dontrun{

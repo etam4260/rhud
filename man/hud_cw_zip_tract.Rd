@@ -51,6 +51,7 @@ hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
 }
 \seealso{
 \itemize{
+\item \code{\link[=crosswalk]{crosswalk()}}
 \item \code{\link[=hud_cw_zip_tract]{hud_cw_zip_tract()}}
 \item \code{\link[=hud_cw_zip_county]{hud_cw_zip_county()}}
 \item \code{\link[=hud_cw_zip_cbsa]{hud_cw_zip_cbsa()}}

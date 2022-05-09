@@ -18,21 +18,53 @@ crosswalk(
 }
 \arguments{
 \item{data}{A dataset with rows describing measurements at a zip,
-county, countysub, cd,
-tract, cbsa, or cbsadiv geographic id.}
+county, county subdivision (countysub), congressional district (cd),
+census tract, core base statistical area (cbsa), or core based
+statistical area division (cbsadiv) geoid.
+\enumerate{
+\item zip
+\item tract
+\item county
+\item countysub
+\item cbsa
+\item cbsadiv
+\item cd
+}}
 
 \item{geoid}{The current geoid that the dataset is described in: must be
 zip, county, countysub, cd,
-tract, cbsa, or cbsadiv geographic id.}
+tract, cbsa, or cbsadiv geographic id.
+\enumerate{
+\item zip
+\item tract
+\item county
+\item countysub
+\item cbsa
+\item cbsadiv
+\item cd
+}}
 
 \item{geoid_col}{The column containing the geographic identifier; must be
-zip, county, countysub, cd,
-tract, cbsa, or cbsadiv geographic id.
+zip, county, county subdivision (countysub), congressional district (cd),
+census tract, core base statistical area (cbsa), and core based
+statistical area division (cbsadiv) geoid.
 Supply either the name of the column or the index.
 All elements in this column must be numbers only at the proper length.
 For example, zip codes must be 5 digit numbers.}
 
-\item{cw_geoid}{The geoid to crosswalk the dataset to.}
+\item{cw_geoid}{The geoid to crosswalk the dataset to; must be
+zip, county, county subdivision (countysub), congressional district (cd),
+census tract, core base statistical area (cbsa), or core based
+statistical area division (cbsadiv) geoid.
+\enumerate{
+\item zip
+\item tract
+\item county
+\item countysub
+\item cbsa
+\item cbsadiv
+\item cd
+}}
 
 \item{cw_geoid_col}{The columns in the dataset to distribute
 according to method ratio.
@@ -41,9 +73,15 @@ the crosswalk file will just be merged to the dataset.
 All elements in these columns must be numbers only.}
 
 \item{method}{The allocation method to use: residential,
-business, other, or total.
-If method is empty, no allocation method will be applied --
-the crosswalk file will just be merged to the dataset.}
+business, other, or total. If method is empty, no allocation
+method will be applied -- the crosswalk file will just be merged
+to the dataset.
+\enumerate{
+\item res
+\item bus
+\item tot
+\item oth
+}}
 
 \item{year}{The year measurement was taken.}
 
@@ -55,7 +93,8 @@ the crosswalk file will just be merged to the dataset.}
 A dataframe containing the crosswalked dataset.
 }
 \description{
-Using the crosswalk files, crosswalk an entire dataset.
+Using the US Housing and Urban Development crosswalk files,
+crosswalk an entire dataset.
 Currently supported crosswalks:
 \enumerate{
 \item zip-tract
@@ -92,5 +131,23 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
           cw_geoid = "zip", cw_geoid_col = "population", method = "bus",
           year = 2018, quarter = 1)
 
+}
+}
+\seealso{
+\itemize{
+\item \code{\link[=crosswalk]{crosswalk()}}
+\item \code{\link[=hud_cw_zip_tract]{hud_cw_zip_tract()}}
+\item \code{\link[=hud_cw_zip_county]{hud_cw_zip_county()}}
+\item \code{\link[=hud_cw_zip_cbsa]{hud_cw_zip_cbsa()}}
+\item \code{\link[=hud_cw_zip_cbsadiv]{hud_cw_zip_cbsadiv()}}
+\item \code{\link[=hud_cw_zip_countysub]{hud_cw_zip_countysub()}}
+\item \code{\link[=hud_cw_zip_cd]{hud_cw_zip_cd()}}
+\item \code{\link[=hud_cw_tract_zip]{hud_cw_tract_zip()}}
+\item \code{\link[=hud_cw_county_zip]{hud_cw_county_zip()}}
+\item \code{\link[=hud_cw_cbsa_zip]{hud_cw_cbsa_zip()}}
+\item \code{\link[=hud_cw_cbsadiv_zip]{hud_cw_cbsadiv_zip()}}
+\item \code{\link[=hud_cw_cd_zip]{hud_cw_cd_zip()}}
+\item \code{\link[=hud_cw_countysub_zip]{hud_cw_countysub_zip()}}
+\item \code{\link[=hud_cw]{hud_cw()}}
 }
 }

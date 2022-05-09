@@ -4,6 +4,9 @@
 #'   If no key is set, return "".
 #' @returns Returns a string.
 #' @export
+#' @seealso
+#' * [rhud::hud_get_key()]
+#' * [rhud::hud_set_key()]
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -28,6 +31,9 @@ hud_get_key <- function() {
 #' @param in_home set the key in the user's HOME directory.
 #'   Is defaulted to false.
 #' @export
+#' @seealso
+#' * [rhud::hud_get_key()]
+#' * [rhud::hud_set_key()]
 #' @examples
 #' \dontrun{
 #' library(rhud)

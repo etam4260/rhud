@@ -65,6 +65,21 @@
 #'   a particular GEOID. These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#' @seealso
+#' * [rhud::crosswalk()]
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @examples
 #' \dontrun{
 #' library(rhud)

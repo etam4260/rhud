@@ -22,3 +22,9 @@ Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 hud_get_key()
 }
 }
+\seealso{
+\itemize{
+\item \code{\link[=hud_get_key]{hud_get_key()}}
+\item \code{\link[=hud_set_key]{hud_set_key()}}
+}
+}

@@ -1,6 +1,7 @@
 #' @name crosswalk
 #' @title crosswalk
-#' @description Using the crosswalk files, crosswalk an entire dataset.
+#' @description Using the US Housing and Urban Development crosswalk files,
+#'  crosswalk an entire dataset.
 #'  Currently supported crosswalks:
 #'   1) zip-tract
 #'   2) zip-county
@@ -15,30 +16,75 @@
 #'   11) zip-countysub (Available 2nd Quarter 2018 onwards)
 #'   12) countysub-zip (Available 2nd Quarter 2018 onwards)
 #' @param data A dataset with rows describing measurements at a zip,
-#'   county, countysub, cd,
-#'   tract, cbsa, or cbsadiv geographic id.
+#'   county, county subdivision (countysub), congressional district (cd),
+#'   census tract, core base statistical area (cbsa), or core based
+#'   statistical area division (cbsadiv) geoid.
+#'   1) zip
+#'   2) tract
+#'   3) county
+#'   4) countysub
+#'   5) cbsa
+#'   6) cbsadiv
+#'   7) cd
 #' @param geoid The current geoid that the dataset is described in: must be
 #'   zip, county, countysub, cd,
 #'   tract, cbsa, or cbsadiv geographic id.
+#'   1) zip
+#'   2) tract
+#'   3) county
+#'   4) countysub
+#'   5) cbsa
+#'   6) cbsadiv
+#'   7) cd
 #' @param geoid_col The column containing the geographic identifier; must be
-#'   zip, county, countysub, cd,
-#'   tract, cbsa, or cbsadiv geographic id.
+#'   zip, county, county subdivision (countysub), congressional district (cd),
+#'   census tract, core base statistical area (cbsa), and core based
+#'   statistical area division (cbsadiv) geoid.
 #'   Supply either the name of the column or the index.
 #'   All elements in this column must be numbers only at the proper length.
 #'   For example, zip codes must be 5 digit numbers.
-#' @param cw_geoid The geoid to crosswalk the dataset to.
+#' @param cw_geoid The geoid to crosswalk the dataset to; must be
+#'   zip, county, county subdivision (countysub), congressional district (cd),
+#'   census tract, core base statistical area (cbsa), or core based
+#'   statistical area division (cbsadiv) geoid.
+#'   1) zip
+#'   2) tract
+#'   3) county
+#'   4) countysub
+#'   5) cbsa
+#'   6) cbsadiv
+#'   7) cd
 #' @param cw_geoid_col The columns in the dataset to distribute
 #'   according to method ratio.
 #'   If method is empty, no allocation method will be applied --
 #'   the crosswalk file will just be merged to the dataset.
 #'   All elements in these columns must be numbers only.
 #' @param method The allocation method to use: residential,
-#'   business, other, or total.
-#'   If method is empty, no allocation method will be applied --
-#'   the crosswalk file will just be merged to the dataset.
+#'   business, other, or total. If method is empty, no allocation
+#'   method will be applied -- the crosswalk file will just be merged
+#'   to the dataset.
+#'   1) res
+#'   2) bus
+#'   3) tot
+#'   4) oth
 #' @param year The year measurement was taken.
 #' @param quarter The quarter of year measurement was taken.
 #' @param key The key obtain from HUD USER website.
+#' @seealso
+#' * [rhud::crosswalk()]
+#' * [rhud::hud_cw_zip_tract()]
+#' * [rhud::hud_cw_zip_county()]
+#' * [rhud::hud_cw_zip_cbsa()]
+#' * [rhud::hud_cw_zip_cbsadiv()]
+#' * [rhud::hud_cw_zip_countysub()]
+#' * [rhud::hud_cw_zip_cd()]
+#' * [rhud::hud_cw_tract_zip()]
+#' * [rhud::hud_cw_county_zip()]
+#' * [rhud::hud_cw_cbsa_zip()]
+#' * [rhud::hud_cw_cbsadiv_zip()]
+#' * [rhud::hud_cw_cd_zip()]
+#' * [rhud::hud_cw_countysub_zip()]
+#' * [rhud::hud_cw()]
 #' @export
 #' @returns A dataframe containing the crosswalked dataset.
 #' @examples

@@ -32,3 +32,9 @@ hud_set_key("dwqkqodkqodqkqoqdq")
 hud_get_key()
 }
 }
+\seealso{
+\itemize{
+\item \code{\link[=hud_get_key]{hud_get_key()}}
+\item \code{\link[=hud_set_key]{hud_set_key()}}
+}
+}

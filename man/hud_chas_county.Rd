@@ -44,3 +44,12 @@ hud_chas_county(county = c(06105, 06113))
 hud_chas_county(county = c("06105", "06113"))
 }
 }
+\seealso{
+\itemize{
+\item \code{\link[=hud_chas_nation]{hud_chas_nation()}}
+\item \code{\link[=hud_chas_state]{hud_chas_state()}}
+\item \code{\link[=hud_chas_county]{hud_chas_county()}}
+\item \code{\link[=hud_chas_state_mcd]{hud_chas_state_mcd()}}
+\item \code{\link[=hud_chas_state_place]{hud_chas_state_place()}}
+}
+}

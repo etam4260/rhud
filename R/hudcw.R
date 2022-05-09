@@ -16,6 +16,7 @@
 #'   account and request for an API key.
 #' @keywords Crosswalks API
 #' @seealso
+#' * [rhud::crosswalk()]
 #' * [rhud::hud_cw_zip_tract()]
 #' * [rhud::hud_cw_zip_county()]
 #' * [rhud::hud_cw_zip_cbsa()]

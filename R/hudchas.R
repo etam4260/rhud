@@ -13,6 +13,12 @@
 #' @param key The key obtain from HUD USER website.
 #' @description Returns CHAS data for the entire nation.
 #' @returns Returns a dataframe with CHAS data for the entire nation.
+#' @seealso
+#' * [rhud::hud_chas_nation()]
+#' * [rhud::hud_chas_state()]
+#' * [rhud::hud_chas_county()]
+#' * [rhud::hud_chas_state_mcd()]
+#' * [rhud::hud_chas_state_place()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -54,6 +60,12 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for a particular state.
+#' @seealso
+#' * [rhud::hud_chas_nation()]
+#' * [rhud::hud_chas_state()]
+#' * [rhud::hud_chas_county()]
+#' * [rhud::hud_chas_state_mcd()]
+#' * [rhud::hud_chas_state_place()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -136,6 +148,12 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for counties.
+#' @seealso
+#' * [rhud::hud_chas_nation()]
+#' * [rhud::hud_chas_state()]
+#' * [rhud::hud_chas_county()]
+#' * [rhud::hud_chas_state_mcd()]
+#' * [rhud::hud_chas_state_place()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -219,6 +237,12 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for mcds.
+#' @seealso
+#' * [rhud::hud_chas_nation()]
+#' * [rhud::hud_chas_state()]
+#' * [rhud::hud_chas_county()]
+#' * [rhud::hud_chas_state_mcd()]
+#' * [rhud::hud_chas_state_place()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -309,6 +333,12 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
 #' @returns Returns a dataframe with CHAS data for places.
+#' @seealso
+#' * [rhud::hud_chas_nation()]
+#' * [rhud::hud_chas_state()]
+#' * [rhud::hud_chas_county()]
+#' * [rhud::hud_chas_state_mcd()]
+#' * [rhud::hud_chas_state_place()]
 #' @export
 #' @examples
 #' \dontrun{

@@ -29,4 +29,13 @@ hud_state_counties("Virginia")
 hud_state_counties("51")
 }
 }
+\seealso{
+\itemize{
+\item \code{\link[=hud_nation_states_territories]{hud_nation_states_territories()}}
+\item \code{\link[=hud_state_metropolitan]{hud_state_metropolitan()}}
+\item \code{\link[=hud_state_counties]{hud_state_counties()}}
+\item \code{\link[=hud_state_places]{hud_state_places()}}
+\item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
+}
+}
 \keyword{Counties}

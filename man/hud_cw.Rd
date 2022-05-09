@@ -117,5 +117,23 @@ hud_cw(type = 12, query = "4606720300 ", year = c("2019", "2019", "2019"),
    quarter = c("4", "4"))
 }
 }
+\seealso{
+\itemize{
+\item \code{\link[=crosswalk]{crosswalk()}}
+\item \code{\link[=hud_cw_zip_tract]{hud_cw_zip_tract()}}
+\item \code{\link[=hud_cw_zip_county]{hud_cw_zip_county()}}
+\item \code{\link[=hud_cw_zip_cbsa]{hud_cw_zip_cbsa()}}
+\item \code{\link[=hud_cw_zip_cbsadiv]{hud_cw_zip_cbsadiv()}}
+\item \code{\link[=hud_cw_zip_countysub]{hud_cw_zip_countysub()}}
+\item \code{\link[=hud_cw_zip_cd]{hud_cw_zip_cd()}}
+\item \code{\link[=hud_cw_tract_zip]{hud_cw_tract_zip()}}
+\item \code{\link[=hud_cw_county_zip]{hud_cw_county_zip()}}
+\item \code{\link[=hud_cw_cbsa_zip]{hud_cw_cbsa_zip()}}
+\item \code{\link[=hud_cw_cbsadiv_zip]{hud_cw_cbsadiv_zip()}}
+\item \code{\link[=hud_cw_cd_zip]{hud_cw_cd_zip()}}
+\item \code{\link[=hud_cw_countysub_zip]{hud_cw_countysub_zip()}}
+\item \code{\link[=hud_cw]{hud_cw()}}
+}
+}
 \keyword{API}
 \keyword{Crosswalks}
