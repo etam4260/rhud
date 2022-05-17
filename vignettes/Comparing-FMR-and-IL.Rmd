@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 These are some the packages needed to demonstrate this example.
 They might take a while to download if you don't have them already.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 library(rhud)
 library(tigris)
 library(leaflet)
@@ -31,7 +31,7 @@ library(sf)
 
 To improve performance, use tigris caching.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 options(tigris_use_cache = TRUE)
 ```
 
@@ -40,32 +40,32 @@ options(tigris_use_cache = TRUE)
 Read in the Fair Markets Rent for counties in the year 2021 as well as the shape
 files needed to map.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 md_counties_2021_fmr = hud_fmr_state_counties(state = 'MD', year = '2021')
 ```
 
 Get county data for the state of Maryland.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 md_counties = hud_state_counties("MD")
 ```
 
 Query for every county in Maryland and get their Income Limits data.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 md_counties_2021_il = hud_il(md_counties$fips_code)
 ```
 
 Download the shape files for counties in the US.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 md_county_shapefile = tigris::counties(state = NULL, cb = FALSE,
                                        resolution = "500k", year = 2021)
 ```
 
 Filter the counties to those only in Maryland.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 md_county_shapefile = md_county_shapefile[md_county_shapefile$STATEFP == 24, ]
 
 md_county_shapefile$fullFips = paste0(as.character(md_county_shapefile$STATEFP),
@@ -77,7 +77,7 @@ md_county_shapefile$fullFips = paste0(as.character(md_county_shapefile$STATEFP),
 
 Merge the shape file with the FMR and IL data.
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval = FALSE}
 md_county_fmr_merged = tigris::geo_join(md_county_shapefile,
                                         md_counties_2021_fmr,
                                         by_sp = "fullFips",
@@ -91,7 +91,7 @@ md_county_fmr_merged = tigris::geo_join(md_county_shapefile,
 Create the pallete for coloring the overlayed shape file. The scale used
 corresponds to Efficiency data.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 pal <- colorNumeric(
   palette = "Greens",
   domain = as.numeric(md_county_fmr_merged$Efficiency))
@@ -100,7 +100,7 @@ pal <- colorNumeric(
 Create the county level, efficiency, one bedroom, two bedroom, three bedroom
 four bedroom label to appear when hovering using the FMR overlay.
 
-```{r message=FALSE}
+```{r message=FALSE, eval = FALSE}
 label <- paste0(
   "County: ", md_county_fmr_merged$NAME, "<br/>",
   "Efficiency: ", scales::dollar(as.numeric(md_county_fmr_merged$Efficiency)), "<br/>",
@@ -116,7 +116,7 @@ Create the .... label to appear when hovering using the IL overlay
 Using the leaflet package, plot the county level map of Fair Markets Rents and 
 Income Limits in the state of Maryland.
 
-```{r message=FALSE, warning=FALSE, out.width = '100%', fig.height = 6}
+```{r message=FALSE, warning=FALSE, out.width = '100%', fig.height = 6, eval = FALSE}
 md_county_fmr_merged %>% 
   leaflet %>% 
   # add base map

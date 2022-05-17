@@ -460,7 +460,8 @@ hud_state_minor_civil_divisions <- function(state,
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("\nThere is no matching fips code for one of the inputted states.", call. = FAlSE)
+      stop("\nThere is no matching fips code for one of the inputted states.",
+           call. = FALSE)
     }
   }
 

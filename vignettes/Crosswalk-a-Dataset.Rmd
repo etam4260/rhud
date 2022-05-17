@@ -2,7 +2,7 @@
 title: "Crosswalk-a-Dataset"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Crosswalk-Entire-Dataset}
+  %\VignetteIndexEntry{Crosswalk-a-Dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
