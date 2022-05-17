@@ -15,6 +15,10 @@ chas_do_query_calls <- function(urls, key) {
   error_urls <- c()
 
   `%notin%` <- Negate(`%in%`)
+
+  # These measurements are hardcoded in, but a more effective method might
+  # be to systematic checks to find all unique columns names from all CHAS
+  # datasets.
   all_measurements <- c("geoname", "sumlevel", "year",
                         "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9",
                         "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17",
@@ -61,7 +65,7 @@ chas_do_query_calls <- function(urls, key) {
       not_measured <- all_measurements[all_measurements %notin%
                                          names(unlist(cont[[1]]))]
         # Check this CHAS data does not have data defined for
-        # all expected fields. If so fill them in with 0's.
+        # all expected fields. If so fill them in with NA's.
       if (length(not_measured) >= 1) {
         extra_mes <- rep(NA, length(not_measured))
         names(extra_mes) <- not_measured

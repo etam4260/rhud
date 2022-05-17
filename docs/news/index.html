@@ -81,29 +81,34 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.0.9000" id="rhud-0209000--512022">rhud 0.2.0.9000 – 5/1/2022<a class="anchor" aria-label="anchor" href="#rhud-0209000--512022"></a></h2>
-<div class="section level3">
-<h3 id="changelog-0-2-0-9000">Changelog:<a class="anchor" aria-label="anchor" href="#changelog-0-2-0-9000"></a></h3>
+<h2 class="page-header" data-toc-text="0.2.0.9000" id="rhud-0209000-512022">rhud 0.2.0.9000 (5/1/2022)<a class="anchor" aria-label="anchor" href="#rhud-0209000-512022"></a></h2>
 <div class="section level4">
-<h4 id="features-0-2-0-9000">Features:<a class="anchor" aria-label="anchor" href="#features-0-2-0-9000"></a></h4>
+<h4 id="new-features-0-2-0-9000">NEW FEATURES:<a class="anchor" aria-label="anchor" href="#new-features-0-2-0-9000"></a></h4>
 <ul><li>All function calls now support multiple geoids, multiple years, and multiple quarters queries if they contain these fields.</li>
 <li>Crosswalk a dataset functionality has been added but is not performant and may have unexpected bugs.</li>
 <li>fmr (fair markets rent) has been decomposed into multiple functions. This now allows for querying zip code level data or better known as (small areas fair markets rent).</li>
-<li>Error and warning messages from queries that are not found, do not spit out during execution, but rather at the end. Warning and error messages are now more visually sound.</li>
-<li>Download bars now appear on the console when querying for data.</li>
-<li>Website documentation now includes details on understanding the general syntax of package functions: this is located on the setup page.</li>
 <li>Added the ability for the user to set the their keys to their working directory .Rprofile and HOME .Rprofile through the hud_set_key() function so keys are now persistent across sessions.</li>
-<li>The entire package has been renamed to rhud</li>
 </ul></div>
 <div class="section level4">
-<h4 id="bug-fixes-0-2-0-9000">Bug Fixes:<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-0-9000"></a></h4>
+<h4 id="minor-improvements-0-2-0-9000">MINOR IMPROVEMENTS:<a class="anchor" aria-label="anchor" href="#minor-improvements-0-2-0-9000"></a></h4>
+<ul><li>Error and warning messages from queries that are not found, do not spit out during execution, but rather at the end. Warning and error messages are now more visually sound.</li>
+<li>Download bars now appear on the console when querying for data.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="bug-fixes-0-2-0-9000">BUG FIXES:<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-0-9000"></a></h4>
 <ul><li>A bug caused by missing fields in chas (comprehensive housing and affordability) data is fixed.</li>
 <li>Issues caused by fmr queries having mixed between county-level and zip code level data have been fixed.</li>
 </ul></div>
-</div>
+<div class="section level4">
+<h4 id="documentation-fixes-0-2-0-9000">DOCUMENTATION FIXES<a class="anchor" aria-label="anchor" href="#documentation-fixes-0-2-0-9000"></a></h4>
+<ul><li>Website documentation now includes details on understanding the general syntax of package functions: this is located on the setup page.</li>
+<li>The entire package has been renamed to rhud</li>
+</ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.1.0.9000" id="rhud-0109000--3182022">rhud 0.1.0.9000 – 3/18/2022<a class="anchor" aria-label="anchor" href="#rhud-0109000--3182022"></a></h2>
+<h2 class="page-header" data-toc-text="0.1.0.9000" id="rhud-0109000-3182022">rhud 0.1.0.9000 (3/18/2022)<a class="anchor" aria-label="anchor" href="#rhud-0109000-3182022"></a></h2>
+<div class="section level4">
+<h4 id="new-features-0-1-0-9000">NEW FEATURES<a class="anchor" aria-label="anchor" href="#new-features-0-1-0-9000"></a></h4>
 <ul><li>The USPS crosswalk functions are now working; the base hud_cw() function and its decomposed function calls can now accept multiple years, quarters, and geoids to query.</li>
 <li>The Fair Markets Rent query functions are now working; they do not support multiple geoid query calls, but does allows for multiple years and quarters.</li>
 <li>The Income Limits query functions are now working; they do not support multiple geoid query calls, but does allow for multiple years and quarters.</li>
@@ -111,8 +116,9 @@
 <li>The website has been updated to include examples for the decomposed cw (crosswalk) and chas(comprehensive housing and affordability) function calls and contains more details on how to query.</li>
 <li>Development for the crosswalk() function has reached a workable state but has not yet been released. It’s main functionality is to crosswalk an entire dataset.</li>
 </ul></div>
+</div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.0.0.9000" id="rhud-0009000--1282022">rhud 0.0.0.9000 – 1/28/2022<a class="anchor" aria-label="anchor" href="#rhud-0009000--1282022"></a></h2>
+<h2 class="page-header" data-toc-text="0.0.0.9000" id="rhud-0009000-1282022">rhud 0.0.0.9000 (1/28/2022)<a class="anchor" aria-label="anchor" href="#rhud-0009000-1282022"></a></h2>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li></ul></div>
   </div>
 

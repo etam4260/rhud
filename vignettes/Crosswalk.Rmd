@@ -72,18 +72,18 @@ the package also contains an omni function which encapsulates the
 capabilities of all the main function calls below --
 [omni-function][Using the omni function for querying]
 
-1) [zip-tract][Converting zipcode to census tract]
-2) [zip-county][Converting zipcode to county fip]
-3) [zip-cbsa (Core Base Statistical Areas)][Converting zipcode to core base statistical area (cbsa)]
-4) [zip-cbsadiv (Available 4th Quarter 2017 onwards)][Converting zipcode to core based statistical area division(cbsadiv)]
-5) [zip-cd (Congressional District)][Converting zipcode to congressional district (cd)]
-6) [tract-zip][Converting census tract to zipcode]
-7) [county-zip][Converting county fip into zipcode]
-8) [cbsa-zip][Converting core based statistical areas (cbsa) to zipcode]
-9) [cbsadiv-zip (Available 4th Quarter 2017 onwards)][Converting core based statistical areas division (cbsadiv) to zipcode]
-10) [cd-zip][Converting congressional district (cd) to zipcode]
-11) [zip-countysub (Available 2nd Quarter 2018 onwards)][Converting zipcode to county subdivision (countysub)]
-12) [countysub-zip (Available 2nd Quarter 2018 onwards)][Converting county subdivision (countysub) to zipcode]
+1) [zip-tract][Crosswalk zipcode to census tract]
+2) [zip-county][Crosswalk zipcode to county fip]
+3) [zip-cbsa (Core Base Statistical Areas)][Crosswalk zipcode to core base statistical area (cbsa)]
+4) [zip-cbsadiv (Available 4th Quarter 2017 onwards)][Crosswalk zipcode to core based statistical area division(cbsadiv)]
+5) [zip-cd (Congressional District)][Crosswalk zipcode to congressional district (cd)]
+6) [tract-zip][Crosswalk census tract to zipcode]
+7) [county-zip][Crosswalk county fip into zipcode]
+8) [cbsa-zip][Crosswalk core based statistical areas (cbsa) to zipcode]
+9) [cbsadiv-zip (Available 4th Quarter 2017 onwards)][Crosswalk core based statistical areas division (cbsadiv) to zipcode]
+10) [cd-zip][Crosswalk congressional district (cd) to zipcode]
+11) [zip-countysub (Available 2nd Quarter 2018 onwards)][Crosswalk zipcode to county subdivision (countysub)]
+12) [countysub-zip (Available 2nd Quarter 2018 onwards)][Crosswalk county subdivision (countysub) to zipcode]
 
 The first geoid type in the function call is what to query for. For
 example in 1) above, 'zip' is the first geoid and 'tract' is the second geoid.
@@ -107,54 +107,54 @@ These are basic examples which shows you to query the Crosswalk API. Before
 looking at the outputted data I RECOMMEND first taking a look at [the parameters][Parameters]
 as well as [return data][Returns] located at the bottom of the page.
 
-### Converting zipcode to census tract
+### Crosswalk zipcode to census tract
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 library(rhud)
 options (digits=4)
 
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
-### Converting zipcode to county fip
+### Crosswalk zipcode to county fip
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_county(zip = 35213, year = c('2020'), quarter = c('2'))
 ```
-### Converting zipcode to core base statistical area (cbsa)
+### Crosswalk zipcode to core base statistical area (cbsa)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsa(zip = 35213, year = c('2011'), quarter = c('3'))
 ```
-### Converting zipcode to core based statistical area division(cbsadiv)
+### Crosswalk zipcode to core based statistical area division(cbsadiv)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsadiv(zip = '22031', year = c('2019'), quarter = c('4'))
 ```
-### Converting zipcode to congressional district (cd)
+### Crosswalk zipcode to congressional district (cd)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cd(zip = '35213', year = c(2011), quarter = c(1))
 ```
-### Converting census tract to zipcode
+### Crosswalk census tract to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 ```
-### Converting county fip into zipcode 
+### Crosswalk county fip into zipcode 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'))
 ```
-### Converting core based statistical areas (cbsa) to zipcode
+### Crosswalk core based statistical areas (cbsa) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsa_zip(cbsa = '10140', year = c('2017'), quarter = c('2'))
 ```
-### Converting core based statistical areas division (cbsadiv) to zipcode
+### Crosswalk core based statistical areas division (cbsadiv) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('4'))
 ```
-### Converting congressional district (cd) to zipcode
+### Crosswalk congressional district (cd) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cd_zip(cd = '2202', year = c('2010'), quarter = c('4'))
 ```
-### Converting zipcode to county subdivision (countysub)
+### Crosswalk zipcode to county subdivision (countysub)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_countysub(zip = '35213', year = c('2019'), quarter = c('2'))
 ```
-### Converting county subdivision (countysub) to zipcode 
+### Crosswalk county subdivision (countysub) to zipcode 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019'),
                      quarter = c('4','4'))

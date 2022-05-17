@@ -182,8 +182,6 @@ hud_chas_county <- function(county, year = c("2014-2018"),
   state_fip <- as.integer(substr(county, 1, 2))
   county_fip <- as.integer(substr(county, 3, 5))
 
-  # Don't know what the 99999 means, but it seems like every fips code has this
-  # tacked onto the end within hud_counties() function call.
   check_county <- paste(county, "99999", sep = "")
 
   # Grab all possible states if the package doesn't have a state dataset to

@@ -150,18 +150,18 @@
 </h2>
 <p>There are 12 main function calls for the crosswalk files: the package also contains an omni function which encapsulates the capabilities of all the main function calls below – <a href="#using-the-omni-function-for-querying">omni-function</a></p>
 <ol style="list-style-type: decimal">
-<li><a href="#converting-zipcode-to-census-tract">zip-tract</a></li>
-<li><a href="#converting-zipcode-to-county-fip">zip-county</a></li>
-<li><a href="#converting-zipcode-to-core-base-statistical-area-cbsa">zip-cbsa (Core Base Statistical Areas)</a></li>
-<li><a href="#converting-zipcode-to-core-based-statistical-area-divisioncbsadiv">zip-cbsadiv (Available 4th Quarter 2017 onwards)</a></li>
-<li><a href="#converting-zipcode-to-congressional-district-cd">zip-cd (Congressional District)</a></li>
-<li><a href="#converting-census-tract-to-zipcode">tract-zip</a></li>
-<li><a href="#converting-county-fip-into-zipcode">county-zip</a></li>
-<li><a href="#converting-core-based-statistical-areas-cbsa-to-zipcode">cbsa-zip</a></li>
-<li><a href="#converting-core-based-statistical-areas-division-cbsadiv-to-zipcode">cbsadiv-zip (Available 4th Quarter 2017 onwards)</a></li>
-<li><a href="#converting-congressional-district-cd-to-zipcode">cd-zip</a></li>
-<li><a href="#converting-zipcode-to-county-subdivision-countysub">zip-countysub (Available 2nd Quarter 2018 onwards)</a></li>
-<li><a href="#converting-county-subdivision-countysub-to-zipcode">countysub-zip (Available 2nd Quarter 2018 onwards)</a></li>
+<li><a href="#crosswalk-zipcode-to-census-tract">zip-tract</a></li>
+<li><a href="#crosswalk-zipcode-to-county-fip">zip-county</a></li>
+<li><a href="#crosswalk-zipcode-to-core-base-statistical-area-cbsa">zip-cbsa (Core Base Statistical Areas)</a></li>
+<li><a href="#crosswalk-zipcode-to-core-based-statistical-area-divisioncbsadiv">zip-cbsadiv (Available 4th Quarter 2017 onwards)</a></li>
+<li><a href="#crosswalk-zipcode-to-congressional-district-cd">zip-cd (Congressional District)</a></li>
+<li><a href="#crosswalk-census-tract-to-zipcode">tract-zip</a></li>
+<li><a href="#crosswalk-county-fip-into-zipcode">county-zip</a></li>
+<li><a href="#crosswalk-core-based-statistical-areas-cbsa-to-zipcode">cbsa-zip</a></li>
+<li><a href="#crosswalk-core-based-statistical-areas-division-cbsadiv-to-zipcode">cbsadiv-zip (Available 4th Quarter 2017 onwards)</a></li>
+<li><a href="#crosswalk-congressional-district-cd-to-zipcode">cd-zip</a></li>
+<li><a href="#crosswalk-zipcode-to-county-subdivision-countysub">zip-countysub (Available 2nd Quarter 2018 onwards)</a></li>
+<li><a href="#crosswalk-county-subdivision-countysub-to-zipcode">countysub-zip (Available 2nd Quarter 2018 onwards)</a></li>
 </ol>
 <p>The first geoid type in the function call is what to query for. For example in 1) above, ‘zip’ is the first geoid and ‘tract’ is the second geoid.</p>
 <p>The second geoid in the function call describes the geoid which we want to determine ‘intersection’ with the first geoid where intersection is described as the % of residential, business, other, and total buildings that overlap.</p>
@@ -169,7 +169,7 @@
 <p>Disclaimer: Although there exists inverse relationships in the Crosswalk Files, the measurements are NOT COMPLETELY inverse – for reasons stated within the papers above.</p>
 <p>These are basic examples which shows you to query the Crosswalk API. Before looking at the outputted data I RECOMMEND first taking a look at <a href="#parameters">the parameters</a> as well as <a href="#returns">return data</a> located at the bottom of the page.</p>
 <div class="section level3">
-<h3 id="converting-zipcode-to-census-tract">Converting zipcode to census tract<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-census-tract"></a>
+<h3 id="crosswalk-zipcode-to-census-tract">Crosswalk zipcode to census tract<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-census-tract"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rhud)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span> (<span class="at">digits=</span><span class="dv">4</span>)</span>
@@ -189,7 +189,7 @@
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9 01073010804  0.002757  0.000000  0.000000  0.002518 35213 2010       1</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-zipcode-to-county-fip">Converting zipcode to county fip<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-county-fip"></a>
+<h3 id="crosswalk-zipcode-to-county-fip">Crosswalk zipcode to county fip<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-county-fip"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_county</span>(<span class="at">zip =</span> <span class="dv">35213</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2020'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'2'</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -198,7 +198,7 @@
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  01073         1         1         1         1 35213 2020       2</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-zipcode-to-core-base-statistical-area-cbsa">Converting zipcode to core base statistical area (cbsa)<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-core-base-statistical-area-cbsa"></a>
+<h3 id="crosswalk-zipcode-to-core-base-statistical-area-cbsa">Crosswalk zipcode to core base statistical area (cbsa)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-core-base-statistical-area-cbsa"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cbsa</span>(<span class="at">zip =</span> <span class="dv">35213</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2011'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'3'</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -207,7 +207,7 @@
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 13820         1         1         1         1 35213 2011       3</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-zipcode-to-core-based-statistical-area-divisioncbsadiv">Converting zipcode to core based statistical area division(cbsadiv)<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-core-based-statistical-area-divisioncbsadiv"></a>
+<h3 id="crosswalk-zipcode-to-core-based-statistical-area-divisioncbsadiv">Crosswalk zipcode to core based statistical area division(cbsadiv)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-core-based-statistical-area-divisioncbsadiv"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cbsadiv</span>(<span class="at">zip =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -216,7 +216,7 @@
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   47894         1         1         1         1 22031 2019       4</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-zipcode-to-congressional-district-cd">Converting zipcode to congressional district (cd)<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-congressional-district-cd"></a>
+<h3 id="crosswalk-zipcode-to-congressional-district-cd">Crosswalk zipcode to congressional district (cd)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-congressional-district-cd"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cd</span>(<span class="at">zip =</span> <span class="st">'35213'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2011</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="dv">1</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -228,7 +228,7 @@
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0104  0.001781    0.0000  0.000000  0.001624 35213 2011       1</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-census-tract-to-zipcode">Converting census tract to zipcode<a class="anchor" aria-label="anchor" href="#converting-census-tract-to-zipcode"></a>
+<h3 id="crosswalk-census-tract-to-zipcode">Crosswalk census tract to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-census-tract-to-zipcode"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_tract_zip</span>(<span class="at">tract =</span> <span class="dv">48201223100</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2017'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'1'</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -238,7 +238,7 @@
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 77396         0   0.04575         0  0.008383 48201223100 2017       1</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-county-fip-into-zipcode">Converting county fip into zipcode<a class="anchor" aria-label="anchor" href="#converting-county-fip-into-zipcode"></a>
+<h3 id="crosswalk-county-fip-into-zipcode">Crosswalk county fip into zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-county-fip-into-zipcode"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_county_zip</span>(<span class="at">county =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2010'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'1'</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -256,7 +256,7 @@
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 71065 0.0001808  0.000000   0.00000 0.0001712  22031 2010       1</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-core-based-statistical-areas-cbsa-to-zipcode">Converting core based statistical areas (cbsa) to zipcode<a class="anchor" aria-label="anchor" href="#converting-core-based-statistical-areas-cbsa-to-zipcode"></a>
+<h3 id="crosswalk-core-based-statistical-areas-cbsa-to-zipcode">Crosswalk core based statistical areas (cbsa) to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-core-based-statistical-areas-cbsa-to-zipcode"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_cbsa_zip</span>(<span class="at">cbsa =</span> <span class="st">'10140'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2017'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'2'</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -286,7 +286,7 @@
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 98566 0.000e+00 0.0000000 0.0008123 2.777e-05 10140 2017       2</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-core-based-statistical-areas-division-cbsadiv-to-zipcode">Converting core based statistical areas division (cbsadiv) to zipcode<a class="anchor" aria-label="anchor" href="#converting-core-based-statistical-areas-division-cbsadiv-to-zipcode"></a>
+<h3 id="crosswalk-core-based-statistical-areas-division-cbsadiv-to-zipcode">Crosswalk core based statistical areas division (cbsadiv) to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-core-based-statistical-areas-division-cbsadiv-to-zipcode"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_cbsadiv_zip</span>(<span class="at">cbsadiv =</span> <span class="dv">10380</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2017'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -309,7 +309,7 @@
 <span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 00631 0.0000000  0.000000  0.001585 1.654e-05   10380 2017       4</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-congressional-district-cd-to-zipcode">Converting congressional district (cd) to zipcode<a class="anchor" aria-label="anchor" href="#converting-congressional-district-cd-to-zipcode"></a>
+<h3 id="crosswalk-congressional-district-cd-to-zipcode">Crosswalk congressional district (cd) to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-congressional-district-cd-to-zipcode"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_cd_zip</span>(<span class="at">cd =</span> <span class="st">'2202'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2010'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -353,7 +353,7 @@
 <span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36 70141 0.0000000 4.997e-05 0.0000000 3.760e-06 2202 2010       4</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-zipcode-to-county-subdivision-countysub">Converting zipcode to county subdivision (countysub)<a class="anchor" aria-label="anchor" href="#converting-zipcode-to-county-subdivision-countysub"></a>
+<h3 id="crosswalk-zipcode-to-county-subdivision-countysub">Crosswalk zipcode to county subdivision (countysub)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-county-subdivision-countysub"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_countysub</span>(<span class="at">zip =</span> <span class="st">'35213'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'2'</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -362,7 +362,7 @@
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0107390324         1         1         1         1 35213 2019       2</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="converting-county-subdivision-countysub-to-zipcode">Converting county subdivision (countysub) to zipcode<a class="anchor" aria-label="anchor" href="#converting-county-subdivision-countysub-to-zipcode"></a>
+<h3 id="crosswalk-county-subdivision-countysub-to-zipcode">Crosswalk county subdivision (countysub) to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-county-subdivision-countysub-to-zipcode"></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_countysub_zip</span>(<span class="at">countysub =</span> <span class="st">'4606720300 '</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>, <span class="st">'2019'</span>, <span class="st">'2019'</span>),</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>,<span class="st">'4'</span>))</span>
