@@ -79,14 +79,15 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_state_metropolitan
 #' @title hud_state_metropolitan
-#' @description Get a list of all metropolitan areas for this state with its
-#'   name and CBSA code.
-#' @param state The state to get all the metropolitan areas.
+#' @description Get details for all metropolitan areas for queried states with
+#'   their name and CBSA code.
+#' @param state The state to get all the metropolitan areas. Can be provided as
+#'   the full name, fip code or abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords CBSA
 #' @export
-#' @returns A dataframe containing details of metropolitan areas in US.
+#' @returns A dataframe containing details of metropolitan areas in a state.
 #' @seealso
 #' * [rhud::hud_nation_states_territories()]
 #' * [rhud::hud_state_metropolitan()]
@@ -213,11 +214,12 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_state_counties
 #' @title hud_state_counties
-#' @description Get a list of all counties within a state.
+#' @description Get a dataframe with details describing the counties located
+#'   within the queried states.
 #' @param state The state to get all counties.
 #' @param key The API key for this user. You must go to HUD and sign up for
-#'  an account and request for an API key.
-#' @keywords Counties
+#'   an account and request for an API key.
+#' @keywords counties
 #' @seealso
 #' * [rhud::hud_nation_states_territories()]
 #' * [rhud::hud_state_metropolitan()]

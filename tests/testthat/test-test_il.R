@@ -68,12 +68,12 @@ test_that("Income Limits Rent County Queries", {
   expect_true(check_is_not_list(c1))
   c1 <- NULL
 
-  c2 <- hud_il("5100199999", year = c("2021"))
+  c2 <- hud_il("5100199999", year = c("2020"))
   expect_true(nrow(c2) == 1)
   expect_true(check_is_not_list(c2))
   c2 <- NULL
 
-  c3 <- hud_il("5151099999", year = c(2021))
+  c3 <- hud_il("5151099999", year = c(2019))
   expect_true(nrow(c3) == 1)
   expect_true(check_is_not_list(c3))
   c3 <- NULL

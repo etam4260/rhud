@@ -106,6 +106,9 @@ chas_do_query_calls <- function(urls, key) {
 #' @title cw_do_query_calls
 #' @description Helper function for queries to the crosswalk API.
 #' @param urls The url endpoints to query for.
+#' @param query The geoids to query for.
+#' @param year The years to query for.
+#' @param quarter The quarters in the year to query for.
 #' @param primary_geoid The first geoid part of a function call. For example,
 #'   hud_cw_zip_tract() has zip as first GEOID and tract as second GEOID.
 #' @param secondary_geoid The second geoid part of a function call.

@@ -290,9 +290,9 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' \dontrun{
 #' library(rhud)
 #'
-#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2010'), quarter = c('1'))
+#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'))
 #'
-#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2010'), quarter = c('1'),
+#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'),
 #'    minimal = TRUE)
 #' }
 hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
@@ -883,6 +883,8 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #' hud_cw_zip_countysub(zip = '35213', year = c('2010'), quarter = c('1'),
 #'    minimal = TRUE)
 #' }
+
+
 hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY")) {

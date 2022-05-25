@@ -1,0 +1,266 @@
+---
+title: "Covid-19-and-Evictions-Crosswalk"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Covid-19-and-Evictions-Crosswalk}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<i>Sample provided by <b>Shuyu Jin</b> (geojsy@umd.edu)</i>
+
+## Overview
+
+In the United States, housing advocates and policymakers are concerned that
+a sudden disruption in household finances caused by the economic crisis related
+to the COVID-19 pandemic will lead to a wave of evictions by tenants unable
+to pay their rents [(*Cowin, Martin, and Stevens, 2020*)](https://www.clevelandfed.org/en/newsroom-and-events/publications/community-development-briefs/db-20200717-measuring-evictions-during-the-covid-19-crisis.aspx). This will
+certainly have a dramatic impact on the policies and funding allocated to 
+areas of the US.
+
+Viewing [*2016 eviction rankings*](https://evictionlab.org/rankings/#/evictions?r=United%20States&a=0&d=evictionRate&lang=en) for locations across the U.S., Richmond has maintained a 
+high eviction rate over the past few years. To understand how the pandemic is 
+affecting evictions, I collected weekly eviction filing data for Richmond, which are
+provided by [*Princeton’s Eviction Lab*](https://evictionlab.org/eviction-tracking/). 
+
+The mapping below uses ggplot and the crosswalk files to 
+display COVID-19 cases as well as evictions based on zip codes and
+census tracts.
+
+<br>
+
+## Loading in the necessary libraries
+
+```{r message=FALSE}
+library(rhud)
+library(sf)
+library(dplyr)
+library(scales)
+library(ggplot2)
+library(readr)
+library(lubridate)
+
+options (digits=20)
+```
+
+<br>
+
+To improve performance, use tigris caching.
+
+```{r message=FALSE}
+options(tigris_use_cache = TRUE)
+```
+
+## Reading in data
+
+```{r message=FALSE}
+
+# Need to move these into the data folder in the R package and 
+# should download the shapefile using tigris package instead of loading 
+# from disk.
+
+richmond_monthly_2020_2021 <- read_csv("Data/richmond_monthly_2020_2021.csv")
+VA_COVID_19_PublicUseDataset_ZIPCode <- read_csv("Data/VA-COVID-19-PublicUseDataset-ZIPCode.csv")
+richmondBoundary <- st_read("Data/cb_2018_us_zcta510_500k/cb_2018_us_zcta510_500k.shp")
+
+```
+
+<br>
+
+## Cleaning date objects
+
+```{r message=FALSE}
+
+VA_COVID_19_PublicUseDataset_ZIPCode$date <- lubridate::mdy(VA_COVID_19_PublicUseDataset_ZIPCode$`Report Date`)
+
+VA_COVID_19_PublicUseDataset_ZIPCode$monthYear <- paste(as.character( lubridate::month(VA_COVID_19_PublicUseDataset_ZIPCode$date)), "-", as.character( lubridate::year(VA_COVID_19_PublicUseDataset_ZIPCode$date)), sep="" )
+```
+
+<br> 
+ 
+```{r message=FALSE} 
+VA_COVID_19_PublicUseDataset_ZIPCode$monthYear <- my(VA_COVID_19_PublicUseDataset_ZIPCode$monthYear)
+
+VA_COVID_19_PublicUseDataset_ZIPCode$`Number of Cases` <- as.integer(VA_COVID_19_PublicUseDataset_ZIPCode$`Number of Cases`)
+``` 
+
+<br>
+ 
+```{r message=FALSE}
+covidCases <- aggregate(`Number of Cases` ~ monthYear + `ZIP Code`, data = VA_COVID_19_PublicUseDataset_ZIPCode, FUN = sum)
+```
+ 
+## Aggregating Racial Majority
+ 
+```{r message=FALSE}
+eviction_race <- aggregate(`filings_2020` ~ month + GEOID + racial_majority,
+                           data = richmond_monthly_2020_2021, FUN = sum)
+
+eviction_no_race <- aggregate(`filings_2020` ~ month + GEOID, 
+                              data = richmond_monthly_2020_2021, FUN = sum)
+```
+
+<br>
+
+## Aggregating Covid Cases
+
+```{r message=FALSE}
+covidCases_spatial <- aggregate(`Number of Cases` ~ `ZIP Code`,
+                                FUN = sum, data = covidCases)
+
+covidCases_temporal <- aggregate(`Number of Cases` ~ monthYear,
+                                 FUN = sum, data = covidCases)
+```
+
+<br>
+
+```{r message=FALSE}
+eviction_no_race_spatial <- aggregate(filings_2020 ~ GEOID,
+                                      FUN = sum, data = eviction_no_race)
+
+eviction_no_race_temporal <- aggregate(filings_2020 ~ month,
+                                       FUN = sum, data = eviction_no_race)
+
+eviction_no_race_temporal$month <- my(eviction_no_race_temporal$month)
+
+```
+
+<br>
+
+## 
+
+```{r message=FALSE}
+richmond <- inner_join(richmondBoundary,eviction_no_race_spatial, 
+                       by = c("ZCTA5CE10" = "GEOID" ))
+
+richmond <- inner_join(richmond,covidCases_spatial, 
+                       by = c("ZCTA5CE10" = "ZIP Code" ))
+```
+
+<br>
+
+## Mapping COVID cases by zip code
+
+```{r message=FALSE}
+ggplot() +
+  geom_sf(data = richmond, aes(fill= `Number of Cases`), size = 0.1, colour = "grey") + 
+  scale_fill_gradient2(low = "grey", mid = "white", high = "darkred", labels = comma) +
+  ggtitle("Covid-19 Case in Richmond, VA during 2020-2021, by zipcode") +
+  coord_sf() +
+  theme(plot.title = element_text(face = "bold"),
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+    panel.background = element_rect(fill = "white"))
+```
+
+<br>
+
+## Mapping Eviction filings by zip code
+
+```{r message=FALSE}
+ggplot() +
+  geom_sf(data = richmond, aes(fill= `filings_2020`), size = 0.1, colour = "grey") + 
+  scale_fill_gradient2() +
+  ggtitle("Eviction Case in Richmond, VA during 2020-2021, by zipcode") +
+  coord_sf() +
+  theme(plot.title = element_text(face = "bold"),
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+    panel.background = element_rect(fill = "white"))
+```
+
+<br>
+
+# Utilizing the crosswalk files
+
+<br>
+
+## Mapping COVID cases and Eviction Filings by Census Tracts
+
+```{r message=FALSE}
+richmond$ZCTA5CE10 <- as.numeric(richmond$ZCTA5CE10)
+```
+
+<br>
+
+```{r message=FALSE}
+a = as.data.frame(richmond)
+covidcases_cw <- crosswalk(data = a, geoid = "zip", geoid_col = "ZCTA5CE10",
+          cw_geoid = "tract", cw_geoid_col = "Number of Cases", method = "tot")
+
+evi_cw <- crosswalk(data = a, geoid = "zip", geoid_col = "ZCTA5CE10",
+          cw_geoid = "tract", cw_geoid_col = "filings_2020", method = "tot")
+```
+```{r message=FALSE}
+evi_tract <- aggregate(filings_2020 ~ tract, FUN = sum, data = evi_cw)
+evi_tract$filings_2020 <- as.integer(evi_tract$filings_2020)
+
+cov_tract <- aggregate(`Number of Cases` ~ tract, FUN = sum, data = covidcases_cw)
+cov_tract$`Number of Cases` <- as.integer(cov_tract$`Number of Cases`)
+```
+
+<br>
+
+```{r message=FALSE}
+census2020 <- st_read("Data/tl_2021_51_tract/tl_2021_51_tract.shp")
+```
+
+<br>
+
+```{r message=FALSE}
+evi <- inner_join(census2020, evi_tract, by = c("GEOID" = "tract"))
+covid <- inner_join(census2020, cov_tract, by = c("GEOID" = "tract"))
+```
+
+<br>
+
+```{r message=FALSE}
+ggplot() +
+  geom_sf(data = covid, aes(fill= `Number of Cases`), size = 0.1, colour = "grey") + 
+  scale_fill_gradient2(low = "grey", high = "darkred", labels = comma) +
+  ggtitle("Covid Case in Richmond, VA during 2020-2021, by census tract") +
+  coord_sf() +
+  theme(plot.title = element_text(face = "bold"),
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+    panel.background = element_rect(fill = "white"))
+```
+
+<br>
+
+```{r message=FALSE}
+ggplot() +
+  geom_sf(data = evi, aes(fill= `filings_2020`), size = 0.1, colour = "grey") + 
+  scale_fill_gradient2() +
+  ggtitle("Eviction Case in Richmond, VA during 2020-2021, by census tract") +
+  coord_sf() +
+  theme(plot.title = element_text(face = "bold"),
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+    panel.background = element_rect(fill = "white"))
+```
+
+<br>
+
+## Observations
+A noteworthy point, the number of COVID and eviction filings is not 
+significantly correlated. Meanwhile, crosswalking data from zip codes to census
+tracts yielded less accurate results. There appeared to be some discrete or 
+even N/A results with COVID cases by census tracts.  
+
+Therefore, it should be noted that there are considerations when crosswalking
+data to smaller geographies, particularly census tracts. The fundamental reason
+should be the zip codes cross-cut numerous tracts that do not follow the 
+boundaries closely. 

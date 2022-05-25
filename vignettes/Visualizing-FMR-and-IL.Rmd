@@ -1,8 +1,8 @@
 ---
-title: "Comparing-FMR-and-IL"
+title: "Visualizing-FMR-and-IL"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Comparing-FMR-and-IL}
+  %\VignetteIndexEntry{Visualizing-FMR-and-IL}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,12 +16,18 @@ knitr::opts_chunk$set(
 
 <i>Sample provided by <b>Shuyu Jin</b> (geojsy@umd.edu)</i>
 
+## Overview
+
+The US Department of Housing and Urban Development maintains both
+[FMR](https://link-url-here.org) (Fair Markets Rent) and 
+[IL](https://link-url-here.org) (Income Limits) programs which are crucial
+for determining eligibility for assistance dollars in the US. Provided below is
+an example of querying both FMR and IL as well as mapping them using 
+the leaflet R library.
+
 ## Loading in the necessary libraries
 
-These are some the packages needed to demonstrate this example.
-They might take a while to download if you don't have them already.
-
-```{r message=FALSE, eval = FALSE}
+```{r message=FALSE}
 library(rhud)
 library(tigris)
 library(leaflet)
@@ -29,9 +35,11 @@ library(tidyverse)
 library(sf)
 ```
 
+<br>
+
 To improve performance, use tigris caching.
 
-```{r message=FALSE, eval = FALSE}
+```{r message=FALSE}
 options(tigris_use_cache = TRUE)
 ```
 
@@ -40,32 +48,41 @@ options(tigris_use_cache = TRUE)
 Read in the Fair Markets Rent for counties in the year 2021 as well as the shape
 files needed to map.
 
-```{r message=FALSE, eval = FALSE}
+```{r message=FALSE}
 md_counties_2021_fmr = hud_fmr_state_counties(state = 'MD', year = '2021')
 ```
 
-Get county data for the state of Maryland.
+<br>
 
-```{r message=FALSE, eval = FALSE}
+Get county data for the state of Maryland using the rhud package.
+
+```{r message=FALSE}
 md_counties = hud_state_counties("MD")
 ```
 
-Query for every county in Maryland and get their Income Limits data.
+<br>
 
-```{r message=FALSE, eval = FALSE}
+Query for every county in Maryland and get their Income Limits data using
+the rhud package.
+
+```{r message=FALSE}
 md_counties_2021_il = hud_il(md_counties$fips_code)
 ```
 
+<br>
+
 Download the shape files for counties in the US.
 
-```{r message=FALSE, eval = FALSE}
+```{r message=FALSE}
 md_county_shapefile = tigris::counties(state = NULL, cb = FALSE,
                                        resolution = "500k", year = 2021)
 ```
 
+<br>
+
 Filter the counties to those only in Maryland.
 
-```{r message=FALSE, eval = FALSE}
+```{r message=FALSE}
 md_county_shapefile = md_county_shapefile[md_county_shapefile$STATEFP == 24, ]
 
 md_county_shapefile$fullFips = paste0(as.character(md_county_shapefile$STATEFP),
@@ -73,11 +90,13 @@ md_county_shapefile$fullFips = paste0(as.character(md_county_shapefile$STATEFP),
                                  "99999")
 ```
 
+<br>
+
 ## Merging of shapefiles and data
 
 Merge the shape file with the FMR and IL data.
 
-```{r message=FALSE, warning=FALSE, eval = FALSE}
+```{r message=FALSE, warning=FALSE}
 md_county_fmr_merged = tigris::geo_join(md_county_shapefile,
                                         md_counties_2021_fmr,
                                         by_sp = "fullFips",
@@ -85,22 +104,25 @@ md_county_fmr_merged = tigris::geo_join(md_county_shapefile,
                                         how = "inner")
 ```
 
+<br>
 
-## Forming components of Leaflet map
+## Leaflet mapping
 
 Create the pallete for coloring the overlayed shape file. The scale used
 corresponds to Efficiency data.
 
-```{r message=FALSE, eval = FALSE}
+```{r message=FALSE}
 pal <- colorNumeric(
   palette = "Greens",
   domain = as.numeric(md_county_fmr_merged$Efficiency))
 ```
 
+<br>
+
 Create the county level, efficiency, one bedroom, two bedroom, three bedroom
 four bedroom label to appear when hovering using the FMR overlay.
 
-```{r message=FALSE, eval = FALSE}
+```{r message=FALSE}
 label <- paste0(
   "County: ", md_county_fmr_merged$NAME, "<br/>",
   "Efficiency: ", scales::dollar(as.numeric(md_county_fmr_merged$Efficiency)), "<br/>",
@@ -111,12 +133,21 @@ label <- paste0(
   lapply(htmltools::HTML)
 ```
 
-Create the .... label to appear when hovering using the IL overlay
+<br>
+
+Create the ... label to appear when hovering using the IL overlay
+
+``` {r message=FALSE}
+
+
+```
+
+<br>
 
 Using the leaflet package, plot the county level map of Fair Markets Rents and 
 Income Limits in the state of Maryland.
 
-```{r message=FALSE, warning=FALSE, out.width = '100%', fig.height = 6, eval = FALSE}
+```{r message=FALSE, warning=FALSE, out.width = '100%', fig.height = 6}
 md_county_fmr_merged %>% 
   leaflet %>% 
   # add base map
@@ -142,4 +173,8 @@ md_county_fmr_merged %>%
             position = "bottomright")
 ```
 
+<br>
+
 ## Observations
+
+Some noticable observations are...

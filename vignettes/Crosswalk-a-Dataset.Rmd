@@ -20,8 +20,6 @@ For those who need a more powerful method for crosswalking semi-large datasets
 and allocating fields based on the provided ratios, the crosswalk() 
 function is available.
 
-First load the data into the environment or in this case a sample dataset.
-
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 library(rhud)
 options (digits=4)

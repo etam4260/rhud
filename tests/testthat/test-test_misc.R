@@ -30,7 +30,7 @@ test_that("List States Query", {
   skip_if(Sys.getenv("HUD_KEY") == "")
   states <- hud_nation_states_territories()
   expect_true(nrow(states) >= 1)
-  expect_error(hud_states("qdqdwq"))
+  expect_error(hud_nation_states_territories("qdqdwq"))
 })
 
 test_that("List Counties Query", {

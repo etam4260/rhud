@@ -54,6 +54,4 @@ test_that("Fair Markets Rent Different Years", {
   expect_true(length(y4) >= 1)
   y5 <- hud_fmr("AL", year = c(2017))
   expect_true(length(y5) >= 1)
-
-
 })

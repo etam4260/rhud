@@ -19,10 +19,12 @@ navbar:
     - text: "Comprehensive Housing and Affordability Strategy"
       href: articles/Comprehensive-Housing-and-Affordability-Strategy.html
    casestudy:
-    text: "Case Study"
+    text: "Case Studies"
     menu:
-    - text: "Crosswalk a dataset"
-      href: articles/Crosswalk-a-Dataset.html
+    - text: "Analysis of COVID-19 Cases and Evictions"
+      href: articles/Covid-19-and-Evictions-Crosswalk.html
+    - text: "Visualizing FMR and IL"
+      href: articles/Visualizing-FMR-and-IL.html
    reference:
     text: Reference
     href: reference/index.html

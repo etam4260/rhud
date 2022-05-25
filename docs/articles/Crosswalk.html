@@ -73,13 +73,16 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Case Study
+    Case Studies
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Crosswalk-a-Dataset.html">Crosswalk a dataset</a>
+      <a href="../articles/Covid-19-and-Evictions-Crosswalk.html">Analysis of COVID-19 Cases and Evictions</a>
+    </li>
+    <li>
+      <a href="../articles/Visualizing-FMR-and-IL.html">Visualizing FMR and IL</a>
     </li>
   </ul>
 </li>
@@ -129,9 +132,8 @@
 <div class="line-block">Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S.<br>
         Department of Housing and Urban Development’s ZIP Code Crosswalk Files,”<br>
         Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277<br>
-        <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf</a>
-</div>
-<div class="line-block">Din, Alexander and Wilson, Ron, 2020. “Crosswalking ZIP Codes to Census<br>
+        <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf" class="external-link uri">https://www.huduser.gov/portal/periodicals/cityscpe/vol20num2/ch16.pdf</a><br><br><br>
+Din, Alexander and Wilson, Ron, 2020. “Crosswalking ZIP Codes to Census<br>
         Geographies: Geoprocessing the U.S. Department of Housing &amp; Urban Development’s<br>
         ZIP Code Crosswalk Files,” Cityscape: A Journal of Policy Development and<br>
         Research, Volume 22, Number 1,<br>
@@ -153,7 +155,7 @@
 <li><a href="#crosswalk-zipcode-to-census-tract">zip-tract</a></li>
 <li><a href="#crosswalk-zipcode-to-county-fip">zip-county</a></li>
 <li><a href="#crosswalk-zipcode-to-core-base-statistical-area-cbsa">zip-cbsa (Core Base Statistical Areas)</a></li>
-<li><a href="#crosswalk-zipcode-to-core-based-statistical-area-divisioncbsadiv">zip-cbsadiv (Available 4th Quarter 2017 onwards)</a></li>
+<li><a href="#crosswalk-zipcode-to-core-based-statistical-area-division-cbsadiv">zip-cbsadiv (Available 4th Quarter 2017 onwards)</a></li>
 <li><a href="#crosswalk-zipcode-to-congressional-district-cd">zip-cd (Congressional District)</a></li>
 <li><a href="#crosswalk-census-tract-to-zipcode">tract-zip</a></li>
 <li><a href="#crosswalk-county-fip-into-zipcode">county-zip</a></li>
@@ -207,7 +209,7 @@
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 13820         1         1         1         1 35213 2011       3</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="crosswalk-zipcode-to-core-based-statistical-area-divisioncbsadiv">Crosswalk zipcode to core based statistical area division(cbsadiv)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-core-based-statistical-area-divisioncbsadiv"></a>
+<h3 id="crosswalk-zipcode-to-core-based-statistical-area-division-cbsadiv">Crosswalk zipcode to core based statistical area division (cbsadiv)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-core-based-statistical-area-division-cbsadiv"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cbsadiv</span>(<span class="at">zip =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
@@ -370,10 +372,11 @@
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     zip res_ratio bus_ratio oth_ratio tot_ratio  countysub year quarter</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 57376         1         1         0         1 4606720300 2019       4</span></span></code></pre></div>
+<p><br><br><br></p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="querying-for-only-the-crosswalked-geoids">Querying for only the Crosswalked GEOIDs<a class="anchor" aria-label="anchor" href="#querying-for-only-the-crosswalked-geoids"></a>
+<h2 id="querying-for-only-the-crosswalked-geoids">Querying for only the crosswalked geoids<a class="anchor" aria-label="anchor" href="#querying-for-only-the-crosswalked-geoids"></a>
 </h2>
 <p>If you just want the crosswalked geoids, you can set the <strong>minimal</strong> argument to TRUE. This will return a vector containing the crosswalked geoids without the extra metadata.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_county_zip</span>(<span class="at">county =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2010'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'1'</span>), <span class="at">minimal =</span> <span class="cn">TRUE</span>)</span>
@@ -381,6 +384,7 @@
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "71052" "71078" "71049" "71032" "71027" "71030" "71046" "71063" "71419"</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [10] "71065"</span></span></code></pre></div>
+<p><br><br><br></p>
 </div>
 <div class="section level2">
 <h2 id="using-the-omni-function-for-querying">Using the omni function for querying<a class="anchor" aria-label="anchor" href="#using-the-omni-function-for-querying"></a>
@@ -400,6 +404,163 @@
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  71063 0.0275669  0.014652   0.01408 0.0268813  22031 2010       1</span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  71419 0.0105748  0.003663   0.00000 0.0101875  22031 2010       1</span></span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 71065 0.0001808  0.000000   0.00000 0.0001712  22031 2010       1</span></span></code></pre></div>
+<p><br><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="crosswalking-a-dataset">Crosswalking a dataset<a class="anchor" aria-label="anchor" href="#crosswalking-a-dataset"></a>
+</h2>
+<p>For those who need to apply an allocation method (residential, business, other, total) to individual items in a data set, the <strong>crosswalk()</strong> function is available. Lets say we wanted to know the population at a zip code level (there is likely already a data set for this) for the counties of Washington, Wicomico, and Worchester in Maryland in the year 2019.</p>
+<p>NOTE: The use of the crosswalk() function is likely best suited for datasets that are not described in the geographic identifier we want to crosswalk to. In this case population might not be the best example for this.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>pop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">151049</span>, <span class="fl">103609</span>, <span class="fl">52276</span><span class="op">)</span>,
+                     county <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"24043"</span>, <span class="st">"24045"</span>, <span class="st">"24047"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sample</span><span class="op">)</span>
+<span class="co">#&gt;      pop county</span>
+<span class="co">#&gt; 1 151049  24043</span>
+<span class="co">#&gt; 2 103609  24045</span>
+<span class="co">#&gt; 3  52276  24047</span></code></pre></div>
+<p>In the crosswalked data set below each zip code associated with a county is assigned the same population value.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crosswalk</span>(<span class="at">data =</span> sample, <span class="at">geoid =</span> <span class="st">"county"</span>, <span class="at">geoid_col =</span> <span class="st">"county"</span>, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">cw_geoid =</span> <span class="st">"zip"</span>, <span class="at">cw_geoid_col =</span> <span class="cn">NA</span>, <span class="at">method =</span> <span class="cn">NA</span>, <span class="at">year =</span> <span class="dv">2019</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>          , <span class="at">quarter =</span> <span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============</span><span class="sc">---------------------------------</span>]    <span class="dv">33</span>% <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============================</span><span class="sc">-----------------</span>]    <span class="dv">67</span>% <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">3</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * No method or cw_geoid_col specified: will just merge the datasets.</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    county   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter    pop</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   24043 21740 4.154e-01 0.5855329 0.6520012 4.388e-01 2019       1 151049</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   24043 21742 2.269e-01 0.2051453 0.2022609 2.242e-01 2019       1 151049</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   24043 21795 7.331e-02 0.0689943 0.0498014 7.197e-02 2019       1 151049</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   24043 21713 5.965e-02 0.0295690 0.0192484 5.558e-02 2019       1 151049</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   24043 21783 4.411e-02 0.0126963 0.0033608 3.993e-02 2019       1 151049</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   24043 21722 3.437e-02 0.0075175 0.0030553 3.094e-02 2019       1 151049</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7   24043 21750 2.974e-02 0.0414300 0.0262756 3.051e-02 2019       1 151049</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8   24043 21782 2.497e-02 0.0046776 0.0009166 2.237e-02 2019       1 151049</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9   24043 21756 2.179e-02 0.0018376 0.0009166 1.934e-02 2019       1 151049</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10  24043 21767 1.567e-02 0.0145339 0.0137489 1.550e-02 2019       1 151049</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11  24043 21719 1.093e-02 0.0030070 0.0265811 1.098e-02 2019       1 151049</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12  24043 21734 1.081e-02 0.0150351 0.0012221 1.073e-02 2019       1 151049</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13  24043 21758 1.118e-02 0.0030070 0.0006111 1.010e-02 2019       1 151049</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14  24043 21733 6.992e-03 0.0021717 0.0000000 6.318e-03 2019       1 151049</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15  24043 21711 6.903e-03 0.0015035 0.0000000 6.187e-03 2019       1 151049</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16  24043 21779 5.866e-03 0.0016706 0.0000000 5.289e-03 2019       1 151049</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17  24043 21715 5.481e-04 0.0001671 0.0000000 4.950e-04 2019       1 151049</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18  24043 21780 4.740e-04 0.0000000 0.0000000 4.168e-04 2019       1 151049</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19  24043 21769 2.370e-04 0.0003341 0.0000000 2.345e-04 2019       1 151049</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20  24043 21720 2.963e-05 0.0001671 0.0000000 3.908e-05 2019       1 151049</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21  24043 21746 0.000e+00 0.0005012 0.0000000 3.908e-05 2019       1 151049</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22  24043 21755 1.481e-05 0.0000000 0.0000000 1.303e-05 2019       1 151049</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23  24043 21781 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24  24043 21721 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25  24043 21741 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26  24045 21804 3.617e-01 0.2666006 0.4497751 3.574e-01 2019       1 103609</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27  24045 21801 2.563e-01 0.4428147 0.4677661 2.830e-01 2019       1 103609</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28  24045 21826 6.512e-02 0.0471754 0.0228636 6.152e-02 2019       1 103609</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29  24045 21875 6.282e-02 0.0243806 0.0356072 5.809e-02 2019       1 103609</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30  24045 21802 4.247e-02 0.1117939 0.0007496 4.670e-02 2019       1 103609</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31  24045 21830 3.543e-02 0.0059465 0.0018741 3.121e-02 2019       1 103609</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32  24045 21849 3.141e-02 0.0053518 0.0052474 2.784e-02 2019       1 103609</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33  24045 21850 2.981e-02 0.0114965 0.0089955 2.719e-02 2019       1 103609</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34  24045 21837 2.548e-02 0.0105055 0.0026237 2.306e-02 2019       1 103609</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35  24045 21874 2.180e-02 0.0073340 0.0022489 1.958e-02 2019       1 103609</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36  24045 21803 1.634e-02 0.0537166 0.0003748 1.893e-02 2019       1 103609</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37  24045 21822 1.714e-02 0.0043608 0.0007496 1.522e-02 2019       1 103609</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38  24045 21856 9.956e-03 0.0033697 0.0000000 8.897e-03 2019       1 103609</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39  24045 21861 8.827e-03 0.0001982 0.0011244 7.692e-03 2019       1 103609</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  24045 21865 5.789e-03 0.0025768 0.0000000 5.228e-03 2019       1 103609</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  24045 21840 5.112e-03 0.0011893 0.0000000 4.519e-03 2019       1 103609</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42  24045 21814 4.434e-03 0.0005946 0.0000000 3.881e-03 2019       1 103609</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43  24045 21852 0.000e+00 0.0003964 0.0000000 3.545e-05 2019       1 103609</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44  24045 21810 0.000e+00 0.0001982 0.0000000 1.772e-05 2019       1 103609</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45  24047 21842 5.302e-01 0.4559211 0.8379953 5.443e-01 2019       1  52276</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46  24047 21811 2.832e-01 0.2535088 0.0927739 2.696e-01 2019       1  52276</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47  24047 21851 5.434e-02 0.0881579 0.0417249 5.577e-02 2019       1  52276</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48  24047 21843 4.340e-02 0.1065789 0.0009324 4.491e-02 2019       1  52276</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49  24047 21863 3.859e-02 0.0660088 0.0205128 3.927e-02 2019       1  52276</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50  24047 21813 2.390e-02 0.0160088 0.0048951 2.221e-02 2019       1  52276</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51  24047 21841 7.577e-03 0.0041667 0.0004662 6.918e-03 2019       1  52276</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52  24047 21872 6.003e-03 0.0039474 0.0004662 5.528e-03 2019       1  52276</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53  24047 21864 4.920e-03 0.0017544 0.0000000 4.411e-03 2019       1  52276</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54  24047 21829 3.411e-03 0.0008772 0.0000000 3.036e-03 2019       1  52276</span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55  24047 21804 1.804e-03 0.0004386 0.0000000 1.604e-03 2019       1  52276</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 56  24047 21862 1.263e-03 0.0024123 0.0002331 1.275e-03 2019       1  52276</span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 57  24047 21822 1.361e-03 0.0000000 0.0000000 1.189e-03 2019       1  52276</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58  24047 21792 0.000e+00 0.0002193 0.0000000 1.432e-05 2019       1  52276</span></span></code></pre></div>
+<p>To utilize an allocation method provided by the crosswalk files and apply it to columns of the data set, specify the method and cw_geoid_col arguments. In this case we want to allocate the county population levels to a zip code level using the method based on the ratio of residential addresses.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">crosswalk</span>(<span class="at">data =</span> sample, <span class="at">geoid =</span> <span class="st">"county"</span>, <span class="at">geoid_col =</span> <span class="st">"county"</span>, </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">cw_geoid =</span> <span class="st">"zip"</span>, <span class="at">cw_geoid_col =</span> <span class="st">"pop"</span>, <span class="at">method =</span> <span class="st">"res"</span>, <span class="at">year =</span> <span class="dv">2019</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>          , <span class="at">quarter =</span> <span class="dv">1</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============</span><span class="sc">---------------------------------</span>]    <span class="dv">33</span>% <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============================</span><span class="sc">-----------------</span>]    <span class="dv">67</span>% <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">3</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Applying allocation method based on residential address percentage.</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    county   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter       pop</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   24043 21740 4.154e-01 0.5855329 0.6520012 4.388e-01 2019       1 62751.933</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   24043 21742 2.269e-01 0.2051453 0.2022609 2.242e-01 2019       1 34280.196</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   24043 21795 7.331e-02 0.0689943 0.0498014 7.197e-02 2019       1 11073.212</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   24043 21713 5.965e-02 0.0295690 0.0192484 5.558e-02 2019       1  9010.270</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   24043 21783 4.411e-02 0.0126963 0.0033608 3.993e-02 2019       1  6663.170</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   24043 21722 3.437e-02 0.0075175 0.0030553 3.094e-02 2019       1  5190.918</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7   24043 21750 2.974e-02 0.0414300 0.0262756 3.051e-02 2019       1  4492.829</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8   24043 21782 2.497e-02 0.0046776 0.0009166 2.237e-02 2019       1  3772.365</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9   24043 21756 2.179e-02 0.0018376 0.0009166 1.934e-02 2019       1  3291.310</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10  24043 21767 1.567e-02 0.0145339 0.0137489 1.550e-02 2019       1  2367.238</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11  24043 21719 1.093e-02 0.0030070 0.0265811 1.098e-02 2019       1  1651.249</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12  24043 21734 1.081e-02 0.0150351 0.0012221 1.073e-02 2019       1  1633.349</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13  24043 21758 1.118e-02 0.0030070 0.0006111 1.010e-02 2019       1  1689.286</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14  24043 21733 6.992e-03 0.0021717 0.0000000 6.318e-03 2019       1  1056.083</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15  24043 21711 6.903e-03 0.0015035 0.0000000 6.187e-03 2019       1  1042.659</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16  24043 21779 5.866e-03 0.0016706 0.0000000 5.289e-03 2019       1   886.036</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17  24043 21715 5.481e-04 0.0001671 0.0000000 4.950e-04 2019       1    82.786</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18  24043 21780 4.740e-04 0.0000000 0.0000000 4.168e-04 2019       1    71.599</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19  24043 21769 2.370e-04 0.0003341 0.0000000 2.345e-04 2019       1    35.799</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20  24043 21720 2.963e-05 0.0001671 0.0000000 3.908e-05 2019       1     4.475</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21  24043 21746 0.000e+00 0.0005012 0.0000000 3.908e-05 2019       1     0.000</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22  24043 21755 1.481e-05 0.0000000 0.0000000 1.303e-05 2019       1     2.237</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23  24043 21781 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24  24043 21721 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25  24043 21741 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26  24045 21804 3.617e-01 0.2666006 0.4497751 3.574e-01 2019       1 37479.352</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27  24045 21801 2.563e-01 0.4428147 0.4677661 2.830e-01 2019       1 26557.357</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28  24045 21826 6.512e-02 0.0471754 0.0228636 6.152e-02 2019       1  6746.751</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29  24045 21875 6.282e-02 0.0243806 0.0356072 5.809e-02 2019       1  6508.531</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30  24045 21802 4.247e-02 0.1117939 0.0007496 4.670e-02 2019       1  4400.703</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31  24045 21830 3.543e-02 0.0059465 0.0018741 3.121e-02 2019       1  3671.152</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32  24045 21849 3.141e-02 0.0053518 0.0052474 2.784e-02 2019       1  3254.265</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33  24045 21850 2.981e-02 0.0114965 0.0089955 2.719e-02 2019       1  3088.362</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34  24045 21837 2.548e-02 0.0105055 0.0026237 2.306e-02 2019       1  2639.571</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35  24045 21874 2.180e-02 0.0073340 0.0022489 1.958e-02 2019       1  2258.843</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36  24045 21803 1.634e-02 0.0537166 0.0003748 1.893e-02 2019       1  1693.069</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37  24045 21822 1.714e-02 0.0043608 0.0007496 1.522e-02 2019       1  1776.021</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38  24045 21856 9.956e-03 0.0033697 0.0000000 8.897e-03 2019       1  1031.581</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39  24045 21861 8.827e-03 0.0001982 0.0011244 7.692e-03 2019       1   914.597</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  24045 21865 5.789e-03 0.0025768 0.0000000 5.228e-03 2019       1   599.806</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  24045 21840 5.112e-03 0.0011893 0.0000000 4.519e-03 2019       1   529.616</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42  24045 21814 4.434e-03 0.0005946 0.0000000 3.881e-03 2019       1   459.426</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43  24045 21852 0.000e+00 0.0003964 0.0000000 3.545e-05 2019       1     0.000</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44  24045 21810 0.000e+00 0.0001982 0.0000000 1.772e-05 2019       1     0.000</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45  24047 21842 5.302e-01 0.4559211 0.8379953 5.443e-01 2019       1 27719.003</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46  24047 21811 2.832e-01 0.2535088 0.0927739 2.696e-01 2019       1 14804.331</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47  24047 21851 5.434e-02 0.0881579 0.0417249 5.577e-02 2019       1  2840.491</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48  24047 21843 4.340e-02 0.1065789 0.0009324 4.491e-02 2019       1  2268.620</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49  24047 21863 3.859e-02 0.0660088 0.0205128 3.927e-02 2019       1  2017.408</span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50  24047 21813 2.390e-02 0.0160088 0.0048951 2.221e-02 2019       1  1249.199</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51  24047 21841 7.577e-03 0.0041667 0.0004662 6.918e-03 2019       1   396.108</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52  24047 21872 6.003e-03 0.0039474 0.0004662 5.528e-03 2019       1   313.800</span></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53  24047 21864 4.920e-03 0.0017544 0.0000000 4.411e-03 2019       1   257.213</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54  24047 21829 3.411e-03 0.0008772 0.0000000 3.036e-03 2019       1   178.334</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55  24047 21804 1.804e-03 0.0004386 0.0000000 1.604e-03 2019       1    94.311</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 56  24047 21862 1.263e-03 0.0024123 0.0002331 1.275e-03 2019       1    66.018</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 57  24047 21822 1.361e-03 0.0000000 0.0000000 1.189e-03 2019       1    71.162</span></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58  24047 21792 0.000e+00 0.0002193 0.0000000 1.432e-05 2019       1     0.000</span></span></code></pre></div>
 <p><br><br><br></p>
 </div>
 <div class="section level2">
@@ -476,7 +637,7 @@ The geoid to query for
 res_ratio
 </td>
 <td>
-The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to the total number of residential addresses in the entire ZIP. (for type 1-5) The ratio of residential addresses in the Zip, Tract, County, or CBSA - ZIP part to the total number of residential addresses in the entire Zip, Tract, County, or CBSA. (for type 6-10)
+The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to the total number of residential addresses in the entire ZIP. (for type 1-5 and 11) The ratio of residential addresses in the Zip, Tract, County, or CBSA - ZIP part to the total number of residential addresses in the entire Zip, Tract, County, or CBSA. (for type 6-10 and 12)
 </td>
 </tr>
 <tr>
@@ -484,7 +645,7 @@ The ratio of residential addresses in the ZIP – Tract, County, or CBSA part to
 bus_ratio
 </td>
 <td>
-The ratio of business addresses in the ZIP – Tract, County, or CBSA part to the total number of business addresses in the entire ZIP. (for type 1-5). The ratio of business addresses in the Tract, County, or CBSA – ZIP part to the total number of business addresses in the entire Tract, County, or CBSA. (for type 6-10)
+The ratio of business addresses in the ZIP – Tract, County, or CBSA part to the total number of business addresses in the entire ZIP. (for type 1-5 and 11). The ratio of business addresses in the Tract, County, or CBSA – ZIP part to the total number of business addresses in the entire Tract, County, or CBSA. (for type 6-10 and 12)
 </td>
 </tr>
 <tr>
@@ -492,7 +653,7 @@ The ratio of business addresses in the ZIP – Tract, County, or CBSA part to th
 oth_ratio
 </td>
 <td>
-The ratio of other addresses in the ZIP – Tract to the total number of other addresses in the entire ZIP. (for type 1-5). The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the total number of other addresses in the entire Tract, County, or CBSA. (for type 6-10)
+The ratio of other addresses in the ZIP – Tract to the total number of other addresses in the entire ZIP. (for type 1-5 and 11). The ratio of other addresses in the Tract, County, or CBSA – ZIP part to the total number of other addresses in the entire Tract, County, or CBSA. (for type 6-10 and 12)
 </td>
 </tr>
 <tr>
@@ -500,7 +661,7 @@ The ratio of other addresses in the ZIP – Tract to the total number of other a
 tot_ratio
 </td>
 <td>
-The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5) The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10)
+The ratio of all addresses in the ZIP – Tract to the total number of all types of addresses in the entire ZIP. (for type 1-5 and 11) The ratio of all addresses in the Tract, County, or CBSA-ZIP part to the total number of all types of addresses in the entire Tract, County, or CBSA. (for type 6-10 and 12)
 </td>
 </tr>
 <tr>
@@ -540,7 +701,7 @@ Quarter of year when measurement was taken.
 Katy Rossiter, K. R. (2014, July 31). Standard Hierarchy of Census Bereau<br>
       Geographies [Photograph]. Understanding Geographic Relationships: Counties,<br>
       Places, Tracts and More.<br>
-      <a href="https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counti" class="external-link uri">https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relationships-counti</a> | es-places-tracts-and-more.html<br><br>
+      <a href="https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relation" class="external-link uri">https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relation</a>| ships-counties-places-tracts-and-more.html<br><br>
 U.S Department of Housing and Urban Development. (n.d.). HUD USPS ZIP<br>
       Code Crosswalk Files | HUD USER. HUD USPS ZIP CODE CROSSWALK FILES.<br>
       Retrieved February 17, 2022, from<br>

@@ -30,7 +30,9 @@ Suggests:
     sf,
     dplyr,
     scales,
-    ggplot2
+    ggplot2,
+    readr,
+    lubridate
 Imports: 
     httr,
     zoo,
