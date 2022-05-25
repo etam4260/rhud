@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-Are you a python developer? Check out [hudpy][https://github.com/etam4260/hudpy]
+Are you a python developer? Check out [hudpy](https://github.com/etam4260/hudpy)
 instead.
 
 ## Housing and Urban Development in R

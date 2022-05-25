@@ -22,7 +22,7 @@ version](https://img.shields.io/badge/devel%20version-0.2.0.9000-yellow)]()
 <!-- badges: end -->
 
 Are you a python developer? Check out
-\[hudpy\]\[<https://github.com/etam4260/hudpy>\] instead.
+[hudpy](https://github.com/etam4260/hudpy) instead.
 
 ## Housing and Urban Development in R
 
