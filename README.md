@@ -21,6 +21,9 @@ version](https://img.shields.io/badge/devel%20version-0.2.0.9000-yellow)]()
 
 <!-- badges: end -->
 
+Are you a python developer? Check out
+\[hudpy\]\[<https://github.com/etam4260/hudpy>\] instead.
+
 ## Housing and Urban Development in R
 
 -   This interface uses the HUD User Data API but is not endorsed or
@@ -68,7 +71,8 @@ Please cite this package using:
 Tam, E., Reilly, A., & Ghaedi, H. (2022). rhud: A R interface for
 accessing HUD  
       (US Department of Housing and Urban Development) APIs (Version
-0.2.0.9000). <https://github.com/etam4260/rhud>
+0.2.0.9000).  
+       <https://github.com/etam4260/rhud>
 
 ## Available Data
 

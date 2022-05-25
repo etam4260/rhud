@@ -23,7 +23,14 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    devtools
+    devtools,
+    tigris,
+    leaflet,
+    tidyverse,
+    sf,
+    dplyr,
+    scales,
+    ggplot2
 Imports: 
     httr,
     zoo,

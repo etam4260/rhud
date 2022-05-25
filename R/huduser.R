@@ -245,7 +245,7 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #'   for an account and request for an API key.
 #' @keywords Fair Markets Rent API
 #' @export
-#' @returns This function returns a dataframe containing FAIR MARKETS RENT data
+#' @returns This function returns a dataframe containing fair markets rent data
 #'   for a particular county or state. For county level data, these measurements
 #'   include the county_name, counties_msa, town_name, metro_status, metro_name,
 #'   smallarea_status, basicdata, Efficiency, One-Bedroom, Two-Bedroom,
@@ -370,7 +370,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
         res <- as.data.frame(do.call(cbind,
                                      list(as.data.frame(cont$data$very_low),
                                           as.data.frame(cont$data$extremely_low),
-                                          as.data.frame(cont$data$very_low))))
+                                          as.data.frame(cont$data$low))))
         res$statecode <- cont$data$statecode
         res$stateid <- cont$data$stateID
       } else if (querytype == "county") {
@@ -421,19 +421,20 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   3 - County
 #'   4 - MCD
 #'   5 - Place
-#' @param state_id For types 2,3,4,5, you must provide a stateId. For 3,4,5
-#' @param entity_id For types 3,4,5, you must provide a fips code
+#' @param state_id For types 2,3,4,5, you must provide a state_id.
+#' @param entity_id For types 3,4,5, you must provide a fips code, placecode,
+#'   or mcd code.
 #' @param year Gets the year that this data was recorded. Defaults to 2014-2018.
 #'   There are specific year ranges that are only accepted.
-#'   2014-2018
-#'   2013-2017
-#'   2012-2016
-#'   2011-2015
-#'   2010-2014
-#'   2009-2013
-#'   2008-2012
-#'   2007-2011
-#'   2006-2010
+#'   * 2014-2018
+#'   * 2013-2017
+#'   * 2012-2016
+#'   * 2011-2015
+#'   * 2010-2014
+#'   * 2009-2013
+#'   * 2008-2012
+#'   * 2007-2011
+#'   * 2006-2010
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @keywords Comprehensive Housing Affordability Strategy (CHAS) API
