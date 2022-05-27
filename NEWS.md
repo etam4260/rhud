@@ -1,3 +1,41 @@
+rhud 0.3.0.9000 (5/30/2022)
+============================
+
+### NEW FEATURES:
+
+  * Added options() for the rhud package, allowing a user to allow caching and 
+  tibbles. 
+   
+  * User is now given a `to_tibble` option for rhud functions that return a
+  data frame. This allows them to get tibbles rather than data frames as the type
+  of data returned. 
+  
+### MINOR IMPROVEMENTS:
+
+  * User is now presented with a message when attaching the package 
+  showing the various options that can that can be set for the package as
+  well as telling the user that they need to obtain a key from the HUD User
+  website. 
+  
+### BUG FIXES
+
+  * Fixed state level FMR data returning two copies of very_low and not low @
+  * Fixed issue with IL data when querying for county and cbsa returning 
+  duplicate year and median income fields. 
+  * Remove download bar from appearing when first loading in the 
+  hud_nation_state_territories() in package environment when validating
+  state inputs. 
+  
+### DOCUMENTATION FIXES
+
+  * Removed crosswalk example on documentation website from case study and 
+  placed the sample into the crosswalk vignette. 
+  * The case studies tab of the documentation website now includes more 
+  realistic use cases for the rhud package alongside several popular R packages.
+  However, they are not complete and will be updated in the future. 
+  * Added Shuyu Jin as a contributor to the package. 
+  
+
 rhud 0.2.0.9000 (5/1/2022)
 ============================
 

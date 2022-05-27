@@ -1,4 +1,6 @@
 #' @import httr
+#' @import tibble
+
 
 # Misc APIs provided by the HUD provide:
 
@@ -8,6 +10,8 @@
 #'   abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords States Territories
 #' @export
 #' @returns A dataframe containing details of all the states and territories
@@ -26,10 +30,19 @@
 #'
 #' hud_nation_states_territories()
 #' }
-hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
+hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
+                                          to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   if (!is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -56,8 +69,13 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 
   cont <- try(content(call), silent = TRUE) #parse returned data
 
-  download_bar(1,1)
-  message("\n")
+  # A lot of the functions in this package use the states in this function call
+  # to validate the input variables from user. Do not show this download bar
+  # when validating.
+  if (!is.null(pkg.env$download_states)) {
+    download_bar(1,1)
+    pkg.env$download_states <- TRUE
+  }
 
   states <- as.data.frame(do.call("rbind", cont))
   states$state_num <- as.character(as.integer(states$state_num))
@@ -69,7 +87,11 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
     states$state_code <- unlist(states$state_code)
     states$state_num <- unlist(states$state_num)
     states$category <- unlist(states$category)
-    return(states)
+    if (to_tibble == FALSE) {
+      return(states)
+    } else {
+      return(as_tibble(states))
+    }
   }
   stop("\nThe key used might be invalid.", call. = FALSE)
 }
@@ -85,6 +107,8 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #'   the full name, fip code or abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords CBSA
 #' @export
 #' @returns A dataframe containing details of metropolitan areas in a state.
@@ -102,10 +126,19 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY")) {
 #'
 #' hud_state_metropolitan("VA")
 #' }
-hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
+hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
+                                   to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -205,7 +238,12 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
     metro$cbsa_code <- unlist(metro$cbsa_code)
     metro$area_name <- unlist(metro$area_name)
     metro$category <- unlist(metro$category)
-    return(metro)
+    if (to_tibble == FALSE) {
+      return(metro)
+    } else {
+      return(as_tibble(metro))
+    }
+
   }
 
   stop("\nThe key used might be invalid.", call. = FALSE)
@@ -219,6 +257,8 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @param state The state to get all counties.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords counties
 #' @seealso
 #' * [rhud::hud_nation_states_territories()]
@@ -238,10 +278,19 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' hud_state_counties("Virginia")
 #' hud_state_counties("51")
 #' }
-hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
+hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
+                               to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -295,7 +344,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 
   urls <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/",
                unlist(fip_code), sep = "")
-  counties <- misc_do_query_call(urls, key)
+  counties <- misc_do_query_call(urls, key, to_tibble)
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
@@ -305,7 +354,12 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
     counties$county_name <- unlist(counties$county_name)
     counties$town_name <- unlist(counties$town_name)
     counties$category <- unlist(counties$category)
-    return(counties)
+
+    if (to_tibble == FALSE) {
+      return(counties)
+    } else {
+      return(as_tibble(counties))
+    }
   }
 
   stop(paste("\nThe key used might be invalid or",
@@ -318,6 +372,8 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @param state The state to get all places.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords places.
 #' @export
 #' @seealso
@@ -337,10 +393,19 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' hud_state_places("Virginia")
 #' hud_state_places("51")
 #' }
-hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
+hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
+                             to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -394,13 +459,17 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
                unlist(fip_code),
                sep = "")
 
-  places <- misc_do_query_call(urls, key)
+  places <- misc_do_query_call(urls, key, to_tibble)
 
   if (nrow(places) > 1) {
     places$statecode <- unlist(places$statecode)
     places$entityId <- unlist(places$entityId)
     places$placename <- unlist(places$placename)
-    return(places)
+    if (to_tibble == FALSE) {
+      return(places)
+    } else {
+      return(as_tibble(places))
+    }
   }
   stop("\nThe key used might be invalid or could not find places for this state.",
        call. = FALSE)
@@ -412,6 +481,8 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' @param state The state to get all MCD.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'  an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords CBSA
 #' @export
 #' @seealso
@@ -432,10 +503,20 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY")) {
 #' hud_state_minor_civil_divisions("51")
 #' }
 hud_state_minor_civil_divisions <- function(state,
-                                            key = Sys.getenv("HUD_KEY")) {
+                                            key = Sys.getenv("HUD_KEY"),
+                                            to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
 
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -488,14 +569,19 @@ hud_state_minor_civil_divisions <- function(state,
                unlist(fip_code),
                sep = "")
 
-  mcd <- misc_do_query_call(urls, key)
+  mcd <- misc_do_query_call(urls, key, to_tibble)
 
   if (nrow(mcd) > 1) {
     mcd$statecode <- unlist(mcd$statecode)
     mcd$entityId <- unlist(mcd$entityId)
     mcd$mcdname <- unlist(mcd$mcdname)
-    return(mcd)
+    if (to_tibble == FALSE) {
+      return(mcd)
+    } else {
+      return(to_tibble(mcd))
+    }
   }
+
   stop("\nThe key used might be invalid or could not find mcds for this state",
        call. = FALSE)
 }

@@ -4,7 +4,12 @@
 \alias{hud_chas_state_mcd}
 \title{hud_chas_state_mcd}
 \usage{
-hud_chas_state_mcd(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
+hud_chas_state_mcd(
+  state,
+  year = c("2014-2018"),
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
+)
 }
 \arguments{
 \item{state}{The state name, abbreviation, or fips code.}
@@ -22,7 +27,10 @@ hud_chas_state_mcd(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtain from HUD USER website.}
+\item{key}{The key obtain from HUD USER website.'}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 Returns a dataframe with CHAS data for mcds.

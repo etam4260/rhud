@@ -11,8 +11,10 @@
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @description Returns CHAS data for the entire nation.
-#' @returns Returns a dataframe with CHAS data for the entire nation.
+#' @returns Returns a data frame with CHAS data for the entire nation.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]
@@ -29,10 +31,18 @@
 #' hud_chas_nation()
 #' }
 hud_chas_nation <- function(year = c("2014-2018"),
-                            key = Sys.getenv("HUD_KEY")) {
+                            key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -40,7 +50,7 @@ hud_chas_nation <- function(year = c("2014-2018"),
 
   urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
                "&year=", year, sep = "")
-  return(chas_do_query_calls(urls, key = key))
+  return(chas_do_query_calls(urls, key = key, to_tibble))
 }
 
 #' @name hud_chas_state
@@ -59,6 +69,8 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @returns Returns a dataframe with CHAS data for a particular state.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
@@ -78,10 +90,18 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #' hud_chas_state("51")
 #' }
 hud_chas_state <- function(state, year = c("2014-2018"),
-                           key = Sys.getenv("HUD_KEY")) {
+                           key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- chas_input_check_cleansing(state, year, key)
   state <- args[[1]]
@@ -127,7 +147,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
                "&stateId=", all_queries$fip_code, "&year=", all_queries$year,
                sep = "")
-  return(chas_do_query_calls(urls, key = key))
+  return(chas_do_query_calls(urls, key = key, to_tibble))
 }
 
 #' @name hud_chas_county
@@ -147,6 +167,8 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @returns Returns a dataframe with CHAS data for counties.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
@@ -165,10 +187,18 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' hud_chas_county(county = c("06105", "06113"))
 #' }
 hud_chas_county <- function(county, year = c("2014-2018"),
-                            key = Sys.getenv("HUD_KEY")) {
+                            key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- chas_input_check_cleansing(county, year, key)
   county <- args[[1]]
@@ -214,7 +244,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
                "&year=", all_queries$year,
                sep = "")
 
-  res <- chas_do_query_calls(urls, key)
+  res <- chas_do_query_calls(urls, key, to_tibble)
 
   return(res)
 }
@@ -233,7 +263,9 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtain from HUD USER website.'
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @returns Returns a dataframe with CHAS data for mcds.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
@@ -252,10 +284,18 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'
 #' }
 hud_chas_state_mcd <- function(state, year = c("2014-2018"),
-                         key = Sys.getenv("HUD_KEY")) {
+                         key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -309,7 +349,7 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
                "&entityId=", all_queries$entityId,
                "&year=", all_queries$year,  sep = "")
 
-  res <- chas_do_query_calls(urls, key)
+  res <- chas_do_query_calls(urls, key, to_tibble)
 
   return(res)
 }
@@ -330,6 +370,8 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
 #' @param key The key obtain from HUD USER website.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @returns Returns a dataframe with CHAS data for places.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
@@ -348,10 +390,18 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #'
 #' }
 hud_chas_state_place <- function(state, year = c("2014-2018"),
-                           key = Sys.getenv("HUD_KEY")) {
+                           key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -407,7 +457,7 @@ hud_chas_state_place <- function(state, year = c("2014-2018"),
                "&entityId=", all_queries$entityId,
                "&year=", all_queries$year,  sep = "")
 
-  res <- chas_do_query_calls(urls, key)
+  res <- chas_do_query_calls(urls, key, to_tibble)
 
 
   return(res)

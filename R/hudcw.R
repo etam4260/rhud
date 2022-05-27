@@ -1,4 +1,3 @@
-
 #' @name hud_cw_zip_tract
 #' @title hud_cw_zip_tract
 #' @description This function queries the Crosswalks API provided by US
@@ -14,6 +13,8 @@
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::crosswalk()]
@@ -46,9 +47,20 @@
 #' }
 hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                              quarter = 1, minimal = FALSE,
-                             key = Sys.getenv("HUD_KEY")) {
+                             key = Sys.getenv("HUD_KEY"),
+                             to_tibble) {
+
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "zip"
   secondary_geoid <- "tract"
 
@@ -72,11 +84,11 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
-                             secondary_geoid, key))
+                             secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$tract)
+                           secondary_geoid, key, to_tibble)$tract)
 }
 
 
@@ -97,6 +109,8 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -128,9 +142,21 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                               quarter = 1, minimal = FALSE,
-                              key = Sys.getenv("HUD_KEY")) {
+                              key = Sys.getenv("HUD_KEY"),
+                              to_tibble) {
+
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "zip"
   secondary_geoid <- "county"
 
@@ -158,12 +184,12 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
 
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$county)
+                           secondary_geoid, key, to_tibble)$county)
 }
 
 
@@ -183,6 +209,8 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -214,9 +242,20 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                             quarter = 1, minimal = FALSE,
-                            key = Sys.getenv("HUD_KEY")) {
+                            key = Sys.getenv("HUD_KEY"),
+                            to_tibble) {
+
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "zip"
   secondary_geoid <- "cbsa"
 
@@ -242,11 +281,11 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$cbsa)
+                           secondary_geoid, key, to_tibble)$cbsa)
 }
 
 
@@ -266,6 +305,10 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -297,9 +340,21 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
-                               key = Sys.getenv("HUD_KEY")) {
+                               key = Sys.getenv("HUD_KEY"),
+                               to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
+
   primary_geoid <- "zip"
   secondary_geoid <- "cbsadiv"
 
@@ -325,11 +380,11 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$cbsadiv)
+                           secondary_geoid, key, to_tibble)$cbsadiv)
 }
 
 
@@ -349,6 +404,8 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -380,9 +437,20 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
-                          key = Sys.getenv("HUD_KEY")) {
+                          key = Sys.getenv("HUD_KEY"),
+                          to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
+
   primary_geoid <- "zip"
   secondary_geoid <- "cd"
 
@@ -409,11 +477,11 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$cd)
+                           secondary_geoid, key, to_tibble)$cd)
 }
 
 
@@ -433,6 +501,8 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -464,9 +534,19 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
                              quarter = 1, minimal = FALSE,
-                             key = Sys.getenv("HUD_KEY")) {
+                             key = Sys.getenv("HUD_KEY"),
+                             to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "tract"
   secondary_geoid <- "zip"
 
@@ -493,11 +573,11 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$zip)
+                           secondary_geoid, key, to_tibble)$zip)
 }
 
 
@@ -518,6 +598,8 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -549,9 +631,19 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                               quarter = 1, minimal = FALSE,
-                              key = Sys.getenv("HUD_KEY")) {
+                              key = Sys.getenv("HUD_KEY"),
+                              to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "county"
   secondary_geoid <- "zip"
 
@@ -578,11 +670,11 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$zip)
+                           secondary_geoid, key, to_tibble)$zip)
 }
 
 
@@ -602,6 +694,8 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -633,9 +727,20 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
                             quarter = 1, minimal = FALSE,
-                            key = Sys.getenv("HUD_KEY")) {
+                            key = Sys.getenv("HUD_KEY"),
+                            to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
+
   primary_geoid <- "cbsa"
   secondary_geoid <- "zip"
 
@@ -662,11 +767,11 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$zip)
+                           secondary_geoid, key, to_tibble)$zip)
 }
 
 
@@ -687,6 +792,8 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -718,9 +825,19 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
-                               key = Sys.getenv("HUD_KEY")) {
+                               key = Sys.getenv("HUD_KEY"),
+                               to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "cbsadiv"
   secondary_geoid <- "zip"
 
@@ -746,11 +863,11 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$zip)
+                           secondary_geoid, key, to_tibble)$zip)
 }
 
 
@@ -772,6 +889,8 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -803,9 +922,19 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
-                          key = Sys.getenv("HUD_KEY")) {
+                          key = Sys.getenv("HUD_KEY"),
+                          to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "cd"
   secondary_geoid <- "zip"
 
@@ -831,11 +960,11 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$zip)
+                           secondary_geoid, key, to_tibble)$zip)
 }
 
 
@@ -855,6 +984,8 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' * [rhud::hud_cw_zip_tract()]
 #' * [rhud::hud_cw_zip_county()]
@@ -883,14 +1014,22 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #' hud_cw_zip_countysub(zip = '35213', year = c('2010'), quarter = c('1'),
 #'    minimal = TRUE)
 #' }
-
-
 hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
-                                 key = Sys.getenv("HUD_KEY")) {
+                                 key = Sys.getenv("HUD_KEY"),
+                                 to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                     call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
   primary_geoid <- "zip"
   secondary_geoid <- "countysub"
 
@@ -916,11 +1055,11 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$countysub)
+                           secondary_geoid, key, to_tibble)$countysub)
 }
 
 
@@ -941,6 +1080,8 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -974,9 +1115,18 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_countysub_zip <- function(countysub,
                                  year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
-                                 key = Sys.getenv("HUD_KEY")) {
+                                 key = Sys.getenv("HUD_KEY"),
+                                 to_tibble) {
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   primary_geoid <- "countysub"
   secondary_geoid <- "zip"
@@ -1003,9 +1153,9 @@ hud_cw_countysub_zip <- function(countysub,
   if (!minimal) {
     return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
-                                        secondary_geoid, key))
+                                        secondary_geoid, key, to_tibble))
   }
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, primary_geoid,
-                           secondary_geoid, key)$zip)
+                           secondary_geoid, key, to_tibble)$zip)
 }

@@ -1,3 +1,6 @@
+#' @import tibble
+
+
 #' @name hud_fmr_state_metroareas
 #' @title hud_fmr_state_metroareas
 #' @description This function queries for a state and returns the
@@ -10,6 +13,8 @@
 #'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
 #' * [rhud::hud_fmr_state_metroareas()]
@@ -18,6 +23,7 @@
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for metro areas in states.
+#' @examples
 #' \dontrun{
 #' library(rhud)
 #'
@@ -27,14 +33,23 @@
 #'
 #' hud_fmr_state_metroareas("Alabama", year = c(2021))
 #'
-#' hud_fmr_state_metroareas("24", year = c(2021)))
+#' hud_fmr_state_metroareas("24", year = c(2021))
 #' }
 hud_fmr_state_metroareas <- function(state,
                                      year = format(Sys.Date() - 365, "%Y"),
-                                     key = Sys.getenv("HUD_KEY")) {
+                                     key = Sys.getenv("HUD_KEY"),
+                                     to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
@@ -90,8 +105,11 @@ hud_fmr_state_metroareas <- function(state,
   if (length(list_res) != 0) {
     res <- as.data.frame(do.call(rbind, list_res))
     res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-    return(res)
+    if (to_tibble == FALSE) {
+      return(res)
+    } else {
+      return(tibble(res))
+    }
   }
   return(NULL)
 }
@@ -109,6 +127,8 @@ hud_fmr_state_metroareas <- function(state,
 #'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
 #' * [rhud::hud_fmr_state_metroareas()]
@@ -117,6 +137,7 @@ hud_fmr_state_metroareas <- function(state,
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for counties in states.
+#' @examples
 #' \dontrun{
 #' library(rhud)
 #'
@@ -126,13 +147,23 @@ hud_fmr_state_metroareas <- function(state,
 #'
 #' hud_fmr_state_counties("Alabama", year = c(2021))
 #'
-#' hud_fmr_state_counties("24", year = c(2021)))
+#' hud_fmr_state_counties("24", year = c(2021))
 #' }
 hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
-                                   key = Sys.getenv("HUD_KEY")) {
+                                   key = Sys.getenv("HUD_KEY"),
+                                   to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
 
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
@@ -190,10 +221,14 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
     res <- as.data.frame(do.call(rbind, list_res))
     res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
-    return(res)
+    if (to_tibble == FALSE) {
+      return(res)
+    } else {
+      return(as_tibble(res))
+    }
   }
-  return(NULL)
 
+  return(NULL)
 }
 
 #' @name hud_fmr_county_zip
@@ -209,6 +244,8 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
 #' * [rhud::hud_fmr_state_metroareas()]
@@ -217,6 +254,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for zip codes in counties.
+#' @examples
 #' \dontrun{
 #' library(rhud)
 #'
@@ -229,10 +267,19 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' hud_fmr_county_zip(5151099999, year = c(2021))
 #' }
 hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
-                               key = Sys.getenv("HUD_KEY")) {
+                               key = Sys.getenv("HUD_KEY"),
+                               to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- fmr_il_input_check_cleansing(county, year, key)
   query <- args[[1]]
@@ -322,7 +369,11 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
       res <- as.data.frame(do.call(rbind, list_res))
       res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
-      return(res)
+      if (to_tibble == FALSE) {
+        return(res)
+      } else {
+        return(as_tibble(res))
+      }
     }
     return(list_res[[1]])
   }
@@ -344,6 +395,8 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
 #' * [rhud::hud_fmr_state_metroareas()]
@@ -352,6 +405,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
 #' @returns A data frame with fair markets rent for zip codes in metro areas.
+#' @examples
 #' \dontrun{
 #' library(rhud)
 #'
@@ -365,10 +419,18 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_fmr_metroarea_zip <- function(metroarea,
                                   year = format(Sys.Date() - 365, "%Y"),
-                                  key = Sys.getenv("HUD_KEY")) {
+                                  key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- fmr_il_input_check_cleansing(metroarea, year, key)
   query <- args[[1]]
@@ -459,7 +521,11 @@ hud_fmr_metroarea_zip <- function(metroarea,
       res <- as.data.frame(do.call(rbind, list_res))
       res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
-      return(res)
+      if (to_tibble == FALSE) {
+        return(res)
+      } else {
+        return(as_tibble(res))
+      }
     }
     return(list_res[[1]])
   }

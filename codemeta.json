@@ -2,13 +2,13 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "rhud",
-  "description": " An R interface for accessing HUD (US Department of Housing and Urban Development) API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits, and the Comprehensive Housing Affordability Strategy.",
+  "description": " An R interface for accessing HUD (US Department of Housing and Urban Development) API. HUD USER has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits, and the Comprehensive Housing Affordability Strategy.",
   "name": "rhud: A R interface for accessing HUD (US Department of Housing and Urban Development) APIs",
   "relatedLink": "https://etam4260.github.io/rhud/index.html",
   "codeRepository": "https://github.com/etam4260/rhud",
   "issueTracker": "https://github.com/etam4260/rhud/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "0.2.0.9000",
+  "version": "0.3.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -35,6 +35,12 @@
       "givenName": "Hamed",
       "familyName": "Ghaedi",
       "email": "hghaedi@terpmail.umd.edu"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Shuyu",
+      "familyName": "Jin",
+      "email": "geojsy@umd.edu"
     }
   ],
   "copyrightHolder": [
@@ -126,6 +132,126 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=devtools"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tigris",
+      "name": "tigris",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tigris"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "leaflet",
+      "name": "leaflet",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=leaflet"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyverse",
+      "name": "tidyverse",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tidyverse"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "sf",
+      "name": "sf",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=sf"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "scales",
+      "name": "scales",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=scales"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "readr",
+      "name": "readr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=readr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "lubridate",
+      "name": "lubridate",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lubridate"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "htmltools",
+      "name": "htmltools",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=htmltools"
     }
   ],
   "softwareRequirements": {
@@ -143,6 +269,18 @@
     },
     "2": {
       "@type": "SoftwareApplication",
+      "identifier": "curl",
+      "name": "curl",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=curl"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
       "identifier": "zoo",
       "name": "zoo",
       "provider": {
@@ -153,7 +291,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=zoo"
     },
-    "3": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "rio",
       "name": "rio",
@@ -165,9 +303,21 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rio"
     },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "tibble",
+      "name": "tibble",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tibble"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "676.783KB",
+  "fileSize": "747.482KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -187,11 +337,26 @@
           "@type": "Person",
           "givenName": "Hamed",
           "familyName": "Ghaedi"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Shuyu",
+          "familyName": "Jin"
         }
       ],
       "name": "rhud: A R Interface to the HUD (US Department of Housing and Urban Development) APIs",
       "url": "https://github.com/etam4260/rhud/",
-      "description": "0.1.0.9000"
+      "description": "0.3.0.9000"
     }
-  ]
+  ],
+  "releaseNotes": "https://github.com/etam4260/rhud/blob/master/NEWS.md",
+  "readme": "https://github.com/etam4260/rhud/blob/main/README.md",
+  "contIntegration": ["https://github.com/etam4260/rhud/actions", "https://codecov.io/gh/etam4260/rhud?branch=main"],
+  "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#maturing"],
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/524",
+    "provider": "https://ropensci.org"
+  },
+  "keywords": ["hud", "crosswalk", "chas", "api", "income-limits", "fair-markets-rent"]
 }

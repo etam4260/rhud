@@ -7,11 +7,13 @@
 hud_fmr_state_metroareas(
   state,
   year = format(Sys.Date() - 365, "\%Y"),
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
-\item{state}{The state to query for.}
+\item{state}{The state to query for. Can be abbreviation, fip code, or
+full name.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
@@ -19,6 +21,9 @@ previous year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 A data frame with fair markets rent for metro areas in states.
@@ -27,6 +32,19 @@ A data frame with fair markets rent for metro areas in states.
 This function queries for a state and returns the
 FMR calculation
 at a metroarea resolution for all metroareas in this state.
+}
+\examples{
+\dontrun{
+library(rhud)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_fmr_state_metroareas("VA", year = c(2021))
+
+hud_fmr_state_metroareas("Alabama", year = c(2021))
+
+hud_fmr_state_metroareas("24", year = c(2021))
+}
 }
 \seealso{
 \itemize{

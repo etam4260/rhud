@@ -1,5 +1,6 @@
 #' @import httr
-#'
+#' @import tibble
+
 # An R interface for accessing HUD USER
 # (US Department of Housing and Urban Development) APIs.
 
@@ -59,6 +60,8 @@
 #'   all fields. This does not remove duplicates.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @export
 #' @returns This function returns a dataframe containing CROSSWALK data for
@@ -123,10 +126,19 @@
 #'    quarter = c("4", "4"))
 #' }
 hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
-                   quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY")) {
+                   quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY"),
+                   to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- cw_input_check_cleansing(query, year, quarter, key)
 
@@ -222,9 +234,9 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 
   if (!minimal) return(cw_do_query_calls(urls, all_queries$query,
                                          all_queries$year,
-                           all_queries$quarter, lhgeoid, rhgeoid, key))
+                           all_queries$quarter, lhgeoid, rhgeoid, key, to_tibble))
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
-                           all_queries$quarter, lhgeoid, rhgeoid, key)[[1]])
+                           all_queries$quarter, lhgeoid, rhgeoid, key, to_tibble)[[1]])
 }
 
 
@@ -243,6 +255,8 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @export
 #' @returns This function returns a dataframe containing fair markets rent data
@@ -267,10 +281,18 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #' hud_fmr("METRO47900M47900", year=c(2018))
 #' }
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
-                    key = Sys.getenv("HUD_KEY")) {
+                    key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
@@ -282,14 +304,14 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
   # Call helper functions...
   if (querytype == "state") {
       # Merge county level data with metroarea data.
-      return(list(counties = hud_fmr_state_counties(query, year, key),
-                  metroareas = hud_fmr_state_metroareas(query, year, key)))
+      return(list(counties = hud_fmr_state_counties(query, year, key, to_tibble),
+                  metroareas = hud_fmr_state_metroareas(query, year, key, to_tibble)))
   } else if (querytype == "cbsa") {
       # Returns zip level data.
-      return(hud_fmr_metroarea_zip(query, year, key))
+      return(hud_fmr_metroarea_zip(query, year, key, to_tibble))
   } else if (querytype == "county") {
       # Returns zip level data.
-      return(hud_fmr_county_zip(query, year, key))
+      return(hud_fmr_county_zip(query, year, key, to_tibble))
   }
 }
 
@@ -309,6 +331,8 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   previous year.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Income Limits API
 #' @export
 #' @returns This function returns a dataframe containing INCOME LIMITS data
@@ -330,10 +354,18 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' hud_il("METRO47900M47900", year=c(2018))
 #' }
 hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
-                   key = Sys.getenv("HUD_KEY")) {
+                   key = Sys.getenv("HUD_KEY"), to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
@@ -367,23 +399,31 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
     } else {
 
       if (querytype == "state") {
-        res <- as.data.frame(do.call(cbind,
-                                     list(as.data.frame(cont$data$very_low),
-                                          as.data.frame(cont$data$extremely_low),
-                                          as.data.frame(cont$data$low))))
+
+        res <- as.data.frame(cont$data)
+
         res$statecode <- cont$data$statecode
-        res$stateid <- cont$data$stateID
+
+        oth <- data.frame(query = all_queries$query[i],
+                          year = all_queries$year[i],
+                          median_income = cont$data$median_income,
+                          stringsAsFactors = FALSE)
+        res <- cbind(oth, res)
+
       } else if (querytype == "county") {
         res <- as.data.frame(cont$data)
+
+        oth <- data.frame(query = all_queries$query[i],
+                          stringsAsFactors = FALSE)
+        res <- cbind(oth, res)
+
       } else {
         res <- as.data.frame(cont$data)
-      }
 
-      oth <- data.frame(query = all_queries$query[i],
-                        year = all_queries$year[i],
-                        median_income = cont$data$median_income,
-                        stringsAsFactors = FALSE)
-      res <- cbind(oth, res)
+        oth <- data.frame(query = all_queries$query[i],
+                          stringsAsFactors = FALSE)
+        res <- cbind(oth, res)
+      }
 
       list_res[[i]] <- res
     }
@@ -404,7 +444,11 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
   if (length(list_res) != 0) {
     res <- do.call(rbind, list_res)
-    return(res)
+    if (to_tibble == FALSE) {
+      return(res)
+    } else {
+      return(as_tibble(res))
+    }
   }
 
   return(NULL)
@@ -437,6 +481,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   * 2006-2010
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @keywords Comprehensive Housing Affordability Strategy (CHAS) API
 #' @export
 #' @returns This function returns a dataframe containing CHAS data for a
@@ -460,10 +506,19 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                      year = c("2014-2018"),
-                     key = Sys.getenv("HUD_KEY")) {
+                     key = Sys.getenv("HUD_KEY"),
+                     to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
 
   if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -568,5 +623,5 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                  "&year=", all_queries$year,
                  sep = "")
   }
-  return(chas_do_query_calls(urls, key = key))
+  return(chas_do_query_calls(urls, key = key, to_tibble))
 }

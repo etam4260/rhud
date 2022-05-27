@@ -7,7 +7,8 @@
 hud_il(
   query,
   year = format(Sys.Date() - 365, "\%Y"),
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
@@ -22,6 +23,9 @@ previous year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 This function returns a dataframe containing INCOME LIMITS data

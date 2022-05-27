@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rhud</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0.9000</span>
       </span>
     </div>
 
@@ -129,6 +129,14 @@
 <p>For those who need a more powerful method for crosswalking semi-large datasets and allocating fields based on the provided ratios, the crosswalk() function is available.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/rhud" class="external-link">rhud</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; rhud:</span>
+<span class="co">#&gt; -------------------------------------------------------------------------------------</span>
+<span class="co">#&gt; * To begin using this package, you must obtain a key from HUD User website.</span>
+<span class="co">#&gt; * To enable caching of rhud data, use `options(rhud_use_cache = TRUE)`</span>
+<span class="co">#&gt; * To get tibbles instead of dataframes, use `options(rhud_use_tibble = TRUE)`</span>
+<span class="co">#&gt; * Set these in your R script for single session or in .Rprofile for persistence.</span>
+<span class="co">#&gt; -------------------------------------------------------------------------------------</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span> <span class="op">(</span>digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span>
 
 <span class="va">sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>pop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">151049</span>, <span class="fl">103609</span>, <span class="fl">52276</span><span class="op">)</span>,

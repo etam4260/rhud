@@ -9,7 +9,8 @@ hud_chas(
   state_id = NULL,
   entity_id = NULL,
   year = c("2014-2018"),
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
@@ -20,24 +21,30 @@ hud_chas(
 4 - MCD
 5 - Place}
 
-\item{state_id}{For types 2,3,4,5, you must provide a stateId. For 3,4,5}
+\item{state_id}{For types 2,3,4,5, you must provide a state_id.}
 
-\item{entity_id}{For types 3,4,5, you must provide a fips code}
+\item{entity_id}{For types 3,4,5, you must provide a fips code, placecode,
+or mcd code.}
 
 \item{year}{Gets the year that this data was recorded. Defaults to 2014-2018.
 There are specific year ranges that are only accepted.
-2014-2018
-2013-2017
-2012-2016
-2011-2015
-2010-2014
-2009-2013
-2008-2012
-2007-2011
-2006-2010}
+\itemize{
+\item 2014-2018
+\item 2013-2017
+\item 2012-2016
+\item 2011-2015
+\item 2010-2014
+\item 2009-2013
+\item 2008-2012
+\item 2007-2011
+\item 2006-2010
+}}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for an
 account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 This function returns a dataframe containing CHAS data for a

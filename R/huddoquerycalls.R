@@ -1,4 +1,5 @@
 #' @import httr
+#' @import tibble
 
 #' @name chas_do_query_calls
 #' @title chas_do_query_calls
@@ -9,7 +10,7 @@
 #' @returns A dataframe of all the response bodies.
 #' @noRd
 #' @noMd
-chas_do_query_calls <- function(urls, key) {
+chas_do_query_calls <- function(urls, key, to_tibble) {
   # Form all query calls...
   list_res <- c()
   error_urls <- c()
@@ -95,7 +96,11 @@ chas_do_query_calls <- function(urls, key) {
 
   if (length(list_res) != 0) {
     res <- as.data.frame(do.call("rbind", list_res))
-    return(res)
+    if (to_tibble == FALSE) {
+      return(res)
+    } else {
+      return(as_tibble(res))
+    }
   }
 
   return(NULL)
@@ -117,7 +122,7 @@ chas_do_query_calls <- function(urls, key) {
 #' @noRd
 #' @noMd
 cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
-                              secondary_geoid, key) {
+                              secondary_geoid, key, to_tibble) {
   list_res <- c()
   error_urls <- c()
 
@@ -182,7 +187,11 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
     colnames(allres)[1] <- secondary_geoid
   }
 
-  return(as.data.frame(allres))
+  if (to_tibble == FALSE) {
+    return(as.data.frame(allres))
+  } else {
+    return(as_tibble(allres))
+  }
 }
 
 
@@ -195,7 +204,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 #' @returns A dataframe containing all queried rows.
 #' @noRd
 #' @noMd
-misc_do_query_call <- function(urls, key) {
+misc_do_query_call <- function(urls, key, to_tibble) {
   list_res <- c()
   error_urls <- c()
 
@@ -235,9 +244,15 @@ misc_do_query_call <- function(urls, key) {
                   sep = ""), call. = FALSE)
   }
 
+
   if (length(list_res) != 0) {
     res <- as.data.frame(do.call(rbind, list_res))
-    return(res)
+    if (to_tibble == FALSE) {
+      return(res)
+    } else {
+      return(as_tibble(res))
+    }
   }
+
   return(NULL)
 }

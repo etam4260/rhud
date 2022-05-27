@@ -4,20 +4,24 @@
 \alias{hud_state_metropolitan}
 \title{hud_state_metropolitan}
 \usage{
-hud_state_metropolitan(state, key = Sys.getenv("HUD_KEY"))
+hud_state_metropolitan(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
-\item{state}{The state to get all the metropolitan areas.}
+\item{state}{The state to get all the metropolitan areas. Can be provided as
+the full name, fip code or abbreviation.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for an
 account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
-A dataframe containing details of metropolitan areas in US.
+A dataframe containing details of metropolitan areas in a state.
 }
 \description{
-Get a list of all metropolitan areas for this state with its
-name and CBSA code.
+Get details for all metropolitan areas for queried states with
+their name and CBSA code.
 }
 \examples{
 \dontrun{

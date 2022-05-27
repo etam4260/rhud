@@ -1,3 +1,6 @@
+#' @import tibble
+
+
 #' @name crosswalk
 #' @title crosswalk
 #' @description Using the US Housing and Urban Development crosswalk files,
@@ -70,6 +73,8 @@
 #' @param year The year measurement was taken.
 #' @param quarter The quarter of year measurement was taken.
 #' @param key The key obtain from HUD USER website.
+#' @param to_tibble If TRUE, return the data in a tibble format
+#'   rather than a data frame.
 #' @seealso
 #' * [rhud::crosswalk()]
 #' * [rhud::hud_cw_zip_tract()]
@@ -112,9 +117,21 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                       method = NA,
                       year = format(Sys.Date() - 365, "%Y"),
                       quarter = 1,
-                      key = Sys.getenv("HUD_KEY")) {
+                      key = Sys.getenv("HUD_KEY"),
+                      to_tibble) {
+
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
+
+  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
+    to_tibble = getOption("rhud_use_tibble")
+    message(paste("Outputted in tibble format",
+                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+  } else if (missing(to_tibble)) {
+    to_tibble = FALSE
+  }
+
+
   args <- crosswalk_a_dataset_input_check_cleansing(data, geoid, geoid_col,
                                             cw_geoid, cw_geoid_col, method,
                                             year,
@@ -184,7 +201,13 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
   # If no method is provided, assume merge and crosswalk
   if (is.na(cw_geoid_col) || is.na(method)) {
     message("\n* No method or cw_geoid_col specified: will just merge the datasets.")
-    return(merge(cw_data, data, by.x = 6, by.y = geoid_col))
+
+    if (to_tibble == FALSE) {
+      return(merge(cw_data, data, by.x = 6, by.y = geoid_col))
+    } else {
+      return(as_tibble(merge(cw_data, data, by.x = 6, by.y = geoid_col)))
+    }
+
   } else if (!is.na(cw_geoid_col) && !is.na(method)) {
 
     merged <- merge(cw_data, data, by.x = 6, by.y = geoid_col)
@@ -226,7 +249,13 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
       stop("\nThe method specified might be invalid. Check the documentation.",
            call. = FALSE)
     }
-    return(merged)
+
+    if (to_tibble == FALSE) {
+      return(merged)
+    } else {
+      return(as_tibble(merged))
+    }
+
   }
   return(NULL)
 }

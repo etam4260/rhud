@@ -9,7 +9,8 @@ hud_cw_cd_zip(
   year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   minimal = FALSE,
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
@@ -28,6 +29,9 @@ all fields. This does not remove duplicates.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for an
 account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 This function returns a dataframe containing CROSSWALK data for

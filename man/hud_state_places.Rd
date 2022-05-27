@@ -4,13 +4,16 @@
 \alias{hud_state_places}
 \title{hud_state_places}
 \usage{
-hud_state_places(state, key = Sys.getenv("HUD_KEY"))
+hud_state_places(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
 \item{state}{The state to get all places.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 A dataframe containing details of places in a state.

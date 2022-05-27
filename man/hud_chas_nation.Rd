@@ -4,7 +4,7 @@
 \alias{hud_chas_nation}
 \title{hud_chas_nation}
 \usage{
-hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
+hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
 \item{year}{The years to query for.
@@ -21,9 +21,12 @@ hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
 }}
 
 \item{key}{The key obtain from HUD USER website.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
-Returns a dataframe with CHAS data for the entire nation.
+Returns a data frame with CHAS data for the entire nation.
 }
 \description{
 Returns CHAS data for the entire nation.

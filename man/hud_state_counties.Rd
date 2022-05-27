@@ -4,19 +4,23 @@
 \alias{hud_state_counties}
 \title{hud_state_counties}
 \usage{
-hud_state_counties(state, key = Sys.getenv("HUD_KEY"))
+hud_state_counties(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
 \item{state}{The state to get all counties.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 A dataframe containing all counties within a state
 }
 \description{
-Get a list of all counties within a state.
+Get a dataframe with details describing the counties located
+within the queried states.
 }
 \examples{
 \dontrun{
@@ -38,4 +42,4 @@ hud_state_counties("51")
 \item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
 }
 }
-\keyword{Counties}
+\keyword{counties}

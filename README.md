@@ -68,11 +68,11 @@ the data into memory.
 
 Please cite this package using:
 
-Tam, E., Reilly, A., & Ghaedi, H. (2022). rhud: A R interface for
-accessing HUD  
-      (US Department of Housing and Urban Development) APIs (Version
-0.2.0.9000).  
-       <https://github.com/etam4260/rhud>
+Tam E, Reilly A, Ghaedi H, Jin S (2022). rhud: A R Interface to the
+HUD  
+      (US Department of Housing and Urban Development) APIs.
+0.3.0.9000,  
+      <https://github.com/etam4260/rhud/>.
 
 ## Available Data
 
@@ -115,6 +115,7 @@ bar.
 -   Emmet Tam(<https://github.com/etam4260>)\[<emmet_tam@yahoo.com>\]
 -   Allison Reilly()\[<areilly2@umd.edu>\]
 -   Hamed Ghaedi()\[<hghaedi@terpmail.umd.edu>\]
+-   Shuyu Jin(<https://github.com/geojsy>)\[<geojsy@umd.edu>\]
 
 ## Disclaimers
 

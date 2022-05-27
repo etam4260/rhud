@@ -4,7 +4,12 @@
 \alias{hud_chas_state_place}
 \title{hud_chas_state_place}
 \usage{
-hud_chas_state_place(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
+hud_chas_state_place(
+  state,
+  year = c("2014-2018"),
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
+)
 }
 \arguments{
 \item{state}{The state name, abbreviation, or fips code. Make sure if state
@@ -24,6 +29,9 @@ fips is 1 digit number, do not include leading 0.}
 }}
 
 \item{key}{The key obtain from HUD USER website.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 Returns a dataframe with CHAS data for places.

@@ -9,10 +9,10 @@ type: software
 license: GPL-2.0-or-later
 title: 'rhud: A R interface for accessing HUD (US Department of Housing and Urban
   Development) APIs'
-version: 0.2.0.9000
+version: 0.3.0.9000
 abstract: An R interface for accessing HUD (US Department of Housing and Urban Development)
-  API. The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent, Income Limits,
-  and the Comprehensive Housing Affordability Strategy.
+  API. HUD USER has four main datasets, USPS Crosswalk, Fair Markets Rent, Income
+  Limits, and the Comprehensive Housing Affordability Strategy.
 authors:
 - family-names: Tam
   given-names: Emmet
@@ -29,8 +29,10 @@ preferred-citation:
     given-names: Allison
   - family-names: Ghaedi
     given-names: Hamed
+  - family-names: Jin
+    given-names: Shuyu
   year: '2022'
-  notes: 0.1.0.9000
+  notes: 0.3.0.9000
   url: https://github.com/etam4260/rhud/
 repository-code: https://github.com/etam4260/rhud
 url: https://etam4260.github.io/rhud/index.html
@@ -38,6 +40,13 @@ contact:
 - family-names: Tam
   given-names: Emmet
   email: emmet_tam@yahoo.com
+keywords:
+- api
+- chas
+- crosswalk
+- fair-markets-rent
+- hud
+- income-limits
 references:
 - type: software
   title: covr
@@ -138,6 +147,175 @@ references:
   year: '2022'
   url: https://CRAN.R-project.org/package=devtools
 - type: software
+  title: tigris
+  abstract: 'tigris: Load Census TIGER/Line Shapefiles'
+  notes: Suggests
+  authors:
+  - family-names: Walker
+    given-names: Kyle
+    email: kyle@walker-data.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=tigris
+- type: software
+  title: leaflet
+  abstract: 'leaflet: Create Interactive Web Maps with the JavaScript ''Leaflet''
+    Library'
+  notes: Suggests
+  authors:
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@rstudio.com
+  - family-names: Karambelkar
+    given-names: Bhaskar
+  - family-names: Xie
+    given-names: Yihui
+  year: '2022'
+  url: https://CRAN.R-project.org/package=leaflet
+- type: software
+  title: tidyverse
+  abstract: 'tidyverse: Easily Install and Load the ''Tidyverse'''
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=tidyverse
+- type: software
+  title: sf
+  abstract: 'sf: Simple Features for R'
+  notes: Suggests
+  authors:
+  - family-names: Pebesma
+    given-names: Edzer
+    email: edzer.pebesma@uni-muenster.de
+    orcid: https://orcid.org/0000-0001-8049-7069
+  year: '2022'
+  url: https://CRAN.R-project.org/package=sf
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
+  year: '2022'
+  url: https://CRAN.R-project.org/package=dplyr
+- type: software
+  title: scales
+  abstract: 'scales: Scale Functions for Visualization'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  - family-names: Seidel
+    given-names: Dana
+  year: '2022'
+  url: https://CRAN.R-project.org/package=scales
+- type: software
+  title: ggplot2
+  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Chang
+    given-names: Winston
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@rstudio.com
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Takahashi
+    given-names: Kohske
+  - family-names: Wilke
+    given-names: Claus
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Woo
+    given-names: Kara
+    orcid: https://orcid.org/0000-0002-5125-4188
+  - family-names: Yutani
+    given-names: Hiroaki
+    orcid: https://orcid.org/0000-0002-3385-7233
+  - family-names: Dunnington
+    given-names: Dewey
+    orcid: https://orcid.org/0000-0002-9415-4582
+  year: '2022'
+  url: https://CRAN.R-project.org/package=ggplot2
+- type: software
+  title: readr
+  abstract: 'readr: Read Rectangular Text Data'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@rstudio.com
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2022'
+  url: https://CRAN.R-project.org/package=readr
+- type: software
+  title: lubridate
+  abstract: 'lubridate: Make Dealing with Dates a Little Easier'
+  notes: Suggests
+  authors:
+  - family-names: Spinu
+    given-names: Vitalie
+    email: spinuvit@gmail.com
+  - family-names: Grolemund
+    given-names: Garrett
+  - family-names: Wickham
+    given-names: Hadley
+  year: '2022'
+  url: https://CRAN.R-project.org/package=lubridate
+- type: software
+  title: htmltools
+  abstract: 'htmltools: Tools for HTML'
+  notes: Suggests
+  authors:
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@rstudio.com
+  - family-names: Sievert
+    given-names: Carson
+    email: carson@rstudio.com
+    orcid: https://orcid.org/0000-0002-4958-2844
+  - family-names: Schloerke
+    given-names: Barret
+    email: barret@rstudio.com
+    orcid: https://orcid.org/0000-0001-9986-114X
+  - family-names: Chang
+    given-names: Winston
+    email: winston@rstudio.com
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Xie
+    given-names: Yihui
+    email: yihui@rstudio.com
+  - family-names: Allen
+    given-names: Jeff
+    email: jeff@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=htmltools
+- type: software
   title: httr
   abstract: 'httr: Tools for Working with URLs and HTTP'
   notes: Imports
@@ -147,6 +325,17 @@ references:
     email: hadley@rstudio.com
   year: '2022'
   url: https://CRAN.R-project.org/package=httr
+- type: software
+  title: curl
+  abstract: 'curl: A Modern and Flexible Web Client for R'
+  notes: Imports
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2022'
+  url: https://CRAN.R-project.org/package=curl
 - type: software
   title: zoo
   abstract: 'zoo: S3 Infrastructure for Regular and Irregular Time Series (Z''s Ordered
@@ -180,3 +369,16 @@ references:
     orcid: https://orcid.org/0000-0003-4097-6326
   year: '2022'
   url: https://CRAN.R-project.org/package=rio
+- type: software
+  title: tibble
+  abstract: 'tibble: Simple Data Frames'
+  notes: Imports
+  authors:
+  - family-names: Müller
+    given-names: Kirill
+    email: krlmlr+r@mailbox.org
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=tibble

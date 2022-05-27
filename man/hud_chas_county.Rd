@@ -4,7 +4,12 @@
 \alias{hud_chas_county}
 \title{hud_chas_county}
 \usage{
-hud_chas_county(county, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
+hud_chas_county(
+  county,
+  year = c("2014-2018"),
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
+)
 }
 \arguments{
 \item{county}{The county to query for. Must supply a geoid. 2 digit state fip
@@ -27,6 +32,9 @@ end. Just remove that.
 }}
 
 \item{key}{The key obtain from HUD USER website.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 Returns a dataframe with CHAS data for counties.

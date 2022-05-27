@@ -7,7 +7,8 @@
 hud_fmr(
   query,
   year = format(Sys.Date() - 365, "\%Y"),
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
@@ -20,9 +21,12 @@ previous year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
-This function returns a dataframe containing FAIR MARKETS RENT data
+This function returns a dataframe containing fair markets rent data
 for a particular county or state. For county level data, these measurements
 include the county_name, counties_msa, town_name, metro_status, metro_name,
 smallarea_status, basicdata, Efficiency, One-Bedroom, Two-Bedroom,

@@ -7,11 +7,12 @@
 hud_fmr_metroarea_zip(
   metroarea,
   year = format(Sys.Date() - 365, "\%Y"),
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
-\item{metroarea}{A metroarea to query for.}
+\item{metroarea}{Metroareas to query for.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
@@ -19,6 +20,9 @@ previous year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 A data frame with fair markets rent for zip codes in metro areas.
@@ -29,6 +33,19 @@ FMR calculation. If the metroarea is not
 a small area, it will return only single
 measurement for that metroarea. If the metrarea is considered a
 small area, it will return data at a zip code level.
+}
+\examples{
+\dontrun{
+library(rhud)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_fmr_metroarea_zip("METRO47900M47900", year = c(2018))
+
+hud_fmr_metroarea_zip("METRO29180N22001", year = c(2019))
+
+hud_fmr_metroarea_zip("METRO10380M10380", year = c(2020))
+}
 }
 \seealso{
 \itemize{

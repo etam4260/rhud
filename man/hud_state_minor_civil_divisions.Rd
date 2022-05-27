@@ -4,13 +4,16 @@
 \alias{hud_state_minor_civil_divisions}
 \title{hud_state_minor_civil_divisions}
 \usage{
-hud_state_minor_civil_divisions(state, key = Sys.getenv("HUD_KEY"))
+hud_state_minor_civil_divisions(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
 \item{state}{The state to get all MCD.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for
 an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 A dataframe containing details of minor civil divisions in a state.

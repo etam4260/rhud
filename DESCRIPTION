@@ -1,13 +1,15 @@
 Package: rhud
 Title: A R interface for accessing HUD (US Department of Housing and Urban Development) APIs
-Version: 0.2.0.9000
+Version: 0.3.0.9000
 Authors@R: 
     c(person("Emmet", "Tam", ,"emmet_tam@yahoo.com", role = c("aut", "cre", "cph")),
     person("Allison", "Reilly", ,"areilly2@umd.edu", role = c("ctb")),
-    person("Hamed", "Ghaedi", ,"hghaedi@terpmail.umd.edu", role = c("ctb")))
+    person("Hamed", "Ghaedi", ,"hghaedi@terpmail.umd.edu", role = c("ctb")),
+    person("Shuyu", "Jin", ,"geojsy@umd.edu", role = c("ctb"))
+    )
 Description: 
 	An R interface for accessing HUD (US Department of Housing and Urban Development) API.
-	The HUD has four main datasets, USPS Crosswalk, Fair Markets Rent,
+  HUD USER has four main datasets, USPS Crosswalk, Fair Markets Rent,
 	Income Limits, and the Comprehensive Housing Affordability Strategy.
 License: GPL (>= 2)
 Language: en-US
@@ -32,12 +34,14 @@ Suggests:
     scales,
     ggplot2,
     readr,
-    lubridate
+    lubridate,
+    htmltools
 Imports: 
     httr,
+    curl,
     zoo,
     rio,
-    curl
+    tibble
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 ByteCompile: true

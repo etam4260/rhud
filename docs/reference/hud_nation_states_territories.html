@@ -19,7 +19,7 @@ abbreviation."><meta property="og:image" content="/logo.png"><!-- mathjax --><sc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rhud</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0.9000</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@ abbreviation.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hud_nation_states_territories</span><span class="op">(</span>key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hud_nation_states_territories</span><span class="op">(</span>key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span>, <span class="va">to_tibble</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -101,6 +101,9 @@ abbreviation.</p>
     <dl><dt>key</dt>
 <dd><p>The API key for this user. You must go to HUD and sign up for an
 account and request for an API key.</p></dd>
+<dt>to_tibble</dt>
+<dd><p>If TRUE, return the data in a tibble format
+rather than a data frame.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

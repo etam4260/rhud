@@ -9,7 +9,8 @@ hud_cw_zip_cbsadiv(
   year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   minimal = FALSE,
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
@@ -27,6 +28,9 @@ all fields. This does not remove duplicates.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up for an
 account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 This function returns a dataframe containing CROSSWALK data for
@@ -43,9 +47,9 @@ zip to cbsadiv. (Available 4th Quarter 2017 onwards)
 \dontrun{
 library(rhud)
 
-hud_cw_zip_cbsadiv(zip = '35213', year = c('2010'), quarter = c('1'))
+hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'))
 
-hud_cw_zip_cbsadiv(zip = '35213', year = c('2010'), quarter = c('1'),
+hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'),
    minimal = TRUE)
 }
 }

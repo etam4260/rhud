@@ -13,7 +13,8 @@ crosswalk(
   method = NA,
   year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
@@ -88,6 +89,9 @@ to the dataset.
 \item{quarter}{The quarter of year measurement was taken.}
 
 \item{key}{The key obtain from HUD USER website.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 A dataframe containing the crosswalked dataset.

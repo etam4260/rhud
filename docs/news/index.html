@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rhud</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0.9000</span>
       </span>
     </div>
 
@@ -83,6 +83,29 @@
       <small>Source: <a href="https://github.com/etam4260/rhud/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.3.0.9000" id="rhud-0309000-5302022">rhud 0.3.0.9000 (5/30/2022)<a class="anchor" aria-label="anchor" href="#rhud-0309000-5302022"></a></h2>
+<div class="section level4">
+<h4 id="new-features-0-3-0-9000">NEW FEATURES:<a class="anchor" aria-label="anchor" href="#new-features-0-3-0-9000"></a></h4>
+<ul><li><p>Added options() for the rhud package, allowing a user to allow caching and tibbles.</p></li>
+<li><p>User is now given a <code>to_tibble</code> option for rhud functions that return a data frame. This allows them to get tibbles rather than data frames as the type of data returned.</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-improvements-0-3-0-9000">MINOR IMPROVEMENTS:<a class="anchor" aria-label="anchor" href="#minor-improvements-0-3-0-9000"></a></h4>
+<ul><li>User is now presented with a message when attaching the package showing the various options that can that can be set for the package as well as telling the user that they need to obtain a key from the HUD User website.</li></ul></div>
+<div class="section level4">
+<h4 id="bug-fixes-0-3-0-9000">BUG FIXES<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-0-9000"></a></h4>
+<ul><li>Fixed state level FMR data returning two copies of very_low and not low @</li>
+<li>Fixed issue with IL data when querying for county and cbsa returning duplicate year and median income fields.</li>
+<li>Remove download bar from appearing when first loading in the hud_nation_state_territories() in package environment when validating state inputs.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="documentation-fixes-0-3-0-9000">DOCUMENTATION FIXES<a class="anchor" aria-label="anchor" href="#documentation-fixes-0-3-0-9000"></a></h4>
+<ul><li>Removed crosswalk example on documentation website from case study and placed the sample into the crosswalk vignette.</li>
+<li>The case studies tab of the documentation website now includes more realistic use cases for the rhud package alongside several popular R packages. However, they are not complete and will be updated in the future.</li>
+<li>Added Shuyu Jin as a contributor to the package.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0.9000" id="rhud-0209000-512022">rhud 0.2.0.9000 (5/1/2022)<a class="anchor" aria-label="anchor" href="#rhud-0209000-512022"></a></h2>
 <div class="section level4">

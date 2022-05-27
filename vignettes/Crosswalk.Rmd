@@ -376,7 +376,8 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
 | Katy Rossiter, K. R. (2014, July 31). Standard Hierarchy of Census Bereau
 |       Geographies [Photograph]. Understanding Geographic Relationships: Counties,
 |       Places, Tracts and More.
-|       https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relation|       ships-counties-places-tracts-and-more.html
+|       https://www.census.gov/newsroom/blogs/random-samplings/2014/07/understanding-geographic-relation
+|       ships-counties-places-tracts-and-more.html
 |
 | U.S Department of Housing and Urban Development. (n.d.). HUD USPS ZIP
 |       Code Crosswalk Files | HUD USER. HUD  USPS ZIP CODE CROSSWALK FILES.

@@ -7,11 +7,12 @@
 hud_fmr_county_zip(
   county,
   year = format(Sys.Date() - 365, "\%Y"),
-  key = Sys.getenv("HUD_KEY")
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
 )
 }
 \arguments{
-\item{county}{A county to query for.}
+\item{county}{A county to query for. Must be provided as a 5 digit fipcode.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
@@ -19,6 +20,9 @@ previous year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 A data frame with fair markets rent for zip codes in counties.
@@ -29,6 +33,19 @@ If the county is not
 a small area, it will return only single
 measurement for that county. If the county is considered a small area,
 it will return data at a zip code level.
+}
+\examples{
+\dontrun{
+library(rhud)
+
+Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
+
+hud_fmr_county_zip("5100199999", year = c(2021))
+
+hud_fmr_county_zip("5100199999", year = c("2021"))
+
+hud_fmr_county_zip(5151099999, year = c(2021))
+}
 }
 \seealso{
 \itemize{

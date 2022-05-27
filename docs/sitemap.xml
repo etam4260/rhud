@@ -160,6 +160,15 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/rhud-exports.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rhud.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rhud_cache_dir.html</loc>
+  </url>
+  <url>
     <loc>/reference/rhud_website.html</loc>
   </url>
 </urlset>

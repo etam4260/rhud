@@ -4,7 +4,12 @@
 \alias{hud_chas_state}
 \title{hud_chas_state}
 \usage{
-hud_chas_state(state, year = c("2014-2018"), key = Sys.getenv("HUD_KEY"))
+hud_chas_state(
+  state,
+  year = c("2014-2018"),
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble
+)
 }
 \arguments{
 \item{state}{The state to query for. Can supply as abbreviation, whole name,
@@ -24,6 +29,9 @@ or as geoid.}
 }}
 
 \item{key}{The key obtain from HUD USER website.}
+
+\item{to_tibble}{If TRUE, return the data in a tibble format
+rather than a data frame.}
 }
 \value{
 Returns a dataframe with CHAS data for a particular state.
