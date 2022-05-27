@@ -17,7 +17,7 @@ coverage](https://codecov.io/gh/etam4260/rhud/branch/main/graph/badge.svg)](http
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/524_status.svg)](https://github.com/ropensci/software-review/issues/524)
 <br/> <br/> [![devel
-version](https://img.shields.io/badge/devel%20version-0.2.0.9000-yellow)]()
+version](https://img.shields.io/badge/devel%20version-0.3.0.9000-yellow)]()
 
 <!-- badges: end -->
 
