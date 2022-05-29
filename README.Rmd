@@ -81,17 +81,83 @@ also provide miscellaneous supplemental APIs under them.
 
 1) HUD User
   
-    * USPS Crosswalk (https://www.huduser.gov/portal/dataset/uspszip-api.html)
-    * Fair Markets Rent (https://www.huduser.gov/portal/dataset/fmr-api.html)
-      + Small Areas Fair Markets Rent
-      + List States
-      + List Small Areas
-    * Income Limits (https://www.huduser.gov/portal/dataset/fmr-api.html)
-    * Comprehensive Housing and Affordability Strategy (https://www.huduser.gov/portal/dataset/chas-api.html)
-      + List Counties in State
-      + List MCDs in State
-      + List All Cities in State
+  - USPS Crosswalk (https://www.huduser.gov/portal/dataset/uspszip-api.html)
+    
+  | USPS Crosswalk Files | Years | 
+  |------------------------------------------|------------------------------------------------|
+  | `hud_cw_zip_tract()` | 2010-2021 | 
+  | `hud_cw_zip_county()` | 2010-2021 |
+  | `hud_cw_zip_cbsa()` | 2010-2021 |
+  | `hud_cw_zip_cbsadiv()` | 2017-2021 |
+  | `hud_cw_zip_countysub()` | 2018-2021 |
+  | `hud_cw_zip_cd()` | 2010-2021 |
+  | `hud_cw_tract_zip()` | 2010-2021 |
+  | `hud_cw_county_zip()` | 2010-2021 |
+  | `hud_cw_cbsa_zip()` | 2010-2021 |
+  | `hud_cw_cbsadiv_zip()` | 2017-2021 |
+  | `hud_cw_cd_zip()` | 2010-2021 |
+  | `hud_cw_countysub_zip()` | 2018-2021 |
+  | `hud_cw()` | 2010-2021 |
+  | `crosswalk()` | 2010-2021 | 
 
+  - Fair Markets Rent (https://www.huduser.gov/portal/dataset/fmr-api.html)
+      + Small Areas Fair Markets Rent
+      
+  | Fair Markets Rent | Years
+  |------------------------------------------|------------------------------------------------|
+  | `hud_fmr_state_county()` | 2017-2022 |
+  | `hud_fmr_state_metroarea()` | 2017-2022 |
+  | `hud_fmr_county_zip()` | 2017-2022 |
+  | `hud_fmr_metroarea_zip()` | 2017-2022 |
+  | `hud_fmr()` | 2017-2022 |
+
+  
+  - Income Limits (https://www.huduser.gov/portal/dataset/fmr-api.html)
+  
+  | Income Limits | Years
+  |------------------------------------------|------------------------------------------------|
+  | `hud_il()` | 2017-2022 |
+    
+  - Comprehensive Housing and Affordability Strategy (https://www.huduser.gov/portal/dataset/chas-api.html)
+      
+  | Comprehensive Housing and Affordability Strategy | Years
+  |------------------------------------------|------------------------------------------------|
+  | `hud_chas_nation()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
+  | `hud_chas_state()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
+  | `hud_chas_county()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
+  | `hud_chas_state_mcd()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
+  | `hud_chas_state_places()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
+  | `hud_chas()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
+
+  - US Geographic Entities
+
+  | US Geographies | 
+  |------------------------------------------|
+  | `hud_nation_state_territories()` |
+  | `hud_state_metropolitan()` | 
+  | `hud_state_counties()` |
+  | `hud_state_places()` |
+  | `hud_state_minor_civil_divisions()` | 
+
+  - Key access 
+  
+  | Managing Keys |
+  |------------------------------------------|
+  | `hud_set_key()` | 
+  | `hud_get_key()` | 
+
+  - Caching
+  
+  | Caching |
+  |------------------------------------------|
+  | `rhud_use_cache()` |
+  | `rhud_clear_cache()` | 
+
+  - Documentation
+  
+  | Documentation |
+  |------------------------------------------|
+  | `rhud_website()` | 
     
 ## Installation
 
