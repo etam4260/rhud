@@ -153,7 +153,7 @@ The HUD also provide miscellaneous supplemental APIs under them.
 
 | Caching              |
 |----------------------|
-| `rhud_use_cache()`   |
+| `rhud_cache_dir()`   |
 | `rhud_clear_cache()` |
 
 -   Documentation
