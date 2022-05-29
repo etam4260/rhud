@@ -84,22 +84,22 @@ The HUD also provide miscellaneous supplemental APIs under them.
 -   USPS Crosswalk
     (<https://www.huduser.gov/portal/dataset/uspszip-api.html>)
 
-| USPS Crosswalk Files     | Years     |
-|--------------------------|-----------|
-| `hud_cw_zip_tract()`     | 2010-2021 |
-| `hud_cw_zip_county()`    | 2010-2021 |
-| `hud_cw_zip_cbsa()`      | 2010-2021 |
-| `hud_cw_zip_cbsadiv()`   | 2017-2021 |
-| `hud_cw_zip_countysub()` | 2018-2021 |
-| `hud_cw_zip_cd()`        | 2010-2021 |
-| `hud_cw_tract_zip()`     | 2010-2021 |
-| `hud_cw_county_zip()`    | 2010-2021 |
-| `hud_cw_cbsa_zip()`      | 2010-2021 |
-| `hud_cw_cbsadiv_zip()`   | 2017-2021 |
-| `hud_cw_cd_zip()`        | 2010-2021 |
-| `hud_cw_countysub_zip()` | 2018-2021 |
-| `hud_cw()`               | 2010-2021 |
-| `crosswalk()`            | 2010-2021 |
+| USPS Crosswalk Files     | Years           |
+|--------------------------|-----------------|
+| `hud_cw_zip_tract()`     | 2010-2021       |
+| `hud_cw_zip_county()`    | 2010-2021       |
+| `hud_cw_zip_cbsa()`      | 2010-2021       |
+| `hud_cw_zip_cbsadiv()`   | <b>2017-2021<b> |
+| `hud_cw_zip_countysub()` | <b>2018-2021<b> |
+| `hud_cw_zip_cd()`        | 2010-2021       |
+| `hud_cw_tract_zip()`     | 2010-2021       |
+| `hud_cw_county_zip()`    | 2010-2021       |
+| `hud_cw_cbsa_zip()`      | 2010-2021       |
+| `hud_cw_cbsadiv_zip()`   | <b>2017-2021<b> |
+| `hud_cw_cd_zip()`        | 2010-2021       |
+| `hud_cw_countysub_zip()` | <b>2018-2021<b> |
+| `hud_cw()`               | 2010-2021       |
+| `crosswalk()`            | 2010-2021       |
 
 -   Fair Markets Rent
     (<https://www.huduser.gov/portal/dataset/fmr-api.html>)
