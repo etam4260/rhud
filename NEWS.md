@@ -1,3 +1,32 @@
+rhud 0.4.0.9000 (6/10/2022)
+
+### NEW FEATURES:
+  
+  * Caching is fully implemented, allowing user to cache data to where they 
+  want as well as to the current working session. Cached data is stored as
+  csv format.
+  
+### MINOR IMPROVEMENTS:
+
+  * Type checking added for using hud_set_key() as a way of reducing 
+  latent errors. 
+  * Download bar now shows the current working item as well as the 
+  number of failed downloads.
+  * Using the hud_set_key method does not default to writing to the working 
+  directory .Rprofile.
+  * Introduction message to the package is now more informative.
+  * Functions now check if user enters years below what is allowed.
+  
+### DOCUMENTATION FIXES
+  
+  * Improved sample case studies in the website documentation.
+  * Added diagram for census geographies to the crosswalk website documentation
+  to better communicate relationship among geographies.
+  * Introduced some iconography into documentation to help 
+  overall user experience. 
+  * All functions are listed in the README.md page along with the range of years
+  that they can be queried for.
+  
 rhud 0.3.0.9000 (5/30/2022)
 ============================
 
@@ -16,10 +45,10 @@ rhud 0.3.0.9000 (5/30/2022)
   showing the various options that can that can be set for the package as
   well as telling the user that they need to obtain a key from the HUD User
   website. 
-  
+
 ### BUG FIXES
 
-  * Fixed state level FMR data returning two copies of very_low and not low @
+  * Fixed state level FMR data returning two copies of very_low and not low
   * Fixed issue with IL data when querying for county and cbsa returning 
   duplicate year and median income fields. 
   * Remove download bar from appearing when first loading in the 
