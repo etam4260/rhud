@@ -17,6 +17,12 @@ rhud 0.4.0.9000 (6/10/2022)
   * Functions now check if user enters years below what is allowed.
   * State queries for hud_fmr no longer does double queries.
   
+### BUG FIXES
+
+  * Attempt two at removing download bar from appearing when first
+  loading in the  hud_nation_state_territories() in package environment when
+  validating state inputs. 
+  
 ### DOCUMENTATION FIXES
   
   * Improved sample case studies in the website documentation.

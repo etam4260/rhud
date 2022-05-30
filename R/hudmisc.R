@@ -69,12 +69,8 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
   # A lot of the functions in this package use the states in this function call
   # to validate the input variables from user. Do not show this download bar
   # when validating.
-  if (!is.null(pkg.env$download_states)) {
-    download_bar(done = 1, total = 1,
-                 current = urls)
-
-    pkg.env$download_states <- TRUE
-  }
+  download_bar(done = 1, total = 1,
+                 current = urls, error = 0)
 
   states <- as.data.frame(do.call("rbind", cont))
   states$state_num <- as.character(as.integer(states$state_num))
@@ -92,6 +88,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
       return(as_tibble(states))
     }
   }
+
   stop("\nThe key used might be invalid.", call. = FALSE)
 }
 
@@ -165,7 +162,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   cont <- try(content(call), silent = TRUE) #parse returned data
 
   download_bar(done = 1, total = 1,
-               current = urls)
+               current = urls, error = 0)
 
   message("\n")
 
@@ -200,7 +197,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -311,7 +308,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -426,7 +423,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -537,7 +534,7 @@ hud_state_minor_civil_divisions <- function(state,
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- hud_nation_states_territories(key = Sys.getenv("HUD_KEY"))
+    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
