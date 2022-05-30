@@ -26,6 +26,7 @@ rhud 0.4.0.9000 (6/10/2022)
   overall user experience. 
   * All functions are listed in the README.md page along with the range of years
   that they can be queried for.
+  * Description of package now shows up when typing it in console.
   
 rhud 0.3.0.9000 (5/30/2022)
 ============================
