@@ -41,7 +41,8 @@ Imports:
     curl,
     zoo,
     rio,
-    tibble
+    tibble,
+    R.cache
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 ByteCompile: true
