@@ -71,7 +71,10 @@ chas_input_check_cleansing <- function(query, year, key) {
 #' @param key The key obtain from HUD USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
-cw_input_check_cleansing <- function(primary_geoid, secondary_geoid, query, year, quarter, key) {
+cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
+                                     query, year,
+                                     quarter,
+                                     key) {
   if (!is.vector(query) || !is.vector(year) ||
      !is.vector(quarter) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -278,19 +281,31 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 
   # Check if geoid_col exists in dataset or is in valid range
   # Check if this column is all numbers too.
-  tryCatch({data[[geoid_col]]}, error = function(cond) {stop("\nIf the geoid_col argument is specified with indexes make sure it is within the range of the dataset. If column names are specified, make sure the column name exists in the dataset.", call. = FALSE)})
+  tryCatch({data[[geoid_col]]}, error = function(cond) {
+    stop(paste("\nIf the geoid_col argument is specified with indexes make sure ",
+               "it is within the range of the dataset. If column names are ",
+               "specified, make sure the column name exists in the dataset.",
+               sep = ""),
+         call. = FALSE)
+  })
 
   # Check if cw_geoid_col (s) exist in the dataset or is in valid range
   # Check if this column is all numbers too.
-  tryCatch({data[[cw_geoid_col]]}, error = function(cond) {stop("\nIf the cw_geoid_col argument is specified with indexes make sure it is within the range of the dataset. If column names are specified, make sure the column name exists in the dataset.", call. = FALSE)})
+  tryCatch({data[[cw_geoid_col]]}, error = function(cond) {
+    stop(paste("\nIf the cw_geoid_col argument is specified with indexes make ",
+               "sure it is within the range of the dataset. If column names are ",
+               "specified, make sure the column name exists in the dataset.",
+               sep = ""),
+         call. = FALSE)
+  })
 
 
-  if(!all(numbers_only(data[[geoid_col]]))) {
+  if (!all(numbers_only(data[[geoid_col]]))) {
     stop("\nMake sure all items in the geoid_col are made of numbers only",
          call. = FALSE)
   }
 
-  if(!all(numbers_only(data[[cw_geoid_col]]))) {
+  if (!all(numbers_only(data[[cw_geoid_col]]))) {
     stop("\nMake sure all items in the cw_geoid_col are made of numbers only",
          call. = FALSE)
   }

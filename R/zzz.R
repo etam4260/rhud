@@ -1,7 +1,31 @@
-#' @import R.cache
-
 # File adapted from the tigris package:
 # https://github.com/walkerke/tigris/blob/master/R/zzz.R
+
+
+#' @docType package
+#' @name rhud-package
+#' @aliases rhud rhud-package
+#' @title rhud: An R Interface to the US Department of Housing and Urban
+#'   Development APIs
+#' @description
+#' rhud is an R package that enables users to easily download data from the
+#' US Department of Housing and Urban Development APIs at HUD User.
+#' The data is defaulted to return measurements for the prior year
+#' (the year 365 days ago from the current system date). For details about
+#' the package as well as information about its sibling python counterpart,
+#' visit https://github.com/etam4260/rhud
+#'
+#' The default return type of data from rhud is a dataframe. To get tibbles
+#' instead, call: options(rhud_use_tibble = TRUE)
+#'
+#' @author Emmet Tam
+NULL
+
+#' rhud exported operators
+#'
+#'
+#' @name rhud-exports
+NULL
 
 # When user attaches the library, make sure to ask them to use
 # caching as an option. Give them options that they can use
@@ -49,4 +73,3 @@
   }
 
 }
-
