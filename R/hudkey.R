@@ -45,16 +45,28 @@ hud_get_key <- function() {
 #' hud_get_key()
 #' }
 hud_set_key <- function(key,
-                        in_wkdir = TRUE,
+                        in_wkdir = FALSE,
                         in_home = FALSE) {
+
+  # Validate types of key, inwkdir, in_home
+  if (!is.character(key) || length(key) != 1) {
+    stop(paste("Make sure argument key is of type",
+               "character and is of vector length 1",
+               sep = ""))
+  }
+
+  if(!is.logical(in_wkdir) ||
+     !is.logical(in_home) ||
+     length(in_wkdir) != 1  ||
+     length(in_home) != 1) {
+    stop("Make sure argument in_wkdir and in_home are of type logical.")
+  }
 
   # Set the key in working R session.
   Sys.setenv("HUD_KEY" = key)
   message("* Setting the HUD_KEY variable for the working session.")
 
-
   if (in_wkdir) {
-    message("* Trying to set the HUD_KEY to the .Rprofile working directory.")
     # Set the key in the Rprofile working direct. If not made, make one and set.
     if (any(list.files(all.files = TRUE) == ".Rprofile")) {
       # Check the file if it contains a call to set hud key, regex for it.

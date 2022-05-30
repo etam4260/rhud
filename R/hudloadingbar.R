@@ -23,7 +23,21 @@ download_bar <- function(done = NULL, total = NULL,
   }
 
   # TODO: For the num_done/total we might want it to show
-  # the number of successful queries instead...
+  # the number of successful queries instead... or maybe even show
+  # the errorred ones as a separate number.
+
+  # "Error: 6"
+
+  # TODO: Show the ETA for download time. (num api calls * 60)/2000
+
+  # TODO: Need to add current working item when downloading. How best to show
+  # that??
+
+  #[cw, firstgeoid, secondgeoid, year, quarter]
+  #[fmr, firstgeoid, secondgeoid, year]
+  #[il, firstgeoid, year]
+  #[chas, firstgeoid, year]
+  #[misc, firstgeoid, secondgeoid]
 
   # Create the entire loading bar
   loading <- paste("Downloading:\t",

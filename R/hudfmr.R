@@ -1,5 +1,5 @@
 #' @import tibble
-
+#' @import R.cache
 
 #' @name hud_fmr_state_metroareas
 #' @title hud_fmr_state_metroareas
@@ -69,10 +69,7 @@ hud_fmr_state_metroareas <- function(state,
                  "statedata/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-              silent = TRUE)
+    call <- memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
 
@@ -183,10 +180,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                  "statedata/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-              silent = TRUE)
+    call <- memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
 
@@ -298,10 +292,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                  "data/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-              silent = TRUE)
+    call <- memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
 
@@ -449,10 +440,7 @@ hud_fmr_metroarea_zip <- function(metroarea,
                  "data/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-              silent = TRUE)
+    call <- memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
 

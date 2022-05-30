@@ -1,6 +1,6 @@
 #' @import httr
 #' @import tibble
-
+#' @import R.cache
 
 # Misc APIs provided by the HUD provide:
 
@@ -62,10 +62,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
 
   urls <- "https://www.huduser.gov/hudapi/public/fmr/listStates"
 
-  call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
-                                                     as.character(key))),
-                user_agent("https://github.com/etam4260/rhud"),
-                timeout(30)), silent = TRUE) #try to make call
+  call <- memoizedCall(make_query_calls, urls, key)
 
   cont <- try(content(call), silent = TRUE) #parse returned data
 
@@ -160,10 +157,8 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   # abbreviation of state, and the stating that it is a MSA(metro stat areas)
 
   urls <- "https://www.huduser.gov/hudapi/public/fmr/listMetroAreas"
-  call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
-                                                     as.character(key))),
-                user_agent("https://github.com/etam4260/rhud"),
-                timeout(30)), silent = TRUE) #try to make call
+
+  call <- memoizedCall(make_query_calls, urls, key)
 
   cont <- try(content(call), silent = TRUE) #parse returned data
 

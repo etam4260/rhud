@@ -53,6 +53,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
                                   call. = FALSE)
 
+
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
     to_tibble = getOption("rhud_use_tibble")
     message(paste("Outputted in tibble format",
@@ -64,7 +65,9 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "zip"
   secondary_geoid <- "tract"
 
-  args <- cw_input_check_cleansing(zip, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid, zip,
+                                   year, quarter, key)
+
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -160,7 +163,8 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "zip"
   secondary_geoid <- "county"
 
-  args <- cw_input_check_cleansing(zip, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -259,7 +263,8 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "zip"
   secondary_geoid <- "cbsa"
 
-  args <- cw_input_check_cleansing(zip, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -358,7 +363,8 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "zip"
   secondary_geoid <- "cbsadiv"
 
-  args <- cw_input_check_cleansing(zip, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -454,7 +460,8 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "zip"
   secondary_geoid <- "cd"
 
-  args <- cw_input_check_cleansing(zip, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -550,7 +557,8 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "tract"
   secondary_geoid <- "zip"
 
-  args <- cw_input_check_cleansing(tract, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   tract, year, quarter, key)
   tract <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -647,7 +655,8 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "county"
   secondary_geoid <- "zip"
 
-  args <- cw_input_check_cleansing(county, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   county, year, quarter, key)
   county <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -744,7 +753,8 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "cbsa"
   secondary_geoid <- "zip"
 
-  args <- cw_input_check_cleansing(cbsa, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   cbsa, year, quarter, key)
   cbsa <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -841,7 +851,8 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "cbsadiv"
   secondary_geoid <- "zip"
 
-  args <- cw_input_check_cleansing(cbsadiv, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   cbsadiv, year, quarter, key)
   cbsadiv <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -938,7 +949,8 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "cd"
   secondary_geoid <- "zip"
 
-  args <- cw_input_check_cleansing(cd, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   cd, year, quarter, key)
   cd <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -1033,7 +1045,8 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   primary_geoid <- "zip"
   secondary_geoid <- "countysub"
 
-  args <- cw_input_check_cleansing(zip, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   zip, year, quarter, key)
   zip <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]
@@ -1131,7 +1144,8 @@ hud_cw_countysub_zip <- function(countysub,
   primary_geoid <- "countysub"
   secondary_geoid <- "zip"
 
-  args <- cw_input_check_cleansing(countysub, year, quarter, key)
+  args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
+                                   countysub, year, quarter, key)
   countysub <- args[[1]]
   year <- args[[2]]
   quarter <- args[[3]]

@@ -1,5 +1,7 @@
 #' @import httr
 #' @import tibble
+#' @import R.cache
+
 
 #' @name chas_do_query_calls
 #' @title chas_do_query_calls
@@ -48,11 +50,12 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
   for (i in seq_len(length(urls))) {
 
     url <- urls[i]
+    call <- memoizedCall(make_query_calls, url, key)
 
-    call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-              silent = TRUE)
+    #call <- evalWithMemoization(try(GET(url, add_headers(Authorization = paste("Bearer ",
+    #                                                   as.character(key))),
+    #              user_agent("https://github.com/etam4260/rhud"), timeout(30)),
+    #          silent = TRUE))
 
     cont <- try(content(call), silent = TRUE)
 
@@ -129,10 +132,13 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
   for (i in seq_len(length(urls))) {
     url <- urls[i]
 
-    call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"),
-                  timeout(30)), silent = TRUE)
+    call <- memoizedCall(make_query_calls, url, key)
+
+    #call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
+    #                                                   as.character(key))),
+    #              user_agent("https://github.com/etam4260/rhud"),
+    #              timeout(30)), silent = TRUE)
+
 
     cont <- try(content(call), silent = TRUE)
 
@@ -211,11 +217,12 @@ misc_do_query_call <- function(urls, key, to_tibble) {
   for (i in seq_len(length(urls))) {
 
     url <- urls[i]
+    call <- memoizedCall(make_query_calls, url, key)
 
-    call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-              silent = TRUE)
+    #call <- evalWithMemoization(try(GET(url, add_headers(Authorization = paste("Bearer ",
+    #                                                   as.character(key))),
+    #              user_agent("https://github.com/etam4260/rhud"), timeout(30)),
+    #          silent = TRUE))
 
     download_bar(i, length(urls))
 
@@ -255,4 +262,23 @@ misc_do_query_call <- function(urls, key, to_tibble) {
   }
 
   return(NULL)
+}
+
+
+
+#' @name make_query_calls
+#' @title make_query_calls
+#' @description Atomic function for querying a single URL as to make
+#'   R.cache memoizedCall work at a singular API call resolution.
+#' @param urls The urls to query for.
+#' @param key The API key for this user. You must go to HUD and sign up for
+#'   an account and request for an API key.
+#' @returns The returned response object
+#' @noRd
+#' @noMd
+make_query_calls <- function(url, key) {
+  return(try(GET(url, add_headers(Authorization = paste("Bearer ",
+                                                 as.character(key))),
+          user_agent("https://github.com/etam4260/rhud"),
+          timeout(30)), silent = TRUE))
 }

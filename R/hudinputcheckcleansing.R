@@ -71,13 +71,21 @@ chas_input_check_cleansing <- function(query, year, key) {
 #' @param key The key obtain from HUD USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
-cw_input_check_cleansing <- function(query, year, quarter, key) {
+cw_input_check_cleansing <- function(primary_geoid, secondary_geoid, query, year, quarter, key) {
   if (!is.vector(query) || !is.vector(year) ||
      !is.vector(quarter) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
                "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
+  }
+
+  if (primary_geoid == "cbsadiv" || secondary_geoid == "cbsadiv") {
+    min_year = 2018
+  } else if (primary_geoid == "countysub" || secondary_geoid == "countysub") {
+    min_year = 2017
+  } else {
+    min_year = 2010
   }
 
   if (length(key) != 1) {
@@ -93,6 +101,8 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
                "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
 
   }
+
+
 
   query <- unique(paste(trimws(as.character(query), which = "both")))
   year <- unique(paste(trimws(as.character(year), which = "both")))
@@ -112,6 +122,12 @@ cw_input_check_cleansing <- function(query, year, quarter, key) {
   ifelse(any(as.integer(year) >
                as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
          stop("\nA year specified seems to be in the future?",
+              call. = FALSE), "")
+
+  ifelse(any(as.integer(year) < min_year),
+         stop(paste("\nOne of the years is below the min year of this query:",
+                    min_year,
+                    sep = ""),
               call. = FALSE), "")
 
   return(list(query, as.integer(year), as.integer(quarter), key))
@@ -192,6 +208,14 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
   ifelse(any(as.integer(year) >
                as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
          stop("\nA year specified seems to be in the future?", call. = FALSE), "")
+
+
+  min_year = 2017
+  ifelse(any(as.integer(year) < min_year),
+         stop(paste("\nOne of the years is below the min year of this query:",
+                    min_year,
+                    sep = ""),
+              call. = FALSE), "")
 
   # Assume length of inputted query as indicator that this is a certain geoid.
   if (all(nchar(as.character(query)) == 10)) {
