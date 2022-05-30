@@ -4,7 +4,7 @@
 \alias{hud_set_key}
 \title{hud_set_key}
 \usage{
-hud_set_key(key, in_wkdir = TRUE, in_home = FALSE)
+hud_set_key(key, in_wkdir = FALSE, in_home = FALSE)
 }
 \arguments{
 \item{key}{key obtained at

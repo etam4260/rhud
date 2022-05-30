@@ -39,10 +39,10 @@
   # Use evalWithMemoization to cache the data properly.
 
   if(Sys.getenv("RHUD_CACHE_DIR") == "" || Sys.getenv("RHUD_CACHE_DIR") == "NULL") {
-    suppressWarnings(setCacheRootPath(paste(tempdir(),"//", "rhud_cache", sep ="")))
+    suppressWarnings(R.cache::setCacheRootPath(paste(tempdir(),"//", "rhud_cache", sep ="")))
     packageStartupMessage("\n* Setting rhud cache to R temp directory.")
   } else {
-    suppressWarnings(setCacheRootPath(Sys.getenv("RHUD_CACHE_DIR")))
+    suppressWarnings(R.cache::setCacheRootPath(Sys.getenv("RHUD_CACHE_DIR")))
     packageStartupMessage(paste("\n* Setting rhud cache to",
                                 Sys.getenv("RHUD_CACHE_DIR"),
                                 "directory."))

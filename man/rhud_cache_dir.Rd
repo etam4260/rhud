@@ -2,32 +2,47 @@
 % Please edit documentation in R/hudcache.R
 \name{rhud_cache_dir}
 \alias{rhud_cache_dir}
+\alias{rhud_clear_cache}
 \title{rhud_cache_dir}
 \usage{
-rhud_cache_dir(path, in_wkdir = FALSE, in_home = FALSE)
+rhud_cache_dir(path = "NULL", in_wkdir = FALSE, in_home = FALSE)
+
+rhud_clear_cache()
 }
 \arguments{
-\item{path}{The full path to the desired cache directory}
+\item{path}{The full path to the desired cache directory. Only one can be
+set at a time. If no path is specified, it will use the temp directory
+for R. The temp directory is not persistent.}
 
-\item{in_wkdir}{Set the .Rprofile in current working directly to have
-have rhud cache to path.}
+\item{in_wkdir}{Store the path as environment variable in the working directory
+.Rprofile so rhud will cache to this specified path.}
 
-\item{in_home}{Set the .Rprofile in the HOME directory to have
-have rhud cache to path.}
+\item{in_home}{Store the path as environment variable in the HOME directory
+.Rprofile so rhud will cache to this specified path.}
 }
 \description{
 Set the caching directory to store data retrieved using the
-rhud API calls. By default, rhud uses a non-persistent temporary directory given
-for an R session. However, it is possible that a user might want
-to save their queried data in a custom location. This function allows users
-to set the cache directory. The user can also store the result in the
-.RProfile so that rhud will remember the set preference directory throughout
-sessions.
+rhud API calls. By default, rhud uses a non-persistent temporary directory
+given for an R session. However, it is possible that a user might want
+to save their queried data in a custom location which is persistent.
+This function allows users to set the cache directory. The user can also
+store the preferred path in the .RProfile so that rhud will remember the set
+preference directory throughout sessions. Make sure the path is valid and
+and is not in a sensitive location.
 
 Windows users: please note that you'll need to use double-backslashes or
 forward slashes when specifying your cache directory's path in R.
+
+Remove cached data from the caching directory that is used to
+store data retrieved using the rhud API calls. By default, rhud uses a
+non-persistent temporary directory given for an R session, but a user might
+have set another directory to use.
 }
 \examples{
+\dontrun{
+rhud_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
+
+}
 \dontrun{
 rhud_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
 

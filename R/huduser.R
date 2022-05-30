@@ -385,14 +385,9 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
                  if (querytype == "state") "statedata/" else "data/",
                  all_queries$query[i], "?year=", all_queries$year[i], sep = "")
 
-    call <- try(GET(urls, add_headers(Authorization = paste("Bearer ",
-                                                       as.character(key))),
-                  user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-              silent = TRUE)
+    call <- R.cache::memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
-
-    download_bar(i, nrow(all_queries))
 
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
@@ -427,6 +422,9 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
       list_res[[i]] <- res
     }
+
+    download_bar(done = i, total = nrow(all_queries),
+                 current = urls, error = length(error_urls))
   }
   message("\n")
 

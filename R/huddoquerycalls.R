@@ -50,7 +50,7 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
   for (i in seq_len(length(urls))) {
 
     url <- urls[i]
-    call <- memoizedCall(make_query_calls, url, key)
+    call <- R.cache::memoizedCall(make_query_calls, url, key)
 
     #call <- evalWithMemoization(try(GET(url, add_headers(Authorization = paste("Bearer ",
     #                                                   as.character(key))),
@@ -58,8 +58,6 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
     #          silent = TRUE))
 
     cont <- try(content(call), silent = TRUE)
-
-    download_bar(i, length(urls))
 
     if ("error" %in% names(cont) || length(cont) == 0) {
       # Need to output a single error message instead of a bunch when
@@ -79,6 +77,10 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
         list_res[[i]] <- unlist(cont[[1]])
       }
     }
+
+    download_bar(done = i, total = length(urls),
+                 current = url, error = length(error_urls))
+
   }
   message("\n")
 
@@ -132,7 +134,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
   for (i in seq_len(length(urls))) {
     url <- urls[i]
 
-    call <- memoizedCall(make_query_calls, url, key)
+    call <- R.cache::memoizedCall(make_query_calls, url, key)
 
     #call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
     #                                                   as.character(key))),
@@ -141,8 +143,6 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
 
     cont <- try(content(call), silent = TRUE)
-
-    download_bar(i, length(urls))
 
     if ("error" %in% names(cont[[1]])) {
       # Need to output a single error message instead of a bunch when
@@ -163,6 +163,10 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
       list_res[[i]] <- res
     }
+
+    download_bar(done = i, total = length(urls),
+                 current = url, error = length(error_urls))
+
   }
   message("\n")
 
@@ -217,14 +221,12 @@ misc_do_query_call <- function(urls, key, to_tibble) {
   for (i in seq_len(length(urls))) {
 
     url <- urls[i]
-    call <- memoizedCall(make_query_calls, url, key)
+    call <- R.cache::memoizedCall(make_query_calls, url, key)
 
     #call <- evalWithMemoization(try(GET(url, add_headers(Authorization = paste("Bearer ",
     #                                                   as.character(key))),
     #              user_agent("https://github.com/etam4260/rhud"), timeout(30)),
     #          silent = TRUE))
-
-    download_bar(i, length(urls))
 
     cont <- try(content(call), silent = TRUE)
 
@@ -236,6 +238,10 @@ misc_do_query_call <- function(urls, key, to_tibble) {
     } else {
       list_res[[i]] <- as.data.frame(do.call(rbind, cont))
     }
+
+    download_bar(done = i, total = length(urls),
+                 current = url, error = length(error_urls))
+
   }
   message("\n")
 

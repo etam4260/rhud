@@ -70,7 +70,9 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
   # to validate the input variables from user. Do not show this download bar
   # when validating.
   if (!is.null(pkg.env$download_states)) {
-    download_bar(1,1)
+    download_bar(done = 1, total = 1,
+                 current = urls)
+
     pkg.env$download_states <- TRUE
   }
 
@@ -162,7 +164,9 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 
   cont <- try(content(call), silent = TRUE) #parse returned data
 
-  download_bar(1,1)
+  download_bar(done = 1, total = 1,
+               current = urls)
+
   message("\n")
 
   metro <- as.data.frame(do.call(rbind, cont))

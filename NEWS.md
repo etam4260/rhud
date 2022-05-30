@@ -3,8 +3,7 @@ rhud 0.4.0.9000 (6/10/2022)
 ### NEW FEATURES:
   
   * Caching is fully implemented, allowing user to cache data to where they 
-  want as well as to the current working session. Cached data is stored as
-  csv format.
+  want as well as to the current working session. 
   
 ### MINOR IMPROVEMENTS:
 

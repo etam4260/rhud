@@ -20,10 +20,10 @@
 #' @param path The full path to the desired cache directory. Only one can be
 #'  set at a time. If no path is specified, it will use the temp directory
 #'  for R. The temp directory is not persistent.
-#' @in_wkdir Store the path as environment variable in the working directory
-#'   .Rprofile so rhud will cache to this specified path.
-#' @in_home Store the path as environment variable in the HOME directory
-#'   .Rprofile so rhud will cache to this specified path.
+#' @param in_wkdir Store the path as environment variable in the working directory
+#'  .Rprofile so rhud will cache to this specified path.
+#' @param in_home Store the path as environment variable in the HOME directory
+#'  .Rprofile so rhud will cache to this specified path.
 #' @export
 #' @examples
 #' \dontrun{
@@ -151,8 +151,8 @@ rhud_clear_cache <- function() {
 
   if (Sys.getenv("RHUD_CACHE_DIR") == "" ||
       Sys.getenv("RHUD_CACHE_DIR") == "NULL") {
-    clearCache(paste(tempdir(), "//", "rhud_cache", sep = ""))
+    R.cache::clearCache(paste(tempdir(), "//", "rhud_cache", sep = ""))
   } else {
-    clearCache(Sys.getenv("RHUD_CACHE_DIR"))
+    R.cache::clearCache(Sys.getenv("RHUD_CACHE_DIR"))
   }
 }

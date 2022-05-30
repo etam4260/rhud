@@ -69,11 +69,9 @@ hud_fmr_state_metroareas <- function(state,
                  "statedata/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- memoizedCall(make_query_calls, urls, key)
+    call <- R.cache::memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
-
-    download_bar(i, nrow(allqueries))
 
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
@@ -83,6 +81,9 @@ hud_fmr_state_metroareas <- function(state,
       res$year <- allqueries$year[i]
       list_res[[i]] <- res
     }
+
+    download_bar(done = i, total = nrow(allqueries),
+                 current = urls, error = length(error_urls))
   }
   message("\n")
 
@@ -180,11 +181,9 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                  "statedata/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- memoizedCall(make_query_calls, urls, key)
+    call <- R.cache::memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
-
-    download_bar(i, nrow(allqueries))
 
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
@@ -194,6 +193,10 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
       res$year <- allqueries$year[i]
       list_res[[i]] <- res
     }
+
+    download_bar(done = i, total = nrow(allqueries),
+                 current = urls, error = length(error_urls))
+
   }
   message("\n")
 
@@ -292,11 +295,9 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                  "data/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- memoizedCall(make_query_calls, urls, key)
+    call <- R.cache::memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
-
-    download_bar(i, nrow(allqueries))
 
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
@@ -338,6 +339,10 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
         list_res[[i]] <- res
       }
     }
+
+    download_bar(done = i, total = nrow(allqueries),
+                 current = urls, error = length(error_urls))
+
   }
   message("\n")
 
@@ -440,11 +445,9 @@ hud_fmr_metroarea_zip <- function(metroarea,
                  "data/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
-    call <- memoizedCall(make_query_calls, urls, key)
+    call <- R.cache::memoizedCall(make_query_calls, urls, key)
 
     cont <- try(content(call), silent = TRUE)
-
-    download_bar(i, nrow(allqueries))
 
     if ("error" %in% names(cont)) {
       error_urls <- c(error_urls, urls)
@@ -487,6 +490,10 @@ hud_fmr_metroarea_zip <- function(metroarea,
         list_res[[i]] <- res
       }
     }
+
+    download_bar(done = i, total = nrow(allqueries),
+                 current = urls, error = length(error_urls))
+
   }
   message("\n")
 
