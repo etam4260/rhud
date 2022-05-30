@@ -301,11 +301,80 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
   querytype <- args[[4]]
 
   # If state query, will provide data at metro and county level
-  # Call helper functions...
   if (querytype == "state") {
-      # Merge county level data with metroarea data.
-      return(list(counties = hud_fmr_state_counties(query, year, key, to_tibble),
-                  metroareas = hud_fmr_state_metroareas(query, year, key, to_tibble)))
+    # Merge county level data with metroarea data.
+    # Create all combinations of query and year...
+    allqueries <- expand.grid(query = query, year = year,
+                              stringsAsFactors = FALSE)
+    error_urls <- c()
+
+    list_county_res <- c()
+    list_metroarea_res <- c()
+
+    for (i in seq_len(nrow(allqueries))) {
+      # Build the urls for querying the data.
+      urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+                    "statedata/",
+                    allqueries$query[i], "?year=", allqueries$year[i], sep = "")
+
+      call <- R.cache::memoizedCall(make_query_calls, urls, key)
+
+      cont <- try(content(call), silent = TRUE)
+
+      if ("error" %in% names(cont)) {
+        error_urls <- c(error_urls, urls)
+      } else {
+        res_county <- as.data.frame(do.call(rbind, cont$data$counties))
+        res_metroareas <- as.data.frame(do.call(rbind, cont$data$metroareas))
+
+        res_county$query <- allqueries$query[i]
+        res_county$year <- allqueries$year[i]
+
+        res_metroareas$query <- allqueries$query[i]
+        res_metroareas$year <- allqueries$year[i]
+
+        list_county_res[[i]] <- res_county
+        list_metroarea_res[[i]] <- res_metroareas
+      }
+
+      download_bar(done = i, total = nrow(allqueries),
+                   current = urls, error = length(error_urls))
+    }
+    message("\n")
+
+    if (length(error_urls) != 0) {
+      # Spit out error messages to user after all
+      # queries are done.
+      warning(paste("Could not find data for queries: \n\n",
+                    paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                    "\n\nIt is possible that your key maybe invalid or ",
+                    "there isn't any data for these parameters, ",
+                    "If you think this is wrong please ",
+                    "report it at https://github.com/etam4260/rhud/issues.",
+                    sep = ""), call. = FALSE)
+    }
+
+
+    if (length(list_county_res) != 0) {
+
+      res_county <- as.data.frame(do.call(rbind, list_county_res))
+      res_county <- as.data.frame(sapply(res_county,
+                                         function(x) unlist(as.character(x))))
+
+      res_metroareas <- as.data.frame(do.call(rbind, list_metroarea_res))
+      res_metroareas <- as.data.frame(sapply(res_metroareas,
+                                             function(x) unlist(as.character(x))))
+
+      if (to_tibble == FALSE) {
+        return(list(counties = res_county,
+                    metroareas = res_metroareas))
+      } else {
+        return(list(counties = tibble(res_county),
+                    metroareas = tibble(res_metroareas)))
+      }
+    }
+      # return(list(counties = hud_fmr_state_counties(query, year, key, to_tibble),
+      #            metroareas = hud_fmr_state_metroareas(query, year, key, to_tibble)))
   } else if (querytype == "cbsa") {
       # Returns zip level data.
       return(hud_fmr_metroarea_zip(query, year, key, to_tibble))

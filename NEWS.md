@@ -15,6 +15,7 @@ rhud 0.4.0.9000 (6/10/2022)
   directory .Rprofile.
   * Introduction message to the package is now more informative.
   * Functions now check if user enters years below what is allowed.
+  * State queries for hud_fmr no longer does double queries.
   
 ### DOCUMENTATION FIXES
   
