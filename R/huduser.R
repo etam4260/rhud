@@ -525,7 +525,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' @name hud_chas
 #' @title hud_chas
 #' @description This function queries the CHAS API provided by US Department
-#'   of Housing and Urban Development
+#'   of Housing and Urban Development. The ordering of items in state input
+#'   must match that of the entity id input.
 #' @param type Queries the data based off:
 #'   1 - Nation
 #'   2 - State
@@ -609,13 +610,13 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
 
   # Allow user to specify the string too.
   type <- switch(tolower(type),
-                "Nation" = 1,
-                "State" = 2,
-                "County" = 3,
-                "MCD" = 4,
-                "Minor Civil Division" = 4,
-                "Place" = 5,
-                "City" = 5,
+                "nation" = 1,
+                "state" = 2,
+                "county" = 3,
+                "mcd" = 4,
+                "minor civil division" = 4,
+                "place" = 5,
+                "city" = 5,
                 type
   )
 
@@ -646,8 +647,7 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
 
   if (type == "2") {
     if (is.null(state_id)) stop("You need to specify a stateId for this type.")
-    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
-                 "&stateId=", state_id, "&year=", year,  sep = "")
+
     if (!is.vector(state_id)) {
       stop(paste("\nMake sure all inputs are of type vector. ",
                  "Check types with typeof([variable]). ",
@@ -657,7 +657,8 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
     }
 
     all_queries <- expand.grid(fip_code = state_id, year = year,
-                              stringsAsFactors = FALSE)
+                               stringsAsFactors = FALSE)
+
     urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
                  "&stateId=", all_queries$fip_code,
                  "&year=", all_queries$year,  sep = "")
