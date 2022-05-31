@@ -197,7 +197,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -308,7 +308,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -423,7 +423,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -534,7 +534,7 @@ hud_state_minor_civil_divisions <- function(state,
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- supressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
