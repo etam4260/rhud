@@ -4,18 +4,18 @@
 \name{rhud-package}
 \alias{rhud-package}
 \alias{rhud}
-\title{rhud: An R Interface to the US Department of Housing and Urban
+\title{rhud: A R Interface to the US Department of Housing and Urban
 Development APIs}
 \description{
-rhud is an R package that enables users to easily download data from the
-US Department of Housing and Urban Development APIs at HUD User.
+rhud is a R library that allows users to easily download data from the
+US Department of Housing and Urban Development APIs @ HUD User.
 The data is defaulted to return measurements for the prior year
 (the year 365 days ago from the current system date). For details about
-the package as well as information about its sibling python counterpart,
+this package as well as details about its python counterpart,
 visit https://github.com/etam4260/rhud
 
-The default return type of data from rhud is a dataframe. To get tibbles
-instead, call: options(rhud_use_tibble = TRUE)
+The default return type of data is a dataframe.
+To get tibbles instead, use: options(rhud_use_tibble = TRUE)
 }
 \author{
 Emmet Tam

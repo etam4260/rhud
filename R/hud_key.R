@@ -27,7 +27,7 @@ hud_get_key <- function() {
 #' @param key key obtained at
 #'   https://www.huduser.gov/hudapi/public/register?comingfrom=1
 #' @param in_wkdir set the key in the user's .RProfile in this directory.
-#'   Is defaulted to true.
+#'   Is defaulted to false.
 #' @param in_home set the key in the user's HOME directory.
 #'   Is defaulted to false.
 #' @export

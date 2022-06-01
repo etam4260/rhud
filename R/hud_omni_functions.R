@@ -392,7 +392,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' @description This function queries the Income Limits API provided by
 #'   US Department of Housing and Urban Development.
 #' @param query  Querying a
-#'   state provides the IL measurement for that state level resolution. Querying
+#'   state provides the IL measurement for that state level resolution.
 #'   Querying a county or cbsa will provide data at a county and
 #'   cbsa resolution, respectively.
 #' @param year Gets the year that this data was recorded.

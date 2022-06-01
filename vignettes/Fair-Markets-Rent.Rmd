@@ -34,7 +34,7 @@ the federal fiscal year (usually October 1). Fair Market Rentals are estimates
 of the 40th percentile gross rents for standard quality units within a
 metropolitan region or non-metropolitan county, as described in 24 CFR 888.113.
 
-<br><br><br>
+<br>
 
 ## Examples
 
@@ -62,6 +62,7 @@ This is an example to show you how to query for all states in the US.
 library(rhud)
 hud_nation_states_territories()
 ```
+<br>
 
 ### US Counties 
 This is an example to show you how to query for all counties in MD,
@@ -74,6 +75,7 @@ hud_state_counties("Virginia")
 
 hud_state_counties("6")
 ```
+<br>
 
 ### US Metropolitan Areas
 This is an example to show you how to query for metropolitan areas in Wyoming
@@ -81,6 +83,7 @@ and New York.
 ```{r, eval=FALSE}
 hud_state_metropolitan(c("WY", "NY"))
 ```
+<br>
 
 ### State Level Fair Markets Rent
 This is an example which shows you how to query the Fair Markets Rent API for a
@@ -95,6 +98,7 @@ hud_fmr(query= "Virginia", year = '2021')
 
 hud_fmr(query= "51", year = '2021')
 ```
+<br>
 
 If you only need the state level data, then this might work better...
 
@@ -106,8 +110,9 @@ hud_fmr_state_counties(state = "Virginia", year = '2021')
 
 hud_fmr_state_counties(state = "51", year = '2021')
 ```
+<br>
 
-If you need just metropolitan data...
+If you need just metro data...
 
 ```{r, eval=FALSE}
 # These functions gets FMR data for the state of Virginia in 2021.
@@ -117,24 +122,25 @@ hud_fmr_state_metroareas(state = "Virginia", year = '2021')
 
 hud_fmr_state_metroareas(state = "51", year = '2021')
 ```
+<br>
 
 ### County Level Fair Markets Rent
 This is an example which shows you how to query the Fair Markets Rent on a
 county level basis. These are defined with a 2 digit state code + 3 digit county
-code. You also need a 99999 code added onto the end. We currently don't know why
-the extra 99999 is included and have not found any cases where its different. I
-recommend taking a look at [US Counties][] to determine what counties are
-available.
+code. You also need a 99999 code added onto the end. I recommend taking a 
+look at [US Counties][] to determine what counties are available.
 ```{r, eval=FALSE}
 # Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
 hud_fmr(query = '0100199999', year = '2017')
 ```
+<br>
 
 You can also choose to use:
 ```{r, eval=FALSE}
 # Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
 hud_fmr_county_zip(county = '0100199999', year = '2017')
 ```
+<br>
 
 ### Small Areas Fair Markets Rent
 
@@ -142,15 +148,37 @@ hud_fmr_county_zip(county = '0100199999', year = '2017')
 # Gets FMR data for METRO area.
 hud_fmr(query = "METRO47900M47900", year=c(2018))
 ```
+<br>
 
 You can also choose to use:
 ```{r, eval=FALSE}
 # Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
 hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
 ```
-<br><br><br>
+<br>
 
 ## Parameters
+
+<table>
+	<tr>
+		  <th>Data Field</th>
+		  <th>Description</th>
+ 	</tr>
+ 	<tr>
+  		<td>query</td>
+   		<td>Identifier for county, state, or cbsadiv depending on function</td>
+ 	</tr>
+ 	<tr>
+  		<td>year</td>
+   		<td>Year when measurement was taken.</td>   
+ 	</tr>
+ 	<tr>
+  		<td>key</td>
+   		<td>Name of the county if it is a county.</td>
+ 	</tr>
+</table>
+
+
 
 **query:** ***character double integer or numeric***
 

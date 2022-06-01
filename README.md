@@ -171,10 +171,11 @@ The HUD also provide miscellaneous supplemental APIs under them.
 
 -   Key access
 
-| Managing Keys   |
-|-----------------|
-| `hud_set_key()` |
-| `hud_get_key()` |
+| Management             |
+|------------------------|
+| `hud_set_key()`        |
+| `hud_get_key()`        |
+| `hud_set_user_agent()` |
 
 -   Caching
 

@@ -39,8 +39,6 @@ Suggests:
 Imports: 
     httr,
     curl,
-    zoo,
-    rio,
     tibble,
     R.cache
 Config/testthat/edition: 3

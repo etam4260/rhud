@@ -48,31 +48,31 @@ which encapsulates thecapabilities of all the main function calls below --
 4) [mcd][CHAS for MCD] 
 5) [place][CHAS for Place]
 
-### CHAS for Nation
+### Comprehensive Housing and Affordability Strategy for Nation
 ```{r, eval=FALSE}
   library(rhud)
   hud_chas_nation(year=c("2014-2018"))
 ```
 
-### CHAS for State
+### Comprehensive Housing and Affordability Strategy for States
 ```{r, eval=FALSE}
   # Queries for CHAS in a state
   hud_chas_state("Maryland", year=c("2012-2016"))
 ```
 
-### CHAS for County
+### Comprehensive Housing and Affordability Strategy for County
 ```{r, eval=FALSE}
   # Queries a county in Virginia
   hud_chas_county("51999", year=c("2014-2018"))
 ```
 
-### CHAS for MCD
+### Comprehensive Housing and Affordability Strategy for MCD
 ```{r, eval=FALSE}
   # Queries for CHAS for all mcds in Virginia
   hud_chas_state_mcd("VA", "94087")
 ```
 
-### CHAS for Place
+### Comprehensive Housing and Affordability Strategy for Place
 ```{r, eval=FALSE}
   # Queries for CHAS for all places in state fips code 51.
   hud_chas_state_place("51", 48996)

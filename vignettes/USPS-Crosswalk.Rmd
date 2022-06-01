@@ -1,8 +1,8 @@
 ---
-title: "Crosswalk"
+title: "USPS-Crosswalk"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Crosswalk}
+  %\VignetteIndexEntry{USPS-Crosswalk}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -40,8 +40,7 @@ allocation across different geographies.
 
 These journal articles describe the problem and proposed solution in more detail: 
 
-
-
+|
 | Wilson, Ron and Din, Alexander, 2018. “Understanding and Enhancing the U.S.
 |         Department of Housing and Urban Development’s ZIP Code Crosswalk Files,”
 |         Cityscape: A Journal of Policy Development and Research, Volume 20 Number 2, 277
@@ -54,7 +53,7 @@ These journal articles describe the problem and proposed solution in more detail
 |         Research, Volume 22, Number 1,
 |         https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf
 
-<br><br><br>
+<br>
 
 ## Census Geographies
 
@@ -62,7 +61,7 @@ This chart provided by the US Census Bureau gives a good example of the
 relationships among different geographies. The crosswalk files only support a
 subset of these.
 
-<br><br><br>
+<br>
 
 ## Examples
 
@@ -113,53 +112,75 @@ options (digits=4)
 
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
+<br>
+
 ### Crosswalk zipcode to county fip
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_county(zip = 35213, year = c('2020'), quarter = c('2'))
 ```
+<br>
+
 ### Crosswalk zipcode to core base statistical area (cbsa)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsa(zip = 35213, year = c('2011'), quarter = c('3'))
 ```
+<br>
+
 ### Crosswalk zipcode to core based statistical area division (cbsadiv)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsadiv(zip = '22031', year = c('2019'), quarter = c('4'))
 ```
+<br>
+
 ### Crosswalk zipcode to congressional district (cd)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cd(zip = '35213', year = c(2011), quarter = c(1))
 ```
+<br>
+
 ### Crosswalk census tract to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 ```
+<br>
+
 ### Crosswalk county fip into zipcode 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'))
 ```
+<br>
+
 ### Crosswalk core based statistical areas (cbsa) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsa_zip(cbsa = '10140', year = c('2017'), quarter = c('2'))
 ```
+<br>
+
 ### Crosswalk core based statistical areas division (cbsadiv) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('4'))
 ```
+<br>
+
 ### Crosswalk congressional district (cd) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cd_zip(cd = '2202', year = c('2010'), quarter = c('4'))
 ```
+<br>
+
 ### Crosswalk zipcode to county subdivision (countysub)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_countysub(zip = '35213', year = c('2019'), quarter = c('2'))
 ```
+<br>
+
 ### Crosswalk county subdivision (countysub) to zipcode 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019'),
                      quarter = c('4','4'))
 ```
 
-<br><br><br>
+<br>
 
 ## Querying for only the crosswalked geoids
 
@@ -171,7 +192,7 @@ without the extra metadata.
 hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'), minimal = TRUE)
 ```
 
-<br><br><br>
+<br>
 
 ## Using the omni function for querying
 
@@ -186,7 +207,7 @@ above functions.
 hud_cw(type = 7, query = '22031', year = c('2010'), quarter = c('1'))
 ```
 
-<br><br><br>
+<br>
 
 ## Crosswalking a dataset
 
@@ -216,10 +237,14 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
           , quarter = 1)
 ```
 
+<br>
+
 To utilize an allocation method provided by the crosswalk files and apply it
 to columns of the data set, specify the method and cw_geoid_col arguments.
 In this case we want to allocate the county population levels to a zip code
 level using the method based on the ratio of residential addresses.
+
+<br>
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 
@@ -228,95 +253,120 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
           , quarter = 1)
 ```
 
-<br><br><br>
+<br>
 
 ## Parameters
 
-**query:** ***character double integer or numeric***
+<table>
+	<tr>
+		  <th>Parameter</th>
+		  <th>Type</th>
+		  <th>Description</th>
+ 	</tr>
+	<tr>
+  		<td>query</td>
+   		<td>
+          The query argument name is the first geoid in the function call. 
+          For example, zip-county would have the 'zip' argument name as the query.  
+          <br>
+          Functions #1-5 and #11 must specify a 5 digit zip code in the **zip** function
+          argument. 
+          <br><br>
+          * zip = 22031
+          
+          <br>
+          Function #6 must specify an 11 digit number consisting of state FIPS + county
+          FIPS + tract code tract in the **tract** function argument.
+          <br><br>
+          * tract = 51059461700
+          
+          <br>
+          Function #7 must specify a 5 digit county fips code in the **county** function
+          argument.
+          <br><br>
+          * county = 51600
+          
+          <br>
+          Function #8 must specify a micropolitan or metropolitan CBSA code in the
+          **cbsa** function argument. 
+          <br><br>
+          * cbsa = 10380
+          
+          <br>
+          Function #9 must specify a metropolitan CBSA division code in the
+          **cbsadiv** function argument. 
+          <br><br>
+          * cbsadiv = 35614
+          
+          <br>
+          I recommend typing hud_metropolitan("MD") to see a list of metropolitan CBSA in
+          Maryland. For example, a code of METRO22900N40079 needs 22900 inside as the input
+          argument. 
+          <br><br>
+          Function #10 must be a 2 digit state fips code + 2 digit congressional district 
+          code in the **cd** function argument. 
+          <br><br>
+          * cd = 7200
+          
+          <br>
+          Function #12 must be a 10 digit number consisting of 5 digit county fips code + 5 digit
+          county sub district code in the **countysub** argument. 
+          <br><br>
+          * countysub = 4606720300
+          
+   		    <br>
+   		</td>
+ 	</tr>
+	<tr>
+  		<td>year</td>
+   		<td>
+          Years of the data to retrieve: defaults to the current year.
+          <br><br>
+          * year = c(2019, 2018, 2021)
+          * year = c(2016)
+          * year = 2021
+   		</td>
+ 	</tr>
+	<tr>
+  		<td>quarter</td>
+   		<td>
+         The quarters in the year to retrieve: defaults to the first
+         quarter. 
+         <br><br>
+         * quarter = c(1,2,3,4)
+         * quarter = c(1)
+         * quarter = 4
+   		</td>
+ 	</tr>
+ 	<tr>
+  		<td>minimal</td>
+   		<td>
+         If TRUE, returns just the intersecting geoids that are 
+         crosswalked with the queried geoid.  
+   		</td>   
+ 	</tr>
+  <tr>
+  		<td>key</td>
+   		<td>
+         The API key provided by HUD USER.
+         <br><br>
+         * key = "wqokqo2138jdi13wfwwfwcytjyr"
+   		</td>   
+ 	</tr>
+</table>
 
-|          The query argument name is the first geoid in the function call. 
-|          For example, zip-county would have the 'zip' argument name as the query.  
-|
-|          Functions #1-5 and #11 must specify a 5 digit zip code in the **zip** function
-|          argument. 
-|
-|          * zip = 22031
-|
-|          Function #6 must specify an 11 digit number consisting of state FIPS + county
-|          FIPS + tract code tract in the **tract** function argument.
-|
-|          * tract = 51059461700
-|
-|          Function #7 must specify a 5 digit county fips code in the **county** function
-|          argument.
-|  
-|          * county = 51600
-|
-|          Function #8 must specify a micropolitan or metropolitan CBSA code in the
-|          **cbsa** function argument. 
-|  
-|          * cbsa = 10380
-|  
-|          Function #9 must specify a metropolitan CBSA division code in the
-|          **cbsadiv** function argument. 
-|  
-|          * cbsadiv = 35614
-|  
-|          I recommend typing hud_metropolitan("MD") to see a list of metropolitan CBSA in
-|          Maryland. For example, a code of METRO22900N40079 needs 22900 inside as the input
-|          argument. 
-|
-|          Function #10 must be a 2 digit state fips code + 2 digit congressional district 
-|          code in the **cd** function argument. 
-|  
-|          * cd = 7200
-|
-|          Function #12 must be a 10 digit number consisting of 5 digit county fips code + 5 digit
-|          county sub district code in the **countysub** argument. 
-|
-|          * countysub = 4606720300
-  
-**year:** ***character double integer or numeric***
-
-|          Year range of the data to retrieve: defaults to the current year.
-|
-|          * year = c(2019, 2018, 2021)
-|          * year = c(2016)
-|          * year = 2021
-
-**quarter:** ***character double integer or numeric***
-
-|         The quarters in the year to retrieve: defaults to the first
-|         quarter. 
-|  
-|         * quarter = c(1,2,3,4)
-|         * quarter = c(1)
-|         * quarter = 4
-
-**minimal:** ***logical*** 
-
-|         If TRUE, returns just the intersecting geoids that are 
-|         crosswalked with the queried geoid.  
-
-**key:** ***character*** 
-
-|         The API key provided by HUD USER.
-|
-|         * key = "wqokqo2138jdi13wfwwfwcytjyr"
-
-
-<br><br><br>
+<br>
 
 ## Returns
 
 <table>
 	<tr>
-		  <th>Data Field</th>
+		  <th>Return Field</th>
 		  <th>Description</th>
  	</tr>
  	<tr>
-  		<td>zip/county/fipstract/cbsa/cbsadiv/cd/countysub</td>
-   		<td>The geoid to query for</td>
+  		<td>zip,<br>county,<br>fips,<br>tract,<br>cbsa,<br>cbsadiv,<br>cd,<br>countysub</td>
+   		<td>The geoid that is queried for. The name of the column will be named the geoid type</td>
  	</tr>
 	<tr>
   		<td>res_ratio</td>
@@ -350,7 +400,7 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
       </td>   
  	</tr>
  	<tr>
-  		<td>zip/county/fipstract/cbsa/cbsadiv/cd/countysub</td>
+  		<td>zip,<br>county,<br>fips,<br>tract,<br>cbsa,<br>cbsadiv,<br>cd,<br>countysub</td>
    		<td>The intersecting geoids depending on function call</td>   
  	</tr>
  	<tr>
@@ -364,7 +414,7 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
 </table>
 		
 
-<br><br><br>
+<br>
 
 ## References
 

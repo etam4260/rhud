@@ -8,27 +8,30 @@ rhud 0.4.0.9000 (6/10/2022)
     be removed in favor of a solution which allows different caching file 
     formats.
     
+  * Add the ability to set a user agent. (WIP)
+    
   * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
     are now available to help determine whether a singular zip code overlaps
     a geographic identifier using the crosswalk files. Currently supports only
     numeric identifiers, but may in the future provide support for names. 
-  
+    (WIP)
+    
   * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
     are now available to help determine whether a tract, cd, county, countysub,
     cbsa, or cbsadiv overlaps a zip code using the crosswalk files. Currently 
     supports only numeric identifiers, but may in the future provide support 
-    for names.
+    for names. (WIP)
   
 ### MINOR IMPROVEMENTS:
 
   * Type checking added for using hud_set_key() as a way of reducing 
-  latent errors. 
+  latent errors.
   * Download bar now shows the current working item as well as the 
-  number of failed downloads.
+  number of failed downloads. 
   * Using the hud_set_key method does not default to writing to the working 
   directory .Rprofile.
   * Introduction message to the package is now more informative.
-  * Functions now check if user enters years below what is allowed.
+  * Functions now check if user enters years below what is allowed. (WIP)
   * State queries for hud_fmr no longer does double queries.
   
 ### BUG FIXES
@@ -37,16 +40,21 @@ rhud 0.4.0.9000 (6/10/2022)
   loading in the  hud_nation_state_territories() in package environment when
   validating state inputs. 
   
-  * Fix issue with numerics being passed as 4 digits because of leading 0
-  truncation. *
+  * Fixed some bugs caused by hud_set_key not properly setting to the .Rprofile.
+  (WIP)
+  
+  * Fix issues with numerics being passed as 4 digits because of leading 0
+  truncation. (WIP)
   
 ### DOCUMENTATION FIXES
   
-  * Improved sample case studies in the website documentation.
+  * Added documentation to tell user that queries will be a combination of the 
+  geoid, year, and quarter inputs. 
+  * Improved sample case studies in the website documentation. (WIP)
   * Added diagram for census geographies to the crosswalk website documentation
-  to better communicate relationship among geographies.
+  to better communicate relationship among geographies. (WIP)
   * Introduced some iconography into documentation to help 
-  overall user experience. 
+  overall user experience.  (WIP)
   * All functions are listed in the README.md page along with the range of years
   that they can be queried for.
   * Description of package now shows up when typing it in console.
