@@ -176,6 +176,7 @@ The HUD also provide miscellaneous supplemental APIs under them.
 | `hud_set_key()`        |
 | `hud_get_key()`        |
 | `hud_set_user_agent()` |
+| `hud_get_user_agent()` |
 
 -   Caching
 
