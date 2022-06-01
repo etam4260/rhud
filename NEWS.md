@@ -3,7 +3,21 @@ rhud 0.4.0.9000 (6/10/2022)
 ### NEW FEATURES:
   
   * Caching is fully implemented, allowing user to cache data to where they 
-  want as well as to the current working session. 
+    want as well as to the current working session. Currently, this uses the 
+    R.cache library which use the .Rcache file extension. This, however, might
+    be removed in favor of a solution which allows different caching file 
+    formats.
+    
+  * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
+    are now available to help determine whether a singular zip code overlaps
+    a geographic identifier using the crosswalk files. Currently supports only
+    numeric identifiers, but may in the future provide support for names. 
+  
+  * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
+    are now available to help determine whether a tract, cd, county, countysub,
+    cbsa, or cbsadiv overlaps a zip code using the crosswalk files. Currently 
+    supports only numeric identifiers, but may in the future provide support 
+    for names.
   
 ### MINOR IMPROVEMENTS:
 
@@ -22,6 +36,9 @@ rhud 0.4.0.9000 (6/10/2022)
   * Attempt two at removing download bar from appearing when first
   loading in the  hud_nation_state_territories() in package environment when
   validating state inputs. 
+  
+  * Fix issue with numerics being passed as 4 digits because of leading 0
+  truncation. *
   
 ### DOCUMENTATION FIXES
   

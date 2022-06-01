@@ -99,7 +99,34 @@ also provide miscellaneous supplemental APIs under them.
   | `hud_cw_countysub_zip()` | <b>2018-2021<b> |
   | `hud_cw()` | 2010-2021 |
   | `crosswalk()` | 2010-2021 | 
-
+  | 
+  | `%z_in_trt%` | 2021 |
+  | `%z_in_cty%`  | 2021 |
+  | `%z_in_cbsa%` | 2021 |
+  | `%z_in_cbsadiv%` | 2021 |
+  | `%z_in_ctysb%` | 2021 |
+  | `%z_in_cd%` | 2021 |
+  |   
+  | `%trt_in_z%` | 2021 |
+  | `%cty_in_z%` | 2021 |
+  | `%cbsa_in_z%` | 2021 |
+  | `%cbsadiv_in_z%` | 2021 |
+  | `%ctysb_in_z%` | 2021 |
+  | `%cd_in_z%` | 2021 |
+  |
+  | `z_in_trt()` | 2010-2021 |
+  | `z_in_cty()` | 2010-2021 |
+  | `z_in_cbsa()` | 2010-2021 |
+  | `z_in_cbsadiv()` | <b>2017-2021<b> |
+  | `z_in_ctysb()` | <b>2018-2021<b> |
+  | `z_in_cd()` | 2010-2021 |
+  | `trt_in_z()` | 2010-2021 |
+  | `cty_in_z()` | 2010-2021 |
+  | `cbsa_in_z()` | 2010-2021 |
+  | `cbsadiv_in_z()` | <b>2017-2021<b> |
+  | `ctysb_in_z()` | <b>2018-2021<b> |
+  | `cd_in_z()` | 2010-2021 |
+   
   - Fair Markets Rent (https://www.huduser.gov/portal/dataset/fmr-api.html)
       + Small Areas Fair Markets Rent
       
@@ -153,11 +180,14 @@ also provide miscellaneous supplemental APIs under them.
   | `rhud_cache_dir()` |
   | `rhud_clear_cache()` | 
 
-  - Documentation
+  - Utilities
   
-  | Documentation |
+  | Utilities |
   |------------------------------------------|
   | `rhud_website()` | 
+  | `hud_rec_cw_yr` |
+  | `hud_rec_fmr_yr` |
+  | `hud_rec_il_yr` |
     
 ## Installation
 
