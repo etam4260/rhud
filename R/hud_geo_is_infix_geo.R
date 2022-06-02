@@ -16,16 +16,21 @@
 
   args <- hud_rec_cw_yr()
 
-  # TODO: We might want to allow using names also...
-
-  if (as.character(tract) %in%
-      as.character(suppressMessages(hud_cw_zip_tract(zip,
-                                                     minimal = TRUE,
-                                                     year = args[1],
-                                                     quarter = args[2])))) {
-    return(TRUE)
+  # TODO: We might want to allow using names also..
+  res <- c()
+  for (i in seq_len(length(zip))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_zip_tract(zip[i],
+                                                                        minimal = TRUE,
+                                                                        year = args[1],
+                                                                        quarter = args[2])))) %in% as.character(tract))) {
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+
+  return(res)
 }
 
 
