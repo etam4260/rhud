@@ -3,6 +3,10 @@
 #' @description Given a zip code and a tract, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
+#'
+#'   This means that it is possible that certain geoids(lhs) which have boundaries
+#'   that intersect that of the queried geoids(rhs) that are excluded.
+#'
 #' @param zip The zip to determine overlap with tract
 #' @param tract The tract to determine overlap with zip
 #' @export
@@ -17,18 +21,35 @@
   args <- hud_rec_cw_yr()
 
   # TODO: We might want to allow using names also..
+  # There is a bit of overhead cost for doing individual queries because each
+  # zip will need individual calls to hud_cw_zip_tract... Could optimize by
+  # using internal functions...
+
+  # Need to validate tract..
+
+  tract <- unique(paste(trimws(as.character(tract), which = "both")))
+  if (FALSE %in% numbers_only(tract)) stop("\nTract inputs must only be numbers.",
+                                           call. = FALSE)
+  if (any(nchar(tract) != 11)) stop("\nTract inputs are not all of length 11.",
+                                 call. = FALSE)
+
   res <- c()
   for (i in seq_len(length(zip))) {
     if (any(as.character(suppressWarnings(suppressMessages(hud_cw_zip_tract(zip[i],
-                                                                        minimal = TRUE,
-                                                                        year = args[1],
-                                                                        quarter = args[2])))) %in% as.character(tract))) {
+                            minimal = TRUE,
+                            year = args[1],
+                            quarter = args[2])))) %in% as.character(tract))) {
+
+      # What if zip does not have any data (invalid zip). Might want to catch
+      # the warning and tell user... Furthermore, you could validate the
+      # tract... using hud_tract_... but that would more API calls which might
+      # not be worthwhile.
+
       res <- c(res, TRUE)
     } else {
       res <- c(res, FALSE)
     }
   }
-
 
   return(res)
 }
@@ -53,16 +74,31 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(county) %in%
-      as.character(suppressMessages(hud_cw_zip_county(zip,
-                                                      minimal = TRUE,
-                                                      year = args[1],
-                                                      quarter = args[2]
-      )))) {
-    return(TRUE)
-  }
-  return(FALSE)
+  # TODO: We might want to allow using names also..
 
+
+  county <- unique(paste(trimws(as.character(county), which = "both")))
+  if (FALSE %in% numbers_only(county)) stop("\nCounty inputs must only be numbers.",
+                                           call. = FALSE)
+  if (any(nchar(county) != 5)) stop("\nCounty inputs are not all of length 5.",
+                                    call. = FALSE)
+
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_zip_county(zip[i],
+                            minimal = TRUE,
+                            year = args[1],
+                            quarter = args[2])))) %in% as.character(county))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
+  }
+
+  return(res)
 }
 
 
@@ -84,15 +120,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(cbsa) %in%
-      as.character(suppressMessages(hud_cw_zip_cbsa(zip,
-                                                    minimal = TRUE,
-                                                    year = args[1],
-                                                    quarter = args[2]
-      )))) {
-    return(TRUE)
+  cbsa <- unique(paste(trimws(as.character(cbsa), which = "both")))
+  if (FALSE %in% numbers_only(cbsa)) stop("\nCbsa inputs must only be numbers.",
+                                            call. = FALSE)
+  if (any(nchar(cbsa) != 5)) stop("\nCbsa inputs are not all of length 5.",
+                                    call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_zip_cbsa(zip[i],
+                             minimal = TRUE,
+                             year = args[1],
+                             quarter = args[2])))) %in% as.character(cbsa))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -114,15 +162,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(cbsadiv) %in%
-      as.character(suppressMessages(hud_cw_zip_cbsadiv(zip,
-                                                       minimal = TRUE,
-                                                       year = args[1],
-                                                       quarter = args[2]
-      )))) {
-    return(TRUE)
+  cbsadiv <- unique(paste(trimws(as.character(cbsadiv), which = "both")))
+  if (FALSE %in% numbers_only(cbsadiv)) stop("\nCbsadiv inputs must only be numbers.",
+                                          call. = FALSE)
+  if (any(nchar(cbsadiv) != 5)) stop("\nCbsadiv inputs are not all of length 5.",
+                                  call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_zip_cbsadiv(zip[i],
+                           minimal = TRUE,
+                           year = args[1],
+                           quarter = args[2])))) %in% as.character(cbsadiv))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -144,16 +204,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(ctysb) %in%
-      as.character(suppressMessages(hud_cw_zip_countysub(zip,
-                                                         minimal = TRUE,
-                                                         year = args[1],
-                                                         quarter = args[2]
-      )))) {
-    return(TRUE)
-  }
-  return(FALSE)
+  countysub <- unique(paste(trimws(as.character(countysub), which = "both")))
+  if (FALSE %in% numbers_only(countysub)) stop("\nCountysub inputs must only be numbers.",
+                                             call. = FALSE)
+  if (any(nchar(countysub) != 10)) stop("\nCountysub inputs are not all of length 10.",
+                                     call. = FALSE)
 
+  res <- c()
+  for (i in seq_len(length(zip))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_zip_countysub(zip[i],
+                        minimal = TRUE,
+                        year = args[1],
+                        quarter = args[2])))) %in% as.character(countysub))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
+  }
+
+  return(res)
 }
 
 
@@ -175,15 +246,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(cd) %in%
-      as.character(suppressMessages(hud_cw_zip_cd(zip,
-                                                  minimal = TRUE,
-                                                  year = args[1],
-                                                  quarter = args[2]
-      )))) {
-    return(TRUE)
+  cd <- unique(paste(trimws(as.character(cd), which = "both")))
+  if (FALSE %in% numbers_only(cd)) stop("\nCd inputs must only be numbers.",
+                                               call. = FALSE)
+  if (any(nchar(cd) != 4)) stop("\nCd inputs are not all of length 4.",
+                                        call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_zip_cd(zip[i],
+                                minimal = TRUE,
+                                year = args[1],
+                                quarter = args[2])))) %in% as.character(cd))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -209,15 +292,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_tract_zip(tract,
-                                                     minimal = TRUE,
-                                                     year = args[1],
-                                                     quarter = args[2]
-      )))) {
-    return(TRUE)
+  zip <- unique(paste(trimws(as.character(zip), which = "both")))
+  if (FALSE %in% numbers_only(zip)) stop("\nZip inputs must only be numbers.",
+                                        call. = FALSE)
+  if (any(nchar(zip) != 5)) stop("\nZip inputs are not all of length 5.",
+                                call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(tract))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_tract_zip(tract[i],
+                             minimal = TRUE,
+                             year = args[1],
+                             quarter = args[2])))) %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -240,15 +335,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_county_zip(county,
-                                                      minimal = TRUE,
-                                                      year = args[1],
-                                                      quarter = args[2]
-      )))) {
-    return(TRUE)
+  zip <- unique(paste(trimws(as.character(zip), which = "both")))
+  if (FALSE %in% numbers_only(zip)) stop("\nZip inputs must only be numbers.",
+                                         call. = FALSE)
+  if (any(nchar(zip) != 5)) stop("\nZip inputs are not all of length 5.",
+                                 call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(county))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_county_zip(county[i],
+                              minimal = TRUE,
+                              year = args[1],
+                              quarter = args[2])))) %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -271,15 +378,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_cbsa_zip(cbsa,
-                                                    minimal = TRUE,
-                                                    year = args[1],
-                                                    quarter = args[2]
-      )))) {
-    return(TRUE)
+  zip <- unique(paste(trimws(as.character(zip), which = "both")))
+  if (FALSE %in% numbers_only(zip)) stop("\nZip inputs must only be numbers.",
+                                         call. = FALSE)
+  if (any(nchar(zip) != 5)) stop("\nZip inputs are not all of length 5.",
+                                 call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(cbsa))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_cbsa_zip(cbsa[i],
+                               minimal = TRUE,
+                               year = args[1],
+                               quarter = args[2])))) %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -301,15 +420,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_cbsadiv_zip(cbsadiv,
-                                                       minimal = TRUE,
-                                                       year = args[1],
-                                                       quarter = args[2]
-      )))) {
-    return(TRUE)
+  zip <- unique(paste(trimws(as.character(zip), which = "both")))
+  if (FALSE %in% numbers_only(zip)) stop("\nZip inputs must only be numbers.",
+                                         call. = FALSE)
+  if (any(nchar(zip) != 5)) stop("\nZip inputs are not all of length 5.",
+                                 call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(cbsadiv))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_cbsadiv_zip(cbsadiv[i],
+                               minimal = TRUE,
+                               year = args[1],
+                               quarter = args[2])))) %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -331,15 +462,27 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_cd_zip(cd,
-                                                  minimal = TRUE,
-                                                  year = args[1],
-                                                  quarter = args[2]
-      )))) {
-    return(TRUE)
+  zip <- unique(paste(trimws(as.character(zip), which = "both")))
+  if (FALSE %in% numbers_only(zip)) stop("\nZip inputs must only be numbers.",
+                                         call. = FALSE)
+  if (any(nchar(zip) != 5)) stop("\nZip inputs are not all of length 5.",
+                                 call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(cd))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_cd_zip(cd[i],
+                                 minimal = TRUE,
+                                 year = args[1],
+                                 quarter = args[2])))) %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
 
@@ -362,14 +505,26 @@
 
   args <- hud_rec_cw_yr()
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_countysub_zip(countysub,
-                                                         minimal = TRUE,
-                                                         year = args[1],
-                                                         quarter = args[2]
-      )))) {
-    return(TRUE)
+  zip <- unique(paste(trimws(as.character(zip), which = "both")))
+  if (FALSE %in% numbers_only(zip)) stop("\nZip inputs must only be numbers.",
+                                         call. = FALSE)
+  if (any(nchar(zip) != 5)) stop("\nZip inputs are not all of length 5.",
+                                 call. = FALSE)
+
+  res <- c()
+  for (i in seq_len(length(countysub))) {
+    if (any(as.character(suppressWarnings(suppressMessages(hud_cw_countysub_zip(countysub[i],
+                               minimal = TRUE,
+                               year = args[1],
+                               quarter = args[2])))) %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
 }
 
