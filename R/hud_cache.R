@@ -3,8 +3,8 @@
 
 #' @import R.cache
 
-#' @name rhud_set_cache_dir
-#' @title rhud_set_cache_dir
+#' @name hud_set_cache_dir
+#' @title hud_set_cache_dir
 #' @description Set the caching directory to store data retrieved using the
 #' rhud API calls. By default, rhud uses a non-persistent temporary directory
 #' given for an R session. However, it is possible that a user might want
@@ -24,16 +24,20 @@
 #'  .Rprofile so rhud will cache to this specified path.
 #' @param in_home Store the path as environment variable in the HOME directory
 #'  .Rprofile so rhud will cache to this specified path.
+#' @seealso
+#' * [rhud::hud_get_cache_dir()]
+#' * [rhud::hud_set_cache_dir()]
+#' * [rhud::hud_clear_cache()]
 #' @export
 #' @examples
 #' \dontrun{
-#' rhud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
+#' hud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
 #'
 #' }
-rhud_set_cache_dir <- function(path = "NULL",
-                           in_wkdir = FALSE,
-                           in_home = FALSE
-                           ) {
+hud_set_cache_dir <- function(path = "NULL",
+                              in_wkdir = FALSE,
+                              in_home = FALSE
+                              ) {
 
   # Set for the rhud cache path in the current session.
 
@@ -136,40 +140,46 @@ rhud_set_cache_dir <- function(path = "NULL",
 
 
 
-#' @name hud_get_user_agent
-#' @title hud_get_user_agent
-#' @description Get the most recent user agent set.
-#' @returns A character vector with the user agent used for querying HUD User
-#'   APIs.
+#' @name hud_get_cache_dir
+#' @title hud_get_cache_dir
+#' @description Get the path rhud is using to store cached files.
+#' @returns A character vector with path to cached files. If none is set,
+#'   will default to R temp session directory
 #' @export
 #' @seealso
-#' * [rhud::hud_get_user_agent()]
-#' * [rhud::hud_set_user_agent()]
+#' * [rhud::hud_get_cache_dir()]
+#' * [rhud::hud_set_cache_dir()]
+#' * [rhud::hud_clear_cache()]
 #' @examples
 #' \dontrun{
 #' library(rhud)
 #'
-#' hud_get_user_agent()
+#' hud_get_cache_dir()
 #'
 #' }
-rhud_get_cache_dir <- function() {
+hud_get_cache_dir <- function() {
   Sys.getenv("RHUD_CACHE_DIR")
 }
 
 
-#' @name rhud_clear_cache
-#' @title rhud_clear_cache
+#' @name hud_clear_cache
+#' @title hud_clear_cache
 #' @description Remove cached data from the caching directory that is used to
 #' store data retrieved using the rhud API calls. By default, rhud uses a
 #' non-persistent temporary directory given for an R session, but a user might
 #' have set another directory to use.
 #' @export
+#' @seealso
+#' * [rhud::hud_get_cache_dir()]
+#' * [rhud::hud_set_cache_dir()]
+#' * [rhud::hud_clear_cache()]
 #' @examples
 #' \dontrun{
-#' rhud_clear_cache()
+#'
+#' hud_clear_cache()
 #'
 #' }
-rhud_clear_cache <- function() {
+hud_clear_cache <- function() {
 
   if (Sys.getenv("RHUD_CACHE_DIR") == "" ||
       Sys.getenv("RHUD_CACHE_DIR") == "NULL") {
