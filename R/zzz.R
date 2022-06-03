@@ -21,11 +21,6 @@
 #' @author Emmet Tam
 NULL
 
-#' rhud exported operators
-#'
-#'
-#' @name rhud-exports
-NULL
 
 # When user attaches the library, make sure to ask them to use
 # caching as an option. Give them options that they can use
