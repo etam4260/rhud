@@ -8,8 +8,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter
+#'   take a look at their non-infix versions.
+#'
 #' @param zip The zip to determine overlap with tract
 #' @param tract The tract to determine overlap with zip
+#' @returns If zip(s) exist in the tract(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -61,8 +66,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param zip The zip to determine overlap with tract
 #' @param county The county to determine overlap with zip
+#' @returns If zip(s) exist in the county(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -108,8 +118,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param zip The zip to determine overlap with cbsa
 #' @param cbsa The cbsa to determine overlap with zip
+#' @returns If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -156,8 +171,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param zip The zip to determine overlap with cbsadiv
 #' @param cbsadiv The cbsadiv to determine overlap with zip
+#' @returns If zip(s) exist in the cbsadiv(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -203,8 +223,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param zip The zip to determine overlap with countysub
 #' @param countysub The countysub to determine overlap with zip
+#' @returns If zip(s) exist in the countysub(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -250,8 +275,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param zip The zip to determine overlap with a congressional district
 #' @param cd The congressional district to determine overlap with zip
+#' @returns If zip(s) exist in the cd(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -300,8 +330,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param tract The tract to determine overlap with zip
 #' @param zip The zip to determine overlap with tract
+#' @returns If tract(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -347,8 +382,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param county The county to determine overlap with zip.
 #' @param zip The zip to determine overlap with county.
+#' @returns If county(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -395,8 +435,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param cbsa The cbsa to determine overlap with zip
 #' @param zip The zip to determine overlap with cbsa
+#' @returns If cbsa(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -442,8 +487,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param cbsadiv The cbsadiv to determine overlap with zip
 #' @param zip The zip to determine overlap with cbsadiv
+#' @returns If cbsadiv(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -489,8 +539,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
 #' @param cd The cd to determine overlap with zip
 #' @param zip The zip to determine overlap with cd
+#' @returns If cd(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -537,8 +592,13 @@
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
-#' @param ctysb The countysub to determine overlap with zip
+#'   Infix operators default to most recent year and quarter of which the
+#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   take a look at their non-infix versions.
+#'
+#' @param countysub The countysub to determine overlap with zip
 #' @param zip The zip to determine overlap with countysub
+#' @returns If countysub(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{

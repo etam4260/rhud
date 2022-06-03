@@ -2,7 +2,8 @@ test_that("test %z_in_trt%", {
   # When numerics have leading zeros, it might not work...
 
   # Invalid zipcode 34321 should throw warning....
-  expect_warning(expect_equal(c(35213, 34321) %z_in_trt% c("01073010801"),
+  expect_warning(expect_equal(z_in_trt(zip = c(35213, 34321),
+                                       tract = c("01073010801")),
                               c(TRUE, FALSE)))
 
   expect_equal(c(77032, 77396) %z_in_trt% c(24033800608), c(FALSE, FALSE))

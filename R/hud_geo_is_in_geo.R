@@ -39,15 +39,34 @@ z_in_trt <- function(zip, tract, year, quarter) {
     quarter = args[2]
   }
 
-  if (as.character(tract) %in%
-      as.character(suppressMessages(hud_cw_zip_tract(zip,
-                                                     minimal = TRUE,
-                                                     year = year,
-                                                     quarter = quarter)))) {
-    return(TRUE)
+  args <- hud_rec_cw_yr()
+
+  # TODO: We might want to allow using names also..
+  # There is a bit of overhead cost for doing individual queries because each
+  # zip will need individual calls to hud_cw_zip_tract... Could optimize by
+  # using internal functions...
+
+  # Need to validate tract..
+  tract <- geo_is_infix_rhs_cleansing(query = tract, "tract")
+
+  res <- c()
+
+  for (i in seq_len(length(zip))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
+                                                   f = hud_cw_zip_tract,
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip")
+
+    if (any(queried %in% as.character(tract))) {
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  return(FALSE)
+  return(res)
 }
 
 

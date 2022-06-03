@@ -11,6 +11,9 @@ zip \%z_in_cbsa\% cbsa
 
 \item{cbsa}{The cbsa to determine overlap with zip}
 }
+\value{
+If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
+}
 \description{
 Given a zip code and a cbsa, determine if they overlap
 using the crosswalk files. Overlap will be described if
@@ -19,6 +22,10 @@ any residential, business, other, or total addresses reside in both.
 This means that it is possible that certain geoids(lhs) are not counted even
 though their boundaries intersect the queried geoids(rhs). This is likely
 because addresses do not lie in their intersecting region.
+
+Infix operators default to most recent year and quarter of which the
+crosswalk files are available. For access to the year and quarter parameter,
+take a look at their non-infix versions.
 }
 \examples{
 \dontrun{
