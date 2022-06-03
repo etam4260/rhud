@@ -40,7 +40,7 @@ NULL
                               "* To get tibbles instead of dataframes, ",
                               "use `options(rhud_use_tibble = TRUE)`\n",
                               "* Caching is enabled by default. To set a new cache ",
-                              "directory use rhud_cache_dir().\n",
+                              "directory use rhud_set_cache_dir().\n",
                               "* To delete cached ",
                               "items, use rhud_clear_cache()\n",
                               "* Set these in your R script for single session ",
