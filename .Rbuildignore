@@ -1,4 +1,4 @@
-^hudr\.Rproj$
+^rhud\.Rproj$
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^LICENSE\.md$
@@ -14,3 +14,4 @@
 ^docs$
 ^pkgdown$
 ^CITATION\.cff$
+^codemeta\.json$
