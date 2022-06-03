@@ -146,7 +146,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
     if ("error" %in% names(cont[[1]])) {
       # Need to output a single error message instead of a bunch when
-      # something bad occurs. Append to list of errored urlss.
+      # something bad occurs. Append to list of errored urls.
       error_urls <- c(error_urls, url)
     } else {
       res <- as.data.frame(do.call(rbind, cont$data$results))
