@@ -39,9 +39,10 @@ hud_set_user_agent <- function(user_agent, in_wkdir, in_home) {
 
 
   if (in_wkdir) {
-    # Set the key in the Rprofile working direct. If not made, make one and set.
+    # Set the user agent in the Rprofile working direct. If not made,
+    # make one and set.
     if (any(list.files(all.files = TRUE) == ".Rprofile")) {
-      # Check the file if it contains a call to set hud key, regex for it.
+      # Check the file if it contains a call to set user agent, regex for it.
       rprof <- readLines("./.Rprofile")
       all_occur <- grep("^Sys\\.setenv\\(\"HUD_USER_AGENT \" = \".*\"\\)", rprof)
 
@@ -55,11 +56,11 @@ hud_set_user_agent <- function(user_agent, in_wkdir, in_home) {
 
       message("* Writing the HUD_USER_AGENT in working directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "Sys.setenv(\"HUD_USER_AGENT\" = \"", key,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_USER_AGENT\" = \"", key,"\")\n", sep = ""),
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("Sys.setenv(\"HUD_USER_AGENT\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_USER_AGENT\" = \"", key,"\")\n", sep = ""),
                  ".Rprofile")
       message("* Writing the HUD_USER_AGENT in working directory .Rprofile!")
     }
@@ -73,7 +74,7 @@ hud_set_user_agent <- function(user_agent, in_wkdir, in_home) {
     # Make the file here.
     if (any(list.files(file.path(Sys.getenv("HOME")),
                        all.files = TRUE) == ".Rprofile")) {
-      # Check the file if it contains a call to set hud key, regex for it.
+      # Check the file if it contains a call to set user agent, regex for it.
 
       rprof = readLines("~/.Rprofile")
       all_occur <- grep("^Sys\\.setenv\\(\"HUD_USER_AGENT\" = \".*\"\\)", rprof)
@@ -86,13 +87,13 @@ hud_set_user_agent <- function(user_agent, in_wkdir, in_home) {
                       sep = ""))
       }
 
-      message("* Writing the HUD_USER_AGENT your HOME directory .Rprofile!")
+      message("* Writing the HUD_USER_AGENT in HOME directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "Sys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
-                 ".Rprofile")
+                       "\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+                 "~./Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("Sys.setenv(\"HUD_USER_AGENT\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_USER_AGENT\" = \"", key,"\")\n", sep = ""),
                  "~/.Rprofile")
       message("* Writing the HUD_USER_AGENT in HOME directory .Rprofile!")
     }

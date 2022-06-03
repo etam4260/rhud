@@ -61,12 +61,12 @@ hud_set_cache_dir <- function(path = "NULL",
   Sys.setenv("RHUD_CACHE_DIR" = path)
   message("* Setting the RHUD_CACHE_DIR variable for the working session.")
 
-
   if (in_wkdir) {
 
-    # Set the key in the Rprofile working direct. If not made, make one and set.
+    # Set the cache path in the Rprofile working direct. If not made, make
+    # one and set.
     if (any(list.files(all.files = TRUE) == ".Rprofile")) {
-      # Check the file if it contains a call to set hud key, regex for it.
+      # Check the file if it contains a call to set cache path, regex for it.
       rprof <- readLines("./.Rprofile")
 
       all_occur <- grep("^Sys\\.setenv\\(\"RHUD_CACHE_DIR\" = \".*\"\\)",
@@ -84,12 +84,12 @@ hud_set_cache_dir <- function(path = "NULL",
 
       message("* Writing the RHUD_CACHE_DIR in working directory .Rprofile!\n")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "Sys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
+                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
                        sep = ""),
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("Sys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
+      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
                        sep = ""),
                  ".Rprofile")
 
@@ -100,12 +100,12 @@ hud_set_cache_dir <- function(path = "NULL",
 
 
   if (in_home) {
-    # Set the key in the HOME direct
+    # Set the cache path in the HOME direct
     # Make system call to get home directory for this user.
     # Make the file here.
     if (any(list.files(file.path(Sys.getenv("HOME")),
                        all.files = TRUE) == ".Rprofile")) {
-      # Check the file if it contains a call to set hud key, regex for it.
+      # Check the file if it contains a call to cache path, regex for it.
 
       rprof = readLines("~/.Rprofile")
 
@@ -123,14 +123,14 @@ hud_set_cache_dir <- function(path = "NULL",
 
       }
 
-      message("* Writing the RHUD_CACHE_DIR your HOME directory .Rprofile!")
+      message("* Writing the RHUD_CACHE_DIR in HOME directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "Sys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
+                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
                        sep = ""),
-                 ".Rprofile")
+                 "~/.Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("Sys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
+      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
                        sep = ""),
                  "~/.Rprofile")
       message("* Writing the RHUD_CACHE_DIR in HOME directory .Rprofile!")

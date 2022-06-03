@@ -82,11 +82,11 @@ hud_set_key <- function(key,
 
       message("* Writing the HUD_KEY in working directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "Sys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("Sys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
                  ".Rprofile")
       message("* Writing the HUD_KEY in working directory .Rprofile!")
     }
@@ -112,13 +112,14 @@ hud_set_key <- function(key,
                       sep = ""))
       }
 
-      message("* Writing the HUD_KEY your HOME directory .Rprofile!")
+      message("* Writing the HUD_KEY in HOME directory .Rprofile!")
+
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "Sys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
-                 ".Rprofile")
+                       "\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+                 "~/.Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("Sys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
                  "~/.Rprofile")
       message("* Writing the HUD_KEY in HOME directory .Rprofile!")
     }
