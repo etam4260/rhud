@@ -24,7 +24,7 @@ though their boundaries intersect the queried geoids(rhs). This is likely
 because addresses do not lie in their intersecting region.
 
 Infix operators default to most recent year and quarter of which the
-crosswalk files are available. For access to the year and quarter parameter,
+crosswalk files are available. For modifying the year and quarter parameter,
 take a look at their non-infix versions.
 }
 \examples{

@@ -9,7 +9,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter
+#'   crosswalk files are available. For modifying the year and quarter parameter
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip to determine overlap with tract
@@ -67,7 +67,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip to determine overlap with tract
@@ -119,7 +119,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip to determine overlap with cbsa
@@ -172,7 +172,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip to determine overlap with cbsadiv
@@ -224,7 +224,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip to determine overlap with countysub
@@ -276,7 +276,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip to determine overlap with a congressional district
@@ -331,7 +331,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param tract The tract to determine overlap with zip
@@ -383,7 +383,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param county The county to determine overlap with zip.
@@ -436,7 +436,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param cbsa The cbsa to determine overlap with zip
@@ -488,7 +488,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param cbsadiv The cbsadiv to determine overlap with zip
@@ -540,7 +540,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param cd The cd to determine overlap with zip
@@ -593,7 +593,7 @@
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For access to the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param countysub The countysub to determine overlap with zip
