@@ -95,22 +95,6 @@ remove_delimiters <- function(input) {
 }
 
 
-#' @name add_delimiters
-#' @title add_delimiters
-#' @description This is helper function for remove the most common delimiters
-#'   used in character vector data.
-#' @param input A vector or column of characters that need needs delimiters
-#'   removed.
-#' @returns A vector with delimiters added
-#' @noRd
-#' @noMd
-add_delimiters <- function(input) {
-
-}
-
-
-
-
 #' @name fix_geoid
 #' @title fix_geoid
 #' @description This is helper function for adding leading zeros back to a

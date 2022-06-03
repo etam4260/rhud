@@ -107,7 +107,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
 #'   rather than a data frame.
 #' @keywords CBSA
 #' @export
-#' @returns A dataframe containing details of metropolitan areas in a state.
+#' @returns A dataframe containing details of metropolitan areas in state(s)
 #' @seealso
 #' * [rhud::hud_nation_states_territories()]
 #' * [rhud::hud_state_metropolitan()]
@@ -263,7 +263,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 #' * [rhud::hud_state_places()]
 #' * [rhud::hud_state_minor_civil_divisions()]
 #' @export
-#' @returns A dataframe containing all counties within a state
+#' @returns A dataframe containing all counties within state(s).
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -378,7 +378,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
 #' * [rhud::hud_state_counties()]
 #' * [rhud::hud_state_places()]
 #' * [rhud::hud_state_minor_civil_divisions()]
-#' @returns A dataframe containing details of places in a state.
+#' @returns A dataframe containing details of places in state(s).
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -487,7 +487,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
 #' * [rhud::hud_state_counties()]
 #' * [rhud::hud_state_places()]
 #' * [rhud::hud_state_minor_civil_divisions()]
-#' @returns A dataframe containing details of minor civil divisions in a state.
+#' @returns A dataframe containing details of minor civil divisions in state(s).
 #' @examples
 #' \dontrun{
 #' library(rhud)

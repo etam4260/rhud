@@ -22,7 +22,8 @@
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
-#' @returns A data frame with fair markets rent for metro areas in states.
+#' @returns A data frame with fair markets rent for metro areas in states for
+#'   all combinations of "state" and "year" inputs.
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -134,7 +135,8 @@ hud_fmr_state_metroareas <- function(state,
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
-#' @returns A data frame with fair markets rent for counties in states.
+#' @returns A data frame with fair markets rent for counties in states for
+#'   all combinations of "state" and "year" inputs.
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -250,7 +252,8 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
-#' @returns A data frame with fair markets rent for zip codes in counties.
+#' @returns A data frame with fair markets rent for zip codes in counties for
+#'   all combinations of "county" and "year" inputs.
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -400,7 +403,8 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
-#' @returns A data frame with fair markets rent for zip codes in metro areas.
+#' @returns A data frame with fair markets rent for zip codes in metro areas for
+#'   all combinations of "metroarea" and "year" inputs.
 #' @examples
 #' \dontrun{
 #' library(rhud)

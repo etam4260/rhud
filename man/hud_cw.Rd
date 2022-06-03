@@ -69,8 +69,11 @@ an account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-This function returns a dataframe containing CROSSWALK data for
-a particular GEOID. These measurements include res-ratio, bus-ratio,
+This function returns a dataframe containing crosswalk data for
+one geoid to another for all combinations of "query", "year", and "quarter"
+inputs where query depends on type specified.
+
+These measurements include res-ratio, bus-ratio,
 oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html
 }

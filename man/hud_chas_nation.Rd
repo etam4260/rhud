@@ -26,7 +26,8 @@ hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"), to_tibble)
 rather than a data frame.}
 }
 \value{
-Returns a data frame with CHAS data for the entire nation.
+Returns a data frame with CHAS data for the entire nation for all
+observations supplied in "year" input.
 }
 \description{
 Returns CHAS data for the entire nation.

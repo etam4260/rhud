@@ -64,10 +64,14 @@
 #'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   one geoid to another for all combinations of "query", "year", and "quarter"
+#'   inputs where query depends on type specified.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @seealso
 #' * [rhud::crosswalk()]
 #' * [rhud::hud_cw_zip_tract()]
@@ -260,14 +264,20 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 #' @keywords Fair Markets Rent API
 #' @export
 #' @returns This function returns a dataframe containing fair markets rent data
-#'   for a particular county or state. For county level data, these measurements
-#'   include the county_name, counties_msa, town_name, metro_status, metro_name,
-#'   smallarea_status, basicdata, Efficiency, One-Bedroom, Two-Bedroom,
-#'   Three-Bedroom, Four-Bedroom, and year. For more details about these
-#'   measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html For
-#'   state level data, these measurements will be the same as county level data,
-#'   but will return a dataframe with the individual measurements for each
-#'   individual county within the state.
+#'   for a particular county, metroarea, or state. For county and msa level data,
+#'   these measurements include the county_name, counties_msa, town_name,
+#'   metro_status, metro_name, smallarea_status, basicdata, Efficiency,
+#'   One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip code
+#'   level data if it considered a small area. Otherwise, data will be returned
+#'   at the level of the queried county or metroarea.
+#'
+#'   For state level data two dataframes will be returned. One for county level
+#'   and the other for metroarea level data. These measurements will be the same
+#'   as county/metroarea level data.
+#'
+#'   For more details about these measurements, go to
+#'   https://www.huduser.gov/portal/dataset/fmr-api.html.
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -404,12 +414,15 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   rather than a data frame.
 #' @keywords Income Limits API
 #' @export
-#' @returns This function returns a dataframe containing INCOME LIMITS data
-#'   for a particular county or state. For county level data, these measurements
-#'   include the county_name, counties_msa, town_name, metro_status, metro_name,
-#'   year, median_income, very_low+, extremely_low+, and low+. For more details
-#'   about these measurements, go to
+#' @returns This function returns a dataframe containing income limits data
+#'   for a particular county, metroarea, or state. Data is returned at the level
+#'   of the queried geoid.
+#'
+#'   These measurements include the county_name, counties_msa, town_name,
+#'   metro_status, metro_name, year, median_income, very_low+, extremely_low+,
+#'   and low+. For more details about these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/fmr-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -553,8 +566,9 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   rather than a data frame.
 #' @keywords Comprehensive Housing Affordability Strategy (CHAS) API
 #' @export
-#' @returns This function returns a dataframe containing CHAS data for a
-#'   particular state. For more details about these measurements, go to
+#' @returns This function returns a dataframe containing comprehensive housing
+#'   and affordability data for a particular state. For more details about
+#'   these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/chas-api.html
 #' @examples
 #' \dontrun{

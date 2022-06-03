@@ -14,7 +14,8 @@
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @description Returns CHAS data for the entire nation.
-#' @returns Returns a data frame with CHAS data for the entire nation.
+#' @returns Returns a data frame with CHAS data for the entire nation for all
+#'   observations supplied in "year" input.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]
@@ -71,7 +72,8 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #' @param key The key obtain from HUD USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a dataframe with CHAS data for a particular state.
+#' @returns Returns a data frame with CHAS data for states for all combinations
+#'   of "state" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]
@@ -169,7 +171,8 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' @param key The key obtain from HUD USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a dataframe with CHAS data for counties.
+#' @returns Returns a data frame with CHAS data for counties for all
+#'   combinations of "county" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]
@@ -266,7 +269,8 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' @param key The key obtain from HUD USER website.'
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a dataframe with CHAS data for mcds.
+#' @returns Returns a dataframe with CHAS data for mcds inside states for all
+#'   combinations of "state" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]
@@ -372,7 +376,8 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #' @param key The key obtain from HUD USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a dataframe with CHAS data for places.
+#' @returns Returns a dataframe with CHAS data for places inside states for all
+#'   combinations of "state" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]

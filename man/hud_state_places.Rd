@@ -16,7 +16,7 @@ an account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-A dataframe containing details of places in a state.
+A dataframe containing details of places in state(s).
 }
 \description{
 Get a list of all places in a state.

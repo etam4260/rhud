@@ -47,8 +47,9 @@ account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-This function returns a dataframe containing CHAS data for a
-particular state. For more details about these measurements, go to
+This function returns a dataframe containing comprehensive housing
+and affordability data for a particular state. For more details about
+these measurements, go to
 https://www.huduser.gov/portal/dataset/chas-api.html
 }
 \description{

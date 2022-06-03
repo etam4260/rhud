@@ -26,7 +26,8 @@ for an account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-A data frame with fair markets rent for metro areas in states.
+A data frame with fair markets rent for metro areas in states for
+all combinations of "state" and "year" inputs.
 }
 \description{
 This function queries for a state and returns the

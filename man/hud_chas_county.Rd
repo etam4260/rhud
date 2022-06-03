@@ -37,7 +37,8 @@ end. Just remove that.
 rather than a data frame.}
 }
 \value{
-Returns a dataframe with CHAS data for counties.
+Returns a data frame with CHAS data for counties for all
+combinations of "county" and "year" inputs.
 }
 \description{
 Returns CHAS data for counties.

@@ -17,7 +17,7 @@ account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-A dataframe containing details of metropolitan areas in a state.
+A dataframe containing details of metropolitan areas in state(s)
 }
 \description{
 Get details for all metropolitan areas for queried states with

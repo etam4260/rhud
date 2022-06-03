@@ -16,7 +16,7 @@ an account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-A dataframe containing all counties within a state
+A dataframe containing all counties within state(s).
 }
 \description{
 Get a dataframe with details describing the counties located

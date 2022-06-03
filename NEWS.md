@@ -39,6 +39,8 @@ rhud 0.4.0.9000 (6/10/2022)
   * Introduction message to the package is now more informative.
   * Functions now check if user enters years below what is allowed. (WIP)
   * State queries for hud_fmr no longer does double queries.
+  * User is presented with a description of the entire package when typing
+    part of its name in the console.
   
 ### BUG FIXES
 
@@ -71,12 +73,12 @@ rhud 0.3.0.9000 (5/30/2022)
 
 ### NEW FEATURES:
 
-  * Added options() for the rhud package, allowing a user to allow using
-  tibbles. 
+  * Added options() for the rhud package, allowing a user to get tibbles instead
+    of dataframes.
    
   * User is now given a `to_tibble` option for rhud functions that return a
-  data frame. This allows them to get tibbles rather than data frames as the type
-  of data returned. 
+    data frame. This allows them to get tibbles rather than data frames as the type
+    of data returned. 
   
 ### MINOR IMPROVEMENTS:
 

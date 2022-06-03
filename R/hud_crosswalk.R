@@ -32,10 +32,14 @@
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing crosswalk data for a
-#'   particular geoid. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   zip to tract for all combinations of "zip", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -130,10 +134,14 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   zip to county for all combinations of "zip", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -231,10 +239,14 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for a
-#'   particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   zip to cbsa for all combinations of "zip", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -312,8 +324,6 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   account and request for an API key.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @param to_tibble If TRUE, return the data in a tibble format
-#'   rather than a data frame.
 #' @keywords Crosswalks API
 #' @seealso
 #' * [rhud::hud_cw_zip_tract()]
@@ -330,10 +340,14 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   zip to cbsadiv for all combinations of "zip", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -428,10 +442,14 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for a
-#'   particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   zip to cd for all combinations of "zip", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -526,10 +544,14 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for a
-#'   particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   tract to zip for all combinations of "tract", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -624,10 +646,14 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   county to zip for all combinations of "county", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -721,10 +747,14 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   cbsa to zip for all combinations of "cbsa", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -820,10 +850,14 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   cbsadiv to zip for all combinations of "cbsadiv", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -918,10 +952,14 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   cd to zip for all combinations of "cd", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -1013,10 +1051,14 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for
-#'   a particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   zip to countysub for all combinations of "zip", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)
@@ -1111,10 +1153,14 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_cw_countysub_zip()]
 #' * [rhud::hud_cw()]
 #' @export
-#' @returns This function returns a dataframe containing CROSSWALK data for a
-#'   particular GEOID. These measurements include res-ratio, bus-ratio,
+#' @returns This function returns a dataframe containing crosswalk data for
+#'   countysub to zip for all combinations of "countysub", "year", and "quarter"
+#'   inputs.
+#'
+#'   These measurements include res-ratio, bus-ratio,
 #'   oth-ratio, tot-ratio. For more details on these measurements, visit
 #'   https://www.huduser.gov/portal/dataset/uspszip-api.html
+#'
 #' @examples
 #' \dontrun{
 #' library(rhud)

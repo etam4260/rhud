@@ -34,7 +34,8 @@ or as geoid.}
 rather than a data frame.}
 }
 \value{
-Returns a dataframe with CHAS data for a particular state.
+Returns a data frame with CHAS data for states for all combinations
+of "state" and "year" inputs.
 }
 \description{
 Returns CHAS data for a state.

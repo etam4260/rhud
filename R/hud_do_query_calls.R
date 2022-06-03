@@ -6,7 +6,7 @@
 #' @name chas_do_query_calls
 #' @title chas_do_query_calls
 #' @description Helper function for making the query calls to CHAS
-#' API endpoint.
+#'   API endpoint.
 #' @param urls The urls to query for.
 #' @param key The key obtain from HUD USER website.
 #' @returns A dataframe of all the response bodies.
@@ -51,11 +51,6 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
 
     url <- urls[i]
     call <- R.cache::memoizedCall(make_query_calls, url, key)
-
-    #call <- evalWithMemoization(try(GET(url, add_headers(Authorization = paste("Bearer ",
-    #                                                   as.character(key))),
-    #              user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-    #          silent = TRUE))
 
     cont <- try(content(call), silent = TRUE)
 
@@ -135,12 +130,6 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
     url <- urls[i]
 
     call <- R.cache::memoizedCall(make_query_calls, url, key)
-
-    #call <- try(GET(url, add_headers(Authorization = paste("Bearer ",
-    #                                                   as.character(key))),
-    #              user_agent("https://github.com/etam4260/rhud"),
-    #              timeout(30)), silent = TRUE)
-
 
     cont <- try(content(call), silent = TRUE)
 
@@ -223,11 +212,6 @@ misc_do_query_call <- function(urls, key, to_tibble) {
     url <- urls[i]
     call <- R.cache::memoizedCall(make_query_calls, url, key)
 
-    #call <- evalWithMemoization(try(GET(url, add_headers(Authorization = paste("Bearer ",
-    #                                                   as.character(key))),
-    #              user_agent("https://github.com/etam4260/rhud"), timeout(30)),
-    #          silent = TRUE))
-
     cont <- try(content(call), silent = TRUE)
 
     if ("error" %in% names(cont) || length(cont) == 0) {
@@ -271,11 +255,10 @@ misc_do_query_call <- function(urls, key, to_tibble) {
 }
 
 
-
 #' @name make_query_calls
 #' @title make_query_calls
-#' @description Atomic function for querying a single URL as to make
-#'   R.cache memoizedCall work at a singular API call resolution.
+#' @description Centralized atomic function for querying api calls to URLs
+#'   as to make R.cache memoizedCall work at a singular API call resolution.
 #' @param urls The urls to query for.
 #' @param key The API key for this user. You must go to HUD and sign up for
 #'   an account and request for an API key.
@@ -283,8 +266,19 @@ misc_do_query_call <- function(urls, key, to_tibble) {
 #' @noRd
 #' @noMd
 make_query_calls <- function(url, key) {
+
+  # Check if Sys.getenv("HUD_USER_AGENT") has been set
+  # and is not empty string. If so, then allow user agent
+  # will be set to this. Otherwise, just point back to the
+  # url of the package.
+  the_user_agent <- if (Sys.getenv("HUD_USER_AGENT") != "") {
+                      Sys.getenv("HUD_USER_AGENT")
+                    } else {
+                      "https://github.com/etam4260/rhud"
+                    }
+
   return(try(GET(url, add_headers(Authorization = paste("Bearer ",
                                                  as.character(key))),
-          user_agent("https://github.com/etam4260/rhud"),
+          user_agent(the_user_agent),
           timeout(30)), silent = TRUE))
 }

@@ -34,7 +34,8 @@ fips is 1 digit number, do not include leading 0.}
 rather than a data frame.}
 }
 \value{
-Returns a dataframe with CHAS data for places.
+Returns a dataframe with CHAS data for places inside states for all
+combinations of "state" and "year" inputs.
 }
 \description{
 Returns CHAS for all places in a state.

@@ -33,7 +33,8 @@ hud_chas_state_mcd(
 rather than a data frame.}
 }
 \value{
-Returns a dataframe with CHAS data for mcds.
+Returns a dataframe with CHAS data for mcds inside states for all
+combinations of "state" and "year" inputs.
 }
 \description{
 Returns CHAS data for all mcds in a state.

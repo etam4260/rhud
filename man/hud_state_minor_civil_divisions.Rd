@@ -16,7 +16,7 @@ an account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-A dataframe containing details of minor civil divisions in a state.
+A dataframe containing details of minor civil divisions in state(s).
 }
 \description{
 Get a list of all minor civil divisions in a state

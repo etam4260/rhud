@@ -27,14 +27,19 @@ rather than a data frame.}
 }
 \value{
 This function returns a dataframe containing fair markets rent data
-for a particular county or state. For county level data, these measurements
-include the county_name, counties_msa, town_name, metro_status, metro_name,
-smallarea_status, basicdata, Efficiency, One-Bedroom, Two-Bedroom,
-Three-Bedroom, Four-Bedroom, and year. For more details about these
-measurements, go to https://www.huduser.gov/portal/dataset/fmr-api.html For
-state level data, these measurements will be the same as county level data,
-but will return a dataframe with the individual measurements for each
-individual county within the state.
+for a particular county, metroarea, or state. For county and msa level data,
+these measurements include the county_name, counties_msa, town_name,
+metro_status, metro_name, smallarea_status, basicdata, Efficiency,
+One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip code
+level data if it considered a small area. Otherwise, data will be returned
+at the level of the queried county or metroarea.
+
+For state level data two dataframes will be returned. One for county level
+and the other for metroarea level data. These measurements will be the same
+as county/metroarea level data.
+
+For more details about these measurements, go to
+https://www.huduser.gov/portal/dataset/fmr-api.html.
 }
 \description{
 This function queries the Fair Markets Rent API provided by

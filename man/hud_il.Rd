@@ -28,11 +28,13 @@ an account and request for an API key.}
 rather than a data frame.}
 }
 \value{
-This function returns a dataframe containing INCOME LIMITS data
-for a particular county or state. For county level data, these measurements
-include the county_name, counties_msa, town_name, metro_status, metro_name,
-year, median_income, very_low+, extremely_low+, and low+. For more details
-about these measurements, go to
+This function returns a dataframe containing income limits data
+for a particular county, metroarea, or state. Data is returned at the level
+of the queried geoid.
+
+These measurements include the county_name, counties_msa, town_name,
+metro_status, metro_name, year, median_income, very_low+, extremely_low+,
+and low+. For more details about these measurements, go to
 https://www.huduser.gov/portal/dataset/fmr-api.html
 }
 \description{
