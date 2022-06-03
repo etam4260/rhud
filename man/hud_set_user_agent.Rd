@@ -4,7 +4,7 @@
 \alias{hud_set_user_agent}
 \title{hud_set_user_agent}
 \usage{
-hud_set_user_agent(user_agent, in_wkdir, in_home)
+hud_set_user_agent(user_agent, in_wkdir = FALSE, in_home = FALSE)
 }
 \arguments{
 \item{user_agent}{A character vector with the user agent.}
