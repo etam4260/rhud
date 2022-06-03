@@ -338,9 +338,9 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' \dontrun{
 #' library(rhud)
 #'
-#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'))
+#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2017'), quarter = c('4'))
 #'
-#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'),
+#' hud_cw_zip_cbsadiv(zip = '35213', year = c('2017'), quarter = c('4'),
 #'    minimal = TRUE)
 #' }
 hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
@@ -828,9 +828,9 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #' \dontrun{
 #' library(rhud)
 #'
-#' hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('1'))
+#' hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('4'))
 #'
-#' hud_cw_cbsadiv_zip(cbsadiv = '10380', year = c('2010'), quarter = c('1'),
+#' hud_cw_cbsadiv_zip(cbsadiv = '10380', year = c('2017'), quarter = c('4'),
 #'    minimal = TRUE)
 #' }
 hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
@@ -1021,9 +1021,9 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #' \dontrun{
 #' library(rhud)
 #'
-#' hud_cw_zip_countysub(zip = 35213, year = c('2017'), quarter = c('1'))
+#' hud_cw_zip_countysub(zip = 35213, year = c('2019'), quarter = c('2'))
 #'
-#' hud_cw_zip_countysub(zip = '35213', year = c('2010'), quarter = c('1'),
+#' hud_cw_zip_countysub(zip = '35213', year = c('2019'), quarter = c('2'),
 #'    minimal = TRUE)
 #' }
 hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
@@ -1119,10 +1119,16 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #' \dontrun{
 #' library(rhud)
 #'
-#' hud_cw_countysub_zip(countysub = '4606720300 ',
+#' hud_cw_countysub_zip(countysub = '4606720300',
 #'    year = c('2019', '2019', '2019'), quarter = c('4','4'))
 #'
-#' hud_cw_countysub_zip(countysub = '4606720300 ',
+#' hud_cw_countysub_zip(countysub = '3706794068',
+#'    year = c('2019', '2019', '2019'), quarter = c('4','4'))
+#'
+#' hud_cw_countysub_zip(countysub = '3711993268',
+#'    year = c('2019', '2019', '2019'), quarter = c('4','4'))
+#'
+#' hud_cw_countysub_zip(countysub = '3910383426',
 #'    year = c('2019'), quarter = c('1'), minimal = TRUE)
 #' }
 hud_cw_countysub_zip <- function(countysub,
