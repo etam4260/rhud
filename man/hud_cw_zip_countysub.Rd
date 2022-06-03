@@ -47,9 +47,9 @@ zip to countysub. (Available 2nd Quarter 2018 onwards)
 \dontrun{
 library(rhud)
 
-hud_cw_zip_countysub(zip = 35213, year = c('2017'), quarter = c('1'))
+hud_cw_zip_countysub(zip = 35213, year = c('2019'), quarter = c('2'))
 
-hud_cw_zip_countysub(zip = '35213', year = c('2010'), quarter = c('1'),
+hud_cw_zip_countysub(zip = '35213', year = c('2019'), quarter = c('2'),
    minimal = TRUE)
 }
 }

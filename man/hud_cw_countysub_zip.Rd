@@ -48,10 +48,16 @@ returns the crosswalk for countysub to zip.
 \dontrun{
 library(rhud)
 
-hud_cw_countysub_zip(countysub = '4606720300 ',
+hud_cw_countysub_zip(countysub = '4606720300',
    year = c('2019', '2019', '2019'), quarter = c('4','4'))
 
-hud_cw_countysub_zip(countysub = '4606720300 ',
+hud_cw_countysub_zip(countysub = '3706794068',
+   year = c('2019', '2019', '2019'), quarter = c('4','4'))
+
+hud_cw_countysub_zip(countysub = '3711993268',
+   year = c('2019', '2019', '2019'), quarter = c('4','4'))
+
+hud_cw_countysub_zip(countysub = '3910383426',
    year = c('2019'), quarter = c('1'), minimal = TRUE)
 }
 }

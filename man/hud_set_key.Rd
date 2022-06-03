@@ -11,7 +11,7 @@ hud_set_key(key, in_wkdir = FALSE, in_home = FALSE)
 https://www.huduser.gov/hudapi/public/register?comingfrom=1}
 
 \item{in_wkdir}{set the key in the user's .RProfile in this directory.
-Is defaulted to true.}
+Is defaulted to false.}
 
 \item{in_home}{set the key in the user's HOME directory.
 Is defaulted to false.}

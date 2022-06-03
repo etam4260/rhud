@@ -15,6 +15,10 @@ zip \%z_in_cbsa\% cbsa
 Given a zip code and a cbsa, determine if they overlap
 using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
+
+This means that it is possible that certain geoids(lhs) are not counted even
+though their boundaries intersect the queried geoids(rhs). This is likely
+because addresses do not lie in their intersecting region.
 }
 \examples{
 \dontrun{

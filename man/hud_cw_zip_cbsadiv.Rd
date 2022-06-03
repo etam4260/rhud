@@ -47,9 +47,9 @@ zip to cbsadiv. (Available 4th Quarter 2017 onwards)
 \dontrun{
 library(rhud)
 
-hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'))
+hud_cw_zip_cbsadiv(zip = '35213', year = c('2017'), quarter = c('4'))
 
-hud_cw_zip_cbsadiv(zip = '35213', year = c('2018'), quarter = c('1'),
+hud_cw_zip_cbsadiv(zip = '35213', year = c('2017'), quarter = c('4'),
    minimal = TRUE)
 }
 }

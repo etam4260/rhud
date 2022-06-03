@@ -47,9 +47,9 @@ returns the crosswalk for cbsadiv to zip.
 \dontrun{
 library(rhud)
 
-hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('1'))
+hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('4'))
 
-hud_cw_cbsadiv_zip(cbsadiv = '10380', year = c('2010'), quarter = c('1'),
+hud_cw_cbsadiv_zip(cbsadiv = '10380', year = c('2017'), quarter = c('4'),
    minimal = TRUE)
 }
 }
