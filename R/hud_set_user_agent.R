@@ -18,12 +18,29 @@
 #'
 #' }
 hud_set_user_agent <- function(user_agent, in_wkdir, in_home) {
+
+  if (!is.character(path) || length(path) != 1) {
+    stop(paste("Make sure argument key is of type",
+               "character and is of vector length 1",
+               sep = ""))
+  }
+
+
+  if(!is.logical(in_wkdir) ||
+     !is.logical(in_home) ||
+     length(in_wkdir) != 1  ||
+     length(in_home) != 1) {
+
+    stop("Make sure argument in_wkdir and in_home are of type logical.")
+  }
+
   Sys.setenv("HUD_USER_AGENT" = user_agent)
+  message("* Setting the HUD_USER_AGENT variable for the working session.")
+
 
 
 
 }
-
 
 
 #' @name hud_get_user_agent

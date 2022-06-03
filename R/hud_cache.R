@@ -55,6 +55,8 @@ rhud_set_cache_dir <- function(path = "NULL",
   }
 
   Sys.setenv("RHUD_CACHE_DIR" = path)
+  message("* Setting the RHUD_CACHE_DIR variable for the working session.")
+
 
   if (in_wkdir) {
 
@@ -134,8 +136,24 @@ rhud_set_cache_dir <- function(path = "NULL",
 
 
 
+#' @name hud_get_user_agent
+#' @title hud_get_user_agent
+#' @description Get the most recent user agent set.
+#' @returns A character vector with the user agent used for querying HUD User
+#'   APIs.
+#' @export
+#' @seealso
+#' * [rhud::hud_get_user_agent()]
+#' * [rhud::hud_set_user_agent()]
+#' @examples
+#' \dontrun{
+#' library(rhud)
+#'
+#' hud_get_user_agent()
+#'
+#' }
 rhud_get_cache_dir <- function() {
-
+  Sys.getenv("RHUD_CACHE_DIR")
 }
 
 
