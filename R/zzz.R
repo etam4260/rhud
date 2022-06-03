@@ -32,6 +32,7 @@ NULL
                               "------------------------------------------------",
                               "\n* To begin, first obtain a key ",
                               "from HUD User website at `https://www.huduser.gov/hudapi/public/login`\n",
+                              "* To set the key, use hud_set_key(\"your-key\")\n",
                               "* To get tibbles instead of dataframes, ",
                               "use `options(rhud_use_tibble = TRUE)`\n",
                               "* Caching is enabled by default. To set a new cache ",
