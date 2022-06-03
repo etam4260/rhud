@@ -1,9 +1,11 @@
 test_that("test %z_in_trt%", {
   # When numerics have leading zeros, it might not work...
 
-  expect_equal(c(35213, 34321) %z_in_trt% c("01073010801"), c(TRUE, FALSE))
+  # Invalid zipcode 34321 should throw warning....
+  expect_warning(expect_equal(c(35213, 34321) %z_in_trt% c("01073010801"),
+                              c(TRUE, FALSE)))
 
-  expect_equal(c(77032, 77396) %z_in_trt% c(24033800608), c(TRUE, TRUE))
+  expect_equal(c(77032, 77396) %z_in_trt% c(24033800608), c(FALSE, FALSE))
 
   expect_equal(c(20774, 20772) %z_in_trt% c(24033800608), c(TRUE, TRUE))
 
@@ -36,7 +38,7 @@ test_that("test %z_in_cbsa%", {
   expect_equal(98569 %z_in_cbsa% 10140, TRUE)
 
   expect_equal(c(98520, 98541, 98526, 98571, 98559, 98583) %z_in_cbsa% 10140,
-               c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE))
+               c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE))
 
   expect_error(c(98520, 12) %z_in_cbsa% c(10140))
 
@@ -45,19 +47,19 @@ test_that("test %z_in_cbsa%", {
 
 
 test_that("test %z_in_cbsadiv%", {
-  expect_equal(35235 %z_in_cbsadiv% 13820, FALSE)
-
-  expect_equal(35071 %z_in_cbsadiv% 13820, FALSE)
-
+  expect_warning(expect_equal(35235 %z_in_cbsadiv% 13820, FALSE))
   # The zip to cbsadiv and cbsadiv to zip API might be broken for any
   # years after 2017 and 4th quarter. Should report this to HUD...
-  expect_equal(c(35022, 35126, 35210, 35501, 35071, 35064) %z_in_cbsadiv% 13820,
-               c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE))
+
+  expect_warning(expect_equal(35071 %z_in_cbsadiv% 13820, FALSE))
+
 
   expect_error(c(98520, 12) %z_in_cbsadiv% c(1014220))
 
   expect_error(c(20774, 122) %z_in_cbsadiv% c(1014033))
 })
+
+
 
 test_that("test %z_in_ctysb%", {
   expect_equal(44214 %z_in_ctysb% 3910383426, TRUE)
@@ -65,7 +67,7 @@ test_that("test %z_in_ctysb%", {
   expect_equal(44256 %z_in_ctysb% 3910383426, TRUE)
 
   expect_equal(c(44273, 44256, 44254, 44217, 44215, 44251) %z_in_ctysb% 3910383426,
-               c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE))
+               c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE))
 
   expect_error(c(98520, 12) %z_in_ctysb% c(1014220))
 
@@ -129,12 +131,11 @@ test_that("test %cbsa_in_z%", {
 })
 
 test_that("test %cbsadiv_in_z%", {
-  expect_equal(32300 %cbsadiv_in_z% 24054, FALSE)
+  expect_warning(expect_equal(32300 %cbsadiv_in_z% 24054, FALSE))
 
-  expect_equal(19260 %cbsadiv_in_z% 24054, FALSE)
+  expect_warning(expect_equal(19260 %cbsadiv_in_z% 24054, FALSE))
 
-  expect_equal(c(32300, 19260) %cbsadiv_in_z% 24054,
-               c(FALSE, FALSE))
+  expect_warning(expect_warning(c(32300, 19260) %cbsadiv_in_z% 24054))
 
   expect_error(c(98520, 12) %cbsadiv_in_z% c(1014220))
 
@@ -146,8 +147,8 @@ test_that("test %cd_in_z%", {
 
   expect_equal(5105 %cd_in_z% 24059, TRUE)
 
-  expect_equal(c(5109, 5105, 5106, 4332) %cd_in_z% 24059,
-               c(TRUE, TRUE, TRUE, FALSE))
+  expect_warning(expect_equal(c(5109, 5105, 5106, 4332) %cd_in_z% 24059,
+               c(TRUE, TRUE, TRUE, FALSE)))
 
   expect_error(c(98520, 12) %cd_in_z% c(1014220))
 
