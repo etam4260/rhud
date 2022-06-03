@@ -4,7 +4,7 @@
 \alias{hud_set_cache_dir}
 \title{hud_set_cache_dir}
 \usage{
-hud_set_cache_dir(path = "NULL", in_wkdir = FALSE, in_home = FALSE)
+hud_set_cache_dir(path, in_wkdir = FALSE, in_home = FALSE)
 }
 \arguments{
 \item{path}{The full path to the desired cache directory. Only one can be
@@ -29,6 +29,11 @@ and is not in a sensitive location.
 
 Windows users: please note that you'll need to use double-backslashes or
 forward slashes when specifying your cache directory's path in R.
+\itemize{
+\item This will create a folder called rhud_cache in specified path
+\item If setting a new directory, the previous cache will not be cleaned. In
+a future update there will be a garbage collection option.
+}
 }
 \examples{
 \dontrun{
