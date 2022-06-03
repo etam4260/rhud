@@ -8,25 +8,31 @@ rhud 0.4.0.9000 (6/10/2022)
     be removed in favor of a solution which allows different caching file 
     formats.
     
-  * Add the ability to set a user agent. (WIP)
+  * Added the ability to set a user agent. (WIP)
+    
+  * Added the ability to determine the most recent data for each program 
+    provided by HUD USER API via hud_rec_cw_yr(), hud_rec_fmr_yr(), 
+    hud_rec_il_yr().
+    (WIP)
     
   * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
     are now available to help determine whether a singular zip code overlaps
     a geographic identifier using the crosswalk files. Currently supports only
-    numeric identifiers, but may in the future provide support for names. 
+    numeric identifiers, but may in the future provide support for names. Their
+    non-infix counterparts are also available.
     (WIP)
     
   * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
     are now available to help determine whether a tract, cd, county, countysub,
     cbsa, or cbsadiv overlaps a zip code using the crosswalk files. Currently 
     supports only numeric identifiers, but may in the future provide support 
-    for names. (WIP)
+    for names. Their non-infix counterparts are also available. (WIP)
   
 ### MINOR IMPROVEMENTS:
 
   * Type checking added for using hud_set_key() as a way of reducing 
   latent errors.
-  * Download bar now shows the current working item as well as the 
+  * Download bar now shows the current working url as well as the 
   number of failed downloads. 
   * Using the hud_set_key method does not default to writing to the working 
   directory .Rprofile.
@@ -43,13 +49,14 @@ rhud 0.4.0.9000 (6/10/2022)
   * Fixed some bugs caused by hud_set_key not properly setting to the .Rprofile.
   (WIP)
   
-  * Fix issues with numerics being passed as 4 digits because of leading 0
-  truncation. (WIP)
+  * Fix some issues with numerics being passed with less digits because of
+  leading 0 truncation. (WIP)
   
 ### DOCUMENTATION FIXES
   
   * Added documentation to tell user that queries will be a combination of the 
-  geoid, year, and quarter inputs. 
+  geoid, year, and quarter inputs. (WIP)
+  * Included in README.md how to setup the key and provide a simple example.
   * Improved sample case studies in the website documentation. (WIP)
   * Added diagram for census geographies to the crosswalk website documentation
   to better communicate relationship among geographies. (WIP)
