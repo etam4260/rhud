@@ -28,6 +28,43 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
+
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("etam4260/rhud")
+```
+
+For more details on how to setup and utilize this package. Please go to
+https://etam4260.github.io/rhud/. Select [Setup] in the navigation bar.
+
+## Key Access
+
+To use functions provided by this package, you need to get access HUD USER via 
+token. Go to https://www.huduser.gov/hudapi/public/login to register for an 
+account and then create a token with access to all datasets provided by HUD. 
+This will include selecting USPS Crosswalk, Fair Markets Rent, Income Limits,
+and Comprehensive Housing Affordability Strategy. 
+
+Now copy and paste that key into the hud_set_key() function to be used throughout
+your R session.
+``` {r, eval = FALSE} 
+hud_set_key("sample-key")
+```
+
+## Simplistic Example
+This sample provided below shows how to query the USPS Crosswalk API
+``` {r, eval = FALSE} 
+
+hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
+
+```
+
+
 Are you a python developer? Check out [hudpy](https://github.com/etam4260/hudpy)
 instead.
 
@@ -191,19 +228,6 @@ also provide miscellaneous supplemental APIs under them.
   | `hud_rec_fmr_yr` |
   | `hud_rec_il_yr` |
     
-## Installation
-
-You can install the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("etam4260/rhud")
-```
-
-For more details on how to setup and utilize this package. Please go to
-https://etam4260.github.io/rhud/. Select [Setup] in the navigation bar.
-
-
 ## Contributors
 
 * Emmet Tam(https://github.com/etam4260)[emmet_tam@yahoo.com]
