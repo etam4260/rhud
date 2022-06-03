@@ -113,6 +113,7 @@ test_that("Query hud_cw_county_zip()", {
   expect_true(check_is_not_list(all_md))
 })
 
+
 test_that("Query hud_cw_cbsa_zip()", {
   skip_if(Sys.getenv("HUD_KEY") == "")
   res <- hud_cw_cbsa_zip(cbsa = "10140", year = c("2017"), quarter = c("2"))

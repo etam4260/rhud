@@ -4,10 +4,10 @@
 \alias{hud_set_user_agent}
 \title{hud_set_user_agent}
 \usage{
-hud_set_user_agent(user)
+hud_set_user_agent(user_agent, in_wkdir, in_home)
 }
 \arguments{
-\item{user}{A character vector with the user agent.}
+\item{user_agent}{A character vector with the user agent.}
 
 \item{in_wkdir}{set the key in the user's .RProfile in this directory.
 Is defaulted to false.}

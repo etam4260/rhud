@@ -16,5 +16,7 @@ geo_is_infix_query_and_get_warnings(query, f, year, quarter, querytype)
 \item{quarter}{The quarter to query for.}
 }
 \description{
-geo_is_infix_query_and_get_warnings
+Giving a geoid to query for, make sure to call the core
+hud_cw() functions to get the crosswalk output
+but intercept it to make custom warning messages.
 }

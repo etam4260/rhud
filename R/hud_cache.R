@@ -3,8 +3,8 @@
 
 #' @import R.cache
 
-#' @name rhud_cache_dir
-#' @title rhud_cache_dir
+#' @name rhud_set_cache_dir
+#' @title rhud_set_cache_dir
 #' @description Set the caching directory to store data retrieved using the
 #' rhud API calls. By default, rhud uses a non-persistent temporary directory
 #' given for an R session. However, it is possible that a user might want
@@ -27,10 +27,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' rhud_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
+#' rhud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
 #'
 #' }
-rhud_cache_dir <- function(path = "NULL",
+rhud_set_cache_dir <- function(path = "NULL",
                            in_wkdir = FALSE,
                            in_home = FALSE
                            ) {
@@ -134,9 +134,13 @@ rhud_cache_dir <- function(path = "NULL",
 
 
 
+rhud_get_cache_dir <- function() {
 
-#' @name rhud_cache_dir
-#' @title rhud_cache_dir
+}
+
+
+#' @name rhud_clear_cache
+#' @title rhud_clear_cache
 #' @description Remove cached data from the caching directory that is used to
 #' store data retrieved using the rhud API calls. By default, rhud uses a
 #' non-persistent temporary directory given for an R session, but a user might
@@ -144,7 +148,7 @@ rhud_cache_dir <- function(path = "NULL",
 #' @export
 #' @examples
 #' \dontrun{
-#' rhud_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
+#' rhud_clear_cache()
 #'
 #' }
 rhud_clear_cache <- function() {

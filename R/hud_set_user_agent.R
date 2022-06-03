@@ -1,7 +1,7 @@
 #' @name hud_set_user_agent
 #' @title hud_set_user_agent
 #' @description Set a user agent when querying the HUD User APIs.
-#' @param user A character vector with the user agent.
+#' @param user_agent A character vector with the user agent.
 #' @param in_wkdir set the key in the user's .RProfile in this directory.
 #'   Is defaulted to false.
 #' @param in_home set the key in the user's HOME directory.
@@ -17,7 +17,10 @@
 #' hud_set_user_agent("im-the-user")
 #'
 #' }
-hud_set_user_agent <- function(user) {
+hud_set_user_agent <- function(user_agent, in_wkdir, in_home) {
+  Sys.setenv("HUD_USER_AGENT" = user_agent)
+
+
 
 }
 

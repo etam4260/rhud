@@ -637,7 +637,9 @@ geo_is_infix_rhs_cleansing <- function(query, geoid_type) {
 
 #' @name geo_is_infix_query_and_get_warnings
 #' @title geo_is_infix_query_and_get_warnings
-#' @description
+#' @description Giving a geoid to query for, make sure to call the core
+#'   hud_cw() functions to get the crosswalk output
+#'   but intercept it to make custom warning messages.
 #' @param query The geoids to query for crosswalk
 #' @param f The function used query the crosswalk files.
 #' @param year The year to query for.
