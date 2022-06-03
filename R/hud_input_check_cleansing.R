@@ -84,11 +84,14 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
   }
 
   if (primary_geoid == "cbsadiv" || secondary_geoid == "cbsadiv") {
-    min_year = 2018
-  } else if (primary_geoid == "countysub" || secondary_geoid == "countysub") {
     min_year = 2017
+    min_quarter = 4
+  } else if (primary_geoid == "countysub" || secondary_geoid == "countysub") {
+    min_year = 2018
+    min_quarter = 2
   } else {
     min_year = 2010
+    min_quarter = 1
   }
 
   if (length(key) != 1) {
@@ -112,8 +115,10 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
   quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
-  if (FALSE %in% numbers_only(query)) stop("\nQuery input must only be numbers.")
-  if (FALSE %in% numbers_only(year)) stop("\nYear input must only be numbers.")
+  if (FALSE %in% numbers_only(query)) stop("\nQuery input must only be numbers.",
+                                           call. = FALSE)
+  if (FALSE %in% numbers_only(year)) stop("\nYear input must only be numbers.",
+                                          call. = FALSE)
   if (FALSE %in% numbers_only(quarter)) {
     stop("\nQuarter input must only be numbers.", call. = FALSE)
   }
@@ -128,8 +133,14 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
               call. = FALSE), "")
 
   ifelse(any(as.integer(year) < min_year),
-         stop(paste("\nOne of the years is below the min year of this query:",
+         stop(paste("\nOne of the years is below the min year of this query: ",
                     min_year,
+                    sep = ""),
+              call. = FALSE), "")
+
+  ifelse(year == min_year && any(as.integer(quarter) < min_quarter),
+         stop(paste("\nOne of the quarter is below the minimum quarter for the minimum year: ",
+                    min_quarter,
                     sep = ""),
               call. = FALSE), "")
 

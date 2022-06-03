@@ -12,8 +12,9 @@
 #' * [rhud::hud_set_user_agent()]
 #' @examples
 #' \dontrun{
+#' library(rhud)
 #'
-#' hud_get_key()
+#' hud_set_user_agent("im-the-user")
 #'
 #' }
 hud_set_user_agent <- function(user) {
@@ -33,10 +34,11 @@ hud_set_user_agent <- function(user) {
 #' * [rhud::hud_set_user_agent()]
 #' @examples
 #' \dontrun{
+#' library(rhud)
 #'
-#' hud_get_key()
+#' hud_get_user_agent()
 #'
 #' }
 hud_get_user_agent <- function() {
-
+  return(Sys.getenv("HUD_USER_AGENT"))
 }
