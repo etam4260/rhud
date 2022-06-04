@@ -7,6 +7,7 @@
 #' @param tract The tract to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @returns If zip(s) exist in the tract(s) specified, then TRUE is returned.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -96,6 +97,7 @@ z_in_trt <- function(zip, tract, year, quarter) {
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
+#' @returns If zip(s) exist in the county(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -151,6 +153,7 @@ z_in_cty <- function(zip, county, year, quarter) {
 #' @param cbsa The cbsa to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @returns If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -235,6 +238,7 @@ z_in_cbsa <- function(zip, cbsa, year, quarter) {
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
+#' @returns If zip(s) exist in the cbsadiv(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -304,6 +308,7 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
+#' @returns If zip(s) exist in the countysub(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -371,6 +376,7 @@ z_in_ctysb <- function(zip, countysub, year, quarter) {
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
+#' @returns If zip(s) exist in the cd(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -443,6 +449,7 @@ z_in_cd <- function(zip, cd, year, quarter) {
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
 #' @export
+#' @returns If tract(s) exist in the zip(s) specified, then TRUE is returned.
 #' @examples
 #' \dontrun{
 #'
@@ -511,6 +518,7 @@ trt_in_z <- function(tract, zip, year, quarter) {
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
 #' @export
+#' @returns If county(s) exist in the zip(s) specified, then TRUE is returned.
 #' @examples
 #' \dontrun{
 #'
@@ -579,6 +587,7 @@ cty_in_z <- function(county, zip, year, quarter) {
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
 #' @export
+#' @returns If cbsa(s) exist in the zip(s) specified, then TRUE is returned.
 #' @examples
 #' \dontrun{
 #'
@@ -647,10 +656,11 @@ cbsa_in_z <- function(cbsa, zip, year, quarter) {
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
 #' @export
+#' @returns If cbsadiv(s) exist in the zip(s) specified, then TRUE is returned.
 #' @examples
 #' \dontrun{
 #'
-#' z_in_cbsadiv(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
+#' cbsadiv_in_zip(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
 #'
 #' }
 cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
@@ -714,6 +724,7 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
+#' @returns If cd(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -782,6 +793,7 @@ cd_in_z <- function(cd, zip, year, quarter) {
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
+#' @returns If countysub(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{

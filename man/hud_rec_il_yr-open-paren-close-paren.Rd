@@ -7,6 +7,10 @@
 \usage{
 hud_rec_il_yr()
 }
+\value{
+The most recent year for the il files for state, county, and
+metroarea queries.
+}
 \description{
 Ping the Income Limits API provided by HUD User to
 determine the most recently released files. This will only ping

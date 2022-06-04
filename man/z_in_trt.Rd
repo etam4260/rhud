@@ -15,6 +15,9 @@ z_in_trt(zip, tract, year, quarter)
 
 \item{quarter}{The quarter of the crosswalk files.}
 }
+\value{
+If zip(s) exist in the tract(s) specified, then TRUE is returned.
+}
 \description{
 Given a zip code and a tract, determine if they overlap
 using the crosswalk files. Overlap will be described if

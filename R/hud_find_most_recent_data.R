@@ -8,6 +8,7 @@
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
 #' * [rhud::hud_rec_il_yr()]
+#' @returns The most recent year and quarter of available crosswalk files.
 #' @export
 #' @examples
 #' \dontrun{
@@ -65,6 +66,8 @@ hud_rec_cw_yr <- function() {
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
 #' * [rhud::hud_rec_il_yr()]
+#' @returns The most recent year for the fmr files for state, county, and
+#'   metroarea queries.
 #' @export
 #' @examples
 #' \dontrun{
@@ -152,6 +155,8 @@ hud_rec_fmr_yr <- function() {
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
 #' * [rhud::hud_rec_il_yr()]
+#' @returns The most recent year for the il files for state, county, and
+#'   metroarea queries.
 #' @export
 #' @examples
 #' \dontrun{

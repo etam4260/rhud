@@ -15,6 +15,9 @@ cbsadiv_in_z(cbsadiv, zip, year, quarter)
 
 \item{quarter}{The quarter of the crosswalk files.}
 }
+\value{
+If cbsadiv(s) exist in the zip(s) specified, then TRUE is returned.
+}
 \description{
 Given a cbsadiv and a zip, determine if they overlap
 using the crosswalk files. Overlap will be described if
@@ -23,7 +26,7 @@ any residential, business, other, or total addresses reside in both.
 \examples{
 \dontrun{
 
-z_in_cbsadiv(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
+cbsadiv_in_zip(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
 
 }
 }

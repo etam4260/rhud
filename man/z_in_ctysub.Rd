@@ -16,6 +16,9 @@ z_in_ctysb(zip, countysub, year, quarter)
 
 \item{quarter}{The quarter of the crosswalk files.}
 }
+\value{
+If zip(s) exist in the countysub(s) specified, then TRUE is returned.
+}
 \description{
 Given a zip code and a countysub, determine if they overlap
 using the crosswalk files. Overlap will be described if

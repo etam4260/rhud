@@ -6,6 +6,9 @@
 \usage{
 hud_rec_cw_yr()
 }
+\value{
+The most recent year and quarter of available crosswalk files.
+}
 \description{
 Ping the Crosswalk API provided by HUD User to determine the
 most recently released files. This will only ping for the last two
