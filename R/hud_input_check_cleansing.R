@@ -347,7 +347,9 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
   }
 
 
-  args <- cw_input_check_cleansing(query = data[, geoid_col], year = year,
+  args <- cw_input_check_cleansing(primary_geoid = geoid,
+                                   secondary_geoid = cw_geoid,
+                                   query = data[, geoid_col], year = year,
                                    quarter = quarter, key = key)
 
   return(list(geoid, geoid_col, cw_geoid, cw_geoid_col, method,

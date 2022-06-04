@@ -101,7 +101,7 @@ hud_set_cache_dir <- function(path,
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
+      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
                        sep = ""),
                  ".Rprofile")
 
@@ -137,12 +137,12 @@ hud_set_cache_dir <- function(path,
 
       message("* Writing the RHUD_CACHE_DIR in HOME directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
+                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
                        sep = ""),
                  "~/.Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", key,"\")\n",
+      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
                        sep = ""),
                  "~/.Rprofile")
       message("* Writing the RHUD_CACHE_DIR in HOME directory .Rprofile!")

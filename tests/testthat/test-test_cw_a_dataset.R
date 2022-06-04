@@ -94,6 +94,8 @@ test_that("test simple crosswalk for zip", {
 
 
 test_that("test awkward crosswalk",{
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   sample <- data.frame(mes = c(1232, 1232, 1232), zip = c(21206, 21206, 21206))
 
   expect_error(crosswalk(sample, "zip", "zip", "county", year = 2018,

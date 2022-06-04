@@ -29,14 +29,15 @@
 #' }
 z_in_trt <- function(zip, tract, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
-  }
+    if (missing(year)) {
+      year = args[1]
+    }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
   args <- hud_rec_cw_yr()
@@ -104,25 +105,38 @@ z_in_trt <- function(zip, tract, year, quarter) {
 #' }
 z_in_cty <- function(zip, county, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  county <- geo_is_infix_rhs_cleansing(query = county, "county")
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
+                                                   f = hud_cw_zip_county,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "zip")
+
+    if (any(queried %in% as.character(county))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(county) %in%
-      as.character(suppressMessages(hud_cw_zip_county(zip,
-                                                      minimal = TRUE,
-                                                      year = year,
-                                                      quarter = quarter)))) {
-    return(TRUE)
-  }
-
-  return(FALSE)
+  return(res)
 }
 
 
@@ -159,25 +173,41 @@ z_in_cty <- function(zip, county, year, quarter) {
 #' }
 z_in_cbsa <- function(zip, cbsa, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  args <- hud_rec_cw_yr()
+
+
+  cbsa <- geo_is_infix_rhs_cleansing(query = cbsa, "cbsa")
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
+                                                   f = hud_cw_zip_cbsa,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "zip")
+
+    if (any(queried %in% as.character(cbsa))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(cbsa) %in%
-      as.character(suppressMessages(hud_cw_zip_cbsa(zip,
-                                                      minimal = TRUE,
-                                                      year = year,
-                                                      quarter = quarter)))) {
-    return(TRUE)
-  }
-
-  return(FALSE)
+  return(res)
 }
 
 
@@ -214,25 +244,38 @@ z_in_cbsa <- function(zip, cbsa, year, quarter) {
 #' }
 z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  cbsadiv <- geo_is_infix_rhs_cleansing(query = cbsadiv, "cbsadiv")
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
+                                                   f = hud_cw_zip_cbsadiv,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "zip")
+
+    if (any(queried %in% as.character(cbsadiv))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(cbsadiv) %in%
-      as.character(suppressMessages(hud_cw_zip_cbsadiv(zip,
-                                                       minimal = TRUE,
-                                                       year = year,
-                                                       quarter = quarter)))) {
-    return(TRUE)
-  }
-
-  return(FALSE)
+  return(res)
 }
 
 
@@ -270,25 +313,38 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 #' }
 z_in_ctysb <- function(zip, countysub, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  countysub <- geo_is_infix_rhs_cleansing(query = countysub, "countysub")
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
+                                                   f = hud_cw_zip_countysub,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "zip")
+
+    if (any(queried %in% as.character(countysub))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(countysub) %in%
-      as.character(suppressMessages(hud_cw_zip_countysub(zip,
-                                                       minimal = TRUE,
-                                                       year = year,
-                                                       quarter = quarter)))) {
-    return(TRUE)
-  }
-
-  return(FALSE)
+  return(res)
 }
 
 
@@ -324,25 +380,37 @@ z_in_ctysb <- function(zip, countysub, year, quarter) {
 #' }
 z_in_cd <- function(zip, cd, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  cd <- geo_is_infix_rhs_cleansing(query = cd, "cd")
+
+  res <- c()
+  for (i in seq_len(length(zip))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
+                                                   f = hud_cw_zip_cd,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "zip")
+
+    if (any(queried %in% as.character(cd))) {
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(cd) %in%
-      as.character(suppressMessages(hud_cw_zip_cd(zip,
-                                                 minimal = TRUE,
-                                                 year = year,
-                                                 quarter = quarter)))) {
-    return(TRUE)
-  }
-
-  return(FALSE)
+  return(res)
 }
 
 
@@ -383,25 +451,37 @@ z_in_cd <- function(zip, cd, year, quarter) {
 #' }
 trt_in_z <- function(tract, zip, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  res <- c()
+  for (i in seq_len(length(tract))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = tract[i],
+                                                   f = hud_cw_tract_zip,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "tract")
+
+
+    if (any(queried %in% as.character(zip))) {
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_tract_zip(tract,
-                                                     minimal = TRUE,
-                                                     year = year,
-                                                     quarter = quarter
-      )))) {
-    return(TRUE)
-  }
-  return(FALSE)
+  return(res)
 }
 
 
@@ -439,25 +519,38 @@ trt_in_z <- function(tract, zip, year, quarter) {
 #' }
 cty_in_z <- function(county, zip, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  res <- c()
+  for (i in seq_len(length(county))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = county[i],
+                                                   f = hud_cw_county_zip,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "county")
+
+    if (any(queried %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_county_zip(county,
-                                                      minimal = TRUE,
-                                                      year = year,
-                                                      quarter = quarter
-      )))) {
-    return(TRUE)
-  }
-  return(FALSE)
+  return(res)
 }
 
 
@@ -494,26 +587,39 @@ cty_in_z <- function(county, zip, year, quarter) {
 #' }
 cbsa_in_z <- function(cbsa, zip, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
-  }
+  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  res <- c()
+  for (i in seq_len(length(cbsa))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = cbsa[i],
+                                                   f = hud_cw_cbsa_zip,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "cbsa")
+
+    if (any(queried %in% as.character(zip))) {
 
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_cbsa_zip(cbsa,
-                                                    minimal = TRUE,
-                                                    year = year,
-                                                    quarter = quarter
-      )))) {
-    return(TRUE)
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
-  return(FALSE)
+
+  return(res)
+
 }
 
 
@@ -549,25 +655,38 @@ cbsa_in_z <- function(cbsa, zip, year, quarter) {
 #' }
 cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  res <- c()
+  for (i in seq_len(length(cbsadiv))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = cbsadiv[i],
+                                                   f = hud_cw_cbsadiv_zip,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "cbsadiv")
+
+    if (any(queried %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_cbsadiv_zip(cbsadiv,
-                                                       minimal = TRUE,
-                                                       year = year,
-                                                       quarter = quarter
-      )))) {
-    return(TRUE)
-  }
-  return(FALSE)
+  return(res)
 }
 
 
@@ -604,25 +723,38 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
 #' }
 cd_in_z <- function(cd, zip, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  res <- c()
+  for (i in seq_len(length(cd))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = cd[i],
+                                                   f = hud_cw_cd_zip,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "cd")
+
+    if (any(queried %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_cd_zip(cd,
-                                                  minimal = TRUE,
-                                                  year = year,
-                                                  quarter = quarter
-      )))) {
-    return(TRUE)
-  }
-  return(FALSE)
+  return(res)
 }
 
 
@@ -657,23 +789,36 @@ cd_in_z <- function(cd, zip, year, quarter) {
 #' }
 ctysb_in_z <- function(countysub, zip, year, quarter) {
 
-  if (missing(year)) {
+  if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
-    year = args[1]
+    if (missing(year)) {
+      year = args[1]
+    }
+
+    if (missing(quarter)) {
+      quarter = args[2]
+    }
   }
 
-  if (missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    quarter = args[2]
+  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  res <- c()
+  for (i in seq_len(length(countysub))) {
+
+    queried <- geo_is_infix_query_and_get_warnings(query = countysub[i],
+                                                   f = hud_cw_countysub_zip,
+                                                   year = args[1],
+                                                   quarter = args[2],
+                                                   querytype = "countysub")
+
+    if (any(queried %in% as.character(zip))) {
+
+
+      res <- c(res, TRUE)
+    } else {
+      res <- c(res, FALSE)
+    }
   }
 
-  if (as.character(zip) %in%
-      as.character(suppressMessages(hud_cw_countysub_zip(countysub,
-                                                         minimal = TRUE,
-                                                         year = year,
-                                                         quarter = quarter
-      )))) {
-    return(TRUE)
-  }
-  return(FALSE)
+  return(res)
 }

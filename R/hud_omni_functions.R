@@ -129,8 +129,11 @@
 #' hud_cw(type = 12, query = "4606720300 ", year = c("2019", "2019", "2019"),
 #'    quarter = c("4", "4"))
 #' }
-hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
-                   quarter = 1, minimal = FALSE, key = Sys.getenv("HUD_KEY"),
+hud_cw <- function(type, query,
+                   year = format(Sys.Date() - 365, "%Y"),
+                   quarter = 1,
+                   minimal = FALSE,
+                   key = Sys.getenv("HUD_KEY"),
                    to_tibble) {
 
   if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
@@ -143,13 +146,6 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
   } else if (missing(to_tibble)) {
     to_tibble = FALSE
   }
-
-  args <- cw_input_check_cleansing(query, year, quarter, key)
-
-  query <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
 
   alltypes <- c("zip-tract", "zip-county", "zip-cbsa",
                 "zip-cbsadiv", "zip-cd", "tract-zip",
@@ -189,6 +185,14 @@ hud_cw <- function(type, query, year = format(Sys.Date() - 365, "%Y"),
 
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
+
+  args <- cw_input_check_cleansing(lhgeoid, rhgeoid, query, year, quarter, key)
+
+  query <- args[[1]]
+  year <- args[[2]]
+  quarter <- args[[3]]
+  key <- args[[4]]
+
 
   # Need to make sure query is a zip code of 5 digits.
   if (as.integer(type) >= 1 && as.integer(type) <= 5 ||

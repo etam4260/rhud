@@ -1,5 +1,6 @@
 test_that("test %z_in_trt%", {
   # When numerics have leading zeros, it might not work...
+  skip_if(Sys.getenv("HUD_KEY") == "")
 
   # Invalid zipcode 34321 should throw warning....
   expect_warning(expect_equal(c(35213, 34321) %z_in_trt% c("01073010801"),
@@ -18,6 +19,8 @@ test_that("test %z_in_trt%", {
 
 
 test_that("test %z_in_cty%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_equal(71052 %z_in_cty% 22031, TRUE)
 
   expect_equal(c(71049, 71052, 71419, 71027) %z_in_cty% 22031, c(TRUE,
@@ -32,6 +35,7 @@ test_that("test %z_in_cty%", {
 
 
 test_that("test %z_in_cbsa%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
 
   expect_equal(71052 %z_in_cbsa% 43340, TRUE)
 
@@ -47,6 +51,8 @@ test_that("test %z_in_cbsa%", {
 
 
 test_that("test %z_in_cbsadiv%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_warning(expect_equal(35235 %z_in_cbsadiv% 13820, FALSE))
   # The zip to cbsadiv and cbsadiv to zip API might be broken for any
   # years after 2017 and 4th quarter. Should report this to HUD...
@@ -62,6 +68,8 @@ test_that("test %z_in_cbsadiv%", {
 
 
 test_that("test %z_in_ctysb%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_equal(44214 %z_in_ctysb% 3910383426, TRUE)
 
   expect_equal(44256 %z_in_ctysb% 3910383426, TRUE)
@@ -75,6 +83,8 @@ test_that("test %z_in_ctysb%", {
 })
 
 test_that("test %z_in_cd%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_equal(70072 %z_in_cd% 2202, TRUE)
 
   expect_equal(70117 %z_in_cd% 2202, TRUE)
@@ -88,7 +98,7 @@ test_that("test %z_in_cd%", {
 })
 
 test_that("test %trt_in_z%", {
-
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # In this case we see that numeric inputs with leading zero get truncated..
   # need to fix that.
 
@@ -105,6 +115,8 @@ test_that("test %trt_in_z%", {
 })
 
 test_that("test %cty_in_z%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_equal(24027 %cty_in_z% 21043, TRUE)
 
   expect_equal(24005 %cty_in_z% 21043, TRUE)
@@ -118,6 +130,8 @@ test_that("test %cty_in_z%", {
 })
 
 test_that("test %cbsa_in_z%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_equal(32300 %cbsa_in_z% 24054, TRUE)
 
   expect_equal(19260 %cbsa_in_z% 24054, TRUE)
@@ -131,6 +145,8 @@ test_that("test %cbsa_in_z%", {
 })
 
 test_that("test %cbsadiv_in_z%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_warning(expect_equal(32300 %cbsadiv_in_z% 24054, FALSE))
 
   expect_warning(expect_equal(19260 %cbsadiv_in_z% 24054, FALSE))
@@ -143,6 +159,8 @@ test_that("test %cbsadiv_in_z%", {
 })
 
 test_that("test %cd_in_z%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_equal(5109 %cd_in_z% 24059, TRUE)
 
   expect_equal(5105 %cd_in_z% 24059, TRUE)
@@ -156,6 +174,8 @@ test_that("test %cd_in_z%", {
 })
 
 test_that("test %ctysb_in_z%", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
+
   expect_equal(3910371488 %ctysb_in_z% 44273, TRUE)
 
   expect_equal(3916950666 %ctysb_in_z% 44273, TRUE)
