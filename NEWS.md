@@ -9,25 +9,25 @@ rhud 0.4.0.9000 (6/10/2022)
     be removed in favor of a solution which allows different caching file 
     formats.
     
-  * Added the ability to set a user agent. (WIP)
+  * Added the ability to set a user agent. 
     
   * Added the ability to determine the most recent data for each program 
     provided by HUD USER API via hud_rec_cw_yr(), hud_rec_fmr_yr(), 
     hud_rec_il_yr().
-    (WIP)
+    
     
   * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
     are now available to help determine whether a singular zip code overlaps
     a geographic identifier using the crosswalk files. Currently supports only
     numeric identifiers, but may in the future provide support for names. Their
     non-infix counterparts are also available.
-    (WIP)
+    
     
   * %trt_in_z%`, `%cty_in_z%`, `%ctysb_in_z%`, `%cd_in_z%`, `%cbsa_in_z%`, `%cbsadiv_in_z%`
     are now available to help determine whether a tract, cd, county, countysub,
     cbsa, or cbsadiv overlaps a zip code using the crosswalk files. Currently 
     supports only numeric identifiers, but may in the future provide support 
-    for names. Their non-infix counterparts are also available. (WIP)
+    for names. Their non-infix counterparts are also available.
   
 ### MINOR IMPROVEMENTS:
 
@@ -38,7 +38,7 @@ rhud 0.4.0.9000 (6/10/2022)
   * Using the hud_set_key method does not default to writing to the working 
     directory .Rprofile.
   * Introduction message to the package is now more informative.
-  * Functions now check if user enters years below what is allowed. (WIP)
+  * Functions now check if user enters years below what is allowed.
   * State queries for hud_fmr no longer does double queries.
   * User is presented with a description of the entire package when typing
     part of its name in the console.
@@ -50,7 +50,6 @@ rhud 0.4.0.9000 (6/10/2022)
     validating state inputs. 
   
   * Fixed some bugs caused by hud_set_key not properly setting to the .Rprofile.
-    (WIP)
   
   * Fix some issues with numerics being passed with less digits because of
     leading 0 truncation. (WIP)
@@ -58,7 +57,7 @@ rhud 0.4.0.9000 (6/10/2022)
 ### DOCUMENTATION FIXES
   
   * Added documentation to tell user that queries will be a combination of the 
-    geoid, year, and quarter inputs. (WIP)
+    geoid, year, and quarter inputs. 
   * Included in README.md how to setup the key and provide a simple example.
   * Improved sample case studies in the website documentation. (WIP)
   * Added diagram for census geographies to the crosswalk website documentation
