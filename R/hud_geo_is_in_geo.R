@@ -286,8 +286,8 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 
 
 
-#' @name z_in_ctysub
-#' @title z_in_ctysub
+#' @name z_in_ctysb
+#' @title z_in_ctysb
 #' @description Given a zip code and a countysub, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
@@ -313,7 +313,7 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 #' @examples
 #' \dontrun{
 #'
-#' z_in_ctysub(zip = 35213, countysub = 0107390324, year = 2019, quarter = 2)
+#' z_in_ctysb(zip = 35213, countysub = 0107390324, year = 2019, quarter = 2)
 #'
 #' }
 z_in_ctysb <- function(zip, countysub, year, quarter) {
