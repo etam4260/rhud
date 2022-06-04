@@ -77,7 +77,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
-  if (nrow(states) > 1) {
+  if (!is.null(states) && nrow(states) > 1) {
     states$state_name <- unlist(states$state_name)
     states$state_code <- unlist(states$state_code)
     states$state_num <- unlist(states$state_num)
@@ -88,8 +88,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
       return(as_tibble(states))
     }
   }
-
-  stop("\nThe key used might be invalid.", call. = FALSE)
+  return(NULL)
 }
 
 # Need to allow user to filter metropolitan areas similar to place, county,
@@ -230,7 +229,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
-  if (nrow(metro) > 1) {
+  if (!is.null(metro) && nrow(metro) > 1) {
     metro$cbsa_code <- unlist(metro$cbsa_code)
     metro$area_name <- unlist(metro$area_name)
     metro$category <- unlist(metro$category)
@@ -242,7 +241,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 
   }
 
-  stop("\nThe key used might be invalid.", call. = FALSE)
+  return(NULL)
 }
 
 
@@ -344,7 +343,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
-  if (nrow(counties) > 1) {
+  if (!is.null(counties) && nrow(counties) > 1) {
     counties$state_code <- unlist(counties$state_code)
     counties$fips_code <- unlist(counties$fips_code)
     counties$county_name <- unlist(counties$county_name)
@@ -358,8 +357,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
     }
   }
 
-  stop(paste("\nThe key used might be invalid or",
-             "could not find counties for this state."), call. = FALSE)
+  return(NULL)
 }
 
 #' @name hud_state_places
@@ -457,7 +455,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
 
   places <- misc_do_query_call(urls, key, to_tibble)
 
-  if (nrow(places) > 1) {
+  if (!is.null(places) && nrow(places) > 1) {
     places$statecode <- unlist(places$statecode)
     places$entityId <- unlist(places$entityId)
     places$placename <- unlist(places$placename)
@@ -467,8 +465,8 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
       return(as_tibble(places))
     }
   }
-  stop("\nThe key used might be invalid or could not find places for this state.",
-       call. = FALSE)
+
+  return(NULL)
 }
 
 #' @name hud_state_minor_civil_divisions
@@ -567,7 +565,7 @@ hud_state_minor_civil_divisions <- function(state,
 
   mcd <- misc_do_query_call(urls, key, to_tibble)
 
-  if (nrow(mcd) > 1) {
+  if (!is.null(mcd) && nrow(mcd) > 1) {
     mcd$statecode <- unlist(mcd$statecode)
     mcd$entityId <- unlist(mcd$entityId)
     mcd$mcdname <- unlist(mcd$mcdname)
@@ -578,6 +576,5 @@ hud_state_minor_civil_divisions <- function(state,
     }
   }
 
-  stop("\nThe key used might be invalid or could not find mcds for this state",
-       call. = FALSE)
+  return(NULL)
 }

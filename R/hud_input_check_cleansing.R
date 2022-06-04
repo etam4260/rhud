@@ -138,7 +138,7 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
                     sep = ""),
               call. = FALSE), "")
 
-  ifelse(year == min_year && any(as.integer(quarter) < min_quarter),
+  ifelse(any(year == min_year) && any(as.integer(quarter) < min_quarter),
          stop(paste("\nOne of the quarter is below the minimum quarter for the minimum year: ",
                     min_quarter,
                     sep = ""),

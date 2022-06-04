@@ -5,9 +5,9 @@
 #'    years. This tests hud_cw_tract_zip(tract = 48201223100) as the
 #'    endpoint query.
 #' @seealso
-#' * [rhud::`hud_rec_cw_yr()`]
-#' * [rhud::`hud_rec_fmr_yr()`]
-#' * [rhud::`hud_rec_il_yr`]
+#' * [rhud::hud_rec_cw_yr()]
+#' * [rhud::hud_rec_fmr_yr()]
+#' * [rhud::hud_rec_il_yr]
 #' @export
 #' @examples
 #' \dontrun{
@@ -62,9 +62,9 @@ hud_rec_cw_yr <- function() {
 #'    for the last two years. Will return years for county and metroarea
 #'    resolution.
 #' @seealso
-#' * [rhud::`hud_rec_cw_yr()`]
-#' * [rhud::`hud_rec_fmr_yr()`]
-#' * [rhud::`hud_rec_il_yr`]
+#' * [rhud::hud_rec_cw_yr()]
+#' * [rhud::hud_rec_fmr_yr()]
+#' * [rhud::hud_rec_il_yr]
 #' @export
 #' @examples
 #' \dontrun{
@@ -149,9 +149,9 @@ hud_rec_fmr_yr <- function() {
 #'    for the last two years. Will return years for county and metroarea
 #'    resolution.
 #' @seealso
-#' * [rhud::`hud_rec_cw_yr()`]
-#' * [rhud::`hud_rec_fmr_yr()`]
-#' * [rhud::`hud_rec_il_yr`]
+#' * [rhud::hud_rec_cw_yr()]
+#' * [rhud::hud_rec_fmr_yr()]
+#' * [rhud::hud_rec_il_yr]
 #' @export
 #' @examples
 #' \dontrun{

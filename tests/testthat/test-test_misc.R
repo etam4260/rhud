@@ -9,7 +9,7 @@ test_that("All MCD In State Query", {
   mcd <- hud_state_minor_civil_divisions("6")
   expect_true(nrow(mcd) >= 1)
 
-  expect_error(hud_state_minor_civil_divisions("CA", "qdqdwq"))
+  expect_warning(hud_state_minor_civil_divisions("CA", "qdqdwq"))
 })
 
 test_that("All Cities in State Query", {
@@ -23,7 +23,7 @@ test_that("All Cities in State Query", {
   cities <- hud_state_places("8")
   expect_true(nrow(cities) >= 1)
 
-  expect_error(hud_state_places("CA", "qdqdwq"))
+  expect_warning(hud_state_places("CA", "qdqdwq"))
 })
 
 test_that("List States Query", {
@@ -44,7 +44,7 @@ test_that("List Counties Query", {
   counties <- hud_state_counties("Washington")
   expect_true(nrow(counties) >= 1)
 
-  expect_error(hud_state_counties("CA", "qdqdwq"))
+  expect_warning(hud_state_counties("CA", "qdqdwq"))
 })
 
 test_that("List Small Areas Query", {

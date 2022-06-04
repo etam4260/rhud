@@ -651,6 +651,8 @@
 #'    5) cbsadiv,
 #'    6) county,
 #'    7) countysub
+#' @noRd
+#' @noMd
 geo_is_infix_rhs_cleansing <- function(query, geoid_type) {
 
   query <- unique(paste(trimws(as.character(query), which = "both")))
@@ -704,6 +706,16 @@ geo_is_infix_rhs_cleansing <- function(query, geoid_type) {
 #' @param f The function used query the crosswalk files.
 #' @param year The year to query for.
 #' @param quarter The quarter to query for.
+#' @param querytype The geoid user is querying for.
+#'    1) zip
+#'    2) tract
+#'    3) cbsa
+#'    4) cd
+#'    5) cbsadiv
+#'    6) countsub
+#'    7) county
+#' @noRd
+#' @noMd
 geo_is_infix_query_and_get_warnings <- function(query,
                                                 f,
                                                 year,

@@ -30,11 +30,11 @@ z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
 \seealso{
 \itemize{
 \item \code{\link[=z_in_trt]{z_in_trt()}}
-\item \code{\link[=z_in_county]{z_in_county()}}
+\item \code{\link[=z_in_cty]{z_in_cty()}}
 \item \code{\link[=z_in_cbsa]{z_in_cbsa()}}
 \item \code{\link[=z_in_cbsadiv]{z_in_cbsadiv()}}
 \item \code{\link[=z_in_ctysb]{z_in_ctysb()}}
-\item \code{\link[=z_cd]{z_cd()}}
+\item \link{z_in_cd}
 \item \code{\link[=trt_in_z]{trt_in_z()}}
 \item \code{\link[=cty_in_z]{cty_in_z()}}
 \item \code{\link[=cbsa_in_z]{cbsa_in_z()}}

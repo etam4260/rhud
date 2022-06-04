@@ -22,8 +22,8 @@ hud_rec_il_yr()
 }
 \seealso{
 \itemize{
-\item \link[=`hud_rec_cw_yr()`]{rhud::\code{hud_rec_cw_yr()}}
-\item \link[=`hud_rec_fmr_yr()`]{rhud::\code{hud_rec_fmr_yr()}}
-\item \link[=`hud_rec_il_yr`]{rhud::\code{hud_rec_il_yr}}
+\item \code{\link[=hud_rec_cw_yr]{hud_rec_cw_yr()}}
+\item \code{\link[=hud_rec_fmr_yr]{hud_rec_fmr_yr()}}
+\item \link{hud_rec_il_yr}
 }
 }

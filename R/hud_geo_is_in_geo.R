@@ -9,11 +9,11 @@
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -85,11 +85,11 @@ z_in_trt <- function(zip, tract, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -153,11 +153,11 @@ z_in_cty <- function(zip, county, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -224,11 +224,11 @@ z_in_cbsa <- function(zip, cbsa, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -293,11 +293,11 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -360,11 +360,11 @@ z_in_ctysb <- function(zip, countysub, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -431,11 +431,11 @@ z_in_cd <- function(zip, cd, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -499,11 +499,11 @@ trt_in_z <- function(tract, zip, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -567,11 +567,11 @@ cty_in_z <- function(county, zip, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -635,11 +635,11 @@ cbsa_in_z <- function(cbsa, zip, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -703,11 +703,11 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
 #' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
@@ -767,13 +767,15 @@ cd_in_z <- function(cd, zip, year, quarter) {
 #'   any residential, business, other, or total addresses reside in both.
 #' @param countysub The countysub to determine overlap with zip
 #' @param zip The zip to determine overlap with countysub
+#' @param year The year of the crosswalk files.
+#' @param quarter The quarter of the crosswalk files.
 #' @seealso
 #' * [rhud::z_in_trt()]
-#' * [rhud::z_in_county()]
+#' * [rhud::z_in_cty()]
 #' * [rhud::z_in_cbsa()]
 #' * [rhud::z_in_cbsadiv()]
 #' * [rhud::z_in_ctysb()]
-#' * [rhud::z_cd()]
+#' * [rhud::z_in_cd]
 #' * [rhud::trt_in_z()]
 #' * [rhud::cty_in_z()]
 #' * [rhud::cbsa_in_z()]
