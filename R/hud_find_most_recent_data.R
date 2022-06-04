@@ -7,7 +7,7 @@
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
-#' * [rhud::hud_rec_il_yr]
+#' * [rhud::hud_rec_il_yr()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -64,7 +64,7 @@ hud_rec_cw_yr <- function() {
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
-#' * [rhud::hud_rec_il_yr]
+#' * [rhud::hud_rec_il_yr()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -151,7 +151,7 @@ hud_rec_fmr_yr <- function() {
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
-#' * [rhud::hud_rec_il_yr]
+#' * [rhud::hud_rec_il_yr()]
 #' @export
 #' @examples
 #' \dontrun{
