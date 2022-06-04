@@ -218,10 +218,11 @@ The HUD also provide miscellaneous supplemental APIs under them.
 
 -   Caching
 
-| Caching                                               |
-|-------------------------------------------------------|
-| `hud_set_cache_dir()`                                 |
-| ``` hud_get_cache_dir()``|   | ```hud_clear_cache()\` |
+| Caching               |
+|-----------------------|
+| `hud_set_cache_dir()` |
+| `hud_get_cache_dir()` |
+| `hud_clear_cache()`   |
 
 -   Utilities
 

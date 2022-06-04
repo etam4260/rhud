@@ -217,7 +217,7 @@ also provide miscellaneous supplemental APIs under them.
   | Caching |
   |------------------------------------------|
   | `hud_set_cache_dir()` |
-  | `hud_get_cache_dir()``|
+  | `hud_get_cache_dir()` |
   | `hud_clear_cache()` | 
 
   - Utilities
