@@ -10,8 +10,8 @@ navbar:
     text: Articles
     menu:
     - text: "HUD User"
-    - text: "Crosswalk"
-      href: articles/Crosswalk.html
+    - text: "USPS Crosswalk"
+      href: articles/USPS-Crosswalk.html
     - text: "Fair Markets Rent"
       href: articles/Fair-Markets-Rent.html
     - text: "Income Limits"

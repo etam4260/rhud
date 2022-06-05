@@ -35,7 +35,7 @@ zip to congressional district."><meta property="og:image" content="/logo.png"><!
   </a>
   <ul class="dropdown-menu" role="menu"><li class="dropdown-header">HUD User</li>
     <li>
-      <a href="../articles/Crosswalk.html">Crosswalk</a>
+      <a href="../articles/USPS-Crosswalk.html">USPS Crosswalk</a>
     </li>
     <li>
       <a href="../articles/Fair-Markets-Rent.html">Fair Markets Rent</a>
@@ -82,7 +82,7 @@ zip to congressional district."><meta property="og:image" content="/logo.png"><!
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>hud_cw_zip_cd</h1>
-    <small class="dont-index">Source: <a href="https://github.com/etam4260/rhud/blob/HEAD/R/hudcw.R" class="external-link"><code>R/hudcw.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/etam4260/rhud/blob/HEAD/R/hud_crosswalk.R" class="external-link"><code>R/hud_crosswalk.R</code></a></small>
     <div class="hidden name"><code>hud_cw_zip_cd.Rd</code></div>
     </div>
 
@@ -126,8 +126,10 @@ rather than a data frame.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>This function returns a dataframe containing CROSSWALK data for a
-particular GEOID. These measurements include res-ratio, bus-ratio,
+    <p>This function returns a dataframe containing crosswalk data for
+zip to cd for all combinations of "zip", "year", and "quarter"
+inputs.
+These measurements include res-ratio, bus-ratio,
 oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html</p>
     </div>

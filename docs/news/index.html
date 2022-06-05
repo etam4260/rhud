@@ -33,7 +33,7 @@
   </a>
   <ul class="dropdown-menu" role="menu"><li class="dropdown-header">HUD User</li>
     <li>
-      <a href="../articles/Crosswalk.html">Crosswalk</a>
+      <a href="../articles/USPS-Crosswalk.html">USPS Crosswalk</a>
     </li>
     <li>
       <a href="../articles/Fair-Markets-Rent.html">Fair Markets Rent</a>
@@ -84,10 +84,47 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="0.4.0.9000" id="rhud-0409000-6102022">rhud 0.4.0.9000 (6/10/2022)<a class="anchor" aria-label="anchor" href="#rhud-0409000-6102022"></a></h2>
+<div class="section level4">
+<h4 id="new-features-0-4-0-9000">NEW FEATURES:<a class="anchor" aria-label="anchor" href="#new-features-0-4-0-9000"></a></h4>
+<ul><li><p>Caching is fully implemented, allowing user to cache data to where they want as well as to the current working session. Currently, this uses the R.cache library which use the .Rcache file extension. This, however, might be removed in favor of a solution which allows different caching file formats.</p></li>
+<li><p>Added the ability to set a user agent.</p></li>
+<li><p>Added the ability to determine the most recent data for each program provided by HUD USER API via hud_rec_cw_yr(), hud_rec_fmr_yr(), hud_rec_il_yr().</p></li>
+<li><p>%z_in_trt%<code>,</code>%z_in_cty%<code>,</code>%z_in_ctysb%<code>,</code>%z_in_cd%<code>,</code>%z_in_cbsa%<code>,</code>%z_in_cbsadiv%` are now available to help determine whether a singular zip code overlaps a geographic identifier using the crosswalk files. Currently supports only numeric identifiers, but may in the future provide support for names. Their non-infix counterparts are also available.</p></li>
+<li><p>%trt_in_z%<code>,</code>%cty_in_z%<code>,</code>%ctysb_in_z%<code>,</code>%cd_in_z%<code>,</code>%cbsa_in_z%<code>,</code>%cbsadiv_in_z%` are now available to help determine whether a tract, cd, county, countysub, cbsa, or cbsadiv overlaps a zip code using the crosswalk files. Currently supports only numeric identifiers, but may in the future provide support for names. Their non-infix counterparts are also available.</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-improvements-0-4-0-9000">MINOR IMPROVEMENTS:<a class="anchor" aria-label="anchor" href="#minor-improvements-0-4-0-9000"></a></h4>
+<ul><li>Type checking added for using hud_set_key() as a way of reducing latent errors.</li>
+<li>Download bar now shows the current working url as well as the number of failed downloads.</li>
+<li>Using the hud_set_key method does not default to writing to the working directory .Rprofile.</li>
+<li>Introduction message to the package is now more informative.</li>
+<li>Functions now check if user enters years below what is allowed.</li>
+<li>State queries for hud_fmr no longer does double queries.</li>
+<li>User is presented with a description of the entire package when typing part of its name in the console.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="bug-fixes-0-4-0-9000">BUG FIXES<a class="anchor" aria-label="anchor" href="#bug-fixes-0-4-0-9000"></a></h4>
+<ul><li><p>Attempt two at removing download bar from appearing when first loading in the hud_nation_state_territories() in package environment when validating state inputs.</p></li>
+<li><p>Fixed some bugs caused by hud_set_key not properly setting to the .Rprofile.</p></li>
+<li><p>Fix some issues with numerics being passed with less digits because of leading 0 truncation. (WIP)</p></li>
+</ul></div>
+<div class="section level4">
+<h4 id="documentation-fixes-0-4-0-9000">DOCUMENTATION FIXES<a class="anchor" aria-label="anchor" href="#documentation-fixes-0-4-0-9000"></a></h4>
+<ul><li>Added documentation to tell user that queries will be a combination of the geoid, year, and quarter inputs.</li>
+<li>Included in README.md how to setup the key and provide a simple example.</li>
+<li>Improved sample case studies in the website documentation. (WIP)</li>
+<li>Added diagram for census geographies to the crosswalk website documentation to better communicate relationship among geographies. (WIP)</li>
+<li>Introduced some iconography into documentation to help overall user experience. (WIP)</li>
+<li>All functions are listed in the README.md page along with the range of years that they can be queried for.</li>
+<li>Description of package now shows up when typing it in console.</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0.9000" id="rhud-0309000-5302022">rhud 0.3.0.9000 (5/30/2022)<a class="anchor" aria-label="anchor" href="#rhud-0309000-5302022"></a></h2>
 <div class="section level4">
 <h4 id="new-features-0-3-0-9000">NEW FEATURES:<a class="anchor" aria-label="anchor" href="#new-features-0-3-0-9000"></a></h4>
-<ul><li><p>Added options() for the rhud package, allowing a user to allow caching and tibbles.</p></li>
+<ul><li><p>Added options() for the rhud package, allowing a user to get tibbles instead of dataframes.</p></li>
 <li><p>User is now given a <code>to_tibble</code> option for rhud functions that return a data frame. This allows them to get tibbles rather than data frames as the type of data returned.</p></li>
 </ul></div>
 <div class="section level4">
@@ -95,7 +132,7 @@
 <ul><li>User is now presented with a message when attaching the package showing the various options that can that can be set for the package as well as telling the user that they need to obtain a key from the HUD User website.</li></ul></div>
 <div class="section level4">
 <h4 id="bug-fixes-0-3-0-9000">BUG FIXES<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-0-9000"></a></h4>
-<ul><li>Fixed state level FMR data returning two copies of very_low and not low @</li>
+<ul><li>Fixed state level FMR data returning two copies of very_low and not low</li>
 <li>Fixed issue with IL data when querying for county and cbsa returning duplicate year and median income fields.</li>
 <li>Remove download bar from appearing when first loading in the hud_nation_state_territories() in package environment when validating state inputs.</li>
 </ul></div>

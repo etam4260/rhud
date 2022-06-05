@@ -35,7 +35,7 @@ zip to countysub. (Available 2nd Quarter 2018 onwards)"><meta property="og:image
   </a>
   <ul class="dropdown-menu" role="menu"><li class="dropdown-header">HUD User</li>
     <li>
-      <a href="../articles/Crosswalk.html">Crosswalk</a>
+      <a href="../articles/USPS-Crosswalk.html">USPS Crosswalk</a>
     </li>
     <li>
       <a href="../articles/Fair-Markets-Rent.html">Fair Markets Rent</a>
@@ -82,7 +82,7 @@ zip to countysub. (Available 2nd Quarter 2018 onwards)"><meta property="og:image
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>hud_cw_zip_countysub</h1>
-    <small class="dont-index">Source: <a href="https://github.com/etam4260/rhud/blob/HEAD/R/hudcw.R" class="external-link"><code>R/hudcw.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/etam4260/rhud/blob/HEAD/R/hud_crosswalk.R" class="external-link"><code>R/hud_crosswalk.R</code></a></small>
     <div class="hidden name"><code>hud_cw_zip_countysub.Rd</code></div>
     </div>
 
@@ -126,8 +126,10 @@ rather than a data frame.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>This function returns a dataframe containing CROSSWALK data for
-a particular GEOID. These measurements include res-ratio, bus-ratio,
+    <p>This function returns a dataframe containing crosswalk data for
+zip to countysub for all combinations of "zip", "year", and "quarter"
+inputs.
+These measurements include res-ratio, bus-ratio,
 oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html</p>
     </div>
@@ -137,9 +139,9 @@ https://www.huduser.gov/portal/dataset/uspszip-api.html</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/rhud" class="external-link">rhud</a></span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">hud_cw_zip_countysub</span><span class="op">(</span>zip <span class="op">=</span> <span class="fl">35213</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">hud_cw_zip_countysub</span><span class="op">(</span>zip <span class="op">=</span> <span class="fl">35213</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2019'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">hud_cw_zip_countysub</span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>,</span>
+<span class="r-in"><span class="fu">hud_cw_zip_countysub</span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2019'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span><span class="op">)</span>,</span>
 <span class="r-in">   minimal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
