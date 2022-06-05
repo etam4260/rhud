@@ -136,20 +136,6 @@ also provide miscellaneous supplemental APIs under them.
   | `hud_cw_countysub_zip()` | <b>2018-2021<b> |
   | `hud_cw()` | 2010-2021 |
   | `crosswalk()` | 2010-2021 | 
-  | 
-  | `%z_in_trt%` | 2021 |
-  | `%z_in_cty%`  | 2021 |
-  | `%z_in_cbsa%` | 2021 |
-  | `%z_in_cbsadiv%` | 2021 |
-  | `%z_in_ctysb%` | 2021 |
-  | `%z_in_cd%` | 2021 |
-  |   
-  | `%trt_in_z%` | 2021 |
-  | `%cty_in_z%` | 2021 |
-  | `%cbsa_in_z%` | 2021 |
-  | `%cbsadiv_in_z%` | 2021 |
-  | `%ctysb_in_z%` | 2021 |
-  | `%cd_in_z%` | 2021 |
   |
   | `z_in_trt()` | 2010-2021 |
   | `z_in_cty()` | 2010-2021 |
@@ -163,14 +149,28 @@ also provide miscellaneous supplemental APIs under them.
   | `cbsadiv_in_z()` | <b>2017-2021<b> |
   | `ctysb_in_z()` | <b>2018-2021<b> |
   | `cd_in_z()` | 2010-2021 |
+  |
+  | `%z_in_trt%` | 2021 |
+  | `%z_in_cty%`  | 2021 |
+  | `%z_in_cbsa%` | 2021 |
+  | `%z_in_cbsadiv%` | 2021 |
+  | `%z_in_ctysb%` | 2021 |
+  | `%z_in_cd%` | 2021 |
+  |   
+  | `%trt_in_z%` | 2021 |
+  | `%cty_in_z%` | 2021 |
+  | `%cbsa_in_z%` | 2021 |
+  | `%cbsadiv_in_z%` | 2021 |
+  | `%ctysb_in_z%` | 2021 |
+  | `%cd_in_z%` | 2021 |
    
   - Fair Markets Rent (https://www.huduser.gov/portal/dataset/fmr-api.html)
       + Small Areas Fair Markets Rent
       
   | Fair Markets Rent | Years
   |------------------------------------------|------------------------------------------------|
-  | `hud_fmr_state_county()` | 2017-2022 |
-  | `hud_fmr_state_metroarea()` | 2017-2022 |
+  | `hud_fmr_state_counties()` | 2017-2022 |
+  | `hud_fmr_state_metroareas()` | 2017-2022 |
   | `hud_fmr_county_zip()` | 2017-2022 |
   | `hud_fmr_metroarea_zip()` | 2017-2022 |
   | `hud_fmr()` | 2017-2022 |
@@ -190,14 +190,14 @@ also provide miscellaneous supplemental APIs under them.
   | `hud_chas_state()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
   | `hud_chas_county()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
   | `hud_chas_state_mcd()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
-  | `hud_chas_state_places()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
+  | `hud_chas_state_place()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
   | `hud_chas()` | 2014-2018 , 2013-2017, 2012-2016, 2011-2015, 2010-2014, 2009-2013, 2008-2012, 2007-2011, 2006-2010 |
 
   - US Geographic Entities
 
   | US Geographies | 
   |------------------------------------------|
-  | `hud_nation_state_territories()` |
+  | `hud_nation_states_territories()` |
   | `hud_state_metropolitan()` | 
   | `hud_state_counties()` |
   | `hud_state_places()` |
@@ -225,9 +225,9 @@ also provide miscellaneous supplemental APIs under them.
   | Utilities |
   |------------------------------------------|
   | `rhud_website()` | 
-  | `hud_rec_cw_yr` |
-  | `hud_rec_fmr_yr` |
-  | `hud_rec_il_yr` |
+  | `hud_rec_cw_yr()` |
+  | `hud_rec_fmr_yr()` |
+  | `hud_rec_il_yr()` |
     
 ## Contributors
 
