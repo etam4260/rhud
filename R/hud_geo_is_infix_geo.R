@@ -1,6 +1,9 @@
 #' @name %z_in_trt%
 #' @title %z_in_trt%
-#' @description Given a zip code and a tract, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment variable
+#'   must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a zip code and a tract, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -24,6 +27,13 @@
 #' }
 `%z_in_trt%` <- function(zip, tract) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
+  # These results will get cached, but might want to make it save to
+  # pkg environment and not depend on automated caching.
   args <- hud_rec_cw_yr()
 
   # TODO: We might want to allow using names also..
@@ -32,7 +42,19 @@
   # using internal functions...
 
   # Need to validate tract..
-  tract <- geo_is_infix_rhs_cleansing(query = tract, "tract")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "tract",
+                                      secondary_geoid = "zip",
+                                      query = tract, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+
+  tract <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(tract) != 11)) stop("\nInputted tract(s) are not all of length 11.")
 
   res <- c()
 
@@ -40,9 +62,11 @@
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_tract,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(tract))) {
       res <- c(res, TRUE)
@@ -58,7 +82,10 @@
 
 #' @name %z_in_cty%
 #' @title %z_in_cty%
-#' @description Given a zip code and a county, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a zip code and a county, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -82,18 +109,36 @@
 #' }
 `%z_in_cty%` <- function(zip, county) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  county <- geo_is_infix_rhs_cleansing(query = county, "county")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "county",
+                                      secondary_geoid = "zip",
+                                      query = county, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  county <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(county) != 5)) stop("\nInputted county(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_county,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                  )
 
     if (any(queried %in% as.character(county))) {
 
@@ -110,7 +155,10 @@
 
 #' @name %z_in_cbsa%
 #' @title %z_in_cbsa%
-#' @description Given a zip code and a cbsa, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a zip code and a cbsa, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -134,19 +182,37 @@
 #' }
 `%z_in_cbsa%` <- function(zip, cbsa) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
+
   args <- hud_rec_cw_yr()
 
+  cleaned <- cw_input_check_cleansing(primary_geoid = "cbsa",
+                                      secondary_geoid = "zip",
+                                      query = cbsa, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
 
-  cbsa <- geo_is_infix_rhs_cleansing(query = cbsa, "cbsa")
+  cbsa <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(cbsa) != 5)) stop("\nInputted cbsa(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_cbsa,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(cbsa))) {
 
@@ -163,7 +229,10 @@
 
 #' @name %z_in_cbsadiv%
 #' @title %z_in_cbsadiv%
-#' @description Given a zip code and a cbsadiv, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a zip code and a cbsadiv, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -187,18 +256,36 @@
 #' }
 `%z_in_cbsadiv%` <- function(zip, cbsadiv) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  cbsadiv <- geo_is_infix_rhs_cleansing(query = cbsadiv, "cbsadiv")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "cbsadiv",
+                                      secondary_geoid = "zip",
+                                      query = cbsadiv, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  cbsadiv <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(cbsadiv) != 5)) stop("\nInputted cbsadiv(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_cbsadiv,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(cbsadiv))) {
 
@@ -215,7 +302,10 @@
 
 #' @name %z_in_ctysb%
 #' @title %z_in_ctysb%
-#' @description Given a zip code and a countysub, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a zip code and a countysub, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -239,18 +329,38 @@
 #' }
 `%z_in_ctysb%` <- function(zip, countysub) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
+
   args <- hud_rec_cw_yr()
 
-  countysub <- geo_is_infix_rhs_cleansing(query = countysub, "countysub")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "countysub",
+                                      secondary_geoid = "zip",
+                                      query = countysub, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  countysub <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(countysub) != 10)) stop("\nInputted countysub(s) are not all of length 10.")
+
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_countysub,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(countysub))) {
 
@@ -267,7 +377,10 @@
 
 #' @name %z_in_cd%
 #' @title %z_in_cd%
-#' @description Given a zip code and a congressional district, determine if
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a zip code and a congressional district, determine if
 #'   they overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -291,18 +404,37 @@
 #' }
 `%z_in_cd%` <- function(zip, cd) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  cd <- geo_is_infix_rhs_cleansing(query = cd, "cd")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "cd",
+                                      secondary_geoid = "zip",
+                                      query = cd, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  cd <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(cd) != 4)) stop("\nInputted cd(s) are not all of length 4.")
+
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_cd,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(cd))) {
 
@@ -322,7 +454,10 @@
 
 #' @name %trt_in_z%
 #' @title %trt_in_z%
-#' @description Given a tract and a zip code, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a tract and a zip code, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -346,18 +481,36 @@
 #' }
 `%trt_in_z%` <- function(tract, zip) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "tract",
+                                      query = zip, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(tract))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = tract[i],
                                                    f = hud_cw_tract_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "tract")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "tract",
+                                                   key = key
+                                                   )
 
 
     if (any(queried %in% as.character(zip))) {
@@ -374,7 +527,10 @@
 
 #' @name %cty_in_z%
 #' @title %cty_in_z%
-#' @description Given a county and a zip, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a county and a zip, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -398,18 +554,37 @@
 #' }
 `%cty_in_z%` <- function(county, zip) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "county",
+                                      query = zip, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(county))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = county[i],
                                                    f = hud_cw_county_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "county")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "county",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(zip))) {
 
@@ -427,7 +602,10 @@
 
 #' @name %cbsa_in_z%
 #' @title %cbsa_in_z%
-#' @description Given a cbsa and a zip, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a cbsa and a zip, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -451,18 +629,37 @@
 #' }
 `%cbsa_in_z%` <- function(cbsa, zip) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "cbsa",
+                                      query = zip, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(cbsa))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = cbsa[i],
                                                    f = hud_cw_cbsa_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "cbsa")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "cbsa",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(zip))) {
 
@@ -479,7 +676,10 @@
 
 #' @name %cbsadiv_in_z%
 #' @title %cbsadiv_in_z%
-#' @description Given a cbsadiv and a zip, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a cbsadiv and a zip, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -503,18 +703,37 @@
 #' }
 `%cbsadiv_in_z%` <- function(cbsadiv, zip) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
+
   args <- hud_rec_cw_yr()
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "cbsadiv",
+                                      query = zip, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(cbsadiv))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = cbsadiv[i],
                                                    f = hud_cw_cbsadiv_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "cbsadiv")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "cbsadiv",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(zip))) {
 
@@ -531,7 +750,10 @@
 
 #' @name %cd_in_z%
 #' @title %cd_in_z%
-#' @description Given a congressional district and a zip, determine if they
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a congressional district and a zip, determine if they
 #'   overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -555,18 +777,37 @@
 #' }
 `%cd_in_z%` <- function(cd, zip) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "cd",
+                                      query = zip, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(cd))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = cd[i],
                                                    f = hud_cw_cd_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "cd")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "cd",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(zip))) {
 
@@ -584,7 +825,10 @@
 
 #' @name %ctysb_in_z%
 #' @title %ctysb_in_z%
-#' @description Given a countysub and zip code, determine if they overlap
+#' @description To use this function, the HUD_KEY system environment
+#'   variable must be set first: use hud_set_key("the_key") to do this.
+#'
+#'   Given a countysub and zip code, determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -608,18 +852,37 @@
 #' }
 `%ctysb_in_z%` <- function(countysub, zip) {
 
+  if (Sys.getenv("HUD_KEY") == "") {
+    stop(paste("Make sure to set the HUD_KEY environment",
+               "variable before rhud using infix operators."))
+  }
+
   args <- hud_rec_cw_yr()
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "countysub",
+                                      query = zip, year = args[1],
+                                      quarter = args[2],
+                                      Sys.getenv("HUD_KEY"))
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(countysub))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = countysub[i],
                                                    f = hud_cw_countysub_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "countysub")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "countysub",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(zip))) {
 
@@ -635,68 +898,6 @@
 
 
 
-
-
-#' @name geo_is_infix_rhs_cleansing
-#' @title geo_is_infix_rhs_cleansing
-#' @description Given a geographic identifier, described by the
-#'   crosswalk files, determine whether it is the right length and has
-#'   correct spacing.
-#' @param query The geoid to query for
-#' @param geoid_type The type of geoid, either:
-#'    1) zip,
-#'    2) tract,
-#'    3) cd,
-#'    4) cbsa,
-#'    5) cbsadiv,
-#'    6) county,
-#'    7) countysub
-#' @noRd
-#' @noMd
-geo_is_infix_rhs_cleansing <- function(query, geoid_type) {
-
-  query <- unique(paste(trimws(as.character(query), which = "both")))
-
-  if (geoid_type == "zip") {
-    if (FALSE %in% numbers_only(query)) stop("\nZip inputs must only be numbers.",
-                                             call. = FALSE)
-    if (any(nchar(query) != 5)) stop("\nZip inputs are not all of length 5.",
-                                      call. = FALSE)
-  } else if (geoid_type == "tract") {
-    if (FALSE %in% numbers_only(query)) stop("\nTract inputs must only be numbers.",
-                                             call. = FALSE)
-    if (any(nchar(query) != 11)) stop("\nTract inputs are not all of length 11.",
-                                      call. = FALSE)
-  } else if (geoid_type == "county") {
-    if (FALSE %in% numbers_only(query)) stop("\nCounty inputs must only be numbers.",
-                                              call. = FALSE)
-    if (any(nchar(query) != 5)) stop("\nCounty inputs are not all of length 5.",
-                                      call. = FALSE)
-  } else if (geoid_type == "cbsa") {
-    if (FALSE %in% numbers_only(query)) stop("\nCbsa inputs must only be numbers.",
-                                            call. = FALSE)
-    if (any(nchar(query) != 5)) stop("\nCbsa inputs are not all of length 5.",
-                                    call. = FALSE)
-  } else if (geoid_type == "cbsadiv") {
-    if (FALSE %in% numbers_only(query)) stop("\nCbsadiv inputs must only be numbers.",
-                                               call. = FALSE)
-    if (any(nchar(query) != 5)) stop("\nCbsadiv inputs are not all of length 5.",
-                                       call. = FALSE)
-  } else if (geoid_type == "cd") {
-    if (FALSE %in% numbers_only(query)) stop("\nCd inputs must only be numbers.",
-                                             call. = FALSE)
-    if (any(nchar(query) != 4)) stop("\nCd inputs are not all of length 4.",
-                                     call. = FALSE)
-  } else if (geoid_type == "countysub") {
-    if (FALSE %in% numbers_only(query)) stop("\nCountysub inputs must only be numbers.",
-                                             call. = FALSE)
-    if (any(nchar(query) != 10)) stop("\nCountysub inputs are not all of length 10.",
-                                     call. = FALSE)
-  }
-  return(query)
-}
-
-
 #' @name geo_is_infix_query_and_get_warnings
 #' @title geo_is_infix_query_and_get_warnings
 #' @description Giving a geoid to query for, make sure to call the core
@@ -707,6 +908,7 @@ geo_is_infix_rhs_cleansing <- function(query, geoid_type) {
 #' @param year The year to query for.
 #' @param quarter The quarter to query for.
 #' @param querytype The geoid user is querying for.
+#' @param key The HUD USER API Key.
 #'    1) zip
 #'    2) tract
 #'    3) cbsa
@@ -720,7 +922,9 @@ geo_is_infix_query_and_get_warnings <- function(query,
                                                 f,
                                                 year,
                                                 quarter,
-                                                querytype) {
+                                                querytype,
+                                                key
+                                                ) {
 
   res <- c()
   tryCatch(
@@ -728,7 +932,9 @@ geo_is_infix_query_and_get_warnings <- function(query,
       res <- suppressMessages(f(query,
                minimal = TRUE,
                year = year,
-               quarter = quarter))
+               quarter = quarter,
+               key = key
+               ))
     },
     error = function(cond)
     {

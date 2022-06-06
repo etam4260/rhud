@@ -4,6 +4,8 @@
 #'    most recently released files. This will only ping for the last two
 #'    years. This tests hud_cw_tract_zip(tract = 48201223100) as the
 #'    endpoint query.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
@@ -16,7 +18,8 @@
 #' hud_rec_cw_yr()
 #'
 #' }
-hud_rec_cw_yr <- function() {
+hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
+
   year = as.integer(format(Sys.Date(), "%Y"))
   month = as.integer(format(Sys.Date(), "%m"))
 
@@ -37,7 +40,9 @@ hud_rec_cw_yr <- function() {
     # different CW files and making a percentage threshold on them.
     data <- suppressMessages(suppressWarnings(hud_cw_tract_zip(tract = 48201223100,
                                                                year = year,
-                                                               quarter = quarter)))
+                                                               quarter = quarter,
+                                                               key = key
+                                                               )))
 
     if (!is.null(data) && nrow(data) >= 1) {
       return(c(year = year, quarter = quarter))
@@ -62,6 +67,8 @@ hud_rec_cw_yr <- function() {
 #'    determine the most recently released files. This will only ping
 #'    for the last two years. Will return years for county and metroarea
 #'    resolution.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'    for an account and request for an API key.
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
@@ -75,7 +82,7 @@ hud_rec_cw_yr <- function() {
 #' hud_rec_fmr_yr()
 #'
 #' }
-hud_rec_fmr_yr <- function() {
+hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
   year = as.integer(format(Sys.Date(), "%Y"))
   month = as.integer(format(Sys.Date(), "%m"))
 
@@ -98,7 +105,9 @@ hud_rec_fmr_yr <- function() {
 
     if (is.null(year_state)) {
       data <- suppressMessages(suppressWarnings(hud_fmr("MD",
-                                                        year = year)))
+                                                        year = year,
+                                                        key = key
+                                                        )))
 
       if (!is.null(data) && length(data) >= 1) {
         year_state = year
@@ -108,7 +117,9 @@ hud_rec_fmr_yr <- function() {
 
     if (is.null(year_county)) {
       data <- suppressMessages(suppressWarnings(hud_fmr_county_zip("5100199999",
-                                                                   year = year)))
+                                                                   year = year,
+                                                                   key = key
+                                                                   )))
 
       if (!is.null(data) && nrow(data) >= 1) {
         year_county = year
@@ -118,7 +129,9 @@ hud_rec_fmr_yr <- function() {
 
     if (is.null(year_metroarea)) {
       data <- suppressMessages(suppressWarnings(hud_fmr_metroarea_zip("METRO47900M47900",
-                                                                      year = year)))
+                                                                      year = year,
+                                                                      key = key
+                                                                      )))
 
       if (!is.null(data) && nrow(data) >= 1) {
         year_metroarea = year
@@ -151,6 +164,8 @@ hud_rec_fmr_yr <- function() {
 #'    determine the most recently released files. This will only ping
 #'    for the last two years. Will return years for county and metroarea
 #'    resolution.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
@@ -164,7 +179,7 @@ hud_rec_fmr_yr <- function() {
 #' hud_rec_il_yr()
 #'
 #' }
-hud_rec_il_yr <- function() {
+hud_rec_il_yr <- function(key = Sys.getenv("HUD_KEY")) {
   year = as.integer(format(Sys.Date(), "%Y"))
   month = as.integer(format(Sys.Date(), "%m"))
 
@@ -187,7 +202,9 @@ hud_rec_il_yr <- function() {
 
     if (is.null(year_state)) {
       data <- suppressMessages(suppressWarnings(hud_il("MD",
-                                                        year = year)))
+                                                        year = year,
+                                                        key = key
+                                                       )))
 
       if (!is.null(data) && nrow(data) >= 1) {
         year_state = year
@@ -197,7 +214,9 @@ hud_rec_il_yr <- function() {
 
     if (is.null(year_county)) {
       data <- suppressMessages(suppressWarnings(hud_il("5100199999",
-                                                       year = year)))
+                                                       year = year,
+                                                       key = key
+                                                       )))
 
       if (!is.null(data) && nrow(data) >= 1) {
         year_county = year
@@ -207,7 +226,9 @@ hud_rec_il_yr <- function() {
 
     if (is.null(year_metroarea)) {
       data <- suppressMessages(suppressWarnings(hud_il("METRO47900M47900",
-                                                        year = year)))
+                                                        year = year,
+                                                        key = key
+                                                       )))
 
       if (!is.null(data) && nrow(data) >= 1) {
         year_metroarea = year

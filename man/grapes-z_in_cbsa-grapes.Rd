@@ -15,6 +15,9 @@ zip \%z_in_cbsa\% cbsa
 If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
 }
 \description{
+To use this function, the HUD_KEY system environment
+variable must be set first: use hud_set_key("the_key") to do this.
+
 Given a zip code and a cbsa, determine if they overlap
 using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.

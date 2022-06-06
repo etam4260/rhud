@@ -4,7 +4,7 @@
 \alias{z_in_cbsadiv}
 \title{z_in_cbsadiv}
 \usage{
-z_in_cbsadiv(zip, cbsadiv, year, quarter)
+z_in_cbsadiv(zip, cbsadiv, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{zip}{The zip to determine overlap with cbsadiv}
@@ -14,6 +14,9 @@ z_in_cbsadiv(zip, cbsadiv, year, quarter)
 \item{year}{The year of the crosswalk files.}
 
 \item{quarter}{The quarter of the crosswalk files.}
+
+\item{key}{The API key for this user. You must go to HUD and sign up
+for an account and request for an API key.}
 }
 \value{
 If zip(s) exist in the cbsadiv(s) specified, then TRUE is returned.

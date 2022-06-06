@@ -5,7 +5,11 @@
 \alias{hud_rec_il_yr}
 \title{hud_rec_il_yr()}
 \usage{
-hud_rec_il_yr()
+hud_rec_il_yr(key = Sys.getenv("HUD_KEY"))
+}
+\arguments{
+\item{key}{The API key for this user. You must go to HUD and sign up
+for an account and request for an API key.}
 }
 \value{
 The most recent year for the il files for state, county, and

@@ -4,7 +4,7 @@
 \alias{trt_in_z}
 \title{trt_in_z}
 \usage{
-trt_in_z(tract, zip, year, quarter)
+trt_in_z(tract, zip, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{tract}{The tract to determine overlap with zip}
@@ -14,6 +14,9 @@ trt_in_z(tract, zip, year, quarter)
 \item{year}{The year of the crosswalk files.}
 
 \item{quarter}{The quarter of the crosswalk files.}
+
+\item{key}{The API key for this user. You must go to HUD and sign up
+for an account and request for an API key.}
 }
 \value{
 If tract(s) exist in the zip(s) specified, then TRUE is returned.

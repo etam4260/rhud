@@ -4,7 +4,7 @@
 \alias{cty_in_z}
 \title{cty_in_z}
 \usage{
-cty_in_z(county, zip, year, quarter)
+cty_in_z(county, zip, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
 \item{county}{The county to determine overlap with zip.}
@@ -14,6 +14,9 @@ cty_in_z(county, zip, year, quarter)
 \item{year}{The year of the crosswalk files.}
 
 \item{quarter}{The quarter of the crosswalk files.}
+
+\item{key}{The API key for this user. You must go to HUD and sign up
+for an account and request for an API key.}
 }
 \value{
 If county(s) exist in the zip(s) specified, then TRUE is returned.

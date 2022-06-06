@@ -7,6 +7,8 @@
 #' @param tract The tract to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @returns If zip(s) exist in the tract(s) specified, then TRUE is returned.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -28,7 +30,8 @@
 #' z_in_trt(zip = 71052, tract = 22031950600, year = 2019, quarter = 2)
 #'
 #' }
-z_in_trt <- function(zip, tract, year, quarter) {
+z_in_trt <- function(zip, tract, year, quarter,
+                     key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -41,15 +44,25 @@ z_in_trt <- function(zip, tract, year, quarter) {
     }
   }
 
-  args <- hud_rec_cw_yr()
-
   # TODO: We might want to allow using names also..
   # There is a bit of overhead cost for doing individual queries because each
   # zip will need individual calls to hud_cw_zip_tract... Could optimize by
   # using internal functions...
 
   # Need to validate tract..
-  tract <- geo_is_infix_rhs_cleansing(query = tract, "tract")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "tract",
+                                      secondary_geoid = "zip",
+                                      query = tract, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  tract <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(tract) != 11)) stop("\nInputted tract(s) are not all of length 11.")
 
   res <- c()
 
@@ -59,7 +72,9 @@ z_in_trt <- function(zip, tract, year, quarter) {
                                                    f = hud_cw_zip_tract,
                                                    year = year,
                                                    quarter = quarter,
-                                                   querytype = "zip")
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(tract))) {
       res <- c(res, TRUE)
@@ -84,6 +99,8 @@ z_in_trt <- function(zip, tract, year, quarter) {
 #' @param county The county to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -105,7 +122,8 @@ z_in_trt <- function(zip, tract, year, quarter) {
 #' z_in_cty(zip = 71052, county = 22031, year = 2019, quarter = 2)
 #'
 #' }
-z_in_cty <- function(zip, county, year, quarter) {
+z_in_cty <- function(zip, county, year, quarter,
+                     key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -118,16 +136,30 @@ z_in_cty <- function(zip, county, year, quarter) {
     }
   }
 
-  county <- geo_is_infix_rhs_cleansing(query = county, "county")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "county",
+                                      secondary_geoid = "zip",
+                                      query = county, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  county <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(county) != 5)) stop("\nInputted county(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_county,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(county))) {
 
@@ -153,6 +185,8 @@ z_in_cty <- function(zip, county, year, quarter) {
 #' @param cbsa The cbsa to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @returns If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -174,7 +208,8 @@ z_in_cty <- function(zip, county, year, quarter) {
 #' z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
 #'
 #' }
-z_in_cbsa <- function(zip, cbsa, year, quarter) {
+z_in_cbsa <- function(zip, cbsa, year, quarter,
+                      key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -187,19 +222,30 @@ z_in_cbsa <- function(zip, cbsa, year, quarter) {
     }
   }
 
-  args <- hud_rec_cw_yr()
+  cleaned <- cw_input_check_cleansing(primary_geoid = "cbsa",
+                                      secondary_geoid = "zip",
+                                      query = cbsa, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
 
 
-  cbsa <- geo_is_infix_rhs_cleansing(query = cbsa, "cbsa")
+  cbsa <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(cbsa) != 5)) stop("\nInputted cbsa(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_cbsa,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(cbsa))) {
 
@@ -225,6 +271,8 @@ z_in_cbsa <- function(zip, cbsa, year, quarter) {
 #' @param cbsadiv The cbsadiv to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -246,7 +294,8 @@ z_in_cbsa <- function(zip, cbsa, year, quarter) {
 #' z_in_cbsadiv(zip = 71052, cbsadiv = 43340, year = 2019, quarter = 2)
 #'
 #' }
-z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
+z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
+                         key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -259,16 +308,29 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
     }
   }
 
-  cbsadiv <- geo_is_infix_rhs_cleansing(query = cbsadiv, "cbsadiv")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "cbsadiv",
+                                      secondary_geoid = "zip",
+                                      query = cbsadiv, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  cbsadiv <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(cbsadiv) != 5)) stop("\nInputted cbsadiv(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_cbsadiv,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key)
 
     if (any(queried %in% as.character(cbsadiv))) {
 
@@ -295,6 +357,8 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 #' @param countysub The countysub to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -316,7 +380,8 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter) {
 #' z_in_ctysb(zip = 35213, countysub = 0107390324, year = 2019, quarter = 2)
 #'
 #' }
-z_in_ctysb <- function(zip, countysub, year, quarter) {
+z_in_ctysb <- function(zip, countysub, year, quarter,
+                       key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -329,16 +394,30 @@ z_in_ctysb <- function(zip, countysub, year, quarter) {
     }
   }
 
-  countysub <- geo_is_infix_rhs_cleansing(query = countysub, "countysub")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "countysub",
+                                      secondary_geoid = "zip",
+                                      query = countysub, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  countysub <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(countysub) != 10)) stop("\nInputted countysub(s) are not all of length 10.")
+
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_countysub,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key)
 
     if (any(queried %in% as.character(countysub))) {
 
@@ -363,6 +442,8 @@ z_in_ctysb <- function(zip, countysub, year, quarter) {
 #' @param cd The cd to determine overlap with zip
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -384,7 +465,7 @@ z_in_ctysb <- function(zip, countysub, year, quarter) {
 #' z_in_cd(zip = 35213, cd = 2204, year = 2019, quarter = 2)
 #'
 #' }
-z_in_cd <- function(zip, cd, year, quarter) {
+z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -397,16 +478,30 @@ z_in_cd <- function(zip, cd, year, quarter) {
     }
   }
 
-  cd <- geo_is_infix_rhs_cleansing(query = cd, "cd")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "cd",
+                                      secondary_geoid = "zip",
+                                      query = cd, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  cd <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(cd) != 4)) stop("\nInputted cd(s) are not all of length 4.")
+
 
   res <- c()
   for (i in seq_len(length(zip))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = zip[i],
                                                    f = hud_cw_zip_cd,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "zip")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "zip",
+                                                   key = key)
 
     if (any(queried %in% as.character(cd))) {
 
@@ -435,6 +530,8 @@ z_in_cd <- function(zip, cd, year, quarter) {
 #' @param zip The zip to determine overlap with tract
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -456,7 +553,8 @@ z_in_cd <- function(zip, cd, year, quarter) {
 #' trt_in_z(tract = 22031950600, zip = 71052, year = 2019, quarter = 2)
 #'
 #' }
-trt_in_z <- function(tract, zip, year, quarter) {
+trt_in_z <- function(tract, zip, year, quarter,
+                     key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -469,16 +567,31 @@ trt_in_z <- function(tract, zip, year, quarter) {
     }
   }
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "tract",
+                                      query = zip, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+
 
   res <- c()
   for (i in seq_len(length(tract))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = tract[i],
                                                    f = hud_cw_tract_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "tract")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "tract",
+                                                   key = key
+                                                   )
 
 
     if (any(queried %in% as.character(zip))) {
@@ -504,6 +617,8 @@ trt_in_z <- function(tract, zip, year, quarter) {
 #' @param zip The zip to determine overlap with county.
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -525,7 +640,8 @@ trt_in_z <- function(tract, zip, year, quarter) {
 #' cty_in_z(county = 22031, zip = 71052, year = 2019, quarter = 2)
 #'
 #' }
-cty_in_z <- function(county, zip, year, quarter) {
+cty_in_z <- function(county, zip, year, quarter,
+                     key= Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -538,16 +654,31 @@ cty_in_z <- function(county, zip, year, quarter) {
     }
   }
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "county",
+                                      query = zip, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+
 
   res <- c()
   for (i in seq_len(length(county))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = county[i],
                                                    f = hud_cw_county_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "county")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "county",
+                                                   key = key
+                                                   )
 
     if (any(queried %in% as.character(zip))) {
 
@@ -573,6 +704,8 @@ cty_in_z <- function(county, zip, year, quarter) {
 #' @param zip The zip to determine overlap with cbsa
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -594,7 +727,8 @@ cty_in_z <- function(county, zip, year, quarter) {
 #' cbsa_in_z(cbsa = 43340, zip = 71052, year = 2019, quarter = 1)
 #'
 #' }
-cbsa_in_z <- function(cbsa, zip, year, quarter) {
+cbsa_in_z <- function(cbsa, zip, year, quarter,
+                      key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -607,16 +741,30 @@ cbsa_in_z <- function(cbsa, zip, year, quarter) {
     }
   }
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "cbsa",
+                                      query = zip, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(cbsa))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = cbsa[i],
                                                    f = hud_cw_cbsa_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "cbsa")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "cbsa",
+                                                   key = key)
 
     if (any(queried %in% as.character(zip))) {
 
@@ -642,6 +790,8 @@ cbsa_in_z <- function(cbsa, zip, year, quarter) {
 #' @param zip The zip to determine overlap with cbsadiv
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -663,7 +813,8 @@ cbsa_in_z <- function(cbsa, zip, year, quarter) {
 #' cbsadiv_in_zip(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
 #'
 #' }
-cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
+cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
+                         key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -676,16 +827,29 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
     }
   }
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "cbsadiv",
+                                      query = zip, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(cbsadiv))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = cbsadiv[i],
                                                    f = hud_cw_cbsadiv_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "cbsadiv")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "cbsadiv",
+                                                   key = key)
 
     if (any(queried %in% as.character(zip))) {
 
@@ -711,6 +875,8 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
 #' @param zip The zip to determine overlap with cd
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -732,7 +898,8 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter) {
 #' cd_in_z(cd = 2204, zip = 71052, year = 2019, quarter = 4)
 #'
 #' }
-cd_in_z <- function(cd, zip, year, quarter) {
+cd_in_z <- function(cd, zip, year, quarter,
+                    key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -745,16 +912,29 @@ cd_in_z <- function(cd, zip, year, quarter) {
     }
   }
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "cd",
+                                      query = zip, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(cd))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = cd[i],
                                                    f = hud_cw_cd_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "cd")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "cd",
+                                                   key = key)
 
     if (any(queried %in% as.character(zip))) {
 
@@ -780,6 +960,8 @@ cd_in_z <- function(cd, zip, year, quarter) {
 #' @param zip The zip to determine overlap with countysub
 #' @param year The year of the crosswalk files.
 #' @param quarter The quarter of the crosswalk files.
+#' @param key The API key for this user. You must go to HUD and sign up
+#'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
 #' * [rhud::z_in_cty()]
@@ -801,7 +983,8 @@ cd_in_z <- function(cd, zip, year, quarter) {
 #' ctysb_in_z(countysub = 2203194756, zip = 71052, year = 2019, quarter = 2)
 #'
 #' }
-ctysb_in_z <- function(countysub, zip, year, quarter) {
+ctysb_in_z <- function(countysub, zip, year, quarter,
+                       key = Sys.getenv("HUD_KEY")) {
 
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
@@ -814,16 +997,29 @@ ctysb_in_z <- function(countysub, zip, year, quarter) {
     }
   }
 
-  zip <- geo_is_infix_rhs_cleansing(query = zip, "zip")
+  cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
+                                      secondary_geoid = "ctysb",
+                                      query = zip, year = year,
+                                      quarter = quarter,
+                                      Sys.getenv("HUD_KEY"))
+
+
+  zip <- cleaned[1]
+  year <- cleaned[2]
+  quarter <- cleaned[3]
+  key <- cleaned[4]
+
+  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
 
   res <- c()
   for (i in seq_len(length(countysub))) {
 
     queried <- geo_is_infix_query_and_get_warnings(query = countysub[i],
                                                    f = hud_cw_countysub_zip,
-                                                   year = args[1],
-                                                   quarter = args[2],
-                                                   querytype = "countysub")
+                                                   year = year,
+                                                   quarter = quarter,
+                                                   querytype = "countysub",
+                                                   key = key)
 
     if (any(queried %in% as.character(zip))) {
 
