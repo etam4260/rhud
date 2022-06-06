@@ -1,12 +1,14 @@
 #' @name z_in_trt
 #' @title z_in_trt
-#' @description Given a zip code and a tract, determine if they overlap
+#' @description Given zip code(s) and tract(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip to determine overlap with tract
-#' @param tract The tract to determine overlap with zip
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param zip The zip(s) to determine overlap with tract(s).
+#' @param tract The tract(s) to determine overlap with zip(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @returns If zip(s) exist in the tract(s) specified, then TRUE is returned.
@@ -92,13 +94,15 @@ z_in_trt <- function(zip, tract, year, quarter,
 
 #' @name z_in_cty
 #' @title z_in_cty
-#' @description Given a zip code and a county, determine if they overlap
+#' @description Given zip code(s) and county(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip to determine overlap with county
-#' @param county The county to determine overlap with zip
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param zip The zip(s) to determine overlap with county(s).
+#' @param county The county(s) to determine overlap with zip(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -178,13 +182,15 @@ z_in_cty <- function(zip, county, year, quarter,
 
 #' @name z_in_cbsa
 #' @title z_in_cbsa
-#' @description Given a zip code and a cbsa, determine if they overlap
+#' @description Given zip code(s) and cbsa(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip to determine overlap with cbsa
-#' @param cbsa The cbsa to determine overlap with zip
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param zip The zip(s) to determine overlap with cbsa(s).
+#' @param cbsa The cbsa(s) to determine overlap with zip(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @returns If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
@@ -264,13 +270,15 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 
 #' @name z_in_cbsadiv
 #' @title z_in_cbsadiv
-#' @description Given a zip code and a cbsadiv, determine if they overlap
+#' @description Given zip code(s) and cbsadiv(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip to determine overlap with cbsadiv
-#' @param cbsadiv The cbsadiv to determine overlap with zip
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param zip The zip(s) to determine overlap with cbsadiv(s).
+#' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -350,13 +358,15 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 
 #' @name z_in_ctysb
 #' @title z_in_ctysb
-#' @description Given a zip code and a countysub, determine if they overlap
+#' @description Given zip code(s) and a countysub(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip to determine overlap with countysub
-#' @param countysub The countysub to determine overlap with zip
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param zip The zip(s) to determine overlap with countysub(s).
+#' @param countysub The countysub(s) to determine overlap with zip(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -435,13 +445,15 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
 
 #' @name z_in_cd
 #' @title z_in_cd
-#' @description Given a zip code and a congressional district, determine
+#' @description Given zip code(s) and congressional district(s), determine
 #'   if they overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip to determine overlap with cd
-#' @param cd The cd to determine overlap with zip
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param zip The zip(s) to determine overlap with cd(s).
+#' @param cd The cd(s) to determine overlap with zip(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -523,13 +535,15 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 
 #' @name trt_in_z
 #' @title trt_in_z
-#' @description Given a tract and a zip code, determine if they overlap
+#' @description Given tract(s) and a zip code(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param tract The tract to determine overlap with zip
-#' @param zip The zip to determine overlap with tract
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param tract The tract(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with tract(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -610,13 +624,15 @@ trt_in_z <- function(tract, zip, year, quarter,
 
 #' @name cty_in_z
 #' @title cty_in_z
-#' @description Given a county and a zip, determine if they overlap
+#' @description Given county(s) and a zip(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param county The county to determine overlap with zip.
-#' @param zip The zip to determine overlap with county.
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param county The county(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with county(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -697,13 +713,15 @@ cty_in_z <- function(county, zip, year, quarter,
 
 #' @name cbsa_in_z
 #' @title cbsa_in_z
-#' @description Given a cbsa and a zip, determine if they overlap
+#' @description Given a cbsa(s) and a zip(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param cbsa The cbsa to determine overlap with zip
-#' @param zip The zip to determine overlap with cbsa
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param cbsa The cbsa(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with cbsa(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -783,13 +801,15 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 
 #' @name cbsadiv_in_z
 #' @title cbsadiv_in_z
-#' @description Given a cbsadiv and a zip, determine if they overlap
+#' @description Given cbsadiv(s) and zip(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param cbsadiv The cbsadiv to determine overlap with zip
-#' @param zip The zip to determine overlap with cbsadiv
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with cbsadiv(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -868,13 +888,15 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
 
 #' @name cd_in_z
 #' @title cd_in_z
-#' @description Given a congressional district and a zip, determine if they
+#' @description Given congressional district(s) and zip(s), determine if they
 #'   overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param cd The cd to determine overlap with zip
-#' @param zip The zip to determine overlap with cd
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param cd The cd(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with cd(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
@@ -953,13 +975,15 @@ cd_in_z <- function(cd, zip, year, quarter,
 
 #' @name ctysb_in_z
 #' @title ctysb_in_z
-#' @description Given a countysub and zip code, determine if they overlap
+#' @description Given countysub(s) and zip code(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param countysub The countysub to determine overlap with zip
-#' @param zip The zip to determine overlap with countysub
-#' @param year The year of the crosswalk files.
-#' @param quarter The quarter of the crosswalk files.
+#' @param countysub The countysub(s). to determine overlap with zip(s).
+#' @param zip The zip(s). to determine overlap with countysub(s).
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
 #' @param key The API key for this user. You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso

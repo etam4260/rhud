@@ -7,9 +7,9 @@
 cd \%cd_in_z\% zip
 }
 \arguments{
-\item{cd}{The cd to determine overlap with zip}
+\item{cd}{The cd(s) to determine overlap with zip(s).}
 
-\item{zip}{The zip to determine overlap with cd}
+\item{zip}{The zip(s). to determine overlap with cd(s).}
 }
 \value{
 If cd(s) exist in the zip(s) specified, then TRUE is returned.
@@ -18,7 +18,7 @@ If cd(s) exist in the zip(s) specified, then TRUE is returned.
 To use this function, the HUD_KEY system environment
 variable must be set first: use hud_set_key("the_key") to do this.
 
-Given a congressional district and a zip, determine if they
+Given congressional district(s) and a zip(s), determine if they
 overlap using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 

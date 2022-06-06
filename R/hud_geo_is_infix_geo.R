@@ -3,7 +3,7 @@
 #' @description To use this function, the HUD_KEY system environment variable
 #'   must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a zip code and a tract, determine if they overlap
+#'   Given zip code(s) and tract(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -15,8 +15,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter
 #'   take a look at their non-infix versions.
 #'
-#' @param zip The zip to determine overlap with tract
-#' @param tract The tract to determine overlap with zip
+#' @param zip The zip(s) to determine overlap with tract(s)
+#' @param tract The tract(s) to determine overlap with zip(s)
 #' @returns If zip(s) exist in the tract(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -85,7 +85,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a zip code and a county, determine if they overlap
+#'   Given zip code(s) and county(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -97,8 +97,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param zip The zip to determine overlap with tract
-#' @param county The county to determine overlap with zip
+#' @param zip The zip(s) to determine overlap with county(s)
+#' @param county The county(s) to determine overlap with zip(s)
 #' @returns If zip(s) exist in the county(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -158,7 +158,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a zip code and a cbsa, determine if they overlap
+#'   Given a zip code(s) and a cbsa(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -170,8 +170,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param zip The zip to determine overlap with cbsa
-#' @param cbsa The cbsa to determine overlap with zip
+#' @param zip The zip(s) to determine overlap with cbsa(s)
+#' @param cbsa The cbsa(s) to determine overlap with zip(s)
 #' @returns If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -232,7 +232,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a zip code and a cbsadiv, determine if they overlap
+#'   Given zip code(s) and cbsadiv(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -244,8 +244,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param zip The zip to determine overlap with cbsadiv
-#' @param cbsadiv The cbsadiv to determine overlap with zip
+#' @param zip The zip(s) to determine overlap with cbsadiv(s)
+#' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s)
 #' @returns If zip(s) exist in the cbsadiv(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -305,7 +305,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a zip code and a countysub, determine if they overlap
+#'   Given zip code(s) and a countysub(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -317,8 +317,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param zip The zip to determine overlap with countysub
-#' @param countysub The countysub to determine overlap with zip
+#' @param zip The zip(s) to determine overlap with countysub(s)
+#' @param countysub The countysub(s) to determine overlap with zip(s)
 #' @returns If zip(s) exist in the countysub(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -380,7 +380,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a zip code and a congressional district, determine if
+#'   Given zip code(s) and congressional district(s), determine if
 #'   they overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -392,8 +392,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param zip The zip to determine overlap with a congressional district
-#' @param cd The congressional district to determine overlap with zip
+#' @param zip The zip(s) to determine overlap with a congressional district(s)
+#' @param cd The congressional district(s) to determine overlap with zip(s)
 #' @returns If zip(s) exist in the cd(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -457,7 +457,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a tract and a zip code, determine if they overlap
+#'   Given tract(s) and zip code(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -469,8 +469,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param tract The tract to determine overlap with zip
-#' @param zip The zip to determine overlap with tract
+#' @param tract The tract(s) to determine overlap with zip(s)
+#' @param zip The zip(s) to determine overlap with tract(s)
 #' @returns If tract(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -530,7 +530,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a county and a zip, determine if they overlap
+#'   Given county(s) and zip(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -542,8 +542,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param county The county to determine overlap with zip.
-#' @param zip The zip to determine overlap with county.
+#' @param county The county(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with county(s).
 #' @returns If county(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -605,7 +605,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a cbsa and a zip, determine if they overlap
+#'   Given cbsa(s) and zip(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -617,8 +617,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param cbsa The cbsa to determine overlap with zip
-#' @param zip The zip to determine overlap with cbsa
+#' @param cbsa The cbsa(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with cbsa(s).
 #' @returns If cbsa(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -679,7 +679,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a cbsadiv and a zip, determine if they overlap
+#'   Given cbsadiv(s) and zip(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -691,8 +691,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param cbsadiv The cbsadiv to determine overlap with zip
-#' @param zip The zip to determine overlap with cbsadiv
+#' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
+#' @param zip The zip(s) to determine overlap with cbsadiv(s).
 #' @returns If cbsadiv(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -753,7 +753,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a congressional district and a zip, determine if they
+#'   Given congressional district(s) and a zip(s), determine if they
 #'   overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -765,8 +765,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param cd The cd to determine overlap with zip
-#' @param zip The zip to determine overlap with cd
+#' @param cd The cd(s) to determine overlap with zip(s).
+#' @param zip The zip(s). to determine overlap with cd(s).
 #' @returns If cd(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples
@@ -828,7 +828,7 @@
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
-#'   Given a countysub and zip code, determine if they overlap
+#'   Given countysub(s) and zip(s), determine if they overlap
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
@@ -840,8 +840,8 @@
 #'   crosswalk files are available. For modifying the year and quarter parameter,
 #'   take a look at their non-infix versions.
 #'
-#' @param countysub The countysub to determine overlap with zip
-#' @param zip The zip to determine overlap with countysub
+#' @param countysub The countysub(s) to determine overlap with zip(s).
+#' @param zip The zip(s). to determine overlap with countysub(s).
 #' @returns If countysub(s) exist in the zip(s) specified, then TRUE is returned.
 #' @export
 #' @examples

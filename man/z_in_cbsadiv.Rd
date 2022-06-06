@@ -7,13 +7,15 @@
 z_in_cbsadiv(zip, cbsadiv, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{zip}{The zip to determine overlap with cbsadiv}
+\item{zip}{The zip(s) to determine overlap with cbsadiv(s).}
 
-\item{cbsadiv}{The cbsadiv to determine overlap with zip}
+\item{cbsadiv}{The cbsadiv(s) to determine overlap with zip(s).}
 
-\item{year}{The year of the crosswalk files.}
+\item{year}{Gets the year that this data was recorded. Can specify multiple
+years. Default is the previous year.}
 
-\item{quarter}{The quarter of the crosswalk files.}
+\item{quarter}{Gets the quarter of the year that this data was recorded.
+Defaults to the first quarter of the year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}
@@ -22,7 +24,7 @@ for an account and request for an API key.}
 If zip(s) exist in the cbsadiv(s) specified, then TRUE is returned.
 }
 \description{
-Given a zip code and a cbsadiv, determine if they overlap
+Given zip code(s) and cbsadiv(s), determine if they overlap
 using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 }

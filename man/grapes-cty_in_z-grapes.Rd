@@ -7,9 +7,9 @@
 county \%cty_in_z\% zip
 }
 \arguments{
-\item{county}{The county to determine overlap with zip.}
+\item{county}{The county(s) to determine overlap with zip(s).}
 
-\item{zip}{The zip to determine overlap with county.}
+\item{zip}{The zip(s) to determine overlap with county(s).}
 }
 \value{
 If county(s) exist in the zip(s) specified, then TRUE is returned.
@@ -18,7 +18,7 @@ If county(s) exist in the zip(s) specified, then TRUE is returned.
 To use this function, the HUD_KEY system environment
 variable must be set first: use hud_set_key("the_key") to do this.
 
-Given a county and a zip, determine if they overlap
+Given county(s) and zip(s), determine if they overlap
 using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 

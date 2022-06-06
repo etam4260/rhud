@@ -7,9 +7,9 @@
 cbsa \%cbsa_in_z\% zip
 }
 \arguments{
-\item{cbsa}{The cbsa to determine overlap with zip}
+\item{cbsa}{The cbsa(s) to determine overlap with zip(s).}
 
-\item{zip}{The zip to determine overlap with cbsa}
+\item{zip}{The zip(s) to determine overlap with cbsa(s).}
 }
 \value{
 If cbsa(s) exist in the zip(s) specified, then TRUE is returned.
@@ -18,7 +18,7 @@ If cbsa(s) exist in the zip(s) specified, then TRUE is returned.
 To use this function, the HUD_KEY system environment
 variable must be set first: use hud_set_key("the_key") to do this.
 
-Given a cbsa and a zip, determine if they overlap
+Given cbsa(s) and zip(s), determine if they overlap
 using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 

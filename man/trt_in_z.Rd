@@ -7,13 +7,15 @@
 trt_in_z(tract, zip, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{tract}{The tract to determine overlap with zip}
+\item{tract}{The tract(s) to determine overlap with zip(s).}
 
-\item{zip}{The zip to determine overlap with tract}
+\item{zip}{The zip(s) to determine overlap with tract(s).}
 
-\item{year}{The year of the crosswalk files.}
+\item{year}{Gets the year that this data was recorded. Can specify multiple
+years. Default is the previous year.}
 
-\item{quarter}{The quarter of the crosswalk files.}
+\item{quarter}{Gets the quarter of the year that this data was recorded.
+Defaults to the first quarter of the year.}
 
 \item{key}{The API key for this user. You must go to HUD and sign up
 for an account and request for an API key.}
@@ -22,7 +24,7 @@ for an account and request for an API key.}
 If tract(s) exist in the zip(s) specified, then TRUE is returned.
 }
 \description{
-Given a tract and a zip code, determine if they overlap
+Given tract(s) and a zip code(s), determine if they overlap
 using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 }
