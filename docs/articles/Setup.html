@@ -152,34 +152,53 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span> <span class="op">=</span> <span class="st">"2yeuduhq72ueajk"</span><span class="op">)</span>
 <span class="co"># "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register for a key and replace it here.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span></code></pre></div>
-<p>You can also use the hud_set_key() function – this is quicker to type and more intuitive.</p>
+<p>You can also use the hud_set_key() function – this is quicker to type and more intuitive. You can also tell RStudio to remember the key by setting <code>in_wkdir</code> and <code>in_home</code> parameter to <code>TRUE</code> which will write Sys.setenv(“your-key”) to your .Rprofile.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_key.html">hud_set_key</a></span><span class="op">(</span><span class="st">"2yeuduhq72ueajk"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_key.html">hud_set_key</a></span><span class="op">(</span><span class="st">"2yeuduhq72ueajk"</span>, in_home <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>To check whether hudr can gain access to this environment variable…</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_key.html">hud_get_key</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>It is now set up for the rest of the R session.</p>
-</div>
-<div class="section level3">
-<h3 id="rprofile">.Rprofile<a class="anchor" aria-label="anchor" href="#rprofile"></a>
-</h3>
-<p>You also choose to save it into your .Rprofile to save the key in between R session.</p>
-<p>When R starts it looks for .Rprofile files in different locations:</p>
-<ul>
-<li>R_HOME: which is the directory in that R is installed,</li>
-<li>HOME: the user’s home directory,</li>
-<li>The current working directory for R</li>
-<li>R only loads one .Rprofile file per session and thus an .Rprofile file at the project-level overrides files in other locations.</li>
-</ul>
-<p>The .Rprofile file is an R script that is launch each time R starts.</p>
-<p>To set the HUD_KEY in .Rprofile working directory use:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_key.html">hud_set_key</a></span><span class="op">(</span><span class="st">"dqdqdqdqd"</span>, in_wkdir <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>To set the HUD_KEY in .Rprofile HOME directory use:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_key.html">hud_set_key</a></span><span class="op">(</span><span class="st">"dqdqdqdqd"</span>, in_home <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><br><br><br></p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="setting-a-user-agent">Setting a user agent<a class="anchor" aria-label="anchor" href="#setting-a-user-agent"></a>
+</h2>
+<p>It is recommended to set a user agent before querying. This tells the HUD servers a bit more about the querying application or user.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_user_agent.html">hud_set_user_agent</a></span><span class="op">(</span><span class="st">"This Application"</span><span class="op">)</span></code></pre></div>
+<p>If no user agent is set, it will return an empty string.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_user_agent.html">hud_get_user_agent</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><br><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="increasing-performance-with-caching">Increasing Performance with Caching<a class="anchor" aria-label="anchor" href="#increasing-performance-with-caching"></a>
+</h2>
+<p>By default, rhud uses caching by default. Calls to the HUD User API are sent to the RStudio temporary session directory.</p>
+<p>If no caching directory is set (located in temp directory), it will return an empty string.</p>
+<p>To check the current caching directory use:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_cache_dir.html">hud_get_cache_dir</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>To set a new caching directory use:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_cache_dir.html">hud_set_cache_dir</a></span><span class="op">(</span><span class="st">".//a//sample//path"</span>, in_home <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>To clear all items in the cache use:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_clear_cache.html">hud_clear_cache</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><br><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="tibbles-vs-dataframes">Tibbles vs Dataframes<a class="anchor" aria-label="anchor" href="#tibbles-vs-dataframes"></a>
+</h2>
+<p>To get tibbles instead of data frames, use <code>options(rhud_use_tibble = TRUE)</code> or set it explicitly using the <code>to_tibble</code> argument.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>rhud_use_tibble <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/hud_cw_zip_tract.html">hud_cw_zip_tract</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>,
+                 to_tibble <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><br><br><br></p>
 </div>
 <div class="section level2">
 <h2 id="understanding-the-syntax">Understanding the Syntax<a class="anchor" aria-label="anchor" href="#understanding-the-syntax"></a>
@@ -193,7 +212,7 @@
 <p>For those that do not have the {2} and {3}, these are omni functions which are capable of performing all queries under {1}, but these functions are harder to understand.</p>
 <p>For those that do not have the {3}, it inherits the {2}. This means that if {2} is a state input, then the data described by the output data is also a state.</p>
 <p>A quick example:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_county_zip.html">hud_cw_county_zip</a></span><span class="op">(</span>county <span class="op">=</span> <span class="fl">22031</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The first part of the function begins with ‘hud’.</p>
 <p>The second part is ‘cw’ meaning we are querying the crosswalk files.</p>
@@ -205,7 +224,7 @@
 <h2 id="additional-help">Additional Help<a class="anchor" aria-label="anchor" href="#additional-help"></a>
 </h2>
 <p>If you ever get confused or need help you can easily revisit this website through where you can check the all the function definitions in the <strong><em>Reference</em></strong> tab.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/rhud_website.html">rhud_website</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>This will quickly open up this website on your web browser as well as the github repository where you can submit issues.</p>
 </div>

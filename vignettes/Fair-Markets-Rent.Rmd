@@ -55,6 +55,91 @@ not small areas will have an NA in the zip_code,
 meaning this measurement is defined at a county level. Those counties that 
 are small areas will return zip code data in the zip_code field.
 
+### State Level Fair Markets Rent
+This is an example which shows you how to query the Fair Markets Rent API for a
+state. You can use the state abbreviation, state name, or state fips code. It
+will return all counties in the state and their Fair Markets Rents as well
+as all metroareas in the state and their Fair Markets Rent.
+```{r, eval=FALSE}
+# These functions gets FMR data for the state of Virginia in 2021.
+hud_fmr(query = 'VA', year = '2021')
+
+hud_fmr(query= "Virginia", year = '2021')
+
+hud_fmr(query= "51", year = '2021')
+```
+<br>
+
+If you only need the county level data, then this might work better...
+
+```{r, eval=FALSE}
+# These functions gets FMR data for the state of Virginia in 2021 for counties.
+hud_fmr_state_counties(state = 'VA', year = '2021')
+
+hud_fmr_state_counties(state = "Virginia", year = '2021')
+
+hud_fmr_state_counties(state = "51", year = '2021')
+```
+<br>
+
+If you need just metro data...
+
+```{r, eval=FALSE}
+# These functions gets FMR data for the state of Virginia in 2021 for metroareas.
+hud_fmr_state_metroareas(state = 'VA', year = '2021')
+
+hud_fmr_state_metroareas(state = "Virginia", year = '2021')
+
+hud_fmr_state_metroareas(state = "51", year = '2021')
+```
+<br>
+
+### County Level Fair Markets Rent
+This is an example which shows you how to query the Fair Markets Rent on a
+county level basis. These are defined with a 2 digit state code + 3 digit county
+code. You also need a 99999 code added onto the end. I recommend taking a 
+look at [US Counties][] to determine what counties are available.
+
+```{r, eval=FALSE}
+# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
+hud_fmr(query = '0100199999', year = '2017')
+```
+<br>
+
+You can also choose to use:
+```{r, eval=FALSE}
+# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
+hud_fmr_county_zip(county = '0100199999', year = '2017')
+```
+<br>
+
+### Small Areas Fair Markets Rent
+
+```{r, eval=FALSE}
+# Gets FMR data for METRO area.
+hud_fmr(query = "METRO47900M47900", year=c(2018))
+```
+<br>
+
+You can also choose to use:
+```{r, eval=FALSE}
+# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
+hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
+```
+<br>
+
+## Most recent Fair Markets Rent files
+
+To get the most recent Fair Markets Rent files by year:
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
+rhud::hud_rec_fmr_yr()
+
+```
+<br>
+
+## Querying for Geographic Identifers
+
 ### US States
 This is an example to show you how to query for all states in the US.
 
@@ -85,78 +170,6 @@ hud_state_metropolitan(c("WY", "NY"))
 ```
 <br>
 
-### State Level Fair Markets Rent
-This is an example which shows you how to query the Fair Markets Rent API for a
-state. You can use the state abbreviation, state name, or state fips code. It
-will return all counties in the state and their Fair Markets Rents as well
-as all metroareas in the state and their Fair Markets Rent.
-```{r, eval=FALSE}
-# These functions gets FMR data for the state of Virginia in 2021.
-hud_fmr(query = 'VA', year = '2021')
-
-hud_fmr(query= "Virginia", year = '2021')
-
-hud_fmr(query= "51", year = '2021')
-```
-<br>
-
-If you only need the state level data, then this might work better...
-
-```{r, eval=FALSE}
-# These functions gets FMR data for the state of Virginia in 2021.
-hud_fmr_state_counties(state = 'VA', year = '2021')
-
-hud_fmr_state_counties(state = "Virginia", year = '2021')
-
-hud_fmr_state_counties(state = "51", year = '2021')
-```
-<br>
-
-If you need just metro data...
-
-```{r, eval=FALSE}
-# These functions gets FMR data for the state of Virginia in 2021.
-hud_fmr_state_metroareas(state = 'VA', year = '2021')
-
-hud_fmr_state_metroareas(state = "Virginia", year = '2021')
-
-hud_fmr_state_metroareas(state = "51", year = '2021')
-```
-<br>
-
-### County Level Fair Markets Rent
-This is an example which shows you how to query the Fair Markets Rent on a
-county level basis. These are defined with a 2 digit state code + 3 digit county
-code. You also need a 99999 code added onto the end. I recommend taking a 
-look at [US Counties][] to determine what counties are available.
-```{r, eval=FALSE}
-# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
-hud_fmr(query = '0100199999', year = '2017')
-```
-<br>
-
-You can also choose to use:
-```{r, eval=FALSE}
-# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
-hud_fmr_county_zip(county = '0100199999', year = '2017')
-```
-<br>
-
-### Small Areas Fair Markets Rent
-
-```{r, eval=FALSE}
-# Gets FMR data for METRO area.
-hud_fmr(query = "METRO47900M47900", year=c(2018))
-```
-<br>
-
-You can also choose to use:
-```{r, eval=FALSE}
-# Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
-hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
-```
-<br>
-
 ## Parameters
 
 <table>
@@ -165,51 +178,41 @@ hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
 		  <th>Description</th>
  	</tr>
  	<tr>
-  		<td>query</td>
-   		<td>Identifier for county, state, or cbsadiv depending on function</td>
+  		<td>query&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   		<td>Can provide either a 10 digit FIPS code which is almost always
+          state fips + county fips + 99999, or state abbreviation. 
+          Can also provide a CBSA code. You are only allowed to query for metropolitan
+          areas.
+          <br><br>
+          Run hud_states() to get a list of counties.
+          <br><br>
+          Run hud_metropolitan("MD") to get a list of metropolitan areas in MD.
+          <br><br>
+          Run hud_counties("MD") to get list of counties in MD.
+          <br><br>
+          * query = 'METRO12700M12700'
+          * query = 'MD'
+          * query = '5100199999'
+      </td>
  	</tr>
  	<tr>
   		<td>year</td>
-   		<td>Year when measurement was taken.</td>   
+   		<td> Year range of the data to retrieve: defaults to the current year.
+          <br><br>
+          * year = c(2019, 2018, 2021)
+          * year = c(2016)
+          * year = 2021
+      </td>   
  	</tr>
  	<tr>
   		<td>key</td>
-   		<td>Name of the county if it is a county.</td>
+   		<td>
+          The API key provided by HUD USER.
+          <br><br>
+          * key = "wqokqo2138jdi13wfwwfwcytjyr"
+      </td>
  	</tr>
 </table>
-
-
-
-**query:** ***character double integer or numeric***
-
-|          Can provide either a 10 digit FIPS code which is almost always
-|          state fips + county fips + 99999, or state abbreviation. 
-|          Can also provide a CBSA code. You are only allowed to query for metropolitan
-|          areas.
-|
-|          Run hud_states() to get a list of counties.
-|  
-|          Run hud_metropolitan("MD") to get a list of metropolitan areas in MD.
-|  
-|          Run hud_counties("MD") to get list of counties in MD.
-|  
-|          * query = 'METRO12700M12700'
-|          * query = 'MD'
-|          * query = '5100199999'
-
-**year:** ***character double integer or numeric***
-
-|          Year range of the data to retrieve: defaults to the current year.
-|
-|          * year = c(2019, 2018, 2021)
-|          * year = c(2016)
-|          * year = 2021
-
-**key:** ***character*** 
-
-|         The API key provided by HUD USER.
-|
-|         * key = "wqokqo2138jdi13wfwwfwcytjyr"
 
 <br><br><br>
 
@@ -286,6 +289,6 @@ hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
 
 | "What Is Fair Market Rent? | RentData.org." Www.rentdata.org,
 |        www.rentdata.org/articles/what-is-fair-market-rent. Accessed 18 Feb. 2022.
-
+|
 | "Fair Market Rents | HUD USER." Huduser.gov, U.S Department of Housing and Urban
 |        Development, 2017, www.huduser.gov/portal/datasets/fmr.html.

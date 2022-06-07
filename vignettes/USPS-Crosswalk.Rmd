@@ -247,13 +247,51 @@ level using the method based on the ratio of residential addresses.
 <br>
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
-
 crosswalk(data = sample, geoid = "county", geoid_col = "county", 
           cw_geoid = "zip", cw_geoid_col = "pop", method = "res", year = 2019
           , quarter = 1)
 ```
-
 <br>
+
+## Geo-in-geo functions: does one geography overlap another?
+
+This library also allows the user to determine if one geography overlaps
+another.
+
+<b>Disclaimer:</b> Overlap is not determined by whether the boundaries intersect, but
+rather if any addresses lie in both. 
+
+The function below queries for if zipcode 71052 overlaps cbsa 43340. 
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
+71052 %z_in_cbsa% 43340
+
+```
+<br>
+
+The infix operator used above defaults to the most recent crosswalk files 
+available. Furthermore, you must have the HUD_KEY system environment variable 
+set before using them: check the Setup page.
+
+The non infix version is also available: this allows you to specify the year,
+quarter, and key arguments.
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
+z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
+
+```
+<br>
+
+## Most recent USPS Crosswalk files
+
+To get the most recent crosswalk files by year and quarter:
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
+hud_rec_cw_yr()
+
+```
+
+<br><br><br>
 
 ## Parameters
 
@@ -355,7 +393,7 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
  	</tr>
 </table>
 
-<br>
+<br><br><br>
 
 ## Returns
 

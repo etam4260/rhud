@@ -62,10 +62,12 @@ Sys.getenv("HUD_KEY")
 ```
 
 You can also use the hud_set_key() function -- this is quicker to type and more
-intuitive.
+intuitive. You can also tell RStudio to remember the key by setting `in_wkdir` and
+`in_home` parameter to `TRUE` which will write Sys.setenv("your-key") to your
+.Rprofile.
 
 ```{r, eval=FALSE}
-hud_set_key("2yeuduhq72ueajk")
+hud_set_key("2yeuduhq72ueajk", in_home = TRUE)
 ```
 
 To check whether hudr can gain access to this environment variable...
@@ -76,29 +78,63 @@ hud_get_key()
 
 It is now set up for the rest of the R session.
 
-### .Rprofile
+<br><br><br>
 
-You also choose to save it into your .Rprofile to save the key in between 
-R session.
+## Setting a user agent
 
-When R starts it looks for .Rprofile files in different locations:
+It is recommended to set a user agent before querying. This tells the HUD
+servers a bit more about the querying application or user.
 
-* R_HOME: which is the directory in that R is installed,
-* HOME: the user's home directory,
-* The current working directory for R
-* R only loads one .Rprofile file per session and thus an .Rprofile 
-file at the project-level overrides files in other locations.
-
-The .Rprofile file is an R script that is launch each time R starts. 
-
-To set the HUD_KEY in .Rprofile working directory use:
 ```{r, eval=FALSE}
-hud_set_key("dqdqdqdqd", in_wkdir = TRUE)
+hud_set_user_agent("This Application")
 ```
 
-To set the HUD_KEY in .Rprofile HOME directory use:
+If no user agent is set, it will return an empty string.
+
 ```{r, eval=FALSE}
-hud_set_key("dqdqdqdqd", in_home = TRUE)
+hud_get_user_agent()
+```
+
+<br><br><br>
+
+## Increasing Performance with Caching
+
+By default, rhud uses caching by default. Calls to the HUD User API are
+sent to the RStudio temporary session directory.
+
+If no caching directory is set (located in temp directory),
+it will return an empty string.
+
+To check the current caching directory use:
+
+```{r, eval=FALSE}
+hud_get_cache_dir()
+```
+
+To set a new caching directory use:
+
+```{r, eval=FALSE}
+hud_set_cache_dir(".//a//sample//path", in_home = TRUE)
+```
+
+To clear all items in the cache use:
+
+```{r, eval=FALSE}
+hud_clear_cache()
+```
+
+<br><br><br>
+
+## Tibbles vs Dataframes
+
+To get tibbles instead of data frames, use `options(rhud_use_tibble = TRUE)`
+or set it explicitly using the `to_tibble` argument.
+
+``` {r, eval = FALSE} 
+options(rhud_use_tibble = TRUE)
+
+hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
+                 to_tibble = TRUE)
 ```
 
 <br><br><br>

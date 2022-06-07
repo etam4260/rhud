@@ -41,32 +41,6 @@ state.
 * Querying for a county will return the IL measurement for that county.
 * Querying for a cbsa will return the measurement for that cbsa.
 
-### US States
-This is an example to show you how to query for all states and territories
-in the US.
-```{r, eval=FALSE}
-library(rhud)
-hud_nation_states_territories()
-```
-
-### US Counties 
-This is an example to show you how to query for all counties in MD,
-Virginia, and California, respectively.
-```{r, eval=FALSE}
-hud_state_counties("MD")
-
-hud_state_counties("Virginia")
-
-hud_state_counties("6")
-```
-
-### US Metropolitan Areas
-This is an example to show you how to query for metropolitan areas for a state.
-```{r, eval=FALSE}
-# Get all metropolitan areas in Maryland and Virginia.
-hud_state_metropolitan(c("MD", "VA"))
-```
-
 ### State Level Income Limits
 These are examples which show you how to query the Income Limits on a state
 level basis. You can use the state abbreviation, state name, or state fipscode.
@@ -74,6 +48,7 @@ It will return a single row indicating the income limits for that particular
 state.
 
 ```{r, eval=FALSE}
+library(rhud)
 # These function calls gets income limits data for the state of Virginia in 2021.
 hud_il(query = 'VA', year = '2021')
 
@@ -84,6 +59,7 @@ hud_il(query= "51", year = '2021')
 # You can also choose to query for multiple states or multiple years.
 hud_il(query = c('VA', 'MD'), year = c('2021', '2019'))
 ```
+<br>
 
 ### County Level Income Limits
 These are examples that show you how to query the Income Limits on a 
@@ -96,6 +72,7 @@ are available for particular states.
 # This queries for Income Limits in 2017.
 hud_il(query = '0100199999', year = '2017')
 ```
+<br>
 
 ### Small Areas Income Limits
 These are examples that show you how to query the Small Areas Income Limits.
@@ -110,39 +87,90 @@ hud_il(query = "METRO47900M47900", year=c(2018))
 
 <br><br><br>
 
+## Most recent Income Limits files
+
+To get the most recent Income Limits files by year:
+
+```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
+rhud::hud_rec_il_yr()
+
+```
+<br>
+
+## Querying for Geographic Identifers
+
+### US States
+This is an example to show you how to query for all states and territories
+in the US.
+```{r, eval=FALSE}
+library(rhud)
+hud_nation_states_territories()
+```
+<br>
+
+### US Counties 
+This is an example to show you how to query for all counties in MD,
+Virginia, and California, respectively.
+```{r, eval=FALSE}
+hud_state_counties("MD")
+
+hud_state_counties("Virginia")
+
+hud_state_counties("6")
+```
+<br>
+
+### US Metropolitan Areas
+This is an example to show you how to query for metropolitan areas for a state.
+```{r, eval=FALSE}
+# Get all metropolitan areas in Maryland and Virginia.
+hud_state_metropolitan(c("MD", "VA"))
+```
+<br>
+
 ## Parameters
 
-**query:** ***character double integer or numeric***
-
-|          Can provide either a 10 digit FIPS code which is almost always
-|          state fips + county fips + 99999, or state abbreviation. 
-|          Can also provide a CBSA code. You are only allowed to query for metropolitan
-|          areas.
-|
-|          Run hud_states() to get a list of counties.
-|  
-|          Run hud_metropolitan("MD") to get a list of metropolitan areas in MD.
-|  
-|          Run hud_counties("MD") to get list of counties in MD.
-|  
-|          * query = 'METRO12700M12700'
-|          * query = 'MD'
-|          * query = '5100199999'
-
-**year:** ***character double integer or numeric***
-
-|          Year range of the data to retrieve: defaults to the current year.
-|
-|          * year = c(2019, 2018, 2021)
-|          * year = c(2016)
-|          * year = 2021
-
-**key:** ***character*** 
-
-|         The API key provided by HUD USER.
-|
-|         * key = "wqokqo2138jdi13wfwwfwcytjyr"
-
+<table>
+	<tr>
+		  <th>Data Field</th>
+		  <th>Description</th>
+ 	</tr>
+ 	<tr>
+  		<td>query&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   		<td>Can provide either a 10 digit FIPS code which is almost always
+          state fips + county fips + 99999, or state abbreviation. 
+          Can also provide a CBSA code. You are only allowed to query for metropolitan
+          areas.
+          <br><br>
+          Run hud_states() to get a list of counties.
+          <br><br>
+          Run hud_metropolitan("MD") to get a list of metropolitan areas in MD.
+          <br><br>
+          Run hud_counties("MD") to get list of counties in MD.
+          <br><br>
+          * query = 'METRO12700M12700'
+          * query = 'MD'
+          * query = '5100199999'
+      </td>
+ 	</tr>
+ 	<tr>
+  		<td>year</td>
+   		<td> Year range of the data to retrieve: defaults to the current year.
+          <br><br>
+          * year = c(2019, 2018, 2021)
+          * year = c(2016)
+          * year = 2021
+      </td>   
+ 	</tr>
+ 	<tr>
+  		<td>key</td>
+   		<td>
+          The API key provided by HUD USER.
+          <br><br>
+          * key = "wqokqo2138jdi13wfwwfwcytjyr"
+      </td>
+ 	</tr>
+</table>
 
 <br><br><br>
 

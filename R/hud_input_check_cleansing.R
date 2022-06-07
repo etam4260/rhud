@@ -108,7 +108,7 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
 
   }
 
-
+  #query <- add_leading_zeros(geoid_type = primary_geoid, input = query)
 
   query <- unique(paste(trimws(as.character(query), which = "both")))
   year <- unique(paste(trimws(as.character(year), which = "both")))
