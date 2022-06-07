@@ -21,6 +21,9 @@ version](https://img.shields.io/badge/devel%20version-0.3.0.9000-yellow)]()
 
 <!-- badges: end -->
 
+Are you a python developer? Check out
+[hudpy](https://github.com/etam4260/hudpy) instead.
+
 ## Installation
 
 You can install the development version from
@@ -59,8 +62,18 @@ This sample provided below shows how to query the USPS Crosswalk API
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
 
-Are you a python developer? Check out
-[hudpy](https://github.com/etam4260/hudpy) instead.
+## Tibbles vs Dataframes
+
+To get tibbles instead of data frames, use
+`options(rhud_use_tibble = TRUE)` or set it explicitly using the
+`to_tibble` argument.
+
+``` r
+options(rhud_use_tibble = TRUE)
+
+hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
+                 to_tibble = TRUE)
+```
 
 ## Housing and Urban Development in R
 
