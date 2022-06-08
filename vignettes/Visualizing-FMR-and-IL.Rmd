@@ -2,10 +2,11 @@
 title: "Visualizing-FMR-and-IL"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Visualizing-FMR-and-IL}
+  %\VignetteIndexEntry{Comparing-FMR-and-IL}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+<i>Sample provided by <b>Shuyu Jin (geojsy@umd.edu)</b></i>
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -14,16 +15,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-<i>Sample provided by <b>Shuyu Jin</b> (geojsy@umd.edu)</i>
-
 ## Overview
+The US Department of Housing and Urban Development maintains both [*FMR*](https://www.hud.gov/program_offices/public_indian_housing/programs/hcv/landlord/fmr) (Fair Markets Rent) and [*IL*](https://www.huduser.gov/portal/datasets/il.html) (Income Limits) programs which are crucial for determining eligibility for assistance dollars in the US. Provided below is an example of querying both FMR and IL as well as mapping them using the leaflet R library.
 
-The US Department of Housing and Urban Development maintains both
-[FMR](https://link-url-here.org) (Fair Markets Rent) and 
-[IL](https://link-url-here.org) (Income Limits) programs which are crucial
-for determining eligibility for assistance dollars in the US. Provided below is
-an example of querying both FMR and IL as well as mapping them using 
-the leaflet R library.
 
 ## Loading in the necessary libraries
 
@@ -34,8 +28,6 @@ library(leaflet)
 library(tidyverse)
 library(sf)
 ```
-
-<br>
 
 To improve performance, use tigris caching.
 
@@ -49,48 +41,43 @@ Read in the Fair Markets Rent for counties in the year 2021 as well as the shape
 files needed to map.
 
 ```{r message=FALSE}
-md_counties_2021_fmr = hud_fmr_state_counties(state = 'MD', year = '2021')
+md_counties_2021_fmr = hud_fmr_state_counties(state = 'MD', year = '2021') 
 ```
 
-<br>
-
-Get county data for the state of Maryland using the rhud package.
+Get county data for the state of Maryland.
 
 ```{r message=FALSE}
 md_counties = hud_state_counties("MD")
 ```
 
-<br>
-
-Query for every county in Maryland and get their Income Limits data using
-the rhud package.
+Query for every county and get their Income Limits data using the rhud package.
 
 ```{r message=FALSE}
 md_counties_2021_il = hud_il(md_counties$fips_code)
+
+#Find unique column names and keep only unique column names
+unique_names = unique(colnames(md_counties_2021_il))
+md_counties_2021_il_unique = md_counties_2021_il[unique_names]
 ```
 
-<br>
-
-Download the shape files for counties in the US.
+Download the shape files for counties in the US and obtain consistent projection.
 
 ```{r message=FALSE}
-md_county_shapefile = tigris::counties(state = NULL, cb = FALSE,
-                                       resolution = "500k", year = 2021)
-```
+county_shapefile = tigris::counties(state = NULL, cb = FALSE,
+                                       resolution = "500k", year = 2021) %>% sf::st_transform('+proj=longlat +datum=WGS84')
 
-<br>
+```
 
 Filter the counties to those only in Maryland.
 
 ```{r message=FALSE}
-md_county_shapefile = md_county_shapefile[md_county_shapefile$STATEFP == 24, ]
+md_county_shapefile = county_shapefile[county_shapefile$STATEFP == 24, ]
 
 md_county_shapefile$fullFips = paste0(as.character(md_county_shapefile$STATEFP),
                                  as.character(md_county_shapefile$COUNTYFP),
                                  "99999")
 ```
 
-<br>
 
 ## Merging of shapefiles and data
 
@@ -104,26 +91,39 @@ md_county_fmr_merged = tigris::geo_join(md_county_shapefile,
                                         how = "inner")
 ```
 
-<br>
+```{r message=FALSE, warning=FALSE}
+md_county_il_merged = tigris::geo_join(md_county_shapefile,
+                                       md_counties_2021_il_unique,
+                                       by_sp = "fullFips",
+                                       by_df = "query",
+                                       how = "inner")
+```
 
-## Leaflet mapping
+
+## Leaflet Mapping
 
 Create the pallete for coloring the overlayed shape file. The scale used
-corresponds to Efficiency data.
+corresponds to Efficiency data and Median Income data.
 
 ```{r message=FALSE}
-pal <- colorNumeric(
+pal_md_fmr <- colorNumeric(
   palette = "Greens",
   domain = as.numeric(md_county_fmr_merged$Efficiency))
 ```
 
-<br>
+```{r message=FALSE}
+pal_md_il <- colorNumeric(
+  palette = "Purples",
+  domain = as.numeric(md_county_il_merged$median_income))
+```
+
 
 Create the county level, efficiency, one bedroom, two bedroom, three bedroom
 four bedroom label to appear when hovering using the FMR overlay.
 
+
 ```{r message=FALSE}
-label <- paste0(
+label_fmr <- paste0(
   "County: ", md_county_fmr_merged$NAME, "<br/>",
   "Efficiency: ", scales::dollar(as.numeric(md_county_fmr_merged$Efficiency)), "<br/>",
   "One Bedroom: ", scales::dollar(as.numeric(md_county_fmr_merged$`One-Bedroom`)), "<br/>",
@@ -133,26 +133,32 @@ label <- paste0(
   lapply(htmltools::HTML)
 ```
 
-<br>
+Create the county level, median income, 1 person family low/very low/extremely low income limits label to appear when hovering using the IL overlay
 
-Create the ... label to appear when hovering using the IL overlay
-
-``` {r message=FALSE}
-
-
+```{r message=FALSE}
+label_il <- paste0(
+  "County: ", md_county_il_merged$NAME, "<br/>",
+  "Median Income: ", scales::dollar(as.numeric(md_county_il_merged$median_income)), "<br/>",
+  "1 Person Family Low (80%) Income Limits: ", scales::dollar(as.numeric(md_county_il_merged$low.il80_p1)), "<br/>",
+  "1 Person Family Very Low (50%) Income Limits: ", scales::dollar(as.numeric(md_county_il_merged$very_low.il50_p1)), "<br/>",
+  "1 Person Family Extremely Low (30%) Income Limits: ", scales::dollar(as.numeric(md_county_il_merged$extremely_low.il30_p1))) %>% 
+  lapply(htmltools::HTML)
 ```
-
-<br>
 
 Using the leaflet package, plot the county level map of Fair Markets Rents and 
 Income Limits in the state of Maryland.
 
-```{r message=FALSE, warning=FALSE, out.width = '100%', fig.height = 6}
-md_county_fmr_merged %>% 
-  leaflet %>% 
-  # add base map
+```{r}
+# The legends overlap with the zoom control buttons, need to move these controls.
+
+leaflet(width = "100%", options = leafletOptions(zoomControl = FALSE)) %>%
+  htmlwidgets::onRender("function(el, x){
+                        L.control.zoom({position: 'topright'}).addTo(this)
+                        }")%>%
+  
   addProviderTiles("CartoDB") %>% 
-  addPolygons(fillColor = ~pal(as.numeric(Efficiency)),
+  
+  addPolygons(data = md_county_fmr_merged, fillColor = ~pal_md_fmr(as.numeric(Efficiency)),
               weight = 2,
               opacity = 1,
               color = "white",
@@ -163,18 +169,42 @@ md_county_fmr_merged %>%
                                            dashArray = "",
                                            fillOpacity = 0.7,
                                            bringToFront = TRUE),
-              label = label) %>% 
+              label = label_fmr,
+              group = "Fair Markets Rent") %>%
+  
+  addPolygons(data = md_county_il_merged, fillColor = ~pal_md_il(as.numeric(median_income)),
+              weight = 2,
+              opacity = 1,
+              color = "white",
+              dashArray = "3",
+              fillOpacity = 0.7,
+              highlight = highlightOptions(weight = 2,
+                                           color = "#666",
+                                           dashArray = "",
+                                           fillOpacity = 0.7,
+                                           bringToFront = TRUE),
+              label = label_il,
+              group = "Income Limits") %>% 
+  
+  addLayersControl(overlayGroups = c("Fair Markets Rent", "Income Limits"), baseGroups = "CartoDB") %>%
+  
   # add legend
-  addLegend(pal = pal, 
-            values = ~as.numeric(Efficiency), 
-            opacity = 0.7, 
-            title = htmltools::HTML("Fair Markets Rent <br> 
-                                    by County"),
-            position = "bottomright")
+  addLegend("bottomright",
+    pal = pal_md_fmr,
+    values = as.numeric(md_county_fmr_merged$Efficiency),
+            opacity = 0.7,
+            title = htmltools::HTML("Fair Markets Rent <br>
+                                    by County"), group = "Fair Markets Rent") %>%
+  
+    addLegend("bottomleft",
+      pal = pal_md_il,
+            values = as.numeric(md_county_il_merged$median_income),
+            opacity = 0.7,
+            title = htmltools::HTML("Income Limits <br>
+                                    by County"), group = "Income Limits") %>%
+setView(lat = 39, lng = -77, zoom = 6)
 ```
 
-<br>
 
 ## Observations
-
-Some noticable observations are...
+Using the rhud package to download FMR and IL data, combined with the Leaflet package for map visualization, users can understand the data more intuitively, thus effectively helping users shorten the time to view the data. 
