@@ -13,8 +13,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  eval = FALSE
+  comment = "#>"
+  # eval = FALSE
 )
 ```
 
@@ -93,7 +93,7 @@ richmond <- inner_join(richmond_shapefile_zctas, eviction_no_race_spatial, by = 
 richmond <- inner_join(richmond, covidCases_spatial, by = c("ZCTA5CE20" = "ZIP Code" ))
 ```
 
-```{r message=FALSE}
+```{r echo=TRUE, message=FALSE}
 ggplot() +
   geom_sf(data = richmond, aes(fill= `Number of Cases`), size = 0.1, colour = "grey") + 
   scale_fill_gradient2(low = "grey", mid = "white", high = "darkred", labels = comma) +
