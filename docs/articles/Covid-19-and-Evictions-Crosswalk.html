@@ -127,20 +127,9 @@
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
-<p>In the United States, housing advocates and policymakers are
-concerned that a sudden disruption in household finances caused by the
-economic crisis related to the COVID-19 pandemic will lead to a wave of
-evictions by tenants unable to pay their rents <a href="https://www.clevelandfed.org/en/newsroom-and-events/publications/community-development-briefs/db-20200717-measuring-evictions-during-the-covid-19-crisis.aspx" class="external-link">(<em>Cowin,
-Martin, and Stevens, 2020</em>)</a>.</p>
-<p>Viewing <a href="https://evictionlab.org/rankings/#/evictions?r=United%20States&amp;a=0&amp;d=evictionRate&amp;lang=en" class="external-link"><em>2016
-eviction rankings</em></a> for locations across the U.S., Richmond has
-maintained a high eviction rate over the past few years. To understand
-how the pandemic is affecting evictions, I collected weekly eviction
-filing data for Richmond, which are provided by <a href="https://evictionlab.org/eviction-tracking/" class="external-link"><em>Princeton’s
-Eviction Lab</em></a>.</p>
-<p>The mapping below uses ggplot and the crosswalk files to display
-COVID-19 cases as well as evictions based on zip codes and census
-tracts.</p>
+<p>In the United States, housing advocates and policymakers are concerned that a sudden disruption in household finances caused by the economic crisis related to the COVID-19 pandemic will lead to a wave of evictions by tenants unable to pay their rents <a href="https://www.clevelandfed.org/en/newsroom-and-events/publications/community-development-briefs/db-20200717-measuring-evictions-during-the-covid-19-crisis.aspx" class="external-link">(<em>Cowin, Martin, and Stevens, 2020</em>)</a>.</p>
+<p>Viewing <a href="https://evictionlab.org/rankings/#/evictions?r=United%20States&amp;a=0&amp;d=evictionRate&amp;lang=en" class="external-link"><em>2016 eviction rankings</em></a> for locations across the U.S., Richmond has maintained a high eviction rate over the past few years. To understand how the pandemic is affecting evictions, I collected weekly eviction filing data for Richmond, which are provided by <a href="https://evictionlab.org/eviction-tracking/" class="external-link"><em>Princeton’s Eviction Lab</em></a>.</p>
+<p>The mapping below uses ggplot and the crosswalk files to display COVID-19 cases as well as evictions based on zip codes and census tracts.</p>
 </div>
 <div class="section level3">
 <h3 id="loading-in-the-necessary-libraries">Loading in the necessary libraries<a class="anchor" aria-label="anchor" href="#loading-in-the-necessary-libraries"></a>
@@ -185,8 +174,7 @@ tracts.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">eviction_race</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">`filings_2020`</span> <span class="op">~</span> <span class="va">month</span> <span class="op">+</span> <span class="va">GEOID</span> <span class="op">+</span> <span class="va">racial_majority</span>, data <span class="op">=</span> <span class="va">richmond_monthly_2020_2021</span>, FUN <span class="op">=</span> <span class="va">sum</span><span class="op">)</span>
 <span class="va">eviction_no_race</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">`filings_2020`</span> <span class="op">~</span> <span class="va">month</span> <span class="op">+</span> <span class="va">GEOID</span>, data <span class="op">=</span> <span class="va">richmond_monthly_2020_2021</span>, FUN <span class="op">=</span> <span class="va">sum</span><span class="op">)</span></code></pre></div>
-<p>Aggregating and classifying COVID cases and eviction data based on
-spatial and temporal condition</p>
+<p>Aggregating and classifying COVID cases and eviction data based on spatial and temporal condition</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">covidCases_spatial</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">`Number of Cases`</span> <span class="op">~</span> <span class="va">`ZIP Code`</span>, FUN <span class="op">=</span> <span class="va">sum</span>, data <span class="op">=</span> <span class="va">covidCases</span><span class="op">)</span>
 <span class="va">covidCases_temporal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/aggregate.sf.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">`Number of Cases`</span> <span class="op">~</span> <span class="va">monthYear</span>, FUN <span class="op">=</span> <span class="va">sum</span>, data <span class="op">=</span> <span class="va">covidCases</span><span class="op">)</span>
@@ -295,41 +283,16 @@ spatial and temporal condition</p>
 <div class="section level2">
 <h2 id="observations">Observations<a class="anchor" aria-label="anchor" href="#observations"></a>
 </h2>
-<p>A noteworthy point, the number of COVID and eviction filings is not
-significantly correlated. In fact, by 2021, Richmond remained 25% below
-the historical average <a href="https://evictionlab.org/us-eviction-filing-patterns-2021/" class="external-link"><em>(Hepburn,
-Jin, &amp; Fish et al., 2022)</em></a>. To answer why the number of
-eviction filings in Richmond has been changed during the pandemic,
-combing with time, the CDC moratorium expiration might be a significant
-reason. Since during September 4, 2020, and July 31, 2021, <a href="https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html" class="external-link"><em>CDC’s
-moratorium</em></a> on evictions for rent assistance for tenants and
-landlords helped prevent at least 1.55 million eviction filings
-nationwide <a href="https://evictionlab.org/eleven-months-cdc/" class="external-link"><em>(Rangel, Haas, and
-Lemmerman et al., 2021)</em></a>.</p>
-<p>Meanwhile, crossing data from ZIP Codes to census tracts yielded less
-accurate results. We got some discrete or even N/A results with COVID
-cases by census tracts. Therefore, it should be noted that there are
-considerations when crosswalking data to smaller geographies,
-particularly census tracts. The fundamental reason should be the ZIP
-Codes cross-cut numerous tracts that do not follow the boundaries
-closely <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf" class="external-link"><em>(Din
-and Wilson, 2020)</em></a>.</p>
+<p>A noteworthy point, the number of COVID and eviction filings is not significantly correlated. In fact, by 2021, Richmond remained 25% below the historical average <a href="https://evictionlab.org/us-eviction-filing-patterns-2021/" class="external-link"><em>(Hepburn, Jin, &amp; Fish et al., 2022)</em></a>. To answer why the number of eviction filings in Richmond has been changed during the pandemic, combing with time, the CDC moratorium expiration might be a significant reason. Since during September 4, 2020, and July 31, 2021, <a href="https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html" class="external-link"><em>CDC’s moratorium</em></a> on evictions for rent assistance for tenants and landlords helped prevent at least 1.55 million eviction filings nationwide <a href="https://evictionlab.org/eleven-months-cdc/" class="external-link"><em>(Rangel, Haas, and Lemmerman et al., 2021)</em></a>.</p>
+<p>Meanwhile, crossing data from ZIP Codes to census tracts yielded less accurate results. We got some discrete or even N/A results with COVID cases by census tracts. Therefore, it should be noted that there are considerations when crosswalking data to smaller geographies, particularly census tracts. The fundamental reason should be the ZIP Codes cross-cut numerous tracts that do not follow the boundaries closely <a href="https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf" class="external-link"><em>(Din and Wilson, 2020)</em></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
 </h2>
-<p>CDC. “CDC Issues Eviction Moratorium Order in Areas of Substantial
-and High Transmission.” <a href="https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html" class="external-link uri">https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html</a>
-(Accessed 05/12/2022)</p>
-<p>Din, Alexander, and Ron Wilson. “Crosswalking ZIP Codes to Census
-Geographies.” Cityscape 22, no. 1 (2020): 293-314. (Accessed
-06/01/2022)</p>
-<p>Jasmine Rangel, Jacob Haas, Emily Lemmerman, et al. “Preliminary
-Analysis: 11 Months of the CDC Moratorium.” Eviction Lab. <a href="https://evictionlab.org/eleven-months-cdc/" class="external-link uri">https://evictionlab.org/eleven-months-cdc/</a>. (Accessed
-05/12/2022)</p>
-<p>Peter Hepburn, Olivia Jin, Joe Fish, et al. “Preliminary Analysis:
-Eviction Filing Patterns in 2021.” Eviction Lab. <a href="https://evictionlab.org/us-eviction-filing-patterns-2021/" class="external-link uri">https://evictionlab.org/us-eviction-filing-patterns-2021/</a>.
-(Accessed 05/14/2022)</p>
+<p>CDC. “CDC Issues Eviction Moratorium Order in Areas of Substantial and High Transmission.” <a href="https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html" class="external-link uri">https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html</a> (Accessed 05/12/2022)</p>
+<p>Din, Alexander, and Ron Wilson. “Crosswalking ZIP Codes to Census Geographies.” Cityscape 22, no. 1 (2020): 293-314. (Accessed 06/01/2022)</p>
+<p>Jasmine Rangel, Jacob Haas, Emily Lemmerman, et al. “Preliminary Analysis: 11 Months of the CDC Moratorium.” Eviction Lab. <a href="https://evictionlab.org/eleven-months-cdc/" class="external-link uri">https://evictionlab.org/eleven-months-cdc/</a>. (Accessed 05/12/2022)</p>
+<p>Peter Hepburn, Olivia Jin, Joe Fish, et al. “Preliminary Analysis: Eviction Filing Patterns in 2021.” Eviction Lab. <a href="https://evictionlab.org/us-eviction-filing-patterns-2021/" class="external-link uri">https://evictionlab.org/us-eviction-filing-patterns-2021/</a>. (Accessed 05/14/2022)</p>
 </div>
   </div>
 

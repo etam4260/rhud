@@ -1,8 +1,8 @@
 ---
-title: "Visualizing-FMR-and-IL"
+title: "Visualizing-FMR-and-IL-2"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Visualizing-FMR-and-IL}
+  %\VignetteIndexEntry{Visualizing-FMR-and-IL-2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

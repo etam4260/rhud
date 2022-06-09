@@ -2,7 +2,7 @@
 title: "Visualizing-FMR-and-IL"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Comparing-FMR-and-IL}
+  %\VignetteIndexEntry{Visualizing-FMR-and-IL}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

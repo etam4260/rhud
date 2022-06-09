@@ -1,8 +1,8 @@
 ---
-title: "Covid-19-and-Evictions-Crosswalk"
+title: "Covid-19-and-Evictions-Crosswalk-2"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Covid-19-and-Evictions-Crosswalk}
+  %\VignetteIndexEntry{Covid-19-and-Evictions-Crosswalk-2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
