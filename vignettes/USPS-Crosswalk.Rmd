@@ -298,7 +298,6 @@ hud_rec_cw_yr()
 <table>
 	<tr>
 		  <th>Parameter</th>
-		  <th>Type</th>
 		  <th>Description</th>
  	</tr>
 	<tr>

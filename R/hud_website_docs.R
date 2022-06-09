@@ -2,7 +2,7 @@
 
 #' @name rhud_website
 #' @title rhud_website
-#' @description Quickly get documentation for the hudr package by opening up
+#' @description Quickly get documentation for the rhud package by opening up
 #'   the websites associated with it. Currently supports Unix and Windows OS.
 #' @param website The websites available.
 #'   1) "github-pages"
@@ -10,7 +10,6 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #' rhud_website("github-pages")
 #' rhud_website("github")
 #' rhud_website()
@@ -21,6 +20,8 @@ rhud_website <- function(website = c("github-pages", "github")) {
 
   github_pages <- "https://etam4260.github.io/rhud/"
   github <- "https://github.com/etam4260/rhud"
+
+  # TODO: Change this to browseURL()
 
   if (.Platform$OS.type == "unix") {
     if ("github" %in% website) system(paste("open", github, sep = " "))
