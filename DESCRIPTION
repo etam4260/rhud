@@ -41,7 +41,8 @@ Imports:
     httr,
     curl,
     tibble,
-    R.cache
+    R.cache,
+    utils
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 ByteCompile: true

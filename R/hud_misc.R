@@ -78,10 +78,12 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
   if (!is.null(states) && nrow(states) > 1) {
+
     states$state_name <- unlist(states$state_name)
     states$state_code <- unlist(states$state_code)
     states$state_num <- unlist(states$state_num)
     states$category <- unlist(states$category)
+
     if (to_tibble == FALSE) {
       return(states)
     } else {
