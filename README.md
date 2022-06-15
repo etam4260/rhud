@@ -16,6 +16,7 @@ coverage](https://codecov.io/gh/etam4260/rhud/branch/main/graph/badge.svg)](http
 [![CodeFactor](https://www.codefactor.io/repository/github/etam4260/rhud/badge/main)](https://www.codefactor.io/repository/github/etam4260/rhud/overview/main)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/524_status.svg)](https://github.com/ropensci/software-review/issues/524)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6644503.svg)](https://doi.org/10.5281/zenodo.6644503)
 <br/> <br/> [![devel
 version](https://img.shields.io/badge/devel%20version-0.3.0.9000-yellow)]()
 

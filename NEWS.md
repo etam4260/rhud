@@ -42,7 +42,7 @@ rhud 0.4.0.9000 (6/10/2022)
   * State queries for hud_fmr no longer does double queries.
   * User is presented with a description of the entire package when typing
     part of its name in the console.
-  
+
 ### BUG FIXES
 
   * Attempt two at removing download bar from appearing when first
@@ -61,12 +61,14 @@ rhud 0.4.0.9000 (6/10/2022)
   * Included in README.md how to setup the key and provide a simple example.
   * Improved sample case studies in the website documentation. (WIP)
   * Added diagram for census geographies to the crosswalk website documentation
-  to better communicate relationship among geographies. (WIP)
+    to better communicate relationship among geographies. (WIP)
   * Introduced some iconography into documentation to help 
     overall user experience.  (WIP)
   * All functions are listed in the README.md page along with the range of years
     that they can be queried for.
   * Description of package now shows up when typing it in console.
+  * Fixed examples provided by in documentation to be runnable and 
+    not throw errors. 
   
 rhud 0.3.0.9000 (5/30/2022)
 ============================
