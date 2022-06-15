@@ -1,5 +1,6 @@
 #' @importFrom curl has_internet
-
+#' @importFrom utils browseURL
+#'
 #' @name rhud_website
 #' @title rhud_website
 #' @description Quickly get documentation for the rhud package by opening up
