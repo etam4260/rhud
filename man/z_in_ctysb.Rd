@@ -21,7 +21,8 @@ Defaults to the first quarter of the year.}
 for an account and request for an API key.}
 }
 \value{
-If zip(s) exist in the countysub(s) specified, then TRUE is returned.
+If zip(s) exist in the countysub(s) specified, then
+TRUE is returned.
 }
 \description{
 Given zip code(s) and a countysub(s), determine if they overlap

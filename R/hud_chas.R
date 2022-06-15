@@ -32,15 +32,20 @@
 hud_chas_nation <- function(year = c("2014-2018"),
                             key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+
+    to_tibble <- getOption("rhud_use_tibble")
+
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- chas_input_check_cleansing(year = year, key = key)
@@ -87,15 +92,19 @@ hud_chas_nation <- function(year = c("2014-2018"),
 hud_chas_state <- function(state, year = c("2014-2018"),
                            key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- chas_input_check_cleansing(state, year, key)
@@ -109,7 +118,8 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(hud_nation_states_territories(
+      key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -175,20 +185,24 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
+#'
 #' hud_chas_county(county = c("06105", "06113"))
+#'
 #' }
 hud_chas_county <- function(county, year = c("2014-2018"),
                             key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- chas_input_check_cleansing(county, year, key)
@@ -208,7 +222,8 @@ hud_chas_county <- function(county, year = c("2014-2018"),
   # Grab all possible states if the package doesn't have a state dataset to
   # query from.
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(
+      hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   # Check if first two numbers of county code inputted is a valid state.
@@ -269,21 +284,23 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' @examples
 #' \dontrun{
 #'
-#' #hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
+#' hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
 #'
 #' }
 hud_chas_state_mcd <- function(state, year = c("2014-2018"),
                          key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- chas_input_check_cleansing(year = year, key = key)
@@ -295,7 +312,8 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
   if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(
+      hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   for (i in seq_len(length(state))) {
@@ -323,7 +341,9 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
   fip_code <- unlist(fip_code)
 
   # Get all MCDs in these states...
-  all_mcd_in_states <- suppressMessages(hud_state_minor_civil_divisions(fip_code))
+  all_mcd_in_states <- suppressMessages(
+    hud_state_minor_civil_divisions(fip_code))
+
   all_queries <- data.frame()
 
   for (i in year) {
@@ -373,21 +393,23 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #' @examples
 #' \dontrun{
 #'
-#' #hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
+#' hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
 #'
 #' }
 hud_chas_state_place <- function(state, year = c("2014-2018"),
                            key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- chas_input_check_cleansing(year = year, key = key)
@@ -395,7 +417,8 @@ hud_chas_state_place <- function(state, year = c("2014-2018"),
   key <- args[[2]]
 
   if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
+    pkg.env$state <- suppressMessages(
+      hud_nation_states_territories(key = Sys.getenv("HUD_KEY")))
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)

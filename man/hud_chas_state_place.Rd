@@ -43,7 +43,7 @@ Returns CHAS for all places in a state.
 \examples{
 \dontrun{
 
-#hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
+hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
 
 }
 }

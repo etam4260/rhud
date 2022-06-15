@@ -41,7 +41,7 @@ hud_set_key <- function(key,
                sep = ""))
   }
 
-  if(!is.logical(in_wkdir) ||
+  if (!is.logical(in_wkdir) ||
      !is.logical(in_home) ||
      length(in_wkdir) != 1  ||
      length(in_home) != 1) {
@@ -61,18 +61,18 @@ hud_set_key <- function(key,
 
       if (any(all_occur)) {
         message(paste("* It looks like your .RProfile contains multiple ",
-                      "definitions of the HUD_KEY. Do file.edit(\".Rprofile\") ",
-                      "to take a look at it.",
+                      "definitions of the HUD_KEY. ",
+                      "Do file.edit(\".Rprofile\") to take a look at it.",
                       sep = ""))
       }
 
       message("* Writing the HUD_KEY in working directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  ".Rprofile")
       message("* Writing the HUD_KEY in working directory .Rprofile!")
     }
@@ -88,24 +88,24 @@ hud_set_key <- function(key,
                        all.files = TRUE) == ".Rprofile")) {
       # Check the file if it contains a call to set hud key, regex for it.
 
-      rprof = readLines("~/.Rprofile")
+      rprof <- readLines("~/.Rprofile")
       all_occur <- grep("^Sys\\.setenv\\(\"HUD_KEY\" = \".*\"\\)", rprof)
 
       if (any(all_occur)) {
         message(paste("* It looks like your HOME .RProfile contains multiple ",
-                      "definitions of the HUD_KEY. Do file.edit(\"~/.Rprofile\") ",
-                      "to take a look at it.",
+                      "definitions of the HUD_KEY. ",
+                      "Do file.edit(\"~/.Rprofile\") to take a look at it.",
                       sep = ""))
       }
 
       message("* Writing the HUD_KEY in HOME directory .Rprofile!")
 
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  "~/.Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  "~/.Rprofile")
       message("* Writing the HUD_KEY in HOME directory .Rprofile!")
     }

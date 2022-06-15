@@ -38,11 +38,11 @@ z_in_trt <- function(zip, tract, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -64,7 +64,9 @@ z_in_trt <- function(zip, tract, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(tract) != 11)) stop("\nInputted tract(s) are not all of length 11.")
+  if (any(nchar(tract) != 11)) {
+    stop("\nInputted tract(s) are not all of length 11.", call. = FALSE)
+  }
 
   res <- c()
 
@@ -132,11 +134,11 @@ z_in_cty <- function(zip, county, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -152,7 +154,9 @@ z_in_cty <- function(zip, county, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(county) != 5)) stop("\nInputted county(s) are not all of length 5.")
+  if (any(nchar(county) != 5)) {
+    stop("\nInputted county(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -220,11 +224,11 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -240,7 +244,9 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cbsa) != 5)) stop("\nInputted cbsa(s) are not all of length 5.")
+  if (any(nchar(cbsa) != 5)) {
+    stop("\nInputted cbsa(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -309,11 +315,11 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -329,7 +335,9 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cbsadiv) != 5)) stop("\nInputted cbsadiv(s) are not all of length 5.")
+  if (any(nchar(cbsadiv) != 5)) {
+    stop("\nInputted cbsadiv(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -383,7 +391,8 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
-#' @returns If zip(s) exist in the countysub(s) specified, then TRUE is returned.
+#' @returns If zip(s) exist in the countysub(s) specified, then
+#'  TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -397,11 +406,11 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -417,8 +426,10 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(countysub) != 10)) stop("\nInputted countysub(s) are not all of length 10.")
-
+  if (any(nchar(countysub) != 10)) {
+    stop("\nInputted countysub(s) are not all of length 10.",
+         call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -483,11 +494,11 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -503,8 +514,9 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cd) != 4)) stop("\nInputted cd(s) are not all of length 4.")
-
+  if (any(nchar(cd) != 4)) {
+    stop("\nInputted cd(s) are not all of length 4.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -574,11 +586,11 @@ trt_in_z <- function(tract, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -594,7 +606,9 @@ trt_in_z <- function(tract, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
 
   res <- c()
@@ -663,13 +677,14 @@ cty_in_z <- function(county, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "county",
@@ -683,7 +698,9 @@ cty_in_z <- function(county, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
 
   res <- c()
@@ -752,13 +769,14 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsa",
@@ -773,7 +791,9 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
   key <- cleaned[4]
 
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cbsa))) {
@@ -840,13 +860,14 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsadiv",
@@ -860,7 +881,9 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cbsadiv))) {
@@ -927,13 +950,14 @@ cd_in_z <- function(cd, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cd",
@@ -947,7 +971,9 @@ cd_in_z <- function(cd, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cd))) {
@@ -1000,7 +1026,8 @@ cd_in_z <- function(cd, zip, year, quarter,
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
-#' @returns If countysub(s) exist in the zip(s) specified, then TRUE is returned.
+#' @returns If countysub(s) exist in the zip(s) specified,
+#'   then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -1014,13 +1041,14 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "ctysb",
@@ -1034,7 +1062,9 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(countysub))) {

@@ -45,7 +45,9 @@ Returns CHAS data for counties.
 }
 \examples{
 \dontrun{
+
 hud_chas_county(county = c("06105", "06113"))
+
 }
 }
 \seealso{

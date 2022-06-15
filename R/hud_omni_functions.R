@@ -132,15 +132,17 @@ hud_cw <- function(type, query,
                    key = Sys.getenv("HUD_KEY"),
                    to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   alltypes <- c("zip-tract", "zip-county", "zip-cbsa",
@@ -148,8 +150,10 @@ hud_cw <- function(type, query,
                 "county-zip", "cbsa-zip", "cbsadiv-zip",
                 "cd-zip", "zip-countysub", "countysub-zip")
 
-  if (length(type) != 1) stop("\nOnly one crosswalk type can be specified at a time",
+  if (length(type) != 1) {
+    stop("\nOnly one crosswalk type can be specified at a time",
                               call. = FALSE)
+  }
 
   # Allow user to specify the full string too.
   type <- switch(tolower(type),
@@ -177,7 +181,8 @@ hud_cw <- function(type, query,
   }
 
   ifelse(as.integer(type) < 1 || as.integer(type) > 12,
-         stop("\nThe type input is not in the range of 1-12", call. = FALSE), "")
+         stop("\nThe type input is not in the range of 1-12",
+              call. = FALSE), "")
 
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
@@ -238,9 +243,11 @@ hud_cw <- function(type, query,
 
   if (!minimal) return(cw_do_query_calls(urls, all_queries$query,
                                          all_queries$year,
-                           all_queries$quarter, lhgeoid, rhgeoid, key, to_tibble))
+                           all_queries$quarter, lhgeoid, rhgeoid, key,
+                           to_tibble))
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
-                           all_queries$quarter, lhgeoid, rhgeoid, key, to_tibble)[[1]])
+                           all_queries$quarter, lhgeoid, rhgeoid, key,
+                           to_tibble)[[1]])
 }
 
 
@@ -264,10 +271,12 @@ hud_cw <- function(type, query,
 #' @keywords Fair Markets Rent API
 #' @export
 #' @returns This function returns a dataframe containing fair markets rent data
-#'   for a particular county, metroarea, or state. For county and msa level data,
+#'   for a particular county, metroarea, or state. For county and msa level
+#'   data,
 #'   these measurements include the county_name, counties_msa, town_name,
 #'   metro_status, metro_name, smallarea_status, basicdata, Efficiency,
-#'   One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip code
+#'   One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip
+#'   code
 #'   level data if it considered a small area. Otherwise, data will be returned
 #'   at the level of the queried county or metroarea.
 #'
@@ -290,15 +299,17 @@ hud_cw <- function(type, query,
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(query, year, key)
@@ -369,8 +380,9 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                                          function(x) unlist(as.character(x))))
 
       res_metroareas <- as.data.frame(do.call(rbind, list_metroarea_res))
-      res_metroareas <- as.data.frame(sapply(res_metroareas,
-                                             function(x) unlist(as.character(x))))
+      res_metroareas <- as.data.frame(sapply(
+        res_metroareas,
+        function(x) unlist(as.character(x))))
 
       if (to_tibble == FALSE) {
         return(list(counties = res_county,
@@ -380,8 +392,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     metroareas = tibble(res_metroareas)))
       }
     }
-      # return(list(counties = hud_fmr_state_counties(query, year, key, to_tibble),
-      #            metroareas = hud_fmr_state_metroareas(query, year, key, to_tibble)))
+
   } else if (querytype == "cbsa") {
       # Returns zip level data.
       return(hud_fmr_metroarea_zip(query, year, key, to_tibble))
@@ -432,15 +443,17 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
                    key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(query, year, key)
@@ -581,15 +594,17 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                      key = Sys.getenv("HUD_KEY"),
                      to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {

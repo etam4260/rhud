@@ -74,7 +74,8 @@ test_that("test %z_in_ctysb%", {
 
   expect_equal(44256 %z_in_ctysb% 3910383426, TRUE)
 
-  expect_equal(c(44273, 44256, 44254, 44217, 44215, 44251) %z_in_ctysb% 3910383426,
+  expect_equal(c(44273, 44256, 44254, 44217, 44215, 44251) %z_in_ctysb%
+                 3910383426,
                c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE))
 
   expect_error(c(98520, 12) %z_in_ctysb% c(1014220))

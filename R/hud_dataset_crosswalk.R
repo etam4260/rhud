@@ -120,15 +120,17 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                       key = Sys.getenv("HUD_KEY"),
                       to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
 
@@ -192,15 +194,16 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
     stop(paste("\nCrosswalk from",
                toupper(geoid), "to",
                toupper(cw_geoid),
-               "is not supported. Type ?crosswalk to see information on
-               what is available.",
+               "is not supported. Type ?crosswalk to see information on ",
+               "what is available.",
                sep = " "))
   }
 
   # If no columns are provides, assume just want to merge...
   # If no method is provided, assume merge and crosswalk
   if (is.na(cw_geoid_col) || is.na(method)) {
-    message("\n* No method or cw_geoid_col specified: will just merge the datasets.")
+    message("\n* No method or cw_geoid_col specified: ",
+            "will just merge the datasets.")
 
     if (to_tibble == FALSE) {
       return(merge(cw_data, data, by.x = 6, by.y = geoid_col))
@@ -218,28 +221,33 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
     # apply method to columns specified.
     if (method == "residential" || method == "res" || method == "res_ratio") {
-      message("\n* Applying allocation method based on residential address percentage.")
+      message("\n* Applying allocation method based on",
+              "residential address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
           as.numeric(merged[i, "res_ratio"])
       }
-    } else if (method == "business" || method == "bus" || method == "bus_ratio") {
-      message("\n* Applying allocation method based on business address percentage.")
+    } else if (method == "business" || method == "bus" ||
+               method == "bus_ratio") {
+      message("\n* Applying allocation method based on ",
+              "business address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
           as.numeric(merged[i, "bus_ratio"])
       }
     } else if (method == "other" || method == "oth" || method == "oth_ratio") {
-      message("\n* Applying allocation method based on other address percentage.")
+      message("\n* Applying allocation method based on ",
+              "other address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
           as.numeric(merged[i, "oth_ratio"])
       }
     } else if (method == "total" || method == "tot" || method == "tot_ratio") {
-      message("\n* Applying allocation method based on total address percentage.")
+      message("\n* Applying allocation method based on ",
+              "total address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *

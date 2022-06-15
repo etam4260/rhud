@@ -16,7 +16,7 @@
 #' rhud_website()
 #' }
 rhud_website <- function(website = c("github-pages", "github")) {
-  if(!curl::has_internet()) stop("You currently do not have internet access.")
+  if (!curl::has_internet()) stop("You currently do not have internet access.")
   # Check for internet
 
   if ("github" %in% website) browseURL("https://github.com/etam4260/rhud")

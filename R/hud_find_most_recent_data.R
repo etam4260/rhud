@@ -20,41 +20,42 @@
 #' }
 hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
-  year = as.integer(format(Sys.Date(), "%Y"))
-  month = as.integer(format(Sys.Date(), "%m"))
+  year <- as.integer(format(Sys.Date(), "%Y"))
+  month <- as.integer(format(Sys.Date(), "%m"))
 
   if (month >= 1 && month <= 3) {
-    quarter = 1
+    quarter <- 1
   } else if (month >= 4 && month <= 6) {
-    quarter = 2
+    quarter <- 2
   } else if (month >= 7 && month <= 9) {
-    quarter = 3
+    quarter <- 3
   } else if (month >= 10 && month <= 12) {
-    quarter = 4
+    quarter <- 4
   }
 
   # Ping HUD CW API. Set a limit for 8 pings or the two years from current one.
-  i = 8
+  i <- 8
   while (i > 0) {
     # It might be worthwhile to make this a little more robust by pinging
     # different CW files and making a percentage threshold on them.
-    data <- suppressMessages(suppressWarnings(hud_cw_tract_zip(tract = 48201223100,
-                                                               year = year,
-                                                               quarter = quarter,
-                                                               key = key
-                                                               )))
+    data <- suppressMessages(suppressWarnings(hud_cw_tract_zip(
+      tract = 48201223100,
+      year = year,
+      quarter = quarter,
+      key = key
+    )))
 
     if (!is.null(data) && nrow(data) >= 1) {
       return(c(year = year, quarter = quarter))
     }
 
     if (quarter > 1) {
-      quarter = quarter - 1
+      quarter <- quarter - 1
     } else {
-      year = year - 1
-      quarter = 4
+      year <- year - 1
+      quarter <- 4
     }
-    i = i - 1
+    i <- i - 1
   }
 
   return(c(NA, NA))
@@ -83,17 +84,17 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
 #'
 #' }
 hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
-  year = as.integer(format(Sys.Date(), "%Y"))
-  month = as.integer(format(Sys.Date(), "%m"))
+  year <- as.integer(format(Sys.Date(), "%Y"))
+  month <- as.integer(format(Sys.Date(), "%m"))
 
   if (month >= 1 && month <= 3) {
-    quarter = 1
+    quarter <- 1
   } else if (month >= 4 && month <= 6) {
-    quarter = 2
+    quarter <- 2
   } else if (month >= 7 && month <= 9) {
-    quarter = 3
+    quarter <- 3
   } else if (month >= 10 && month <= 12) {
-    quarter = 4
+    quarter <- 4
   }
 
   year_state <- NULL
@@ -110,7 +111,7 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
                                                         )))
 
       if (!is.null(data) && length(data) >= 1) {
-        year_state = year
+        year_state <- year
       }
     }
 
@@ -122,19 +123,20 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
                                                                    )))
 
       if (!is.null(data) && nrow(data) >= 1) {
-        year_county = year
+        year_county <- year
       }
     }
 
 
     if (is.null(year_metroarea)) {
-      data <- suppressMessages(suppressWarnings(hud_fmr_metroarea_zip("METRO47900M47900",
-                                                                      year = year,
-                                                                      key = key
-                                                                      )))
+      data <- suppressMessages(suppressWarnings(
+        hud_fmr_metroarea_zip("METRO47900M47900",
+                              year = year,
+                              key = key
+                              )))
 
       if (!is.null(data) && nrow(data) >= 1) {
-        year_metroarea = year
+        year_metroarea <- year
       }
     }
 
@@ -180,17 +182,17 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
 #'
 #' }
 hud_rec_il_yr <- function(key = Sys.getenv("HUD_KEY")) {
-  year = as.integer(format(Sys.Date(), "%Y"))
-  month = as.integer(format(Sys.Date(), "%m"))
+  year <- as.integer(format(Sys.Date(), "%Y"))
+  month <- as.integer(format(Sys.Date(), "%m"))
 
   if (month >= 1 && month <= 3) {
-    quarter = 1
+    quarter <- 1
   } else if (month >= 4 && month <= 6) {
-    quarter = 2
+    quarter <- 2
   } else if (month >= 7 && month <= 9) {
-    quarter = 3
+    quarter <- 3
   } else if (month >= 10 && month <= 12) {
-    quarter = 4
+    quarter <- 4
   }
 
   year_state <- NULL
@@ -207,7 +209,7 @@ hud_rec_il_yr <- function(key = Sys.getenv("HUD_KEY")) {
                                                        )))
 
       if (!is.null(data) && nrow(data) >= 1) {
-        year_state = year
+        year_state <- year
       }
     }
 
@@ -219,7 +221,7 @@ hud_rec_il_yr <- function(key = Sys.getenv("HUD_KEY")) {
                                                        )))
 
       if (!is.null(data) && nrow(data) >= 1) {
-        year_county = year
+        year_county <- year
       }
     }
 
@@ -231,7 +233,7 @@ hud_rec_il_yr <- function(key = Sys.getenv("HUD_KEY")) {
                                                        )))
 
       if (!is.null(data) && nrow(data) >= 1) {
-        year_metroarea = year
+        year_metroarea <- year
       }
     }
 

@@ -27,10 +27,12 @@ rather than a data frame.}
 }
 \value{
 This function returns a dataframe containing fair markets rent data
-for a particular county, metroarea, or state. For county and msa level data,
+for a particular county, metroarea, or state. For county and msa level
+data,
 these measurements include the county_name, counties_msa, town_name,
 metro_status, metro_name, smallarea_status, basicdata, Efficiency,
-One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip code
+One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip
+code
 level data if it considered a small area. Otherwise, data will be returned
 at the level of the queried county or metroarea.
 

@@ -7,9 +7,9 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
-#'   though their boundaries intersect the queried geoids(rhs). This is likely
-#'   because addresses do not lie in their intersecting region.
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even though their boundaries intersect the queried geoids(rhs). This is
+#'   likely because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
 #'   crosswalk files are available. For modifying the year and quarter parameter
@@ -36,11 +36,6 @@
   # pkg environment and not depend on automated caching.
   args <- hud_rec_cw_yr()
 
-  # TODO: We might want to allow using names also..
-  # There is a bit of overhead cost for doing individual queries because each
-  # zip will need individual calls to hud_cw_zip_tract... Could optimize by
-  # using internal functions...
-
   # Need to validate tract..
   cleaned <- cw_input_check_cleansing(primary_geoid = "tract",
                                       secondary_geoid = "zip",
@@ -48,13 +43,14 @@
                                       quarter = args[2],
                                       Sys.getenv("HUD_KEY"))
 
-
   tract <- cleaned[1]
   year <- cleaned[2]
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(tract) != 11)) stop("\nInputted tract(s) are not all of length 11.")
+  if (any(nchar(tract) != 11)) {
+    stop("\nInputted tract(s) are not all of length 11.", call. = FALSE)
+  }
 
   res <- c()
 
@@ -89,12 +85,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip(s) to determine overlap with county(s)
@@ -127,7 +125,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(county) != 5)) stop("\nInputted county(s) are not all of length 5.")
+  if (any(nchar(county) != 5)) {
+    stop("\nInputted county(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -162,12 +162,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip(s) to determine overlap with cbsa(s)
@@ -201,7 +203,10 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cbsa) != 5)) stop("\nInputted cbsa(s) are not all of length 5.")
+
+  if (any(nchar(cbsa) != 5)) {
+    stop("\nInputted cbsa(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -236,12 +241,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip(s) to determine overlap with cbsadiv(s)
@@ -276,7 +283,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cbsadiv) != 5)) stop("\nInputted cbsadiv(s) are not all of length 5.")
+  if (any(nchar(cbsadiv) != 5)) {
+    stop("\nInputted cbsadiv(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -311,12 +320,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip(s) to determine overlap with countysub(s)
@@ -350,7 +361,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(countysub) != 10)) stop("\nInputted countysub(s) are not all of length 10.")
+  if (any(nchar(countysub) != 10)) {
+    stop("\nInputted countysub(s) are not all of length 10.", call. = FALSE)
+  }
 
 
   res <- c()
@@ -386,12 +399,14 @@
 #'   they overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param zip The zip(s) to determine overlap with a congressional district(s)
@@ -424,7 +439,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cd) != 4)) stop("\nInputted cd(s) are not all of length 4.")
+  if (any(nchar(cd) != 4)) {
+    stop("\nInputted cd(s) are not all of length 4.", call. = FALSE)
+  }
 
 
   res <- c()
@@ -463,12 +480,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param tract The tract(s) to determine overlap with zip(s)
@@ -501,7 +520,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(tract))) {
@@ -536,12 +557,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param county The county(s) to determine overlap with zip(s).
@@ -575,7 +598,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(county))) {
@@ -611,12 +636,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param cbsa The cbsa(s) to determine overlap with zip(s).
@@ -650,7 +677,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cbsa))) {
@@ -685,12 +714,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
@@ -726,7 +757,9 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cbsadiv))) {
@@ -761,12 +794,14 @@
 #'   overlap using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param cd The cd(s) to determine overlap with zip(s).
@@ -800,7 +835,10 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cd))) {
@@ -836,12 +874,14 @@
 #'   using the crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #'
-#'   This means that it is possible that certain geoids(lhs) are not counted even
+#'   This means that it is possible that certain geoids(lhs) are not counted
+#'   even
 #'   though their boundaries intersect the queried geoids(rhs). This is likely
 #'   because addresses do not lie in their intersecting region.
 #'
 #'   Infix operators default to most recent year and quarter of which the
-#'   crosswalk files are available. For modifying the year and quarter parameter,
+#'   crosswalk files are available. For modifying the year and quarter
+#'   parameter,
 #'   take a look at their non-infix versions.
 #'
 #' @param countysub The countysub(s) to determine overlap with zip(s).
@@ -875,7 +915,10 @@
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(countysub))) {
@@ -931,8 +974,7 @@ geo_is_infix_query_and_get_warnings <- function(query,
                                                 ) {
 
   res <- c()
-  tryCatch(
-    {
+  tryCatch({
       res <- suppressMessages(f(query,
                minimal = TRUE,
                year = year,
@@ -940,21 +982,18 @@ geo_is_infix_query_and_get_warnings <- function(query,
                key = key
                ))
     },
-    error = function(cond)
-    {
+    error = function(cond) {
       stop(cond$message, call. = FALSE)
     },
-    warning = function(cond)
-    {
+    warning = function(cond) {
       # Might be more efficient to save the errored geoids when used instead
       # of having to regex it...
-      warning(paste("\nThe ", querytype, " ", query ," inputted is not valid.",
-                    " No data was found for year: ", year , " and quarter: ", quarter,
+      warning(paste("\nThe ", querytype, " ", query, " inputted is not valid.",
+                    " No data was found for year: ", year, " and quarter: ",
+                    quarter,
                     sep = ""
               ), call. = FALSE)
-
     }
   )
   return(res)
 }
-

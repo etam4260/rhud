@@ -11,8 +11,8 @@ hud_set_cache_dir(path, in_wkdir = FALSE, in_home = FALSE)
 set at a time. If no path is specified, it will use the temp directory
 for R. The temp directory is not persistent.}
 
-\item{in_wkdir}{Store the path as environment variable in the working directory
-.Rprofile so rhud will cache to this specified path.}
+\item{in_wkdir}{Store the path as environment variable in the working
+directory .Rprofile so rhud will cache to this specified path.}
 
 \item{in_home}{Store the path as environment variable in the HOME directory
 .Rprofile so rhud will cache to this specified path.}
@@ -37,6 +37,7 @@ a future update there will be a garbage collection option.
 }
 \examples{
 \dontrun{
+
 hud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
 
 }

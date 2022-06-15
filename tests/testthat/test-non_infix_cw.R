@@ -63,7 +63,8 @@ test_that("test z_in_cbsadiv", {
   # The zip to cbsadiv and cbsadiv to zip API might be broken for any
   # years after 2017 and 4th quarter. Should report this to HUD...
 
-  expect_warning(expect_equal(z_in_cbsadiv(zip = 35071, cbsadiv = 13820), FALSE))
+  expect_warning(expect_equal(z_in_cbsadiv(zip = 35071, cbsadiv = 13820),
+                              FALSE))
 
 
   expect_error(z_in_cbsadiv(zip = c(98520, 12), cbsadiv = c(1014220)))
@@ -80,7 +81,8 @@ test_that("test z_in_ctysb", {
   expect_equal(z_in_ctysb(zip = 44256, countysub = 3910383426), TRUE)
 
   expect_equal(z_in_ctysb(zip = c(44273, 44256, 44254, 44217, 44215, 44251),
-                          countysub = 3910383426), c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE))
+                          countysub = 3910383426), c(TRUE, TRUE, TRUE,
+                                                     TRUE, TRUE, TRUE))
 
   expect_error(z_in_ctysb(zip = c(98520, 12), countysub = c(1014220)))
 
@@ -201,5 +203,5 @@ test_that("test ctysb_in_z", {
 
   expect_error(ctysb_in_z(countysub = c(98520, 12), zip = c(1014220)))
 
-  expect_error(ctysb_in_z(countysub = c(20774, 122), zip =c(1014033)))
+  expect_error(ctysb_in_z(countysub = c(20774, 122), zip = c(1014033)))
 })

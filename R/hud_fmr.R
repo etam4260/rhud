@@ -39,15 +39,17 @@ hud_fmr_state_metroareas <- function(state,
                                      key = Sys.getenv("HUD_KEY"),
                                      to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(state, year, key)
@@ -147,15 +149,17 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                                    key = Sys.getenv("HUD_KEY"),
                                    to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
 
@@ -260,15 +264,17 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                                key = Sys.getenv("HUD_KEY"),
                                to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(county, year, key)
@@ -407,15 +413,17 @@ hud_fmr_metroarea_zip <- function(metroarea,
                                   year = format(Sys.Date() - 365, "%Y"),
                                   key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(metroarea, year, key)

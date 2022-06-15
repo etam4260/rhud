@@ -25,7 +25,7 @@ hud_set_user_agent <- function(user_agent, in_wkdir = FALSE, in_home = FALSE) {
   }
 
 
-  if(!is.logical(in_wkdir) ||
+  if (!is.logical(in_wkdir) ||
      !is.logical(in_home) ||
      length(in_wkdir) != 1  ||
      length(in_home) != 1) {
@@ -55,11 +55,13 @@ hud_set_user_agent <- function(user_agent, in_wkdir = FALSE, in_home = FALSE) {
 
       message("* Writing the HUD_USER_AGENT in working directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"HUD_USER_AGENT\" = \"", user_agent,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_USER_AGENT\" = \"",
+                       user_agent, "\")\n", sep = ""),
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("\nSys.setenv(\"HUD_USER_AGENT\" = \"", user_agent,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_USER_AGENT\" = \"",
+                       user_agent, "\")\n", sep = ""),
                  ".Rprofile")
       message("* Writing the HUD_USER_AGENT in working directory .Rprofile!")
     }
@@ -75,7 +77,7 @@ hud_set_user_agent <- function(user_agent, in_wkdir = FALSE, in_home = FALSE) {
                        all.files = TRUE) == ".Rprofile")) {
       # Check the file if it contains a call to set user agent, regex for it.
 
-      rprof = readLines("~/.Rprofile")
+      rprof <- readLines("~/.Rprofile")
       all_occur <- grep("^Sys\\.setenv\\(\"HUD_USER_AGENT\" = \".*\"\\)", rprof)
 
       if (any(all_occur)) {
@@ -88,11 +90,13 @@ hud_set_user_agent <- function(user_agent, in_wkdir = FALSE, in_home = FALSE) {
 
       message("* Writing the HUD_USER_AGENT in HOME directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"HUD_KEY\" = \"", user_agent,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_KEY\" = \"", user_agent,
+                       "\")\n", sep = ""),
                  "~./Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("\nSys.setenv(\"HUD_USER_AGENT\" = \"", user_agent,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_USER_AGENT\" = \"", user_agent,
+                       "\")\n", sep = ""),
                  "~/.Rprofile")
       message("* Writing the HUD_USER_AGENT in HOME directory .Rprofile!")
     }

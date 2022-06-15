@@ -84,14 +84,14 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
   }
 
   if (primary_geoid == "cbsadiv" || secondary_geoid == "cbsadiv") {
-    min_year = 2017
-    min_quarter = 4
+    min_year <- 2017
+    min_quarter <- 4
   } else if (primary_geoid == "countysub" || secondary_geoid == "countysub") {
-    min_year = 2018
-    min_quarter = 2
+    min_year <- 2018
+    min_quarter <- 2
   } else {
-    min_year = 2010
-    min_quarter = 1
+    min_year <- 2010
+    min_quarter <- 1
   }
 
   if (length(key) != 1) {
@@ -108,15 +108,15 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
 
   }
 
-  #query <- add_leading_zeros(geoid_type = primary_geoid, input = query)
-
   query <- unique(paste(trimws(as.character(query), which = "both")))
   year <- unique(paste(trimws(as.character(year), which = "both")))
   quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
-  if (FALSE %in% numbers_only(query)) stop("\nQuery input must only be numbers.",
-                                           call. = FALSE)
+  if (FALSE %in% numbers_only(query)) stop(
+    "\nQuery input must only be numbers.",
+    call. = FALSE)
+
   if (FALSE %in% numbers_only(year)) stop("\nYear input must only be numbers.",
                                           call. = FALSE)
   if (FALSE %in% numbers_only(quarter)) {
@@ -139,7 +139,8 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
               call. = FALSE), "")
 
   ifelse(any(year == min_year) && any(as.integer(quarter) < min_quarter),
-         stop(paste("\nOne of the quarter is below the minimum quarter for the minimum year: ",
+         stop(paste("\nOne of the quarter is below the
+                    minimum quarter for the minimum year: ",
                     min_quarter,
                     sep = ""),
               call. = FALSE), "")
@@ -221,10 +222,11 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
   # the "range" of acceptable values.
   ifelse(any(as.integer(year) >
                as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
-         stop("\nA year specified seems to be in the future?", call. = FALSE), "")
+         stop("\nA year specified seems to be in the future?", call. = FALSE),
+              "")
 
 
-  min_year = 2017
+  min_year <- 2017
   ifelse(any(as.integer(year) < min_year),
          stop(paste("\nOne of the years is below the min year of this query:",
                     min_year,
@@ -292,22 +294,36 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 
   # Check if geoid_col exists in dataset or is in valid range
   # Check if this column is all numbers too.
-  tryCatch({data[[geoid_col]]}, error = function(cond) {
-    stop(paste("\nIf the geoid_col argument is specified with indexes make sure ",
+  tryCatch({
+
+    data[[geoid_col]]
+
+    },
+    error = function(cond) {
+
+      stop(paste("\nIf the geoid_col argument is
+                 specified with indexes make sure ",
                "it is within the range of the dataset. If column names are ",
                "specified, make sure the column name exists in the dataset.",
                sep = ""),
-         call. = FALSE)
-  })
+           call. = FALSE)
+    }
+  )
 
   # Check if cw_geoid_col (s) exist in the dataset or is in valid range
   # Check if this column is all numbers too.
-  tryCatch({data[[cw_geoid_col]]}, error = function(cond) {
-    stop(paste("\nIf the cw_geoid_col argument is specified with indexes make ",
-               "sure it is within the range of the dataset. If column names are ",
-               "specified, make sure the column name exists in the dataset.",
-               sep = ""),
-         call. = FALSE)
+  tryCatch({
+
+    data[[cw_geoid_col]]
+
+    }, error = function(cond) {
+      stop(paste("\nIf the cw_geoid_col argument is
+                 specified with indexes make ",
+                 "sure it is within the range of the dataset.
+                 If column names are ",
+                 "specified, make sure the column name exists in the dataset.",
+                 sep = ""),
+           call. = FALSE)
   })
 
 
@@ -323,9 +339,10 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 
   if (length(geoid) > 1 ||  length(geoid_col) > 1
       && length(cw_geoid) > 1 || length(year) > 1 || length(quarter) > 1) {
-    stop(paste("\nThis function currently only supports crosswalking one dataset ",
-          "at a time. Make sure all input arguments are of length 1: ",
-          "not including the data or cw_geoid_col arguments", sep = ""),
+    stop(paste("\nThis function currently only supports
+               crosswalking one dataset ",
+               "at a time. Make sure all input arguments are of length 1: ",
+               "not including the data or cw_geoid_col arguments", sep = ""),
          call. = FALSE)
   }
 

@@ -11,14 +11,14 @@
 #' @noMd
 download_bar <- function(done = NULL, total = NULL,
                          percentage = NULL, current = NULL, error = NULL) {
-  done_perc <- done/total
-  remain_perc <- (total - done)/total
+  done_perc <- done / total
+  remain_perc <- (total - done) / total
 
   # Loading bar is 25 character long.
   done_bars <- paste(rep("=", round(done_perc * 50)), collapse = "")
   remain_bars <- paste(rep("-", round(remain_perc * 50)), collapse = "")
 
-  if(round(remain_perc * 50) - (remain_perc * 50) == .5) {
+  if (round(remain_perc * 50) - (remain_perc * 50) == .5) {
     # if they are both .5, then they make sure not to round both up.
     remain_bars <- paste(rep("-", floor(remain_perc * 50)), collapse = "")
   }
@@ -30,7 +30,8 @@ download_bar <- function(done = NULL, total = NULL,
 
   # TODO: Show the ETA for download time. (num api calls * 60)/2000
   url <- substr(current,
-                regexec("https://www.huduser.gov/hudapi/public/(.*)", current)[[1]][2],
+                regexec("https://www.huduser.gov/hudapi/public/(.*)",
+                        current)[[1]][2],
                 nchar(current)
                 )
 
@@ -49,5 +50,5 @@ download_bar <- function(done = NULL, total = NULL,
                    round(done_perc * 100, digits = 0), "%\t",
                    done, "/", total, "\t", error, "\t", url, sep = "")
 
-  message(paste('\r', loading, sep = ""), appendLF = FALSE)
+  message(paste("\r", loading, sep = ""), appendLF = FALSE)
 }
