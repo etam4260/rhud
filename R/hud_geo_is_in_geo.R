@@ -299,7 +299,8 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 #' @examples
 #' \dontrun{
 #'
-#' z_in_cbsadiv(zip = 71052, cbsadiv = 43340, year = 2019, quarter = 2)
+#'
+#' z_in_cbsadiv(zip = 71052, cbsadiv = 43340, year = 2017, quarter = 4)
 #'
 #' }
 z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
@@ -387,7 +388,7 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 #' @examples
 #' \dontrun{
 #'
-#' z_in_ctysb(zip = 35213, countysub = 0107390324, year = 2019, quarter = 2)
+#' z_in_ctysb(zip = 35213, countysub = "0107390324", year = 2019, quarter = 2)
 #'
 #' }
 z_in_ctysb <- function(zip, countysub, year, quarter,
@@ -830,7 +831,7 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 #' @examples
 #' \dontrun{
 #'
-#' cbsadiv_in_zip(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
+#' cbsadiv_in_z(cbsadiv = 43340, zip = 71052, year = 2017, quarter = 4)
 #'
 #' }
 cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,

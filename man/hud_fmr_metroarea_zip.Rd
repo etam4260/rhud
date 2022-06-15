@@ -37,10 +37,6 @@ small area, it will return data at a zip code level.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_fmr_metroarea_zip("METRO47900M47900", year = c(2018))
 
 hud_fmr_metroarea_zip("METRO29180N22001", year = c(2019))

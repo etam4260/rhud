@@ -12,7 +12,6 @@
 #' * [rhud::hud_set_user_agent()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_set_user_agent("im-the-user")
 #'
@@ -114,7 +113,6 @@ hud_set_user_agent <- function(user_agent, in_wkdir = FALSE, in_home = FALSE) {
 #' * [rhud::hud_set_user_agent()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_get_user_agent()
 #'

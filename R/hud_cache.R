@@ -164,8 +164,6 @@ hud_set_cache_dir <- function(path,
 #' * [rhud::hud_clear_cache()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
 #' hud_get_cache_dir()
 #'
 #' }

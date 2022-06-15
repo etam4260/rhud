@@ -15,8 +15,6 @@ Get the path rhud is using to store cached files.
 }
 \examples{
 \dontrun{
-library(rhud)
-
 hud_get_cache_dir()
 
 }

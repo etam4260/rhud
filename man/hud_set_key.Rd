@@ -21,17 +21,6 @@ A wrapper around Sys.getenv() to set HUD_KEY environment
 variable. Allows the user to also set the key to their .RProfile
 in working or HOME.
 }
-\examples{
-\dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-hud_get_key()
-
-hud_set_key("dwqkqodkqodqkqoqdq")
-hud_get_key()
-}
-}
 \seealso{
 \itemize{
 \item \code{\link[=hud_get_key]{hud_get_key()}}

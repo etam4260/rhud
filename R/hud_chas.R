@@ -25,11 +25,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
 #' hud_chas_nation()
+#'
 #' }
 hud_chas_nation <- function(year = c("2014-2018"),
                             key = Sys.getenv("HUD_KEY"), to_tibble) {
@@ -83,12 +81,7 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_chas_state("CA")
-#' hud_chas_state("New York")
 #' hud_chas_state("51")
 #' }
 hud_chas_state <- function(state, year = c("2014-2018"),
@@ -182,11 +175,6 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
-#' hud_chas_county(county = c(06105, 06113))
 #' hud_chas_county(county = c("06105", "06113"))
 #' }
 hud_chas_county <- function(county, year = c("2014-2018"),
@@ -280,11 +268,8 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
-#' hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
+#' #hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
 #'
 #' }
 hud_chas_state_mcd <- function(state, year = c("2014-2018"),
@@ -387,11 +372,8 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #' @export
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
-#' hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
+#' #hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
 #'
 #' }
 hud_chas_state_place <- function(state, year = c("2014-2018"),

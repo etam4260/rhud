@@ -59,10 +59,6 @@ must match that of the entity id input.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_chas(1)
 
 hud_chas('2', state_id = '56')

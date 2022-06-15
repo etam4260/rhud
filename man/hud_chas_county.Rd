@@ -45,11 +45,6 @@ Returns CHAS data for counties.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
-hud_chas_county(county = c(06105, 06113))
 hud_chas_county(county = c("06105", "06113"))
 }
 }

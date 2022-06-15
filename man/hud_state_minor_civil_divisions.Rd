@@ -23,10 +23,6 @@ Get a list of all minor civil divisions in a state
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_state_minor_civil_divisions("CA")
 hud_state_minor_civil_divisions("Virginia")
 hud_state_minor_civil_divisions("51")

@@ -31,7 +31,7 @@ any residential, business, other, or total addresses reside in both.
 \examples{
 \dontrun{
 
-z_in_ctysb(zip = 35213, countysub = 0107390324, year = 2019, quarter = 2)
+z_in_ctysb(zip = 35213, countysub = "0107390324", year = 2019, quarter = 2)
 
 }
 }

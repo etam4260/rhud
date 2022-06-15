@@ -138,6 +138,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
       # something bad occurs. Append to list of errored urls.
       error_urls <- c(error_urls, url)
     } else {
+
       res <- as.data.frame(do.call(rbind, cont$data$results))
 
       res$query <- query[i]

@@ -31,7 +31,7 @@ any residential, business, other, or total addresses reside in both.
 \examples{
 \dontrun{
 
-cbsadiv_in_zip(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
+cbsadiv_in_z(cbsadiv = 43340, zip = 71052, year = 2017, quarter = 4)
 
 }
 }

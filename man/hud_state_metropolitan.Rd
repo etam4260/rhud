@@ -25,11 +25,9 @@ their name and CBSA code.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_state_metropolitan("VA")
+
 }
 }
 \seealso{

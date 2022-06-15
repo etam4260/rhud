@@ -42,11 +42,8 @@ Returns CHAS for all places in a state.
 }
 \examples{
 \dontrun{
-library(rhud)
 
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
-hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
+#hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
 
 }
 }

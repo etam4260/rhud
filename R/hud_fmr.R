@@ -26,15 +26,13 @@
 #'   all combinations of "state" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
 #' hud_fmr_state_metroareas("VA", year = c(2021))
 #'
 #' hud_fmr_state_metroareas("Alabama", year = c(2021))
 #'
 #' hud_fmr_state_metroareas("24", year = c(2021))
+#'
 #' }
 hud_fmr_state_metroareas <- function(state,
                                      year = format(Sys.Date() - 365, "%Y"),
@@ -139,10 +137,6 @@ hud_fmr_state_metroareas <- function(state,
 #'   all combinations of "state" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_fmr_state_counties("VA", year = c(2021))
 #'
 #' hud_fmr_state_counties("Alabama", year = c(2021))
@@ -256,10 +250,6 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #'   all combinations of "county" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_fmr_county_zip("5100199999", year = c(2021))
 #'
 #' hud_fmr_county_zip("5100199999", year = c("2021"))
@@ -407,10 +397,6 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'   all combinations of "metroarea" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_fmr_metroarea_zip("METRO47900M47900", year = c(2018))
 #'
 #' hud_fmr_metroarea_zip("METRO29180N22001", year = c(2019))

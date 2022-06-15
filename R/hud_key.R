@@ -9,10 +9,6 @@
 #' * [rhud::hud_set_key()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_get_key()
 #' }
 hud_get_key <- function() {
@@ -34,16 +30,6 @@ hud_get_key <- function() {
 #' @seealso
 #' * [rhud::hud_get_key()]
 #' * [rhud::hud_set_key()]
-#' @examples
-#' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#' hud_get_key()
-#'
-#' hud_set_key("dwqkqodkqodqkqoqdq")
-#' hud_get_key()
-#' }
 hud_set_key <- function(key,
                         in_wkdir = FALSE,
                         in_home = FALSE) {

@@ -36,15 +36,13 @@ at a metroarea resolution for all metroareas in this state.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_fmr_state_metroareas("VA", year = c(2021))
 
 hud_fmr_state_metroareas("Alabama", year = c(2021))
 
 hud_fmr_state_metroareas("24", year = c(2021))
+
 }
 }
 \seealso{

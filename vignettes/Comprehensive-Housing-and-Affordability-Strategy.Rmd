@@ -35,10 +35,12 @@ Each geoid query represents a CHAS measurement for that particular
 geographic resolution. Before looking at the examples I RECOMMEND first
 looking at [the parameters][Parameters]
 as well as [return data][Returns] located at the bottom of the page.
+(^ Currently a work in progress ^)
+
 
 The functions below are the main functions for querying the CHAS API at
 different geographic resolutions. The package also contains an omni function 
-which encapsulates thecapabilities of all the main function calls below --
+which encapsulates the capabilities of all the main function calls below --
 [omni-function][Using the omni function for querying]
 
 1) [nation][Comprehensive Housing and Affordability Strategy for Nation]
@@ -131,6 +133,9 @@ hud_state_places(c("VA", "CA"))
 ```
 
 <br><br><br>
+
+
+
 
 ## References
 

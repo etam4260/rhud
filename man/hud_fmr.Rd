@@ -51,9 +51,6 @@ if geoids are classified as a small area.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_fmr("VA", year=c(2021))
 

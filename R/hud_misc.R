@@ -24,10 +24,6 @@
 #' * [rhud::hud_state_minor_civil_divisions()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_nation_states_territories()
 #' }
 hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
@@ -117,11 +113,9 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
 #' * [rhud::hud_state_minor_civil_divisions()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
 #' hud_state_metropolitan("VA")
+#'
 #' }
 hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
                                    to_tibble) {
@@ -267,10 +261,6 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 #' @returns A dataframe containing all counties within state(s).
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_state_counties("CA")
 #' hud_state_counties("Virginia")
 #' hud_state_counties("51")
@@ -381,10 +371,6 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
 #' @returns A dataframe containing details of places in state(s).
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_state_places("CA")
 #' hud_state_places("Virginia")
 #' hud_state_places("51")
@@ -490,10 +476,6 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
 #' @returns A dataframe containing details of minor civil divisions in state(s).
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_state_minor_civil_divisions("CA")
 #' hud_state_minor_civil_divisions("Virginia")
 #' hud_state_minor_civil_divisions("51")

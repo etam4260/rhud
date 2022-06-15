@@ -83,10 +83,6 @@ US Department of Housing and Urban Development.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_cw(type = 1, query = "35213", year = c("2010", "2011"),
    quarter = c("1"))
 
@@ -112,7 +108,7 @@ hud_cw(type = 8, query = "10140", year = c("2010", "2011"),
    quarter = c("1", "2"))
 
 hud_cw(type = 9, query = "10380", year = c("2017"),
-   quarter = c("1", "2", "3"))
+   quarter = c("4"))
 
 hud_cw(type = 10, query = "2202", year = c("2010", "2011"),
    quarter = c("4", "3"))

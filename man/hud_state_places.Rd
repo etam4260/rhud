@@ -23,10 +23,6 @@ Get a list of all places in a state.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_state_places("CA")
 hud_state_places("Virginia")
 hud_state_places("51")

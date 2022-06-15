@@ -20,7 +20,6 @@ Set a user agent when querying the HUD User APIs.
 }
 \examples{
 \dontrun{
-library(rhud)
 
 hud_set_user_agent("im-the-user")
 

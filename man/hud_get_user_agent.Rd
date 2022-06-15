@@ -15,7 +15,6 @@ Get the most recent user agent set.
 }
 \examples{
 \dontrun{
-library(rhud)
 
 hud_get_user_agent()
 
