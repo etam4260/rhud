@@ -116,16 +116,6 @@ format rather than a data-frame like object. Although there exist file
 downloadables, R users may want to be able to extract specific bits of
 the data into memory.
 
-## Citation
-
-Please cite this package using:
-
-Tam E, Reilly A, Ghaedi H, Jin S (2022). rhud: A R Interface to the
-HUD  
-      (US Department of Housing and Urban Development) APIs.
-0.3.0.9000,  
-      <https://github.com/etam4260/rhud/>.
-
 ## Available Data
 
 The APIs and datasets which this library interfaces are listed below.
@@ -272,6 +262,16 @@ The HUD also provide miscellaneous supplemental APIs under them.
 
 -   This is open source, so please fork and introduce some pull
     requests!
+
+## Citation
+
+Please cite this package using:
+
+Tam E, Reilly A, Ghaedi H, Jin S (2022). rhud: A R Interface to the
+HUD  
+      (US Department of Housing and Urban Development) APIs.
+0.3.0.9000,  
+      <https://github.com/etam4260/rhud/>.
 
 ## References
 

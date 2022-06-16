@@ -90,6 +90,7 @@ test_that("Crosswalk All Types", {
 
 
 test_that("Crosswalk Different Years", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Error when years are in the future
   expect_error(hud_cw(type = 7, query = "22031",
                       year = c("2010", "2011", "2024"),
@@ -98,6 +99,7 @@ test_that("Crosswalk Different Years", {
 
 
 test_that("Different Quarters", {
+  skip_if(Sys.getenv("HUD_KEY") == "")
   # Error when quarters are not from 1 to 4
   expect_error(hud_cw(type = 7, query = "22031",
                       year = c("2010", "2011"),
