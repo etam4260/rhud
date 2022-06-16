@@ -14,6 +14,8 @@ hud_cw_cbsa_zip(
 )
 }
 \arguments{
+\item{cbsa}{5 digit core based statistical area code.}
+
 \item{year}{Gets the year that this data was recorded. Can specify multiple
 years. Default is the previous year.}
 
@@ -29,10 +31,6 @@ USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
-
-\item{zip}{5 digit (United States Postal Service) USPS zipcode
-of the data to retrieve. E.g. 22031 for type
-1 to 5 and 11 .}
 }
 \value{
 This function returns a dataframe containing crosswalk data for

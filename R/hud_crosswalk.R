@@ -539,9 +539,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
 #'   tract to zip.
-#' @param zip 5 digit (United States Postal Service) USPS zipcode
-#'   of the data to retrieve. E.g. 22031 for type
-#'   1 to 5 and 11 .
+#' @param tract 11 digit tract code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
@@ -645,9 +643,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
 #'   county to zip.
-#' @param zip 5 digit (United States Postal Service) USPS zipcode
-#'   of the data to retrieve. E.g. 22031 for type
-#'   1 to 5 and 11 .
+#' @param county 5 digit county code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
@@ -752,9 +748,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
 #'   cbsa to zip.
-#' @param zip 5 digit (United States Postal Service) USPS zipcode
-#'   of the data to retrieve. E.g. 22031 for type
-#'   1 to 5 and 11 .
+#' @param cbsa 5 digit core based statistical area code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
@@ -859,9 +853,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
 #'   cbsadiv to zip.
-#' @param zip 5 digit (United States Postal Service) USPS zipcode
-#'   of the data to retrieve. E.g. 22031 for type
-#'   1 to 5 and 11 .
+#' @param cbsadiv 5 digit core based statisical area division code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
@@ -964,9 +956,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
 #'   cd to zip.
-#' @param zip 5 digit (United States Postal Service) USPS zipcode
-#'   of the data to retrieve. E.g. 22031 for type
-#'   1 to 5 and 11 .
+#' @param cd 4 digit congressional district code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
@@ -1173,9 +1163,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
 #'   countysub to zip.
-#' @param zip 5 digit (United States Postal Service) USPS zipcode
-#'   of the data to retrieve. E.g. 22031 for type
-#'   1 to 5 and 11 .
+#' @param countysub 10 digit county sub division code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
