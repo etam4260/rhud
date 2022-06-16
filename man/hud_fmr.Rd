@@ -13,20 +13,22 @@ hud_fmr(
 }
 \arguments{
 \item{query}{Can provide either a 5 digit FIPS code + 99999 at end,
-state abbreviation, or CBSA code.}
+state abbreviation, or cbsa (core based statistical area) code.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
 previous year.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-This function returns a dataframe containing fair markets rent data
+This function returns a dataframe or tibble
+containing Fair Markets Rent (FMR) data
 for a particular county, metroarea, or state. For county and msa level
 data,
 these measurements include the county_name, counties_msa, town_name,
@@ -45,11 +47,12 @@ https://www.huduser.gov/portal/dataset/fmr-api.html.
 }
 \description{
 This function queries the Fair Markets Rent API provided by
-US Department of Housing and Urban Development. Querying a
-state provides a list containing two dataframes: one with fmr at a county
-level resolution and the other fmr at a metroarea level resolution.
-Querying a county or cbsa will provide data at a zip code resolution
-if geoids are classified as a small area.
+US Department of Housing and Urban Development (HUD USER). Querying a
+state provides a list containing two datasets: one with FMR at a county
+level resolution and the other FMR at a metroarea level resolution.
+Querying a county or (core based statistical areas) cbsa will provide data
+at a zip code resolution
+if geographic identifiers are classified as a small area.
 }
 \examples{
 \dontrun{

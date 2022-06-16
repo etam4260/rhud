@@ -21,7 +21,7 @@ A dataframe containing details of metropolitan areas in state(s)
 }
 \description{
 Get details for all metropolitan areas for queried states with
-their name and CBSA code.
+their name and (core based statistical area) cbsa code.
 }
 \examples{
 \dontrun{
@@ -39,4 +39,4 @@ hud_state_metropolitan("VA")
 \item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
 }
 }
-\keyword{CBSA}
+\keyword{cbsa}

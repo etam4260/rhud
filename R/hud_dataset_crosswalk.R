@@ -3,7 +3,7 @@
 
 #' @name crosswalk
 #' @title crosswalk
-#' @description Using the US Housing and Urban Development crosswalk files,
+#' @description Using the US Housing and Urban Development USPS Crosswalk files,
 #'  crosswalk an entire dataset.
 #'  Currently supported crosswalks:
 #'   1) zip-tract
@@ -21,7 +21,7 @@
 #' @param data A dataset with rows describing measurements at a zip,
 #'   county, county subdivision (countysub), congressional district (cd),
 #'   census tract, core base statistical area (cbsa), or core based
-#'   statistical area division (cbsadiv) geoid.
+#'   statistical area division (cbsadiv) geographic identifier.
 #'   1) zip
 #'   2) tract
 #'   3) county
@@ -31,7 +31,7 @@
 #'   7) cd
 #' @param geoid The current geoid that the dataset is described in: must be
 #'   zip, county, countysub, cd,
-#'   tract, cbsa, or cbsadiv geographic id.
+#'   tract, cbsa, or cbsadiv geographic identifier.
 #'   1) zip
 #'   2) tract
 #'   3) county
@@ -42,7 +42,7 @@
 #' @param geoid_col The column containing the geographic identifier; must be
 #'   zip, county, county subdivision (countysub), congressional district (cd),
 #'   census tract, core base statistical area (cbsa), and core based
-#'   statistical area division (cbsadiv) geoid.
+#'   statistical area division (cbsadiv) geographic identifier.
 #'   Supply either the name of the column or the index.
 #'   All elements in this column must be numbers only at the proper length.
 #'   For example, zip codes must be 5 digit numbers.
@@ -70,9 +70,13 @@
 #'   2) bus
 #'   3) tot
 #'   4) oth
-#' @param year The year measurement was taken.
-#' @param quarter The quarter of year measurement was taken.
-#' @param key The key obtain from HUD USER website.
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @seealso

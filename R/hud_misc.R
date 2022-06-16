@@ -8,11 +8,12 @@
 #' @description Get a list of state and US territories
 #'   along with the corresponding fips code and
 #'   abbreviation.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The API key for this user. You must go to
+#'   (US Department of Housing and Urban Development) HUD USER and sign up
+#'   for an account and request for an API key.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @keywords States Territories
+#' @keywords states territories
 #' @export
 #' @returns A dataframe containing details of all the states and territories
 #'   in the US.
@@ -97,14 +98,14 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
 #' @name hud_state_metropolitan
 #' @title hud_state_metropolitan
 #' @description Get details for all metropolitan areas for queried states with
-#'   their name and CBSA code.
+#'   their name and (core based statistical area) cbsa code.
 #' @param state The state to get all the metropolitan areas. Can be provided as
 #'   the full name, fip code or abbreviation.
 #' @param key The API key for this user. You must go to HUD and sign up for an
 #'   account and request for an API key.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @keywords CBSA
+#' @keywords cbsa
 #' @export
 #' @returns A dataframe containing details of metropolitan areas in state(s)
 #' @seealso
@@ -249,11 +250,12 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 
 #' @name hud_state_counties
 #' @title hud_state_counties
-#' @description Get a dataframe with details describing the counties located
-#'   within the queried states.
-#' @param state The state to get all counties.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
+#' @description Get a dataframe with details describing the county(s) located
+#'   within the queried state(s).
+#' @param state The state(s) to get all county(s).
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords counties
@@ -363,13 +365,14 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
 
 #' @name hud_state_places
 #' @title hud_state_places
-#' @description Get a list of all places in a state.
-#' @param state The state to get all places.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'  an account and request for an API key.
+#' @description Get a list of all places in state(s).
+#' @param state The state(s) to get all places.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @keywords places.
+#' @keywords places
 #' @export
 #' @seealso
 #' * [rhud::hud_nation_states_territories()]
@@ -473,12 +476,13 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
 #' @name hud_state_minor_civil_divisions
 #' @title hud_state_minor_civil_divisions
 #' @description Get a list of all minor civil divisions in a state
-#' @param state The state to get all MCD.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'  an account and request for an API key.
+#' @param state The state to get all mcd(s).
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @keywords CBSA
+#' @keywords mcd
 #' @export
 #' @seealso
 #' * [rhud::hud_nation_states_territories()]

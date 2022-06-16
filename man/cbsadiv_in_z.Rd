@@ -25,7 +25,8 @@ If cbsadiv(s) exist in the zip(s) specified, then TRUE is returned.
 }
 \description{
 Given cbsadiv(s) and zip(s), determine if they overlap
-using the crosswalk files. Overlap will be described if
+using the (United States Postal Service)
+USPS Crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 }
 \examples{

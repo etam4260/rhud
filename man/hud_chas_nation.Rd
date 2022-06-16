@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_chas.R
 \name{hud_chas_nation}
 \alias{hud_chas_nation}
-\title{hud_chas_nation}
+\title{Comprehensive Housing and Affordability Strategy for the US.}
 \usage{
 hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"), to_tibble)
 }
@@ -20,17 +20,22 @@ hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"), to_tibble)
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtain from HUD USER website.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-Returns a data frame with CHAS data for the entire nation for all
+Returns a data frame with
+Comprehensive Housing and Affordability Strategy (CHAS) data for the
+entire nation for all
 observations supplied in "year" input.
 }
 \description{
-Returns CHAS data for the entire nation.
+Returns Comprehensive Housing and Affordability Strategy (CHAS)
+data for the entire nation.
 }
 \examples{
 \dontrun{

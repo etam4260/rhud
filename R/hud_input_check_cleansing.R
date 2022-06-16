@@ -1,11 +1,14 @@
 #' @name chas_input_check_cleansing
 #' @title chas_input_check_cleansing
 #' @description Helper function used to clean user inputted variables for all
-#'    decomposed CHAS functions.
+#'    decomposed (Comprehensive Housing and Affordability Strategy)
+#'    CHAS functions.
 #' @param query
-#'   The inputted GEOID.
+#'   The inputted geographic identifiers to query for.
 #' @param year The years to query for.
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
 chas_input_check_cleansing <- function(query, year, key) {
@@ -63,12 +66,20 @@ chas_input_check_cleansing <- function(query, year, key) {
 #' @name cw_input_check_cleansing
 #' @title cw_input_check_cleansing
 #' @description Helper function used to clean user inputted variables for all
-#' Crosswalk functions.
+#'   (United States Postal Service) USPS Crosswalk functions.
+#' @param primary_geoid
+#'   The first geoid used in the function call. For example, in
+#'   hud_cw_zip_tract(), the first geoid would be zip.
+#' @param secondary_geoid
+#'   The second geoid used in the function call. For example, in
+#'   hud_cw_zip_tract(), the second geoid would be tract.
 #' @param query
-#'   The inputted GEOID.
+#'   The inputted geographic identifiers to query for.
 #' @param year The years to query for.
 #' @param quarter The quarters to query for.
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
 cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
@@ -152,11 +163,13 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
 #' @name fmr_il_input_check_cleansing
 #' @title fmr_il_input_check_cleansing
 #' @description Helper function used to clean user inputted variables for all
-#'   Fair markets rent and Income Limits datasets.
+#'   Fair Markets Rent and Income Limits APIs.
 #' @param query
-#'   The inputted GEOID.
+#'   The inputted geographic identifiers to query for.
 #' @param year The years to query for.
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
 fmr_il_input_check_cleansing <- function(query, year, key) {

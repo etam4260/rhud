@@ -15,7 +15,7 @@ rhud_website(website = c("github-pages", "github"))
 }
 \description{
 Quickly get documentation for the rhud package by opening up
-the websites associated with it. Currently supports Unix and Windows OS.
+the websites associated with it.
 }
 \examples{
 \dontrun{

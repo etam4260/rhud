@@ -1,16 +1,19 @@
 #' @name hud_rec_cw_yr
 #' @title hud_rec_cw_yr
-#' @description Ping the Crosswalk API provided by HUD User to determine the
-#'    most recently released files. This will only ping for the last two
-#'    years. This tests hud_cw_tract_zip(tract = 48201223100) as the
-#'    endpoint query.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @description Pings the (United States Postal Service) USPS Crosswalk API
+#'    provided by HUD USER to determine the most recently released files.
+#'    This will only ping for the last two years for every quarter.
+#'    This tests hud_cw_tract_zip(tract = 48201223100) as
+#'    the endpoint query.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
 #' * [rhud::hud_rec_il_yr()]
-#' @returns The most recent year and quarter of available crosswalk files.
+#' @returns The most recent year and quarter of available
+#'   (United States Postal Service)  USPS Crosswalk files.
 #' @export
 #' @examples
 #' \dontrun{
@@ -64,12 +67,14 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_rec_fmr_yr
 #' @title hud_rec_fmr_yr
-#' @description  Ping the Fair Markets Rent API provided by HUD User to
+#' @description  Pings the Fair Markets Rent API provided by
+#'    (US Department of Housing and Urban Development) HUD User to
 #'    determine the most recently released files. This will only ping
-#'    for the last two years. Will return years for county and metroarea
-#'    resolution.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'    for an account and request for an API key.
+#'    for the last two years. Will return years for state, county, and metroarea
+#'    resolutions.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
@@ -162,17 +167,18 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
 #' @name hud_rec_il_yr()
 #' @title hud_rec_il_yr()
-#' @description Ping the Income Limits API provided by HUD User to
+#' @description Pings the Income Limits API provided by HUD User to
 #'    determine the most recently released files. This will only ping
-#'    for the last two years. Will return years for county and metroarea
+#'    for the last two years. Will return years for state, county, and metroarea
 #'    resolution.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @seealso
 #' * [rhud::hud_rec_cw_yr()]
 #' * [rhud::hud_rec_fmr_yr()]
 #' * [rhud::hud_rec_il_yr()]
-#' @returns The most recent year for the il files for state, county, and
+#' @returns The most recent year for the Income Limits for state, county, and
 #'   metroarea queries.
 #' @export
 #' @examples

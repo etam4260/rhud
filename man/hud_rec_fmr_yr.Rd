@@ -7,18 +7,20 @@
 hud_rec_fmr_yr(key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 }
 \value{
 The most recent year for the fmr files for state, county, and
 metroarea queries.
 }
 \description{
-Ping the Fair Markets Rent API provided by HUD User to
+Pings the Fair Markets Rent API provided by
+(US Department of Housing and Urban Development) HUD User to
 determine the most recently released files. This will only ping
-for the last two years. Will return years for county and metroarea
-resolution.
+for the last two years. Will return years for state, county, and metroarea
+resolutions.
 }
 \examples{
 \dontrun{

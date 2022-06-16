@@ -14,22 +14,25 @@ hud_cw_cbsadiv_zip(
 )
 }
 \arguments{
-\item{cbsadiv}{5-digit CBSA Division code which only applies to Metropolitan Areas.}
-
 \item{year}{Gets the year that this data was recorded. Can specify multiple
 years. Default is the previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
+\item{minimal}{Return just the crosswalked geoids if true. Otherwise, return
 all fields. This does not remove duplicates.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for an
-account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
+
+\item{zip}{5 digit (United States Postal Service) USPS zipcode
+of the data to retrieve. E.g. 22031 for type
+1 to 5 and 11 .}
 }
 \value{
 This function returns a dataframe containing crosswalk data for
@@ -41,10 +44,10 @@ oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html
 }
 \description{
-This function queries the Crosswalks API provided by
-US Department of Housing and Urban Development. This
-returns the crosswalk for cbsadiv to zip.
-(Available 4th Quarter 2017 onwards)
+This function queries the USPS Crosswalks API provided by US
+Department of Housing and Urban Development (HUD USER).
+This returns the crosswalk for
+cbsadiv to zip.
 }
 \examples{
 \dontrun{

@@ -7,10 +7,11 @@
 hud_state_counties(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
-\item{state}{The state to get all counties.}
+\item{state}{The state(s) to get all county(s).}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -19,8 +20,8 @@ rather than a data frame.}
 A dataframe containing all counties within state(s).
 }
 \description{
-Get a dataframe with details describing the counties located
-within the queried states.
+Get a dataframe with details describing the county(s) located
+within the queried state(s).
 }
 \examples{
 \dontrun{

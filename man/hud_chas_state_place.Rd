@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_chas.R
 \name{hud_chas_state_place}
 \alias{hud_chas_state_place}
-\title{hud_chas_state_place}
+\title{Comprehensive Housing and Affordability Strategy for US Places}
 \usage{
 hud_chas_state_place(
   state,
@@ -28,17 +28,22 @@ fips is 1 digit number, do not include leading 0.}
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtain from HUD USER website.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-Returns a dataframe with CHAS data for places inside states for all
+Returns a dataframe with
+Comprehensive Housing and Affordability Strategy (CHAS) data for places
+inside states for all
 combinations of "state" and "year" inputs.
 }
 \description{
-Returns CHAS for all places in a state.
+Returns Comprehensive Housing and Affordability Strategy (CHAS)
+for all places in a state.
 }
 \examples{
 \dontrun{

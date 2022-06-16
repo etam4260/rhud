@@ -4,15 +4,16 @@
 #' @name hud_fmr_state_metroareas
 #' @title hud_fmr_state_metroareas
 #' @description This function queries for a state and returns the
-#'   FMR calculation
-#'   at a metroarea resolution for all metroareas in this state.
-#' @param state The state to query for. Can be abbreviation, fip code, or
-#'   full name.
+#'   (Fair Markets Rent) FMR calculation
+#'   at a metroarea resolution for all metroareas in the state query.
+#' @param state The state(s) to query for. Can be abbreviation(s),
+#'   fip code(s), or full name(s).
 #' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
+#'   Can specify multiple year(s). Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
@@ -22,7 +23,7 @@
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
-#' @returns A data frame with fair markets rent for metro areas in states for
+#' @returns A data frame with Fair Markets Rent for metro areas in state(s) for
 #'   all combinations of "state" and "year" inputs.
 #' @examples
 #' \dontrun{
@@ -117,15 +118,16 @@ hud_fmr_state_metroareas <- function(state,
 #' @name hud_fmr_state_counties
 #' @title hud_fmr_state_counties
 #' @description This function queries for a state and returns the
-#'   FMR calculation
-#'   at a county resolution for all counties in this state.
-#' @param state The state to query for. Can be abbreviation, fip code, or
+#'   (Fair Markets Rent) FMR calculation
+#'   at a county resolution for all counties in state input.
+#' @param state The state(s) to query for. Can be abbreviation, fip code, or
 #'   full name.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
@@ -239,8 +241,9 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
@@ -388,8 +391,9 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API

@@ -4,7 +4,7 @@
 #' @name rhud_website
 #' @title rhud_website
 #' @description Quickly get documentation for the rhud package by opening up
-#'   the websites associated with it. Currently supports Unix and Windows OS.
+#'   the websites associated with it.
 #' @param website The websites available.
 #'   1) "github-pages"
 #'   2) "github"

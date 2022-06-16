@@ -7,8 +7,9 @@
 hud_nation_states_territories(key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
-\item{key}{The API key for this user. You must go to HUD and sign up for an
-account and request for an API key.}
+\item{key}{The API key for this user. You must go to
+(US Department of Housing and Urban Development) HUD USER and sign up
+for an account and request for an API key.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -36,5 +37,5 @@ hud_nation_states_territories()
 \item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
 }
 }
-\keyword{States}
-\keyword{Territories}
+\keyword{states}
+\keyword{territories}

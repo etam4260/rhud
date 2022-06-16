@@ -12,15 +12,16 @@ hud_fmr_state_counties(
 )
 }
 \arguments{
-\item{state}{The state to query for. Can be abbreviation, fip code, or
+\item{state}{The state(s) to query for. Can be abbreviation, fip code, or
 full name.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
 previous year.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -31,8 +32,8 @@ all combinations of "state" and "year" inputs.
 }
 \description{
 This function queries for a state and returns the
-FMR calculation
-at a county resolution for all counties in this state.
+(Fair Markets Rent) FMR calculation
+at a county resolution for all counties in state input.
 }
 \examples{
 \dontrun{

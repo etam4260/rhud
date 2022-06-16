@@ -1,7 +1,8 @@
 #' @name z_in_trt
 #' @title z_in_trt
 #' @description Given zip code(s) and tract(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with tract(s).
 #' @param tract The tract(s) to determine overlap with zip(s).
@@ -45,11 +46,6 @@ z_in_trt <- function(zip, tract, year, quarter,
       quarter <- args[2]
     }
   }
-
-  # TODO: We might want to allow using names also..
-  # There is a bit of overhead cost for doing individual queries because each
-  # zip will need individual calls to hud_cw_zip_tract... Could optimize by
-  # using internal functions...
 
   # Need to validate tract..
   cleaned <- cw_input_check_cleansing(primary_geoid = "tract",
@@ -97,7 +93,8 @@ z_in_trt <- function(zip, tract, year, quarter,
 #' @name z_in_cty
 #' @title z_in_cty
 #' @description Given zip code(s) and county(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with county(s).
 #' @param county The county(s) to determine overlap with zip(s).
@@ -187,7 +184,8 @@ z_in_cty <- function(zip, county, year, quarter,
 #' @name z_in_cbsa
 #' @title z_in_cbsa
 #' @description Given zip code(s) and cbsa(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with cbsa(s).
 #' @param cbsa The cbsa(s) to determine overlap with zip(s).
@@ -277,7 +275,8 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 #' @name z_in_cbsadiv
 #' @title z_in_cbsadiv
 #' @description Given zip code(s) and cbsadiv(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with cbsadiv(s).
 #' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
@@ -368,7 +367,8 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 #' @name z_in_ctysb
 #' @title z_in_ctysb
 #' @description Given zip code(s) and a countysub(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with countysub(s).
 #' @param countysub The countysub(s) to determine overlap with zip(s).
@@ -458,7 +458,8 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
 #' @name z_in_cd
 #' @title z_in_cd
 #' @description Given zip code(s) and congressional district(s), determine
-#'   if they overlap using the crosswalk files. Overlap will be described if
+#'   if they overlap using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with cd(s).
 #' @param cd The cd(s) to determine overlap with zip(s).
@@ -549,7 +550,8 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 #' @name trt_in_z
 #' @title trt_in_z
 #' @description Given tract(s) and a zip code(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param tract The tract(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with tract(s).
@@ -640,7 +642,8 @@ trt_in_z <- function(tract, zip, year, quarter,
 #' @name cty_in_z
 #' @title cty_in_z
 #' @description Given county(s) and a zip(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param county The county(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with county(s).
@@ -732,7 +735,8 @@ cty_in_z <- function(county, zip, year, quarter,
 #' @name cbsa_in_z
 #' @title cbsa_in_z
 #' @description Given a cbsa(s) and a zip(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param cbsa The cbsa(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with cbsa(s).
@@ -823,7 +827,8 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 #' @name cbsadiv_in_z
 #' @title cbsadiv_in_z
 #' @description Given cbsadiv(s) and zip(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with cbsadiv(s).
@@ -913,7 +918,8 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
 #' @name cd_in_z
 #' @title cd_in_z
 #' @description Given congressional district(s) and zip(s), determine if they
-#'   overlap using the crosswalk files. Overlap will be described if
+#'   overlap using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param cd The cd(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with cd(s).
@@ -1003,7 +1009,8 @@ cd_in_z <- function(cd, zip, year, quarter,
 #' @name ctysb_in_z
 #' @title ctysb_in_z
 #' @description Given countysub(s) and zip code(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param countysub The countysub(s). to determine overlap with zip(s).
 #' @param zip The zip(s). to determine overlap with countysub(s).

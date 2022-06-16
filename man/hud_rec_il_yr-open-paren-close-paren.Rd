@@ -8,17 +8,18 @@
 hud_rec_il_yr(key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 }
 \value{
-The most recent year for the il files for state, county, and
+The most recent year for the Income Limits for state, county, and
 metroarea queries.
 }
 \description{
-Ping the Income Limits API provided by HUD User to
+Pings the Income Limits API provided by HUD User to
 determine the most recently released files. This will only ping
-for the last two years. Will return years for county and metroarea
+for the last two years. Will return years for state, county, and metroarea
 resolution.
 }
 \examples{

@@ -15,9 +15,9 @@
 
 #' @name hud_cw
 #' @title hud_cw
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development.
-#' @param type Must be a number between 1 and 12 depending on the Crosswalk
+#' @description This function queries the USPS Crosswalks API provided by
+#'   US Department of Housing and Urban Development (HUD USER).
+#' @param type Must be a number between 1 and 12 depending on the USPS Crosswalk
 #'   type. You can also supply the string name.
 #'   1) zip-tract
 #'   2) zip-county
@@ -58,8 +58,9 @@
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -254,23 +255,26 @@ hud_cw <- function(type, query,
 #' @name hud_fmr
 #' @title hud_fmr
 #' @description This function queries the Fair Markets Rent API provided by
-#'   US Department of Housing and Urban Development. Querying a
-#'   state provides a list containing two dataframes: one with fmr at a county
-#'   level resolution and the other fmr at a metroarea level resolution.
-#'   Querying a county or cbsa will provide data at a zip code resolution
-#'   if geoids are classified as a small area.
+#'   US Department of Housing and Urban Development (HUD USER). Querying a
+#'   state provides a list containing two datasets: one with FMR at a county
+#'   level resolution and the other FMR at a metroarea level resolution.
+#'   Querying a county or (core based statistical areas) cbsa will provide data
+#'   at a zip code resolution
+#'   if geographic identifiers are classified as a small area.
 #' @param query Can provide either a 5 digit FIPS code + 99999 at end,
-#'   state abbreviation, or CBSA code.
+#'   state abbreviation, or cbsa (core based statistical area) code.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @export
-#' @returns This function returns a dataframe containing fair markets rent data
+#' @returns This function returns a dataframe or tibble
+#'   containing Fair Markets Rent (FMR) data
 #'   for a particular county, metroarea, or state. For county and msa level
 #'   data,
 #'   these measurements include the county_name, counties_msa, town_name,
@@ -408,21 +412,24 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' @name hud_il
 #' @title hud_il
 #' @description This function queries the Income Limits API provided by
-#'   US Department of Housing and Urban Development.
+#'   US Department of Housing and Urban Development (HUD USER).
 #' @param query  Querying a
-#'   state provides the IL measurement for that state level resolution.
+#'   state provides the Income Limits measurement for that state level
+#'   resolution.
 #'   Querying a county or cbsa will provide data at a county and
 #'   cbsa resolution, respectively.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Income Limits API
 #' @export
-#' @returns This function returns a dataframe containing income limits data
+#' @returns This function returns a dataframe or tibble containing
+#'   Income Limits data
 #'   for a particular county, metroarea, or state. Data is returned at the level
 #'   of the queried geoid.
 #'
@@ -544,9 +551,11 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
 #' @name hud_chas
 #' @title hud_chas
-#' @description This function queries the CHAS API provided by US Department
-#'   of Housing and Urban Development. The ordering of items in state input
-#'   must match that of the entity id input.
+#' @description This function queries the
+#'   Comprehensive Housing Affordability Strategy CHAS API provided by
+#'   US Department
+#'   of Housing and Urban Development (HUD USER). The ordering of items in
+#'   stateid input must match that of the entityid input.
 #' @param type Queries the data based off:
 #'   1 - Nation
 #'   2 - State
@@ -567,14 +576,17 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   * 2008-2012
 #'   * 2007-2011
 #'   * 2006-2010
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Comprehensive Housing Affordability Strategy (CHAS) API
 #' @export
-#' @returns This function returns a dataframe containing comprehensive housing
-#'   and affordability data for a particular state. For more details about
+#' @returns This function returns a dataframe or tibble containing
+#'   Comprehensive Housing
+#'   and Affordability Strategy data for a particular state.
+#'   For more details about
 #'   these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/chas-api.html
 #' @examples

@@ -21,7 +21,7 @@ crosswalk(
 \item{data}{A dataset with rows describing measurements at a zip,
 county, county subdivision (countysub), congressional district (cd),
 census tract, core base statistical area (cbsa), or core based
-statistical area division (cbsadiv) geoid.
+statistical area division (cbsadiv) geographic identifier.
 \enumerate{
 \item zip
 \item tract
@@ -34,7 +34,7 @@ statistical area division (cbsadiv) geoid.
 
 \item{geoid}{The current geoid that the dataset is described in: must be
 zip, county, countysub, cd,
-tract, cbsa, or cbsadiv geographic id.
+tract, cbsa, or cbsadiv geographic identifier.
 \enumerate{
 \item zip
 \item tract
@@ -48,7 +48,7 @@ tract, cbsa, or cbsadiv geographic id.
 \item{geoid_col}{The column containing the geographic identifier; must be
 zip, county, county subdivision (countysub), congressional district (cd),
 census tract, core base statistical area (cbsa), and core based
-statistical area division (cbsadiv) geoid.
+statistical area division (cbsadiv) geographic identifier.
 Supply either the name of the column or the index.
 All elements in this column must be numbers only at the proper length.
 For example, zip codes must be 5 digit numbers.}
@@ -84,11 +84,15 @@ to the dataset.
 \item oth
 }}
 
-\item{year}{The year measurement was taken.}
+\item{year}{Gets the year that this data was recorded. Can specify multiple
+years. Default is the previous year.}
 
-\item{quarter}{The quarter of year measurement was taken.}
+\item{quarter}{Gets the quarter of the year that this data was recorded.
+Defaults to the first quarter of the year.}
 
-\item{key}{The key obtain from HUD USER website.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -97,7 +101,7 @@ rather than a data frame.}
 A dataframe containing the crosswalked dataset.
 }
 \description{
-Using the US Housing and Urban Development crosswalk files,
+Using the US Housing and Urban Development USPS Crosswalk files,
 crosswalk an entire dataset.
 Currently supported crosswalks:
 \enumerate{

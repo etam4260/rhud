@@ -1,5 +1,5 @@
 #' @name hud_chas_nation
-#' @title hud_chas_nation
+#' @title Comprehensive Housing and Affordability Strategy for the US.
 #' @param year The years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"
@@ -10,11 +10,16 @@
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @description Returns CHAS data for the entire nation.
-#' @returns Returns a data frame with CHAS data for the entire nation for all
+#' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
+#'   data for the entire nation.
+#' @returns Returns a data frame with
+#'   Comprehensive Housing and Affordability Strategy (CHAS) data for the
+#'   entire nation for all
 #'   observations supplied in "year" input.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
@@ -58,9 +63,10 @@ hud_chas_nation <- function(year = c("2014-2018"),
 }
 
 #' @name hud_chas_state
-#' @title hud_chas_state
-#' @description Returns CHAS data for a state.
-#' @param state The state to query for. Can supply as abbreviation, whole name,
+#' @title Comprehensive Housing and Affordability Strategy for US States.
+#' @description Returns Comprehensive Housing and Affordability Strategy
+#'   (CHAS) data for state(s).
+#' @param state The state(s) to query for. Can supply as abbreviation, whole name,
 #'   or as geoid.
 #' @param year The years to query for.
 #'  * year = "2014-2018"
@@ -72,10 +78,14 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a data frame with CHAS data for states for all combinations
+#' @returns Returns a data frame with
+#'   Comprehensive Housing and Affordability Strategy (CHAS) data for states for
+#'   all combinations
 #'   of "state" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
@@ -156,9 +166,10 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 }
 
 #' @name hud_chas_county
-#' @title hud_chas_county
-#' @description Returns CHAS data for counties.
-#' @param county The county to query for. Must supply a geoid. 2 digit state fip
+#' @title Comprehensive Housing and Affordability Strategy for the US Counties
+#' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
+#"   data for county(s).
+#' @param county The county(s) to query for. Must supply a geoid. 2 digit state fip
 #'   + 3 digit county fip. hud_state_counties() will show an extra 99999 at the
 #'   end. Just remove that.
 #' @param year The years to query for.
@@ -171,11 +182,14 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a data frame with CHAS data for counties for all
-#'   combinations of "county" and "year" inputs.
+#' @returns Returns a data frame with
+#'   Comprehensive Housing and Affordability Strategy (CHAS) data for
+#'   counties for all combinations of "county" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]
@@ -256,8 +270,10 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 }
 
 #' @name hud_chas_state_mcd
-#' @title hud_chas_state_mcd
-#' @description Returns CHAS data for all mcds in a state.
+#' @title Comprehensive Housing and Affordability Strategy for
+#'   US Minor Civil Divisions
+#' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
+#'   data for all mcd in a state.
 #' @param state The state name, abbreviation, or fips code.
 #' @param year The years to query for.
 #'  * year = "2014-2018"
@@ -269,10 +285,14 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtain from HUD USER website.'
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a dataframe with CHAS data for mcds inside states for all
+#' @returns Returns a dataframe with
+#'   Comprehensive Housing and Affordability Strategy (CHAS) data for mcds
+#'   inside states for all
 #'   combinations of "state" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
@@ -364,8 +384,9 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 }
 
 #' @name hud_chas_state_place
-#' @title hud_chas_state_place
-#' @description Returns CHAS for all places in a state.
+#' @title Comprehensive Housing and Affordability Strategy for US Places
+#' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
+#'   for all places in a state.
 #' @param state The state name, abbreviation, or fips code. Make sure if state
 #'   fips is 1 digit number, do not include leading 0.
 #' @param year The years to query for.
@@ -378,10 +399,14 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
-#' @returns Returns a dataframe with CHAS data for places inside states for all
+#' @returns Returns a dataframe with
+#'   Comprehensive Housing and Affordability Strategy (CHAS) data for places
+#'   inside states for all
 #'   combinations of "state" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]

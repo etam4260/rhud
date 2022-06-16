@@ -25,7 +25,8 @@ If zip(s) exist in the cd(s) specified, then TRUE is returned.
 }
 \description{
 Given zip code(s) and congressional district(s), determine
-if they overlap using the crosswalk files. Overlap will be described if
+if they overlap using the (United States Postal Service)
+USPS Crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 }
 \examples{
