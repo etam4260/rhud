@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_fmr.R
 \name{hud_fmr_state_counties}
 \alias{hud_fmr_state_counties}
-\title{hud_fmr_state_counties}
+\title{Fair Markets Rent State Queries for Counties}
 \usage{
 hud_fmr_state_counties(
   state,

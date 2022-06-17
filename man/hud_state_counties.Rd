@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_state_counties}
 \alias{hud_state_counties}
-\title{hud_state_counties}
+\title{US Counties}
 \usage{
 hud_state_counties(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_infix_geo.R
 \name{\%cd_in_z\%}
 \alias{\%cd_in_z\%}
-\title{\%cd_in_z\%}
+\title{Congressional District Addresses in Zip Addresses?}
 \usage{
 cd \%cd_in_z\% zip
 }

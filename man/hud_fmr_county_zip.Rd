@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_fmr.R
 \name{hud_fmr_county_zip}
 \alias{hud_fmr_county_zip}
-\title{hud_fmr_county_zip}
+\title{Fair Markets Rent County Queries for Zip}
 \usage{
 hud_fmr_county_zip(
   county,

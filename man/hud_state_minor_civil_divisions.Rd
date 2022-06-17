@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_state_minor_civil_divisions}
 \alias{hud_state_minor_civil_divisions}
-\title{hud_state_minor_civil_divisions}
+\title{US Minor Civil Divisions}
 \usage{
 hud_state_minor_civil_divisions(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }

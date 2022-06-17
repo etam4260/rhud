@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_omni_functions.R
 \name{hud_fmr}
 \alias{hud_fmr}
-\title{hud_fmr}
+\title{Omni-Query for US Fair Markets Rent API}
 \usage{
 hud_fmr(
   query,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_cache.R
 \name{hud_clear_cache}
 \alias{hud_clear_cache}
-\title{hud_clear_cache}
+\title{Clear RHUD Cache Directory}
 \usage{
 hud_clear_cache()
 }

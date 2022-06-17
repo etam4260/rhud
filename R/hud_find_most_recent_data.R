@@ -1,5 +1,5 @@
 #' @name hud_rec_cw_yr
-#' @title hud_rec_cw_yr
+#' @title Get Most Recently Released Year and Quarter: USPS Crosswalk Files
 #' @description Pings the (United States Postal Service) USPS Crosswalk API
 #'    provided by HUD USER to determine the most recently released files.
 #'    This will only ping for the last two years for every quarter.
@@ -66,7 +66,7 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
 
 #' @name hud_rec_fmr_yr
-#' @title hud_rec_fmr_yr
+#' @title  Get Most Recently Released Year: Fair Markets Rent
 #' @description  Pings the Fair Markets Rent API provided by
 #'    (US Department of Housing and Urban Development) HUD User to
 #'    determine the most recently released files. This will only ping
@@ -166,7 +166,7 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
 
 #' @name hud_rec_il_yr()
-#' @title hud_rec_il_yr()
+#' @title Get Most Recently Released Year: Income Limits
 #' @description Pings the Income Limits API provided by HUD User to
 #'    determine the most recently released files. This will only ping
 #'    for the last two years. Will return years for state, county, and metroarea

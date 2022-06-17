@@ -1,5 +1,5 @@
 #' @name hud_set_user_agent
-#' @title hud_set_user_agent
+#' @title Set RHUD User Agent
 #' @description Set a user agent when querying the HUD User APIs.
 #' @param user_agent A character vector with the user agent.
 #' @param in_wkdir set the key in the user's .RProfile in this directory.
@@ -107,7 +107,7 @@ hud_set_user_agent <- function(user_agent, in_wkdir = FALSE, in_home = FALSE) {
 
 
 #' @name hud_get_user_agent
-#' @title hud_get_user_agent
+#' @title Get RHUD User Agent
 #' @description Get the most recent user agent set.
 #' @returns A character vector with the user agent used for querying HUD User
 #'   APIs.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_infix_geo.R
 \name{\%cbsadiv_in_z\%}
 \alias{\%cbsadiv_in_z\%}
-\title{\%cbsadiv_in_z\%}
+\title{CBSAdiv Addresses in Zip Addresses?}
 \usage{
 cbsadiv \%cbsadiv_in_z\% zip
 }

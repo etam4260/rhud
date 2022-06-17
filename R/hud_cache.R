@@ -4,7 +4,7 @@
 #' @import R.cache
 
 #' @name hud_set_cache_dir
-#' @title hud_set_cache_dir
+#' @title Set RHUD Cache Directory
 #' @description Set the caching directory to store data retrieved using the
 #' rhud API calls. By default, rhud uses a non-persistent temporary directory
 #' given for an R session. However, it is possible that a user might want
@@ -154,7 +154,7 @@ hud_set_cache_dir <- function(path,
 
 
 #' @name hud_get_cache_dir
-#' @title hud_get_cache_dir
+#' @title Get RHUD Cache Directory
 #' @description Get the path rhud is using to store cached files.
 #' @returns A character vector with path to cached files. If none is set,
 #'   will default to R temp session directory
@@ -174,7 +174,7 @@ hud_get_cache_dir <- function() {
 
 
 #' @name hud_clear_cache
-#' @title hud_clear_cache
+#' @title Clear RHUD Cache Directory
 #' @description Remove cached data from the caching directory that is used to
 #' store data retrieved using the rhud API calls. By default, rhud uses a
 #' non-persistent temporary directory given for an R session, but a user might

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_find_most_recent_data.R
 \name{hud_rec_cw_yr}
 \alias{hud_rec_cw_yr}
-\title{hud_rec_cw_yr}
+\title{Get Most Recently Released Year and Quarter: USPS Crosswalk Files}
 \usage{
 hud_rec_cw_yr(key = Sys.getenv("HUD_KEY"))
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_infix_geo.R
 \name{\%z_in_trt\%}
 \alias{\%z_in_trt\%}
-\title{\%z_in_trt\%}
+\title{Zip Addresses in Tract Addresses?}
 \usage{
 zip \%z_in_trt\% tract
 }

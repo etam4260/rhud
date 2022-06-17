@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_in_geo.R
 \name{z_in_cd}
 \alias{z_in_cd}
-\title{z_in_cd}
+\title{Zip Addresses in Congressional District Addresses?}
 \usage{
 z_in_cd(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY"))
 }

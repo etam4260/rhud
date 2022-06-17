@@ -1,5 +1,5 @@
 #' @name hud_get_key
-#' @title hud_get_key
+#' @title Get HUD_KEY System Variable
 #' @description  Return most recent key set in the HUD_KEY environment variable.
 #'   If no key is set, return "".
 #' @returns Returns a string.
@@ -16,7 +16,7 @@ hud_get_key <- function() {
 }
 
 #' @name hud_set_key
-#' @title hud_set_key
+#' @title Set HUD_KEY System Variable
 #' @description A wrapper around Sys.getenv() to set HUD_KEY environment
 #'   variable. Allows the user to also set the key to their .RProfile
 #'   in working or HOME.

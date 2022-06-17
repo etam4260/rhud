@@ -2,7 +2,7 @@
 
 
 #' @name crosswalk
-#' @title crosswalk
+#' @title Crosswalk a Dataset
 #' @description Using the US Housing and Urban Development USPS Crosswalk files,
 #'  crosswalk an entire dataset.
 #'  Currently supported crosswalks:

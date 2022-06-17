@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_key.R
 \name{hud_get_key}
 \alias{hud_get_key}
-\title{hud_get_key}
+\title{Get HUD_KEY System Variable}
 \usage{
 hud_get_key()
 }

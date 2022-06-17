@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_website_docs.R
 \name{rhud_website}
 \alias{rhud_website}
-\title{rhud_website}
+\title{Access RHUD Web Resources}
 \usage{
 rhud_website(website = c("github-pages", "github"))
 }

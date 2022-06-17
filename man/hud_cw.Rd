@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_omni_functions.R
 \name{hud_cw}
 \alias{hud_cw}
-\title{hud_cw}
+\title{Omni-Query for HUD Crosswalk Files API}
 \usage{
 hud_cw(
   type,

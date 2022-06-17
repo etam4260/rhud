@@ -2,7 +2,7 @@
 #' @import R.cache
 
 #' @name hud_fmr_state_metroareas
-#' @title hud_fmr_state_metroareas
+#' @title Fair Markets Rent State Queries for Metroareas
 #' @description This function queries for a state and returns the
 #'   (Fair Markets Rent) FMR calculation
 #'   at a metroarea resolution for all metroareas in the state query.
@@ -116,7 +116,7 @@ hud_fmr_state_metroareas <- function(state,
 
 
 #' @name hud_fmr_state_counties
-#' @title hud_fmr_state_counties
+#' @title Fair Markets Rent State Queries for Counties
 #' @description This function queries for a state and returns the
 #'   (Fair Markets Rent) FMR calculation
 #'   at a county resolution for all counties in state input.
@@ -231,7 +231,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 }
 
 #' @name hud_fmr_county_zip
-#' @title hud_fmr_county_zip
+#' @title Fair Markets Rent County Queries for Zip
 #' @description This function queries for a county and returns FMR calculation.
 #'    If the county is not
 #'    a small area, it will return only single
@@ -381,7 +381,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_fmr_metroarea_zip
-#' @title hud_fmr_metroarea_zip
+#' @title Fair Markets Rent Metroarea Queries for Zip
 #' @description This function queries for a metroarea and returns
 #'    FMR calculation. If the metroarea is not
 #'    a small area, it will return only single

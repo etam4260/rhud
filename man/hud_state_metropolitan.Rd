@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_state_metropolitan}
 \alias{hud_state_metropolitan}
-\title{hud_state_metropolitan}
+\title{US Metropolitan Areas}
 \usage{
 hud_state_metropolitan(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }

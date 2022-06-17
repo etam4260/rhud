@@ -1,5 +1,5 @@
 #' @name add_leading_zeros
-#' @title add_leading_zeros
+#' @title Add Leading Zeros To Character Vector
 #' @description Sometimes when loading in data from an excel file it
 #'   truncates the leading 0's. This attempts to re-add those.
 #' @param geoid_type What geoid type to add leading 0s to
@@ -59,7 +59,7 @@ add_leading_zeros <- function(geoid_type = "zip", input) {
 }
 
 #' @name remove_leading_zeros
-#' @title remove_leading_zeros
+#' @title Remove Leading Zeros from Character Vector
 #' @description Remove leading zeros from character vector.
 #' @param input A vector or column of character vectors that need leading zeros
 #'   removed.
@@ -96,8 +96,8 @@ remove_delimiters <- function(input) {
 
 
 #' @name fix_geoid
-#' @title fix_geoid
-#' @description This is helper function for adding leading zeros back to a
+#' @title Add Leading Zeros back to Character Vector Helper
+#' @description This is helper function for adding_leading_zeros() back to a
 #'   character vector.
 #' @param geoid_type What geoid type to add leading 0s to
 #'   1) zip -> Must be 5 digit zip code

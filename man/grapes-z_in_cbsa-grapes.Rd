@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_infix_geo.R
 \name{\%z_in_cbsa\%}
 \alias{\%z_in_cbsa\%}
-\title{\%z_in_cbsa\%}
+\title{Zip Addresses in CBSA Addresses?}
 \usage{
 zip \%z_in_cbsa\% cbsa
 }

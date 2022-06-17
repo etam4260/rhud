@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_nation_states_territories}
 \alias{hud_nation_states_territories}
-\title{hud_nation_states_territories}
+\title{US States and Territories}
 \usage{
 hud_nation_states_territories(key = Sys.getenv("HUD_KEY"), to_tibble)
 }
