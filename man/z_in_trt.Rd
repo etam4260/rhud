@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_in_geo.R
 \name{z_in_trt}
 \alias{z_in_trt}
-\title{z_in_trt}
+\title{Zip Addresses in Tract Addresses?}
 \usage{
 z_in_trt(zip, tract, year, quarter, key = Sys.getenv("HUD_KEY"))
 }

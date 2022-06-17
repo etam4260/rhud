@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_omni_functions.R
 \name{hud_il}
 \alias{hud_il}
-\title{hud_il}
+\title{Omni-Query for HUD US Income Limits API}
 \usage{
 hud_il(
   query,

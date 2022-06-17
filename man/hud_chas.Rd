@@ -2,7 +2,8 @@
 % Please edit documentation in R/hud_omni_functions.R
 \name{hud_chas}
 \alias{hud_chas}
-\title{hud_chas}
+\title{Omni-Query for HUD Comprehensive Housing and Affordability Strategy
+API}
 \usage{
 hud_chas(
   type,

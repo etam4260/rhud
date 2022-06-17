@@ -84,7 +84,8 @@ hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
 or certified by HUD User.
 
 The goal of this project is to provide an easy-to-use interface to access
-various open-source APIs provided by the U.S Housing and Urban Development. 
+various open-source APIs provided by the U.S Department of 
+Housing and Urban Development. 
 These include the USPS Crosswalk Files, Fair Markets Rent, Income Limits, and
 Comprehensive Housing and Affordability Strategy. Although HUD does provide 
 datasets for other programs, they are currently not supported by an API. 

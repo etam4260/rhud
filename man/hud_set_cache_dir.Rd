@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_cache.R
 \name{hud_set_cache_dir}
 \alias{hud_set_cache_dir}
-\title{hud_set_cache_dir}
+\title{Set RHUD Cache Directory}
 \usage{
 hud_set_cache_dir(path, in_wkdir = FALSE, in_home = FALSE)
 }

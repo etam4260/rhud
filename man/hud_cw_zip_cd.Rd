@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_crosswalk.R
 \name{hud_cw_zip_cd}
 \alias{hud_cw_zip_cd}
-\title{hud_cw_zip_cd}
+\title{Crosswalk Zip to CD}
 \usage{
 hud_cw_zip_cd(
   zip,

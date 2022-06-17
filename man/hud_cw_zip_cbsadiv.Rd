@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_crosswalk.R
 \name{hud_cw_zip_cbsadiv}
 \alias{hud_cw_zip_cbsadiv}
-\title{hud_cw_zip_cbsadiv}
+\title{Crosswalk Zip to CBSAdiv}
 \usage{
 hud_cw_zip_cbsadiv(
   zip,

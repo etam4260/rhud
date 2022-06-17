@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_key.R
 \name{hud_set_key}
 \alias{hud_set_key}
-\title{hud_set_key}
+\title{Set HUD_KEY System Variable}
 \usage{
 hud_set_key(key, in_wkdir = FALSE, in_home = FALSE)
 }

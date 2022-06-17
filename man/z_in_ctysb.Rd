@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_in_geo.R
 \name{z_in_ctysb}
 \alias{z_in_ctysb}
-\title{z_in_ctysb}
+\title{Zip Addresses in Countysub Addresses?}
 \usage{
 z_in_ctysb(zip, countysub, year, quarter, key = Sys.getenv("HUD_KEY"))
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_crosswalk.R
 \name{hud_cw_zip_countysub}
 \alias{hud_cw_zip_countysub}
-\title{hud_cw_zip_countysub}
+\title{Crosswalk Zip to Countysub}
 \usage{
 hud_cw_zip_countysub(
   zip,

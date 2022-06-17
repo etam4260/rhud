@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_set_user_agent.R
 \name{hud_get_user_agent}
 \alias{hud_get_user_agent}
-\title{hud_get_user_agent}
+\title{Get RHUD User Agent}
 \usage{
 hud_get_user_agent()
 }

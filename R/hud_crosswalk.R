@@ -1,5 +1,5 @@
 #' @name hud_cw_zip_tract
-#' @title hud_cw_zip_tract
+#' @title Crosswalk Zip to Tract
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -105,7 +105,7 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_county
-#' @title hud_cw_zip_county
+#' @title Crosswalk Zip to County
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -215,7 +215,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_cbsa
-#' @title hud_cw_zip_cbsa
+#' @title  Crosswalk Zip to CBSA
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -321,7 +321,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_cbsadiv
-#' @title hud_cw_zip_cbsadiv
+#' @title  Crosswalk Zip to CBSAdiv
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -427,7 +427,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_cd
-#' @title hud_cw_zip_cd
+#' @title  Crosswalk Zip to CD
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -534,7 +534,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_tract_zip
-#' @title hud_cw_tract_zip
+#' @title Crosswalk Tract to Zip
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -638,7 +638,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_county_zip
-#' @title hud_cw_county_zip
+#' @title Crosswalk County to Zip
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -743,7 +743,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_cbsa_zip
-#' @title hud_cw_cbsa_zip
+#' @title Crosswalk CBSA to Zip
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -848,7 +848,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_cbsadiv_zip
-#' @title hud_cw_cbsadiv_zip
+#' @title Crosswalk CBSAdiv to Zip
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -951,7 +951,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_cd_zip
-#' @title hud_cw_cd_zip
+#' @title Crosswalk CD to Zip
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -1054,7 +1054,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_countysub
-#' @title hud_cw_zip_countysub
+#' @title Crosswalk Zip to Countysub
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for
@@ -1158,7 +1158,7 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_countysub_zip
-#' @title hud_cw_countysub_zip
+#' @title Crosswalk Countysub to Zip
 #' @description This function queries the USPS Crosswalks API provided by US
 #'   Department of Housing and Urban Development (HUD USER).
 #'   This returns the crosswalk for

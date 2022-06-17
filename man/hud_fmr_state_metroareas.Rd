@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_fmr.R
 \name{hud_fmr_state_metroareas}
 \alias{hud_fmr_state_metroareas}
-\title{hud_fmr_state_metroareas}
+\title{Fair Markets Rent State Queries for Metroareas}
 \usage{
 hud_fmr_state_metroareas(
   state,

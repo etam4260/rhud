@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_dataset_crosswalk.R
 \name{crosswalk}
 \alias{crosswalk}
-\title{crosswalk}
+\title{Crosswalk a Dataset}
 \usage{
 crosswalk(
   data,

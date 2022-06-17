@@ -4,7 +4,7 @@
 
 
 #' @name chas_do_query_calls
-#' @title chas_do_query_calls
+#' @title API Calls for Comprehensive Housing and Affordability Helper
 #' @description Helper function for making the query calls to
 #'   Comprehensive Housing and Affordability Strategy (CHAS)
 #'   API endpoint as well as concatenating all response objects to
@@ -113,7 +113,7 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
 
 
 #' @name cw_do_query_calls
-#' @title cw_do_query_calls
+#' @title API Calls for USPS Crosswalk Helper
 #' @description Helper function for making the query calls to
 #'   USPS Crosswalk API endpoint as well as concatenating all response objects
 #'   to be returned to the user.
@@ -206,7 +206,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
 
 #' @name misc_do_query_call
-#' @title misc_do_query_call
+#' @title API Calls for Misc Helper
 #' @description Helper function for making the query calls to
 #'   misc endpoints as well as concatenating all response objects
 #'   to be returned to the user. The misc APIs are located in hud_misc.R
@@ -271,7 +271,7 @@ misc_do_query_call <- function(urls, key, to_tibble) {
 
 
 #' @name make_query_calls
-#' @title make_query_calls
+#' @title Make Query Calls to HUD USER
 #' @description Centralized atomic function for querying API calls
 #'   as to make R.cache memoizedCall work at a singular API call resolution.
 #' @param urls The urls to query for.

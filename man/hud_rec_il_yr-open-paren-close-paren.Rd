@@ -3,7 +3,7 @@
 \name{hud_rec_il_yr()}
 \alias{hud_rec_il_yr()}
 \alias{hud_rec_il_yr}
-\title{hud_rec_il_yr()}
+\title{Get Most Recently Released Year: Income Limits}
 \usage{
 hud_rec_il_yr(key = Sys.getenv("HUD_KEY"))
 }

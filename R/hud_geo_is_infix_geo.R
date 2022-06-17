@@ -1,5 +1,5 @@
 #' @name %z_in_trt%
-#' @title %z_in_trt%
+#' @title Zip Addresses in Tract Addresses?
 #' @description To use this function, the HUD_KEY system environment variable
 #'   must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -77,7 +77,7 @@
 
 
 #' @name %z_in_cty%
-#' @title %z_in_cty%
+#' @title Zip Addresses in County Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -154,7 +154,7 @@
 
 
 #' @name %z_in_cbsa%
-#' @title %z_in_cbsa%
+#' @title  Zip Addresses in CBSA Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -233,7 +233,7 @@
 
 
 #' @name %z_in_cbsadiv%
-#' @title %z_in_cbsadiv%
+#' @title  Zip Addresses in CBSAdiv Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -312,7 +312,7 @@
 
 
 #' @name %z_in_ctysb%
-#' @title %z_in_ctysb%
+#' @title Zip Addresses in Countysub Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -391,7 +391,7 @@
 
 
 #' @name %z_in_cd%
-#' @title %z_in_cd%
+#' @title Zip Addresses in Congressional District Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -472,7 +472,7 @@
 
 
 #' @name %trt_in_z%
-#' @title %trt_in_z%
+#' @title Tract Addresses in Zip Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -549,7 +549,7 @@
 
 
 #' @name %cty_in_z%
-#' @title %cty_in_z%
+#' @title County Addresses in Zip Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -628,7 +628,7 @@
 
 
 #' @name %cbsa_in_z%
-#' @title %cbsa_in_z%
+#' @title CBSA Addresses in Zip Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -706,7 +706,7 @@
 
 
 #' @name %cbsadiv_in_z%
-#' @title %cbsadiv_in_z%
+#' @title CBSAdiv Addresses in Zip Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -786,7 +786,7 @@
 
 
 #' @name %cd_in_z%
-#' @title %cd_in_z%
+#' @title Congressional District Addresses in Zip Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -866,7 +866,7 @@
 
 
 #' @name %ctysb_in_z%
-#' @title %ctysb_in_z%
+#' @title Countysub Addresses in Zip Addresses?
 #' @description To use this function, the HUD_KEY system environment
 #'   variable must be set first: use hud_set_key("the_key") to do this.
 #'
@@ -946,7 +946,7 @@
 
 
 #' @name geo_is_infix_query_and_get_warnings
-#' @title geo_is_infix_query_and_get_warnings
+#' @title US Geographic Identifier in US Geographic Identifier Query and Warn
 #' @description Giving a geoid to query for, make sure to call the core
 #'   hud_cw() functions to get the crosswalk output
 #'   but intercept it to make custom warning messages.

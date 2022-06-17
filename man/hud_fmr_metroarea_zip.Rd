@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_fmr.R
 \name{hud_fmr_metroarea_zip}
 \alias{hud_fmr_metroarea_zip}
-\title{hud_fmr_metroarea_zip}
+\title{Fair Markets Rent Metroarea Queries for Zip}
 \usage{
 hud_fmr_metroarea_zip(
   metroarea,

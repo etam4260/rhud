@@ -4,7 +4,8 @@
 
 # Misc APIs provided by the HUD provide:
 
-#' @title hud_nation_states_territories
+#' @name hud_nation_states_territories
+#' @title US States and Territories
 #' @description Get a list of state and US territories
 #'   along with the corresponding fips code and
 #'   abbreviation.
@@ -96,7 +97,7 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
 # mcds.
 
 #' @name hud_state_metropolitan
-#' @title hud_state_metropolitan
+#' @title US Metropolitan Areas
 #' @description Get details for all metropolitan areas for queried states with
 #'   their name and (core based statistical area) cbsa code.
 #' @param state The state to get all the metropolitan areas. Can be provided as
@@ -249,7 +250,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 
 
 #' @name hud_state_counties
-#' @title hud_state_counties
+#' @title US Counties
 #' @description Get a dataframe with details describing the county(s) located
 #'   within the queried state(s).
 #' @param state The state(s) to get all county(s).
@@ -364,7 +365,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
 }
 
 #' @name hud_state_places
-#' @title hud_state_places
+#' @title US Places
 #' @description Get a list of all places in state(s).
 #' @param state The state(s) to get all places.
 #' @param key The key obtained from HUD
@@ -474,7 +475,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
 }
 
 #' @name hud_state_minor_civil_divisions
-#' @title hud_state_minor_civil_divisions
+#' @title US Minor Civil Divisions
 #' @description Get a list of all minor civil divisions in a state
 #' @param state The state to get all mcd(s).
 #' @param key The key obtained from HUD

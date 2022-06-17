@@ -14,7 +14,7 @@
 # Comprehensive and Housing Affordability Strategy
 
 #' @name hud_cw
-#' @title hud_cw
+#' @title Omni-Query for HUD Crosswalk Files API
 #' @description This function queries the USPS Crosswalks API provided by
 #'   US Department of Housing and Urban Development (HUD USER).
 #' @param type Must be a number between 1 and 12 depending on the USPS Crosswalk
@@ -253,7 +253,7 @@ hud_cw <- function(type, query,
 
 
 #' @name hud_fmr
-#' @title hud_fmr
+#' @title Omni-Query for US Fair Markets Rent API
 #' @description This function queries the Fair Markets Rent API provided by
 #'   US Department of Housing and Urban Development (HUD USER). Querying a
 #'   state provides a list containing two datasets: one with FMR at a county
@@ -410,7 +410,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_il
-#' @title hud_il
+#' @title Omni-Query for HUD US Income Limits API
 #' @description This function queries the Income Limits API provided by
 #'   US Department of Housing and Urban Development (HUD USER).
 #' @param query  Querying a
@@ -550,7 +550,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_chas
-#' @title hud_chas
+#' @title Omni-Query for HUD Comprehensive Housing and Affordability Strategy
+#'   API
 #' @description This function queries the
 #'   Comprehensive Housing Affordability Strategy CHAS API provided by
 #'   US Department

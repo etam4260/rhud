@@ -1,5 +1,6 @@
 #' @name chas_input_check_cleansing
-#' @title chas_input_check_cleansing
+#' @title Input Cleansing for Comprehensive Housing and
+#'   Affordability Strategy Queries Helper
 #' @description Helper function used to clean user inputted variables for all
 #'    decomposed (Comprehensive Housing and Affordability Strategy)
 #'    CHAS functions.
@@ -64,7 +65,7 @@ chas_input_check_cleansing <- function(query, year, key) {
 
 
 #' @name cw_input_check_cleansing
-#' @title cw_input_check_cleansing
+#' @title Input Cleansing for USPS Crosswalk Queries Helper
 #' @description Helper function used to clean user inputted variables for all
 #'   (United States Postal Service) USPS Crosswalk functions.
 #' @param primary_geoid
@@ -161,7 +162,7 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
 
 
 #' @name fmr_il_input_check_cleansing
-#' @title fmr_il_input_check_cleansing
+#' @title Input Cleansing for Fair Markets Rent and Income Limits Queries Helper
 #' @description Helper function used to clean user inputted variables for all
 #'   Fair Markets Rent and Income Limits APIs.
 #' @param query
@@ -265,7 +266,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
 
 
 #' @name crosswalk_a_dataset_input_check_cleansing
-#' @title crosswalk_a_dataset_input_check_cleansing
+#' @title Input Cleansing for crosswalk() Function Helper
 #' @description Helper function used to clean inputs for the
 #'   crosswalk() function.
 #' @param data A dataset with rows describing measurements at a zip, county,

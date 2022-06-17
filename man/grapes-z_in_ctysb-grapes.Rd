@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_infix_geo.R
 \name{\%z_in_ctysb\%}
 \alias{\%z_in_ctysb\%}
-\title{\%z_in_ctysb\%}
+\title{Zip Addresses in Countysub Addresses?}
 \usage{
 zip \%z_in_ctysb\% countysub
 }

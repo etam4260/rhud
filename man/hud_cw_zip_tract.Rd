@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_crosswalk.R
 \name{hud_cw_zip_tract}
 \alias{hud_cw_zip_tract}
-\title{hud_cw_zip_tract}
+\title{Crosswalk Zip to Tract}
 \usage{
 hud_cw_zip_tract(
   zip,

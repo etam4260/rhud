@@ -1,5 +1,5 @@
 #' @name z_in_trt
-#' @title z_in_trt
+#' @title Zip Addresses in Tract Addresses?
 #' @description Given zip code(s) and tract(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -91,7 +91,7 @@ z_in_trt <- function(zip, tract, year, quarter,
 
 
 #' @name z_in_cty
-#' @title z_in_cty
+#' @title Zip Addresses in County Addresses?
 #' @description Given zip code(s) and county(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -182,7 +182,7 @@ z_in_cty <- function(zip, county, year, quarter,
 
 
 #' @name z_in_cbsa
-#' @title z_in_cbsa
+#' @title Zip Addresses in CBSA Addresses?
 #' @description Given zip code(s) and cbsa(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -273,7 +273,7 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 
 
 #' @name z_in_cbsadiv
-#' @title z_in_cbsadiv
+#' @title Zip Addresses in CBSAdiv Addresses?
 #' @description Given zip code(s) and cbsadiv(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -365,7 +365,7 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 
 
 #' @name z_in_ctysb
-#' @title z_in_ctysb
+#' @title Zip Addresses in Countysub Addresses?
 #' @description Given zip code(s) and a countysub(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -456,7 +456,7 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
 
 
 #' @name z_in_cd
-#' @title z_in_cd
+#' @title Zip Addresses in Congressional District Addresses?
 #' @description Given zip code(s) and congressional district(s), determine
 #'   if they overlap using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -548,7 +548,7 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 
 
 #' @name trt_in_z
-#' @title trt_in_z
+#' @title Tract Addresses in Zip Addresses?
 #' @description Given tract(s) and a zip code(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -640,7 +640,7 @@ trt_in_z <- function(tract, zip, year, quarter,
 
 
 #' @name cty_in_z
-#' @title cty_in_z
+#' @title County Addresses in Zip Addresses?
 #' @description Given county(s) and a zip(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -733,7 +733,7 @@ cty_in_z <- function(county, zip, year, quarter,
 
 
 #' @name cbsa_in_z
-#' @title cbsa_in_z
+#' @title CBSA Addresses in Zip Addresses?
 #' @description Given a cbsa(s) and a zip(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -825,7 +825,7 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 
 
 #' @name cbsadiv_in_z
-#' @title cbsadiv_in_z
+#' @title CBSAdiv Addresses in Zip Addresses?
 #' @description Given cbsadiv(s) and zip(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -916,7 +916,7 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
 
 
 #' @name cd_in_z
-#' @title cd_in_z
+#' @title Congressional District Addresses in Zip Addresses?
 #' @description Given congressional district(s) and zip(s), determine if they
 #'   overlap using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
@@ -1007,7 +1007,7 @@ cd_in_z <- function(cd, zip, year, quarter,
 
 
 #' @name ctysb_in_z
-#' @title ctysb_in_z
+#' @title Countysub Addresses in Zip Addresses?
 #' @description Given countysub(s) and zip code(s), determine if they overlap
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if

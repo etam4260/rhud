@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_in_geo.R
 \name{z_in_cbsa}
 \alias{z_in_cbsa}
-\title{z_in_cbsa}
+\title{Zip Addresses in CBSA Addresses?}
 \usage{
 z_in_cbsa(zip, cbsa, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
