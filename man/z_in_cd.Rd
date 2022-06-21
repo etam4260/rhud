@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_in_geo.R
 \name{z_in_cd}
 \alias{z_in_cd}
-\title{z_in_cd}
+\title{Zip Addresses in Congressional District Addresses?}
 \usage{
 z_in_cd(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
@@ -25,7 +25,8 @@ If zip(s) exist in the cd(s) specified, then TRUE is returned.
 }
 \description{
 Given zip code(s) and congressional district(s), determine
-if they overlap using the crosswalk files. Overlap will be described if
+if they overlap using the (United States Postal Service)
+USPS Crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 }
 \examples{

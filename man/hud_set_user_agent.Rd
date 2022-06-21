@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_set_user_agent.R
 \name{hud_set_user_agent}
 \alias{hud_set_user_agent}
-\title{hud_set_user_agent}
+\title{Set RHUD User Agent}
 \usage{
 hud_set_user_agent(user_agent, in_wkdir = FALSE, in_home = FALSE)
 }
@@ -20,7 +20,6 @@ Set a user agent when querying the HUD User APIs.
 }
 \examples{
 \dontrun{
-library(rhud)
 
 hud_set_user_agent("im-the-user")
 

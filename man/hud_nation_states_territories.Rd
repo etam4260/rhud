@@ -2,13 +2,14 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_nation_states_territories}
 \alias{hud_nation_states_territories}
-\title{hud_nation_states_territories}
+\title{US States and Territories}
 \usage{
 hud_nation_states_territories(key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
-\item{key}{The API key for this user. You must go to HUD and sign up for an
-account and request for an API key.}
+\item{key}{The API key for this user. You must go to
+(US Department of Housing and Urban Development) HUD USER and sign up
+for an account and request for an API key.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -24,10 +25,6 @@ abbreviation.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_nation_states_territories()
 }
 }
@@ -40,5 +37,5 @@ hud_nation_states_territories()
 \item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
 }
 }
-\keyword{States}
-\keyword{Territories}
+\keyword{states}
+\keyword{territories}

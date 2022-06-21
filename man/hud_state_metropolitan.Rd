@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_state_metropolitan}
 \alias{hud_state_metropolitan}
-\title{hud_state_metropolitan}
+\title{US Metropolitan Areas}
 \usage{
 hud_state_metropolitan(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
@@ -21,15 +21,13 @@ A dataframe containing details of metropolitan areas in state(s)
 }
 \description{
 Get details for all metropolitan areas for queried states with
-their name and CBSA code.
+their name and (core based statistical area) cbsa code.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_state_metropolitan("VA")
+
 }
 }
 \seealso{
@@ -41,4 +39,4 @@ hud_state_metropolitan("VA")
 \item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
 }
 }
-\keyword{CBSA}
+\keyword{cbsa}

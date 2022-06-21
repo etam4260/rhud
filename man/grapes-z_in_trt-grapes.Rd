@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_infix_geo.R
 \name{\%z_in_trt\%}
 \alias{\%z_in_trt\%}
-\title{\%z_in_trt\%}
+\title{Zip Addresses in Tract Addresses?}
 \usage{
 zip \%z_in_trt\% tract
 }
@@ -22,9 +22,9 @@ Given zip code(s) and tract(s), determine if they overlap
 using the crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 
-This means that it is possible that certain geoids(lhs) are not counted even
-though their boundaries intersect the queried geoids(rhs). This is likely
-because addresses do not lie in their intersecting region.
+This means that it is possible that certain geoids(lhs) are not counted
+even though their boundaries intersect the queried geoids(rhs). This is
+likely because addresses do not lie in their intersecting region.
 
 Infix operators default to most recent year and quarter of which the
 crosswalk files are available. For modifying the year and quarter parameter

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_in_geo.R
 \name{cty_in_z}
 \alias{cty_in_z}
-\title{cty_in_z}
+\title{County Addresses in Zip Addresses?}
 \usage{
 cty_in_z(county, zip, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
@@ -25,7 +25,8 @@ If county(s) exist in the zip(s) specified, then TRUE is returned.
 }
 \description{
 Given county(s) and a zip(s), determine if they overlap
-using the crosswalk files. Overlap will be described if
+using the (United States Postal Service)
+USPS Crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 }
 \examples{

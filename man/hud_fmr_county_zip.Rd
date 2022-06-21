@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_fmr.R
 \name{hud_fmr_county_zip}
 \alias{hud_fmr_county_zip}
-\title{hud_fmr_county_zip}
+\title{Fair Markets Rent County Queries for Zip}
 \usage{
 hud_fmr_county_zip(
   county,
@@ -18,8 +18,9 @@ hud_fmr_county_zip(
 Can specify multiple years. Default is the
 previous year.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -37,10 +38,6 @@ it will return data at a zip code level.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_fmr_county_zip("5100199999", year = c(2021))
 
 hud_fmr_county_zip("5100199999", year = c("2021"))

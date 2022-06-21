@@ -1,11 +1,15 @@
 #' @name chas_input_check_cleansing
-#' @title chas_input_check_cleansing
+#' @title Input Cleansing for Comprehensive Housing and
+#'   Affordability Strategy Queries Helper
 #' @description Helper function used to clean user inputted variables for all
-#'    decomposed CHAS functions.
+#'    decomposed (Comprehensive Housing and Affordability Strategy)
+#'    CHAS functions.
 #' @param query
-#'   The inputted GEOID.
+#'   The inputted geographic identifiers to query for.
 #' @param year The years to query for.
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
 chas_input_check_cleansing <- function(query, year, key) {
@@ -61,14 +65,22 @@ chas_input_check_cleansing <- function(query, year, key) {
 
 
 #' @name cw_input_check_cleansing
-#' @title cw_input_check_cleansing
+#' @title Input Cleansing for USPS Crosswalk Queries Helper
 #' @description Helper function used to clean user inputted variables for all
-#' Crosswalk functions.
+#'   (United States Postal Service) USPS Crosswalk functions.
+#' @param primary_geoid
+#'   The first geoid used in the function call. For example, in
+#'   hud_cw_zip_tract(), the first geoid would be zip.
+#' @param secondary_geoid
+#'   The second geoid used in the function call. For example, in
+#'   hud_cw_zip_tract(), the second geoid would be tract.
 #' @param query
-#'   The inputted GEOID.
+#'   The inputted geographic identifiers to query for.
 #' @param year The years to query for.
 #' @param quarter The quarters to query for.
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
 cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
@@ -84,14 +96,14 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
   }
 
   if (primary_geoid == "cbsadiv" || secondary_geoid == "cbsadiv") {
-    min_year = 2017
-    min_quarter = 4
+    min_year <- 2017
+    min_quarter <- 4
   } else if (primary_geoid == "countysub" || secondary_geoid == "countysub") {
-    min_year = 2018
-    min_quarter = 2
+    min_year <- 2018
+    min_quarter <- 2
   } else {
-    min_year = 2010
-    min_quarter = 1
+    min_year <- 2010
+    min_quarter <- 1
   }
 
   if (length(key) != 1) {
@@ -108,15 +120,15 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
 
   }
 
-  #query <- add_leading_zeros(geoid_type = primary_geoid, input = query)
-
   query <- unique(paste(trimws(as.character(query), which = "both")))
   year <- unique(paste(trimws(as.character(year), which = "both")))
   quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
-  if (FALSE %in% numbers_only(query)) stop("\nQuery input must only be numbers.",
-                                           call. = FALSE)
+  if (FALSE %in% numbers_only(query)) stop(
+    "\nQuery input must only be numbers.",
+    call. = FALSE)
+
   if (FALSE %in% numbers_only(year)) stop("\nYear input must only be numbers.",
                                           call. = FALSE)
   if (FALSE %in% numbers_only(quarter)) {
@@ -139,7 +151,8 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
               call. = FALSE), "")
 
   ifelse(any(year == min_year) && any(as.integer(quarter) < min_quarter),
-         stop(paste("\nOne of the quarter is below the minimum quarter for the minimum year: ",
+         stop(paste("\nOne of the quarter is below the
+                    minimum quarter for the minimum year: ",
                     min_quarter,
                     sep = ""),
               call. = FALSE), "")
@@ -149,13 +162,15 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
 
 
 #' @name fmr_il_input_check_cleansing
-#' @title fmr_il_input_check_cleansing
+#' @title Input Cleansing for Fair Markets Rent and Income Limits Queries Helper
 #' @description Helper function used to clean user inputted variables for all
-#'   Fair markets rent and Income Limits datasets.
+#'   Fair Markets Rent and Income Limits APIs.
 #' @param query
-#'   The inputted GEOID.
+#'   The inputted geographic identifiers to query for.
 #' @param year The years to query for.
-#' @param key The key obtain from HUD USER website.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
 fmr_il_input_check_cleansing <- function(query, year, key) {
@@ -221,10 +236,11 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
   # the "range" of acceptable values.
   ifelse(any(as.integer(year) >
                as.integer(strsplit(as.character(Sys.Date()), "-")[[1]][1])),
-         stop("\nA year specified seems to be in the future?", call. = FALSE), "")
+         stop("\nA year specified seems to be in the future?", call. = FALSE),
+              "")
 
 
-  min_year = 2017
+  min_year <- 2017
   ifelse(any(as.integer(year) < min_year),
          stop(paste("\nOne of the years is below the min year of this query:",
                     min_year,
@@ -250,7 +266,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
 
 
 #' @name crosswalk_a_dataset_input_check_cleansing
-#' @title crosswalk_a_dataset_input_check_cleansing
+#' @title Input Cleansing for crosswalk() Function Helper
 #' @description Helper function used to clean inputs for the
 #'   crosswalk() function.
 #' @param data A dataset with rows describing measurements at a zip, county,
@@ -292,22 +308,36 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 
   # Check if geoid_col exists in dataset or is in valid range
   # Check if this column is all numbers too.
-  tryCatch({data[[geoid_col]]}, error = function(cond) {
-    stop(paste("\nIf the geoid_col argument is specified with indexes make sure ",
+  tryCatch({
+
+    data[[geoid_col]]
+
+    },
+    error = function(cond) {
+
+      stop(paste("\nIf the geoid_col argument is
+                 specified with indexes make sure ",
                "it is within the range of the dataset. If column names are ",
                "specified, make sure the column name exists in the dataset.",
                sep = ""),
-         call. = FALSE)
-  })
+           call. = FALSE)
+    }
+  )
 
   # Check if cw_geoid_col (s) exist in the dataset or is in valid range
   # Check if this column is all numbers too.
-  tryCatch({data[[cw_geoid_col]]}, error = function(cond) {
-    stop(paste("\nIf the cw_geoid_col argument is specified with indexes make ",
-               "sure it is within the range of the dataset. If column names are ",
-               "specified, make sure the column name exists in the dataset.",
-               sep = ""),
-         call. = FALSE)
+  tryCatch({
+
+    data[[cw_geoid_col]]
+
+    }, error = function(cond) {
+      stop(paste("\nIf the cw_geoid_col argument is
+                 specified with indexes make ",
+                 "sure it is within the range of the dataset.
+                 If column names are ",
+                 "specified, make sure the column name exists in the dataset.",
+                 sep = ""),
+           call. = FALSE)
   })
 
 
@@ -323,9 +353,10 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 
   if (length(geoid) > 1 ||  length(geoid_col) > 1
       && length(cw_geoid) > 1 || length(year) > 1 || length(quarter) > 1) {
-    stop(paste("\nThis function currently only supports crosswalking one dataset ",
-          "at a time. Make sure all input arguments are of length 1: ",
-          "not including the data or cw_geoid_col arguments", sep = ""),
+    stop(paste("\nThis function currently only supports
+               crosswalking one dataset ",
+               "at a time. Make sure all input arguments are of length 1: ",
+               "not including the data or cw_geoid_col arguments", sep = ""),
          call. = FALSE)
   }
 

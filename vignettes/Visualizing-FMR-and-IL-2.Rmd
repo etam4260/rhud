@@ -1,0 +1,180 @@
+---
+title: "Visualizing-FMR-and-IL-2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualizing-FMR-and-IL-2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<i>Sample provided by <b>Shuyu Jin</b> (geojsy@umd.edu)</i>
+
+## Overview
+
+The US Department of Housing and Urban Development maintains both
+[FMR](https://link-url-here.org) (Fair Markets Rent) and 
+[IL](https://link-url-here.org) (Income Limits) programs which are crucial
+for determining eligibility for assistance dollars in the US. Provided below is
+an example of querying both FMR and IL as well as mapping them using 
+the leaflet R library.
+
+## Loading in the necessary libraries
+
+```{r message=FALSE}
+library(rhud)
+library(tigris)
+library(leaflet)
+library(tidyverse)
+library(sf)
+```
+
+<br>
+
+To improve performance, use tigris caching.
+
+```{r message=FALSE}
+options(tigris_use_cache = TRUE)
+```
+
+## Reading in data
+
+Read in the Fair Markets Rent for counties in the year 2021 as well as the shape
+files needed to map.
+
+```{r message=FALSE}
+md_counties_2021_fmr = hud_fmr_state_counties(state = 'MD', year = '2021')
+```
+
+<br>
+
+Get county data for the state of Maryland using the rhud package.
+
+```{r message=FALSE}
+md_counties = hud_state_counties("MD")
+```
+
+<br>
+
+Query for every county in Maryland and get their Income Limits data using
+the rhud package.
+
+```{r message=FALSE}
+md_counties_2021_il = hud_il(md_counties$fips_code)
+```
+
+<br>
+
+Download the shape files for counties in the US.
+
+```{r message=FALSE}
+md_county_shapefile = tigris::counties(state = NULL, cb = FALSE,
+                                       resolution = "500k", year = 2021)
+```
+
+<br>
+
+Filter the counties to those only in Maryland.
+
+```{r message=FALSE}
+md_county_shapefile = md_county_shapefile[md_county_shapefile$STATEFP == 24, ]
+
+md_county_shapefile$fullFips = paste0(as.character(md_county_shapefile$STATEFP),
+                                 as.character(md_county_shapefile$COUNTYFP),
+                                 "99999")
+```
+
+<br>
+
+## Merging of shapefiles and data
+
+Merge the shape file with the FMR and IL data.
+
+```{r message=FALSE, warning=FALSE}
+md_county_fmr_merged = tigris::geo_join(md_county_shapefile,
+                                        md_counties_2021_fmr,
+                                        by_sp = "fullFips",
+                                        by_df = "fips_code",
+                                        how = "inner")
+```
+
+<br>
+
+## Leaflet mapping
+
+Create the pallete for coloring the overlayed shape file. The scale used
+corresponds to Efficiency data.
+
+```{r message=FALSE}
+pal <- colorNumeric(
+  palette = "Greens",
+  domain = as.numeric(md_county_fmr_merged$Efficiency))
+```
+
+<br>
+
+Create the county level, efficiency, one bedroom, two bedroom, three bedroom
+four bedroom label to appear when hovering using the FMR overlay.
+
+```{r message=FALSE}
+label <- paste0(
+  "County: ", md_county_fmr_merged$NAME, "<br/>",
+  "Efficiency: ", scales::dollar(as.numeric(md_county_fmr_merged$Efficiency)), "<br/>",
+  "One Bedroom: ", scales::dollar(as.numeric(md_county_fmr_merged$`One-Bedroom`)), "<br/>",
+  "Two Bedroom: ", scales::dollar(as.numeric(md_county_fmr_merged$`Two-Bedroom`)), "<br/>",
+  "Three Bedroom: ", scales::dollar(as.numeric(md_county_fmr_merged$`Three-Bedroom`)), "<br/>",
+  "Four Bedroom: ", scales::dollar(as.numeric(md_county_fmr_merged$`Four-Bedroom`))) %>% 
+  lapply(htmltools::HTML)
+```
+
+<br>
+
+Create the ... label to appear when hovering using the IL overlay
+
+``` {r message=FALSE}
+
+
+```
+
+<br>
+
+Using the leaflet package, plot the county level map of Fair Markets Rents and 
+Income Limits in the state of Maryland.
+
+```{r message=FALSE, warning=FALSE, out.width = '100%', fig.height = 6}
+md_county_fmr_merged %>% 
+  leaflet %>% 
+  # add base map
+  addProviderTiles("CartoDB") %>% 
+  addPolygons(fillColor = ~pal(as.numeric(Efficiency)),
+              weight = 2,
+              opacity = 1,
+              color = "white",
+              dashArray = "3",
+              fillOpacity = 0.7,
+              highlight = highlightOptions(weight = 2,
+                                           color = "#666",
+                                           dashArray = "",
+                                           fillOpacity = 0.7,
+                                           bringToFront = TRUE),
+              label = label) %>% 
+  # add legend
+  addLegend(pal = pal, 
+            values = ~as.numeric(Efficiency), 
+            opacity = 0.7, 
+            title = htmltools::HTML("Fair Markets Rent <br> 
+                                    by County"),
+            position = "bottomright")
+```
+
+<br>
+
+## Observations
+
+Some noticable observations are...

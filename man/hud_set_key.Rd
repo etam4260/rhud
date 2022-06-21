@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_key.R
 \name{hud_set_key}
 \alias{hud_set_key}
-\title{hud_set_key}
+\title{Set HUD_KEY System Variable}
 \usage{
 hud_set_key(key, in_wkdir = FALSE, in_home = FALSE)
 }
@@ -20,17 +20,6 @@ Is defaulted to false.}
 A wrapper around Sys.getenv() to set HUD_KEY environment
 variable. Allows the user to also set the key to their .RProfile
 in working or HOME.
-}
-\examples{
-\dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-hud_get_key()
-
-hud_set_key("dwqkqodkqodqkqoqdq")
-hud_get_key()
-}
 }
 \seealso{
 \itemize{

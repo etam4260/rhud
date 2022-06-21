@@ -2,7 +2,8 @@
 % Please edit documentation in R/hud_omni_functions.R
 \name{hud_chas}
 \alias{hud_chas}
-\title{hud_chas}
+\title{Omni-Query for HUD Comprehensive Housing and Affordability Strategy
+API}
 \usage{
 hud_chas(
   type,
@@ -40,29 +41,30 @@ There are specific year ranges that are only accepted.
 \item 2006-2010
 }}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for an
-account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-This function returns a dataframe containing comprehensive housing
-and affordability data for a particular state. For more details about
+This function returns a dataframe or tibble containing
+Comprehensive Housing
+and Affordability Strategy data for a particular state.
+For more details about
 these measurements, go to
 https://www.huduser.gov/portal/dataset/chas-api.html
 }
 \description{
-This function queries the CHAS API provided by US Department
-of Housing and Urban Development. The ordering of items in state input
-must match that of the entity id input.
+This function queries the
+Comprehensive Housing Affordability Strategy CHAS API provided by
+US Department
+of Housing and Urban Development (HUD USER). The ordering of items in
+stateid input must match that of the entityid input.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_chas(1)
 
 hud_chas('2', state_id = '56')

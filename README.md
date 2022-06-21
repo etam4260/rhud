@@ -16,6 +16,7 @@ coverage](https://codecov.io/gh/etam4260/rhud/branch/main/graph/badge.svg)](http
 [![CodeFactor](https://www.codefactor.io/repository/github/etam4260/rhud/badge/main)](https://www.codefactor.io/repository/github/etam4260/rhud/overview/main)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/524_status.svg)](https://github.com/ropensci/software-review/issues/524)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6644503.svg)](https://doi.org/10.5281/zenodo.6644503)
 <br/> <br/> [![devel
 version](https://img.shields.io/badge/devel%20version-0.3.0.9000-yellow)]()
 
@@ -81,11 +82,11 @@ hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
     certified by HUD User.
 
 The goal of this project is to provide an easy-to-use interface to
-access various open-source APIs provided by the U.S Housing and Urban
-Development. These include the USPS Crosswalk Files, Fair Markets Rent,
-Income Limits, and Comprehensive Housing and Affordability Strategy.
-Although HUD does provide datasets for other programs, they are
-currently not supported by an API.
+access various open-source APIs provided by the U.S Department of
+Housing and Urban Development. These include the USPS Crosswalk Files,
+Fair Markets Rent, Income Limits, and Comprehensive Housing and
+Affordability Strategy. Although HUD does provide datasets for other
+programs, they are currently not supported by an API.
 
 Please read
 <https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
@@ -114,16 +115,6 @@ API system can be confusing and provides their information in JSON
 format rather than a data-frame like object. Although there exist file
 downloadables, R users may want to be able to extract specific bits of
 the data into memory.
-
-## Citation
-
-Please cite this package using:
-
-Tam E, Reilly A, Ghaedi H, Jin S (2022). rhud: A R Interface to the
-HUD  
-      (US Department of Housing and Urban Development) APIs.
-0.3.0.9000,  
-      <https://github.com/etam4260/rhud/>.
 
 ## Available Data
 
@@ -271,6 +262,16 @@ The HUD also provide miscellaneous supplemental APIs under them.
 
 -   This is open source, so please fork and introduce some pull
     requests!
+
+## Citation
+
+Please cite this package using:
+
+Tam E, Reilly A, Ghaedi H, Jin S (2022). rhud: A R Interface to the
+HUD  
+      (US Department of Housing and Urban Development) APIs.
+0.3.0.9000,  
+      <https://github.com/etam4260/rhud/>.
 
 ## References
 

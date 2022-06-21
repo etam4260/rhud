@@ -2,17 +2,18 @@
 #' @import R.cache
 
 #' @name hud_fmr_state_metroareas
-#' @title hud_fmr_state_metroareas
+#' @title Fair Markets Rent State Queries for Metroareas
 #' @description This function queries for a state and returns the
-#'   FMR calculation
-#'   at a metroarea resolution for all metroareas in this state.
-#' @param state The state to query for. Can be abbreviation, fip code, or
-#'   full name.
+#'   (Fair Markets Rent) FMR calculation
+#'   at a metroarea resolution for all metroareas in the state query.
+#' @param state The state(s) to query for. Can be abbreviation(s),
+#'   fip code(s), or full name(s).
 #' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
+#'   Can specify multiple year(s). Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
@@ -22,34 +23,34 @@
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
 #' @export
-#' @returns A data frame with fair markets rent for metro areas in states for
+#' @returns A data frame with Fair Markets Rent for metro areas in state(s) for
 #'   all combinations of "state" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
 #' hud_fmr_state_metroareas("VA", year = c(2021))
 #'
 #' hud_fmr_state_metroareas("Alabama", year = c(2021))
 #'
 #' hud_fmr_state_metroareas("24", year = c(2021))
+#'
 #' }
 hud_fmr_state_metroareas <- function(state,
                                      year = format(Sys.Date() - 365, "%Y"),
                                      key = Sys.getenv("HUD_KEY"),
                                      to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(state, year, key)
@@ -115,17 +116,18 @@ hud_fmr_state_metroareas <- function(state,
 
 
 #' @name hud_fmr_state_counties
-#' @title hud_fmr_state_counties
+#' @title Fair Markets Rent State Queries for Counties
 #' @description This function queries for a state and returns the
-#'   FMR calculation
-#'   at a county resolution for all counties in this state.
-#' @param state The state to query for. Can be abbreviation, fip code, or
+#'   (Fair Markets Rent) FMR calculation
+#'   at a county resolution for all counties in state input.
+#' @param state The state(s) to query for. Can be abbreviation, fip code, or
 #'   full name.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
@@ -139,10 +141,6 @@ hud_fmr_state_metroareas <- function(state,
 #'   all combinations of "state" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_fmr_state_counties("VA", year = c(2021))
 #'
 #' hud_fmr_state_counties("Alabama", year = c(2021))
@@ -153,15 +151,17 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                                    key = Sys.getenv("HUD_KEY"),
                                    to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
 
@@ -231,7 +231,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 }
 
 #' @name hud_fmr_county_zip
-#' @title hud_fmr_county_zip
+#' @title Fair Markets Rent County Queries for Zip
 #' @description This function queries for a county and returns FMR calculation.
 #'    If the county is not
 #'    a small area, it will return only single
@@ -241,8 +241,9 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
@@ -256,10 +257,6 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #'   all combinations of "county" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_fmr_county_zip("5100199999", year = c(2021))
 #'
 #' hud_fmr_county_zip("5100199999", year = c("2021"))
@@ -270,15 +267,17 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                                key = Sys.getenv("HUD_KEY"),
                                to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(county, year, key)
@@ -382,7 +381,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_fmr_metroarea_zip
-#' @title hud_fmr_metroarea_zip
+#' @title Fair Markets Rent Metroarea Queries for Zip
 #' @description This function queries for a metroarea and returns
 #'    FMR calculation. If the metroarea is not
 #'    a small area, it will return only single
@@ -392,8 +391,9 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
@@ -407,10 +407,6 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'   all combinations of "metroarea" and "year" inputs.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_fmr_metroarea_zip("METRO47900M47900", year = c(2018))
 #'
 #' hud_fmr_metroarea_zip("METRO29180N22001", year = c(2019))
@@ -421,15 +417,17 @@ hud_fmr_metroarea_zip <- function(metroarea,
                                   year = format(Sys.Date() - 365, "%Y"),
                                   key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(metroarea, year, key)

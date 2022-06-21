@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_fmr.R
 \name{hud_fmr_state_metroareas}
 \alias{hud_fmr_state_metroareas}
-\title{hud_fmr_state_metroareas}
+\title{Fair Markets Rent State Queries for Metroareas}
 \usage{
 hud_fmr_state_metroareas(
   state,
@@ -12,39 +12,38 @@ hud_fmr_state_metroareas(
 )
 }
 \arguments{
-\item{state}{The state to query for. Can be abbreviation, fip code, or
-full name.}
+\item{state}{The state(s) to query for. Can be abbreviation(s),
+fip code(s), or full name(s).}
 
 \item{year}{Gets the year that this data was recorded.
-Can specify multiple years. Default is the
+Can specify multiple year(s). Default is the
 previous year.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-A data frame with fair markets rent for metro areas in states for
+A data frame with Fair Markets Rent for metro areas in state(s) for
 all combinations of "state" and "year" inputs.
 }
 \description{
 This function queries for a state and returns the
-FMR calculation
-at a metroarea resolution for all metroareas in this state.
+(Fair Markets Rent) FMR calculation
+at a metroarea resolution for all metroareas in the state query.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_fmr_state_metroareas("VA", year = c(2021))
 
 hud_fmr_state_metroareas("Alabama", year = c(2021))
 
 hud_fmr_state_metroareas("24", year = c(2021))
+
 }
 }
 \seealso{

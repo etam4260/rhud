@@ -1,7 +1,7 @@
 year <- format(Sys.Date(), "%Y")
 
 bibentry(bibtype = "Manual",
-         title = "rhud: A R Interface to the HUD (US Department of Housing and Urban Development) APIs",
+         title = "rhud: A R Interface for the HUD (US Department of Housing and Urban Development) APIs",
          author = c(person("Emmet", "Tam"),
                     person("Allison", "Reilly"),
                     person("Hamed", "Ghaedi"),
@@ -9,3 +9,18 @@ bibentry(bibtype = "Manual",
          year = year,
          note = "0.3.0.9000",
          url = "https://github.com/etam4260/rhud/")
+
+bibentry(bibtype = "Manual",
+         title = "rhud: A R interface for accessing HUD (US Department of Housing and Urban Development) APIs",
+         author = c(person("Emmet", "Tam"),
+                    person("Allison", "Reilly"),
+                    person("Hamed", "Ghaedi"),
+                    person("Shuyu", "Jin")),
+
+         year = year,
+         note = "To cite package 'rhud' in publications use:",
+         publisher = "Zenodo",
+         version = "0.3.0.9000",
+         doi = "10.5281/zenodo.6644503",
+         url = "https://doi.org/10.5281/zenodo.6644503"
+)

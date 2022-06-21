@@ -4,12 +4,17 @@
 
 
 #' @name chas_do_query_calls
-#' @title chas_do_query_calls
-#' @description Helper function for making the query calls to CHAS
-#'   API endpoint.
+#' @title API Calls for Comprehensive Housing and Affordability Helper
+#' @description Helper function for making the query calls to
+#'   Comprehensive Housing and Affordability Strategy (CHAS)
+#'   API endpoint as well as concatenating all response objects to
+#'   be returned to the user.
 #' @param urls The urls to query for.
-#' @param key The key obtain from HUD USER website.
-#' @returns A dataframe of all the response bodies.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
+#' @param to_tibble If TRUE, return as tibble else dataframe.
+#' @returns A tibble or dataframe of all response bodies.
 #' @noRd
 #' @noMd
 chas_do_query_calls <- function(urls, key, to_tibble) {
@@ -108,17 +113,22 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
 
 
 #' @name cw_do_query_calls
-#' @title cw_do_query_calls
-#' @description Helper function for queries to the crosswalk API.
-#' @param urls The url endpoints to query for.
+#' @title API Calls for USPS Crosswalk Helper
+#' @description Helper function for making the query calls to
+#'   USPS Crosswalk API endpoint as well as concatenating all response objects
+#'   to be returned to the user.
+#' @param urls The urls to query for.
 #' @param query The geoids to query for.
 #' @param year The years to query for.
 #' @param quarter The quarters in the year to query for.
 #' @param primary_geoid The first geoid part of a function call. For example,
-#'   hud_cw_zip_tract() has zip as first GEOID and tract as second GEOID.
+#'   hud_cw_zip_tract() has zip as first geoid and tract as second geoid.
 #' @param secondary_geoid The second geoid part of a function call.
-#' @param key The key needed to query the HUD API
-#' @returns A data frame of all the results made from the query.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
+#' @param to_tibble If TRUE, return as tibble else dataframe.
+#' @returns A tibble or dataframe of all response bodies.
 #' @noRd
 #' @noMd
 cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
@@ -138,6 +148,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
       # something bad occurs. Append to list of errored urls.
       error_urls <- c(error_urls, url)
     } else {
+
       res <- as.data.frame(do.call(rbind, cont$data$results))
 
       res$query <- query[i]
@@ -195,12 +206,16 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
 
 #' @name misc_do_query_call
-#' @title misc_do_query_call
-#' @description Make queries calls given a list of urlss
-#' @param urls The urlss to query for.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
-#' @returns A dataframe containing all queried rows.
+#' @title API Calls for Misc Helper
+#' @description Helper function for making the query calls to
+#'   misc endpoints as well as concatenating all response objects
+#'   to be returned to the user. The misc APIs are located in hud_misc.R
+#' @param urls The urls to query for.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
+#' @param to_tibble If TRUE, return as tibble else dataframe.
+#' @returns A tibble or dataframe of all response bodies.
 #' @noRd
 #' @noMd
 misc_do_query_call <- function(urls, key, to_tibble) {
@@ -256,13 +271,14 @@ misc_do_query_call <- function(urls, key, to_tibble) {
 
 
 #' @name make_query_calls
-#' @title make_query_calls
-#' @description Centralized atomic function for querying api calls to URLs
+#' @title Make Query Calls to HUD USER
+#' @description Centralized atomic function for querying API calls
 #'   as to make R.cache memoizedCall work at a singular API call resolution.
 #' @param urls The urls to query for.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
-#' @returns The returned response object
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
+#' @returns The response object.
 #' @noRd
 #' @noMd
 make_query_calls <- function(url, key) {

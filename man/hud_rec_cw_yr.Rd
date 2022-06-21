@@ -2,22 +2,25 @@
 % Please edit documentation in R/hud_find_most_recent_data.R
 \name{hud_rec_cw_yr}
 \alias{hud_rec_cw_yr}
-\title{hud_rec_cw_yr}
+\title{Get Most Recently Released Year and Quarter: USPS Crosswalk Files}
 \usage{
 hud_rec_cw_yr(key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 }
 \value{
-The most recent year and quarter of available crosswalk files.
+The most recent year and quarter of available
+(United States Postal Service)  USPS Crosswalk files.
 }
 \description{
-Ping the Crosswalk API provided by HUD User to determine the
-most recently released files. This will only ping for the last two
-years. This tests hud_cw_tract_zip(tract = 48201223100) as the
-endpoint query.
+Pings the (United States Postal Service) USPS Crosswalk API
+provided by HUD USER to determine the most recently released files.
+This will only ping for the last two years for every quarter.
+This tests hud_cw_tract_zip(tract = 48201223100) as
+the endpoint query.
 }
 \examples{
 \dontrun{

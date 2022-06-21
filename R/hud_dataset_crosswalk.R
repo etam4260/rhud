@@ -2,8 +2,8 @@
 
 
 #' @name crosswalk
-#' @title crosswalk
-#' @description Using the US Housing and Urban Development crosswalk files,
+#' @title Crosswalk a Dataset
+#' @description Using the US Housing and Urban Development USPS Crosswalk files,
 #'  crosswalk an entire dataset.
 #'  Currently supported crosswalks:
 #'   1) zip-tract
@@ -21,7 +21,7 @@
 #' @param data A dataset with rows describing measurements at a zip,
 #'   county, county subdivision (countysub), congressional district (cd),
 #'   census tract, core base statistical area (cbsa), or core based
-#'   statistical area division (cbsadiv) geoid.
+#'   statistical area division (cbsadiv) geographic identifier.
 #'   1) zip
 #'   2) tract
 #'   3) county
@@ -31,7 +31,7 @@
 #'   7) cd
 #' @param geoid The current geoid that the dataset is described in: must be
 #'   zip, county, countysub, cd,
-#'   tract, cbsa, or cbsadiv geographic id.
+#'   tract, cbsa, or cbsadiv geographic identifier.
 #'   1) zip
 #'   2) tract
 #'   3) county
@@ -42,7 +42,7 @@
 #' @param geoid_col The column containing the geographic identifier; must be
 #'   zip, county, county subdivision (countysub), congressional district (cd),
 #'   census tract, core base statistical area (cbsa), and core based
-#'   statistical area division (cbsadiv) geoid.
+#'   statistical area division (cbsadiv) geographic identifier.
 #'   Supply either the name of the column or the index.
 #'   All elements in this column must be numbers only at the proper length.
 #'   For example, zip codes must be 5 digit numbers.
@@ -70,9 +70,13 @@
 #'   2) bus
 #'   3) tot
 #'   4) oth
-#' @param year The year measurement was taken.
-#' @param quarter The quarter of year measurement was taken.
-#' @param key The key obtain from HUD USER website.
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
+#' @param quarter Gets the quarter of the year that this data was recorded.
+#'   Defaults to the first quarter of the year.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @seealso
@@ -120,15 +124,17 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                       key = Sys.getenv("HUD_KEY"),
                       to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
 
@@ -192,15 +198,16 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
     stop(paste("\nCrosswalk from",
                toupper(geoid), "to",
                toupper(cw_geoid),
-               "is not supported. Type ?crosswalk to see information on
-               what is available.",
+               "is not supported. Type ?crosswalk to see information on ",
+               "what is available.",
                sep = " "))
   }
 
   # If no columns are provides, assume just want to merge...
   # If no method is provided, assume merge and crosswalk
   if (is.na(cw_geoid_col) || is.na(method)) {
-    message("\n* No method or cw_geoid_col specified: will just merge the datasets.")
+    message("\n* No method or cw_geoid_col specified: ",
+            "will just merge the datasets.")
 
     if (to_tibble == FALSE) {
       return(merge(cw_data, data, by.x = 6, by.y = geoid_col))
@@ -218,28 +225,33 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
     # apply method to columns specified.
     if (method == "residential" || method == "res" || method == "res_ratio") {
-      message("\n* Applying allocation method based on residential address percentage.")
+      message("\n* Applying allocation method based on",
+              "residential address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
           as.numeric(merged[i, "res_ratio"])
       }
-    } else if (method == "business" || method == "bus" || method == "bus_ratio") {
-      message("\n* Applying allocation method based on business address percentage.")
+    } else if (method == "business" || method == "bus" ||
+               method == "bus_ratio") {
+      message("\n* Applying allocation method based on ",
+              "business address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
           as.numeric(merged[i, "bus_ratio"])
       }
     } else if (method == "other" || method == "oth" || method == "oth_ratio") {
-      message("\n* Applying allocation method based on other address percentage.")
+      message("\n* Applying allocation method based on ",
+              "other address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
           as.numeric(merged[i, "oth_ratio"])
       }
     } else if (method == "total" || method == "tot" || method == "tot_ratio") {
-      message("\n* Applying allocation method based on total address percentage.")
+      message("\n* Applying allocation method based on ",
+              "total address percentage.")
       for (i in seq_len(nrow(merged))) {
 
         merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_omni_functions.R
 \name{hud_il}
 \alias{hud_il}
-\title{hud_il}
+\title{Omni-Query for HUD US Income Limits API}
 \usage{
 hud_il(
   query,
@@ -13,7 +13,8 @@ hud_il(
 }
 \arguments{
 \item{query}{Querying a
-state provides the IL measurement for that state level resolution.
+state provides the Income Limits measurement for that state level
+resolution.
 Querying a county or cbsa will provide data at a county and
 cbsa resolution, respectively.}
 
@@ -21,14 +22,16 @@ cbsa resolution, respectively.}
 Can specify multiple years. Default is the
 previous year.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-This function returns a dataframe containing income limits data
+This function returns a dataframe or tibble containing
+Income Limits data
 for a particular county, metroarea, or state. Data is returned at the level
 of the queried geoid.
 
@@ -39,13 +42,10 @@ https://www.huduser.gov/portal/dataset/fmr-api.html
 }
 \description{
 This function queries the Income Limits API provided by
-US Department of Housing and Urban Development.
+US Department of Housing and Urban Development (HUD USER).
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_il("VA", year=c(2021))
 

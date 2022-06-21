@@ -70,7 +70,7 @@ intuitive. You can also tell RStudio to remember the key by setting `in_wkdir` a
 hud_set_key("2yeuduhq72ueajk", in_home = TRUE)
 ```
 
-To check whether hudr can gain access to this environment variable...
+To check whether rhud can gain access to this environment variable...
 
 ```{r, eval=FALSE}
 hud_get_key()
@@ -193,7 +193,7 @@ at a zip code resolution.
 ## Additional Help
 
 If you ever get confused or need help you can easily revisit this website 
-through where you can check the all the function definitions in the
+where you can check the all the function definitions in the
 ***Reference*** tab.
 
 ```{r, eval=FALSE}

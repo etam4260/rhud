@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_chas.R
 \name{hud_chas_state}
 \alias{hud_chas_state}
-\title{hud_chas_state}
+\title{Comprehensive Housing and Affordability Strategy for US States.}
 \usage{
 hud_chas_state(
   state,
@@ -12,7 +12,7 @@ hud_chas_state(
 )
 }
 \arguments{
-\item{state}{The state to query for. Can supply as abbreviation, whole name,
+\item{state}{The state(s) to query for. Can supply as abbreviation, whole name,
 or as geoid.}
 
 \item{year}{The years to query for.
@@ -28,26 +28,26 @@ or as geoid.}
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtain from HUD USER website.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-Returns a data frame with CHAS data for states for all combinations
+Returns a data frame with
+Comprehensive Housing and Affordability Strategy (CHAS) data for states for
+all combinations
 of "state" and "year" inputs.
 }
 \description{
-Returns CHAS data for a state.
+Returns Comprehensive Housing and Affordability Strategy
+(CHAS) data for state(s).
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_chas_state("CA")
-hud_chas_state("New York")
 hud_chas_state("51")
 }
 }
