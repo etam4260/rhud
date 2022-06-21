@@ -1,8 +1,8 @@
 ---
-title: "Fair-Markets-Rent"
+title: "Fair Market Rents"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Fair-Markets-Rent}
+  %\VignetteIndexEntry{Fair-Market-Rents}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,6 +25,10 @@ rental units in both the HOME Investment Partnerships program and the Emergency
 Solution Grants program, and rent ceilings for rental units in both the HOME
 Investment Partnerships program and the Emergency Solution Grant.
 
+```{r, echo=FALSE, fig.cap="Small wooden house with coin stack on white background by wuestenigel is licensed under CC BY 2.0.", out.width = '50%'}
+knitr::include_graphics("./fmr_pic.jpg")
+```
+
 Furthermore, the United States Department of Housing and Urban Development (HUD)
 calculates FMRs for metropolitan areas defined by the Office of Management and
 Budget (OMB), some HUD-designated subdivisions of OMB metropolitan areas, and
@@ -35,6 +39,9 @@ of the 40th percentile gross rents for standard quality units within a
 metropolitan region or non-metropolitan county, as described in 24 CFR 888.113.
 
 <br>
+
+
+
 
 ## Examples
 
@@ -133,7 +140,7 @@ hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
 To get the most recent Fair Markets Rent files by year:
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-rhud::hud_rec_fmr_yr()
+# rhud::hud_rec_fmr_yr()
 
 ```
 <br>

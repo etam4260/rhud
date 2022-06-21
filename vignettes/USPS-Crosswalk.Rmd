@@ -1,5 +1,5 @@
 ---
-title: "USPS-Crosswalk"
+title: "USPS Crosswalk"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{USPS-Crosswalk}
@@ -60,6 +60,11 @@ These journal articles describe the problem and proposed solution in more detail
 This chart provided by the US Census Bureau gives a good example of the
 relationships among different geographies. The crosswalk files only support a
 subset of these.
+
+```{r, echo=FALSE, fig.cap="Hierarchy of Census Geographic Entities", out.width = '100%'}
+knitr::include_graphics("./Hierarchy of Census Geographic Entities.001.jpeg")
+```
+
 
 <br>
 
@@ -264,7 +269,7 @@ rather if any addresses lie in both.
 The function below queries for if zipcode 71052 overlaps cbsa 43340. 
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-71052 %z_in_cbsa% 43340
+# 71052 %z_in_cbsa% 43340
 
 ```
 <br>
@@ -277,7 +282,7 @@ The non infix version is also available: this allows you to specify the year,
 quarter, and key arguments.
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
+# z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
 
 ```
 <br>
@@ -287,7 +292,7 @@ z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
 To get the most recent crosswalk files by year and quarter:
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-hud_rec_cw_yr()
+# hud_rec_cw_yr()
 
 ```
 
