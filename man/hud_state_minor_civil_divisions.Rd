@@ -2,15 +2,16 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_state_minor_civil_divisions}
 \alias{hud_state_minor_civil_divisions}
-\title{hud_state_minor_civil_divisions}
+\title{US Minor Civil Divisions}
 \usage{
 hud_state_minor_civil_divisions(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
-\item{state}{The state to get all MCD.}
+\item{state}{The state to get all mcd(s).}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -23,10 +24,6 @@ Get a list of all minor civil divisions in a state
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_state_minor_civil_divisions("CA")
 hud_state_minor_civil_divisions("Virginia")
 hud_state_minor_civil_divisions("51")
@@ -41,4 +38,4 @@ hud_state_minor_civil_divisions("51")
 \item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
 }
 }
-\keyword{CBSA}
+\keyword{mcd}

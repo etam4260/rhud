@@ -1,18 +1,21 @@
 #' @name hud_cw_zip_tract
-#' @title hud_cw_zip_tract
-#' @description This function queries the Crosswalks API provided by US
-#'   Department of Housing and Urban Development. This returns the crosswalk for
+#' @title Crosswalk Zip to Tract
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
 #'   zip to tract.
-#' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+#' @param zip 5 digit (United States Postal Service) USPS zipcode
+#'   of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -54,16 +57,17 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                              key = Sys.getenv("HUD_KEY"),
                              to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
-
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "zip"
@@ -101,21 +105,23 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_county
-#' @title hud_cw_zip_county
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for zip to county.
-#' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+#' @title Crosswalk Zip to County
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   zip to county.
+#' @param zip 5 digit (United States Postal Service) USPS zipcode
+#'   of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
-#' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
-#'   previous year.
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -156,16 +162,18 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                               key = Sys.getenv("HUD_KEY"),
                               to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "zip"
@@ -207,20 +215,23 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_cbsa
-#' @title hud_cw_zip_cbsa
-#' @description This function queries the Crosswalks API provided by US
-#'   Department of Housing and Urban Development. This returns the crosswalk for
+#' @title  Crosswalk Zip to CBSA
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
 #'   zip to cbsa.
-#' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+#' @param zip 5 digit (United States Postal Service) USPS zipcode
+#'   of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -261,15 +272,17 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                             key = Sys.getenv("HUD_KEY"),
                             to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "zip"
@@ -308,20 +321,23 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_cbsadiv
-#' @title hud_cw_zip_cbsadiv
-#' @description This function queries the Crosswalks API provided by US
-#'   Department of Housing and Urban Development. This returns the crosswalk for
-#'   zip to cbsadiv. (Available 4th Quarter 2017 onwards)
-#' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+#' @title  Crosswalk Zip to CBSAdiv
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   zip to cbsadiv.
+#' @param zip 5 digit (United States Postal Service) USPS zipcode
+#'   of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -361,16 +377,17 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
                                key = Sys.getenv("HUD_KEY"),
                                to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
-
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
 
@@ -410,20 +427,23 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_cd
-#' @title hud_cw_zip_cd
-#' @description This function queries the Crosswalks API provided by US
-#'   Department of Housing and Urban Development. This returns the crosswalk for
-#'   zip to congressional district.
-#' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+#' @title  Crosswalk Zip to CD
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   zip to cd.
+#' @param zip 5 digit (United States Postal Service) USPS zipcode
+#'   of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -463,15 +483,17 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
                           key = Sys.getenv("HUD_KEY"),
                           to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
 
@@ -512,20 +534,21 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_tract_zip
-#' @title hud_cw_tract_zip
-#' @description This function queries the Crosswalks API provided by US
-#'   Department of Housing and Urban Development. This returns the crosswalk for
+#' @title Crosswalk Tract to Zip
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
 #'   tract to zip.
-#' @param tract 11 digit unique 2000 or 2010 Census tract GEOID consisting of
-#'   state FIPS + county FIPS + tract code. Eg: 51059461700  for type 6
+#' @param tract 11 digit tract code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -565,15 +588,17 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
                              quarter = 1, minimal = FALSE,
                              key = Sys.getenv("HUD_KEY"),
                              to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <-  FALSE
   }
 
   primary_geoid <- "tract"
@@ -613,21 +638,21 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_county_zip
-#' @title hud_cw_county_zip
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for county to zip.
-#' @param county
-#'   5 digit unique 2000 or 2010 Census county GEOID consisting of
-#' state FIPS + county FIPS. Eg: 51600 for type 7
+#' @title Crosswalk County to Zip
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   county to zip.
+#' @param county 5 digit county code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -667,15 +692,17 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                               quarter = 1, minimal = FALSE,
                               key = Sys.getenv("HUD_KEY"),
                               to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "county"
@@ -693,6 +720,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
   all_queries <- expand.grid(query = county, year = year,
                              quarter = quarter, stringsAsFactors = FALSE)
+
   urls <- paste("https://www.huduser.gov/hudapi/public/usps?type=", 7,
                "&query=", all_queries$query,
                "&year=", all_queries$year,
@@ -715,20 +743,21 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_cbsa_zip
-#' @title hud_cw_cbsa_zip
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development. This
-#' returns the crosswalk for cbsa to zip.
-#' @param cbsa 5 digit CBSA code for Micropolitan and Metropolitan Areas Eg:
-#'   10380 for type 8
+#' @title Crosswalk CBSA to Zip
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   cbsa to zip.
+#' @param cbsa 5 digit core based statistical area code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -768,15 +797,17 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
                             quarter = 1, minimal = FALSE,
                             key = Sys.getenv("HUD_KEY"),
                             to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
 
@@ -817,21 +848,21 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_cbsadiv_zip
-#' @title hud_cw_cbsadiv_zip
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for cbsadiv to zip.
-#'   (Available 4th Quarter 2017 onwards)
-#' @param cbsadiv
-#'   5-digit CBSA Division code which only applies to Metropolitan Areas.
+#' @title Crosswalk CBSAdiv to Zip
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   cbsadiv to zip.
+#' @param cbsadiv 5 digit core based statisical area division code.
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -871,15 +902,17 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
                                key = Sys.getenv("HUD_KEY"),
                                to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "cbsadiv"
@@ -918,22 +951,21 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_cd_zip
-#' @title hud_cw_cd_zip
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for cbsadiv to zip.
-#' @param cd
-#'  4-digit GEOID for the Congressional District which consists of
-#'  state FIPS + Congressional District code. Eg: 7200 for type 10
-#' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
-#' previous year.
+#' @title Crosswalk CD to Zip
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   cd to zip.
+#' @param cd 4 digit congressional district code.
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -973,15 +1005,17 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
                           key = Sys.getenv("HUD_KEY"),
                           to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "cd"
@@ -1020,20 +1054,23 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_zip_countysub
-#' @title hud_cw_zip_countysub
-#' @description This function queries the Crosswalks API provided by US
-#'   Department of Housing and Urban Development. This returns the crosswalk for
-#'   zip to countysub. (Available 2nd Quarter 2018 onwards)
-#' @param zip 5 digit USPS ZIP code of the data to retrieve. E.g. 22031 for type
+#' @title Crosswalk Zip to Countysub
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   zip to countysub.
+#' @param zip 5 digit (United States Postal Service) USPS zipcode
+#'   of the data to retrieve. E.g. 22031 for type
 #'   1 to 5 and 11 .
 #' @param year Gets the year that this data was recorded. Can specify multiple
 #'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -1073,15 +1110,17 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                  key = Sys.getenv("HUD_KEY"),
                                  to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                    call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "zip"
@@ -1119,22 +1158,21 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_cw_countysub_zip
-#' @title hud_cw_countysub_zip
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development. This
-#'   returns the crosswalk for countysub to zip.
-#'   (Available 2nd Quarter 2018 onwards)
-#' @param countysub
-#'   10-digit GEOID for the County sub Eg: 4606720300 for type 12
-#' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
-#' previous year.
+#' @title Crosswalk Countysub to Zip
+#' @description This function queries the USPS Crosswalks API provided by US
+#'   Department of Housing and Urban Development (HUD USER).
+#'   This returns the crosswalk for
+#'   countysub to zip.
+#' @param countysub 10 digit county sub division code.
+#' @param year Gets the year that this data was recorded. Can specify multiple
+#'   years. Default is the previous year.
 #' @param quarter Gets the quarter of the year that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
+#' @param minimal Return just the crosswalked geoids if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -1182,15 +1220,17 @@ hud_cw_countysub_zip <- function(countysub,
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY"),
                                  to_tibble) {
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   primary_geoid <- "countysub"
@@ -1203,8 +1243,10 @@ hud_cw_countysub_zip <- function(countysub,
   quarter <- args[[3]]
   key <- args[[4]]
 
-  if (any(nchar(countysub) != 10)) stop("\nCountysub inputs are not all of length 10",
-                                        call. = FALSE)
+  if (any(nchar(countysub) != 10)) {
+    stop("\nCountysub inputs are not all of length 10",
+         call. = FALSE)
+  }
 
   all_queries <- expand.grid(query = countysub, year = year,
                              quarter = quarter, stringsAsFactors = FALSE)

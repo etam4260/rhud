@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_fmr.R
 \name{hud_fmr_state_counties}
 \alias{hud_fmr_state_counties}
-\title{hud_fmr_state_counties}
+\title{Fair Markets Rent State Queries for Counties}
 \usage{
 hud_fmr_state_counties(
   state,
@@ -12,15 +12,16 @@ hud_fmr_state_counties(
 )
 }
 \arguments{
-\item{state}{The state to query for. Can be abbreviation, fip code, or
+\item{state}{The state(s) to query for. Can be abbreviation, fip code, or
 full name.}
 
 \item{year}{Gets the year that this data was recorded.
 Can specify multiple years. Default is the
 previous year.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up
-for an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -31,15 +32,11 @@ all combinations of "state" and "year" inputs.
 }
 \description{
 This function queries for a state and returns the
-FMR calculation
-at a county resolution for all counties in this state.
+(Fair Markets Rent) FMR calculation
+at a county resolution for all counties in state input.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_fmr_state_counties("VA", year = c(2021))
 
 hud_fmr_state_counties("Alabama", year = c(2021))

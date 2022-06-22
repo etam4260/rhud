@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_geo_is_in_geo.R
 \name{z_in_cbsadiv}
 \alias{z_in_cbsadiv}
-\title{z_in_cbsadiv}
+\title{Zip Addresses in CBSAdiv Addresses?}
 \usage{
 z_in_cbsadiv(zip, cbsadiv, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
@@ -25,13 +25,15 @@ If zip(s) exist in the cbsadiv(s) specified, then TRUE is returned.
 }
 \description{
 Given zip code(s) and cbsadiv(s), determine if they overlap
-using the crosswalk files. Overlap will be described if
+using the (United States Postal Service)
+USPS Crosswalk files. Overlap will be described if
 any residential, business, other, or total addresses reside in both.
 }
 \examples{
 \dontrun{
 
-z_in_cbsadiv(zip = 71052, cbsadiv = 43340, year = 2019, quarter = 2)
+
+z_in_cbsadiv(zip = 71052, cbsadiv = 43340, year = 2017, quarter = 4)
 
 }
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/hud_chas.R
 \name{hud_chas_state_mcd}
 \alias{hud_chas_state_mcd}
-\title{hud_chas_state_mcd}
+\title{Comprehensive Housing and Affordability Strategy for
+US Minor Civil Divisions}
 \usage{
 hud_chas_state_mcd(
   state,
@@ -27,23 +28,25 @@ hud_chas_state_mcd(
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtain from HUD USER website.'}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-Returns a dataframe with CHAS data for mcds inside states for all
+Returns a dataframe with
+Comprehensive Housing and Affordability Strategy (CHAS) data for mcds
+inside states for all
 combinations of "state" and "year" inputs.
 }
 \description{
-Returns CHAS data for all mcds in a state.
+Returns Comprehensive Housing and Affordability Strategy (CHAS)
+data for all mcd in a state.
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 
 hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
 

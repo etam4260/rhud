@@ -1,5 +1,5 @@
 #' @name hud_get_key
-#' @title hud_get_key
+#' @title Get HUD_KEY System Variable
 #' @description  Return most recent key set in the HUD_KEY environment variable.
 #'   If no key is set, return "".
 #' @returns Returns a string.
@@ -9,10 +9,6 @@
 #' * [rhud::hud_set_key()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_get_key()
 #' }
 hud_get_key <- function() {
@@ -20,7 +16,7 @@ hud_get_key <- function() {
 }
 
 #' @name hud_set_key
-#' @title hud_set_key
+#' @title Set HUD_KEY System Variable
 #' @description A wrapper around Sys.getenv() to set HUD_KEY environment
 #'   variable. Allows the user to also set the key to their .RProfile
 #'   in working or HOME.
@@ -34,16 +30,6 @@ hud_get_key <- function() {
 #' @seealso
 #' * [rhud::hud_get_key()]
 #' * [rhud::hud_set_key()]
-#' @examples
-#' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#' hud_get_key()
-#'
-#' hud_set_key("dwqkqodkqodqkqoqdq")
-#' hud_get_key()
-#' }
 hud_set_key <- function(key,
                         in_wkdir = FALSE,
                         in_home = FALSE) {
@@ -55,7 +41,7 @@ hud_set_key <- function(key,
                sep = ""))
   }
 
-  if(!is.logical(in_wkdir) ||
+  if (!is.logical(in_wkdir) ||
      !is.logical(in_home) ||
      length(in_wkdir) != 1  ||
      length(in_home) != 1) {
@@ -75,18 +61,18 @@ hud_set_key <- function(key,
 
       if (any(all_occur)) {
         message(paste("* It looks like your .RProfile contains multiple ",
-                      "definitions of the HUD_KEY. Do file.edit(\".Rprofile\") ",
-                      "to take a look at it.",
+                      "definitions of the HUD_KEY. ",
+                      "Do file.edit(\".Rprofile\") to take a look at it.",
                       sep = ""))
       }
 
       message("* Writing the HUD_KEY in working directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  ".Rprofile")
       message("* Writing the HUD_KEY in working directory .Rprofile!")
     }
@@ -102,24 +88,24 @@ hud_set_key <- function(key,
                        all.files = TRUE) == ".Rprofile")) {
       # Check the file if it contains a call to set hud key, regex for it.
 
-      rprof = readLines("~/.Rprofile")
+      rprof <- readLines("~/.Rprofile")
       all_occur <- grep("^Sys\\.setenv\\(\"HUD_KEY\" = \".*\"\\)", rprof)
 
       if (any(all_occur)) {
         message(paste("* It looks like your HOME .RProfile contains multiple ",
-                      "definitions of the HUD_KEY. Do file.edit(\"~/.Rprofile\") ",
-                      "to take a look at it.",
+                      "definitions of the HUD_KEY. ",
+                      "Do file.edit(\"~/.Rprofile\") to take a look at it.",
                       sep = ""))
       }
 
       message("* Writing the HUD_KEY in HOME directory .Rprofile!")
 
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+                       "\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  "~/.Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key,"\")\n", sep = ""),
+      writeLines(paste("\nSys.setenv(\"HUD_KEY\" = \"", key, "\")\n", sep = ""),
                  "~/.Rprofile")
       message("* Writing the HUD_KEY in HOME directory .Rprofile!")
     }

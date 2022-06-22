@@ -1,7 +1,8 @@
 #' @name z_in_trt
-#' @title z_in_trt
+#' @title Zip Addresses in Tract Addresses?
 #' @description Given zip code(s) and tract(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with tract(s).
 #' @param tract The tract(s) to determine overlap with zip(s).
@@ -38,18 +39,13 @@ z_in_trt <- function(zip, tract, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
-
-  # TODO: We might want to allow using names also..
-  # There is a bit of overhead cost for doing individual queries because each
-  # zip will need individual calls to hud_cw_zip_tract... Could optimize by
-  # using internal functions...
 
   # Need to validate tract..
   cleaned <- cw_input_check_cleansing(primary_geoid = "tract",
@@ -64,7 +60,9 @@ z_in_trt <- function(zip, tract, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(tract) != 11)) stop("\nInputted tract(s) are not all of length 11.")
+  if (any(nchar(tract) != 11)) {
+    stop("\nInputted tract(s) are not all of length 11.", call. = FALSE)
+  }
 
   res <- c()
 
@@ -93,9 +91,10 @@ z_in_trt <- function(zip, tract, year, quarter,
 
 
 #' @name z_in_cty
-#' @title z_in_cty
+#' @title Zip Addresses in County Addresses?
 #' @description Given zip code(s) and county(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with county(s).
 #' @param county The county(s) to determine overlap with zip(s).
@@ -132,11 +131,11 @@ z_in_cty <- function(zip, county, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -152,7 +151,9 @@ z_in_cty <- function(zip, county, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(county) != 5)) stop("\nInputted county(s) are not all of length 5.")
+  if (any(nchar(county) != 5)) {
+    stop("\nInputted county(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -181,9 +182,10 @@ z_in_cty <- function(zip, county, year, quarter,
 
 
 #' @name z_in_cbsa
-#' @title z_in_cbsa
+#' @title Zip Addresses in CBSA Addresses?
 #' @description Given zip code(s) and cbsa(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with cbsa(s).
 #' @param cbsa The cbsa(s) to determine overlap with zip(s).
@@ -220,11 +222,11 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -240,7 +242,9 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cbsa) != 5)) stop("\nInputted cbsa(s) are not all of length 5.")
+  if (any(nchar(cbsa) != 5)) {
+    stop("\nInputted cbsa(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -269,9 +273,10 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 
 
 #' @name z_in_cbsadiv
-#' @title z_in_cbsadiv
+#' @title Zip Addresses in CBSAdiv Addresses?
 #' @description Given zip code(s) and cbsadiv(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with cbsadiv(s).
 #' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
@@ -299,7 +304,8 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 #' @examples
 #' \dontrun{
 #'
-#' z_in_cbsadiv(zip = 71052, cbsadiv = 43340, year = 2019, quarter = 2)
+#'
+#' z_in_cbsadiv(zip = 71052, cbsadiv = 43340, year = 2017, quarter = 4)
 #'
 #' }
 z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
@@ -308,11 +314,11 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -328,7 +334,9 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cbsadiv) != 5)) stop("\nInputted cbsadiv(s) are not all of length 5.")
+  if (any(nchar(cbsadiv) != 5)) {
+    stop("\nInputted cbsadiv(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -357,9 +365,10 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 
 
 #' @name z_in_ctysb
-#' @title z_in_ctysb
+#' @title Zip Addresses in Countysub Addresses?
 #' @description Given zip code(s) and a countysub(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with countysub(s).
 #' @param countysub The countysub(s) to determine overlap with zip(s).
@@ -382,12 +391,13 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
-#' @returns If zip(s) exist in the countysub(s) specified, then TRUE is returned.
+#' @returns If zip(s) exist in the countysub(s) specified, then
+#'  TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
 #'
-#' z_in_ctysb(zip = 35213, countysub = 0107390324, year = 2019, quarter = 2)
+#' z_in_ctysb(zip = 35213, countysub = "0107390324", year = 2019, quarter = 2)
 #'
 #' }
 z_in_ctysb <- function(zip, countysub, year, quarter,
@@ -396,11 +406,11 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -416,8 +426,10 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(countysub) != 10)) stop("\nInputted countysub(s) are not all of length 10.")
-
+  if (any(nchar(countysub) != 10)) {
+    stop("\nInputted countysub(s) are not all of length 10.",
+         call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -444,9 +456,10 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
 
 
 #' @name z_in_cd
-#' @title z_in_cd
+#' @title Zip Addresses in Congressional District Addresses?
 #' @description Given zip code(s) and congressional district(s), determine
-#'   if they overlap using the crosswalk files. Overlap will be described if
+#'   if they overlap using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param zip The zip(s) to determine overlap with cd(s).
 #' @param cd The cd(s) to determine overlap with zip(s).
@@ -482,11 +495,11 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -502,8 +515,9 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(cd) != 4)) stop("\nInputted cd(s) are not all of length 4.")
-
+  if (any(nchar(cd) != 4)) {
+    stop("\nInputted cd(s) are not all of length 4.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(zip))) {
@@ -534,9 +548,10 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 
 
 #' @name trt_in_z
-#' @title trt_in_z
+#' @title Tract Addresses in Zip Addresses?
 #' @description Given tract(s) and a zip code(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param tract The tract(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with tract(s).
@@ -573,11 +588,11 @@ trt_in_z <- function(tract, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
 
@@ -593,7 +608,9 @@ trt_in_z <- function(tract, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
 
   res <- c()
@@ -623,9 +640,10 @@ trt_in_z <- function(tract, zip, year, quarter,
 
 
 #' @name cty_in_z
-#' @title cty_in_z
+#' @title County Addresses in Zip Addresses?
 #' @description Given county(s) and a zip(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param county The county(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with county(s).
@@ -662,13 +680,14 @@ cty_in_z <- function(county, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "county",
@@ -682,7 +701,9 @@ cty_in_z <- function(county, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
 
   res <- c()
@@ -712,9 +733,10 @@ cty_in_z <- function(county, zip, year, quarter,
 
 
 #' @name cbsa_in_z
-#' @title cbsa_in_z
+#' @title CBSA Addresses in Zip Addresses?
 #' @description Given a cbsa(s) and a zip(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param cbsa The cbsa(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with cbsa(s).
@@ -751,13 +773,14 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsa",
@@ -772,7 +795,9 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
   key <- cleaned[4]
 
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cbsa))) {
@@ -800,9 +825,10 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 
 
 #' @name cbsadiv_in_z
-#' @title cbsadiv_in_z
+#' @title CBSAdiv Addresses in Zip Addresses?
 #' @description Given cbsadiv(s) and zip(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with cbsadiv(s).
@@ -830,7 +856,7 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 #' @examples
 #' \dontrun{
 #'
-#' cbsadiv_in_zip(cbsadiv = 43340, zip = 71052, year = year, quarter = quarter)
+#' cbsadiv_in_z(cbsadiv = 43340, zip = 71052, year = 2017, quarter = 4)
 #'
 #' }
 cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
@@ -839,13 +865,14 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsadiv",
@@ -859,7 +886,9 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cbsadiv))) {
@@ -887,9 +916,10 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
 
 
 #' @name cd_in_z
-#' @title cd_in_z
+#' @title Congressional District Addresses in Zip Addresses?
 #' @description Given congressional district(s) and zip(s), determine if they
-#'   overlap using the crosswalk files. Overlap will be described if
+#'   overlap using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param cd The cd(s) to determine overlap with zip(s).
 #' @param zip The zip(s) to determine overlap with cd(s).
@@ -926,13 +956,14 @@ cd_in_z <- function(cd, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cd",
@@ -946,7 +977,9 @@ cd_in_z <- function(cd, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(cd))) {
@@ -974,9 +1007,10 @@ cd_in_z <- function(cd, zip, year, quarter,
 
 
 #' @name ctysb_in_z
-#' @title ctysb_in_z
+#' @title Countysub Addresses in Zip Addresses?
 #' @description Given countysub(s) and zip code(s), determine if they overlap
-#'   using the crosswalk files. Overlap will be described if
+#'   using the (United States Postal Service)
+#'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
 #' @param countysub The countysub(s). to determine overlap with zip(s).
 #' @param zip The zip(s). to determine overlap with countysub(s).
@@ -999,7 +1033,8 @@ cd_in_z <- function(cd, zip, year, quarter,
 #' * [rhud::cbsadiv_in_z()]
 #' * [rhud::cd_in_z()]
 #' * [rhud::ctysb_in_z()]
-#' @returns If countysub(s) exist in the zip(s) specified, then TRUE is returned.
+#' @returns If countysub(s) exist in the zip(s) specified,
+#'   then TRUE is returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -1013,13 +1048,14 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
   if (missing(year) || missing(quarter)) {
     args <- hud_rec_cw_yr()
     if (missing(year)) {
-      year = args[1]
+      year <- args[1]
     }
 
     if (missing(quarter)) {
-      quarter = args[2]
+      quarter <- args[2]
     }
   }
+
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "ctysb",
@@ -1033,7 +1069,9 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
   quarter <- cleaned[3]
   key <- cleaned[4]
 
-  if (any(nchar(zip) != 5)) stop("\nInputted zip(s) are not all of length 5.")
+  if (any(nchar(zip) != 5)) {
+    stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
+  }
 
   res <- c()
   for (i in seq_len(length(countysub))) {

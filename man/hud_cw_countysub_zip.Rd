@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_crosswalk.R
 \name{hud_cw_countysub_zip}
 \alias{hud_cw_countysub_zip}
-\title{hud_cw_countysub_zip}
+\title{Crosswalk Countysub to Zip}
 \usage{
 hud_cw_countysub_zip(
   countysub,
@@ -14,20 +14,20 @@ hud_cw_countysub_zip(
 )
 }
 \arguments{
-\item{countysub}{10-digit GEOID for the County sub Eg: 4606720300 for type 12}
+\item{countysub}{10 digit county sub division code.}
 
-\item{year}{Gets the year that this data was recorded.
-Can specify multiple years. Default is the
-previous year.}
+\item{year}{Gets the year that this data was recorded. Can specify multiple
+years. Default is the previous year.}
 
 \item{quarter}{Gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
+\item{minimal}{Return just the crosswalked geoids if true. Otherwise, return
 all fields. This does not remove duplicates.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for an
-account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -42,10 +42,10 @@ oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html
 }
 \description{
-This function queries the Crosswalks API provided by
-US Department of Housing and Urban Development. This
-returns the crosswalk for countysub to zip.
-(Available 2nd Quarter 2018 onwards)
+This function queries the USPS Crosswalks API provided by US
+Department of Housing and Urban Development (HUD USER).
+This returns the crosswalk for
+countysub to zip.
 }
 \examples{
 \dontrun{

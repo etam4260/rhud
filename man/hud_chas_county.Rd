@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_chas.R
 \name{hud_chas_county}
 \alias{hud_chas_county}
-\title{hud_chas_county}
+\title{Comprehensive Housing and Affordability Strategy for the US Counties}
 \usage{
 hud_chas_county(
   county,
@@ -12,7 +12,7 @@ hud_chas_county(
 )
 }
 \arguments{
-\item{county}{The county to query for. Must supply a geoid. 2 digit state fip
+\item{county}{The county(s) to query for. Must supply a geoid. 2 digit state fip
 \itemize{
 \item 3 digit county fip. hud_state_counties() will show an extra 99999 at the
 end. Just remove that.
@@ -31,26 +31,26 @@ end. Just remove that.
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtain from HUD USER website.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-Returns a data frame with CHAS data for counties for all
-combinations of "county" and "year" inputs.
+Returns a data frame with
+Comprehensive Housing and Affordability Strategy (CHAS) data for
+counties for all combinations of "county" and "year" inputs.
 }
 \description{
-Returns CHAS data for counties.
+Returns Comprehensive Housing and Affordability Strategy (CHAS)
 }
 \examples{
 \dontrun{
-library(rhud)
 
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
-hud_chas_county(county = c(06105, 06113))
 hud_chas_county(county = c("06105", "06113"))
+
 }
 }
 \seealso{

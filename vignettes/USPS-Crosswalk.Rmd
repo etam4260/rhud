@@ -303,7 +303,6 @@ To get the most recent crosswalk files by year and quarter:
 <table>
 	<tr>
 		  <th>Parameter</th>
-		  <th>Type</th>
 		  <th>Description</th>
  	</tr>
 	<tr>

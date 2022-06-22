@@ -14,10 +14,10 @@
 # Comprehensive and Housing Affordability Strategy
 
 #' @name hud_cw
-#' @title hud_cw
-#' @description This function queries the Crosswalks API provided by
-#'   US Department of Housing and Urban Development.
-#' @param type Must be a number between 1 and 12 depending on the Crosswalk
+#' @title Omni-Query for HUD Crosswalk Files API
+#' @description This function queries the USPS Crosswalks API provided by
+#'   US Department of Housing and Urban Development (HUD USER).
+#' @param type Must be a number between 1 and 12 depending on the USPS Crosswalk
 #'   type. You can also supply the string name.
 #'   1) zip-tract
 #'   2) zip-county
@@ -58,8 +58,9 @@
 #'   Defaults to the first quarter of the year.
 #' @param minimal Return just the crosswalked GEOIDs if true. Otherwise, return
 #'   all fields. This does not remove duplicates.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Crosswalks API
@@ -89,10 +90,6 @@
 #' * [rhud::hud_cw()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_cw(type = 1, query = "35213", year = c("2010", "2011"),
 #'    quarter = c("1"))
 #'
@@ -118,7 +115,7 @@
 #'    quarter = c("1", "2"))
 #'
 #' hud_cw(type = 9, query = "10380", year = c("2017"),
-#'    quarter = c("1", "2", "3"))
+#'    quarter = c("4"))
 #'
 #' hud_cw(type = 10, query = "2202", year = c("2010", "2011"),
 #'    quarter = c("4", "3"))
@@ -136,15 +133,17 @@ hud_cw <- function(type, query,
                    key = Sys.getenv("HUD_KEY"),
                    to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   alltypes <- c("zip-tract", "zip-county", "zip-cbsa",
@@ -152,8 +151,10 @@ hud_cw <- function(type, query,
                 "county-zip", "cbsa-zip", "cbsadiv-zip",
                 "cd-zip", "zip-countysub", "countysub-zip")
 
-  if (length(type) != 1) stop("\nOnly one crosswalk type can be specified at a time",
+  if (length(type) != 1) {
+    stop("\nOnly one crosswalk type can be specified at a time",
                               call. = FALSE)
+  }
 
   # Allow user to specify the full string too.
   type <- switch(tolower(type),
@@ -181,7 +182,8 @@ hud_cw <- function(type, query,
   }
 
   ifelse(as.integer(type) < 1 || as.integer(type) > 12,
-         stop("\nThe type input is not in the range of 1-12", call. = FALSE), "")
+         stop("\nThe type input is not in the range of 1-12",
+              call. = FALSE), "")
 
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
@@ -242,36 +244,43 @@ hud_cw <- function(type, query,
 
   if (!minimal) return(cw_do_query_calls(urls, all_queries$query,
                                          all_queries$year,
-                           all_queries$quarter, lhgeoid, rhgeoid, key, to_tibble))
+                           all_queries$quarter, lhgeoid, rhgeoid, key,
+                           to_tibble))
   return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
-                           all_queries$quarter, lhgeoid, rhgeoid, key, to_tibble)[[1]])
+                           all_queries$quarter, lhgeoid, rhgeoid, key,
+                           to_tibble)[[1]])
 }
 
 
 #' @name hud_fmr
-#' @title hud_fmr
+#' @title Omni-Query for US Fair Markets Rent API
 #' @description This function queries the Fair Markets Rent API provided by
-#'   US Department of Housing and Urban Development. Querying a
-#'   state provides a list containing two dataframes: one with fmr at a county
-#'   level resolution and the other fmr at a metroarea level resolution.
-#'   Querying a county or cbsa will provide data at a zip code resolution
-#'   if geoids are classified as a small area.
+#'   US Department of Housing and Urban Development (HUD USER). Querying a
+#'   state provides a list containing two datasets: one with FMR at a county
+#'   level resolution and the other FMR at a metroarea level resolution.
+#'   Querying a county or (core based statistical areas) cbsa will provide data
+#'   at a zip code resolution
+#'   if geographic identifiers are classified as a small area.
 #' @param query Can provide either a 5 digit FIPS code + 99999 at end,
-#'   state abbreviation, or CBSA code.
+#'   state abbreviation, or cbsa (core based statistical area) code.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up
-#'   for an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @export
-#' @returns This function returns a dataframe containing fair markets rent data
-#'   for a particular county, metroarea, or state. For county and msa level data,
+#' @returns This function returns a dataframe or tibble
+#'   containing Fair Markets Rent (FMR) data
+#'   for a particular county, metroarea, or state. For county and msa level
+#'   data,
 #'   these measurements include the county_name, counties_msa, town_name,
 #'   metro_status, metro_name, smallarea_status, basicdata, Efficiency,
-#'   One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip code
+#'   One-Bedroom, Two-Bedroom, Three-Bedroom, Four-Bedroom, and year for zip
+#'   code
 #'   level data if it considered a small area. Otherwise, data will be returned
 #'   at the level of the queried county or metroarea.
 #'
@@ -284,9 +293,6 @@ hud_cw <- function(type, query,
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
 #' hud_fmr("VA", year=c(2021))
 #'
@@ -297,15 +303,17 @@ hud_cw <- function(type, query,
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(query, year, key)
@@ -376,8 +384,9 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                                          function(x) unlist(as.character(x))))
 
       res_metroareas <- as.data.frame(do.call(rbind, list_metroarea_res))
-      res_metroareas <- as.data.frame(sapply(res_metroareas,
-                                             function(x) unlist(as.character(x))))
+      res_metroareas <- as.data.frame(sapply(
+        res_metroareas,
+        function(x) unlist(as.character(x))))
 
       if (to_tibble == FALSE) {
         return(list(counties = res_county,
@@ -387,8 +396,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     metroareas = tibble(res_metroareas)))
       }
     }
-      # return(list(counties = hud_fmr_state_counties(query, year, key, to_tibble),
-      #            metroareas = hud_fmr_state_metroareas(query, year, key, to_tibble)))
+
   } else if (querytype == "cbsa") {
       # Returns zip level data.
       return(hud_fmr_metroarea_zip(query, year, key, to_tibble))
@@ -402,23 +410,26 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_il
-#' @title hud_il
+#' @title Omni-Query for HUD US Income Limits API
 #' @description This function queries the Income Limits API provided by
-#'   US Department of Housing and Urban Development.
+#'   US Department of Housing and Urban Development (HUD USER).
 #' @param query  Querying a
-#'   state provides the IL measurement for that state level resolution.
+#'   state provides the Income Limits measurement for that state level
+#'   resolution.
 #'   Querying a county or cbsa will provide data at a county and
 #'   cbsa resolution, respectively.
 #' @param year Gets the year that this data was recorded.
 #'   Can specify multiple years. Default is the
 #'   previous year.
-#' @param key The API key for this user. You must go to HUD and sign up for
-#'   an account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Income Limits API
 #' @export
-#' @returns This function returns a dataframe containing income limits data
+#' @returns This function returns a dataframe or tibble containing
+#'   Income Limits data
 #'   for a particular county, metroarea, or state. Data is returned at the level
 #'   of the queried geoid.
 #'
@@ -429,9 +440,6 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
 #'
 #' hud_il("VA", year=c(2021))
 #'
@@ -442,15 +450,17 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
                    key = Sys.getenv("HUD_KEY"), to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   args <- fmr_il_input_check_cleansing(query, year, key)
@@ -540,10 +550,13 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
 
 #' @name hud_chas
-#' @title hud_chas
-#' @description This function queries the CHAS API provided by US Department
-#'   of Housing and Urban Development. The ordering of items in state input
-#'   must match that of the entity id input.
+#' @title Omni-Query for HUD Comprehensive Housing and Affordability Strategy
+#'   API
+#' @description This function queries the
+#'   Comprehensive Housing Affordability Strategy CHAS API provided by
+#'   US Department
+#'   of Housing and Urban Development (HUD USER). The ordering of items in
+#'   stateid input must match that of the entityid input.
 #' @param type Queries the data based off:
 #'   1 - Nation
 #'   2 - State
@@ -564,22 +577,21 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   * 2008-2012
 #'   * 2007-2011
 #'   * 2006-2010
-#' @param key The API key for this user. You must go to HUD and sign up for an
-#'   account and request for an API key.
+#' @param key The key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Comprehensive Housing Affordability Strategy (CHAS) API
 #' @export
-#' @returns This function returns a dataframe containing comprehensive housing
-#'   and affordability data for a particular state. For more details about
+#' @returns This function returns a dataframe or tibble containing
+#'   Comprehensive Housing
+#'   and Affordability Strategy data for a particular state.
+#'   For more details about
 #'   these measurements, go to
 #'   https://www.huduser.gov/portal/dataset/chas-api.html
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
-#' Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-#'
 #' hud_chas(1)
 #'
 #' hud_chas('2', state_id = '56')
@@ -595,15 +607,17 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                      key = Sys.getenv("HUD_KEY"),
                      to_tibble) {
 
-  if (!curl::has_internet()) stop("\nYou currently do not have internet access.",
-                                  call. = FALSE)
+  if (!curl::has_internet()) {
+    stop("\nYou currently do not have internet access.", call. = FALSE)
+  }
 
   if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble = getOption("rhud_use_tibble")
-    message(paste("Outputted in tibble format",
-                  "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
+    to_tibble <- getOption("rhud_use_tibble")
+    message(paste(
+      "Outputted in tibble format",
+      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
   } else if (missing(to_tibble)) {
-    to_tibble = FALSE
+    to_tibble <- FALSE
   }
 
   if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_website_docs.R
 \name{rhud_website}
 \alias{rhud_website}
-\title{rhud_website}
+\title{Access RHUD Web Resources}
 \usage{
 rhud_website(website = c("github-pages", "github"))
 }
@@ -14,12 +14,11 @@ rhud_website(website = c("github-pages", "github"))
 }}
 }
 \description{
-Quickly get documentation for the hudr package by opening up
-the websites associated with it. Currently supports Unix and Windows OS.
+Quickly get documentation for the rhud package by opening up
+the websites associated with it.
 }
 \examples{
 \dontrun{
-library(rhud)
 rhud_website("github-pages")
 rhud_website("github")
 rhud_website()

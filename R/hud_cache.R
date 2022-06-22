@@ -4,7 +4,7 @@
 #' @import R.cache
 
 #' @name hud_set_cache_dir
-#' @title hud_set_cache_dir
+#' @title Set RHUD Cache Directory
 #' @description Set the caching directory to store data retrieved using the
 #' rhud API calls. By default, rhud uses a non-persistent temporary directory
 #' given for an R session. However, it is possible that a user might want
@@ -25,8 +25,8 @@
 #' @param path The full path to the desired cache directory. Only one can be
 #'  set at a time. If no path is specified, it will use the temp directory
 #'  for R. The temp directory is not persistent.
-#' @param in_wkdir Store the path as environment variable in the working directory
-#'  .Rprofile so rhud will cache to this specified path.
+#' @param in_wkdir Store the path as environment variable in the working
+#'   directory .Rprofile so rhud will cache to this specified path.
 #' @param in_home Store the path as environment variable in the HOME directory
 #'  .Rprofile so rhud will cache to this specified path.
 #' @seealso
@@ -36,6 +36,7 @@
 #' @export
 #' @examples
 #' \dontrun{
+#'
 #' hud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
 #'
 #' }
@@ -62,7 +63,7 @@ hud_set_cache_dir <- function(path,
   }
 
 
-  if(!is.logical(in_wkdir) ||
+  if (!is.logical(in_wkdir) ||
      !is.logical(in_home) ||
      length(in_wkdir) != 1  ||
      length(in_home) != 1) {
@@ -96,12 +97,12 @@ hud_set_cache_dir <- function(path,
 
       message("* Writing the RHUD_CACHE_DIR in working directory .Rprofile!\n")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
+                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path, "\")\n",
                        sep = ""),
                  ".Rprofile")
     } else {
       file.create(".Rprofile")
-      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
+      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path, "\")\n",
                        sep = ""),
                  ".Rprofile")
 
@@ -119,7 +120,7 @@ hud_set_cache_dir <- function(path,
                        all.files = TRUE) == ".Rprofile")) {
       # Check the file if it contains a call to cache path, regex for it.
 
-      rprof = readLines("~/.Rprofile")
+      rprof <- readLines("~/.Rprofile")
 
       all_occur <- grep("^Sys\\.setenv\\(\"RHUD_CACHE_DIR\" = \".*\"\\)",
                         rprof)
@@ -137,12 +138,12 @@ hud_set_cache_dir <- function(path,
 
       message("* Writing the RHUD_CACHE_DIR in HOME directory .Rprofile!")
       writeLines(paste(paste(rprof, collapse = "\n"),
-                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
+                       "\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path, "\")\n",
                        sep = ""),
                  "~/.Rprofile")
     } else {
       file.create("~/.Rprofile")
-      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path,"\")\n",
+      writeLines(paste("\nSys.setenv(\"RHUD_CACHE_DIR\" = \"", path, "\")\n",
                        sep = ""),
                  "~/.Rprofile")
       message("* Writing the RHUD_CACHE_DIR in HOME directory .Rprofile!")
@@ -153,7 +154,7 @@ hud_set_cache_dir <- function(path,
 
 
 #' @name hud_get_cache_dir
-#' @title hud_get_cache_dir
+#' @title Get RHUD Cache Directory
 #' @description Get the path rhud is using to store cached files.
 #' @returns A character vector with path to cached files. If none is set,
 #'   will default to R temp session directory
@@ -164,8 +165,6 @@ hud_set_cache_dir <- function(path,
 #' * [rhud::hud_clear_cache()]
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
 #' hud_get_cache_dir()
 #'
 #' }
@@ -175,7 +174,7 @@ hud_get_cache_dir <- function() {
 
 
 #' @name hud_clear_cache
-#' @title hud_clear_cache
+#' @title Clear RHUD Cache Directory
 #' @description Remove cached data from the caching directory that is used to
 #' store data retrieved using the rhud API calls. By default, rhud uses a
 #' non-persistent temporary directory given for an R session, but a user might

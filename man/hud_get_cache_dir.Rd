@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_cache.R
 \name{hud_get_cache_dir}
 \alias{hud_get_cache_dir}
-\title{hud_get_cache_dir}
+\title{Get RHUD Cache Directory}
 \usage{
 hud_get_cache_dir()
 }
@@ -15,8 +15,6 @@ Get the path rhud is using to store cached files.
 }
 \examples{
 \dontrun{
-library(rhud)
-
 hud_get_cache_dir()
 
 }

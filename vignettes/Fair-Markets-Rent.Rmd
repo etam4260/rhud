@@ -181,7 +181,7 @@ hud_state_metropolitan(c("WY", "NY"))
 
 <table>
 	<tr>
-		  <th>Data Field</th>
+		  <th>Parameters</th>
 		  <th>Description</th>
  	</tr>
  	<tr>

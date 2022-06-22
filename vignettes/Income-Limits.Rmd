@@ -132,7 +132,7 @@ hud_state_metropolitan(c("MD", "VA"))
 
 <table>
 	<tr>
-		  <th>Data Field</th>
+		  <th>Parameters</th>
 		  <th>Description</th>
  	</tr>
  	<tr>
@@ -220,7 +220,7 @@ hud_state_metropolitan(c("MD", "VA"))
  	</tr>
  	<tr>
   		<td>median_income</td>
-   		<td>Efficiency FMR in US Dollars</td>   
+   		<td>Median Income for this geographic identifier</td>   
  	</tr>
  	<tr>
   		<td>very_low + </td>

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hud_omni_functions.R
 \name{hud_cw}
 \alias{hud_cw}
-\title{hud_cw}
+\title{Omni-Query for HUD Crosswalk Files API}
 \usage{
 hud_cw(
   type,
@@ -15,7 +15,7 @@ hud_cw(
 )
 }
 \arguments{
-\item{type}{Must be a number between 1 and 12 depending on the Crosswalk
+\item{type}{Must be a number between 1 and 12 depending on the USPS Crosswalk
 type. You can also supply the string name.
 \enumerate{
 \item zip-tract
@@ -62,8 +62,9 @@ Defaults to the first quarter of the year.}
 \item{minimal}{Return just the crosswalked GEOIDs if true. Otherwise, return
 all fields. This does not remove duplicates.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -78,15 +79,11 @@ oth-ratio, tot-ratio. For more details on these measurements, visit
 https://www.huduser.gov/portal/dataset/uspszip-api.html
 }
 \description{
-This function queries the Crosswalks API provided by
-US Department of Housing and Urban Development.
+This function queries the USPS Crosswalks API provided by
+US Department of Housing and Urban Development (HUD USER).
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_cw(type = 1, query = "35213", year = c("2010", "2011"),
    quarter = c("1"))
 
@@ -112,7 +109,7 @@ hud_cw(type = 8, query = "10140", year = c("2010", "2011"),
    quarter = c("1", "2"))
 
 hud_cw(type = 9, query = "10380", year = c("2017"),
-   quarter = c("1", "2", "3"))
+   quarter = c("4"))
 
 hud_cw(type = 10, query = "2202", year = c("2010", "2011"),
    quarter = c("4", "3"))

@@ -2,15 +2,16 @@
 % Please edit documentation in R/hud_misc.R
 \name{hud_state_places}
 \alias{hud_state_places}
-\title{hud_state_places}
+\title{US Places}
 \usage{
 hud_state_places(state, key = Sys.getenv("HUD_KEY"), to_tibble)
 }
 \arguments{
-\item{state}{The state to get all places.}
+\item{state}{The state(s) to get all places.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up for
-an account and request for an API key.}
+\item{key}{The key obtained from HUD
+(US Department of Housing and Urban Development)
+USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
@@ -19,14 +20,10 @@ rather than a data frame.}
 A dataframe containing details of places in state(s).
 }
 \description{
-Get a list of all places in a state.
+Get a list of all places in state(s).
 }
 \examples{
 \dontrun{
-library(rhud)
-
-Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid")
-
 hud_state_places("CA")
 hud_state_places("Virginia")
 hud_state_places("51")
@@ -41,4 +38,4 @@ hud_state_places("51")
 \item \code{\link[=hud_state_minor_civil_divisions]{hud_state_minor_civil_divisions()}}
 }
 }
-\keyword{places.}
+\keyword{places}
