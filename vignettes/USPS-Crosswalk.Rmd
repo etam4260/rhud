@@ -62,7 +62,7 @@ relationships among different geographies. The crosswalk files only support a
 subset of these.
 
 ```{r, echo=FALSE, fig.cap="Hierarchy of Census Geographic Entities", out.width = '100%'}
-knitr::include_graphics("./Hierarchy of Census Geographic Entities.001.jpeg")
+knitr::include_graphics("./Hierarchy_of_Census_Geographic_Entities.001.jpeg")
 ```
 
 

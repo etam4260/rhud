@@ -139,8 +139,8 @@ hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
 
 To get the most recent Fair Markets Rent files by year:
 
-```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-# rhud::hud_rec_fmr_yr()
+```{r, eval = FALSE}
+hud_rec_fmr_yr()
 
 ```
 <br>
@@ -151,7 +151,7 @@ To get the most recent Fair Markets Rent files by year:
 This is an example to show you how to query for all states in the US.
 
 ```{r, eval=FALSE}
-library(rhud)
+# library(rhud)
 hud_nation_states_territories()
 ```
 <br>
