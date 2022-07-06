@@ -29,6 +29,16 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
+The goal of this project is to provide an easy-to-use interface to access
+various open-source APIs provided by the U.S Department of 
+Housing and Urban Development. 
+These include the USPS Crosswalk Files, Fair Markets Rent, Income Limits, and
+Comprehensive Housing and Affordability Strategy. Although HUD does provide 
+datasets for other programs, they are currently not supported by an API. 
+
+Please read https://www.huduser.gov/portal/dataset/api-terms-of-service.html
+for all terms of service.
+
 
 Are you a python developer? Check out [hudpy](https://github.com/etam4260/hudpy)
 instead.
