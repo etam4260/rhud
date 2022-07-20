@@ -22,6 +22,17 @@ version](https://img.shields.io/badge/devel%20version-0.3.0.9000-yellow)]()
 
 <!-- badges: end -->
 
+The goal of this project is to provide an easy-to-use interface to
+access various open-source APIs provided by the U.S Department of
+Housing and Urban Development. These include the USPS Crosswalk Files,
+Fair Markets Rent, Income Limits, and Comprehensive Housing and
+Affordability Strategy. Although HUD does provide datasets for other
+programs, they are currently not supported by an API.
+
+Please read
+<https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
+all terms of service.
+
 Are you a python developer? Check out
 [hudpy](https://github.com/etam4260/hudpy) instead.
 
@@ -121,7 +132,7 @@ the data into memory.
 The APIs and datasets which this library interfaces are listed below.
 The HUD also provide miscellaneous supplemental APIs under them.
 
-1.  HUD User
+1)  HUD User
 
 -   USPS Crosswalk
     (<https://www.huduser.gov/portal/dataset/uspszip-api.html>)
@@ -246,7 +257,7 @@ The HUD also provide miscellaneous supplemental APIs under them.
 
 ## Disclaimers
 
--   License: GPL >= 2
+-   License: GPL \>= 2
 
 -   To get citation information for rhud in R, type citation(package =
     ‘rhud’)

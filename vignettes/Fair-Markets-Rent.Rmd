@@ -294,7 +294,7 @@ hud_state_metropolitan(c("WY", "NY"))
 
 ## References
 
-| "What Is Fair Market Rent? | RentData.org." Www.rentdata.org,
+| "What Is Fair Market Rent? | RentData.org." www.rentdata.org,
 |        www.rentdata.org/articles/what-is-fair-market-rent. Accessed 18 Feb. 2022.
 |
 | "Fair Market Rents | HUD USER." Huduser.gov, U.S Department of Housing and Urban
