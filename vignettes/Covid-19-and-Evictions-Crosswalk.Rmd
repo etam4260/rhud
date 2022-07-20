@@ -153,7 +153,6 @@ richmond$ZCTA5CE20 <- as.numeric(richmond$ZCTA5CE20)
 
 Crosswalk zipcode to census tract
 ```{r message=FALSE}
-# Converting from a string to a dataframe to calculate
 a = as.data.frame(richmond)
 covidcases_cw <- crosswalk(data = a, geoid = "zip", geoid_col = "ZCTA5CE20",
           cw_geoid = "tract", cw_geoid_col = "Number of Cases", method = "tot")
