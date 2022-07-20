@@ -33,6 +33,7 @@ library(sf)
 library(dplyr)
 library(scales)
 library(ggplot2)
+library(lubridate)
 options (digits=20)
 ```
 To improve performance, use tigris caching.
@@ -56,7 +57,6 @@ richmond_shapefile_tracts <- tigris::tracts(state = "51", county = "760", cb = T
 
 Cleaning date objects
 ```{r message=FALSE}
-library(lubridate)
 VA_COVID_19_PublicUseDataset_ZIPCode$date <- lubridate::mdy(VA_COVID_19_PublicUseDataset_ZIPCode$`Report Date`)
 
 VA_COVID_19_PublicUseDataset_ZIPCode$monthYear <- paste(as.character( lubridate::month(VA_COVID_19_PublicUseDataset_ZIPCode$date)), "-", as.character( lubridate::year(VA_COVID_19_PublicUseDataset_ZIPCode$date)), sep="" )
