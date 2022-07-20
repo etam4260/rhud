@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fair-Markets-Rent • rhud</title>
+<title>Fair Market Rents • rhud</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Fair-Markets-Rent">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Fair Market Rents">
 <meta property="og:description" content="rhud">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -113,7 +113,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Fair-Markets-Rent</h1>
+      <h1 data-toc-skip>Fair Market Rents</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/etam4260/rhud/blob/HEAD/vignettes/Fair-Markets-Rent.Rmd" class="external-link"><code>vignettes/Fair-Markets-Rent.Rmd</code></a></small>
@@ -126,21 +126,56 @@
 <div class="section level2">
 <h2 id="program-overview">Program Overview<a class="anchor" aria-label="anchor" href="#program-overview"></a>
 </h2>
-<p>According to (Fair Market Rents | HUD USER), Fair Market Rents (FMRs) are used to calculate payment standard amounts for the Housing Choice Voucher program, initial renewal rents for some expiring project-based Section 8 contracts, initial rents for housing assistance payment (HAP) contracts in the Moderate Rehabilitation Single Room Occupancy program (Mod Rehab), rent ceilings for rental units in both the HOME Investment Partnerships program and the Emergency Solution Grants program, and rent ceilings for rental units in both the HOME Investment Partnerships program and the Emergency Solution Grant.</p>
-<p>Furthermore, the United States Department of Housing and Urban Development (HUD) calculates FMRs for metropolitan areas defined by the Office of Management and Budget (OMB), some HUD-designated subdivisions of OMB metropolitan areas, and each non-metropolitan county on an annual basis. FMRs must be posted at least 30 days before they go into effect, and they must go into force at the beginning of the federal fiscal year (usually October 1). Fair Market Rentals are estimates of the 40th percentile gross rents for standard quality units within a metropolitan region or non-metropolitan county, as described in 24 CFR 888.113.</p>
+<p>According to (Fair Market Rents | HUD USER), Fair Market Rents (FMRs)
+are used to calculate payment standard amounts for the Housing Choice
+Voucher program, initial renewal rents for some expiring project-based
+Section 8 contracts, initial rents for housing assistance payment (HAP)
+contracts in the Moderate Rehabilitation Single Room Occupancy program
+(Mod Rehab), rent ceilings for rental units in both the HOME Investment
+Partnerships program and the Emergency Solution Grants program, and rent
+ceilings for rental units in both the HOME Investment Partnerships
+program and the Emergency Solution Grant.</p>
+<div class="figure">
+<img src="fmr_pic.jpg" alt="Small wooden house with coin stack on white background by wuestenigel is licensed under CC BY 2.0." width="50%"><p class="caption">
+Small wooden house with coin stack on white background by wuestenigel is
+licensed under CC BY 2.0.
+</p>
+</div>
+<p>Furthermore, the United States Department of Housing and Urban
+Development (HUD) calculates FMRs for metropolitan areas defined by the
+Office of Management and Budget (OMB), some HUD-designated subdivisions
+of OMB metropolitan areas, and each non-metropolitan county on an annual
+basis. FMRs must be posted at least 30 days before they go into effect,
+and they must go into force at the beginning of the federal fiscal year
+(usually October 1). Fair Market Rentals are estimates of the 40th
+percentile gross rents for standard quality units within a metropolitan
+region or non-metropolitan county, as described in 24 CFR 888.113.</p>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>These are basic examples to show you how to query the Fair Markets Rent API. Before looking at the examples I RECOMMEND first looking at <a href="#parameters">the parameters</a> as well as <a href="#returns">return data</a> located at the bottom of the page.</p>
-<p><strong>Disclaimer:</strong> The output tables are too large to be displayed here so we choose to leave them out.</p>
-<p>Querying a county or cbsa code that are considered small areas will return data at a zip code level. If they are not small areas, then it will give a singular measurement for that entire county or cbsa.</p>
-<p>Lets say we are working with county level data – when mixing them together (counties that are small areas and not small areas) those counties that are not small areas will have an NA in the zip_code, meaning this measurement is defined at a county level. Those counties that are small areas will return zip code data in the zip_code field.</p>
+<p>These are basic examples to show you how to query the Fair Markets
+Rent API. Before looking at the examples I RECOMMEND first looking at <a href="#parameters">the parameters</a> as well as <a href="#returns">return data</a> located at the bottom of the page.</p>
+<p><strong>Disclaimer:</strong> The output tables are too large to be
+displayed here so we choose to leave them out.</p>
+<p>Querying a county or cbsa code that are considered small areas will
+return data at a zip code level. If they are not small areas, then it
+will give a singular measurement for that entire county or cbsa.</p>
+<p>Lets say we are working with county level data – when mixing them
+together (counties that are small areas and not small areas) those
+counties that are not small areas will have an NA in the zip_code,
+meaning this measurement is defined at a county level. Those counties
+that are small areas will return zip code data in the zip_code
+field.</p>
 <div class="section level3">
 <h3 id="state-level-fair-markets-rent">State Level Fair Markets Rent<a class="anchor" aria-label="anchor" href="#state-level-fair-markets-rent"></a>
 </h3>
-<p>This is an example which shows you how to query the Fair Markets Rent API for a state. You can use the state abbreviation, state name, or state fips code. It will return all counties in the state and their Fair Markets Rents as well as all metroareas in the state and their Fair Markets Rent.</p>
+<p>This is an example which shows you how to query the Fair Markets Rent
+API for a state. You can use the state abbreviation, state name, or
+state fips code. It will return all counties in the state and their Fair
+Markets Rents as well as all metroareas in the state and their Fair
+Markets Rent.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># These functions gets FMR data for the state of Virginia in 2021.</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'VA'</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
@@ -149,7 +184,8 @@
 
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query<span class="op">=</span> <span class="st">"51"</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span></code></pre></div>
 <p><br></p>
-<p>If you only need the county level data, then this might work better…</p>
+<p>If you only need the county level data, then this might work
+better…</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># These functions gets FMR data for the state of Virginia in 2021 for counties.</span>
 <span class="fu"><a href="../reference/hud_fmr_state_counties.html">hud_fmr_state_counties</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">'VA'</span>, year <span class="op">=</span> <span class="st">'2021'</span><span class="op">)</span>
@@ -171,7 +207,11 @@
 <div class="section level3">
 <h3 id="county-level-fair-markets-rent">County Level Fair Markets Rent<a class="anchor" aria-label="anchor" href="#county-level-fair-markets-rent"></a>
 </h3>
-<p>This is an example which shows you how to query the Fair Markets Rent on a county level basis. These are defined with a 2 digit state code + 3 digit county code. You also need a 99999 code added onto the end. I recommend taking a look at <a href="#us-counties">US Counties</a> to determine what counties are available.</p>
+<p>This is an example which shows you how to query the Fair Markets Rent
+on a county level basis. These are defined with a 2 digit state code + 3
+digit county code. You also need a 99999 code added onto the end. I
+recommend taking a look at <a href="#us-counties">US Counties</a> to
+determine what counties are available.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999</span>
 <span class="fu"><a href="../reference/hud_fmr.html">hud_fmr</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">'0100199999'</span>, year <span class="op">=</span> <span class="st">'2017'</span><span class="op">)</span></code></pre></div>
@@ -201,9 +241,7 @@
 </h2>
 <p>To get the most recent Fair Markets Rent files by year:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">rhud</span><span class="fu">::</span><span class="fu"><a href="../reference/hud_rec_fmr_yr.html">hud_rec_fmr_yr</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;     state    county metroarea </span>
-<span class="co">#&gt;      2022      2022      2022</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_rec_fmr_yr.html">hud_rec_fmr_yr</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -212,16 +250,18 @@
 <div class="section level3">
 <h3 id="us-states">US States<a class="anchor" aria-label="anchor" href="#us-states"></a>
 </h3>
-<p>This is an example to show you how to query for all states in the US.</p>
+<p>This is an example to show you how to query for all states in the
+US.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/rhud" class="external-link">rhud</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="co"># library(rhud)</span>
 <span class="fu"><a href="../reference/hud_nation_states_territories.html">hud_nation_states_territories</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="us-counties">US Counties<a class="anchor" aria-label="anchor" href="#us-counties"></a>
 </h3>
-<p>This is an example to show you how to query for all counties in MD, Virginia, and California, respectively.</p>
+<p>This is an example to show you how to query for all counties in MD,
+Virginia, and California, respectively.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_state_counties.html">hud_state_counties</a></span><span class="op">(</span><span class="st">"MD"</span><span class="op">)</span>
 
@@ -233,7 +273,8 @@
 <div class="section level3">
 <h3 id="us-metropolitan-areas">US Metropolitan Areas<a class="anchor" aria-label="anchor" href="#us-metropolitan-areas"></a>
 </h3>
-<p>This is an example to show you how to query for metropolitan areas in Wyoming and New York.</p>
+<p>This is an example to show you how to query for metropolitan areas in
+Wyoming and New York.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_state_metropolitan.html">hud_state_metropolitan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WY"</span>, <span class="st">"NY"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><br></p>
@@ -245,7 +286,7 @@
 <table class="table">
 <tr>
 <th>
-Data Field
+Parameters
 </th>
 <th>
 Description
@@ -256,7 +297,13 @@ Description
 query               
 </td>
 <td>
-Can provide either a 10 digit FIPS code which is almost always state fips + county fips + 99999, or state abbreviation. Can also provide a CBSA code. You are only allowed to query for metropolitan areas. <br><br> Run hud_states() to get a list of counties. <br><br> Run hud_metropolitan(“MD”) to get a list of metropolitan areas in MD. <br><br> Run hud_counties(“MD”) to get list of counties in MD. <br><br> * query = ‘METRO12700M12700’ * query = ‘MD’ * query = ‘5100199999’
+Can provide either a 10 digit FIPS code which is almost always state
+fips + county fips + 99999, or state abbreviation. Can also provide a
+CBSA code. You are only allowed to query for metropolitan areas.
+<br><br> Run hud_states() to get a list of counties. <br><br> Run
+hud_metropolitan(“MD”) to get a list of metropolitan areas in MD.
+<br><br> Run hud_counties(“MD”) to get list of counties in MD. <br><br>
+* query = ‘METRO12700M12700’ * query = ‘MD’ * query = ‘5100199999’
 </td>
 </tr>
 <tr>
@@ -264,7 +311,8 @@ Can provide either a 10 digit FIPS code which is almost always state fips + coun
 year
 </td>
 <td>
-Year range of the data to retrieve: defaults to the current year. <br><br> * year = c(2019, 2018, 2021) * year = c(2016) * year = 2021
+Year range of the data to retrieve: defaults to the current year.
+<br><br> * year = c(2019, 2018, 2021) * year = c(2016) * year = 2021
 </td>
 </tr>
 <tr>
@@ -272,7 +320,8 @@ Year range of the data to retrieve: defaults to the current year. <br><br> * yea
 key
 </td>
 <td>
-The API key provided by HUD USER. <br><br> * key = “wqokqo2138jdi13wfwwfwcytjyr”
+The API key provided by HUD USER. <br><br> * key =
+“wqokqo2138jdi13wfwwfwcytjyr”
 </td>
 </tr>
 </table>
@@ -319,7 +368,8 @@ Name of the county if it is a county.
 counties_msa
 </td>
 <td>
-Names of all counties belonging to the Metro Area if it is a Metro Area (MSA).
+Names of all counties belonging to the Metro Area if it is a Metro Area
+(MSA).
 </td>
 </tr>
 <tr>
@@ -335,7 +385,8 @@ Town name - applicable for North East regions
 metro_status
 </td>
 <td>
-value will be “1” if it is a metropolitan county. Otherwise value will be “0”.
+value will be “1” if it is a metropolitan county. Otherwise value will
+be “0”.
 </td>
 </tr>
 <tr>
@@ -400,10 +451,14 @@ Four-Bedroom
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div class="line-block">“What Is Fair Market Rent? | RentData.org.” Www.rentdata.org,<br>
-       www.rentdata.org/articles/what-is-fair-market-rent. Accessed 18 Feb. 2022.<br><br>
-“Fair Market Rents | HUD USER.” Huduser.gov, U.S Department of Housing and Urban<br>
-       Development, 2017, www.huduser.gov/portal/datasets/fmr.html.</div>
+<div class="line-block">“What Is Fair Market Rent? | RentData.org.”
+www.rentdata.org,<br>
+       www.rentdata.org/articles/what-is-fair-market-rent. Accessed 18
+Feb. 2022.<br><br>
+“Fair Market Rents | HUD USER.” Huduser.gov, U.S Department of Housing
+and Urban<br>
+       Development, 2017,
+www.huduser.gov/portal/datasets/fmr.html.</div>
 </div>
   </div>
 
