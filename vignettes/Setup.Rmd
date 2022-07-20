@@ -14,8 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Setup
-
 You can install the development version from GitHub with:
 
 ```{r, eval=FALSE}
@@ -35,14 +33,14 @@ calls. However, it is **NOT RECOMMENDED** to do this. To reduce the need to
 supply the key argument in every function call you can use the Sys.setenv()
 function to save the key to the user environment.
 
-<br><br><br>
 
-## Interactive Key Setup
+
+### Interactive Key Setup
 
 There are various method of setting up a key. However, I recommend using the
 Sys.setenv() function. 
 
-### Using Sys.setenv() during an interactive session
+###3 Using Sys.setenv() during an interactive session
 One method of setting the API key is to use environment variables. This library
 searches for HUD_KEY in the user environment to check if a key has been defined.
 If no key has been defined, an empty string is outputted. 
@@ -68,7 +66,7 @@ intuitive. You can also tell RStudio to remember the key by setting `in_wkdir` a
 .Rprofile.
 
 ```{r, eval=FALSE}
-hud_set_key("OUR KEY HERE", in_home = TRUE)
+hud_set_key("YOUR KEY HERE", in_home = TRUE)
 ```
 
 To check whether rhud can gain access to this environment variable...
@@ -79,9 +77,9 @@ hud_get_key()
 
 It is now set up for the rest of the R session.
 
-<br><br><br>
 
-## Setting a user agent
+
+### Setting a user agent
 
 It is recommended to set a user agent before querying. This tells the HUD
 servers a bit more about the querying application or user.
@@ -96,9 +94,8 @@ If no user agent is set, it will return an empty string.
 hud_get_user_agent()
 ```
 
-<br><br><br>
 
-## Increasing Performance with Caching
+### Increasing Performance with Caching
 
 By default, rhud uses caching by default. Calls to the HUD User API are
 sent to the RStudio temporary session directory.
@@ -124,9 +121,8 @@ To clear all items in the cache use:
 hud_clear_cache()
 ```
 
-<br><br><br>
 
-## Tibbles vs Dataframes
+### Tibbles vs Dataframes
 
 To get tibbles instead of data frames, use `options(rhud_use_tibble = TRUE)`
 or set it explicitly using the `to_tibble` argument.
@@ -138,9 +134,8 @@ hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
                  to_tibble = TRUE)
 ```
 
-<br><br><br>
 
-## Understanding the Syntax
+### Understanding the Syntax
 
 A noticeable issue with querying geographic data is determining what resolution
 the data is returned in. Therefore, understanding the syntax of 
@@ -189,9 +184,9 @@ The third part is 'county' meaning we need to input county(s)
 The fourth part is the 'zip' meaning the data will be returned 
 at a zip code resolution.
 
-<br><br><br>
 
-## Additional Help
+
+### Additional Help
 
 If you ever get confused or need help you can easily revisit this website 
 where you can check the all the function definitions in the
