@@ -22,7 +22,6 @@ version](https://img.shields.io/badge/devel%20version-0.3.0.9000-yellow)]()
 
 <!-- badges: end -->
 
-
 ### Citation
 
 Please cite this package using:
@@ -235,14 +234,14 @@ The HUD also provide miscellaneous supplemental APIs under them.
 | `hud_rec_fmr_yr()` |
 | `hud_rec_il_yr()`  |
 
-\##3 Contributors
+### Contributors
 
 -   Emmet Tam(<https://github.com/etam4260>)\[<emmet_tam@yahoo.com>\]
 -   Allison Reilly\[<areilly2@umd.edu>\]
 -   Hamed Ghaedi\[<hghaedi@terpmail.umd.edu>\]
 -   Shuyu Jin(<https://github.com/geojsy>)\[<geojsy@umd.edu>\]
 
-\##3 Disclaimers
+### Disclaimers
 
 -   License: GPL \>= 2
 
