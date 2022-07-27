@@ -30,3 +30,10 @@ navbar:
    changelog:
     text: Changelog
     href: news/index.html
+
+reference:
+- title: All functions
+  desc:  An index that lists all functions in alphabetical order.
+- contents:
+  - starts_with("*")
+
