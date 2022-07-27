@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Program Overview
+### Program Overview
 
 According to (Consolidated Planning/CHAS Data | HUD USER), the United States
 Department of Housing and Urban Development (HUD) gets custom tabulations of
@@ -24,9 +24,8 @@ Strategy), show the scope of housing issues and needs, particularly among
 low-income households. Local governments utilize the CHAS data to plan how they
 will spend HUD monies, and HUD may use the data to distribute grant funds.
   
-<br><br><br>
 
-## Examples
+### Examples
 
 These are basic examples showing you how to query the Comprehensive Housing and
 Affordability (CHAS) API.
@@ -49,40 +48,41 @@ which encapsulates the capabilities of all the main function calls below --
 4) [mcd][Comprehensive Housing and Affordability Strategy for MCD] 
 5) [place][Comprehensive Housing and Affordability Strategy for Place]
 
-### Comprehensive Housing and Affordability Strategy for Nation
+#### Comprehensive Housing and Affordability Strategy for Nation
 ```{r, eval=FALSE}
   library(rhud)
   hud_chas_nation(year=c("2014-2018"))
 ```
-<br>
-### Comprehensive Housing and Affordability Strategy for States
+
+
+#### Comprehensive Housing and Affordability Strategy for States
 
 ```{r, eval=FALSE}
   # Queries for CHAS in a state
   hud_chas_state("Maryland", year=c("2012-2016"))
 ```
-<br>
-### Comprehensive Housing and Affordability Strategy for County
+
+#### Comprehensive Housing and Affordability Strategy for County
 
 ```{r, eval=FALSE}
   # Queries a county in Virginia
   hud_chas_county("51999", year=c("2014-2018"))
 ```
-<br>
-### Comprehensive Housing and Affordability Strategy for MCD
+
+#### Comprehensive Housing and Affordability Strategy for MCD
 
 ```{r, eval=FALSE}
   # Queries for CHAS for all mcds in Virginia
   hud_chas_state_mcd("VA", year=c("2014-2018"))
 ```
-<br>
-### Comprehensive Housing and Affordability Strategy for Place
+
+#### Comprehensive Housing and Affordability Strategy for Place
 
 ```{r, eval=FALSE}
   # Queries for CHAS for all places in state fips code 51.
   hud_chas_state_place("51", year=c("2014-2018"))
 ```
-<br>
+
 
 ### Using the omni function for querying
 
@@ -101,11 +101,11 @@ details on how to use this.
   hud_chas(type = 2, 51)
 ```
 
-<br><br><br>
+
 
 ### Querying for Geographic Identifers
 
-### US Counties 
+#### US Counties 
 This is an example to show you how to query for all counties in MD,
 Virginia, and California, respectively.
 
@@ -116,28 +116,27 @@ hud_state_counties("Virginia")
 
 hud_state_counties("6")
 ```
-<br>
 
-### US Minor Civil Divisions
+
+#### US Minor Civil Divisions
 This is an example to show you how to query for minor civil divisions in
 Virginia and California.
 ```{r, eval=FALSE}
 hud_state_minor_civil_divisions(c("VA", "CA"))
 ```
-<br>
 
-### US Places
+
+#### US Places
 This is an example to show you how to query for places in Wyoming and Michigan
 ```{r, eval=FALSE}
 hud_state_places(c("VA", "CA"))
 ```
 
-<br><br><br>
 
 
 
 
-## References
+### References
 
 | "Consolidated Planning/CHAS Data | HUD USER." Www.huduser.gov,
 |      www.huduser.gov/portal/datasets/cp.html.

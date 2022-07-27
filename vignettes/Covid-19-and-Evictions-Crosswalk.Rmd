@@ -26,7 +26,7 @@ The HUD ZIP Code crosswalk files aim to allocate address locations from ZIP Code
 Weekly eviction filing data for Richmond, provided by [Princeton’s Eviction Lab](https://evictionlab.org/eviction-tracking/), and the COVID-19 data set, downloaded from [Virginia Open Data Portal](https://data.virginia.gov/Government/VDH-COVID-19-PublicUseDataset-ZIPCode/8bkr-zfqv/data).
 
 
-### Loading in the necessary libraries
+#### Loading in the necessary libraries
 ```{r message=FALSE}
 library(rhud)
 library(sf)
@@ -43,7 +43,7 @@ options(tigris_use_cache = TRUE)
 ```
 
 
-### Reading in data
+#### Reading in data
 
 ```{r message=FALSE}
 library(readr)
@@ -86,7 +86,7 @@ eviction_no_race_temporal$month <- my(eviction_no_race_temporal$month)
 ```
 
 
-### Mapping COVID cases and Eviction Filings by ZIP Codes
+#### Mapping COVID cases and Eviction Filings by ZIP Codes
 
 ```{r message=FALSE}
 richmond <- inner_join(richmond_shapefile_zctas, eviction_no_race_spatial, by = c("ZCTA5CE20" = "GEOID" ))
@@ -145,7 +145,7 @@ Although the number of COVID cases and eviction filings does not appear to be po
 ```
 
 
-### Mapping COVID cases and Eviction Filings by Census Tracts
+#### Mapping COVID cases and Eviction Filings by Census Tracts
 
 ```{r message=FALSE}
 richmond$ZCTA5CE20 <- as.numeric(richmond$ZCTA5CE20)
@@ -204,14 +204,14 @@ ggplot() +
 ```
 
 
-## Observations
+### Observations
 A noteworthy point, the number of COVID and eviction filings is not significantly correlated. In fact, by 2021, Richmond remained 25% below the historical average [(Hepburn, Jin, & Fish et al., 2022)](https://evictionlab.org/us-eviction-filing-patterns-2021/). To answer why the number of eviction filings in Richmond has been changed during the pandemic, combing with time, the CDC moratorium expiration might be a significant reason. Since during September 4, 2020, and July 31, 2021, [CDC’s moratorium](https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html) on evictions for rent assistance for tenants and landlords helped prevent at least 1.55 million eviction filings nationwide [(Rangel, Haas, and Lemmerman et al., 2021)](https://evictionlab.org/eleven-months-cdc/).
 
 Meanwhile, crossing data from ZIP Codes to census tracts yielded less accurate results. We got some discrete or even N/A results with COVID cases by census tracts. Therefore, it should be noted that there are considerations when crosswalking data to smaller geographies, particularly census tracts. The fundamental reason should be the ZIP Codes cross-cut numerous tracts that do not follow the boundaries closely [(Din and Wilson, 2020)]( https://www.huduser.gov/portal/periodicals/cityscpe/vol22num1/ch12.pdf). 
 
 
 
-## Reference
+### Reference
 CDC. "CDC Issues Eviction Moratorium Order in Areas of Substantial and High Transmission." https://www.cdc.gov/media/releases/2021/s0803-cdc-eviction-order.html (Accessed 05/12/2022)
 
 Din, Alexander, and Ron Wilson. "Crosswalking ZIP Codes to Census Geographies." Cityscape 22, no. 1 (2020): 293-314.
