@@ -3,18 +3,20 @@
 
 #' @name hud_fmr_state_metroareas
 #' @title Fair Markets Rent State Queries for Metroareas
-#' @description This function queries for a state and returns the
+#' @description This function queries for state(s) and returns the
 #'   (Fair Markets Rent) FMR calculation
 #'   at a metroarea resolution for all metroareas in the state query.
-#' @param state The state(s) to query for. Can be abbreviation(s),
+#' @param state A character or numeric vector: the state(s) to query for.
+#'   Can be abbreviation(s),
 #'   fip code(s), or full name(s).
-#' @param year Gets the year that this data was recorded.
+#' @param year A character of numeric vector: gets the year
+#'   that this data was recorded.
 #'   Can specify multiple year(s). Default is the
 #'   previous year.
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical: if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
@@ -22,6 +24,7 @@
 #' * [rhud::hud_fmr_state_counties()]
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
+#' * [rhud::hud_fmr()]
 #' @export
 #' @returns A data frame with Fair Markets Rent for metro areas in state(s) for
 #'   all combinations of "state" and "year" inputs.
@@ -38,20 +41,9 @@
 hud_fmr_state_metroareas <- function(state,
                                      year = format(Sys.Date() - 365, "%Y"),
                                      key = Sys.getenv("HUD_KEY"),
-                                     to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+                                     to_tibble = getOption("rhud_use_tibble",
+                                                           FALSE)) {
+  is_internet_available()
 
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
@@ -67,7 +59,9 @@ hud_fmr_state_metroareas <- function(state,
   list_res <- c()
   for (i in seq_len(nrow(allqueries))) {
     # Build the urls for querying the data.
-    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+
+    urls <- paste(get_hud_host_name(),
+                 "fmr/",
                  "statedata/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
@@ -87,7 +81,7 @@ hud_fmr_state_metroareas <- function(state,
     download_bar(done = i, total = nrow(allqueries),
                  current = urls, error = length(error_urls))
   }
-  message("\n")
+
 
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all
@@ -103,32 +97,36 @@ hud_fmr_state_metroareas <- function(state,
 
 
   if (length(list_res) != 0) {
+
     res <- as.data.frame(do.call(rbind, list_res))
     res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-    if (to_tibble == FALSE) {
-      return(res)
-    } else {
-      return(tibble(res))
+
+    if (to_tibble) {
+      res <- tibble(res)
     }
+
   }
-  return(NULL)
+
+  res
 }
 
 
 #' @name hud_fmr_state_counties
 #' @title Fair Markets Rent State Queries for Counties
-#' @description This function queries for a state and returns the
+#' @description This function queries for state(s) and returns the
 #'   (Fair Markets Rent) FMR calculation
 #'   at a county resolution for all counties in state input.
-#' @param state The state(s) to query for. Can be abbreviation, fip code, or
-#'   full name.
-#' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
+#' @param state A character or numeric vector: the state(s) to query for.
+#'   Can be abbreviation(s),
+#'   fip code(s), or full name(s).
+#' @param year A character of numeric vector: gets the year
+#'   that this data was recorded.
+#'   Can specify multiple year(s). Default is the
 #'   previous year.
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical: if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
@@ -136,6 +134,7 @@ hud_fmr_state_metroareas <- function(state,
 #' * [rhud::hud_fmr_state_counties()]
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
+#' * [rhud::hud_fmr()]
 #' @export
 #' @returns A data frame with fair markets rent for counties in states for
 #'   all combinations of "state" and "year" inputs.
@@ -149,21 +148,9 @@ hud_fmr_state_metroareas <- function(state,
 #' }
 hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                                    key = Sys.getenv("HUD_KEY"),
-                                   to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
-
+                                   to_tibble = getOption("rhud_use_tibble",
+                                                         FALSE)) {
+  is_internet_available()
 
   args <- fmr_il_input_check_cleansing(state, year, key)
   query <- args[[1]]
@@ -179,7 +166,8 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
   list_res <- c()
   for (i in seq_len(nrow(allqueries))) {
     # Build the urls for querying the data.
-    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+    urls <- paste(get_hud_host_name(),
+                 "fmr/",
                  "statedata/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
@@ -200,7 +188,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
                  current = urls, error = length(error_urls))
 
   }
-  message("\n")
+
 
 
   if (length(error_urls) != 0) {
@@ -217,34 +205,36 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 
 
   if (length(list_res) != 0) {
+
     res <- as.data.frame(do.call(rbind, list_res))
     res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
-    if (to_tibble == FALSE) {
-      return(res)
-    } else {
-      return(as_tibble(res))
+    if (to_tibble) {
+      res <- as_tibble(res)
     }
+
   }
 
-  return(NULL)
+  res
 }
 
 #' @name hud_fmr_county_zip
 #' @title Fair Markets Rent County Queries for Zip
-#' @description This function queries for a county and returns FMR calculation.
+#' @description This function queries for county(s) and returns FMR calculation.
 #'    If the county is not
 #'    a small area, it will return only single
 #'    measurement for that county. If the county is considered a small area,
 #'    it will return data at a zip code level.
-#' @param county A county to query for. Must be provided as a 5 digit fipcode.
-#' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
+#' @param county A character or numeric vector: a county to query for.
+#'   Must be provided as a 5 digit fipcode.
+#' @param year A character of numeric vector: gets the year
+#'   that this data was recorded.
+#'   Can specify multiple year(s). Default is the
 #'   previous year.
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical: if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
@@ -252,6 +242,7 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_fmr_state_counties()]
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
+#' * [rhud::hud_fmr()]
 #' @export
 #' @returns A data frame with fair markets rent for zip codes in counties for
 #'   all combinations of "county" and "year" inputs.
@@ -265,20 +256,9 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                                key = Sys.getenv("HUD_KEY"),
-                               to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+                               to_tibble = getOption("rhud_use_tibble",
+                                                     FALSE)) {
+  is_internet_available()
 
   args <- fmr_il_input_check_cleansing(county, year, key)
   query <- args[[1]]
@@ -293,7 +273,8 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
   list_res <- c()
   for (i in seq_len(nrow(allqueries))) {
     # Build the urls for querying the data.
-    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+    urls <- paste(get_hud_host_name(),
+                 "fmr/",
                  "data/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
@@ -346,7 +327,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                  current = urls, error = length(error_urls))
 
   }
-  message("\n")
+
 
 
   if (length(error_urls) != 0) {
@@ -363,38 +344,40 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
 
   if (length(list_res) != 0) {
+
     if (length(list_res) != 1) {
+
       res <- as.data.frame(do.call(rbind, list_res))
       res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
-      if (to_tibble == FALSE) {
-        return(res)
-      } else {
-        return(as_tibble(res))
+      if (to_tibble) {
+        res <- as_tibble(res)
       }
     }
-    return(list_res[[1]])
+
   }
-  return(NULL)
+
+  res
 }
 
 
 
 #' @name hud_fmr_metroarea_zip
 #' @title Fair Markets Rent Metroarea Queries for Zip
-#' @description This function queries for a metroarea and returns
+#' @description This function queries for metroarea(s) and returns
 #'    FMR calculation. If the metroarea is not
 #'    a small area, it will return only single
 #'    measurement for that metroarea. If the metrarea is considered a
 #'    small area, it will return data at a zip code level.
-#' @param metroarea Metroareas to query for.
-#' @param year Gets the year that this data was recorded.
-#'   Can specify multiple years. Default is the
+#' @param metroarea A character vector: metroarea(s) to query for.
+#' @param year A character of numeric vector: gets the year
+#'   that this data was recorded.
+#'   Can specify multiple year(s). Default is the
 #'   previous year.
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical: if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Fair Markets Rent API
 #' @seealso
@@ -402,6 +385,7 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' * [rhud::hud_fmr_state_counties()]
 #' * [rhud::hud_fmr_metroarea_zip()]
 #' * [rhud::hud_fmr_county_zip()]
+#' * [rhud::hud_fmr()]
 #' @export
 #' @returns A data frame with fair markets rent for zip codes in metro areas for
 #'   all combinations of "metroarea" and "year" inputs.
@@ -415,20 +399,10 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #' }
 hud_fmr_metroarea_zip <- function(metroarea,
                                   year = format(Sys.Date() - 365, "%Y"),
-                                  key = Sys.getenv("HUD_KEY"), to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+                                  key = Sys.getenv("HUD_KEY"),
+                                  to_tibble = getOption("rhud_use_tibble",
+                                                        FALSE)) {
+  is_internet_available()
 
   args <- fmr_il_input_check_cleansing(metroarea, year, key)
   query <- args[[1]]
@@ -443,7 +417,8 @@ hud_fmr_metroarea_zip <- function(metroarea,
   list_res <- c()
   for (i in seq_len(nrow(allqueries))) {
     # Build the urls for querying the data.
-    urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+    urls <- paste(get_hud_host_name(),
+                 "fmr/",
                  "data/",
                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
@@ -497,7 +472,7 @@ hud_fmr_metroarea_zip <- function(metroarea,
                  current = urls, error = length(error_urls))
 
   }
-  message("\n")
+
 
 
   if (length(error_urls) != 0) {
@@ -515,16 +490,19 @@ hud_fmr_metroarea_zip <- function(metroarea,
   if (length(list_res) != 0) {
 
     if (length(list_res) != 1) {
+
       res <- as.data.frame(do.call(rbind, list_res))
       res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
-      if (to_tibble == FALSE) {
-        return(res)
-      } else {
-        return(as_tibble(res))
+      if (to_tibble) {
+        res <- as_tibble(res)
       }
+
     }
-    return(list_res[[1]])
+
+    # return(list_res[[1]])
+
   }
-  return(NULL)
+
+  res
 }

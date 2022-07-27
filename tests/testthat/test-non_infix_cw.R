@@ -1,5 +1,6 @@
-test_that("test z_in_trt", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("z_in_trt() Simple Queries and Errors", {
+  skip_if_no_key()
+
   # When numerics have leading zeros, it might not work...
 
   # Invalid zipcode 34321 should throw warning...
@@ -23,8 +24,8 @@ test_that("test z_in_trt", {
 })
 
 
-test_that("test z_in_cty", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("z_in_cty() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(z_in_cty(zip = 71052, county = 22031), TRUE)
 
@@ -38,8 +39,8 @@ test_that("test z_in_cty", {
 })
 
 
-test_that("test z_in_cbsa", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("z_in_cbsa() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(z_in_cbsa(zip = 71052, cbsa = 43340), TRUE)
 
@@ -55,8 +56,8 @@ test_that("test z_in_cbsa", {
 })
 
 
-test_that("test z_in_cbsadiv", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("z_in_trt() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_warning(expect_equal(z_in_cbsadiv(zip = 35235, cbsadiv = 13820),
                               FALSE))
@@ -73,8 +74,8 @@ test_that("test z_in_cbsadiv", {
 })
 
 
-test_that("test z_in_ctysb", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("z_in_ctysb() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(z_in_ctysb(zip = 44214, countysub = 3910383426), TRUE)
 
@@ -90,8 +91,8 @@ test_that("test z_in_ctysb", {
 })
 
 
-test_that("test z_in_cd", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("z_in_cd() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(z_in_cd(zip = 70072, cd = 2202), TRUE)
 
@@ -106,8 +107,8 @@ test_that("test z_in_cd", {
 })
 
 
-test_that("test trt_in_z", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("trt_in_z() Simple Queries and Errors", {
+  skip_if_no_key()
   # In this case we see that numeric inputs with leading zero get truncated..
   # need to fix that.
 
@@ -124,8 +125,8 @@ test_that("test trt_in_z", {
 })
 
 
-test_that("test cty_in_z", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("cty_in_z() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(cty_in_z(county = 24027, zip = 21043), TRUE)
 
@@ -140,8 +141,8 @@ test_that("test cty_in_z", {
 })
 
 
-test_that("test cbsa_in_z", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("cbsa_in_z() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(cbsa_in_z(cbsa = 32300, zip = 24054), TRUE)
 
@@ -156,8 +157,9 @@ test_that("test cbsa_in_z", {
 })
 
 
-test_that("test cbsadiv_in_z", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("cbsadiv_in_z() Simple Queries and Errors", {
+
+  skip_if_no_key()
 
   expect_warning(expect_equal(cbsadiv_in_z(cbsadiv = 32300, zip = 24054),
                               FALSE))
@@ -174,8 +176,8 @@ test_that("test cbsadiv_in_z", {
 })
 
 
-test_that("test cd_in_z", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("cd_in_z() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(cd_in_z(cd = 5109, zip = 24059), TRUE)
 
@@ -191,8 +193,8 @@ test_that("test cd_in_z", {
 })
 
 
-test_that("test ctysb_in_z", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("ctysb_in_z() Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(ctysb_in_z(countysub = 3910371488, zip = 44273), TRUE)
 

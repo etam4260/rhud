@@ -4,7 +4,10 @@
 \alias{hud_nation_states_territories}
 \title{US States and Territories}
 \usage{
-hud_nation_states_territories(key = Sys.getenv("HUD_KEY"), to_tibble)
+hud_nation_states_territories(
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble = getOption("rhud_use_tibble")
+)
 }
 \arguments{
 \item{key}{The API key for this user. You must go to

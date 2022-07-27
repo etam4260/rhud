@@ -4,13 +4,18 @@
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip(s) to determine overlap with tract(s).
-#' @param tract The tract(s) to determine overlap with zip(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with tract(s).
+#' @param tract A character or numeric vector: the tract(s) to determine
+#'   overlap with zip(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @returns If zip(s) exist in the tract(s) specified, then TRUE is returned.
 #' @seealso
@@ -83,7 +88,7 @@ z_in_trt <- function(zip, tract, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -96,13 +101,18 @@ z_in_trt <- function(zip, tract, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip(s) to determine overlap with county(s).
-#' @param county The county(s) to determine overlap with zip(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with county(s).
+#' @param county A character or numeric vector: the county(s) to determine
+#'   overlap with zip(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -175,7 +185,7 @@ z_in_cty <- function(zip, county, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -187,13 +197,18 @@ z_in_cty <- function(zip, county, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip(s) to determine overlap with cbsa(s).
-#' @param cbsa The cbsa(s) to determine overlap with zip(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with cbsa(s).
+#' @param cbsa A character or numeric vector: the cbsa(s) to determine
+#'   overlap with zip(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @returns If zip(s) exist in the cbsa(s) specified, then TRUE is returned.
 #' @seealso
@@ -266,7 +281,7 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -278,13 +293,18 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip(s) to determine overlap with cbsadiv(s).
-#' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with cbsadiv(s).
+#' @param cbsadiv A character or numeric vector: the cbsadiv(s) to determine
+#'   overlap with zip(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -357,7 +377,7 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -370,13 +390,18 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip(s) to determine overlap with countysub(s).
-#' @param countysub The countysub(s) to determine overlap with zip(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with countysub(s).
+#' @param countysub A character or numeric vector: the countysub(s) to determine
+#'   overlap with zip(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -450,7 +475,7 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -461,13 +486,19 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
 #'   if they overlap using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param zip The zip(s) to determine overlap with cd(s).
-#' @param cd The cd(s) to determine overlap with zip(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with congressional district(s).
+#' @param cd A character or numeric vector: the congressional district(s) to
+#'   determine
+#'   overlap with zip(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -537,7 +568,7 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -553,13 +584,18 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param tract The tract(s) to determine overlap with zip(s).
-#' @param zip The zip(s) to determine overlap with tract(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param tract A character or numeric vector: the tract(s) to determine
+#'   overlap with zip(s).
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with tract(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -632,7 +668,7 @@ trt_in_z <- function(tract, zip, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -645,13 +681,18 @@ trt_in_z <- function(tract, zip, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param county The county(s) to determine overlap with zip(s).
-#' @param zip The zip(s) to determine overlap with county(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param county A character or numeric vector: the county(s) to determine
+#'   overlap with zip(s).
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with county(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -726,7 +767,7 @@ cty_in_z <- function(county, zip, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -738,13 +779,18 @@ cty_in_z <- function(county, zip, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param cbsa The cbsa(s) to determine overlap with zip(s).
-#' @param zip The zip(s) to determine overlap with cbsa(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param cbsa A character or numeric vector: the cbsa(s) to determine
+#'   overlap with zip(s).
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with cbsa(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -818,7 +864,7 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
     }
   }
 
-  return(res)
+  res
 
 }
 
@@ -830,13 +876,18 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param cbsadiv The cbsadiv(s) to determine overlap with zip(s).
-#' @param zip The zip(s) to determine overlap with cbsadiv(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param cbsadiv A character or numeric vector: the cbsadiv(s) to determine
+#'   overlap with zip(s).
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with cbsadiv(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -909,7 +960,7 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -921,13 +972,19 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
 #'   overlap using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param cd The cd(s) to determine overlap with zip(s).
-#' @param zip The zip(s) to determine overlap with cd(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param cd A character or numeric vector: the congressional districts(s)
+#'   to determine
+#'   overlap with zip(s).
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with congressional district(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -1000,7 +1057,7 @@ cd_in_z <- function(cd, zip, year, quarter,
     }
   }
 
-  return(res)
+  res
 }
 
 
@@ -1012,13 +1069,18 @@ cd_in_z <- function(cd, zip, year, quarter,
 #'   using the (United States Postal Service)
 #'   USPS Crosswalk files. Overlap will be described if
 #'   any residential, business, other, or total addresses reside in both.
-#' @param countysub The countysub(s). to determine overlap with zip(s).
-#' @param zip The zip(s). to determine overlap with countysub(s).
-#' @param year Gets the year that this data was recorded. Can specify multiple
+#' @param countysub A character or numeric vector: the countysub(s) to determine
+#'   overlap with zip(s).
+#' @param zip A character or numeric vector: the zip(s) to determine
+#'   overlap with countysub(s).
+#' @param year A character or numeric vector: gets the year that this data was
+#'   recorded. Can specify multiple
 #'   years. Default is the previous year.
-#' @param quarter Gets the quarter of the year that this data was recorded.
+#' @param quarter A character or numeric vector: gets the quarter of the year
+#'   that this data was recorded.
 #'   Defaults to the first quarter of the year.
-#' @param key The API key for this user. You must go to HUD and sign up
+#' @param key A character vector of length one: the API key for this user.
+#'   You must go to HUD and sign up
 #'   for an account and request for an API key.
 #' @seealso
 #' * [rhud::z_in_trt()]
@@ -1092,5 +1154,5 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
     }
   }
 
-  return(res)
+  res
 }

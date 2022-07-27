@@ -1,7 +1,8 @@
-#' @name add_leading_zeros
+#' @name geoid_add_leading_zeros
 #' @title Add Leading Zeros To Character Vector
 #' @description Sometimes when loading in data from an excel file it
-#'   truncates the leading 0's. This attempts to re-add those.
+#'   truncates the leading 0's which is important in determining the proper
+#'   geoid. This attempts to re-add those.
 #' @param geoid_type What geoid type to add leading 0s to
 #'   1) zip -> Must be 5 digit zip code
 #'   2) county -> Must be a 5 digit county fips code
@@ -18,80 +19,66 @@
 #' @noMd
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #' zip <- c(02102, 11032, 01232)
 #'
-#' zip <- hud_add_leading_zeros("zip", zip)
+#' zip <- geoid_add_leading_zeros("zip", zip)
 #'
 #' cbsa <- c(02102, 11032, 01232)
 #'
-#' cbsa <- hud_add_leading_zeros("cbsa", cbsa)
+#' cbsa <- geoid_add_leading_zeros("cbsa", cbsa)
 #'
 #' some_geoid <- c(213113, 6526266, 1316455)
 #'
-#' some_geoid <- hud_add_leading_zeros(10, some_geoid)
+#' some_geoid <- geoid_add_leading_zeros(10, some_geoid)
 #' }
-add_leading_zeros <- function(geoid_type = "zip", input) {
+geoid_add_leading_zeros <- function(geoid_type = "zip", input) {
+  res <- NULL
+
   if (!numbers_only(geoid_type)) {
     if (geoid_type == "zip") {
-      return(fix_geoid(input, 5))
+
+      res <- fix_geoid(input, 5)
+
     } else if (geoid_type == "county") {
-      return(fix_geoid(input, 5))
+
+      res <- fix_geoid(input, 5)
+
     } else if (geoid_type == "cbsa") {
-      return(fix_geoid(input, 5))
+
+      res <- fix_geoid(input, 5)
+
     } else if (geoid_type == "cbsadiv") {
-      return(fix_geoid(input, 5))
+
+      res <- fix_geoid(input, 5)
+
     } else if (geoid_type == "countysub") {
-      return(fix_geoid(input, 10))
+
+      res <- fix_geoid(input, 10)
+
     } else if (geoid_type == "cd") {
-      return(fix_geoid(input, 4))
+
+      res <- fix_geoid(input, 4)
+
     } else if (geoid_type == "tract") {
-      return(fix_geoid(input, 11))
+
+      res <- fix_geoid(input, 11)
+
     }
+
   } else if (numbers_only(geoid_type)) {
-    return(fix_geoid(input, geoid_type))
+
+    res <- fix_geoid(input, geoid_type)
+
   } else {
+
     stop(paste("Not a valid input argument for geoid_type. ",
           "You can specify either a number as the expected ",
           "length of the geoid or the name of the geoid lowercase.",
-          sep = ""))
+          sep = ""), call. = FALSE)
+
   }
-}
 
-#' @name remove_leading_zeros
-#' @title Remove Leading Zeros from Character Vector
-#' @description Remove leading zeros from character vector.
-#' @param input A vector or column of character vectors that need leading zeros
-#'   removed.
-#' @returns A vector with leading zeros removed.
-#' @noRd
-#' @noMd
-#' @examples
-#' \dontrun{
-#' library(rhud)
-#' zip <- c(02102, 11032, 01232)
-#'
-#' zip <- hud_remove_leading_zeros("zip", zip)
-#'
-#' cbsa <- c(02102, 11032, 01232)
-#'
-#' cbsa <- hud_remove_leading_zeros("cbsa", cbsa)
-#' }
-remove_leading_zeros <- function(input) {
-  return(sub("^0+", "", input))
-}
-
-#' @name remove_delimiters
-#' @title remove_delimiters
-#' @description This is helper function for remove the most common delimiters
-#'   used in character vector data.
-#' @param input A vector or column of characters that need needs delimiters
-#'   removed.
-#' @returns A vector with delimiters removed.
-#' @noRd
-#' @noMd
-remove_delimiters <- function(input) {
-  return(gsub("[^1-9A-Za-z]*", "", input))
+  res
 }
 
 
@@ -113,10 +100,26 @@ remove_delimiters <- function(input) {
 #' @noRd
 #' @noMd
 fix_geoid <- function(geoids, num_char) {
+
   for (i in seq_len(length(geoids))) {
       diff <- num_char - nchar(geoids[i])
       geoids[i] <- paste(paste(rep(0, diff), collapse = ""),
                          geoids[i], sep = "")
   }
-  return(geoids)
+
+  geoids
+}
+
+
+#' @name remove_delimiters
+#' @title remove_delimiters
+#' @description This is helper function for remove the most common delimiters
+#'   used in character vector data.
+#' @param input A vector or column of characters that need needs delimiters
+#'   removed.
+#' @returns A vector with delimiters removed.
+#' @noRd
+#' @noMd
+remove_delimiters <- function(input) {
+  gsub("[^1-9A-Za-z]*", "", input)
 }

@@ -8,73 +8,56 @@
 #' @description Helper function for making the query calls to
 #'   Comprehensive Housing and Affordability Strategy (CHAS)
 #'   API endpoint as well as concatenating all response objects to
-#'   be returned to the user.
-#' @param urls The urls to query for.
-#' @param key The key obtained from HUD
+#'   be returned to the user. Collect error urls and warn users and cache the
+#'   queries and show the download bar.
+#' @param urls A character vector: the urls to query for.
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return as tibble else dataframe.
+#' @param to_tibble A logical: if TRUE, return as tibble else dataframe.
 #' @returns A tibble or dataframe of all response bodies.
 #' @noRd
 #' @noMd
 chas_do_query_calls <- function(urls, key, to_tibble) {
   # Form all query calls...
   list_res <- c()
-  error_urls <- c()
-
-  `%notin%` <- Negate(`%in%`)
+  error_urls <- character(0)
 
   # These measurements are hardcoded in, but a more effective method might
-  # be to systematic checks to find all unique columns names from all CHAS
+  # be systematic checks to find all unique columns names from all CHAS
   # datasets.
-  all_measurements <- c("geoname", "sumlevel", "year",
-                        "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9",
-                        "A10", "A11", "A12", "A13", "A14", "A15", "A16", "A17",
-                        "A18",
-                        "B1", "B2", "B3", "B4", "B5", "B6", "B7",
-                        "B8", "B9",
-                        "C1", "C2", "C3", "C4", "C5", "C6",
-                        "D1", "D2", "D3",
-                        "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12",
-                        "E1", "E2", "E3", "E5", "E6", "E7", "E9", "E10", "E11",
-                        "E13", "E14", "E15", "E17", "E18", "E19", "E21", "E22",
-                        "E23",
-                        "F1", "F2", "F3", "F5", "F6", "F7", "F9", "F10", "F11",
-                        "F13", "F14", "F15", "F17", "F18", "F19", "F21", "F22",
-                        "F23",
-                        "G1", "G2", "G3", "G5", "G6", "G7", "G9", "G10", "G11",
-                        "G13", "G14", "G15", "G17", "G18", "G19",
-                        "H1", "H2", "H4", "H5", "H7", "H8", "H10", "H11", "H13",
-                        "H14", "H16",
-                        "I1", "I2", "I4", "I5", "I7", "I8", "I10", "I11",
-                        "I13", "I14", "I16",
-                        "J1", "J2", "J4", "J5", "J7", "J8", "J10",
-                        "J11", "J13", "J14", "J16")
 
+  all_measurements <- hud_chas_col_names()
 
   for (i in seq_len(length(urls))) {
 
     url <- urls[i]
+
     call <- R.cache::memoizedCall(make_query_calls, url, key)
+    processed_code <- process_status_codes(call)
 
-    cont <- try(content(call), silent = TRUE)
+    if (!is.null(processed_code)) {
 
-    if ("error" %in% names(cont) || length(cont) == 0) {
-      # Need to output a single error message instead of a bunch when
-      # something bad occurs. Append to list of errored urlss.
-      error_urls <- c(error_urls, url)
+      error_urls <- list(c(processed_code, url))
+
     } else {
-      not_measured <- all_measurements[all_measurements %notin%
+      cont <- try(content(call), silent = TRUE)
+
+      not_measured <- all_measurements[!all_measurements %in%
                                          names(unlist(cont[[1]]))]
-        # Check this CHAS data does not have data defined for
-        # all expected fields. If so fill them in with NA's.
+      # Check this CHAS data does not have data defined for
+      # all expected fields. If so fill them in with NA's.
       if (length(not_measured) >= 1) {
+
         extra_mes <- rep(NA, length(not_measured))
         names(extra_mes) <- not_measured
 
         list_res[[i]] <- c(unlist(cont[[1]]), extra_mes)
+
       } else {
+
         list_res[[i]] <- unlist(cont[[1]])
+
       }
     }
 
@@ -82,33 +65,9 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
                  current = url, error = length(error_urls))
 
   }
-  message("\n")
 
-  # Spit out error messages to user after all
-  # queries are done.
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
-
-  }
-
-  if (length(list_res) != 0) {
-    res <- as.data.frame(do.call("rbind", list_res))
-    if (to_tibble == FALSE) {
-      return(res)
-    } else {
-      return(as_tibble(res))
-    }
-  }
-
-  return(NULL)
+  print_resp_warning_messages(error_urls)
+  if_tibble_return(list_res, to_tibble, "chas")
 }
 
 
@@ -116,38 +75,45 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
 #' @title API Calls for USPS Crosswalk Helper
 #' @description Helper function for making the query calls to
 #'   USPS Crosswalk API endpoint as well as concatenating all response objects
-#'   to be returned to the user.
-#' @param urls The urls to query for.
-#' @param query The geoids to query for.
-#' @param year The years to query for.
-#' @param quarter The quarters in the year to query for.
-#' @param primary_geoid The first geoid part of a function call. For example,
+#'   to be returned to the user.  Collect error urls and warn users and cache
+#'   the
+#'   queries and show the download bar.
+#' @param urls A character vector : the urls to query for.
+#' @param query A character vector : the geoids to query for.
+#' @param year A character or numeric vector : the years to query for.
+#' @param quarter A character or numeric vector: the quarters in the year
+#'   to query for.
+#' @param primary_geoid A character vector: the first geoid part of a
+#'   function call. For example,
 #'   hud_cw_zip_tract() has zip as first geoid and tract as second geoid.
-#' @param secondary_geoid The second geoid part of a function call.
-#' @param key The key obtained from HUD
+#' @param secondary_geoid A character vector: the second geoid part of
+#'   function call.
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return as tibble else dataframe.
+#' @param to_tibble A logical: if TRUE, return as tibble else dataframe.
 #' @returns A tibble or dataframe of all response bodies.
 #' @noRd
 #' @noMd
 cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
                               secondary_geoid, key, to_tibble) {
   list_res <- c()
-  error_urls <- c()
+  error_urls <- character(0)
 
   for (i in seq_len(length(urls))) {
     url <- urls[i]
 
     call <- R.cache::memoizedCall(make_query_calls, url, key)
+    processed_code <- process_status_codes(call)
 
-    cont <- try(content(call), silent = TRUE)
-
-    if ("error" %in% names(cont[[1]])) {
+    if (!is.null(processed_code)) {
       # Need to output a single error message instead of a bunch when
       # something bad occurs. Append to list of errored urls.
-      error_urls <- c(error_urls, url)
+      error_urls <- list(c(processed_code, url))
+
     } else {
+
+      cont <- try(content(call), silent = TRUE)
 
       res <- as.data.frame(do.call(rbind, cont$data$results))
 
@@ -162,46 +128,16 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
       res[5] <- unlist(res[5])
 
       list_res[[i]] <- res
+
     }
 
     download_bar(done = i, total = length(urls),
                  current = url, error = length(error_urls))
 
   }
-  message("\n")
 
-  # Spit out error messages to user after all
-  # queries are done.
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
-  }
-
-
-
-  allres <- NULL
-  if (length(list_res) != 0) {
-    # Some years may not contain all the measurements, fill those in with NA
-    # first before combining.
-
-
-    allres <- do.call(rbind, list_res)
-    colnames(allres)[6] <- primary_geoid
-    colnames(allres)[1] <- secondary_geoid
-  }
-
-  if (to_tibble == FALSE) {
-    return(as.data.frame(allres))
-  } else {
-    return(as_tibble(allres))
-  }
+  print_resp_warning_messages(error_urls)
+  if_tibble_return(list_res, to_tibble, "cw", primary_geoid, secondary_geoid)
 }
 
 
@@ -209,92 +145,520 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 #' @title API Calls for Misc Helper
 #' @description Helper function for making the query calls to
 #'   misc endpoints as well as concatenating all response objects
-#'   to be returned to the user. The misc APIs are located in hud_misc.R
-#' @param urls The urls to query for.
-#' @param key The key obtained from HUD
+#'   to be returned to the user. The misc APIs are located in hud_misc.R.
+#'   Collect error urls and warn users and cache the
+#'   queries and show the download bar.
+#' @param urls A character vector: the urls to query for.
+#' @param key A character vector of length one: the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return as tibble else dataframe.
+#' @param to_tibble A logical: if TRUE, return as tibble else dataframe.
 #' @returns A tibble or dataframe of all response bodies.
 #' @noRd
 #' @noMd
 misc_do_query_call <- function(urls, key, to_tibble) {
   list_res <- c()
-  error_urls <- c()
+  error_urls <- character(0)
 
   for (i in seq_len(length(urls))) {
 
     url <- urls[i]
+
     call <- R.cache::memoizedCall(make_query_calls, url, key)
+    processed_code <- process_status_codes(call)
 
-    cont <- try(content(call), silent = TRUE)
-
-    if ("error" %in% names(cont) || length(cont) == 0) {
+    if (!is.null(processed_code)) {
       # Need to output a single error message instead of a bunch when
-      # something bad occurs. Append to list of errored urlss.
-      error_urls <- c(error_urls, url)
+      # something bad occurs. Append to list of errored urls.
+      error_urls <- list(c(processed_code, url))
 
     } else {
+
+      cont <- try(content(call), silent = TRUE)
       list_res[[i]] <- as.data.frame(do.call(rbind, cont))
+
     }
 
     download_bar(done = i, total = length(urls),
                  current = url, error = length(error_urls))
 
   }
-  message("\n")
 
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
+  print_resp_warning_messages(error_urls)
+  if_tibble_return(list_res, to_tibble, "misc")
+}
+
+
+
+
+
+#' @name il_do_query_call
+#' @title API Calls for Fair Markets Rent
+#' @description Helper function for making the query calls to
+#'   FMR (Fair Markets Rent) endpoints as well as concatenating all
+#'   response objects
+#'   to be returned to the user.
+#' @param all_queries The components of an IL query call, including the
+#'   geoid and year.
+#' @param key A character vector of length one: the key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
+#' @param to_tibble A logical: if TRUE, return as tibble else data frame.
+#' @param query_type The geoid type being queried for: state, county, or cbsa.
+#' @returns A tibble or dataframe of all response bodies.
+#' @noRd
+#' @noMd
+il_do_query_call <- function(all_queries, key, to_tibble, query_type) {
+  if (query_type == "state") {
+
+  } else if (query_type == "county") {
+
+  } else if (query_type == "cbsa") {
+
   }
+}
 
+#' @name fmr_do_query_call
+#' @title API Calls for Income Limits
+#' @description Helper function for making the query calls to
+#'   IL (Income Limits) endpoints as well as concatenating all response objects
+#'   to be returned to the user.
+#' @param all_queries The components of an IL query call, including the
+#'   geoid and year.
+#' @param key A character vector of length one: the key obtained from HUD
+#'   (US Department of Housing and Urban Development)
+#'   USER website.
+#' @param to_tibble A logical: if TRUE, return as tibble else dataframe.
+#' @param querytype The geoid type being queried for: state, county, or cbsa.
+#' @returns A tibble or dataframe of all response bodies.
+#' @noRd
+#' @noMd
+fmr_do_query_call <- function(all_queries, key, to_tibble, query_type) {
+  if (query_type == "state") {
+    # Merge county level data with metroarea data.
+    # Create all combinations of query and year...
+    allqueries <- expand.grid(query = query, year = year,
+                              stringsAsFactors = FALSE)
+    error_urls <- c()
+
+    list_county_res <- c()
+    list_metroarea_res <- c()
+
+    for (i in seq_len(nrow(allqueries))) {
+      # Build the urls for querying the data.
+
+      urls <- paste(get_hud_host_name(),
+                    "fmr/",
+                    "statedata/",
+                    allqueries$query[i], "?year=", allqueries$year[i], sep = "")
+
+      call <- R.cache::memoizedCall(make_query_calls, urls, key)
+
+      cont <- try(content(call), silent = TRUE)
+
+      if ("error" %in% names(cont)) {
+        error_urls <- c(error_urls, urls)
+      } else {
+        res_county <- as.data.frame(do.call(rbind, cont$data$counties))
+        res_metroareas <- as.data.frame(do.call(rbind, cont$data$metroareas))
+
+        res_county$query <- allqueries$query[i]
+        res_county$year <- allqueries$year[i]
+
+        res_metroareas$query <- allqueries$query[i]
+        res_metroareas$year <- allqueries$year[i]
+
+        list_county_res[[i]] <- res_county
+        list_metroarea_res[[i]] <- res_metroareas
+      }
+
+      download_bar(done = i, total = nrow(allqueries),
+                   current = urls, error = length(error_urls))
+    }
+
+
+    if (length(error_urls) != 0) {
+      # Spit out error messages to user after all
+      # queries are done.
+      warning(paste("Could not find data for queries: \n\n",
+                    paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                    "\n\nIt is possible that your key maybe invalid or ",
+                    "there isn't any data for these parameters, ",
+                    "If you think this is wrong please ",
+                    "report it at https://github.com/etam4260/rhud/issues.",
+                    sep = ""), call. = FALSE)
+    }
+
+
+    if (length(list_county_res) != 0) {
+
+      res_county <- as.data.frame(do.call(rbind, list_county_res))
+      res_county <- as.data.frame(sapply(res_county,
+                                         function(x) unlist(as.character(x))))
+
+      res_metroareas <- as.data.frame(do.call(rbind, list_metroarea_res))
+      res_metroareas <- as.data.frame(sapply(
+        res_metroareas,
+        function(x) unlist(as.character(x))))
+
+      if (is.null(to_tibble) || !to_tibble) {
+
+        res <- list(counties = res_county, metroareas = res_metroareas)
+
+      } else {
+
+        res <- list(counties = tibble(res_county),
+                    metroareas = tibble(res_metroareas))
+
+      }
+    }
+  } else if (query_type == "county") {
+
+    list_res <- c()
+    for (i in seq_len(nrow(allqueries))) {
+      # Build the urls for querying the data.
+      urls <- paste(get_hud_host_name(),
+                    "fmr/",
+                    "data/",
+                    allqueries$query[i], "?year=", allqueries$year[i], sep = "")
+
+      call <- R.cache::memoizedCall(make_query_calls, urls, key)
+
+      cont <- try(content(call), silent = TRUE)
+
+      if ("error" %in% names(cont)) {
+        error_urls <- c(error_urls, urls)
+      } else {
+        if (cont$data$smallarea_status == "0") {
+          # Returns just county
+          res <- as.data.frame(do.call(cbind, cont$data$basicdata))
+
+          res$query <- allqueries$query[i]
+          res$year <- allqueries$year[i]
+          res$zip_code <- ""
+
+          res$county_name <- cont$data$county_name
+          res$counties_msa <- cont$data$counties_msa
+          res$town_name <- cont$data$town_name
+          res$metro_status <- cont$data$metro_status
+          res$metro_name <- cont$data$metro_name
+          res$area_name <- cont$data$area_name
+          res$smallarea_status <- cont$data$smallarea_status
+
+          list_res[[i]] <- res
+
+        } else {
+          # Returns zip code level data
+          res <- as.data.frame(do.call(rbind, cont$data$basicdata))
+          res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+
+          res$query <- allqueries$query[i]
+          res$year <- allqueries$year[i]
+
+          res$county_name <- cont$data$county_name
+          res$counties_msa <- cont$data$counties_msa
+          res$town_name <- cont$data$town_name
+          res$metro_status <- cont$data$metro_status
+          res$metro_name <- cont$data$metro_name
+          res$area_name <- cont$data$area_name
+          res$smallarea_status <- cont$data$smallarea_status
+
+          list_res[[i]] <- res
+        }
+      }
+
+      download_bar(done = i, total = nrow(allqueries),
+                   current = urls, error = length(error_urls))
+
+    }
+
+
+
+    if (length(error_urls) != 0) {
+      # Spit out error messages to user after all
+      # queries are done.
+      warning(paste("Could not find data for queries: \n\n",
+                    paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                    "\n\nIt is possible that your key maybe invalid or ",
+                    "there isn't any data for these parameters, ",
+                    "If you think this is wrong please ",
+                    "report it at https://github.com/etam4260/rhud/issues.",
+                    sep = ""), call. = FALSE)
+    }
+
+
+    if (length(list_res) != 0) {
+
+      if (length(list_res) != 1) {
+
+        res <- as.data.frame(do.call(rbind, list_res))
+        res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+
+        if (to_tibble) {
+          res <- as_tibble(res)
+        }
+      }
+
+      # return(list_res[[1]])
+
+    }
+  } else if (query_type == "cbsa") {
+    list_res <- c()
+    for (i in seq_len(nrow(allqueries))) {
+      # Build the urls for querying the data.
+      urls <- paste(get_hud_host_name(),
+                    "fmr/",
+                    "data/",
+                    allqueries$query[i], "?year=", allqueries$year[i], sep = "")
+
+      call <- R.cache::memoizedCall(make_query_calls, urls, key)
+
+      cont <- try(content(call), silent = TRUE)
+
+      if ("error" %in% names(cont)) {
+        error_urls <- c(error_urls, urls)
+      } else {
+
+        if (cont$data$smallarea_status == "0") {
+          # Returns just county
+          res <- as.data.frame(do.call(cbind, cont$data$basicdata))
+
+          res$query <- allqueries$query[i]
+          res$year <- allqueries$year[i]
+          res$zip_code <- ""
+
+          res$county_name <- cont$data$county_name
+          res$counties_msa <- cont$data$counties_msa
+          res$town_name <- cont$data$town_name
+          res$metro_status <- cont$data$metro_status
+          res$metro_name <- cont$data$metro_name
+          res$area_name <- cont$data$area_name
+          res$smallarea_status <- cont$data$smallarea_status
+
+          list_res[[i]] <- res
+
+        } else {
+          # Returns zip code level data
+          res <- as.data.frame(do.call(rbind, cont$data$basicdata))
+          res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+
+          res$query <- allqueries$query[i]
+          res$year <- allqueries$year[i]
+
+          res$county_name <- cont$data$county_name
+          res$counties_msa <- cont$data$counties_msa
+          res$town_name <- cont$data$town_name
+          res$metro_status <- cont$data$metro_status
+          res$metro_name <- cont$data$metro_name
+          res$area_name <- cont$data$area_name
+          res$smallarea_status <- cont$data$smallarea_status
+
+          list_res[[i]] <- res
+        }
+      }
+
+      download_bar(done = i, total = nrow(allqueries),
+                   current = urls, error = length(error_urls))
+
+    }
+
+
+
+    if (length(error_urls) != 0) {
+      # Spit out error messages to user after all
+      # queries are done.
+      warning(paste("Could not find data for queries: \n\n",
+                    paste(paste("*", error_urls, sep = " "), collapse = "\n"),
+                    "\n\nIt is possible that your key maybe invalid or ",
+                    "there isn't any data for these parameters, ",
+                    "If you think this is wrong please ",
+                    "report it at https://github.com/etam4260/rhud/issues.",
+                    sep = ""), call. = FALSE)
+    }
+
+    if (length(list_res) != 0) {
+
+      if (length(list_res) != 1) {
+
+        res <- as.data.frame(do.call(rbind, list_res))
+        res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+
+        if (to_tibble) {
+          res <- as_tibble(res)
+        }
+
+      }
+
+
+    }
+
+
+  }
+}
+
+
+#' @name if_tibble_return
+#' @title Convert Final Object to Tibble
+#' @description Convert Final Object to Tibble if TRUE, else return
+#'   as data frame.
+#' @param list_res The list of data frame responses to concatenate together.
+#' @param to_tibble If TRUE convert to tibble: If FALSE keep as data frame.
+#' @param api The API that is queried for:
+#'   1) chas
+#'   2) cw
+#'   3) fmr
+#'   4) il
+#'   5) misc
+#' @returns The final response object.
+#' @noRd
+#' @noMd
+if_tibble_return <- function(list_res,
+                             to_tibble,
+                             api,
+                             primary_geoid = NULL,
+                             secondary_geoid = NULL) {
+
+  res <- NULL
 
   if (length(list_res) != 0) {
-    res <- as.data.frame(do.call(rbind, list_res))
-    if (to_tibble == FALSE) {
-      return(res)
-    } else {
-      return(as_tibble(res))
+
+    res <- do.call(rbind, list_res)
+
+    if (api == "cw") {
+
+      colnames(allres)[6] <- primary_geoid
+      colnames(allres)[1] <- secondary_geoid
+
     }
+
+    if (to_tibble) {
+
+      res <- as_tibble(res)
+
+    }
+
   }
 
-  return(NULL)
+  res
 }
+
 
 
 #' @name make_query_calls
 #' @title Make Query Calls to HUD USER
 #' @description Centralized atomic function for querying API calls
 #'   as to make R.cache memoizedCall work at a singular API call resolution.
-#' @param urls The urls to query for.
-#' @param key The key obtained from HUD
+#' @param urls A character vector: the urls to query for.
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
 #' @returns The response object.
 #' @noRd
 #' @noMd
-make_query_calls <- function(url, key) {
+make_query_calls <- function(url, key, path, query) {
 
   # Check if Sys.getenv("HUD_USER_AGENT") has been set
   # and is not empty string. If so, then allow user agent
   # will be set to this. Otherwise, just point back to the
   # url of the package.
+
   the_user_agent <- if (Sys.getenv("HUD_USER_AGENT") != "") {
                       Sys.getenv("HUD_USER_AGENT")
                     } else {
                       "https://github.com/etam4260/rhud"
                     }
 
-  return(try(GET(url, add_headers(Authorization = paste("Bearer ",
-                                                 as.character(key))),
-          user_agent(the_user_agent),
-          timeout(30)), silent = TRUE))
+  config <- add_headers(Authorization = paste("Bearer ", as.character(key)))
+
+  # For retries, we might want to allow user to specify this
+  # parameter... giving them the choice between speed vs accuracy...
+  request <- RETRY("GET",
+                   url,
+                   config,
+                   pause_cap = 1,
+                   times = 2,
+                   user_agent(the_user_agent),
+                   quiet = TRUE)
+
+
+  request
+}
+
+
+
+
+#' @name process_status_codes
+#' @title Handle Status Codes Returned By Query
+#' @description Given a response object from a query, handle it differently
+#'   based on the status codes returned.
+#' @param call The response object
+#' @returns NULL if the response is 200 else return the status code and
+#'   the associated error.
+#' @noRd
+#' @noMd
+process_status_codes <- function(call) {
+  error <- NULL
+
+  if (status_code(call) == 400) {
+
+    error <- c(400, paste("An invalid value was specified for one of ",
+                  "the query parameters in the request URI."))
+
+  } else if (status_code(call) == 401) {
+
+    error <- c(401, paste("Authentication failure"))
+
+  } else if (status_code(call) == 403) {
+
+    paste(403, "Not allowed to access this dataset API, ",
+                  "because you have not registered for it.")
+
+  } else if (status_code(call) == 404) {
+
+    paste(404, "No data found using '(value you entered)'")
+
+  } else if (status_code(call) == 405) {
+
+    paste(405, "Unsupported method, only GET is supported")
+
+  } else if (status_code(call) == 406) {
+
+    paste(406, "Unsupported Accept Header value, ",
+                  "must be application/json")
+
+  } else if (status_code(call) == 500) {
+
+    paste(500, "Internal server error occurred")
+
+  }
+
+
+  error
+
+}
+
+
+
+
+#' @name print_resp_warning_messages
+#' @title Print Response Warning Messages
+#' @description Print warning messages associated with query calls.
+#' @param errors The c(response code, response code description, url)
+#' @noRd
+#' @noMd
+print_resp_warning_messages <- function(errors) {
+  # Spit out error messages to user after all
+  # queries are done.
+  if (length(errors) != 0) {
+    # Spit out error messages to user after all
+    # queries are done.
+    warning(paste("Could not find data for queries: \n\n",
+                  paste(paste("*", errors, sep = " "), collapse = "\n"),
+                  "\n\nIt is possible that your key maybe invalid or ",
+                  "there isn't any data for these parameters, ",
+                  "If you think this is wrong please ",
+                  "report it at https://github.com/etam4260/rhud/issues.",
+                  sep = ""), call. = FALSE)
+
+  }
 }

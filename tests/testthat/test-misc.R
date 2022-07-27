@@ -1,5 +1,6 @@
-test_that("All MCD In State Query", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_state_minor_civil_divisions() State Queries and Error", {
+  skip_if_no_key()
+
   mcd <- hud_state_minor_civil_divisions("CA")
   expect_true(nrow(mcd) >= 1)
 
@@ -12,8 +13,9 @@ test_that("All MCD In State Query", {
   expect_warning(hud_state_minor_civil_divisions("CA", "qdqdwq"))
 })
 
-test_that("All Cities in State Query", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_state_places() State Queries and Error", {
+  skip_if_no_key()
+
   cities <- hud_state_places("NY")
   expect_true(nrow(cities) >= 1)
 
@@ -26,15 +28,17 @@ test_that("All Cities in State Query", {
   expect_warning(hud_state_places("CA", "qdqdwq"))
 })
 
-test_that("List States Query", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_nation_state_territories() Simple Examples and Error", {
+  skip_if_no_key()
+
   states <- hud_nation_states_territories()
   expect_true(nrow(states) >= 1)
   expect_error(hud_nation_states_territories("qdqdwq"))
 })
 
-test_that("List Counties Query", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_state_counties() Simple Examples and Error", {
+  skip_if_no_key()
+
   counties <- hud_state_counties("MD")
   expect_true(nrow(counties) >= 1)
 
@@ -47,8 +51,9 @@ test_that("List Counties Query", {
   expect_warning(hud_state_counties("CA", "qdqdwq"))
 })
 
-test_that("List Small Areas Query", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_state_metropolitan() Simple Examples and Error", {
+  skip_if_no_key()
+
   # According to HUD small areas include metropolitan areas.
   # Query for specify states
   metro <- hud_state_metropolitan("CA")

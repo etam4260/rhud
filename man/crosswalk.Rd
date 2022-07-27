@@ -14,7 +14,7 @@ crosswalk(
   year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   key = Sys.getenv("HUD_KEY"),
-  to_tibble
+  to_tibble = getOption("rhud_use_tibble")
 )
 }
 \arguments{

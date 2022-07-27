@@ -1,6 +1,6 @@
 #' @name hud_chas_nation
 #' @title Comprehensive Housing and Affordability Strategy for the US.
-#' @param year The years to query for.
+#' @param year A character vector with the years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"
 #'  * year = "2012-2016"
@@ -10,10 +10,10 @@
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical: if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
 #'   data for the entire nation.
@@ -27,6 +27,7 @@
 #' * [rhud::hud_chas_county()]
 #' * [rhud::hud_chas_state_mcd()]
 #' * [rhud::hud_chas_state_place()]
+#' * [rhud::hud_chas()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -35,23 +36,10 @@
 #'
 #' }
 hud_chas_nation <- function(year = c("2014-2018"),
-                            key = Sys.getenv("HUD_KEY"), to_tibble) {
+                            key = Sys.getenv("HUD_KEY"),
+                            to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-
-    to_tibble <- getOption("rhud_use_tibble")
-
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  is_internet_available()
 
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -59,16 +47,18 @@ hud_chas_nation <- function(year = c("2014-2018"),
 
   urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
                "&year=", year, sep = "")
-  return(chas_do_query_calls(urls, key = key, to_tibble))
+
+  chas_do_query_calls(urls, key = key, to_tibble)
 }
 
 #' @name hud_chas_state
 #' @title Comprehensive Housing and Affordability Strategy for US States.
 #' @description Returns Comprehensive Housing and Affordability Strategy
 #'   (CHAS) data for state(s).
-#' @param state The state(s) to query for. Can supply as abbreviation, whole name,
-#'   or as geoid.
-#' @param year The years to query for.
+#' @param state A character or numeric vector: the state(s) to query for.
+#'   Can supply as abbreviation, whole name,
+#'   or as the fips code.
+#' @param year A character vector: the years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"
 #'  * year = "2012-2016"
@@ -78,10 +68,10 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical: if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @returns Returns a data frame with
 #'   Comprehensive Housing and Affordability Strategy (CHAS) data for states for
@@ -93,6 +83,7 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #' * [rhud::hud_chas_county()]
 #' * [rhud::hud_chas_state_mcd()]
 #' * [rhud::hud_chas_state_place()]
+#' * [rhud::hud_chas()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -100,22 +91,10 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #' hud_chas_state("51")
 #' }
 hud_chas_state <- function(state, year = c("2014-2018"),
-                           key = Sys.getenv("HUD_KEY"), to_tibble) {
+                           key = Sys.getenv("HUD_KEY"),
+                           to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  is_internet_available()
 
   args <- chas_input_check_cleansing(state, year, key)
   state <- args[[1]]
@@ -125,7 +104,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   # Assume abbreviation or fips code if length of 2. Captitalize does not
   # affect numbers. Assume full state name if length more than 2
   if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
+  if (all(nchar(state) > 2)) state <- capitalize(state)
 
   if (is.null(pkg.env$state)) {
     pkg.env$state <- suppressMessages(hud_nation_states_territories(
@@ -162,14 +141,17 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
                "&stateId=", all_queries$fip_code, "&year=", all_queries$year,
                sep = "")
-  return(chas_do_query_calls(urls, key = key, to_tibble))
+
+
+  chas_do_query_calls(urls, key = key, to_tibble)
 }
 
 #' @name hud_chas_county
 #' @title Comprehensive Housing and Affordability Strategy for the US Counties
 #' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
 #"   data for county(s).
-#' @param county The county(s) to query for. Must supply a geoid. 2 digit state fip
+#' @param county A character or numeric vector:
+#'   the county(s) to query for. Must supply a geoid. 2 digit state fip
 #'   + 3 digit county fip. hud_state_counties() will show an extra 99999 at the
 #'   end. Just remove that.
 #' @param year The years to query for.
@@ -182,10 +164,10 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtained from HUD
+#' @param key A character vector of length 1: the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical: if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @returns Returns a data frame with
 #'   Comprehensive Housing and Affordability Strategy (CHAS) data for
@@ -196,6 +178,7 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #' * [rhud::hud_chas_county()]
 #' * [rhud::hud_chas_state_mcd()]
 #' * [rhud::hud_chas_state_place()]
+#' * [rhud::hud_chas()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -204,20 +187,11 @@ hud_chas_state <- function(state, year = c("2014-2018"),
 #'
 #' }
 hud_chas_county <- function(county, year = c("2014-2018"),
-                            key = Sys.getenv("HUD_KEY"), to_tibble) {
+                            key = Sys.getenv("HUD_KEY"),
+                            to_tibble = getOption("rhud_use_tibble",
+                                                  FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  is_internet_available()
 
   args <- chas_input_check_cleansing(county, year, key)
   county <- args[[1]]
@@ -264,18 +238,19 @@ hud_chas_county <- function(county, year = c("2014-2018"),
                "&year=", all_queries$year,
                sep = "")
 
-  res <- chas_do_query_calls(urls, key, to_tibble)
-
-  return(res)
+  chas_do_query_calls(urls, key, to_tibble)
 }
+
 
 #' @name hud_chas_state_mcd
 #' @title Comprehensive Housing and Affordability Strategy for
 #'   US Minor Civil Divisions
 #' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
 #'   data for all mcd in a state.
-#' @param state The state name, abbreviation, or fips code.
-#' @param year The years to query for.
+#' @param state A character or numeric vector:
+#'   The states to query for which can be specified using
+#'   the state name, abbreviation, or fips code.
+#' @param year A character vector: the years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"
 #'  * year = "2012-2016"
@@ -285,10 +260,10 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical : if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @returns Returns a dataframe with
 #'   Comprehensive Housing and Affordability Strategy (CHAS) data for mcds
@@ -300,28 +275,20 @@ hud_chas_county <- function(county, year = c("2014-2018"),
 #' * [rhud::hud_chas_county()]
 #' * [rhud::hud_chas_state_mcd()]
 #' * [rhud::hud_chas_state_place()]
+#' * [rhud::hud_chas()]
 #' @export
 #' @examples
 #' \dontrun{
 #'
-#' hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
+#' #hud_chas_state_mcd("VA", year = c("2014-2018","2013-2017"))
 #'
 #' }
 hud_chas_state_mcd <- function(state, year = c("2014-2018"),
-                         key = Sys.getenv("HUD_KEY"), to_tibble) {
+                               key = Sys.getenv("HUD_KEY"),
+                               to_tibble = getOption("rhud_use_tibble",
+                                                     FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  is_internet_available()
 
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -329,7 +296,7 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 
 
   if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
+  if (all(nchar(state) > 2)) state <- capitalize(state)
 
   if (is.null(pkg.env$state)) {
     pkg.env$state <- suppressMessages(
@@ -378,18 +345,18 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
                "&entityId=", all_queries$entityId,
                "&year=", all_queries$year,  sep = "")
 
-  res <- chas_do_query_calls(urls, key, to_tibble)
-
-  return(res)
+  chas_do_query_calls(urls, key, to_tibble)
 }
+
 
 #' @name hud_chas_state_place
 #' @title Comprehensive Housing and Affordability Strategy for US Places
 #' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
 #'   for all places in a state.
-#' @param state The state name, abbreviation, or fips code. Make sure if state
-#'   fips is 1 digit number, do not include leading 0.
-#' @param year The years to query for.
+#' @param state A character or numeric vector:
+#'   The states to query for which can be specified using
+#'   the state name, abbreviation, or fips code.
+#' @param year A character vector: the years to query for.
 #'  * year = "2014-2018"
 #'  * year = "2013-2017"
 #'  * year = "2012-2016"
@@ -399,10 +366,10 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #'  * year = "2008-2012"
 #'  * year = "2007-2011"
 #'  * year = "2006-2010"
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
-#' @param to_tibble If TRUE, return the data in a tibble format
+#' @param to_tibble A logical : if TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @returns Returns a dataframe with
 #'   Comprehensive Housing and Affordability Strategy (CHAS) data for places
@@ -414,28 +381,20 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 #' * [rhud::hud_chas_county()]
 #' * [rhud::hud_chas_state_mcd()]
 #' * [rhud::hud_chas_state_place()]
+#' * [rhud::hud_chas()]
 #' @export
 #' @examples
 #' \dontrun{
 #'
-#' hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
+#' #hud_chas_state_place("MD", year = c("2014-2018","2013-2017"))
 #'
 #' }
 hud_chas_state_place <- function(state, year = c("2014-2018"),
-                           key = Sys.getenv("HUD_KEY"), to_tibble) {
+                           key = Sys.getenv("HUD_KEY"),
+                           to_tibble = getOption("rhud_use_tibble",
+                                                 FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  is_internet_available()
 
   args <- chas_input_check_cleansing(year = year, key = key)
   year <- args[[1]]
@@ -447,7 +406,7 @@ hud_chas_state_place <- function(state, year = c("2014-2018"),
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
+  if (all(nchar(state) > 2)) state <- capitalize(state)
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
@@ -488,8 +447,5 @@ hud_chas_state_place <- function(state, year = c("2014-2018"),
                "&entityId=", all_queries$entityId,
                "&year=", all_queries$year,  sep = "")
 
-  res <- chas_do_query_calls(urls, key, to_tibble)
-
-
-  return(res)
+  chas_do_query_calls(urls, key, to_tibble)
 }

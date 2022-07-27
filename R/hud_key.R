@@ -12,6 +12,13 @@
 #' hud_get_key()
 #' }
 hud_get_key <- function() {
+  if (Sys.getenv("HUD_KEY") == "") {
+
+    warning("\nNo key is set: make sure to set one using hud_set_key()",
+            call. = FALSE)
+
+  }
+
   return(Sys.getenv("HUD_KEY"))
 }
 
@@ -20,7 +27,7 @@ hud_get_key <- function() {
 #' @description A wrapper around Sys.getenv() to set HUD_KEY environment
 #'   variable. Allows the user to also set the key to their .RProfile
 #'   in working or HOME.
-#' @param key key obtained at
+#' @param key A character vector of length one with key obtained at
 #'   https://www.huduser.gov/hudapi/public/register?comingfrom=1
 #' @param in_wkdir set the key in the user's .RProfile in this directory.
 #'   Is defaulted to false.
@@ -38,14 +45,15 @@ hud_set_key <- function(key,
   if (!is.character(key) || length(key) != 1) {
     stop(paste("Make sure argument key is of type",
                "character and is of vector length 1",
-               sep = ""))
+               sep = ""), call. = FALSE)
   }
 
   if (!is.logical(in_wkdir) ||
      !is.logical(in_home) ||
      length(in_wkdir) != 1  ||
      length(in_home) != 1) {
-    stop("Make sure argument in_wkdir and in_home are of type logical.")
+    stop("Make sure argument in_wkdir and in_home are of type logical.",
+         call. = FALSE)
   }
 
   # Set the key in working R session.

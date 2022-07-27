@@ -8,7 +8,7 @@ hud_chas_state(
   state,
   year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble
+  to_tibble = getOption("rhud_use_tibble")
 )
 }
 \arguments{
@@ -58,5 +58,6 @@ hud_chas_state("51")
 \item \code{\link[=hud_chas_county]{hud_chas_county()}}
 \item \code{\link[=hud_chas_state_mcd]{hud_chas_state_mcd()}}
 \item \code{\link[=hud_chas_state_place]{hud_chas_state_place()}}
+\item \code{\link[=hud_chas]{hud_chas()}}
 }
 }

@@ -1,5 +1,5 @@
-test_that("test hud_fmr_state_metroareas()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_fmr_state_metroareas() Simple Examples", {
+  skip_if_no_key()
 
   va <- hud_fmr_state_metroareas("VA", year = c(2021))
   expect_true(nrow(va) >= 1)
@@ -12,8 +12,8 @@ test_that("test hud_fmr_state_metroareas()", {
 })
 
 
-test_that("test hud_fmr_state_counties()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_fmr_state_counties() Simple Examples", {
+  skip_if_no_key()
 
   va <- hud_fmr_state_counties("VA", year = c(2021))
   expect_true(nrow(va) >= 1)
@@ -26,8 +26,8 @@ test_that("test hud_fmr_state_counties()", {
 })
 
 
-test_that("test hud_fmr_county_zip()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_fmr_county_zip() Simple Examples", {
+  skip_if_no_key()
 
   c1 <- hud_fmr_county_zip("5100199999", year = c(2021))
   expect_true(nrow(c1) >= 1)
@@ -38,8 +38,9 @@ test_that("test hud_fmr_county_zip()", {
 })
 
 
-test_that("test hud_fmr_metroarea_zip()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_fmr_metroarea_zip() Simple Examples", {
+  skip_if_no_key()
+
   sa1 <- hud_fmr_metroarea_zip("METRO47900M47900", year = c(2018))
   expect_true(nrow(sa1) >= 1)
   sa2 <- hud_fmr_metroarea_zip("METRO29180N22001", year = c(2019))

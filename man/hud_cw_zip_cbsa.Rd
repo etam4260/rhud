@@ -10,7 +10,7 @@ hud_cw_zip_cbsa(
   quarter = 1,
   minimal = FALSE,
   key = Sys.getenv("HUD_KEY"),
-  to_tibble
+  to_tibble = getOption("rhud_use_tibble")
 )
 }
 \arguments{

@@ -4,7 +4,11 @@
 \alias{hud_state_places}
 \title{US Places}
 \usage{
-hud_state_places(state, key = Sys.getenv("HUD_KEY"), to_tibble)
+hud_state_places(
+  state,
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble = getOption("rhud_use_tibble")
+)
 }
 \arguments{
 \item{state}{The state(s) to get all places.}

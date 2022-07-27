@@ -11,7 +11,7 @@ hud_chas(
   entity_id = NULL,
   year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble
+  to_tibble = getOption("rhud_use_tibble")
 )
 }
 \arguments{
@@ -20,7 +20,10 @@ hud_chas(
 2 - State
 3 - County
 4 - MCD
-5 - Place}
+5 - Place
+
+Can either supply the number from 1-5 or the name. Either Nation, State,
+County, MCD, or Place}
 
 \item{state_id}{For types 2,3,4,5, you must provide a state_id.}
 
@@ -59,9 +62,11 @@ https://www.huduser.gov/portal/dataset/chas-api.html
 \description{
 This function queries the
 Comprehensive Housing Affordability Strategy CHAS API provided by
-US Department
-of Housing and Urban Development (HUD USER). The ordering of items in
-stateid input must match that of the entityid input.
+US Department of Housing and Urban Development (HUD USER). This closely
+follow their API implementation. For more intuitive querying, check the
+decomposed versions linked below.
+The ordering of items in stateid input must match that of the entityid
+input.
 }
 \examples{
 \dontrun{
@@ -74,6 +79,16 @@ hud_chas('3','51','199')
 hud_chas('4', '51', 94087)
 
 hud_chas('5', '51', 48996)
+}
+}
+\seealso{
+\itemize{
+\item \code{\link[=hud_chas_nation]{hud_chas_nation()}}
+\item \code{\link[=hud_chas_state]{hud_chas_state()}}
+\item \code{\link[=hud_chas_county]{hud_chas_county()}}
+\item \code{\link[=hud_chas_state_mcd]{hud_chas_state_mcd()}}
+\item \code{\link[=hud_chas_state_place]{hud_chas_state_place()}}
+\item \code{\link[=hud_chas]{hud_chas()}}
 }
 }
 \keyword{(CHAS)}

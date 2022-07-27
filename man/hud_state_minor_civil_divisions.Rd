@@ -4,7 +4,11 @@
 \alias{hud_state_minor_civil_divisions}
 \title{US Minor Civil Divisions}
 \usage{
-hud_state_minor_civil_divisions(state, key = Sys.getenv("HUD_KEY"), to_tibble)
+hud_state_minor_civil_divisions(
+  state,
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble = getOption("rhud_use_tibble")
+)
 }
 \arguments{
 \item{state}{The state to get all mcd(s).}

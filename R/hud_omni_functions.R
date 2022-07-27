@@ -131,20 +131,9 @@ hud_cw <- function(type, query,
                    quarter = 1,
                    minimal = FALSE,
                    key = Sys.getenv("HUD_KEY"),
-                   to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+                   to_tibble = getOption("rhud_use_tibble", FALSE)) {
+  res <- NULL
+  is_internet_available()
 
   alltypes <- c("zip-tract", "zip-county", "zip-cbsa",
                 "zip-cbsadiv", "zip-cd", "tract-zip",
@@ -235,20 +224,29 @@ hud_cw <- function(type, query,
                             stringsAsFactors = FALSE)
 
   all_queries$type <- type[[1]]
-  urls <- paste("https://www.huduser.gov/hudapi/public/usps?type=",
+
+  urls <- paste(get_hud_host_name(),
+               "usps",
+               "?type=",
                all_queries$type,
                "&query=", all_queries$query,
                "&year=", all_queries$year,
                "&quarter=", all_queries$quarter,
                sep = "")
 
-  if (!minimal) return(cw_do_query_calls(urls, all_queries$query,
-                                         all_queries$year,
+
+  if (!minimal) {
+    res <- cw_do_query_calls(urls, all_queries$query,
+                            all_queries$year, all_queries$quarter,
+                            lhgeoid, rhgeoid, key,
+                            to_tibble)
+  } else {
+    res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                            all_queries$quarter, lhgeoid, rhgeoid, key,
-                           to_tibble))
-  return(cw_do_query_calls(urls, all_queries$query, all_queries$year,
-                           all_queries$quarter, lhgeoid, rhgeoid, key,
-                           to_tibble)[[1]])
+                           to_tibble)[[1]]
+  }
+
+  res
 }
 
 
@@ -301,26 +299,23 @@ hud_cw <- function(type, query,
 #' hud_fmr("METRO47900M47900", year=c(2018))
 #' }
 hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
-                    key = Sys.getenv("HUD_KEY"), to_tibble) {
+                    key = Sys.getenv("HUD_KEY"),
+                    to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  res <- NULL
+  is_internet_available()
 
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
   year <- args[[2]]
   key <- args[[3]]
   querytype <- args[[4]]
+
+  allqueries <- expand.grid(query = query, year = year,
+                            stringsAsFactors = FALSE)
+
+  fmr_do_query_call()
+
 
   # If state query, will provide data at metro and county level
   if (querytype == "state") {
@@ -335,7 +330,9 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
     for (i in seq_len(nrow(allqueries))) {
       # Build the urls for querying the data.
-      urls <- paste("https://www.huduser.gov/hudapi/public/fmr/",
+
+      urls <- paste(get_hud_host_name(),
+                    "fmr/",
                     "statedata/",
                     allqueries$query[i], "?year=", allqueries$year[i], sep = "")
 
@@ -362,7 +359,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
       download_bar(done = i, total = nrow(allqueries),
                    current = urls, error = length(error_urls))
     }
-    message("\n")
+
 
     if (length(error_urls) != 0) {
       # Spit out error messages to user after all
@@ -388,22 +385,27 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
         res_metroareas,
         function(x) unlist(as.character(x))))
 
-      if (to_tibble == FALSE) {
-        return(list(counties = res_county,
-                    metroareas = res_metroareas))
+      if (is.null(to_tibble) || !to_tibble) {
+
+        res <- list(counties = res_county, metroareas = res_metroareas)
+
       } else {
-        return(list(counties = tibble(res_county),
-                    metroareas = tibble(res_metroareas)))
+
+        res <- list(counties = tibble(res_county),
+                    metroareas = tibble(res_metroareas))
+
       }
     }
 
   } else if (querytype == "cbsa") {
       # Returns zip level data.
-      return(hud_fmr_metroarea_zip(query, year, key, to_tibble))
+      # res <- hud_fmr_metroarea_zip(query, year, key, to_tibble)
   } else if (querytype == "county") {
       # Returns zip level data.
-      return(hud_fmr_county_zip(query, year, key, to_tibble))
+      # res <- hud_fmr_county_zip(query, year, key, to_tibble)
   }
+
+  res
 }
 
 
@@ -427,6 +429,12 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' @param to_tibble If TRUE, return the data in a tibble format
 #'   rather than a data frame.
 #' @keywords Income Limits API
+#' @seealso
+#' * [rhud::hud_fmr_state_metroareas()]
+#' * [rhud::hud_fmr_state_counties()]
+#' * [rhud::hud_fmr_metroarea_zip()]
+#' * [rhud::hud_fmr_county_zip()]
+#' * [rhud::hud_fmr()]
 #' @export
 #' @returns This function returns a dataframe or tibble containing
 #'   Income Limits data
@@ -448,20 +456,10 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #' hud_il("METRO47900M47900", year=c(2018))
 #' }
 hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
-                   key = Sys.getenv("HUD_KEY"), to_tibble) {
+                   key = Sys.getenv("HUD_KEY"),
+                   to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  is_internet_available()
 
   args <- fmr_il_input_check_cleansing(query, year, key)
   query <- args[[1]]
@@ -477,7 +475,8 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   list_res <- c()
   for (i in seq_len(nrow(all_queries))) {
     # Build the urls for querying the data.
-    urls <- paste("https://www.huduser.gov/hudapi/public/il/",
+    urls <- paste(get_hud_host_name(),
+                 "il/",
                  if (querytype == "state") "statedata/" else "data/",
                  all_queries$query[i], "?year=", all_queries$year[i], sep = "")
 
@@ -522,7 +521,7 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
     download_bar(done = i, total = nrow(all_queries),
                  current = urls, error = length(error_urls))
   }
-  message("\n")
+
 
   if (length(error_urls) != 0) {
     # Spit out error messages to user after all
@@ -538,14 +537,14 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 
   if (length(list_res) != 0) {
     res <- do.call(rbind, list_res)
-    if (to_tibble == FALSE) {
-      return(res)
-    } else {
-      return(as_tibble(res))
+
+    if (to_tibble) {
+      res <- as_tibble(res)
     }
+
   }
 
-  return(NULL)
+  res
 }
 
 
@@ -554,15 +553,21 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   API
 #' @description This function queries the
 #'   Comprehensive Housing Affordability Strategy CHAS API provided by
-#'   US Department
-#'   of Housing and Urban Development (HUD USER). The ordering of items in
-#'   stateid input must match that of the entityid input.
+#'   US Department of Housing and Urban Development (HUD USER). This closely
+#'   follow their API implementation. For more intuitive querying, check the
+#'   decomposed versions linked below.
+#'   The ordering of items in stateid input must match that of the entityid
+#'   input.
 #' @param type Queries the data based off:
 #'   1 - Nation
 #'   2 - State
 #'   3 - County
 #'   4 - MCD
 #'   5 - Place
+#'
+#'   Can either supply the number from 1-5 or the name. Either Nation, State,
+#'   County, MCD, or Place
+#'
 #' @param state_id For types 2,3,4,5, you must provide a state_id.
 #' @param entity_id For types 3,4,5, you must provide a fips code, placecode,
 #'   or mcd code.
@@ -584,6 +589,13 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 #'   rather than a data frame.
 #' @keywords Comprehensive Housing Affordability Strategy (CHAS) API
 #' @export
+#' @seealso
+#' * [rhud::hud_chas_nation()]
+#' * [rhud::hud_chas_state()]
+#' * [rhud::hud_chas_county()]
+#' * [rhud::hud_chas_state_mcd()]
+#' * [rhud::hud_chas_state_place()]
+#' * [rhud::hud_chas()]
 #' @returns This function returns a dataframe or tibble containing
 #'   Comprehensive Housing
 #'   and Affordability Strategy data for a particular state.
@@ -605,20 +617,9 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
 hud_chas <- function(type, state_id = NULL, entity_id = NULL,
                      year = c("2014-2018"),
                      key = Sys.getenv("HUD_KEY"),
-                     to_tibble) {
+                     to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+  is_internet_available()
 
   if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -673,12 +674,18 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
 
 
   if (type == "1") {
-    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
-                 "&year=", year,  sep = "")
+    urls <- paste(get_hud_host_name(),
+                 "chas?type=",
+                 "1",
+                 "&year=",
+                 year,
+                 sep = "")
   }
 
+
   if (type == "2") {
-    if (is.null(state_id)) stop("You need to specify a stateId for this type.")
+    if (is.null(state_id)) stop("You need to specify a stateId for this type.",
+                                call. = FALSE)
 
     if (!is.vector(state_id)) {
       stop(paste("\nMake sure all inputs are of type vector. ",
@@ -691,15 +698,22 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
     all_queries <- expand.grid(fip_code = state_id, year = year,
                                stringsAsFactors = FALSE)
 
-    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "2",
-                 "&stateId=", all_queries$fip_code,
-                 "&year=", all_queries$year,  sep = "")
+    urls <- paste(get_hud_host_name(),
+                  "chas?type=",
+                  "2",
+                 "&stateId=",
+                 all_queries$fip_code,
+                 "&year=",
+                 all_queries$year,
+                 sep = "")
   }
 
   if (type == "3" || type == "4" || type == "5") {
+
     if (is.null(state_id) || is.null(entity_id)) stop("You need to specify a
                                                  stateId and entityId
-                                                 for this type.")
+                                                 for this type.", call. = FALSE)
+
     if (!is.vector(state_id) || !is.vector(entity_id)) {
       stop(paste("\nMake sure all inputs are of type vector. ",
                  "Check types with typeof([variable]). ",
@@ -715,13 +729,20 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
 
     all_queries <- expand.grid(state_fip = state_id, year = year,
                               stringsAsFactors = FALSE)
+
     all_queries$entity_id <- entity_id
 
-    urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", type,
-                 "&stateId=", all_queries$state_fip,
-                 "&entityId=", all_queries$entity_id,
-                 "&year=", all_queries$year,
+    urls <- paste(get_hud_host_name(),
+                 "chas?type=",
+                 type,
+                 "&stateId=",
+                 all_queries$state_fip,
+                 "&entityId=",
+                 all_queries$entity_id,
+                 "&year=",
+                 all_queries$year,
                  sep = "")
   }
-  return(chas_do_query_calls(urls, key = key, to_tibble))
+
+  chas_do_query_calls(urls, key = key, to_tibble)
 }

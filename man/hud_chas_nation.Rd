@@ -4,7 +4,11 @@
 \alias{hud_chas_nation}
 \title{Comprehensive Housing and Affordability Strategy for the US.}
 \usage{
-hud_chas_nation(year = c("2014-2018"), key = Sys.getenv("HUD_KEY"), to_tibble)
+hud_chas_nation(
+  year = c("2014-2018"),
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble = getOption("rhud_use_tibble")
+)
 }
 \arguments{
 \item{year}{The years to query for.
@@ -51,5 +55,6 @@ hud_chas_nation()
 \item \code{\link[=hud_chas_county]{hud_chas_county()}}
 \item \code{\link[=hud_chas_state_mcd]{hud_chas_state_mcd()}}
 \item \code{\link[=hud_chas_state_place]{hud_chas_state_place()}}
+\item \code{\link[=hud_chas]{hud_chas()}}
 }
 }

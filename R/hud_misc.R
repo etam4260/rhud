@@ -29,20 +29,10 @@
 #' hud_nation_states_territories()
 #' }
 hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
-                                          to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+                                    to_tibble = getOption("rhud_use_tibble",
+                                                          FALSE)) {
+  res <- NULL
+  is_internet_available()
 
   if (!is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -84,13 +74,13 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
     states$state_num <- unlist(states$state_num)
     states$category <- unlist(states$category)
 
-    if (to_tibble == FALSE) {
-      return(states)
-    } else {
-      return(as_tibble(states))
+    res <- states
+
+    if (to_tibble) {
+      res <- as_tibble(states)
     }
   }
-  return(NULL)
+  res
 }
 
 # Need to allow user to filter metropolitan areas similar to place, county,
@@ -122,21 +112,11 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
 #'
 #' }
 hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
-                                   to_tibble) {
+                                  to_tibble = getOption("rhud_use_tibble",
+                                                        FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
-
+  res <- NULL
+  is_internet_available()
 
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -166,8 +146,6 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   download_bar(done = 1, total = 1,
                current = urls, error = 0)
 
-  message("\n")
-
   metro <- as.data.frame(do.call(rbind, cont))
 
   # Do a regular expression of the area name column to parse it into
@@ -196,7 +174,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   metro$classifications <- classifications
 
   if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
+  if (all(nchar(state) > 2)) state <- capitalize(state)
 
   if (is.null(pkg.env$state)) {
     pkg.env$state <- suppressMessages(hud_nation_states_territories(
@@ -205,7 +183,8 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 
   for (i in seq_len(length(state))) {
     if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.")
+      stop("There is no matching fips code for one of the inputted states.",
+           call. = FALSE)
     }
   }
 
@@ -234,18 +213,18 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
   if (!is.null(metro) && nrow(metro) > 1) {
+
     metro$cbsa_code <- unlist(metro$cbsa_code)
     metro$area_name <- unlist(metro$area_name)
     metro$category <- unlist(metro$category)
-    if (to_tibble == FALSE) {
-      return(metro)
-    } else {
-      return(as_tibble(metro))
-    }
+    res <- metro
 
+    if (to_tibble) {
+      res <- as_tibble(metro)
+    }
   }
 
-  return(NULL)
+  res
 }
 
 
@@ -275,20 +254,10 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 #' hud_state_counties("51")
 #' }
 hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
-                               to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
+                               to_tibble = getOption("rhud_use_tibble",
+                                                     FALSE)) {
+  res <- NULL
+  is_internet_available()
 
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -307,7 +276,7 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
+  if (all(nchar(state) > 2)) state <- capitalize(state)
 
   if (is.null(pkg.env$state)) {
     pkg.env$state <- suppressMessages(hud_nation_states_territories(
@@ -354,14 +323,14 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
     counties$town_name <- unlist(counties$town_name)
     counties$category <- unlist(counties$category)
 
-    if (to_tibble == FALSE) {
-      return(counties)
-    } else {
-      return(as_tibble(counties))
+    res <- counties
+
+    if (to_tibble) {
+      res <- as_tibble(counties)
     }
   }
 
-  return(NULL)
+  res
 }
 
 #' @name hud_state_places
@@ -389,21 +358,10 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
 #' hud_state_places("51")
 #' }
 hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
-                             to_tibble) {
+                             to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
-
+  res <- NULL
+  is_internet_available()
 
   if (!is.vector(state) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -422,7 +380,7 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
+  if (all(nchar(state) > 2)) state <- capitalize(state)
 
   if (is.null(pkg.env$state)) {
     pkg.env$state <- suppressMessages(hud_nation_states_territories(
@@ -464,14 +422,16 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
     places$statecode <- unlist(places$statecode)
     places$entityId <- unlist(places$entityId)
     places$placename <- unlist(places$placename)
-    if (to_tibble == FALSE) {
-      return(places)
-    } else {
-      return(as_tibble(places))
+
+    res <- places
+
+    if (to_tibble) {
+      res <- as_tibble(places)
     }
+
   }
 
-  return(NULL)
+  res
 }
 
 #' @name hud_state_minor_civil_divisions
@@ -499,29 +459,11 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
 #' hud_state_minor_civil_divisions("51")
 #' }
 hud_state_minor_civil_divisions <- function(state,
-                                            key = Sys.getenv("HUD_KEY"),
-                                            to_tibble) {
-
-  if (!curl::has_internet()) {
-    stop("\nYou currently do not have internet access.", call. = FALSE)
-  }
-
-  if (!is.null(getOption("rhud_use_tibble")) && missing(to_tibble)) {
-    to_tibble <- getOption("rhud_use_tibble")
-    message(paste(
-      "Outputted in tibble format",
-      "because it was set using `options(rhud_use_tibble = TRUE)`\n"))
-  } else if (missing(to_tibble)) {
-    to_tibble <- FALSE
-  }
-
-
-  if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("\nMake sure all inputs are of type vector. ",
-               "Check types with typeof([variable]). ",
-               "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
-  }
+                                    key = Sys.getenv("HUD_KEY"),
+                                    to_tibble = getOption("rhud_use_tibble",
+                                                          FALSE)) {
+  res <- NULL
+  is_internet_available()
 
   if (key == "") {
     stop(paste("\nDid you forget to set the key? ",
@@ -533,7 +475,7 @@ hud_state_minor_civil_divisions <- function(state,
   }
 
   if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(tolower(state))
+  if (all(nchar(state) > 2)) state <- capitalize(state)
 
   if (is.null(pkg.env$state)) {
     pkg.env$state <- suppressMessages(hud_nation_states_territories(
@@ -574,12 +516,13 @@ hud_state_minor_civil_divisions <- function(state,
     mcd$statecode <- unlist(mcd$statecode)
     mcd$entityId <- unlist(mcd$entityId)
     mcd$mcdname <- unlist(mcd$mcdname)
-    if (to_tibble == FALSE) {
-      return(mcd)
-    } else {
-      return(to_tibble(mcd))
+
+    res <- mcd
+
+    if (to_tibble) {
+      res <- to_tibble(mcd)
     }
   }
 
-  return(NULL)
+  res
 }

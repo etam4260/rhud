@@ -1,5 +1,6 @@
-test_that("test hud_chas_nation()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_chas_nation() Simple Examples and Errors", {
+  skip_if_no_key()
+
   # First make simple query call to hud_chas_nation() with no arguments.
   # Will choose default 2014-2018.
   one_year <- hud_chas_nation()
@@ -19,8 +20,9 @@ test_that("test hud_chas_nation()", {
   expect_error(hud_chas_nation(year = c(2018, 2019)))
 })
 
-test_that("test hud_chas_state", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_chas_state() Simple Examples, All States, and Errors", {
+  skip_if_no_key()
+
   # Try querying for a state using abbreviation...
   # Try lowercase too... Try uppercase too...
   # Try weird cases...
@@ -69,8 +71,8 @@ test_that("test hud_chas_state", {
   expect_true(identical(all_state_num, all_state_abbr))
 })
 
-test_that("test hud_chas_county()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_chas_county() Simple Examples, Maryland Counties, and Error", {
+  skip_if_no_key()
   # Simple query only a single county.
   test <- hud_chas_county(county = "06105")
   expect_true(nrow(test) == 1)
@@ -97,8 +99,8 @@ test_that("test hud_chas_county()", {
   expect_true(check_is_not_list(all_md))
 })
 
-test_that("test hud_chas_state_mcd()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_chas_state_mcd() For MD", {
+  skip_if_no_key()
 
   # This will take a while...
   all_md <- hud_chas_state_mcd("md")

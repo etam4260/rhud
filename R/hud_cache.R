@@ -22,13 +22,16 @@
 #' * If setting a new directory, the previous cache will not be cleaned. In
 #'   a future update there will be a garbage collection option.
 #'
-#' @param path The full path to the desired cache directory. Only one can be
+#' @param path A character vector of length one specifying the full path to
+#'  the desired cache directory. Only one can be
 #'  set at a time. If no path is specified, it will use the temp directory
 #'  for R. The temp directory is not persistent.
-#' @param in_wkdir Store the path as environment variable in the working
+#' @param in_wkdir A logical to determine if to store the path as environment
+#'   variable in the working
 #'   directory .Rprofile so rhud will cache to this specified path.
-#' @param in_home Store the path as environment variable in the HOME directory
-#'  .Rprofile so rhud will cache to this specified path.
+#' @param in_home A logical to determine if to store the path as environment
+#'   variable in the HOME directory
+#'   .Rprofile so rhud will cache to this specified path.
 #' @seealso
 #' * [rhud::hud_get_cache_dir()]
 #' * [rhud::hud_set_cache_dir()]
@@ -59,7 +62,7 @@ hud_set_cache_dir <- function(path,
   if (!is.character(path) || length(path) != 1) {
     stop(paste("Make sure argument key is of type",
                "character and is of vector length 1",
-               sep = ""))
+               sep = ""), call. = FALSE)
   }
 
 
@@ -67,7 +70,8 @@ hud_set_cache_dir <- function(path,
      !is.logical(in_home) ||
      length(in_wkdir) != 1  ||
      length(in_home) != 1) {
-    stop("Make sure argument in_wkdir and in_home are of type logical.")
+    stop("Make sure argument in_wkdir and in_home are of type logical.",
+         call. = FALSE)
   }
 
   Sys.setenv("RHUD_CACHE_DIR" = path)
@@ -163,6 +167,8 @@ hud_set_cache_dir <- function(path,
 #' * [rhud::hud_get_cache_dir()]
 #' * [rhud::hud_set_cache_dir()]
 #' * [rhud::hud_clear_cache()]
+#' @returns A character vector stores in the RHUD_CACHE_DIR system environment
+#'   variable.
 #' @examples
 #' \dontrun{
 #' hud_get_cache_dir()

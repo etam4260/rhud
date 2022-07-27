@@ -1,7 +1,7 @@
 # Should allow user to provide county name/state names/abbreviations. All string
 # inputs that can be numeric inputs can be supplied as a numeric input.
-test_that("Crosswalk All Types", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw() for All Types", {
+  skip_if_no_key()
   # For these tests, none of  the Crosswalk queries should throw an error.
   # Need to also check for if these queries result a satiable result; need
   # to add least have 1 row or more in data frame returned.
@@ -89,8 +89,8 @@ test_that("Crosswalk All Types", {
 })
 
 
-test_that("Crosswalk Different Years", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw() for Different Years", {
+  skip_if_no_key()
   # Error when years are in the future
   expect_error(hud_cw(type = 7, query = "22031",
                       year = c("2010", "2011", "2024"),
@@ -98,8 +98,8 @@ test_that("Crosswalk Different Years", {
 })
 
 
-test_that("Different Quarters", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw() for Different Quarters", {
+  skip_if_no_key()
   # Error when quarters are not from 1 to 4
   expect_error(hud_cw(type = 7, query = "22031",
                       year = c("2010", "2011"),
@@ -107,8 +107,8 @@ test_that("Different Quarters", {
 })
 
 
-test_that("Wrong Queries", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw() for Invalid Queries", {
+  skip_if_no_key()
   expect_error(hud_cw(type = 7, query = "22031241231",
                       year = c("2010", "2011"),
                       quarter = c("1", "2", "3", "4")))
@@ -120,9 +120,9 @@ test_that("Wrong Queries", {
 })
 
 
-test_that("Not Convertable to Integer", {
+test_that("hud_cw() for Nonnumeric Inputs", {
   # Character arguments that aren"t numbers in any of them. Throws errors.
-  skip_if(Sys.getenv("HUD_KEY") == "")
+  skip_if_no_key()
   expect_error(hud_cw(type = "dwqji", query = "22031",
                       year = c("2010", "2011"),
                       quarter = c("1", "2", "3", "4")))

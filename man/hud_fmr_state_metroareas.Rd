@@ -8,7 +8,7 @@ hud_fmr_state_metroareas(
   state,
   year = format(Sys.Date() - 365, "\%Y"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble
+  to_tibble = getOption("rhud_use_tibble")
 )
 }
 \arguments{
@@ -52,6 +52,7 @@ hud_fmr_state_metroareas("24", year = c(2021))
 \item \code{\link[=hud_fmr_state_counties]{hud_fmr_state_counties()}}
 \item \code{\link[=hud_fmr_metroarea_zip]{hud_fmr_metroarea_zip()}}
 \item \code{\link[=hud_fmr_county_zip]{hud_fmr_county_zip()}}
+\item \code{\link[=hud_fmr]{hud_fmr()}}
 }
 }
 \keyword{API}

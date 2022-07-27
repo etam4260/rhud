@@ -1,5 +1,5 @@
-test_that("Query hud_cw_zip_tract()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_zip_tract() Simple Example and Error", {
+  skip_if_no_key()
   res <- hud_cw_zip_tract(zip = "35213", year = c("2010"), quarter = c("1"))
   expect_true(nrow(res) >= 1)
 
@@ -13,8 +13,8 @@ test_that("Query hud_cw_zip_tract()", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_zip_county()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_zip_county() Simple Example and Error", {
+  skip_if_no_key()
   res <- hud_cw_zip_county(zip = 35213, year = c("2020"), quarter = c("2"))
   expect_true(nrow(res) >= 1)
 
@@ -28,8 +28,8 @@ test_that("Query hud_cw_zip_county()", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_zip_cbsa()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_zip_cbsa() Simple Example and Error", {
+  skip_if_no_key()
   res <- hud_cw_zip_cbsa(zip = 35213, year = c("2020"), quarter = c("2"))
   expect_true(nrow(res) >= 1)
 
@@ -43,8 +43,8 @@ test_that("Query hud_cw_zip_cbsa()", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_zip_cbsadiv()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_zip_cbsadiv() Simple Example and Error", {
+  skip_if_no_key()
   res <- hud_cw_zip_cbsadiv(zip = 22031, year = c("2020"), quarter = c("2"))
   expect_true(nrow(res) >= 1)
 
@@ -58,8 +58,8 @@ test_that("Query hud_cw_zip_cbsadiv()", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_zip_cd()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_zip_cd() Simple Example and Error", {
+  skip_if_no_key()
   res <- hud_cw_zip_cd(zip = 35213, year = c("2020"), quarter = c("2"))
   expect_true(nrow(res) >= 1)
 
@@ -74,9 +74,9 @@ test_that("Query hud_cw_zip_cd()", {
 })
 
 
-test_that("Query hud_cw_tract_zip()", {
+test_that("hud_cw_tract_zip() Simple Example and Error", {
+  skip_if_no_key()
 
-  skip_if(Sys.getenv("HUD_KEY") == "")
   res <- hud_cw_tract_zip(tract = 48201223100, year = c("2017"),
                           quarter = c("1"))
 
@@ -93,8 +93,9 @@ test_that("Query hud_cw_tract_zip()", {
 })
 
 
-test_that("Query hud_cw_county_zip()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_county_zip() Simple Example and Error", {
+  skip_if_no_key()
+
   res <- hud_cw_county_zip(county = "22031", year = c("2010"), quarter = c("1"))
   expect_true(nrow(res) >= 1)
 
@@ -114,8 +115,9 @@ test_that("Query hud_cw_county_zip()", {
 })
 
 
-test_that("Query hud_cw_cbsa_zip()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_cbsa_zip() Simple Example and Error", {
+  skip_if_no_key()
+
   res <- hud_cw_cbsa_zip(cbsa = "10140", year = c("2017"), quarter = c("2"))
   expect_true(nrow(res) >= 1)
 
@@ -129,8 +131,9 @@ test_that("Query hud_cw_cbsa_zip()", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_cbsadiv_zip()", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_cbsadiv_zip() Simple Example and Error", {
+  skip_if_no_key()
+
   res <- hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c("2017"), quarter = c("4"))
   expect_true(nrow(res) >= 1)
 
@@ -144,8 +147,9 @@ test_that("Query hud_cw_cbsadiv_zip()", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_cd_zip", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_cd_zip() Simple Example and Error", {
+  skip_if_no_key()
+
   res <- hud_cw_cd_zip(cd = "2202", year = c("2010"), quarter = c("4"))
   expect_true(nrow(res) >= 1)
 
@@ -159,8 +163,9 @@ test_that("Query hud_cw_cd_zip", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_zip_countysub", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("hud_cw_zip_countysub() Simple Example and Error", {
+  skip_if_no_key()
+
   res <- hud_cw_zip_countysub(zip = "35213", year = c("2019"), quarter = c("2"))
   expect_true(nrow(res) >= 1)
 
@@ -174,9 +179,10 @@ test_that("Query hud_cw_zip_countysub", {
   expect_true(is.vector(res) && length(res) >= 1)
 })
 
-test_that("Query hud_cw_countysub_zip", {
+test_that("hud_cw_countysub_zip() Simple Example and Error", {
 
-  skip_if(Sys.getenv("HUD_KEY") == "")
+  skip_if_no_key()
+
   res <- hud_cw_countysub_zip(countysub = "4606720300 ",
                               year = c("2019", "2019", "2019"),
                               quarter = c("4", "4"))

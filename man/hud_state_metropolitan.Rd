@@ -4,7 +4,11 @@
 \alias{hud_state_metropolitan}
 \title{US Metropolitan Areas}
 \usage{
-hud_state_metropolitan(state, key = Sys.getenv("HUD_KEY"), to_tibble)
+hud_state_metropolitan(
+  state,
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble = getOption("rhud_use_tibble")
+)
 }
 \arguments{
 \item{state}{The state to get all the metropolitan areas. Can be provided as

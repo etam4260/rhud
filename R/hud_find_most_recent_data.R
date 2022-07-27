@@ -5,7 +5,7 @@
 #'    This will only ping for the last two years for every quarter.
 #'    This tests hud_cw_tract_zip(tract = 48201223100) as
 #'    the endpoint query.
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
 #' @seealso
@@ -22,6 +22,8 @@
 #'
 #' }
 hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
+
+  res <- c(NULL, NULL)
 
   year <- as.integer(format(Sys.Date(), "%Y"))
   month <- as.integer(format(Sys.Date(), "%m"))
@@ -49,7 +51,7 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
     )))
 
     if (!is.null(data) && nrow(data) >= 1) {
-      return(c(year = year, quarter = quarter))
+      res <- c(year = year, quarter = quarter)
     }
 
     if (quarter > 1) {
@@ -61,7 +63,7 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
     i <- i - 1
   }
 
-  return(c(NA, NA))
+  res
 }
 
 
@@ -72,7 +74,7 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
 #'    determine the most recently released files. This will only ping
 #'    for the last two years. Will return years for state, county, and metroarea
 #'    resolutions.
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
 #' @seealso
@@ -89,6 +91,7 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
 #'
 #' }
 hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
+
   year <- as.integer(format(Sys.Date(), "%Y"))
   month <- as.integer(format(Sys.Date(), "%m"))
 
@@ -157,9 +160,7 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
   }
 
-  return(c(state = year_state,
-           county = year_county,
-           metroarea = year_metroarea))
+  c(state = year_state, county = year_county, metroarea = year_metroarea)
 }
 
 
@@ -171,7 +172,7 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
 #'    determine the most recently released files. This will only ping
 #'    for the last two years. Will return years for state, county, and metroarea
 #'    resolution.
-#' @param key The key obtained from HUD
+#' @param key A character vector of length one with the key obtained from HUD
 #'   (US Department of Housing and Urban Development)
 #'   USER website.
 #' @seealso
@@ -255,7 +256,5 @@ hud_rec_il_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
   }
 
-  return(c(state = year_state,
-           county = year_county,
-           metroarea = year_metroarea))
+  c(state = year_state, county = year_county, metroarea = year_metroarea)
 }

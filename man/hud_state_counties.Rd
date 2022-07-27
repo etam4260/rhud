@@ -4,7 +4,11 @@
 \alias{hud_state_counties}
 \title{US Counties}
 \usage{
-hud_state_counties(state, key = Sys.getenv("HUD_KEY"), to_tibble)
+hud_state_counties(
+  state,
+  key = Sys.getenv("HUD_KEY"),
+  to_tibble = getOption("rhud_use_tibble")
+)
 }
 \arguments{
 \item{state}{The state(s) to get all county(s).}

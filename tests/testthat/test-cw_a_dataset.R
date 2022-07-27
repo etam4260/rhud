@@ -1,6 +1,6 @@
 
-test_that("test simple crosswalk for zip", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("crosswalk() for Zipcodes and Simple Examples", {
+  skip_if_no_key()
 
   sample <- data.frame(mes = c(1232, 2453, 4564), zip = c(21206, 21224, 20854))
 
@@ -93,8 +93,8 @@ test_that("test simple crosswalk for zip", {
 })
 
 
-test_that("test awkward crosswalk", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("crosswalk() for Awkward Inputs", {
+  skip_if_no_key()
 
   sample <- data.frame(mes = c(1232, 1232, 1232), zip = c(21206, 21206, 21206))
 

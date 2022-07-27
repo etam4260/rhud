@@ -1,6 +1,6 @@
-test_that("test %z_in_trt%", {
+test_that("%z_in_trt% Simple Queries and Errors", {
   # When numerics have leading zeros, it might not work...
-  skip_if(Sys.getenv("HUD_KEY") == "")
+  skip_if_no_key()
 
   # Invalid zipcode 34321 should throw warning....
   expect_warning(expect_equal(c(35213, 34321) %z_in_trt% c("01073010801"),
@@ -18,8 +18,8 @@ test_that("test %z_in_trt%", {
 })
 
 
-test_that("test %z_in_cty%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%z_in_cty% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(71052 %z_in_cty% 22031, TRUE)
 
@@ -34,8 +34,8 @@ test_that("test %z_in_cty%", {
 })
 
 
-test_that("test %z_in_cbsa%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%z_in_cbsa% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(71052 %z_in_cbsa% 43340, TRUE)
 
@@ -50,8 +50,8 @@ test_that("test %z_in_cbsa%", {
 })
 
 
-test_that("test %z_in_cbsadiv%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%z_in_cbsadiv% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_warning(expect_equal(35235 %z_in_cbsadiv% 13820, FALSE))
   # The zip to cbsadiv and cbsadiv to zip API might be broken for any
@@ -67,8 +67,8 @@ test_that("test %z_in_cbsadiv%", {
 
 
 
-test_that("test %z_in_ctysb%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%z_in_ctysb% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(44214 %z_in_ctysb% 3910383426, TRUE)
 
@@ -83,8 +83,8 @@ test_that("test %z_in_ctysb%", {
   expect_error(c(20774, 122) %z_in_ctysb% c(1014033))
 })
 
-test_that("test %z_in_cd%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%z_in_cd% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(70072 %z_in_cd% 2202, TRUE)
 
@@ -98,8 +98,9 @@ test_that("test %z_in_cd%", {
   expect_error(c(20774, 122) %z_in_cd% c(1014033))
 })
 
-test_that("test %trt_in_z%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%trt_in_z% Simple Queries and Errors", {
+
+  skip_if_no_key()
   # In this case we see that numeric inputs with leading zero get truncated..
   # need to fix that.
 
@@ -115,8 +116,8 @@ test_that("test %trt_in_z%", {
   expect_error(c(20774, 122) %trt_in_z% c(1014033))
 })
 
-test_that("test %cty_in_z%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%cty_in_z% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(24027 %cty_in_z% 21043, TRUE)
 
@@ -130,8 +131,8 @@ test_that("test %cty_in_z%", {
   expect_error(c(20774, 122) %cty_in_z% c(1014033))
 })
 
-test_that("test %cbsa_in_z%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%cbsa_in_z% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(32300 %cbsa_in_z% 24054, TRUE)
 
@@ -145,8 +146,8 @@ test_that("test %cbsa_in_z%", {
   expect_error(c(20774, 122) %cbsa_in_z% c(1014033))
 })
 
-test_that("test %cbsadiv_in_z%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%cbsadiv_in_z% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_warning(expect_equal(32300 %cbsadiv_in_z% 24054, FALSE))
 
@@ -159,8 +160,8 @@ test_that("test %cbsadiv_in_z%", {
   expect_error(c(20774, 122) %cbsadiv_in_z% c(1014033))
 })
 
-test_that("test %cd_in_z%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%cd_in_z% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(5109 %cd_in_z% 24059, TRUE)
 
@@ -174,8 +175,8 @@ test_that("test %cd_in_z%", {
   expect_error(c(20774, 122) %cd_in_z% c(1014033))
 })
 
-test_that("test %ctysb_in_z%", {
-  skip_if(Sys.getenv("HUD_KEY") == "")
+test_that("%ctysb_in_z% Simple Queries and Errors", {
+  skip_if_no_key()
 
   expect_equal(3910371488 %ctysb_in_z% 44273, TRUE)
 

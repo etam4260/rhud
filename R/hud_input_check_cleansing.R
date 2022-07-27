@@ -13,7 +13,9 @@
 #' @returns The cleansed input arguments.
 #' @noRd
 chas_input_check_cleansing <- function(query, year, key) {
-  if (!is.vector(year) || !is.vector(key)) {
+   res <- NULL
+
+   if (!is.vector(year) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
@@ -48,6 +50,7 @@ chas_input_check_cleansing <- function(query, year, key) {
   }
 
   if (!missing(query)) {
+
     if (!is.vector(query)) {
       stop(paste("\nMake sure all inputs are of type vector. ",
                  "Check types with typeof([variable]). ",
@@ -57,9 +60,13 @@ chas_input_check_cleansing <- function(query, year, key) {
     }
 
     query <- unique(paste(trimws(as.character(query), which = "both")))
-    return(list(query, year, key))
+
+    res <- list(query, year, key)
+  } else {
+    res <- list(year, key)
   }
-  return(list(year, key))
+
+  res
 }
 
 
@@ -151,13 +158,14 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
               call. = FALSE), "")
 
   ifelse(any(year == min_year) && any(as.integer(quarter) < min_quarter),
-         stop(paste("\nOne of the quarter is below the
+         stop(paste("\nOne of the quarter(s) is below the
                     minimum quarter for the minimum year: ",
                     min_quarter,
                     sep = ""),
               call. = FALSE), "")
 
-  return(list(query, as.integer(year), as.integer(quarter), key))
+
+  list(query, as.integer(year), as.integer(quarter), key)
 }
 
 
@@ -178,7 +186,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""))
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
   }
 
   if (length(key) != 1) {
@@ -195,7 +203,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
                "hudapi/public/register?comingfrom=1 ",
                "to sign up and get a token. Then save ",
                "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
 
   }
 
@@ -217,6 +225,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
                              as.character(query), ][2]
     query <- unlist(query[[1]])
   }
+
   if (nrow(pkg.env$state[pkg.env$state$state_code %in%
                         as.character(query), ]) != 0) {
     query <- pkg.env$state[pkg.env$state$state_code %in%
@@ -260,7 +269,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
   }
 
   # Make sure to coerce year back to character for user processing.
-  return(list(query, as.integer(year), key, querytype))
+  list(query, as.integer(year), key, querytype)
 }
 
 
@@ -374,7 +383,7 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
                "hudapi/public/register?comingfrom=1 ",
                "to sign up and get a token. Then save ",
                "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
   }
 
 
@@ -383,8 +392,8 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
                                    query = data[, geoid_col], year = year,
                                    quarter = quarter, key = key)
 
-  return(list(geoid, geoid_col, cw_geoid, cw_geoid_col, method,
-              args[2], args[3], args[4]))
+  list(geoid, geoid_col, cw_geoid, cw_geoid_col,
+       method, args[2], args[3], args[4])
 }
 
 
@@ -397,7 +406,10 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 #' @returns A string with only first letter in string capitalized.
 #'   Does not capitalize all words in a sentence.
 #' @noRd
+#' @noMd
 capitalize <- function(string) {
-  return(paste(toupper(substr(string, 1, 1)),
-               substr(string, 2, nchar(string)), sep = ""))
+  string <- tolower(string)
+
+  paste(toupper(substr(string, 1, 1)),
+        substr(string, 2, nchar(string)), sep = "")
 }
