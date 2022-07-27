@@ -1,5 +1,5 @@
 ---
-title: "USPS Crosswalk"
+title: "USPS-Crosswalk"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{USPS-Crosswalk}

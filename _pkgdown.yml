@@ -9,11 +9,10 @@ navbar:
    articles:
     text: Articles
     menu:
-    - text: "HUD User"
     - text: "USPS Crosswalk"
       href: articles/USPS-Crosswalk.html
-    - text: "Fair Markets Rent"
-      href: articles/Fair-Markets-Rent.html
+    - text: "Fair Market Rents"
+      href: articles/Fair-Market-Rents.html
     - text: "Income Limits"
       href: articles/Income-Limits.html
     - text: "Comprehensive Housing and Affordability Strategy"
@@ -21,7 +20,7 @@ navbar:
    casestudy:
     text: "Case Studies"
     menu:
-    - text: "Analysis of COVID-19 Cases and Evictions"
+    - text: "Analysis of Covid-19 Cases and Evictions"
       href: articles/Covid-19-and-Evictions-Crosswalk.html
     - text: "Visualizing FMR and IL"
       href: articles/Visualizing-FMR-and-IL.html

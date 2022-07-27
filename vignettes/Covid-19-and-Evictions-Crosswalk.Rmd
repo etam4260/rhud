@@ -1,5 +1,5 @@
 ---
-title: "Covid 19 and Evictions Crosswalk"
+title: "Covid-19-and-Evictions-Crosswalk"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Covid-19-and-Evictions-Crosswalk}
