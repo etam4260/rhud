@@ -32,9 +32,6 @@ navbar:
    changelog:
     text: Changelog
     href: news/index.html
-   search:
-    exclude: ['news/index.html']
-
 
 reference:
 - title: All functions
@@ -42,3 +39,5 @@ reference:
 - contents:
   - starts_with("*")
 
+search:
+    exclude: ['news/index.html']
