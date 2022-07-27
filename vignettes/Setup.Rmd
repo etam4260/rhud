@@ -40,7 +40,7 @@ function to save the key to the user environment.
 There are various method of setting up a key. However, I recommend using the
 Sys.setenv() function. 
 
-###3 Using Sys.setenv() during an interactive session
+#### Using Sys.setenv() during an interactive session
 One method of setting the API key is to use environment variables. This library
 searches for HUD_KEY in the user environment to check if a key has been defined.
 If no key has been defined, an empty string is outputted. 

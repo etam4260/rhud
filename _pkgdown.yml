@@ -33,7 +33,7 @@ navbar:
 
 reference:
 - title: All functions
-  desc:  An index that lists all functions in alphabetical order.
+  desc:  An index that lists all functions in alphabetical order
 - contents:
   - starts_with("*")
 
