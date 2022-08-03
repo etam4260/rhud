@@ -225,7 +225,7 @@ also provide miscellaneous supplemental APIs under them.
   | `hud_rec_fmr_yr()` |
   | `hud_rec_il_yr()` |
 
-##3 Contributors
+### Contributors
 
 * Emmet Tam(https://github.com/etam4260)[emmet_tam@yahoo.com]
 * Allison Reilly[areilly2@umd.edu]
@@ -233,7 +233,7 @@ also provide miscellaneous supplemental APIs under them.
 * Shuyu Jin(https://github.com/geojsy)[geojsy@umd.edu]
 
 
-##3 Disclaimers
+### Disclaimers
 
 * License: GPL >= 2 
 

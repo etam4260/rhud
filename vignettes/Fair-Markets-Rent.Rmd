@@ -1,5 +1,5 @@
 ---
-title: "Fair Market Rents"
+title: "Fair-Market-Rents"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Fair-Market-Rents}
@@ -21,13 +21,7 @@ to calculate payment standard amounts for the Housing Choice Voucher program,
 initial renewal rents for some expiring project-based Section 8 contracts,
 initial rents for housing assistance payment (HAP) contracts in the Moderate
 Rehabilitation Single Room Occupancy program (Mod Rehab), rent ceilings for
-rental units in both the HOME Investment Partnerships program and the Emergency
-Solution Grants program, and rent ceilings for rental units in both the HOME
-Investment Partnerships program and the Emergency Solution Grant.
-
-
-# <img src='./fmr_pic.jpg' href="https://creativecommons.org/licenses/by/2.0/" title="CC BY 2.0" align="right" width="40%"/>
-
+rental units in both the HOME Investment Partnerships program and the Emergency Solution Grants program, and rent ceilings for rental units in both the HOME Investment Partnerships program and the Emergency Solution Grant.
 
 Furthermore, the United States Department of Housing and Urban Development (HUD)
 calculates FMRs for metropolitan areas defined by the Office of Management and
