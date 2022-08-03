@@ -8,22 +8,24 @@ hud_fmr_state_metroareas(
   state,
   year = format(Sys.Date() - 365, "\%Y"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{state}{The state(s) to query for. Can be abbreviation(s),
+\item{state}{A character or numeric vector: the state(s) to query for.
+Can be abbreviation(s),
 fip code(s), or full name(s).}
 
-\item{year}{Gets the year that this data was recorded.
+\item{year}{A character of numeric vector: gets the year
+that this data was recorded.
 Can specify multiple year(s). Default is the
 previous year.}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical: if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
@@ -31,7 +33,7 @@ A data frame with Fair Markets Rent for metro areas in state(s) for
 all combinations of "state" and "year" inputs.
 }
 \description{
-This function queries for a state and returns the
+This function queries for state(s) and returns the
 (Fair Markets Rent) FMR calculation
 at a metroarea resolution for all metroareas in the state query.
 }

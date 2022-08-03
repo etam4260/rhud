@@ -8,21 +8,23 @@ hud_fmr_county_zip(
   county,
   year = format(Sys.Date() - 365, "\%Y"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{county}{A county to query for. Must be provided as a 5 digit fipcode.}
+\item{county}{A character or numeric vector: a county to query for.
+Must be provided as a 5 digit fipcode.}
 
-\item{year}{Gets the year that this data was recorded.
-Can specify multiple years. Default is the
+\item{year}{A character of numeric vector: gets the year
+that this data was recorded.
+Can specify multiple year(s). Default is the
 previous year.}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical: if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
@@ -30,7 +32,7 @@ A data frame with fair markets rent for zip codes in counties for
 all combinations of "county" and "year" inputs.
 }
 \description{
-This function queries for a county and returns FMR calculation.
+This function queries for county(s) and returns FMR calculation.
 If the county is not
 a small area, it will return only single
 measurement for that county. If the county is considered a small area,

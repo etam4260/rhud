@@ -34,57 +34,41 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
   res <- NULL
   is_internet_available()
 
-  if (!is.vector(key)) {
-    stop(paste("\nMake sure all inputs are of type vector. ",
-               "Check types with typeof([variable]). ",
-               "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
-  }
+  misc_input_check_cleansing(NULL, key, "nation-state")
 
-  if (key == "") {
-    stop(paste("\nDid you forget to set the key? ",
-               "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 ",
-               "to sign up and get a token. Then save ",
-               "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
-  }
 
   urls <- "https://www.huduser.gov/hudapi/public/fmr/listStates"
-
   call <- memoizedCall(make_query_calls, urls, key)
 
-  cont <- try(content(call), silent = TRUE) #parse returned data
+  states <- misc_do_query_call(urls, key, to_tibble = FALSE)
 
-  # A lot of the functions in this package use the states in this function call
-  # to validate the input variables from user. Do not show this download bar
-  # when validating.
-  download_bar(done = 1, total = 1,
-                 current = urls, error = 0)
 
-  states <- as.data.frame(do.call("rbind", cont))
+  # cont <- try(content(call), silent = TRUE) #parse returned data
+  # states <- as.data.frame(do.call("rbind", cont))
+
   states$state_num <- as.character(as.integer(states$state_num))
+
+  states
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
-  if (!is.null(states) && nrow(states) > 1) {
+  #if (!is.null(states) && nrow(states) > 1) {
 
-    states$state_name <- unlist(states$state_name)
-    states$state_code <- unlist(states$state_code)
-    states$state_num <- unlist(states$state_num)
-    states$category <- unlist(states$category)
+    #states$state_name <- unlist(states$state_name)
+    #states$state_code <- unlist(states$state_code)
+    #states$state_num <- unlist(states$state_num)
+    #states$category <- unlist(states$category)
 
-    res <- states
+  #  res <- states
 
-    if (to_tibble) {
-      res <- as_tibble(states)
-    }
-  }
-  res
+  #  if (to_tibble) {
+  #    res <- as_tibble(states)
+ #   }
+ # }
+ #
+  #res
 }
 
-# Need to allow user to filter metropolitan areas similar to place, county,
-# mcds.
 
 #' @name hud_state_metropolitan
 #' @title US Metropolitan Areas
@@ -118,35 +102,24 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   res <- NULL
   is_internet_available()
 
-  if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("\nMake sure all inputs are of type vector. ",
-               "Check types with typeof([variable]). ",
-               "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
-  }
-
-  if (key == "") {
-    stop(paste("\nDid you forget to set the key? ",
-               "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 ",
-               "to sign up and get a token. Then save ",
-               "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
-  }
+  cleaned <- misc_input_check_cleansing(state, key, "state-metro")
+  state <- cleaned[1]
+  key <- cleaned[2]
 
   # The 'area_name' column gives information on the metropolitan place, the
-  # abbreviation of state, and the stating that it is a MSA(metro stat areas)
+  # abbreviation of state, and the stating that it is a MSA(metro state areas)
 
   urls <- "https://www.huduser.gov/hudapi/public/fmr/listMetroAreas"
+  metro <- misc_do_query_call(urls, key, to_tibble = FALSE)
 
-  call <- memoizedCall(make_query_calls, urls, key)
+  #call <- memoizedCall(make_query_calls, urls, key)
 
-  cont <- try(content(call), silent = TRUE) #parse returned data
+  #cont <- try(content(call), silent = TRUE) #parse returned data
 
-  download_bar(done = 1, total = 1,
-               current = urls, error = 0)
+  #download_bar(done = 1, total = 1,
+  #             current = urls, error = 0)
 
-  metro <- as.data.frame(do.call(rbind, cont))
+  #metro <- as.data.frame(do.call(rbind, cont))
 
   # Do a regular expression of the area name column to parse it into
   # the name, the state location, and whether is is a HUD small areas...
@@ -155,6 +128,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   met_name <- c()
   parsed_states <- c()
   classifications <- c()
+
   for (i in seq_len(length(reged))) {
     met_name <- c(met_name, substr(metro$area_name[i], 1,
                                    reged[[i]][2] - 2))
@@ -173,58 +147,27 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   metro$metro_state <- parsed_states
   metro$classifications <- classifications
 
-  if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(state)
-
-  if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(
-      key = Sys.getenv("HUD_KEY")))
-  }
-
-  for (i in seq_len(length(state))) {
-    if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("There is no matching fips code for one of the inputted states.",
-           call. = FALSE)
-    }
-  }
-
-  # Filter now based on state input.
-  # Allow user to supply state name or state abbr or state fips as inputs.
-  if (nrow(pkg.env$state[pkg.env$state$state_name %in%
-                        as.character(state), ]) != 0) {
-    state_abbr <- pkg.env$state[pkg.env$state$state_name %in%
-                                as.character(state), ][2]
-  }
-  if (nrow(pkg.env$state[pkg.env$state$state_code %in%
-                        as.character(state), ]) != 0) {
-    state_abbr <- pkg.env$state[pkg.env$state$state_code %in%
-                                as.character(state), ][2]
-  }
-  if (nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
-                        as.character(state), ]) != 0) {
-    state_abbr <- pkg.env$state[pkg.env$state$state_num %in%
-                                as.character(state), ][2]
-  }
-
   state_abbr <- unlist(state_abbr)
 
-  metro <- metro[metro$metro_state == state_abbr, ]
+  metro <- metro[metro$metro_state == state, ]
+
+  metro
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
-  if (!is.null(metro) && nrow(metro) > 1) {
+  #if (!is.null(metro) && nrow(metro) > 1) {
 
-    metro$cbsa_code <- unlist(metro$cbsa_code)
-    metro$area_name <- unlist(metro$area_name)
-    metro$category <- unlist(metro$category)
-    res <- metro
+    # metro$cbsa_code <- unlist(metro$cbsa_code)
+    # metro$area_name <- unlist(metro$area_name)
+    # metro$category <- unlist(metro$category)
+  #  res <- metro
 
-    if (to_tibble) {
-      res <- as_tibble(metro)
-    }
-  }
+  #  if (to_tibble) {
+  #    res <- as_tibble(metro)
+  #  }
+  #}
 
-  res
+  #res
 }
 
 
@@ -259,79 +202,40 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
   res <- NULL
   is_internet_available()
 
-  if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("\nMake sure all inputs are of type vector. ",
-               "Check types with typeof([variable]). ",
-               "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
-  }
-
-  if (key == "") {
-    stop(paste("\nDid you forget to set the key? ",
-               "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 ",
-               "to sign up and get a token. Then save ",
-               "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
-  }
-
-  if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(state)
-
-  if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(
-      key = Sys.getenv("HUD_KEY")))
-  }
-
-  for (i in seq_len(length(state))) {
-    if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("\nThere is no matching fips code for one of the inputted states.",
-           call. = FALSE)
-    }
-  }
-
-  # Allow user to supply state name or state abbr or state fips as inputs.
-  if (nrow(pkg.env$state[pkg.env$state$state_name %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_name %in%
-                                as.character(state), ][2]
-  }
-  if (nrow(pkg.env$state[pkg.env$state$state_code %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_code %in%
-                                as.character(state), ][2]
-  }
-  if (nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_num %in%
-                                as.character(state), ][2]
-  }
+  cleaned <- misc_input_check_cleansing(state, key, "state-county")
+  state_abbr <- cleaned$fip_code
+  key <- cleaned$key
 
   # Allow the user to specify multiple years states to query for... Just stack
   # them.
 
   urls <- paste("https://www.huduser.gov/hudapi/public/fmr/listCounties/",
-               unlist(fip_code), sep = "")
+               unlist(state_abbr), sep = "")
   counties <- misc_do_query_call(urls, key, to_tibble)
+
+
+  counties
 
   # A very ambiguous check. Assume that error and only errors return 1 row of
   # text explaining so error.
-  if (!is.null(counties) && nrow(counties) > 1) {
-    counties$state_code <- unlist(counties$state_code)
-    counties$fips_code <- unlist(counties$fips_code)
-    counties$county_name <- unlist(counties$county_name)
-    counties$town_name <- unlist(counties$town_name)
-    counties$category <- unlist(counties$category)
+  #if (!is.null(counties) && nrow(counties) > 1) {
 
-    res <- counties
+    #counties$state_code <- unlist(counties$state_code)
+    #counties$fips_code <- unlist(counties$fips_code)
+    #counties$county_name <- unlist(counties$county_name)
+    #counties$town_name <- unlist(counties$town_name)
+    #counties$category <- unlist(counties$category)
 
-    if (to_tibble) {
-      res <- as_tibble(counties)
-    }
-  }
+  #  res <- counties
 
-  res
+  #  if (to_tibble) {
+  #    res <- as_tibble(counties)
+  #  }
+  #}
+
+ #res
 }
+
 
 #' @name hud_state_places
 #' @title US Places
@@ -363,54 +267,10 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
   res <- NULL
   is_internet_available()
 
-  if (!is.vector(state) || !is.vector(key)) {
-    stop(paste("\nMake sure all inputs are of type vector. ",
-               "Check types with typeof([variable]). ",
-               "If list try unlist([variable]); ",
-               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
-  }
+  cleaned <- misc_input_check_cleansing(state, key, "state-place")
+  fip_code <- cleaned$fip_code
+  key <- cleaned$key
 
-  if (key == "") {
-    stop(paste("\nDid you forget to set the key? ",
-               "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 ",
-               "to sign up and get a token. Then save ",
-               "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
-  }
-
-  if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(state)
-
-  if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(
-      key = Sys.getenv("HUD_KEY")))
-  }
-
-  for (i in seq_len(length(state))) {
-    if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("\nThere is no matching fips code for one of the inputted states.",
-           call. = FALSE)
-    }
-  }
-
-
-  # Allow user to supply state name or state abbr or state fips as inputs.
-  if (nrow(pkg.env$state[pkg.env$state$state_name %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_name %in%
-                                as.character(state), ][3]
-  }
-  if (nrow(pkg.env$state[pkg.env$state$state_code %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_code %in%
-                                as.character(state), ][3]
-  }
-  if (nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_num %in%
-                                as.character(state), ][3]
-  }
 
   urls <- paste("https://www.huduser.gov/hudapi/public/chas/listCities/",
                unlist(fip_code),
@@ -418,20 +278,23 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
 
   places <- misc_do_query_call(urls, key, to_tibble)
 
-  if (!is.null(places) && nrow(places) > 1) {
-    places$statecode <- unlist(places$statecode)
-    places$entityId <- unlist(places$entityId)
-    places$placename <- unlist(places$placename)
+  places
 
-    res <- places
+  #if (!is.null(places) && nrow(places) > 1) {
 
-    if (to_tibble) {
-      res <- as_tibble(places)
-    }
+    #places$statecode <- unlist(places$statecode)
+    #places$entityId <- unlist(places$entityId)
+    #places$placename <- unlist(places$placename)
 
-  }
+  #  res <- places
 
-  res
+   # if (to_tibble) {
+   #   res <- as_tibble(places)
+   # }
+
+ # }
+
+  #res
 }
 
 #' @name hud_state_minor_civil_divisions
@@ -465,46 +328,9 @@ hud_state_minor_civil_divisions <- function(state,
   res <- NULL
   is_internet_available()
 
-  if (key == "") {
-    stop(paste("\nDid you forget to set the key? ",
-               "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 ",
-               "to sign up and get a token. Then save ",
-               "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
-  }
-
-  if (all(nchar(state) == 2)) state <- toupper(state)
-  if (all(nchar(state) > 2)) state <- capitalize(state)
-
-  if (is.null(pkg.env$state)) {
-    pkg.env$state <- suppressMessages(hud_nation_states_territories(
-      key = Sys.getenv("HUD_KEY")))
-  }
-
-  for (i in seq_len(length(state))) {
-    if (!any(as.character(state[i]) == pkg.env$state)) {
-      stop("\nThere is no matching fips code for one of the inputted states.",
-           call. = FALSE)
-    }
-  }
-
-  # Allow user to supply state name or state abbr or state fips as inputs.
-  if (nrow(pkg.env$state[pkg.env$state$state_name %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_name %in%
-                                as.character(state), ][3]
-  }
-  if (nrow(pkg.env$state[pkg.env$state$state_code %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_code %in%
-                                as.character(state), ][3]
-  }
-  if (nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
-                        as.character(state), ]) != 0) {
-    fip_code <- pkg.env$state[pkg.env$state$state_num %in%
-                                as.character(state), ][3]
-  }
+  cleaned <- misc_input_check_cleansing(state, key, "state-mcd")
+  fip_code <- cleaned$fip_code
+  key <- cleaned$key
 
   urls <- paste("https://www.huduser.gov/hudapi/public/chas/listMCDs/",
                unlist(fip_code),
@@ -512,17 +338,20 @@ hud_state_minor_civil_divisions <- function(state,
 
   mcd <- misc_do_query_call(urls, key, to_tibble)
 
-  if (!is.null(mcd) && nrow(mcd) > 1) {
-    mcd$statecode <- unlist(mcd$statecode)
-    mcd$entityId <- unlist(mcd$entityId)
-    mcd$mcdname <- unlist(mcd$mcdname)
+  mcd
 
-    res <- mcd
+  #if (!is.null(mcd) && nrow(mcd) > 1) {
 
-    if (to_tibble) {
-      res <- to_tibble(mcd)
-    }
-  }
+    #mcd$statecode <- unlist(mcd$statecode)
+    #mcd$entityId <- unlist(mcd$entityId)
+    #mcd$mcdname <- unlist(mcd$mcdname)
 
-  res
+  #  res <- mcd
+
+  #  if (to_tibble) {
+  #    res <- to_tibble(mcd)
+  #  }
+  #}
+
+  #res
 }

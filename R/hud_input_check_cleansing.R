@@ -12,6 +12,7 @@
 #'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
+#' @noMd
 chas_input_check_cleansing <- function(query, year, key) {
    res <- NULL
 
@@ -61,9 +62,9 @@ chas_input_check_cleansing <- function(query, year, key) {
 
     query <- unique(paste(trimws(as.character(query), which = "both")))
 
-    res <- list(query, year, key)
+    res <- list(query = query, year = year, key = key)
   } else {
-    res <- list(year, key)
+    res <- list(year = year, key = key)
   }
 
   res
@@ -90,10 +91,12 @@ chas_input_check_cleansing <- function(query, year, key) {
 #'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
+#' @noMd
 cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
                                      query, year,
                                      quarter,
                                      key) {
+
   if (!is.vector(query) || !is.vector(year) ||
      !is.vector(quarter) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
@@ -165,7 +168,10 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
               call. = FALSE), "")
 
 
-  list(query, as.integer(year), as.integer(quarter), key)
+  list(query = query,
+       year = as.integer(year),
+       quarter = as.integer(quarter),
+       key = key)
 }
 
 
@@ -181,7 +187,9 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
 #'   USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
+#' @noMd
 fmr_il_input_check_cleansing <- function(query, year, key) {
+
   if (!is.vector(query) || !is.vector(year) || !is.vector(key)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
@@ -269,7 +277,114 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
   }
 
   # Make sure to coerce year back to character for user processing.
-  list(query, as.integer(year), key, querytype)
+  list(query = query,
+       year = as.integer(year),
+       key = key,
+       querytype = querytype)
+}
+
+
+
+
+#' @name misc_input_check_cleansing
+#' @title Input Cleansing for Misc Queries Helper: this includes
+#'    functions inside hud_misc.R
+#' @description Helper function used to clean user inputted variables for all
+#'   misc functions.
+#' @param state The inputted geographic identifiers to query for.
+#' @param key The key obtained from HUD
+#' @param api Which misc api that is being queried from
+#'   (US Department of Housing and Urban Develop ment)
+#'   USER website.
+#'
+#'   1) nation-state
+#'   2) state-metro
+#'   3) state-county
+#'   4) state-place
+#'   5) state-mcd
+#'
+#' @returns The cleansed input arguments.
+#' @noRd
+misc_input_check_cleansing <- function(state, key, api) {
+
+  res <- NULL
+
+  # Determine if user
+  index <- NULL
+  # If metro or county then use state abbreviation
+  # If place or mcd then use 2 digit state code
+  if (api == "state-metro" || api == "state-county") {
+    index <- 2
+  } else if (api == "state-place" || api == "state-mcd") {
+    index <- 3
+  }
+
+
+  if (!is.vector(key)) {
+    stop(paste("\nMake sure all inputs are of type vector. ",
+               "Check types with typeof([variable]). ",
+               "If list try unlist([variable]); ",
+               "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
+  }
+
+  if (key == "") {
+    stop(paste("\nDid you forget to set the key? ",
+               "Please go to https://www.huduser.gov/",
+               "hudapi/public/register?comingfrom=1 ",
+               "to sign up and get a token. Then save ",
+               "this to your environment using ",
+               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""), call. = FALSE)
+  }
+
+  res <- c(fip_code = NULL, key = key)
+
+  if (!is.null(state)) {
+
+    if (!is.vector(state)) {
+      stop(paste("\nMake sure all inputs are of type vector. ",
+                 "Check types with typeof([variable]). ",
+                 "If list try unlist([variable]); ",
+                 "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
+    }
+
+    if (all(nchar(state) == 2)) state <- toupper(state)
+    if (all(nchar(state) > 2)) state <- capitalize(state)
+
+    if (is.null(pkg.env$state)) {
+      pkg.env$state <- suppressMessages(hud_nation_states_territories(
+        key = Sys.getenv("HUD_KEY")))
+    }
+
+    for (i in seq_len(length(state))) {
+      if (!any(as.character(state[i]) == pkg.env$state)) {
+        stop("\nThere is no matching fips code for one of the inputted states.",
+             call. = FALSE)
+      }
+    }
+
+    # Allow user to supply state name or state abbr or state fips as inputs.
+    if (nrow(pkg.env$state[pkg.env$state$state_name %in%
+                           as.character(state), ]) != 0) {
+      fip_code <- pkg.env$state[pkg.env$state$state_name %in%
+                                  as.character(state), ][index]
+    }
+
+    if (nrow(pkg.env$state[pkg.env$state$state_code %in%
+                           as.character(state), ]) != 0) {
+      fip_code <- pkg.env$state[pkg.env$state$state_code %in%
+                                  as.character(state), ][index]
+    }
+
+    if (nrow(pkg.env$state[as.character(pkg.env$state$state_num) %in%
+                           as.character(state), ]) != 0) {
+      fip_code <- pkg.env$state[pkg.env$state$state_num %in%
+                                  as.character(state), ][index]
+    }
+
+    res <- c(fip_code = fip_code, key = key)
+  }
+
+  res
 }
 
 
@@ -297,6 +412,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
 #' @param key The key obtain from HUD USER website.
 #' @returns The cleansed input arguments.
 #' @noRd
+#' @noMd
 crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
                                                       cw_geoid, cw_geoid_col,
                                                       method,
@@ -389,11 +505,19 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 
   args <- cw_input_check_cleansing(primary_geoid = geoid,
                                    secondary_geoid = cw_geoid,
-                                   query = data[, geoid_col], year = year,
-                                   quarter = quarter, key = key)
+                                   query = data[, geoid_col],
+                                   year = year,
+                                   quarter = quarter,
+                                   key = key)
 
-  list(geoid, geoid_col, cw_geoid, cw_geoid_col,
-       method, args[2], args[3], args[4])
+  list(geoid = geoid,
+       geoid_col = geoid_col,
+       cw_geoid = cw_geoid,
+       cw_geoid_col = cw_geoid_col,
+       method = method,
+       year = args[2],
+       quarter = args[3],
+       key = args[4])
 }
 
 

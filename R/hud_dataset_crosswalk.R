@@ -102,8 +102,6 @@
 #' @returns A dataframe or tibble containing the crosswalked dataset.
 #' @examples
 #' \dontrun{
-#' library(rhud)
-#'
 #' sample <- data.frame(population = c(42134, 12413, 13132),
 #'                      county = c(24047, 24045, 24043))
 #'
@@ -135,16 +133,16 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                                             year,
                                             quarter, key)
 
-  geoid <- args[[1]]
-  geoid_col <- args[[2]]
-  cw_geoid <- args[[3]]
+  geoid <- args$geoid
+  geoid_col <- args$geoid_col
+  cw_geoid <- args$cw_geoid
 
-  cw_geoid_col <- args[[4]]
+  cw_geoid_col <- args$cw_geoid_col
 
-  method <- args[[5]]
-  year <- args[[6]]
-  quarter <- args[[7]]
-  key <- args[[8]]
+  method <- args$method
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
 
   if (geoid == "zip" && cw_geoid %in% c("county", "countysub", "tract",

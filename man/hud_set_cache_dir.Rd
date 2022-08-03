@@ -7,14 +7,17 @@
 hud_set_cache_dir(path, in_wkdir = FALSE, in_home = FALSE)
 }
 \arguments{
-\item{path}{The full path to the desired cache directory. Only one can be
+\item{path}{A character vector of length one specifying the full path to
+the desired cache directory. Only one can be
 set at a time. If no path is specified, it will use the temp directory
 for R. The temp directory is not persistent.}
 
-\item{in_wkdir}{Store the path as environment variable in the working
+\item{in_wkdir}{A logical to determine if to store the path as environment
+variable in the working
 directory .Rprofile so rhud will cache to this specified path.}
 
-\item{in_home}{Store the path as environment variable in the HOME directory
+\item{in_home}{A logical to determine if to store the path as environment
+variable in the HOME directory
 .Rprofile so rhud will cache to this specified path.}
 }
 \description{

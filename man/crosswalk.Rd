@@ -14,11 +14,11 @@ crosswalk(
   year = format(Sys.Date() - 365, "\%Y"),
   quarter = 1,
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{data}{A dataset with rows describing measurements at a zip,
+\item{data}{A dataframe or tibble with rows describing measurements at a zip,
 county, county subdivision (countysub), congressional district (cd),
 census tract, core base statistical area (cbsa), or core based
 statistical area division (cbsadiv) geographic identifier.
@@ -32,7 +32,8 @@ statistical area division (cbsadiv) geographic identifier.
 \item cd
 }}
 
-\item{geoid}{The current geoid that the dataset is described in: must be
+\item{geoid}{A character vector describing the current geoid
+that the dataset is described in: must be
 zip, county, countysub, cd,
 tract, cbsa, or cbsadiv geographic identifier.
 \enumerate{
@@ -45,7 +46,8 @@ tract, cbsa, or cbsadiv geographic identifier.
 \item cd
 }}
 
-\item{geoid_col}{The column containing the geographic identifier; must be
+\item{geoid_col}{A character or numeric vector of length one:
+the column containing the geographic identifier; must be
 zip, county, county subdivision (countysub), congressional district (cd),
 census tract, core base statistical area (cbsa), and core based
 statistical area division (cbsadiv) geographic identifier.
@@ -53,8 +55,9 @@ Supply either the name of the column or the index.
 All elements in this column must be numbers only at the proper length.
 For example, zip codes must be 5 digit numbers.}
 
-\item{cw_geoid}{The geoid to crosswalk the dataset to; must be
-zip, county, county subdivision (countysub), congressional district (cd),
+\item{cw_geoid}{A character vector of length one: the geoid to crosswalk
+the dataset to; must be zip, county, county subdivision (countysub),
+congressional district (cd),
 census tract, core base statistical area (cbsa), or core based
 statistical area division (cbsadiv) geoid.
 \enumerate{
@@ -67,14 +70,14 @@ statistical area division (cbsadiv) geoid.
 \item cd
 }}
 
-\item{cw_geoid_col}{The columns in the dataset to distribute
-according to method ratio.
+\item{cw_geoid_col}{A character or numeric vector: the columns in the dataset
+to distribute according to method ratio.
 If method is empty, no allocation method will be applied --
 the crosswalk file will just be merged to the dataset.
 All elements in these columns must be numbers only.}
 
-\item{method}{The allocation method to use: residential,
-business, other, or total. If method is empty, no allocation
+\item{method}{A character vector: the allocation method to use --
+residential, business, other, or total. If method is empty, no allocation
 method will be applied -- the crosswalk file will just be merged
 to the dataset.
 \enumerate{
@@ -84,21 +87,22 @@ to the dataset.
 \item oth
 }}
 
-\item{year}{Gets the year that this data was recorded. Can specify multiple
-years. Default is the previous year.}
+\item{year}{A character or numeric vector: gets the year that this data was
+recorded. Can specify multiple years. Default is the previous year.}
 
-\item{quarter}{Gets the quarter of the year that this data was recorded.
+\item{quarter}{A character or numeric vector:
+gets the quarter of the year that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical: if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
-A dataframe containing the crosswalked dataset.
+A dataframe or tibble containing the crosswalked dataset.
 }
 \description{
 Using the US Housing and Urban Development USPS Crosswalk files,
@@ -121,8 +125,6 @@ Currently supported crosswalks:
 }
 \examples{
 \dontrun{
-library(rhud)
-
 sample <- data.frame(population = c(42134, 12413, 13132),
                      county = c(24047, 24045, 24043))
 

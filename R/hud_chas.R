@@ -42,8 +42,8 @@ hud_chas_nation <- function(year = c("2014-2018"),
   is_internet_available()
 
   args <- chas_input_check_cleansing(year = year, key = key)
-  year <- args[[1]]
-  key <- args[[2]]
+  year <- args$year
+  key <- args$key
 
   urls <- paste("https://www.huduser.gov/hudapi/public/chas?type=", "1",
                "&year=", year, sep = "")
@@ -75,8 +75,7 @@ hud_chas_nation <- function(year = c("2014-2018"),
 #'   rather than a data frame.
 #' @returns Returns a data frame with
 #'   Comprehensive Housing and Affordability Strategy (CHAS) data for states for
-#'   all combinations
-#'   of "state" and "year" inputs.
+#'   all combinations of "state" and "year" inputs.
 #' @seealso
 #' * [rhud::hud_chas_nation()]
 #' * [rhud::hud_chas_state()]
@@ -97,9 +96,9 @@ hud_chas_state <- function(state, year = c("2014-2018"),
   is_internet_available()
 
   args <- chas_input_check_cleansing(state, year, key)
-  state <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
+  state <- args$query
+  year <- args$year
+  key <- args$key
 
   # Assume abbreviation or fips code if length of 2. Captitalize does not
   # affect numbers. Assume full state name if length more than 2
@@ -194,9 +193,9 @@ hud_chas_county <- function(county, year = c("2014-2018"),
   is_internet_available()
 
   args <- chas_input_check_cleansing(county, year, key)
-  county <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
+  county <- args$query
+  year <- args$year
+  key <- args$key
 
   # Try to fix the counties that have lost leading zeros in them...
   county <- add_leading_zeros(geoid_type = "county", county)
@@ -290,9 +289,9 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 
   is_internet_available()
 
-  args <- chas_input_check_cleansing(year = year, key = key)
-  year <- args[[1]]
-  key <- args[[2]]
+  args <- chas_input_check_cleansing(state, year = year, key = key)
+  year <- args$year
+  key <- args$key
 
 
   if (all(nchar(state) == 2)) state <- toupper(state)
@@ -349,6 +348,7 @@ hud_chas_state_mcd <- function(state, year = c("2014-2018"),
 }
 
 
+
 #' @name hud_chas_state_place
 #' @title Comprehensive Housing and Affordability Strategy for US Places
 #' @description Returns Comprehensive Housing and Affordability Strategy (CHAS)
@@ -396,9 +396,9 @@ hud_chas_state_place <- function(state, year = c("2014-2018"),
 
   is_internet_available()
 
-  args <- chas_input_check_cleansing(year = year, key = key)
-  year <- args[[1]]
-  key <- args[[2]]
+  args <- chas_input_check_cleansing(state, year = year, key = key)
+  year <- args$year
+  key <- args$key
 
   if (is.null(pkg.env$state)) {
     pkg.env$state <- suppressMessages(

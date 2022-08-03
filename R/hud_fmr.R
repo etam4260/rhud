@@ -46,66 +46,16 @@ hud_fmr_state_metroareas <- function(state,
   is_internet_available()
 
   args <- fmr_il_input_check_cleansing(state, year, key)
-  query <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
+  query <- args$query
+  year <- args$year
+  key <- args$key
 
-  error_urls <- c()
 
   # Create all combinations of query and year...
   allqueries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  list_res <- c()
-  for (i in seq_len(nrow(allqueries))) {
-    # Build the urls for querying the data.
-
-    urls <- paste(get_hud_host_name(),
-                 "fmr/",
-                 "statedata/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
-
-    call <- R.cache::memoizedCall(make_query_calls, urls, key)
-
-    cont <- try(content(call), silent = TRUE)
-
-    if ("error" %in% names(cont)) {
-      error_urls <- c(error_urls, urls)
-    } else {
-      res <- as.data.frame(do.call(rbind, cont$data$metroareas))
-      res$query <- allqueries$query[i]
-      res$year <- allqueries$year[i]
-      list_res[[i]] <- res
-    }
-
-    download_bar(done = i, total = nrow(allqueries),
-                 current = urls, error = length(error_urls))
-  }
-
-
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
-  }
-
-
-  if (length(list_res) != 0) {
-
-    res <- as.data.frame(do.call(rbind, list_res))
-    res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-    if (to_tibble) {
-      res <- tibble(res)
-    }
-
-  }
+  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)$metroareas
 
   res
 }
@@ -153,69 +103,18 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
   is_internet_available()
 
   args <- fmr_il_input_check_cleansing(state, year, key)
-  query <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
-
-  error_urls <- c()
+  query <- args$query
+  year <- args$year
+  key <- args$key
 
   # Create all combinations of query and year...
   allqueries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  list_res <- c()
-  for (i in seq_len(nrow(allqueries))) {
-    # Build the urls for querying the data.
-    urls <- paste(get_hud_host_name(),
-                 "fmr/",
-                 "statedata/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
-
-    call <- R.cache::memoizedCall(make_query_calls, urls, key)
-
-    cont <- try(content(call), silent = TRUE)
-
-    if ("error" %in% names(cont)) {
-      error_urls <- c(error_urls, urls)
-    } else {
-      res <- as.data.frame(do.call(rbind, cont$data$counties))
-      res$query <- allqueries$query[i]
-      res$year <- allqueries$year[i]
-      list_res[[i]] <- res
-    }
-
-    download_bar(done = i, total = nrow(allqueries),
-                 current = urls, error = length(error_urls))
-
-  }
-
-
-
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
-  }
-
-
-  if (length(list_res) != 0) {
-
-    res <- as.data.frame(do.call(rbind, list_res))
-    res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-    if (to_tibble) {
-      res <- as_tibble(res)
-    }
-
-  }
+  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)$counties
 
   res
+
 }
 
 #' @name hud_fmr_county_zip
@@ -261,101 +160,15 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
   is_internet_available()
 
   args <- fmr_il_input_check_cleansing(county, year, key)
-  query <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
+  query <- args$query
+  year <- args$year
+  key <- args$key
 
-  error_urls <- c()
 
   allqueries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  list_res <- c()
-  for (i in seq_len(nrow(allqueries))) {
-    # Build the urls for querying the data.
-    urls <- paste(get_hud_host_name(),
-                 "fmr/",
-                 "data/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
-
-    call <- R.cache::memoizedCall(make_query_calls, urls, key)
-
-    cont <- try(content(call), silent = TRUE)
-
-    if ("error" %in% names(cont)) {
-      error_urls <- c(error_urls, urls)
-    } else {
-      if (cont$data$smallarea_status == "0") {
-        # Returns just county
-        res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-
-        res$query <- allqueries$query[i]
-        res$year <- allqueries$year[i]
-        res$zip_code <- ""
-
-        res$county_name <- cont$data$county_name
-        res$counties_msa <- cont$data$counties_msa
-        res$town_name <- cont$data$town_name
-        res$metro_status <- cont$data$metro_status
-        res$metro_name <- cont$data$metro_name
-        res$area_name <- cont$data$area_name
-        res$smallarea_status <- cont$data$smallarea_status
-
-        list_res[[i]] <- res
-
-      } else {
-        # Returns zip code level data
-        res <- as.data.frame(do.call(rbind, cont$data$basicdata))
-        res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-        res$query <- allqueries$query[i]
-        res$year <- allqueries$year[i]
-
-        res$county_name <- cont$data$county_name
-        res$counties_msa <- cont$data$counties_msa
-        res$town_name <- cont$data$town_name
-        res$metro_status <- cont$data$metro_status
-        res$metro_name <- cont$data$metro_name
-        res$area_name <- cont$data$area_name
-        res$smallarea_status <- cont$data$smallarea_status
-
-        list_res[[i]] <- res
-      }
-    }
-
-    download_bar(done = i, total = nrow(allqueries),
-                 current = urls, error = length(error_urls))
-
-  }
-
-
-
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
-  }
-
-
-  if (length(list_res) != 0) {
-
-    if (length(list_res) != 1) {
-
-      res <- as.data.frame(do.call(rbind, list_res))
-      res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-      if (to_tibble) {
-        res <- as_tibble(res)
-      }
-    }
-
-  }
+  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)
 
   res
 }
@@ -405,104 +218,14 @@ hud_fmr_metroarea_zip <- function(metroarea,
   is_internet_available()
 
   args <- fmr_il_input_check_cleansing(metroarea, year, key)
-  query <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
-
-  error_urls <- c()
+  query <- args$query
+  year <- args$year
+  key <- args$key
 
   allqueries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  list_res <- c()
-  for (i in seq_len(nrow(allqueries))) {
-    # Build the urls for querying the data.
-    urls <- paste(get_hud_host_name(),
-                 "fmr/",
-                 "data/",
-                 allqueries$query[i], "?year=", allqueries$year[i], sep = "")
-
-    call <- R.cache::memoizedCall(make_query_calls, urls, key)
-
-    cont <- try(content(call), silent = TRUE)
-
-    if ("error" %in% names(cont)) {
-      error_urls <- c(error_urls, urls)
-    } else {
-
-      if (cont$data$smallarea_status == "0") {
-        # Returns just county
-        res <- as.data.frame(do.call(cbind, cont$data$basicdata))
-
-        res$query <- allqueries$query[i]
-        res$year <- allqueries$year[i]
-        res$zip_code <- ""
-
-        res$county_name <- cont$data$county_name
-        res$counties_msa <- cont$data$counties_msa
-        res$town_name <- cont$data$town_name
-        res$metro_status <- cont$data$metro_status
-        res$metro_name <- cont$data$metro_name
-        res$area_name <- cont$data$area_name
-        res$smallarea_status <- cont$data$smallarea_status
-
-        list_res[[i]] <- res
-
-      } else {
-        # Returns zip code level data
-        res <- as.data.frame(do.call(rbind, cont$data$basicdata))
-        res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-        res$query <- allqueries$query[i]
-        res$year <- allqueries$year[i]
-
-        res$county_name <- cont$data$county_name
-        res$counties_msa <- cont$data$counties_msa
-        res$town_name <- cont$data$town_name
-        res$metro_status <- cont$data$metro_status
-        res$metro_name <- cont$data$metro_name
-        res$area_name <- cont$data$area_name
-        res$smallarea_status <- cont$data$smallarea_status
-
-        list_res[[i]] <- res
-      }
-    }
-
-    download_bar(done = i, total = nrow(allqueries),
-                 current = urls, error = length(error_urls))
-
-  }
-
-
-
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
-  }
-
-  if (length(list_res) != 0) {
-
-    if (length(list_res) != 1) {
-
-      res <- as.data.frame(do.call(rbind, list_res))
-      res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-      if (to_tibble) {
-        res <- as_tibble(res)
-      }
-
-    }
-
-    # return(list_res[[1]])
-
-  }
+  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)
 
   res
 }

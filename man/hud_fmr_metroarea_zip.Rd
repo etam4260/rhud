@@ -8,21 +8,22 @@ hud_fmr_metroarea_zip(
   metroarea,
   year = format(Sys.Date() - 365, "\%Y"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{metroarea}{Metroareas to query for.}
+\item{metroarea}{A character vector: metroarea(s) to query for.}
 
-\item{year}{Gets the year that this data was recorded.
-Can specify multiple years. Default is the
+\item{year}{A character of numeric vector: gets the year
+that this data was recorded.
+Can specify multiple year(s). Default is the
 previous year.}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical: if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
@@ -30,7 +31,7 @@ A data frame with fair markets rent for zip codes in metro areas for
 all combinations of "metroarea" and "year" inputs.
 }
 \description{
-This function queries for a metroarea and returns
+This function queries for metroarea(s) and returns
 FMR calculation. If the metroarea is not
 a small area, it will return only single
 measurement for that metroarea. If the metrarea is considered a

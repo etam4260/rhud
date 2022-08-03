@@ -11,7 +11,7 @@ hud_chas(
   entity_id = NULL,
   year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{

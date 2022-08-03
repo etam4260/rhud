@@ -34,40 +34,51 @@
 geoid_add_leading_zeros <- function(geoid_type = "zip", input) {
   res <- NULL
 
+  geoid_type <- assert_geoid_type(geoid_type)
+
+  num_char <- switch(
+    geoid_type,
+    "countysub" =10,
+    "cd" = 4,
+    "tract" = 11,
+    5
+  )
+
   if (!numbers_only(geoid_type)) {
+
     if (geoid_type == "zip") {
 
-      res <- fix_geoid(input, 5)
+      res <- left_pad_zeros(num_char = 5, geoids = input)
 
     } else if (geoid_type == "county") {
 
-      res <- fix_geoid(input, 5)
+      res <- left_pad_zeros(num_char = 5, geoids = input)
 
     } else if (geoid_type == "cbsa") {
 
-      res <- fix_geoid(input, 5)
+      res <- left_pad_zeros(num_char = 5, geoids = input)
 
     } else if (geoid_type == "cbsadiv") {
 
-      res <- fix_geoid(input, 5)
+      res <- left_pad_zeros(num_char = 5, geoids = input)
 
     } else if (geoid_type == "countysub") {
 
-      res <- fix_geoid(input, 10)
+      res <- left_pad_zeros(num_char = 10, geoids = input)
 
     } else if (geoid_type == "cd") {
 
-      res <- fix_geoid(input, 4)
+      res <- left_pad_zeros(num_char = 4, geoids = input)
 
     } else if (geoid_type == "tract") {
 
-      res <- fix_geoid(input, 11)
+      res <- left_pad_zeros(num_char = 11, geoids = input)
 
     }
 
   } else if (numbers_only(geoid_type)) {
 
-    res <- fix_geoid(input, geoid_type)
+    res <- left_pad_zeros(num_char = geoid_type, geoids = input)
 
   } else {
 
@@ -82,7 +93,7 @@ geoid_add_leading_zeros <- function(geoid_type = "zip", input) {
 }
 
 
-#' @name fix_geoid
+#' @name left_pad_zeros
 #' @title Add Leading Zeros back to Character Vector Helper
 #' @description This is helper function for adding_leading_zeros() back to a
 #'   character vector.
@@ -99,7 +110,9 @@ geoid_add_leading_zeros <- function(geoid_type = "zip", input) {
 #' @returns A vector with the corrected geoids.
 #' @noRd
 #' @noMd
-fix_geoid <- function(geoids, num_char) {
+left_pad_zeros <- function(num_char, geoids) {
+
+  diff <- num_char - nchar(geoids[i])
 
   for (i in seq_len(length(geoids))) {
       diff <- num_char - nchar(geoids[i])
@@ -110,6 +123,19 @@ fix_geoid <- function(geoids, num_char) {
   geoids
 }
 
+
+#' @name assert_geoid_type
+#' @title assert_geoid_type
+#' @description This is helper function for remove the most common delimiters
+#'   used in character vector data.
+#' @param geoid_type A vector or column of characters that need needs delimiters
+#'   removed.
+#' @returns A vector with delimiters removed.
+#' @noRd
+#' @noMd
+assert_geoid_type <- function (geoid_type) {
+
+}
 
 #' @name remove_delimiters
 #' @title remove_delimiters

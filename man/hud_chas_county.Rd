@@ -8,11 +8,12 @@ hud_chas_county(
   county,
   year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{county}{The county(s) to query for. Must supply a geoid. 2 digit state fip
+\item{county}{A character or numeric vector:
+the county(s) to query for. Must supply a geoid. 2 digit state fip
 \itemize{
 \item 3 digit county fip. hud_state_counties() will show an extra 99999 at the
 end. Just remove that.
@@ -31,11 +32,11 @@ end. Just remove that.
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length 1: the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical: if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{

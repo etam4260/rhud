@@ -177,12 +177,17 @@ hud_cw <- function(type, query,
   lhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][1]
   rhgeoid <- strsplit(alltypes[as.integer(type)], "-")[[1]][2]
 
-  args <- cw_input_check_cleansing(lhgeoid, rhgeoid, query, year, quarter, key)
+  args <- cw_input_check_cleansing(lhgeoid,
+                                   rhgeoid,
+                                   query,
+                                   year,
+                                   quarter,
+                                   key)
 
-  query <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  query <- args$query
+  year <- args$year
+  quarter <- args$query
+  key <- args$key
 
 
   # Need to make sure query is a zip code of 5 digits.
@@ -302,108 +307,18 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
                     key = Sys.getenv("HUD_KEY"),
                     to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
-  res <- NULL
   is_internet_available()
 
   args <- fmr_il_input_check_cleansing(query, year, key)
-  query <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
-  querytype <- args[[4]]
+  query <- args$query
+  year <- args$year
+  key <- args$key
+  querytype <- args$querytype
 
   allqueries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  fmr_do_query_call()
-
-
-  # If state query, will provide data at metro and county level
-  if (querytype == "state") {
-    # Merge county level data with metroarea data.
-    # Create all combinations of query and year...
-    allqueries <- expand.grid(query = query, year = year,
-                              stringsAsFactors = FALSE)
-    error_urls <- c()
-
-    list_county_res <- c()
-    list_metroarea_res <- c()
-
-    for (i in seq_len(nrow(allqueries))) {
-      # Build the urls for querying the data.
-
-      urls <- paste(get_hud_host_name(),
-                    "fmr/",
-                    "statedata/",
-                    allqueries$query[i], "?year=", allqueries$year[i], sep = "")
-
-      call <- R.cache::memoizedCall(make_query_calls, urls, key)
-
-      cont <- try(content(call), silent = TRUE)
-
-      if ("error" %in% names(cont)) {
-        error_urls <- c(error_urls, urls)
-      } else {
-        res_county <- as.data.frame(do.call(rbind, cont$data$counties))
-        res_metroareas <- as.data.frame(do.call(rbind, cont$data$metroareas))
-
-        res_county$query <- allqueries$query[i]
-        res_county$year <- allqueries$year[i]
-
-        res_metroareas$query <- allqueries$query[i]
-        res_metroareas$year <- allqueries$year[i]
-
-        list_county_res[[i]] <- res_county
-        list_metroarea_res[[i]] <- res_metroareas
-      }
-
-      download_bar(done = i, total = nrow(allqueries),
-                   current = urls, error = length(error_urls))
-    }
-
-
-    if (length(error_urls) != 0) {
-      # Spit out error messages to user after all
-      # queries are done.
-      warning(paste("Could not find data for queries: \n\n",
-                    paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                    "\n\nIt is possible that your key maybe invalid or ",
-                    "there isn't any data for these parameters, ",
-                    "If you think this is wrong please ",
-                    "report it at https://github.com/etam4260/rhud/issues.",
-                    sep = ""), call. = FALSE)
-    }
-
-
-    if (length(list_county_res) != 0) {
-
-      res_county <- as.data.frame(do.call(rbind, list_county_res))
-      res_county <- as.data.frame(sapply(res_county,
-                                         function(x) unlist(as.character(x))))
-
-      res_metroareas <- as.data.frame(do.call(rbind, list_metroarea_res))
-      res_metroareas <- as.data.frame(sapply(
-        res_metroareas,
-        function(x) unlist(as.character(x))))
-
-      if (is.null(to_tibble) || !to_tibble) {
-
-        res <- list(counties = res_county, metroareas = res_metroareas)
-
-      } else {
-
-        res <- list(counties = tibble(res_county),
-                    metroareas = tibble(res_metroareas))
-
-      }
-    }
-
-  } else if (querytype == "cbsa") {
-      # Returns zip level data.
-      # res <- hud_fmr_metroarea_zip(query, year, key, to_tibble)
-  } else if (querytype == "county") {
-      # Returns zip level data.
-      # res <- hud_fmr_county_zip(query, year, key, to_tibble)
-  }
+  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)
 
   res
 }
@@ -462,89 +377,15 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   is_internet_available()
 
   args <- fmr_il_input_check_cleansing(query, year, key)
-  query <- args[[1]]
-  year <- args[[2]]
-  key <- args[[3]]
-  querytype <- args[[4]]
-
-  error_urls <- c()
+  query <- args$query
+  year <- args$year
+  key <- args$key
+  querytype <- args$querytype
 
   all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  list_res <- c()
-  for (i in seq_len(nrow(all_queries))) {
-    # Build the urls for querying the data.
-    urls <- paste(get_hud_host_name(),
-                 "il/",
-                 if (querytype == "state") "statedata/" else "data/",
-                 all_queries$query[i], "?year=", all_queries$year[i], sep = "")
-
-    call <- R.cache::memoizedCall(make_query_calls, urls, key)
-
-    cont <- try(content(call), silent = TRUE)
-
-    if ("error" %in% names(cont)) {
-      error_urls <- c(error_urls, urls)
-    } else {
-
-      if (querytype == "state") {
-
-        res <- as.data.frame(cont$data)
-
-        res$statecode <- cont$data$statecode
-
-        oth <- data.frame(query = all_queries$query[i],
-                          year = all_queries$year[i],
-                          median_income = cont$data$median_income,
-                          stringsAsFactors = FALSE)
-        res <- cbind(oth, res)
-
-      } else if (querytype == "county") {
-        res <- as.data.frame(cont$data)
-
-        oth <- data.frame(query = all_queries$query[i],
-                          stringsAsFactors = FALSE)
-        res <- cbind(oth, res)
-
-      } else {
-        res <- as.data.frame(cont$data)
-
-        oth <- data.frame(query = all_queries$query[i],
-                          stringsAsFactors = FALSE)
-        res <- cbind(oth, res)
-      }
-
-      list_res[[i]] <- res
-    }
-
-    download_bar(done = i, total = nrow(all_queries),
-                 current = urls, error = length(error_urls))
-  }
-
-
-  if (length(error_urls) != 0) {
-    # Spit out error messages to user after all
-    # queries are done.
-    warning(paste("Could not find data for queries: \n\n",
-                  paste(paste("*", error_urls, sep = " "), collapse = "\n"),
-                  "\n\nIt is possible that your key maybe invalid or ",
-                  "there isn't any data for these parameters, ",
-                  "If you think this is wrong please ",
-                  "report it at https://github.com/etam4260/rhud/issues.",
-                  sep = ""), call. = FALSE)
-  }
-
-  if (length(list_res) != 0) {
-    res <- do.call(rbind, list_res)
-
-    if (to_tibble) {
-      res <- as_tibble(res)
-    }
-
-  }
-
-  res
+  il_do_query_call(all_queries, key, to_tibble, querytype)
 }
 
 
@@ -621,24 +462,16 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
 
   is_internet_available()
 
-  if (!is.vector(type) || !is.vector(year) || !is.vector(key)) {
+  args <- chas_input_check_cleansing(year = year, key = key)
+  year <- args$year
+  key <- args$key
+
+
+  if (!is.vector(type)) {
     stop(paste("\nMake sure all inputs are of type vector. ",
                "Check types with typeof([variable]). ",
                "If list try unlist([variable]); ",
                "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
-  }
-
-  if (length(key) != 1) {
-    stop("\nYou need a key and only 1 key.", call. = FALSE)
-  }
-
-  if (key == "") {
-    stop(paste("\nDid you forget to set the key? ",
-               "Please go to https://www.huduser.gov/",
-               "hudapi/public/register?comingfrom=1 ",
-               "to sign up and get a token. Then save ",
-               "this to your environment using ",
-               "Sys.setenv('HUD_KEY' = YOUR_KEY)", sep = ""))
   }
 
   # Allow user to specify the string too.
@@ -658,8 +491,6 @@ hud_chas <- function(type, state_id = NULL, entity_id = NULL,
   type <- paste(trimws(as.character(type), which = "both"))
   state_id <- paste(trimws(as.character(state_id), which = "both"))
   entity_id <- paste(trimws(as.character(entity_id), which = "both"))
-  year <- unique(paste(trimws(as.character(year), which = "both")))
-  key <- paste(trimws(as.character(key), which = "both"))
 
   # Check for if years are proper input
   if (!all(year %in% c("2014-2018", "2013-2017", "2012-2016", "2011-2015",

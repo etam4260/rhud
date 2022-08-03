@@ -10,26 +10,30 @@ hud_cw_cbsa_zip(
   quarter = 1,
   minimal = FALSE,
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{cbsa}{5 digit core based statistical area code.}
+\item{cbsa}{A character or numeric vector: 5 digit core based
+statistical area code.}
 
-\item{year}{Gets the year that this data was recorded. Can specify multiple
+\item{year}{A character or numeric vector: gets the year that this data
+was recorded. Can specify multiple
 years. Default is the previous year.}
 
-\item{quarter}{Gets the quarter of the year that this data was recorded.
+\item{quarter}{A character or numeric vector: gets the quarter of the year
+that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked geoids if true. Otherwise, return
+\item{minimal}{A logical: return just the crosswalked geoids if TRUE.
+Otherwise, return
 all fields. This does not remove duplicates.}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical: if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
@@ -49,7 +53,6 @@ cbsa to zip.
 }
 \examples{
 \dontrun{
-library(rhud)
 
 hud_cw_cbsa_zip(cbsa = 10140, year = c('2017'), quarter = c('1'))
 

@@ -60,10 +60,10 @@ z_in_trt <- function(zip, tract, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  tract <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  tract <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(tract) != 11)) {
     stop("\nInputted tract(s) are not all of length 11.", call. = FALSE)
@@ -156,10 +156,10 @@ z_in_cty <- function(zip, county, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  county <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  county <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(county) != 5)) {
     stop("\nInputted county(s) are not all of length 5.", call. = FALSE)
@@ -252,10 +252,10 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  cbsa <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  cbsa <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(cbsa) != 5)) {
     stop("\nInputted cbsa(s) are not all of length 5.", call. = FALSE)
@@ -349,10 +349,10 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  cbsadiv <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  cbsadiv <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(cbsadiv) != 5)) {
     stop("\nInputted cbsadiv(s) are not all of length 5.", call. = FALSE)
@@ -446,10 +446,10 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  countysub <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  countysub <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(countysub) != 10)) {
     stop("\nInputted countysub(s) are not all of length 10.",
@@ -541,10 +541,10 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
                                       Sys.getenv("HUD_KEY"))
 
 
-  cd <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  cd <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(cd) != 4)) {
     stop("\nInputted cd(s) are not all of length 4.", call. = FALSE)
@@ -639,10 +639,10 @@ trt_in_z <- function(tract, zip, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  zip <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  zip <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(zip) != 5)) {
     stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
@@ -737,10 +737,10 @@ cty_in_z <- function(county, zip, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  zip <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  zip <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(zip) != 5)) {
     stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
@@ -835,10 +835,10 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  zip <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  zip <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
 
   if (any(nchar(zip) != 5)) {
@@ -932,10 +932,10 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  zip <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  zip <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(zip) != 5)) {
     stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
@@ -1029,10 +1029,10 @@ cd_in_z <- function(cd, zip, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  zip <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  zip <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(zip) != 5)) {
     stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)
@@ -1126,10 +1126,10 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
                                       Sys.getenv("HUD_KEY"))
 
 
-  zip <- cleaned[1]
-  year <- cleaned[2]
-  quarter <- cleaned[3]
-  key <- cleaned[4]
+  zip <- cleaned$query
+  year <- cleaned$year
+  quarter <- cleaned$quarter
+  key <- cleaned$key
 
   if (any(nchar(zip) != 5)) {
     stop("\nInputted zip(s) are not all of length 5.", call. = FALSE)

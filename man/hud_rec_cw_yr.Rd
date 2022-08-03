@@ -7,7 +7,7 @@
 hud_rec_cw_yr(key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 }

@@ -8,7 +8,7 @@ hud_fmr(
   query,
   year = format(Sys.Date() - 365, "\%Y"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{

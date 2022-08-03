@@ -9,5 +9,5 @@
 #'
 #' }
 get_hud_host_name <- function() {
-  return("https://www.huduser.gov/hudapi/public/")
+  "https://www.huduser.gov/hudapi/public/"
 }

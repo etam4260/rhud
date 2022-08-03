@@ -7,17 +7,22 @@
 z_in_cbsadiv(zip, cbsadiv, year, quarter, key = Sys.getenv("HUD_KEY"))
 }
 \arguments{
-\item{zip}{The zip(s) to determine overlap with cbsadiv(s).}
+\item{zip}{A character or numeric vector: the zip(s) to determine
+overlap with cbsadiv(s).}
 
-\item{cbsadiv}{The cbsadiv(s) to determine overlap with zip(s).}
+\item{cbsadiv}{A character or numeric vector: the cbsadiv(s) to determine
+overlap with zip(s).}
 
-\item{year}{Gets the year that this data was recorded. Can specify multiple
+\item{year}{A character or numeric vector: gets the year that this data was
+recorded. Can specify multiple
 years. Default is the previous year.}
 
-\item{quarter}{Gets the quarter of the year that this data was recorded.
+\item{quarter}{A character or numeric vector: gets the quarter of the year
+that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{key}{The API key for this user. You must go to HUD and sign up
+\item{key}{A character vector of length one: the API key for this user.
+You must go to HUD and sign up
 for an account and request for an API key.}
 }
 \value{

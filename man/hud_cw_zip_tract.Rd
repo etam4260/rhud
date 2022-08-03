@@ -10,28 +10,32 @@ hud_cw_zip_tract(
   quarter = 1,
   minimal = FALSE,
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{zip}{5 digit (United States Postal Service) USPS zipcode
+\item{zip}{A character or numeric vector: 5 digit
+(United States Postal Service) USPS zipcode
 of the data to retrieve. E.g. 22031 for type
 1 to 5 and 11 .}
 
-\item{year}{Gets the year that this data was recorded. Can specify multiple
+\item{year}{A character or numeric vector: gets the year that this data
+was recorded. Can specify multiple
 years. Default is the previous year.}
 
-\item{quarter}{Gets the quarter of the year that this data was recorded.
+\item{quarter}{A character or numeric vector: gets the quarter of the year
+that this data was recorded.
 Defaults to the first quarter of the year.}
 
-\item{minimal}{Return just the crosswalked geoids if true. Otherwise, return
+\item{minimal}{A logical: return just the crosswalked geoids if TRUE.
+Otherwise, return
 all fields. This does not remove duplicates.}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical: if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{
@@ -51,7 +55,6 @@ zip to tract.
 }
 \examples{
 \dontrun{
-library(rhud)
 
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 

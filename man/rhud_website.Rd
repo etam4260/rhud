@@ -10,7 +10,7 @@ skip_if_no_key()
 rhud_website(website = c("github-pages", "github"))
 }
 \arguments{
-\item{website}{The websites available.
+\item{website}{A character vector: the websites available.
 \enumerate{
 \item "github-pages"
 \item "github"

@@ -9,13 +9,15 @@ hud_chas_state_mcd(
   state,
   year = c("2014-2018"),
   key = Sys.getenv("HUD_KEY"),
-  to_tibble = getOption("rhud_use_tibble")
+  to_tibble = getOption("rhud_use_tibble", FALSE)
 )
 }
 \arguments{
-\item{state}{The state name, abbreviation, or fips code.}
+\item{state}{A character or numeric vector:
+The states to query for which can be specified using
+the state name, abbreviation, or fips code.}
 
-\item{year}{The years to query for.
+\item{year}{A character vector: the years to query for.
 \itemize{
 \item year = "2014-2018"
 \item year = "2013-2017"
@@ -28,11 +30,11 @@ hud_chas_state_mcd(
 \item year = "2006-2010"
 }}
 
-\item{key}{The key obtained from HUD
+\item{key}{A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.}
 
-\item{to_tibble}{If TRUE, return the data in a tibble format
+\item{to_tibble}{A logical : if TRUE, return the data in a tibble format
 rather than a data frame.}
 }
 \value{

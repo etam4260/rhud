@@ -9,6 +9,9 @@ hud_get_cache_dir()
 \value{
 A character vector with path to cached files. If none is set,
 will default to R temp session directory
+
+A character vector stores in the RHUD_CACHE_DIR system environment
+variable.
 }
 \description{
 Get the path rhud is using to store cached files.

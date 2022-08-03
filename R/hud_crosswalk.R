@@ -49,7 +49,6 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -70,10 +69,10 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid, zip,
                                    year, quarter, key)
 
-  zip <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  zip <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
@@ -152,7 +151,6 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_zip_county(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -172,10 +170,10 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    zip, year, quarter, key)
-  zip <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  zip <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
@@ -257,7 +255,6 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_zip_cbsa(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -267,7 +264,7 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                             quarter = 1, minimal = FALSE,
                             key = Sys.getenv("HUD_KEY"),
-                            to_tibble = getOption("rhud_use_tibble")) {
+                            to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
   is_internet_available()
 
@@ -277,10 +274,10 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    zip, year, quarter, key)
-  zip <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  zip <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
@@ -360,7 +357,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
+#'
 #'
 #' hud_cw_zip_cbsadiv(zip = '35213', year = c('2017'), quarter = c('4'))
 #'
@@ -370,7 +367,7 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
                                key = Sys.getenv("HUD_KEY"),
-                               to_tibble = getOption("rhud_use_tibble")) {
+                               to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
   res <- NULL
 
@@ -379,10 +376,10 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    zip, year, quarter, key)
-  zip <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  zip <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
@@ -462,7 +459,6 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_zip_cd(zip = '35213', year = c('2010'), quarter = c('1'))
 #'
@@ -472,7 +468,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
                           key = Sys.getenv("HUD_KEY"),
-                          to_tibble = getOption("rhud_use_tibble")) {
+                          to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -481,10 +477,10 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    zip, year, quarter, key)
-  zip <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  zip <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
@@ -562,7 +558,6 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 #'
@@ -572,7 +567,7 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
                              quarter = 1, minimal = FALSE,
                              key = Sys.getenv("HUD_KEY"),
-                             to_tibble = getOption("rhud_use_tibble")) {
+                             to_tibble = getOption("rhud_use_tibble", FALSE)) {
 
   is_internet_available()
 
@@ -582,10 +577,10 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    tract, year, quarter, key)
-  tract <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  tract <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(tract) != 11)) stop("\nTract inputs are not all of length 11",
                                     call. = FALSE)
@@ -663,7 +658,6 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_county_zip(county = 22031, year = c('2017'), quarter = c('1'))
 #'
@@ -673,7 +667,7 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
                               quarter = 1, minimal = FALSE,
                               key = Sys.getenv("HUD_KEY"),
-                              to_tibble = getOption("rhud_use_tibble")) {
+                              to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -682,10 +676,10 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    county, year, quarter, key)
-  county <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  county <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(county) != 5)) stop("\nCounty inputs are not all of length 5",
                                     call. = FALSE)
@@ -765,7 +759,6 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_cbsa_zip(cbsa = 10140, year = c('2017'), quarter = c('1'))
 #'
@@ -775,7 +768,7 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
                             quarter = 1, minimal = FALSE,
                             key = Sys.getenv("HUD_KEY"),
-                            to_tibble = getOption("rhud_use_tibble")) {
+                            to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -784,10 +777,10 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    cbsa, year, quarter, key)
-  cbsa <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  cbsa <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(cbsa) != 5)) stop("\nCbsa inputs are not all of length 5",
                                   call. = FALSE)
@@ -866,7 +859,6 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('4'))
 #'
@@ -876,7 +868,7 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
                                quarter = 1, minimal = FALSE,
                                key = Sys.getenv("HUD_KEY"),
-                               to_tibble = getOption("rhud_use_tibble")) {
+                               to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -885,10 +877,10 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    cbsadiv, year, quarter, key)
-  cbsadiv <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  cbsadiv <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(cbsadiv) != 5)) stop("\nCbsadiv inputs are not all of length 5",
                                      call. = FALSE)
@@ -965,7 +957,6 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_cd_zip(cd = 2202, year = c('2017'), quarter = c('1'))
 #'
@@ -975,7 +966,7 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
                           quarter = 1, minimal = FALSE,
                           key = Sys.getenv("HUD_KEY"),
-                          to_tibble = getOption("rhud_use_tibble")) {
+                          to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -984,10 +975,10 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    cd, year, quarter, key)
-  cd <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  cd <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(cd) != 4)) stop("\nCd inputs are not all of length 4",
                                 call. = FALSE)
@@ -1007,7 +998,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
   } else {
-    res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
+    res <-  cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
                                secondary_geoid, key, to_tibble)$zip
   }
@@ -1066,7 +1057,6 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_zip_countysub(zip = 35213, year = c('2019'), quarter = c('2'))
 #'
@@ -1076,7 +1066,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY"),
-                                 to_tibble = getOption("rhud_use_tibble")) {
+                                 to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -1085,10 +1075,10 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    zip, year, quarter, key)
-  zip <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  zip <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(zip) != 5)) stop("\nZipcode inputs are not all of length 5",
                                  call. = FALSE)
@@ -1168,7 +1158,6 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'
 #' @examples
 #' \dontrun{
-#' library(rhud)
 #'
 #' hud_cw_countysub_zip(countysub = '4606720300',
 #'    year = c('2019', '2019', '2019'), quarter = c('4','4'))
@@ -1186,7 +1175,7 @@ hud_cw_countysub_zip <- function(countysub,
                                  year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY"),
-                                 to_tibble = getOption("rhud_use_tibble")) {
+                                 to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -1195,10 +1184,10 @@ hud_cw_countysub_zip <- function(countysub,
 
   args <- cw_input_check_cleansing(primary_geoid, secondary_geoid,
                                    countysub, year, quarter, key)
-  countysub <- args[[1]]
-  year <- args[[2]]
-  quarter <- args[[3]]
-  key <- args[[4]]
+  countysub <- args$query
+  year <- args$year
+  quarter <- args$quarter
+  key <- args$key
 
   if (any(nchar(countysub) != 10)) {
     stop("\nCountysub inputs are not all of length 10",

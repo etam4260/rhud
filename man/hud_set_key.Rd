@@ -7,7 +7,7 @@
 hud_set_key(key, in_wkdir = FALSE, in_home = FALSE)
 }
 \arguments{
-\item{key}{key obtained at
+\item{key}{A character vector of length one with key obtained at
 https://www.huduser.gov/hudapi/public/register?comingfrom=1}
 
 \item{in_wkdir}{set the key in the user's .RProfile in this directory.
