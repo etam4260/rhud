@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="rhud">
 <title>Setup • rhud</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -12,12 +13,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Setup">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Setup">
 <meta property="og:description" content="rhud">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -25,159 +25,151 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">rhud</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0.9000</span>
-      </span>
-    </div>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">rhud</a>
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/Setup.html">Setup</a>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/Setup.html">Setup</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">HUD User</li>
-    <li>
-      <a href="../articles/USPS-Crosswalk.html">USPS Crosswalk</a>
-    </li>
-    <li>
-      <a href="../articles/Fair-Markets-Rent.html">Fair Markets Rent</a>
-    </li>
-    <li>
-      <a href="../articles/Income-Limits.html">Income Limits</a>
-    </li>
-    <li>
-      <a href="../articles/Comprehensive-Housing-and-Affordability-Strategy.html">Comprehensive Housing and Affordability Strategy</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Case Studies
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/Covid-19-and-Evictions-Crosswalk.html">Analysis of COVID-19 Cases and Evictions</a>
-    </li>
-    <li>
-      <a href="../articles/Visualizing-FMR-and-IL.html">Visualizing FMR and IL</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../news/index.html">Changelog</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/etam4260/rhud/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/USPS-Crosswalk.html">USPS Crosswalk</a>
+    <a class="dropdown-item" href="../articles/Fair-Market-Rents.html">Fair Market Rents</a>
+    <a class="dropdown-item" href="../articles/Income-Limits.html">Income Limits</a>
+    <a class="dropdown-item" href="../articles/Comprehensive-Housing-and-Affordability-Strategy.html">Comprehensive Housing and Affordability Strategy</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-case-studies">Case Studies</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-case-studies">
+    <a class="dropdown-item" href="../articles/Covid-19-and-Evictions-Crosswalk.html">Analysis of Covid-19 Cases and Evictions</a>
+    <a class="dropdown-item" href="../articles/Visualizing-FMR-and-IL.html">Visualizing FMR and IL</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/etam4260/rhud/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Setup</h1>
+
+
+
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="../logo.png" class="logo" alt=""><h1>Setup</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/etam4260/rhud/blob/HEAD/vignettes/Setup.Rmd" class="external-link"><code>vignettes/Setup.Rmd</code></a></small>
-      <div class="hidden name"><code>Setup.Rmd</code></div>
-
+      <div class="d-none name"><code>Setup.Rmd</code></div>
     </div>
 
     
     
-<div class="section level2">
-<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h2>
 <p>You can install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"etam4260/rhud"</span><span class="op">)</span></code></pre></div>
-<p>The US Department of Housing and Urban Development HUD USER requires users to gain an access key before querying their systems. You must go to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a> and follow the instructions for making an account.</p>
-<p>From the website, you need to make a new token. Make sure to save the token somewhere as you will only be able to view it once. However, you can use it as many times as you want. You can now supply the ‘key’ argument to the function calls. However, it is <strong>NOT RECOMMENDED</strong> to do this. To reduce the need to supply the key argument in every function call you can use the Sys.setenv() function to save the key to the user environment.</p>
-<p><br><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="interactive-key-setup">Interactive Key Setup<a class="anchor" aria-label="anchor" href="#interactive-key-setup"></a>
-</h2>
-<p>There are various method of setting up a key. However, I recommend using the Sys.setenv() function.</p>
+<p>The US Department of Housing and Urban Development HUD USER requires
+users to gain an access key before querying their systems. You must go
+to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a>
+and follow the instructions for making an account.</p>
+<p>From the website, you need to make a new token. Make sure to save the
+token somewhere as you will only be able to view it once. However, you
+can use it as many times as you want. You can now supply the ‘key’
+argument to the function calls. However, it is <strong>NOT
+RECOMMENDED</strong> to do this. To reduce the need to supply the key
+argument in every function call you can use the Sys.setenv() function to
+save the key to the user environment.</p>
 <div class="section level3">
-<h3 id="using-sys-setenv-during-an-interactive-session">Using Sys.setenv() during an interactive session<a class="anchor" aria-label="anchor" href="#using-sys-setenv-during-an-interactive-session"></a>
+<h3 id="interactive-key-setup">Interactive Key Setup<a class="anchor" aria-label="anchor" href="#interactive-key-setup"></a>
 </h3>
-<p>One method of setting the API key is to use environment variables. This library searches for HUD_KEY in the user environment to check if a key has been defined. If no key has been defined, an empty string is outputted.</p>
+<p>There are various method of setting up a key. However, I recommend
+using the Sys.setenv() function.</p>
+<div class="section level4">
+<h4 id="using-sys-setenv-during-an-interactive-session">Using Sys.setenv() during an interactive session<a class="anchor" aria-label="anchor" href="#using-sys-setenv-during-an-interactive-session"></a>
+</h4>
+<p>One method of setting the API key is to use environment variables.
+This library searches for HUD_KEY in the user environment to check if a
+key has been defined. If no key has been defined, an empty string is
+outputted.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/rhud" class="external-link">rhud</a></span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span></code></pre></div>
 <p>To set the key…</p>
+<p>You need to go to <a href="https://www.huduser.gov/hudapi/public/register?comingfrom=1" class="external-link uri">https://www.huduser.gov/hudapi/public/register?comingfrom=1</a>
+and register for a key and replace it here.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span> <span class="op">=</span> <span class="st">"2yeuduhq72ueajk"</span><span class="op">)</span>
-<span class="co"># "2yeuduhq72ueajk" is just a sample key. You need to go to https://www.huduser.gov/hudapi/public/register?comingfrom=1 and register for a key and replace it here.</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span> <span class="op">=</span> <span class="st">"YOUR KEY HERE"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span></code></pre></div>
-<p>You can also use the hud_set_key() function – this is quicker to type and more intuitive. You can also tell RStudio to remember the key by setting <code>in_wkdir</code> and <code>in_home</code> parameter to <code>TRUE</code> which will write Sys.setenv(“your-key”) to your .Rprofile.</p>
+<p>You can also use the hud_set_key() function – this is quicker to type
+and more intuitive. You can also tell RStudio to remember the key by
+setting <code>in_wkdir</code> and <code>in_home</code> parameter to
+<code>TRUE</code> which will write Sys.setenv(“your-key”) to your
+.Rprofile.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_key.html">hud_set_key</a></span><span class="op">(</span><span class="st">"2yeuduhq72ueajk"</span>, in_home <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p>To check whether rhud can gain access to this environment variable…</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_key.html">hud_set_key</a></span><span class="op">(</span><span class="st">"YOUR KEY HERE"</span>, in_home <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>To check whether rhud can gain access to this environment
+variable…</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_key.html">hud_get_key</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>It is now set up for the rest of the R session.</p>
-<p><br><br><br></p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="setting-a-user-agent">Setting a user agent<a class="anchor" aria-label="anchor" href="#setting-a-user-agent"></a>
-</h2>
-<p>It is recommended to set a user agent before querying. This tells the HUD servers a bit more about the querying application or user.</p>
+<div class="section level3">
+<h3 id="setting-a-user-agent">Setting a user agent<a class="anchor" aria-label="anchor" href="#setting-a-user-agent"></a>
+</h3>
+<p>It is recommended to set a user agent before querying. This tells the
+HUD servers a bit more about the querying application or user.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_set_user_agent.html">hud_set_user_agent</a></span><span class="op">(</span><span class="st">"This Application"</span><span class="op">)</span></code></pre></div>
 <p>If no user agent is set, it will return an empty string.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_user_agent.html">hud_get_user_agent</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><br><br><br></p>
 </div>
-<div class="section level2">
-<h2 id="increasing-performance-with-caching">Increasing Performance with Caching<a class="anchor" aria-label="anchor" href="#increasing-performance-with-caching"></a>
-</h2>
-<p>By default, rhud uses caching by default. Calls to the HUD User API are sent to the RStudio temporary session directory.</p>
-<p>If no caching directory is set (located in temp directory), it will return an empty string.</p>
+<div class="section level3">
+<h3 id="increasing-performance-with-caching">Increasing Performance with Caching<a class="anchor" aria-label="anchor" href="#increasing-performance-with-caching"></a>
+</h3>
+<p>By default, rhud uses caching by default. Calls to the HUD User API
+are sent to the RStudio temporary session directory.</p>
+<p>If no caching directory is set (located in temp directory), it will
+return an empty string.</p>
 <p>To check the current caching directory use:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_get_cache_dir.html">hud_get_cache_dir</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -187,74 +179,86 @@
 <p>To clear all items in the cache use:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_clear_cache.html">hud_clear_cache</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><br><br><br></p>
 </div>
-<div class="section level2">
-<h2 id="tibbles-vs-dataframes">Tibbles vs Dataframes<a class="anchor" aria-label="anchor" href="#tibbles-vs-dataframes"></a>
-</h2>
-<p>To get tibbles instead of data frames, use <code>options(rhud_use_tibble = TRUE)</code> or set it explicitly using the <code>to_tibble</code> argument.</p>
+<div class="section level3">
+<h3 id="tibbles-vs-dataframes">Tibbles vs Dataframes<a class="anchor" aria-label="anchor" href="#tibbles-vs-dataframes"></a>
+</h3>
+<p>To get tibbles instead of data frames, use
+<code>options(rhud_use_tibble = TRUE)</code> or set it explicitly using
+the <code>to_tibble</code> argument.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>rhud_use_tibble <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/hud_cw_zip_tract.html">hud_cw_zip_tract</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>,
                  to_tibble <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<p><br><br><br></p>
 </div>
-<div class="section level2">
-<h2 id="understanding-the-syntax">Understanding the Syntax<a class="anchor" aria-label="anchor" href="#understanding-the-syntax"></a>
-</h2>
-<p>A noticeable issue with querying geographic data is determining what resolution the data is returned in. Therefore, understanding the syntax of these function calls should easily help you determine what you are querying and what data is returned.</p>
-<p>The general syntax for these functions within the package follow this pattern where {1},{2}, and {3} are placeholders:</p>
-<p>hud_{1}_{2}_{3}</p>
-<p>{1}: This symbol represents the dataset to query for. So for example if you want fair markets rent data, this will be ‘fmr’. If you want data from the crosswalk files, this will be ‘cw’.</p>
-<p>{2}: This symbol represents the geographic resolution to query for. For example, if the function requires that you input state(s), then this will be named as ‘state.’ If the function requires that you input county(s) then this will be ‘county’.</p>
-<p>{3}: This symbol represented the output geographic resolution. So for example, if we want data at a zip code level, then this will have ‘zip’.</p>
-<p>For those that do not have the {2} and {3}, these are omni functions which are capable of performing all queries under {1}, but these functions are harder to understand.</p>
-<p>For those that do not have the {3}, it inherits the {2}. This means that if {2} is a state input, then the data described by the output data is also a state.</p>
+<div class="section level3">
+<h3 id="understanding-the-syntax">Understanding the Syntax<a class="anchor" aria-label="anchor" href="#understanding-the-syntax"></a>
+</h3>
+<p>A noticeable issue with querying geographic data is determining what
+resolution the data is returned in. Therefore, understanding the syntax
+of these function calls should easily help you determine what you are
+querying and what data is returned.</p>
+<p>The general syntax for these functions within the package follow this
+pattern where {dataset},{geography}, and {resolution} are
+placeholders:</p>
+<p>hud_{dataset}_{geography}_{resolution}</p>
+<p>{dataset}: This symbol represents the dataset to query for. So for
+example if you want fair markets rent data, this will be ‘fmr’. If you
+want data from the crosswalk files, this will be ‘cw’.</p>
+<p>{geography}: This symbol represents the geographic resolution to
+query for. For example, if the function requires that you input
+state(s), then this will be named as ‘state.’ If the function requires
+that you input county(s) then this will be ‘county’.</p>
+<p>{resolution}: This symbol represented the output geographic
+resolution. So for example, if we want data at a zip code level, then
+this will have ‘zip’.</p>
+<p>For those that do not have the {geography} and {resolution}, these
+are omni functions which are capable of performing all queries under
+{dataset}, but these functions are harder to understand.</p>
+<p>For those that do not have the {resolution}, it inherits the
+{geography}. This means that if {geography} is a state input, then the
+data described by the output data is also a state.</p>
 <p>A quick example:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_county_zip.html">hud_cw_county_zip</a></span><span class="op">(</span>county <span class="op">=</span> <span class="fl">22031</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The first part of the function begins with ‘hud’.</p>
-<p>The second part is ‘cw’ meaning we are querying the crosswalk files.</p>
+<p>The second part is ‘cw’ meaning we are querying the crosswalk
+files.</p>
 <p>The third part is ‘county’ meaning we need to input county(s)</p>
-<p>The fourth part is the ‘zip’ meaning the data will be returned at a zip code resolution.</p>
-<p><br><br><br></p>
+<p>The fourth part is the ‘zip’ meaning the data will be returned at a
+zip code resolution.</p>
 </div>
-<div class="section level2">
-<h2 id="additional-help">Additional Help<a class="anchor" aria-label="anchor" href="#additional-help"></a>
-</h2>
-<p>If you ever get confused or need help you can easily revisit this website where you can check the all the function definitions in the <strong><em>Reference</em></strong> tab.</p>
+<div class="section level3">
+<h3 id="additional-help">Additional Help<a class="anchor" aria-label="anchor" href="#additional-help"></a>
+</h3>
+<p>If you ever get confused or need help you can easily revisit this
+website where you can check the all the function definitions in the
+<strong><em>Reference</em></strong> tab.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/rhud_website.html">rhud_website</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>This will quickly open up this website on your web browser as well as the github repository where you can submit issues.</p>
+<p>This will quickly open up this website on your web browser as well as
+the github repository where you can submit issues.</p>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main>
 </div>
 
 
 
-      <footer><div class="copyright">
+    <footer><div class="pkgdown-footer-left">
   <p></p>
 <p>Developed by Emmet Tam.</p>
 </div>
 
-<div class="pkgdown">
+<div class="pkgdown-footer-right">
   <p></p>
 <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
-
 
   
 

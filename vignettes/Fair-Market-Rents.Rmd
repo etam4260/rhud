@@ -1,8 +1,8 @@
 ---
-title: "Fair-Markets-Rent"
+title: "Fair-Market-Rents"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Fair-Markets-Rent}
+  %\VignetteIndexEntry{Fair-Market-Rents}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,29 +14,24 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Program Overview
+### Program Overview
 
 According to (Fair Market Rents | HUD USER), Fair Market Rents (FMRs) are used
 to calculate payment standard amounts for the Housing Choice Voucher program,
 initial renewal rents for some expiring project-based Section 8 contracts,
 initial rents for housing assistance payment (HAP) contracts in the Moderate
 Rehabilitation Single Room Occupancy program (Mod Rehab), rent ceilings for
-rental units in both the HOME Investment Partnerships program and the Emergency
-Solution Grants program, and rent ceilings for rental units in both the HOME
-Investment Partnerships program and the Emergency Solution Grant.
+rental units in both the HOME Investment Partnerships program and the Emergency Solution Grants program, and rent ceilings for rental units in both the HOME Investment Partnerships program and the Emergency Solution Grant.
 
 Furthermore, the United States Department of Housing and Urban Development (HUD)
 calculates FMRs for metropolitan areas defined by the Office of Management and
 Budget (OMB), some HUD-designated subdivisions of OMB metropolitan areas, and
-each non-metropolitan county on an annual basis. FMRs must be posted at least 30
-days before they go into effect, and they must go into force at the beginning of
-the federal fiscal year (usually October 1). Fair Market Rentals are estimates
-of the 40th percentile gross rents for standard quality units within a
-metropolitan region or non-metropolitan county, as described in 24 CFR 888.113.
+each non-metropolitan county on an annual basis. 
 
-<br>
+FMRs must be posted at least 30 days before they go into effect, and they must go into force at the beginning of the federal fiscal year (usually October 1). Fair Market Rentals are estimates of the 40th percentile gross rents for standard quality units within a metropolitan region or non-metropolitan county, as described in 24 CFR 888.113.
 
-## Examples
+
+### Examples
 
 These are basic examples to show you how to query the Fair Markets Rent API. Before
 looking at the examples I RECOMMEND first looking at [the parameters][Parameters]
@@ -55,7 +50,7 @@ not small areas will have an NA in the zip_code,
 meaning this measurement is defined at a county level. Those counties that 
 are small areas will return zip code data in the zip_code field.
 
-### State Level Fair Markets Rent
+#### State Level Fair Markets Rent
 This is an example which shows you how to query the Fair Markets Rent API for a
 state. You can use the state abbreviation, state name, or state fips code. It
 will return all counties in the state and their Fair Markets Rents as well
@@ -68,7 +63,7 @@ hud_fmr(query= "Virginia", year = '2021')
 
 hud_fmr(query= "51", year = '2021')
 ```
-<br>
+
 
 If you only need the county level data, then this might work better...
 
@@ -80,7 +75,7 @@ hud_fmr_state_counties(state = "Virginia", year = '2021')
 
 hud_fmr_state_counties(state = "51", year = '2021')
 ```
-<br>
+
 
 If you need just metro data...
 
@@ -92,9 +87,9 @@ hud_fmr_state_metroareas(state = "Virginia", year = '2021')
 
 hud_fmr_state_metroareas(state = "51", year = '2021')
 ```
-<br>
 
-### County Level Fair Markets Rent
+
+#### County Level Fair Markets Rent
 This is an example which shows you how to query the Fair Markets Rent on a
 county level basis. These are defined with a 2 digit state code + 3 digit county
 code. You also need a 99999 code added onto the end. I recommend taking a 
@@ -104,52 +99,51 @@ look at [US Counties][] to determine what counties are available.
 # Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
 hud_fmr(query = '0100199999', year = '2017')
 ```
-<br>
+
 
 You can also choose to use:
 ```{r, eval=FALSE}
 # Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
 hud_fmr_county_zip(county = '0100199999', year = '2017')
 ```
-<br>
 
-### Small Areas Fair Markets Rent
+
+#### Small Areas Fair Markets Rent
 
 ```{r, eval=FALSE}
 # Gets FMR data for METRO area.
 hud_fmr(query = "METRO47900M47900", year=c(2018))
 ```
-<br>
+
 
 You can also choose to use:
 ```{r, eval=FALSE}
 # Getting a county requires a 2 digit state fipscode + 3 digit county fipscode + 99999
 hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
 ```
-<br>
 
-## Most recent Fair Markets Rent files
+
+### Most recent Fair Markets Rent files
 
 To get the most recent Fair Markets Rent files by year:
 
-```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-rhud::hud_rec_fmr_yr()
-
+```{r, eval = FALSE}
+hud_rec_fmr_yr()
 ```
-<br>
 
-## Querying for Geographic Identifers
 
-### US States
+### Querying for Geographic Identifers
+
+#### US States
 This is an example to show you how to query for all states in the US.
 
 ```{r, eval=FALSE}
-library(rhud)
+# library(rhud)
 hud_nation_states_territories()
 ```
-<br>
 
-### US Counties 
+
+#### US Counties 
 This is an example to show you how to query for all counties in MD,
 Virginia, and California, respectively.
 
@@ -160,17 +154,17 @@ hud_state_counties("Virginia")
 
 hud_state_counties("6")
 ```
-<br>
 
-### US Metropolitan Areas
+
+#### US Metropolitan Areas
 This is an example to show you how to query for metropolitan areas in Wyoming
 and New York.
 ```{r, eval=FALSE}
 hud_state_metropolitan(c("WY", "NY"))
 ```
-<br>
 
-## Parameters
+
+### Parameters
 
 <table>
 	<tr>
@@ -214,9 +208,8 @@ hud_state_metropolitan(c("WY", "NY"))
  	</tr>
 </table>
 
-<br><br><br>
 
-## Returns
+### Returns
 
 
 <table>
@@ -283,11 +276,10 @@ hud_state_metropolitan(c("WY", "NY"))
  	</tr>
 </table>
 
-<br><br><br>
 
-## References
+### References
 
-| "What Is Fair Market Rent? | RentData.org." Www.rentdata.org,
+| "What Is Fair Market Rent? | RentData.org." www.rentdata.org,
 |        www.rentdata.org/articles/what-is-fair-market-rent. Accessed 18 Feb. 2022.
 |
 | "Fair Market Rents | HUD USER." Huduser.gov, U.S Department of Housing and Urban

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Program Overview
+### Program Overview
 
 According to (US Department of Housing and Urban Development, n.d.), the
 difficulty of linking United States Postal Service (USPS) ZIP codes to Census
@@ -55,15 +55,21 @@ These journal articles describe the problem and proposed solution in more detail
 
 <br>
 
-## Census Geographies
+### Census Geographies
 
 This chart provided by the US Census Bureau gives a good example of the
 relationships among different geographies. The crosswalk files only support a
 subset of these.
 
+```{r, echo=FALSE, fig.cap="Hierarchy of Census Geographic Entities", out.width = '100%'}
+# knitr::include_graphics("./Hierarchy_of_Census_Geographic_Entities.001.jpeg")
+```
+
+# <img src='./Hierarchy_of_Census_Geographic_Entities.001.jpeg' align="center" width = "100%"/>
+
 <br>
 
-## Examples
+### Examples
 
 There are 12 main function calls for the crosswalk files:
 the package also contains an omni function which encapsulates the 
@@ -105,7 +111,7 @@ These are basic examples which shows you to query the Crosswalk API. Before
 looking at the outputted data I RECOMMEND first taking a look at [the parameters][Parameters]
 as well as [return data][Returns] located at the bottom of the page.
 
-### Crosswalk zipcode to census tract
+#### Crosswalk zipcode to census tract
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 library(rhud)
 options (digits=4)
@@ -114,67 +120,67 @@ hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
 <br>
 
-### Crosswalk zipcode to county fip
+#### Crosswalk zipcode to county fip
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_county(zip = 35213, year = c('2020'), quarter = c('2'))
 ```
 <br>
 
-### Crosswalk zipcode to core base statistical area (cbsa)
+#### Crosswalk zipcode to core base statistical area (cbsa)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsa(zip = 35213, year = c('2011'), quarter = c('3'))
 ```
 <br>
 
-### Crosswalk zipcode to core based statistical area division (cbsadiv)
+#### Crosswalk zipcode to core based statistical area division (cbsadiv)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cbsadiv(zip = '22031', year = c('2019'), quarter = c('4'))
 ```
 <br>
 
-### Crosswalk zipcode to congressional district (cd)
+#### Crosswalk zipcode to congressional district (cd)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_zip_cd(zip = '35213', year = c(2011), quarter = c(1))
 ```
 <br>
 
-### Crosswalk census tract to zipcode
+#### Crosswalk census tract to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_tract_zip(tract = 48201223100, year = c('2017'), quarter = c('1'))
 ```
 <br>
 
-### Crosswalk county fip into zipcode 
+#### Crosswalk county fip into zipcode 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'))
 ```
 <br>
 
-### Crosswalk core based statistical areas (cbsa) to zipcode
+#### Crosswalk core based statistical areas (cbsa) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsa_zip(cbsa = '10140', year = c('2017'), quarter = c('2'))
 ```
 <br>
 
-### Crosswalk core based statistical areas division (cbsadiv) to zipcode
+#### Crosswalk core based statistical areas division (cbsadiv) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cbsadiv_zip(cbsadiv = 10380, year = c('2017'), quarter = c('4'))
 ```
 <br>
 
-### Crosswalk congressional district (cd) to zipcode
+#### Crosswalk congressional district (cd) to zipcode
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_cd_zip(cd = '2202', year = c('2010'), quarter = c('4'))
 ```
 <br>
 
-### Crosswalk zipcode to county subdivision (countysub)
+#### Crosswalk zipcode to county subdivision (countysub)
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}
 hud_cw_zip_countysub(zip = '35213', year = c('2019'), quarter = c('2'))
 ```
 <br>
 
-### Crosswalk county subdivision (countysub) to zipcode 
+#### Crosswalk county subdivision (countysub) to zipcode 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "")  FALSE else TRUE}
 hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019'),
                      quarter = c('4','4'))
@@ -182,7 +188,7 @@ hud_cw_countysub_zip(countysub = '4606720300 ', year = c('2019', '2019', '2019')
 
 <br>
 
-## Querying for only the crosswalked geoids
+### Querying for only the crosswalked geoids
 
 If you just want the crosswalked geoids, you can set the **minimal** argument 
 to TRUE. This will return a vector containing the crosswalked geoids
@@ -194,7 +200,7 @@ hud_cw_county_zip(county = '22031', year = c('2010'), quarter = c('1'), minimal 
 
 <br>
 
-## Using the omni function for querying
+### Using the omni function for querying
 
 The omni function is a redundant implementation of the functions shown above
 that requires specifying the type which can be from 1-12. The type argument
@@ -209,7 +215,7 @@ hud_cw(type = 7, query = '22031', year = c('2010'), quarter = c('1'))
 
 <br>
 
-## Crosswalking a dataset
+### Crosswalking a dataset
 
 For those who need to apply an allocation method (residential, business, other,
 total) to individual items in a data set, the **crosswalk()** function is available. 
@@ -253,7 +259,7 @@ crosswalk(data = sample, geoid = "county", geoid_col = "county",
 ```
 <br>
 
-## Geo-in-geo functions: does one geography overlap another?
+### Geo-in-geo functions: does one geography overlap another?
 
 This library also allows the user to determine if one geography overlaps
 another.
@@ -264,10 +270,9 @@ rather if any addresses lie in both.
 The function below queries for if zipcode 71052 overlaps cbsa 43340. 
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-71052 %z_in_cbsa% 43340
+# 71052 %z_in_cbsa% 43340
 
 ```
-<br>
 
 The infix operator used above defaults to the most recent crosswalk files 
 available. Furthermore, you must have the HUD_KEY system environment variable 
@@ -277,23 +282,21 @@ The non infix version is also available: this allows you to specify the year,
 quarter, and key arguments.
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
+# z_in_cbsa(zip = 71052, cbsa = 43340, year = 2019, quarter = 2)
 
 ```
-<br>
 
-## Most recent USPS Crosswalk files
+### Most recent USPS Crosswalk files
 
 To get the most recent crosswalk files by year and quarter:
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-hud_rec_cw_yr()
+# hud_rec_cw_yr()
 
 ```
 
-<br><br><br>
 
-## Parameters
+### Parameters
 
 <table>
 	<tr>
@@ -392,9 +395,8 @@ hud_rec_cw_yr()
  	</tr>
 </table>
 
-<br><br><br>
 
-## Returns
+### Returns
 
 <table>
 	<tr>
@@ -451,9 +453,8 @@ hud_rec_cw_yr()
 </table>
 		
 
-<br>
 
-## References
+### References
 
 | Din, Alexander and Wilson, Ron, 2020. "Crosswalking ZIP Codes to Census 
 |       Geographies: Geoprocessing the U.S. Department of Housing & Urban Development’s

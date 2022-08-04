@@ -22,10 +22,61 @@ version](https://img.shields.io/badge/devel%20version-0.3.0.9000-yellow)]()
 
 <!-- badges: end -->
 
+### Citation
+
+Please cite this package using:
+
+Tam E, Reilly A, Ghaedi H, Jin S (2022). rhud: A R Interface to the
+HUD  
+      (US Department of Housing and Urban Development) APIs.
+0.3.0.9000,  
+      <https://github.com/etam4260/rhud/>.
+
 Are you a python developer? Check out
 [hudpy](https://github.com/etam4260/hudpy) instead.
 
-## Installation
+### Housing and Urban Development in R
+
+*This interface uses the HUD User Data API but is not endorsed or
+certified by HUD User*
+
+Although HUD does provide datasets for other programs, they are
+currently not supported by an API. The goal of this project is to
+provide an easy-to-use interface to access various open-source APIs
+provided by the U.S Department of Housing and Urban Development.
+
+These include the USPS Crosswalk Files, Fair Markets Rent, Income
+Limits, and Comprehensive Housing and Affordability Strategy.
+
+Please read
+<https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
+all terms of service.
+
+**According to HUD USER:**
+
+All services, which utilize or access the API, should display the
+following notice prominently within the application: “This product uses
+the HUD User Data API but is not endorsed or certified by HUD User.” You
+may use the HUD User name in order to identify the source of API content
+subject to these rules. You may not use the HUD User name, or the like
+to imply endorsement of any product, service, or entity, not-for-profit,
+commercial or otherwise.
+
+### [HUD User](https://www.huduser.gov/portal/datasets)
+
+According to (HUD User Home Page \| HUD USER), HUD User is a U.S.
+Department of Housing and Urban Development information source that
+includes reports and reference documents. HUD USER was founded in 1978
+by the Department of Housing and Urban Development’s Office of Policy
+Development and Research.
+
+HUD User maintains an API to gain access to their data. However, their
+API system can be confusing and provides their information in JSON
+format rather than a data-frame like object. Although there exist file
+downloadables, R users may want to be able to extract specific bits of
+the data into memory.
+
+### Installation
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -39,7 +90,7 @@ For more details on how to setup and utilize this package. Please go to
 <https://etam4260.github.io/rhud/>. Select \[Setup\] in the navigation
 bar.
 
-## Key Access
+### Key Access
 
 To use functions provided by this package, you need to get access HUD
 USER via token. Go to <https://www.huduser.gov/hudapi/public/login> to
@@ -55,7 +106,7 @@ throughout your R session.
 hud_set_key("sample-key")
 ```
 
-## Simplistic Example
+### Simplistic Example
 
 This sample provided below shows how to query the USPS Crosswalk API
 
@@ -63,68 +114,15 @@ This sample provided below shows how to query the USPS Crosswalk API
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
 
-## Tibbles vs Dataframes
-
-To get tibbles instead of data frames, use
-`options(rhud_use_tibble = TRUE)` or set it explicitly using the
-`to_tibble` argument.
-
-``` r
-options(rhud_use_tibble = TRUE)
-
-hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'),
-                 to_tibble = TRUE)
-```
-
-## Housing and Urban Development in R
-
--   This interface uses the HUD User Data API but is not endorsed or
-    certified by HUD User.
-
-The goal of this project is to provide an easy-to-use interface to
-access various open-source APIs provided by the U.S Department of
-Housing and Urban Development. These include the USPS Crosswalk Files,
-Fair Markets Rent, Income Limits, and Comprehensive Housing and
-Affordability Strategy. Although HUD does provide datasets for other
-programs, they are currently not supported by an API.
-
-Please read
-<https://www.huduser.gov/portal/dataset/api-terms-of-service.html> for
-all terms of service.
-
-According to HUD USER:
-
-All services, which utilize or access the API, should display the
-following notice prominently within the application: “This product uses
-the HUD User Data API but is not endorsed or certified by HUD User.” You
-may use the HUD User name in order to identify the source of API content
-subject to these rules. You may not use the HUD User name, or the like
-to imply endorsement of any product, service, or entity, not-for-profit,
-commercial or otherwise.
-
-## HUD User: <https://www.huduser.gov/portal/datasets>
-
-According to (HUD User Home Page \| HUD USER), HUD User is a U.S.
-Department of Housing and Urban Development information source that
-includes reports and reference documents. HUD USER was founded in 1978
-by the Department of Housing and Urban Development’s Office of Policy
-Development and Research.
-
-HUD User maintains an API to gain access to their data. However, their
-API system can be confusing and provides their information in JSON
-format rather than a data-frame like object. Although there exist file
-downloadables, R users may want to be able to extract specific bits of
-the data into memory.
-
-## Available Data
+### Available Data
 
 The APIs and datasets which this library interfaces are listed below.
 The HUD also provide miscellaneous supplemental APIs under them.
 
-1.  HUD User
+1)  HUD User
 
--   USPS Crosswalk
-    (<https://www.huduser.gov/portal/dataset/uspszip-api.html>)
+-   [USPS
+    Crosswalk](https://www.huduser.gov/portal/dataset/uspszip-api.html)
 
 | USPS Crosswalk Files     | Years           |
 |--------------------------|-----------------|
@@ -170,8 +168,8 @@ The HUD also provide miscellaneous supplemental APIs under them.
 | `%ctysb_in_z%`           | 2021            |
 | `%cd_in_z%`              | 2021            |
 
--   Fair Markets Rent
-    (<https://www.huduser.gov/portal/dataset/fmr-api.html>)
+-   [Fair Markets
+    Rent](https://www.huduser.gov/portal/dataset/fmr-api.html)
     -   Small Areas Fair Markets Rent
 
 | Fair Markets Rent            | Years     |
@@ -182,15 +180,14 @@ The HUD also provide miscellaneous supplemental APIs under them.
 | `hud_fmr_metroarea_zip()`    | 2017-2022 |
 | `hud_fmr()`                  | 2017-2022 |
 
--   Income Limits
-    (<https://www.huduser.gov/portal/dataset/fmr-api.html>)
+-   [Income Limits](https://www.huduser.gov/portal/dataset/fmr-api.html)
 
 | Income Limits | Years     |
 |---------------|-----------|
 | `hud_il()`    | 2017-2022 |
 
--   Comprehensive Housing and Affordability Strategy
-    (<https://www.huduser.gov/portal/dataset/chas-api.html>)
+-   [Comprehensive Housing and Affordability
+    Strategy](https://www.huduser.gov/portal/dataset/chas-api.html)
 
 | Comprehensive Housing and Affordability Strategy | Years                                                                                              |
 |--------------------------------------------------|----------------------------------------------------------------------------------------------------|
@@ -237,16 +234,16 @@ The HUD also provide miscellaneous supplemental APIs under them.
 | `hud_rec_fmr_yr()` |
 | `hud_rec_il_yr()`  |
 
-## Contributors
+### Contributors
 
 -   Emmet Tam(<https://github.com/etam4260>)\[<emmet_tam@yahoo.com>\]
--   Allison Reilly()\[<areilly2@umd.edu>\]
--   Hamed Ghaedi()\[<hghaedi@terpmail.umd.edu>\]
+-   Allison Reilly\[<areilly2@umd.edu>\]
+-   Hamed Ghaedi\[<hghaedi@terpmail.umd.edu>\]
 -   Shuyu Jin(<https://github.com/geojsy>)\[<geojsy@umd.edu>\]
 
-## Disclaimers
+### Disclaimers
 
--   License: GPL >= 2
+-   License: GPL \>= 2
 
 -   To get citation information for rhud in R, type citation(package =
     ‘rhud’)
@@ -263,17 +260,7 @@ The HUD also provide miscellaneous supplemental APIs under them.
 -   This is open source, so please fork and introduce some pull
     requests!
 
-## Citation
-
-Please cite this package using:
-
-Tam E, Reilly A, Ghaedi H, Jin S (2022). rhud: A R Interface to the
-HUD  
-      (US Department of Housing and Urban Development) APIs.
-0.3.0.9000,  
-      <https://github.com/etam4260/rhud/>.
-
-## References
+### References
 
 HUD User Home Page: HUD USER. HUD User Home Page \| HUD USER. (n.d.).
 Retrieved  

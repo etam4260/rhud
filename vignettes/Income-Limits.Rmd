@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Program Overview
+### Program Overview
 
 According to (Income Limits | HUD USER), HUD establishes income restrictions for
 assisted housing programs such as Public Housing, Section 8 project-based,
@@ -24,16 +24,15 @@ parts of some metropolitan areas, and non-metropolitan county, HUD creates
 income limitations based on Median Family Income estimates and Fair Market Rent
 area criteria.
 
-<br><br><br>
 
-## Examples
+### Examples
 
 This page contains basic examples of how to query the HUD Income Limits API.
 Before looking at the examples I reccomend first taking a look at
 [the parameters][Parameters] as well as [output data][Returns] located at
 the bottom of the page.
 
-**DISCLAIMER:** The output tables are too large to be displayed here so we
+**Disclaimer:** The output tables are too large to be displayed here so we
 choose to leave them out.
 
 * Querying a state will return a single row containing the Income Limits for that
@@ -41,7 +40,7 @@ state.
 * Querying for a county will return the IL measurement for that county.
 * Querying for a cbsa will return the measurement for that cbsa.
 
-### State Level Income Limits
+#### State Level Income Limits
 These are examples which show you how to query the Income Limits on a state
 level basis. You can use the state abbreviation, state name, or state fipscode.
 It will return a single row indicating the income limits for that particular
@@ -59,9 +58,9 @@ hud_il(query= "51", year = '2021')
 # You can also choose to query for multiple states or multiple years.
 hud_il(query = c('VA', 'MD'), year = c('2021', '2019'))
 ```
-<br>
 
-### County Level Income Limits
+
+#### County Level Income Limits
 These are examples that show you how to query the Income Limits on a 
 county-level basis: counties are defined with a 2 digit state fipscode + 3 digit county fipscode. You also need a 99999 code added to the end. We currently 
 don't know why the extra 99999 is included and have not found any cases where it's different. I recommend looking at [US Counties][] to determine what counties 
@@ -72,9 +71,9 @@ are available for particular states.
 # This queries for Income Limits in 2017.
 hud_il(query = '0100199999', year = '2017')
 ```
-<br>
 
-### Small Areas Income Limits
+
+#### Small Areas Income Limits
 These are examples that show you how to query the Small Areas Income Limits.
 Small Areas are defined as metropolitan and micropolitan areas specified using
 CBSA codes. Currently, we know how to query for metropolitan small areas, but
@@ -85,30 +84,29 @@ are not sure for micropolitan yet. I recommend looking at
 hud_il(query = "METRO47900M47900", year=c(2018))
 ```
 
-<br><br><br>
 
-## Most recent Income Limits files
+
+### Most recent Income Limits files
 
 To get the most recent Income Limits files by year:
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE }
-rhud::hud_rec_il_yr()
+# rhud::hud_rec_il_yr()
 
 ```
-<br>
 
-## Querying for Geographic Identifers
+### Querying for Geographic Identifers
 
-### US States
+#### US States
 This is an example to show you how to query for all states and territories
 in the US.
 ```{r, eval=FALSE}
 library(rhud)
 hud_nation_states_territories()
 ```
-<br>
 
-### US Counties 
+
+#### US Counties 
 This is an example to show you how to query for all counties in MD,
 Virginia, and California, respectively.
 ```{r, eval=FALSE}
@@ -118,17 +116,17 @@ hud_state_counties("Virginia")
 
 hud_state_counties("6")
 ```
-<br>
 
-### US Metropolitan Areas
+
+#### US Metropolitan Areas
 This is an example to show you how to query for metropolitan areas for a state.
 ```{r, eval=FALSE}
 # Get all metropolitan areas in Maryland and Virginia.
 hud_state_metropolitan(c("MD", "VA"))
 ```
-<br>
 
-## Parameters
+
+### Parameters
 
 <table>
 	<tr>
@@ -172,9 +170,9 @@ hud_state_metropolitan(c("MD", "VA"))
  	</tr>
 </table>
 
-<br><br><br>
 
-## Returns
+
+### Returns
 
 <table>
 	<tr>
@@ -236,9 +234,9 @@ hud_state_metropolitan(c("MD", "VA"))
  	</tr>
 </table>
 
-<br><br><br>
 
-## References
+
+### References
 
 | "Income Limits | HUD USER." Huduser.gov, 2015,
 |         www.huduser.gov/portal/datasets/il.html.

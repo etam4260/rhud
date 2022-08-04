@@ -1,17 +1,17 @@
-pandoc: 2.14.0.3
+pandoc: 2.17.1.1
 pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   Comprehensive-Housing-and-Affordability-Strategy: Comprehensive-Housing-and-Affordability-Strategy.html
-  Covid-19-and-Evictions-Crosswalk 2: Covid-19-and-Evictions-Crosswalk 2.html
+  Covid-19-and-Evictions-Crosswalk-2: Covid-19-and-Evictions-Crosswalk-2.html
   Covid-19-and-Evictions-Crosswalk: Covid-19-and-Evictions-Crosswalk.html
   Crosswalk-a-Dataset: Crosswalk-a-Dataset.html
+  Fair-Market-Rents: Fair-Market-Rents.html
   Fair-Markets-Rent: Fair-Markets-Rent.html
   Income-Limits: Income-Limits.html
   Setup: Setup.html
   USPS-Crosswalk: USPS-Crosswalk.html
-  Visualizing-FMR-and-IL 2: Visualizing-FMR-and-IL 2.html
+  Visualizing-FMR-and-IL-2: Visualizing-FMR-and-IL-2.html
   Visualizing-FMR-and-IL: Visualizing-FMR-and-IL.html
-  authors: authors.html
-last_built: 2022-06-09T17:44Z
+last_built: 2022-07-27T07:53Z
 
