@@ -33,7 +33,7 @@ test_that("hud_nation_state_territories() Simple Examples and Error", {
 
   states <- hud_nation_states_territories()
   expect_true(nrow(states) >= 1)
-  expect_error(hud_nation_states_territories("qdqdwq"))
+  expect_warning(hud_nation_states_territories("qdqdwq"))
 })
 
 test_that("hud_state_counties() Simple Examples and Error", {
@@ -45,7 +45,7 @@ test_that("hud_state_counties() Simple Examples and Error", {
   counties <- hud_state_counties("Michigan")
   expect_true(nrow(counties) >= 1)
 
-  counties <- hud_state_counties("Washington")
+  counties <- hud_state_counties(5)
   expect_true(nrow(counties) >= 1)
 
   expect_warning(hud_state_counties("CA", "qdqdwq"))

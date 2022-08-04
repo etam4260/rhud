@@ -43,7 +43,5 @@ download_bar <- function(done = NULL, total = NULL,
                      done, "/", total, "\t", error, "\t", url, sep = "")
 
     message(paste("\r", loading, sep = ""), appendLF = FALSE)
-
-    message("\n")
   }
 }

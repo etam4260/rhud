@@ -103,6 +103,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   is_internet_available()
 
   cleaned <- misc_input_check_cleansing(state, key, "state-metro")
+
   state_abbr <- cleaned[1]
   key <- cleaned[2]
 
@@ -149,7 +150,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
 
   state_abbr <- unlist(state_abbr)
 
-  metro <- metro[metro$metro_state == state, ]
+  metro <- metro[metro$metro_state == state_abbr, ]
 
   metro
 

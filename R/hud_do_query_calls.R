@@ -479,7 +479,7 @@ if_tibble_return <- function(list_res,
 
     if (length(list_res) != 0) {
 
-      res <- do.call(rbind, list_res)
+      res <- as.data.frame(do.call(rbind, list_res))
 
       if (api == "cw") {
 
@@ -603,7 +603,9 @@ process_status_codes <- function(call) {
 print_resp_warning_messages <- function(errors) {
   # Spit out error messages to user after all
   # queries are done.
+
   if (length(errors) != 0) {
+    message("\n")
     # Spit out error messages to user after all
     # queries are done.
     warning(paste("Could not find data for queries: \n\n",
@@ -615,6 +617,7 @@ print_resp_warning_messages <- function(errors) {
                   sep = ""), call. = FALSE)
 
   }
+  message("\n")
 }
 
 

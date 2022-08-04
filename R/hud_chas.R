@@ -198,7 +198,7 @@ hud_chas_county <- function(county, year = c("2014-2018"),
   key <- args$key
 
   # Try to fix the counties that have lost leading zeros in them...
-  county <- add_leading_zeros(geoid_type = "county", county)
+  county <- geoid_add_leading_zeros(geoid_type = "county", county)
 
   # The first 2 are state fip. Last 3 are county fip.
   state_fip <- as.integer(substr(county, 1, 2))
