@@ -23,9 +23,9 @@ test_that("hud_fmr() Simple County Queries", {
 
   # Make sure to check that everything is of type character
   # not numeric or factor. Also make sure nothing is of list.
-  expect_true(check_is_not_list(c1))
-  expect_true(check_is_not_list(c2))
-  expect_true(check_is_not_list(c3))
+  expect_true(is_valid_rhud_df(c1))
+  expect_true(is_valid_rhud_df(c2))
+  expect_true(is_valid_rhud_df(c3))
 })
 
 
@@ -39,9 +39,9 @@ test_that("hud_fmr() Simple Metroarea Queries", {
   sa3 <- hud_fmr("METRO10380M10380", year = c(2020))
   expect_true(nrow(sa3) >= 1)
 
-  expect_true(check_is_not_list(sa1))
-  expect_true(check_is_not_list(sa2))
-  expect_true(check_is_not_list(sa3))
+  expect_true(is_valid_rhud_df(sa1))
+  expect_true(is_valid_rhud_df(sa2))
+  expect_true(is_valid_rhud_df(sa3))
 })
 
 

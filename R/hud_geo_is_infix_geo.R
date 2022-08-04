@@ -332,7 +332,8 @@
 #'
 #' @param zip The zip(s) to determine overlap with countysub(s)
 #' @param countysub The countysub(s) to determine overlap with zip(s)
-#' @returns If zip(s) exist in the countysub(s) specified, then TRUE is returned.
+#' @returns If zip(s) exist in the countysub(s) specified, then TRUE is
+#'   returned.
 #' @export
 #' @examples
 #' \dontrun{
@@ -886,7 +887,8 @@
 #'
 #' @param countysub The countysub(s) to determine overlap with zip(s).
 #' @param zip The zip(s). to determine overlap with countysub(s).
-#' @returns If countysub(s) exist in the zip(s) specified, then TRUE is returned.
+#' @returns If countysub(s) exist in the zip(s) specified, then TRUE
+#'   is returned.
 #' @export
 #' @examples
 #' \dontrun{

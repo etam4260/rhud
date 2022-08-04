@@ -135,13 +135,13 @@ cw_input_check_cleansing <- function(primary_geoid, secondary_geoid,
   quarter <- unique(paste(trimws(as.character(quarter), which = "both")))
   key <- paste(trimws(as.character(key), which = "both"))
 
-  if (FALSE %in% numbers_only(query)) stop(
+  if (FALSE %in% digits_only(query)) stop(
     "\nQuery input must only be numbers.",
     call. = FALSE)
 
-  if (FALSE %in% numbers_only(year)) stop("\nYear input must only be numbers.",
+  if (FALSE %in% digits_only(year)) stop("\nYear input must only be numbers.",
                                           call. = FALSE)
-  if (FALSE %in% numbers_only(quarter)) {
+  if (FALSE %in% digits_only(quarter)) {
     stop("\nQuarter input must only be numbers.", call. = FALSE)
   }
 
@@ -247,7 +247,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
     query <- unlist(query[[1]])
   }
 
-  if (FALSE %in% numbers_only(year)) stop("\nYear input must only be numbers.",
+  if (FALSE %in% digits_only(year)) stop("\nYear input must only be numbers.",
                                           call. = FALSE)
   # Check year and query input to see if they fit within
   # the "range" of acceptable values.
@@ -280,7 +280,7 @@ fmr_il_input_check_cleansing <- function(query, year, key) {
   list(query = query,
        year = as.integer(year),
        key = key,
-       querytype = querytype)
+       query_type = querytype)
 }
 
 
@@ -344,7 +344,8 @@ misc_input_check_cleansing <- function(state, key, api) {
       stop(paste("\nMake sure all inputs are of type vector. ",
                  "Check types with typeof([variable]). ",
                  "If list try unlist([variable]); ",
-                 "if matrix try as.vector([variable])", sep = ""), call. = FALSE)
+                 "if matrix try as.vector([variable])", sep = ""),
+           call. = FALSE)
     }
 
     if (all(nchar(state) == 2)) state <- toupper(state)
@@ -466,12 +467,12 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
   })
 
 
-  if (!all(numbers_only(data[[geoid_col]]))) {
+  if (!all(digits_only(data[[geoid_col]]))) {
     stop("\nMake sure all items in the geoid_col are made of numbers only",
          call. = FALSE)
   }
 
-  if (!all(numbers_only(data[[cw_geoid_col]]))) {
+  if (!all(digits_only(data[[cw_geoid_col]]))) {
     stop("\nMake sure all items in the cw_geoid_col are made of numbers only",
          call. = FALSE)
   }
@@ -532,7 +533,7 @@ crosswalk_a_dataset_input_check_cleansing <- function(data, geoid, geoid_col,
 #' @noRd
 #' @noMd
 capitalize <- function(string) {
-  string <- tolower(string)
+  #string <- tolower(string)
 
   paste(toupper(substr(string, 1, 1)),
         substr(string, 2, nchar(string)), sep = "")

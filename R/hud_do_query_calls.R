@@ -41,7 +41,7 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
       error_urls <- list(c(processed_code, url))
 
     } else {
-      cont <- try(content(call), silent = TRUE)
+      cont <- parse_resp_content(call)
 
       not_measured <- all_measurements[!all_measurements %in%
                                          names(unlist(cont[[1]]))]
@@ -115,7 +115,7 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
     } else {
 
-      cont <- try(content(call), silent = TRUE)
+      cont <- parse_resp_content(call)
 
       res <- as.data.frame(do.call(rbind, cont$data$results))
 
@@ -181,7 +181,7 @@ misc_do_query_call <- function(urls, key, to_tibble) {
 
     } else {
 
-      cont <- try(content(call), silent = TRUE)
+      cont <- parse_resp_content(call)
       list_res[[i]] <- as.data.frame(do.call(rbind, cont))
 
     }
@@ -220,7 +220,7 @@ misc_do_query_call <- function(urls, key, to_tibble) {
 il_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
   list_res <- c()
-  error_urls <- c()
+  error_urls <- character(0)
 
   for (i in seq_len(nrow(all_queries))) {
 
@@ -228,7 +228,7 @@ il_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
     urls <- paste(get_hud_host_name(),
                   "il/",
-                  if (querytype == "state") "statedata/" else "data/",
+                  if (query_type == "state") "statedata/" else "data/",
                   all_queries$query[i], "?year=", all_queries$year[i], sep = "")
 
     call <- R.cache::memoizedCall(make_query_calls, urls, key)
@@ -240,9 +240,9 @@ il_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
     } else {
 
-      cont <- try(content(call), silent = TRUE)
+      cont <- parse_resp_content(call)
 
-      if (querytype == "state") {
+      if (query_type == "state") {
 
         res <- as.data.frame(cont$data)
         res$statecode <- cont$data$statecode
@@ -254,7 +254,7 @@ il_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
         res <- cbind(oth, res)
 
-      } else if (querytype == "county" || query_type == "cbsa") {
+      } else if (query_type == "county" || query_type == "cbsa") {
 
         res <- as.data.frame(cont$data)
 
@@ -300,19 +300,19 @@ fmr_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
   res <- NULL
 
-  error_urls <- c()
+  error_urls <- character(0)
   list_county_res <- c()
   list_metroarea_res <- c()
   list_res <- c()
 
 
-  for (i in seq_len(nrow(allqueries))) {
+  for (i in seq_len(nrow(all_queries))) {
     # Build the urls for querying the data.
 
     urls <- paste(get_hud_host_name(),
                   "fmr/",
                   if (query_type == "state") "statedata/" else "data/",
-                  allqueries$query[i], "?year=", allqueries$year[i], sep = "")
+                  all_queries$query[i], "?year=", all_queries$year[i], sep = "")
 
     call <- R.cache::memoizedCall(make_query_calls, urls, key)
     processed_code <- process_status_codes(call)
@@ -323,18 +323,18 @@ fmr_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
     } else {
 
-      cont <- try(content(call), silent = TRUE)
+      cont <- parse_resp_content(call)
 
       if (query_type == "state") {
 
         res_county <- as.data.frame(do.call(rbind, cont$data$counties))
         res_metroareas <- as.data.frame(do.call(rbind, cont$data$metroareas))
 
-        res_county$query <- allqueries$query[i]
-        res_county$year <- allqueries$year[i]
+        res_county$query <- all_queries$query[i]
+        res_county$year <- all_queries$year[i]
 
-        res_metroareas$query <- allqueries$query[i]
-        res_metroareas$year <- allqueries$year[i]
+        res_metroareas$query <- all_queries$query[i]
+        res_metroareas$year <- all_queries$year[i]
 
         list_county_res[[i]] <- res_county
         list_metroarea_res[[i]] <- res_metroareas
@@ -346,8 +346,8 @@ fmr_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
           res <- as.data.frame(do.call(cbind, cont$data$basicdata))
 
-          res$query <- allqueries$query[i]
-          res$year <- allqueries$year[i]
+          res$query <- all_queries$query[i]
+          res$year <- all_queries$year[i]
           res$zip_code <- ""
 
           res$county_name <- cont$data$county_name
@@ -366,8 +366,8 @@ fmr_do_query_call <- function(all_queries, key, to_tibble, query_type) {
           res <- as.data.frame(do.call(rbind, cont$data$basicdata))
           res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
-          res$query <- allqueries$query[i]
-          res$year <- allqueries$year[i]
+          res$query <- all_queries$query[i]
+          res$year <- all_queries$year[i]
 
           res$county_name <- cont$data$county_name
           res$counties_msa <- cont$data$counties_msa
@@ -384,7 +384,7 @@ fmr_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
     }
 
-    download_bar(done = i, total = nrow(allqueries),
+    download_bar(done = i, total = nrow(all_queries),
                  current = urls, error = length(error_urls))
 
   }
@@ -449,7 +449,7 @@ if_tibble_return <- function(list_res,
 
           res_county <- as.data.frame(do.call(rbind, list_res))
           res_county <- as.data.frame(sapply(res_county,
-                                             function(x) unlist(as.character(x))))
+                                      function(x) unlist(as.character(x))))
 
           res_metroareas <- as.data.frame(do.call(rbind, list_res_two))
           res_metroareas <- as.data.frame(sapply(
@@ -466,7 +466,7 @@ if_tibble_return <- function(list_res,
 
       } else if (resolution == "county" || resolution == "cbsa") {
 
-        if (length(list_res) > 1) {
+        if (length(list_res) >= 1) {
 
           res <- as.data.frame(do.call(rbind, list_res))
           res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
@@ -483,8 +483,8 @@ if_tibble_return <- function(list_res,
 
       if (api == "cw") {
 
-        colnames(allres)[6] <- primary_geoid
-        colnames(allres)[1] <- secondary_geoid
+        colnames(res)[6] <- primary_geoid
+        colnames(res)[1] <- secondary_geoid
 
       }
 
@@ -594,8 +594,6 @@ process_status_codes <- function(call) {
 }
 
 
-
-
 #' @name print_resp_warning_messages
 #' @title Print Response Warning Messages
 #' @description Print warning messages associated with query calls.
@@ -617,4 +615,37 @@ print_resp_warning_messages <- function(errors) {
                   sep = ""), call. = FALSE)
 
   }
+}
+
+
+
+#' @name parse_resp_content
+#' @title Parse Response Body Content
+#' @description Extract content from a call object and handle warnings and
+#'   errors.
+#' @param call The response object.
+#' @returns The content of response object in UTF-8 encoding.
+#' @noRd
+#' @noMd
+parse_resp_content <- function(call) {
+   cont <- NULL
+
+   tryCatch(
+
+    expr = {
+      cont <- try(content(call, encoding = "UTF-8"), silent = TRUE)
+    },
+
+    error = function(e){
+      stop(e, call. = FALSE)
+    },
+
+    warning = function(w){
+      warning(e, call. = FALSE)
+    }
+
+  )
+
+
+  cont
 }

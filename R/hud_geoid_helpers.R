@@ -10,11 +10,10 @@
 #'   4) cbsadiv -> Must be a 5 digit cbsadiv code
 #    5) countysub -> Must be a 10 digit countysub
 #'   6) cd -> Must be a 4 digit cd code.
-#'   If you specify a number, it will
+#'   If you specify a number it will
 #'   make the geoid of that length.
-#' @param input A vector or column of character vectors that need
-#'   leading zeros to be processed properly.
-#' @returns A vector with leading zeros added.
+#' @param input A character or numeric vector
+#' @returns A character vector with leading zeros added.
 #' @noRd
 #' @noMd
 #' @examples
@@ -33,61 +32,25 @@
 #' }
 geoid_add_leading_zeros <- function(geoid_type = "zip", input) {
   res <- NULL
+  geoid_type <- as.character(geoid_type)
 
-  geoid_type <- assert_geoid_type(geoid_type)
-
-  num_char <- switch(
+  geoid_type <- switch(
     geoid_type,
-    "countysub" =10,
+    "zip" = 5,
+    "county" = 5,
+    "cbsa" = 5,
+    "cbsadiv" = 5,
+    "countysub" = 10,
     "cd" = 4,
     "tract" = 11,
-    5
+    geoid_type
   )
 
-  if (!numbers_only(geoid_type)) {
-
-    if (geoid_type == "zip") {
-
-      res <- left_pad_zeros(num_char = 5, geoids = input)
-
-    } else if (geoid_type == "county") {
-
-      res <- left_pad_zeros(num_char = 5, geoids = input)
-
-    } else if (geoid_type == "cbsa") {
-
-      res <- left_pad_zeros(num_char = 5, geoids = input)
-
-    } else if (geoid_type == "cbsadiv") {
-
-      res <- left_pad_zeros(num_char = 5, geoids = input)
-
-    } else if (geoid_type == "countysub") {
-
-      res <- left_pad_zeros(num_char = 10, geoids = input)
-
-    } else if (geoid_type == "cd") {
-
-      res <- left_pad_zeros(num_char = 4, geoids = input)
-
-    } else if (geoid_type == "tract") {
-
-      res <- left_pad_zeros(num_char = 11, geoids = input)
-
-    }
-
-  } else if (numbers_only(geoid_type)) {
-
-    res <- left_pad_zeros(num_char = geoid_type, geoids = input)
-
-  } else {
-
-    stop(paste("Not a valid input argument for geoid_type. ",
-          "You can specify either a number as the expected ",
-          "length of the geoid or the name of the geoid lowercase.",
-          sep = ""), call. = FALSE)
-
+  if (digits_only(geoid_type)) {
+    geoid_type <- as.integer(geoid_type)
   }
+
+  res <- left_pad_zeros(num_char = geoid_type, geoids = input)
 
   res
 }
@@ -104,17 +67,15 @@ geoid_add_leading_zeros <- function(geoid_type = "zip", input) {
 #'   4) cbsa-div -> Must be a 5 digit cbsa code
 #'   5) countysub -> Must be a 10 digit countysub code
 #'   6) cd -> Must be a 4 digit cd code.
-#' @param geoids A vector or column of geoids that need leading zeros to be
-#'   processed properly.
 #' @param num_chars The number of leading zeros this geoid needs.
-#' @returns A vector with the corrected geoids.
+#' @param geoids A character or numeric vector
+#' @returns A character vector with the corrected geoids.
 #' @noRd
 #' @noMd
 left_pad_zeros <- function(num_char, geoids) {
 
-  diff <- num_char - nchar(geoids[i])
-
   for (i in seq_len(length(geoids))) {
+
       diff <- num_char - nchar(geoids[i])
       geoids[i] <- paste(paste(rep(0, diff), collapse = ""),
                          geoids[i], sep = "")
@@ -124,26 +85,13 @@ left_pad_zeros <- function(num_char, geoids) {
 }
 
 
-#' @name assert_geoid_type
-#' @title assert_geoid_type
-#' @description This is helper function for remove the most common delimiters
-#'   used in character vector data.
-#' @param geoid_type A vector or column of characters that need needs delimiters
-#'   removed.
-#' @returns A vector with delimiters removed.
-#' @noRd
-#' @noMd
-assert_geoid_type <- function (geoid_type) {
-
-}
-
 #' @name remove_delimiters
 #' @title remove_delimiters
 #' @description This is helper function for remove the most common delimiters
 #'   used in character vector data.
-#' @param input A vector or column of characters that need needs delimiters
-#'   removed.
-#' @returns A vector with delimiters removed.
+#' @param input A character or numeric
+#'   vector
+#' @returns A character vector with delimiters removed.
 #' @noRd
 #' @noMd
 remove_delimiters <- function(input) {

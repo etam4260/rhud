@@ -111,7 +111,7 @@ test_that("hud_cw_county_zip() Simple Example and Error", {
   all_md_counties <- hud_state_counties("md")
   all_md <- hud_cw_county_zip(county = substr(all_md_counties$fips_code, 1, 5),
                               year = c("2010"), quarter = c("1"))
-  expect_true(check_is_not_list(all_md))
+  expect_true(is_valid_rhud_df(all_md))
 })
 
 

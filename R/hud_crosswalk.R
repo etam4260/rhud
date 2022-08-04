@@ -87,11 +87,11 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                sep = "")
 
   if (!minimal) {
-    res = cw_do_query_calls(urls, all_queries$query, all_queries$year,
+    res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
   } else {
-    res = cw_do_query_calls(urls, all_queries$query, all_queries$year,
+    res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)$tract
   }
@@ -866,9 +866,10 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
 #'    minimal = TRUE)
 #' }
 hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
-                               quarter = 1, minimal = FALSE,
+                               quarter = 1,
+                               minimal = FALSE,
                                key = Sys.getenv("HUD_KEY"),
-                               to_tibble = getOption("rhud_use_tibble", FALSE)) {
+                              to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -1066,7 +1067,7 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
 hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY"),
-                                 to_tibble = getOption("rhud_use_tibble", FALSE)) {
+                            to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL
@@ -1175,7 +1176,7 @@ hud_cw_countysub_zip <- function(countysub,
                                  year = format(Sys.Date() - 365, "%Y"),
                                  quarter = 1, minimal = FALSE,
                                  key = Sys.getenv("HUD_KEY"),
-                                 to_tibble = getOption("rhud_use_tibble", FALSE)) {
+                             to_tibble = getOption("rhud_use_tibble", FALSE)) {
   is_internet_available()
 
   res <- NULL

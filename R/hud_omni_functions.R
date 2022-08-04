@@ -165,7 +165,7 @@ hud_cw <- function(type, query,
   # Check if type argument follows proper structure.
   type <- paste(trimws(as.character(type), which = "both"))
 
-  if (FALSE %in% numbers_only(type)) {
+  if (FALSE %in% digits_only(type)) {
     stop("\nType input must be a single number or the name of crosswalk file.",
          call. = FALSE)
   }
@@ -186,7 +186,7 @@ hud_cw <- function(type, query,
 
   query <- args$query
   year <- args$year
-  quarter <- args$query
+  quarter <- args$quarter
   key <- args$key
 
 
@@ -315,7 +315,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
   key <- args$key
   querytype <- args$querytype
 
-  allqueries <- expand.grid(query = query, year = year,
+  all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
   res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)
@@ -380,12 +380,12 @@ hud_il <- function(query, year = format(Sys.Date() - 365, "%Y"),
   query <- args$query
   year <- args$year
   key <- args$key
-  querytype <- args$querytype
+  query_type <- args$query_type
 
   all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  il_do_query_call(all_queries, key, to_tibble, querytype)
+  il_do_query_call(all_queries, key, to_tibble, query_type)
 }
 
 

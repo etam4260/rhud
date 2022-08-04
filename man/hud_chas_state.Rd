@@ -39,8 +39,7 @@ rather than a data frame.}
 \value{
 Returns a data frame with
 Comprehensive Housing and Affordability Strategy (CHAS) data for states for
-all combinations
-of "state" and "year" inputs.
+all combinations of "state" and "year" inputs.
 }
 \description{
 Returns Comprehensive Housing and Affordability Strategy

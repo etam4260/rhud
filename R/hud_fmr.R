@@ -49,13 +49,13 @@ hud_fmr_state_metroareas <- function(state,
   query <- args$query
   year <- args$year
   key <- args$key
-
+  query_type <- args$query_type
 
   # Create all combinations of query and year...
-  allqueries <- expand.grid(query = query, year = year,
+  all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)$metroareas
+  res <- fmr_do_query_call(all_queries, key, to_tibble, query_type)$metroareas
 
   res
 }
@@ -106,12 +106,12 @@ hud_fmr_state_counties <- function(state, year = format(Sys.Date() - 365, "%Y"),
   query <- args$query
   year <- args$year
   key <- args$key
-
+  query_type <- args$query_type
   # Create all combinations of query and year...
-  allqueries <- expand.grid(query = query, year = year,
+  all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)$counties
+  res <- fmr_do_query_call(all_queries, key, to_tibble, query_type)$counties
 
   res
 
@@ -163,12 +163,13 @@ hud_fmr_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
   query <- args$query
   year <- args$year
   key <- args$key
+  query_type <- args$query_type
 
 
-  allqueries <- expand.grid(query = query, year = year,
+  all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)
+  res <- fmr_do_query_call(all_queries, key, to_tibble, query_type)
 
   res
 }
@@ -221,11 +222,13 @@ hud_fmr_metroarea_zip <- function(metroarea,
   query <- args$query
   year <- args$year
   key <- args$key
+  query_type <- args$query_type
 
-  allqueries <- expand.grid(query = query, year = year,
+
+  all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
 
-  res <- fmr_do_query_call(all_queries, key, to_tibble, querytype)
+  res <- fmr_do_query_call(all_queries, key, to_tibble, query_type)
 
   res
 }

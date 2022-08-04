@@ -12,7 +12,8 @@ zip \%z_in_ctysb\% countysub
 \item{countysub}{The countysub(s) to determine overlap with zip(s)}
 }
 \value{
-If zip(s) exist in the countysub(s) specified, then TRUE is returned.
+If zip(s) exist in the countysub(s) specified, then TRUE is
+returned.
 }
 \description{
 To use this function, the HUD_KEY system environment
