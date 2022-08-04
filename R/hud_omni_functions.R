@@ -313,7 +313,7 @@ hud_fmr <- function(query, year = format(Sys.Date() - 365, "%Y"),
   query <- args$query
   year <- args$year
   key <- args$key
-  querytype <- args$querytype
+  querytype <- args$query_type
 
   all_queries <- expand.grid(query = query, year = year,
                             stringsAsFactors = FALSE)
