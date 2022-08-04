@@ -103,7 +103,7 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   is_internet_available()
 
   cleaned <- misc_input_check_cleansing(state, key, "state-metro")
-  state <- cleaned[1]
+  state_abbr <- cleaned[1]
   key <- cleaned[2]
 
   # The 'area_name' column gives information on the metropolitan place, the

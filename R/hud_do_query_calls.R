@@ -277,7 +277,7 @@ il_do_query_call <- function(all_queries, key, to_tibble, query_type) {
   if_tibble_return(list_res = list_res,
                    to_tibble = to_tibble,
                    api = "il",
-                   query_type = query_type)
+                   resolution = query_type)
 
 }
 
