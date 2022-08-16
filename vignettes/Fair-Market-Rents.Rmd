@@ -138,7 +138,6 @@ hud_rec_fmr_yr()
 This is an example to show you how to query for all states in the US.
 
 ```{r, eval=FALSE}
-# library(rhud)
 hud_nation_states_territories()
 ```
 
