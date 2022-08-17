@@ -138,5 +138,5 @@ hud_state_places(c("VA", "CA"))
 
 ### References
 
-| "Consolidated Planning/CHAS Data | HUD USER." Www.huduser.gov,
+| "Consolidated Planning/CHAS Data | HUD USER." www.huduser.gov,
 |      www.huduser.gov/portal/datasets/cp.html.

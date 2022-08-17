@@ -10,5 +10,8 @@ articles:
   Setup: Setup.html
   USPS-Crosswalk: USPS-Crosswalk.html
   Visualizing-FMR-and-IL: Visualizing-FMR-and-IL.html
-last_built: 2022-08-10T01:16Z
+last_built: 2022-08-16T01:27Z
+urls:
+  reference: https://etam4260.github.io/rhud/reference
+  article: https://etam4260.github.io/rhud/articles
 
