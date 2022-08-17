@@ -1,24 +1,56 @@
-rhud 0.5.0.9000 (8/10/2022)
+rhud 0.5.0.9000 (8/17/2022)
 ============================
 
 #### New Features
-  * Launched a python version (hudpy).
+  * rhud website now has a search bar.
   
-  * rhud now supports searching (Search Bar) and is enabled by default for Bootstrap 5 sites.
+  * Functions containing the to_tibble argument are now all defaulted to     
+    getOption(“rhud_use_tibble”, FALSE).
+    
+  * Added functionality to quiet the download bar (WIP).
+  
+  * New feature includes the rhud_sitrep() function which report if api key 
+    is set, api is reachable, and current cache settings (WIP).
 
 #### Minor Bug Fixes and Improvements:
 
-  * Deleted a fake key, for example, changed Sys.setenv("HUD_KEY" = "q3r2rjimd129fj121jid") 
-    to Sys.setenv("HUD_KEY" = "YOUR KEY HERE").
+  * hud_get_key() now raises informative error if no key is set.
+  
+  * Deleted occurrences of fake key, for example, changed Sys.setenv(“HUD_KEY”   
+    =“q3r2rjimd129fj121jid”) to Sys.setenv(“HUD_KEY” = “YOUR KEY HERE”).
     
-  * Used mnemonic names hud_{dataset}_{geography}_{resolution} to replace hud_{1}_{2}_{3}.
+  * Used mnemonic names hud_{dataset}{geography}{resolution} to replace 
+    hud_{1}{2}{3}.
+    
+  * Removed most naked abbreviations in function documentation and website 
+    documentation.
+    
+  * @title now gives more descriptive details on each function.
+  
+  * Improved naming of package unit tests.
+  
+  * When package is attached, the user will be prompted with a startup message
+    only if no key is set.
+    
+  * Occurrences of library(rhud) has been removed from the @examples 
+    documentation.
     
 #### Documentation Fixes
 
-  * Organized the pkgdown reference page in alphabetical order in the _pkgdown.yml to make
-    it easier to navigate.
-    
   * Deleted some duplicated articles which were generated in the past.
+  
+  * Improved sample case studies in the website documentation.
+  
+  * Added diagram for census geographies to the crosswalk website 
+    documentation to better communicate relationship among geographies.
+    
+  * Introduced some iconography into documentation to help overall user 
+    experience.
+    
+  * Reorganized readme to have important information at top vs bottom.
+  
+  * Function documentation now includes more information on which R data 
+    types are accepted.
 
 
 rhud 0.4.0.9000 (6/10/2022)
@@ -38,19 +70,19 @@ rhud 0.4.0.9000 (6/10/2022)
     provided by HUD USER API via hud_rec_cw_yr(), hud_rec_fmr_yr(), 
     hud_rec_il_yr().
     
+  * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `
+    %z_in_cbsadiv%`are now available to help determine whether a singular 
+    zip code overlaps a geographic identifier using the crosswalk files. 
+    Currently supports only numeric identifiers, but may in the future 
+    provide support for names. Their non-infix counterparts are also available.
     
-  * %z_in_trt%`, `%z_in_cty%`, `%z_in_ctysb%`, `%z_in_cd%`, `%z_in_cbsa%`, `%z_in_cbsadiv%`
-    are now available to help determine whether a singular zip code overlaps
-    a geographic identifier using the crosswalk files. Currently supports only
-    numeric identifiers, but may in the future provide support for names. Their
-    non-infix counterparts are also available.
     
-    
-  * %trt_in_z%`, `%cty_in_z%`, `%ctysb_in_z%`, `%cd_in_z%`, `%cbsa_in_z%`, `%cbsadiv_in_z%`
-    are now available to help determine whether a tract, cd, county, countysub,
-    cbsa, or cbsadiv overlaps a zip code using the crosswalk files. Currently 
-    supports only numeric identifiers, but may in the future provide support 
-    for names. Their non-infix counterparts are also available.
+  * %trt_in_z%`, `%cty_in_z%`, `%ctysb_in_z%`, `%cd_in_z%`, `%cbsa_in_z%`, 
+    `%cbsadiv_in_z%`are now available to help determine whether a tract, cd, 
+    county, countysub, cbsa, or cbsadiv overlaps a zip code using the 
+    crosswalk files. Currently supports only numeric identifiers, but may 
+    in the future provide support for names. Their non-infix counterparts 
+    are also available.
   
 #### Minor Bug Fixes and Improvements:
 
@@ -113,8 +145,8 @@ rhud 0.3.0.9000 (5/30/2022)
     of dataframes.
    
   * User is now given a `to_tibble` option for rhud functions that return a
-    data frame. This allows them to get tibbles rather than data frames as the type
-    of data returned. 
+    data frame. This allows them to get tibbles rather than data frames as 
+    the type of data returned. 
   
 #### Minor Bug Fixes and Improvements:
 
@@ -138,8 +170,8 @@ rhud 0.3.0.9000 (5/30/2022)
     placed the sample into the crosswalk vignette. 
     
   * The case studies tab of the documentation website now includes more 
-    realistic use cases for the rhud package alongside several popular R packages.
-    However, they are not complete and will be updated in the future. 
+    realistic use cases for the rhud package alongside several popular 
+    R packages. However, they are not complete and will be updated in the future. 
     
   * Added Shuyu Jin as a contributor to the package. 
   
@@ -180,8 +212,8 @@ rhud 0.2.0.9000 (5/1/2022)
 
 #### Documentation Fixes
 
-  * Website documentation now includes details on understanding the general syntax
-    of package functions: this is located on the setup page.
+  * Website documentation now includes details on understanding the 
+    general syntax of package functions: this is located on the setup page.
     
   * The entire package has been renamed to rhud
 
