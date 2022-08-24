@@ -10,8 +10,12 @@ rhud 0.5.0.9000 (8/17/2022)
   
   * New feature includes the rhud_sitrep() function which report if api key 
     is set, api is reachable, and current cache settings.
+  
 
 #### Minor Bug Fixes and Improvements:
+
+  * Query calls now use RETRY instead of GET, with 1 additional re-query after a 
+    failed API call.
 
   * hud_get_key() now raises informative error if no key is set.
   
@@ -58,7 +62,10 @@ rhud 0.5.0.9000 (8/17/2022)
   
   * Function documentation now includes more information on which R data 
     types are accepted.
-
+  
+  * Adding Kyle Ueyama and Rafael Hellwig as official reviewers within the
+    DESCRIPTION file.
+    
 
 rhud 0.4.0.9000 (6/10/2022)
 ============================

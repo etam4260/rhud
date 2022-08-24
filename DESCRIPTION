@@ -5,7 +5,9 @@ Authors@R:
     c(person("Emmet", "Tam", ,"emmet_tam@yahoo.com", role = c("aut", "cre", "cph")),
     person("Allison", "Reilly", ,"areilly2@umd.edu", role = c("ctb")),
     person("Hamed", "Ghaedi", ,"hghaedi@terpmail.umd.edu", role = c("ctb")),
-    person("Shuyu", "Jin", ,"geojsy@umd.edu", role = c("ctb"))
+    person("Shuyu", "Jin", ,"geojsy@umd.edu", role = c("ctb")),
+    person("Kyle", "Ueyama", role = c("rev")),
+    person("Rafael", "Hellwig", role = c("rev"))
     )
 Description: 
 	An R interface for accessing HUD (US Department of Housing and Urban Development) API.

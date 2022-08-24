@@ -110,19 +110,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "testthat",
-      "name": "testthat",
-      "version": ">= 3.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "devtools",
       "name": "devtools",
       "provider": {
@@ -252,6 +239,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=htmltools"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "htmlwidgets",
+      "name": "htmlwidgets",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=htmlwidgets"
     }
   ],
   "softwareRequirements": {
@@ -281,30 +280,6 @@
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "zoo",
-      "name": "zoo",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=zoo"
-    },
-    "4": {
-      "@type": "SoftwareApplication",
-      "identifier": "rio",
-      "name": "rio",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rio"
-    },
-    "5": {
-      "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
       "provider": {
@@ -315,9 +290,38 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "R.cache",
+      "name": "R.cache",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=R.cache"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "747.482KB",
+  "fileSize": "111215.176KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -344,9 +348,41 @@
           "familyName": "Jin"
         }
       ],
-      "name": "rhud: A R Interface to the HUD (US Department of Housing and Urban Development) APIs",
+      "name": "rhud: A R Interface for the HUD (US Department of Housing and Urban Development) APIs",
       "url": "https://github.com/etam4260/rhud/",
       "description": "0.3.0.9000"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "datePublished": "2022",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Emmet",
+          "familyName": "Tam"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Allison",
+          "familyName": "Reilly"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Hamed",
+          "familyName": "Ghaedi"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Shuyu",
+          "familyName": "Jin"
+        }
+      ],
+      "name": "rhud: A R interface for accessing HUD (US Department of Housing and Urban Development) APIs",
+      "identifier": "10.5281/zenodo.6644503",
+      "url": "https://doi.org/10.5281/zenodo.6644503",
+      "description": "To cite package 'rhud' in publications use:",
+      "@id": "https://doi.org/10.5281/zenodo.6644503",
+      "sameAs": "https://doi.org/10.5281/zenodo.6644503"
     }
   ],
   "releaseNotes": "https://github.com/etam4260/rhud/blob/master/NEWS.md",

@@ -45,10 +45,14 @@ instead.
 *This interface uses the HUD User Data API but is not endorsed
 or certified by HUD User*
 
-Although HUD does provide datasets for other programs, they are currently not supported by an API. The goal of this project is to provide an easy-to-use interface to access various open-source APIs provided by the U.S Department of Housing and Urban Development. 
+rhud main functionality is to help with the task of spatially allocating
+data associated with ZIP codes to and from other well-known geographic regions 
+such as counties, congressional districts, metroareas, metroarea divisions, 
+and census tracts.
 
-These include the USPS Crosswalk Files, Fair Markets Rent, Income Limits, and
-Comprehensive Housing and Affordability Strategy. 
+rhud includes access to the USPS Crosswalk Files, Fair Markets Rent,
+Income Limits, and Comprehensive Housing and Affordability Strategy dataset 
+APIs. 
 
 Please read https://www.huduser.gov/portal/dataset/api-terms-of-service.html
 for all terms of service.
