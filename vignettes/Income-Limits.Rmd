@@ -47,7 +47,6 @@ It will return a single row indicating the income limits for that particular
 state.
 
 ```{r, eval=FALSE}
-library(rhud)
 # These function calls gets income limits data for the state of Virginia in 2021.
 hud_il(query = 'VA', year = '2021')
 
@@ -101,7 +100,6 @@ To get the most recent Income Limits files by year:
 This is an example to show you how to query for all states and territories
 in the US.
 ```{r, eval=FALSE}
-library(rhud)
 hud_nation_states_territories()
 ```
 

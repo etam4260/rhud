@@ -33,7 +33,7 @@ FMRs must be posted at least 30 days before they go into effect, and they must g
 
 ### Examples
 
-These are basic examples to show you how to query the Fair Markets Rent API. Before
+These are basic examples to show you how to query the Fair Market Rents API. Before
 looking at the examples I RECOMMEND first looking at [the parameters][Parameters]
 as well as [return data][Returns] located at the bottom of the page.
 
@@ -50,11 +50,11 @@ not small areas will have an NA in the zip_code,
 meaning this measurement is defined at a county level. Those counties that 
 are small areas will return zip code data in the zip_code field.
 
-#### State Level Fair Markets Rent
-This is an example which shows you how to query the Fair Markets Rent API for a
+#### State Level Fair Market Rents
+This is an example which shows you how to query the Fair Market Rents API for a
 state. You can use the state abbreviation, state name, or state fips code. It
-will return all counties in the state and their Fair Markets Rents as well
-as all metroareas in the state and their Fair Markets Rent.
+will return all counties in the state and their Fair Market Rents as well
+as all metroareas in the state and their Fair Market Rents.
 ```{r, eval=FALSE}
 # These functions gets FMR data for the state of Virginia in 2021.
 hud_fmr(query = 'VA', year = '2021')
@@ -89,8 +89,8 @@ hud_fmr_state_metroareas(state = "51", year = '2021')
 ```
 
 
-#### County Level Fair Markets Rent
-This is an example which shows you how to query the Fair Markets Rent on a
+#### County Level Fair Market Rents
+This is an example which shows you how to query the Fair Market Rents on a
 county level basis. These are defined with a 2 digit state code + 3 digit county
 code. You also need a 99999 code added onto the end. I recommend taking a 
 look at [US Counties][] to determine what counties are available.
@@ -108,7 +108,7 @@ hud_fmr_county_zip(county = '0100199999', year = '2017')
 ```
 
 
-#### Small Areas Fair Markets Rent
+#### Small Areas Fair Market Rents
 
 ```{r, eval=FALSE}
 # Gets FMR data for METRO area.
@@ -123,9 +123,9 @@ hud_fmr_metroarea_zip(metroarea = 'METRO47900M47900', year = '2017')
 ```
 
 
-### Most recent Fair Markets Rent files
+### Most recent Fair Market Rents files
 
-To get the most recent Fair Markets Rent files by year:
+To get the most recent Fair Market Rents files by year:
 
 ```{r, eval = FALSE}
 hud_rec_fmr_yr()
@@ -138,7 +138,6 @@ hud_rec_fmr_yr()
 This is an example to show you how to query for all states in the US.
 
 ```{r, eval=FALSE}
-# library(rhud)
 hud_nation_states_territories()
 ```
 

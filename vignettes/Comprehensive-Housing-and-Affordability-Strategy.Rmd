@@ -96,9 +96,9 @@ provided by HUD USER. Please type in '?hud_chas' into your terminal to get more
 details on how to use this.
 
 ```{r, eval = FALSE}
-  hud_chas(type = 1)
+hud_chas(type = 1)
 
-  hud_chas(type = 2, 51)
+hud_chas(type = 2, 51)
 ```
 
 
@@ -138,5 +138,5 @@ hud_state_places(c("VA", "CA"))
 
 ### References
 
-| "Consolidated Planning/CHAS Data | HUD USER." Www.huduser.gov,
+| "Consolidated Planning/CHAS Data | HUD USER." www.huduser.gov,
 |      www.huduser.gov/portal/datasets/cp.html.
