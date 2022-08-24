@@ -24,7 +24,6 @@ Suggests:
     httptest,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0),
     devtools,
     tigris,
     leaflet,
@@ -36,11 +35,12 @@ Suggests:
     readr,
     lubridate,
     htmltools,
-    htmlwidgets
+    htmlwidgets,
 Imports: 
     httr,
     curl,
     tibble,
+    testthat,
     R.cache,
     utils
 Config/testthat/edition: 3

@@ -1128,7 +1128,6 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
 #'   countysub to zip.
 #' @param countysub A character or numeric vector:
 #'   10 digit county sub division code.
-#' @param tract A character or numeric vector: 11 digit tract code.
 #' @param year A character or numeric vector: gets the year that this data
 #'   was recorded. Can specify multiple
 #'   years. Default is the previous year.

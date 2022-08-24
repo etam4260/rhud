@@ -35,8 +35,6 @@ USER website.}
 
 \item{to_tibble}{If TRUE, return the data in a tibble format
 rather than a data frame.}
-
-\item{tract}{A character or numeric vector: 11 digit tract code.}
 }
 \value{
 This function returns a dataframe containing crosswalk data for

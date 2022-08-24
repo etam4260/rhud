@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
 
 ## Obtaining a sample dataset
 
-For those who need a more powerful method for crosswalking semi-large datasets and allocating fields based on 
+For those who need a more powerful method for crosswalking semi-large datasets 
+and allocating fields based on 
 the provided ratios, the crosswalk() function is available.
 
 ```{r, eval = if(Sys.getenv("HUD_KEY") == "") FALSE else TRUE}

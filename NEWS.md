@@ -2,15 +2,14 @@ rhud 0.5.0.9000 (8/17/2022)
 ============================
 
 #### New Features
-  * rhud website now has a search bar.
   
   * Functions containing the to_tibble argument are now all defaulted to     
     getOption(“rhud_use_tibble”, FALSE).
     
-  * Added functionality to quiet the download bar (WIP).
+  * Added functionality to quiet the download bar.
   
   * New feature includes the rhud_sitrep() function which report if api key 
-    is set, api is reachable, and current cache settings (WIP).
+    is set, api is reachable, and current cache settings.
 
 #### Minor Bug Fixes and Improvements:
 
@@ -31,13 +30,20 @@ rhud 0.5.0.9000 (8/17/2022)
   
   * When package is attached, the user will be prompted with a startup message
     only if no key is set.
-    
+
+  * Major internal changes and refactoring to follow DRYer principles.
+
   * Occurrences of library(rhud) has been removed from the @examples 
-    documentation.
+    documentation.  
+    
+  * Fix some issues with numerics being passed with less digits because of
+    leading 0 truncation. (WIP)
     
 #### Documentation Fixes
 
   * Deleted some duplicated articles which were generated in the past.
+  
+  * Documentation website now includes a search bar.
   
   * Improved sample case studies in the website documentation.
   
@@ -47,7 +53,8 @@ rhud 0.5.0.9000 (8/17/2022)
   * Introduced some iconography into documentation to help overall user 
     experience.
     
-  * Reorganized readme to have important information at top vs bottom.
+  * Reorganized README.md to have important information at top and less 
+    important details at bottom.
   
   * Function documentation now includes more information on which R data 
     types are accepted.
@@ -87,9 +94,6 @@ rhud 0.4.0.9000 (6/10/2022)
 #### Minor Bug Fixes and Improvements:
 
   * Fixed some bugs caused by hud_set_key not properly setting to the .Rprofile.
-  
-  * Fix some issues with numerics being passed with less digits because of
-    leading 0 truncation. (WIP)
     
   * Type checking added for using hud_set_key() as a way of reducing 
     latent errors.
@@ -120,13 +124,13 @@ rhud 0.4.0.9000 (6/10/2022)
     
   * Included in README.md how to setup the key and provide a simple example.
   
-  * Improved sample case studies in the website documentation. (WIP)
+  * Improved sample case studies in the website documentation.
   
   * Added diagram for census geographies to the crosswalk website documentation
-    to better communicate relationship among geographies. (WIP)
+    to better communicate relationship among geographies.
     
   * Introduced some iconography into documentation to help 
-    overall user experience.  (WIP)
+    overall user experience.
     
   * All functions are listed in the README.md page along with the range of years
     that they can be queried for.

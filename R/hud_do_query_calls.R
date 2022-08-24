@@ -638,7 +638,7 @@ parse_resp_content <- function(call) {
     },
 
     warning = function(w){
-      warning(e, call. = FALSE)
+      warning(w, call. = FALSE)
     }
 
   )
