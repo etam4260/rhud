@@ -94,6 +94,9 @@
     <loc>https://etam4260.github.io/rhud/reference/ctysb_in_z.html</loc>
   </url>
   <url>
+    <loc>https://etam4260.github.io/rhud/reference/get_hud_host_name.html</loc>
+  </url>
+  <url>
     <loc>https://etam4260.github.io/rhud/reference/grapes-cbsa_in_z-grapes.html</loc>
   </url>
   <url>
@@ -253,6 +256,9 @@
     <loc>https://etam4260.github.io/rhud/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://etam4260.github.io/rhud/reference/is_internet_available.html</loc>
+  </url>
+  <url>
     <loc>https://etam4260.github.io/rhud/reference/rhud-exports.html</loc>
   </url>
   <url>
@@ -263,6 +269,9 @@
   </url>
   <url>
     <loc>https://etam4260.github.io/rhud/reference/rhud_cache_dir.html</loc>
+  </url>
+  <url>
+    <loc>https://etam4260.github.io/rhud/reference/rhud_sitrep.html</loc>
   </url>
   <url>
     <loc>https://etam4260.github.io/rhud/reference/rhud_website.html</loc>

@@ -111,6 +111,7 @@ hud_set_key("sample-key")
 This sample provided below shows how to query the USPS Crosswalk API
 
 ``` r
+
 hud_cw_zip_tract(zip = '35213', year = c('2010'), quarter = c('1'))
 ```
 
@@ -237,8 +238,11 @@ The HUD also provide miscellaneous supplemental APIs under them.
 ### Contributors
 
 -   Emmet Tam(<https://github.com/etam4260>)\[<emmet_tam@yahoo.com>\]
+
 -   Allison Reilly\[<areilly2@umd.edu>\]
+
 -   Hamed Ghaedi\[<hghaedi@terpmail.umd.edu>\]
+
 -   Shuyu Jin(<https://github.com/geojsy>)\[<geojsy@umd.edu>\]
 
 ### Disclaimers

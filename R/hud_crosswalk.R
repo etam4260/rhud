@@ -90,10 +90,11 @@ hud_cw_zip_tract <- function(zip, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "tract"
   } else {
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
-                             secondary_geoid, key, to_tibble)$tract
+                             secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -194,10 +195,11 @@ hud_cw_zip_county <- function(zip, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
                                         secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "county"
   } else {
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                         all_queries$quarter, primary_geoid,
-                        secondary_geoid, key, to_tibble)$county
+                        secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -296,10 +298,11 @@ hud_cw_zip_cbsa <- function(zip, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                         all_queries$quarter, primary_geoid,
                                         secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "cbsa"
   } else {
     res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$cbsa
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -398,10 +401,11 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    colnames(res)[2] <- "cbsadiv"
   } else {
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$cbsadiv
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -500,10 +504,11 @@ hud_cw_zip_cd <- function(zip, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "cd"
   } else {
     res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$cd
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -600,10 +605,12 @@ hud_cw_tract_zip <- function(tract, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+
+    if (!is.null(res)) colnames(res)[2] <- "zip"
   } else {
     res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$zip
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -700,10 +707,11 @@ hud_cw_county_zip <- function(county, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "zip"
   } else {
     res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$zip
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -800,10 +808,11 @@ hud_cw_cbsa_zip <- function(cbsa, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "zip"
   } else {
     res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$zip
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -900,10 +909,11 @@ hud_cw_cbsadiv_zip <- function(cbsadiv, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "zip"
   } else {
     res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$zip
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -998,10 +1008,11 @@ hud_cw_cd_zip <- function(cd, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "zip"
   } else {
     res <-  cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$zip
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -1098,10 +1109,11 @@ hud_cw_zip_countysub <- function(zip, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "zip"
   } else {
     res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$countysub
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res
@@ -1209,10 +1221,11 @@ hud_cw_countysub_zip <- function(countysub,
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
+    if (!is.null(res)) colnames(res)[2] <- "zip"
   } else {
-    res <-   cw_do_query_calls(urls, all_queries$query, all_queries$year,
+    res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
-                               secondary_geoid, key, to_tibble)$zip
+                               secondary_geoid, key, to_tibble)$geoid
   }
 
   res

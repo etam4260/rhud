@@ -119,7 +119,6 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
       res <- as.data.frame(do.call(rbind, cont$data$results))
 
-      res$query <- query[i]
       res$year <- year[i]
       res$quarter <- quarter[i]
 
@@ -128,6 +127,8 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
       res[3] <- unlist(res[3])
       res[4] <- unlist(res[4])
       res[5] <- unlist(res[5])
+      res[6] <- unlist(res[6])
+
 
       list_res[[i]] <- res
 
@@ -466,9 +467,10 @@ if_tibble_return <- function(list_res,
 
       } else if (resolution == "county" || resolution == "cbsa") {
 
-        if (length(list_res) >= 1) {
+        res <- as.data.frame(do.call(rbind, list_res))
 
-          res <- as.data.frame(do.call(rbind, list_res))
+        if (length(list_res) > 1) {
+
           res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
 
         }
@@ -478,16 +480,7 @@ if_tibble_return <- function(list_res,
   } else {
 
     if (length(list_res) != 0) {
-
       res <- as.data.frame(do.call(rbind, list_res))
-
-      if (api == "cw") {
-
-        colnames(res)[6] <- primary_geoid
-        colnames(res)[1] <- secondary_geoid
-
-      }
-
     }
 
   }
@@ -555,6 +548,7 @@ make_query_calls <- function(url, key, path, query) {
 #' @noMd
 process_status_codes <- function(call) {
   error <- NULL
+
 
   if (status_code(call) == 400) {
 

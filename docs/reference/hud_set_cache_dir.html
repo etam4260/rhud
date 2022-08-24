@@ -115,14 +115,17 @@ a future update there will be a garbage collection option.</p></li>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>path</dt>
-<dd><p>The full path to the desired cache directory. Only one can be
+<dd><p>A character vector of length one specifying the full path to
+the desired cache directory. Only one can be
 set at a time. If no path is specified, it will use the temp directory
 for R. The temp directory is not persistent.</p></dd>
 <dt>in_wkdir</dt>
-<dd><p>Store the path as environment variable in the working
+<dd><p>A logical to determine if to store the path as environment
+variable in the working
 directory .Rprofile so rhud will cache to this specified path.</p></dd>
 <dt>in_home</dt>
-<dd><p>Store the path as environment variable in the HOME directory
+<dd><p>A logical to determine if to store the path as environment
+variable in the HOME directory
 .Rprofile so rhud will cache to this specified path.</p></dd>
 </dl></div>
     <div class="section level2">

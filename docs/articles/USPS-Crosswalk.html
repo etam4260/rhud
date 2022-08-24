@@ -210,231 +210,216 @@ Before looking at the outputted data I RECOMMEND first taking a look at
 </h5>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/etam4260/rhud" class="external-link">rhud</a></span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; rhud:</span>
-<span class="co">#&gt; ------------------------------------------------------------------------------------------</span>
-<span class="co">#&gt; * To begin, first obtain a key from HUD User website at `https://www.huduser.gov/hudapi/public/login`</span>
-<span class="co">#&gt; * To set the key, use hud_set_key("your-key")</span>
-<span class="co">#&gt; * To get tibbles instead of dataframes, use `options(rhud_use_tibble = TRUE)`</span>
-<span class="co">#&gt; * Caching is enabled by default. To set a new cache directory use hud_set_cache_dir().</span>
-<span class="co">#&gt; * To delete cached items, use hud_clear_cache()</span>
-<span class="co">#&gt; * Set these in your R script for single session or in .Rprofile for persistence.</span>
-<span class="co">#&gt; * For more information on how to use this package, visit `https://etam4260.github.io/rhud/index.html`</span>
-<span class="co">#&gt; ----------------------------------------------------------------------------------------</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; * Setting rhud cache to R temp directory.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span> <span class="op">(</span>digits<span class="op">=</span><span class="fl">4</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/hud_cw_zip_tract.html">hud_cw_zip_tract</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Downloading: [==================================================] 100% 1/1 0</span>
-<span class="co">#&gt; usps?type=1&amp;query=35213&amp;year=2010&amp;quarter=1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;         tract res_ratio bus_ratio oth_ratio tot_ratio   zip year quarter</span>
-<span class="co">#&gt; 1 01073010801  0.338469  0.404558  0.697872  0.354414 35213 2010       1</span>
-<span class="co">#&gt; 2 01073010803  0.230782  0.028490  0.008511  0.212530 35213 2010       1</span>
-<span class="co">#&gt; 3 01073005600  0.185858  0.039886  0.004255  0.171949 35213 2010       1</span>
-<span class="co">#&gt; 4 01073010802  0.114337  0.011396  0.000000  0.105006 35213 2010       1</span>
-<span class="co">#&gt; 5 01073002306  0.061953  0.509971  0.144681  0.088122 35213 2010       1</span>
-<span class="co">#&gt; 6 01073004702  0.037626  0.000000  0.144681  0.039396 35213 2010       1</span>
-<span class="co">#&gt; 7 01073004800  0.018975  0.000000  0.000000  0.017328 35213 2010       1</span>
-<span class="co">#&gt; 8 01073010805  0.009244  0.005698  0.000000  0.008738 35213 2010       1</span>
-<span class="co">#&gt; 9 01073010804  0.002757  0.000000  0.000000  0.002518 35213 2010       1</span></code></pre></div>
+<span class="co">#&gt;     zip       tract res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 35213 01073010801  0.338469  0.404558  0.697872  0.354414 2010       1</span>
+<span class="co">#&gt; 2 35213 01073010803  0.230782  0.028490  0.008511  0.212530 2010       1</span>
+<span class="co">#&gt; 3 35213 01073005600  0.185858  0.039886  0.004255  0.171949 2010       1</span>
+<span class="co">#&gt; 4 35213 01073010802  0.114337  0.011396  0.000000  0.105006 2010       1</span>
+<span class="co">#&gt; 5 35213 01073002306  0.061953  0.509971  0.144681  0.088122 2010       1</span>
+<span class="co">#&gt; 6 35213 01073004702  0.037626  0.000000  0.144681  0.039396 2010       1</span>
+<span class="co">#&gt; 7 35213 01073004800  0.018975  0.000000  0.000000  0.017328 2010       1</span>
+<span class="co">#&gt; 8 35213 01073010805  0.009244  0.005698  0.000000  0.008738 2010       1</span>
+<span class="co">#&gt; 9 35213 01073010804  0.002757  0.000000  0.000000  0.002518 2010       1</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-zipcode-to-county-fip">Crosswalk zipcode to county fip<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-county-fip"></a>
 </h5>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_county</span>(<span class="at">zip =</span> <span class="dv">35213</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2020'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'2'</span>))</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">2</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">35213</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2020</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">2</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   county res_ratio bus_ratio oth_ratio tot_ratio   zip year quarter</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  01073         1         1         1         1 35213 2020       2</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_zip_county.html">hud_cw_zip_county</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="fl">35213</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2020'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     zip county res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 35213  01073         1         1         1         1 2020       2</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-zipcode-to-core-base-statistical-area-cbsa">Crosswalk zipcode to core base statistical area (cbsa)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-core-base-statistical-area-cbsa"></a>
 </h5>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cbsa</span>(<span class="at">zip =</span> <span class="dv">35213</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2011'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'3'</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">3</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">35213</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2011</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">3</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    cbsa res_ratio bus_ratio oth_ratio tot_ratio   zip year quarter</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 13820         1         1         1         1 35213 2011       3</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_zip_cbsa.html">hud_cw_zip_cbsa</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="fl">35213</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2011'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'3'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     zip  cbsa res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 35213 13820         1         1         1         1 2011       3</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-zipcode-to-core-based-statistical-area-division-cbsadiv">Crosswalk zipcode to core based statistical area division
 (cbsadiv)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-core-based-statistical-area-division-cbsadiv"></a>
 </h5>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cbsadiv</span>(<span class="at">zip =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">4</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">22031</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">4</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   cbsadiv res_ratio bus_ratio oth_ratio tot_ratio   zip year quarter</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   47894         1         1         1         1 22031 2019       4</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_zip_cbsadiv.html">hud_cw_zip_cbsadiv</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2019'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     zip cbsadiv res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 22031   47894         1         1         1         1 2019       4</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-zipcode-to-congressional-district-cd">Crosswalk zipcode to congressional district (cd)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-congressional-district-cd"></a>
 </h5>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_cd</span>(<span class="at">zip =</span> <span class="st">'35213'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2011</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="dv">1</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">5</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">35213</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2011</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     cd res_ratio bus_ratio oth_ratio tot_ratio   zip year quarter</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0106  0.952728    0.9831  0.991701  0.955706 35213 2011       1</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 0107  0.043711    0.0169  0.008299  0.041045 35213 2011       1</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 0103  0.001781    0.0000  0.000000  0.001624 35213 2011       1</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 0104  0.001781    0.0000  0.000000  0.001624 35213 2011       1</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_zip_cd.html">hud_cw_zip_cd</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2011</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     zip   cd res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 35213 0106  0.952728    0.9831  0.991701  0.955706 2011       1</span>
+<span class="co">#&gt; 2 35213 0107  0.043711    0.0169  0.008299  0.041045 2011       1</span>
+<span class="co">#&gt; 3 35213 0103  0.001781    0.0000  0.000000  0.001624 2011       1</span>
+<span class="co">#&gt; 4 35213 0104  0.001781    0.0000  0.000000  0.001624 2011       1</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-census-tract-to-zipcode">Crosswalk census tract to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-census-tract-to-zipcode"></a>
 </h5>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_tract_zip</span>(<span class="at">tract =</span> <span class="dv">48201223100</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2017'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'1'</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">6</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">48201223100</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2017</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     zip res_ratio bus_ratio oth_ratio tot_ratio       tract year quarter</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 77032         1   0.95425         1  0.991617 48201223100 2017       1</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 77396         0   0.04575         0  0.008383 48201223100 2017       1</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_tract_zip.html">hud_cw_tract_zip</a></span><span class="op">(</span>tract <span class="op">=</span> <span class="fl">48201223100</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;         tract   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 48201223100 77032         1   0.95425         1  0.991617 2017       1</span>
+<span class="co">#&gt; 2 48201223100 77396         0   0.04575         0  0.008383 2017       1</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-county-fip-into-zipcode">Crosswalk county fip into zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-county-fip-into-zipcode"></a>
 </h5>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_county_zip</span>(<span class="at">county =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2010'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'1'</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">22031</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2010</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      zip res_ratio bus_ratio oth_ratio tot_ratio county year quarter</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  71052 0.4322130  0.699634   0.56338 0.4455100  22031 2010       1</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  71078 0.1816700  0.086081   0.15493 0.1770400  22031 2010       1</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  71049 0.1103580  0.065934   0.15493 0.1085520  22031 2010       1</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  71032 0.0813449  0.040293   0.01408 0.0790172  22031 2010       1</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  71027 0.0699566  0.047619   0.04225 0.0687441  22031 2010       1</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  71030 0.0435647  0.020147   0.04225 0.0424621  22031 2010       1</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  71046 0.0425705  0.021978   0.01408 0.0414348  22031 2010       1</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  71063 0.0275669  0.014652   0.01408 0.0268813  22031 2010       1</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  71419 0.0105748  0.003663   0.00000 0.0101875  22031 2010       1</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 71065 0.0001808  0.000000   0.00000 0.0001712  22031 2010       1</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_county_zip.html">hud_cw_county_zip</a></span><span class="op">(</span>county <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;    county   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1   22031 71052 0.4322130  0.699634   0.56338 0.4455100 2010       1</span>
+<span class="co">#&gt; 2   22031 71078 0.1816700  0.086081   0.15493 0.1770400 2010       1</span>
+<span class="co">#&gt; 3   22031 71049 0.1103580  0.065934   0.15493 0.1085520 2010       1</span>
+<span class="co">#&gt; 4   22031 71032 0.0813449  0.040293   0.01408 0.0790172 2010       1</span>
+<span class="co">#&gt; 5   22031 71027 0.0699566  0.047619   0.04225 0.0687441 2010       1</span>
+<span class="co">#&gt; 6   22031 71030 0.0435647  0.020147   0.04225 0.0424621 2010       1</span>
+<span class="co">#&gt; 7   22031 71046 0.0425705  0.021978   0.01408 0.0414348 2010       1</span>
+<span class="co">#&gt; 8   22031 71063 0.0275669  0.014652   0.01408 0.0268813 2010       1</span>
+<span class="co">#&gt; 9   22031 71419 0.0105748  0.003663   0.00000 0.0101875 2010       1</span>
+<span class="co">#&gt; 10  22031 71065 0.0001808  0.000000   0.00000 0.0001712 2010       1</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-core-based-statistical-areas-cbsa-to-zipcode">Crosswalk core based statistical areas (cbsa) to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-core-based-statistical-areas-cbsa-to-zipcode"></a>
 </h5>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_cbsa_zip</span>(<span class="at">cbsa =</span> <span class="st">'10140'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2017'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'2'</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">8</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">10140</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2017</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">2</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      zip res_ratio bus_ratio oth_ratio tot_ratio  cbsa year quarter</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  98520 3.384e-01 0.5520178 0.4216084 3.573e-01 10140 2017       2</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  98550 1.823e-01 0.1780822 0.2258327 1.835e-01 10140 2017       2</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  98569 1.268e-01 0.0744169 0.1283509 1.230e-01 10140 2017       2</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  98563 1.166e-01 0.0995927 0.1064175 1.150e-01 10140 2017       2</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  98541 1.001e-01 0.0377638 0.0609261 9.411e-02 10140 2017       2</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  98557 4.417e-02 0.0148093 0.0138099 4.093e-02 10140 2017       2</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  98537 3.694e-02 0.0159200 0.0138099 3.457e-02 10140 2017       2</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  98568 2.151e-02 0.0011107 0.0040617 1.938e-02 10140 2017       2</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  98595 1.415e-02 0.0103665 0.0154346 1.391e-02 10140 2017       2</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 98547 5.923e-03 0.0029619 0.0024370 5.581e-03 10140 2017       2</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 98535 2.993e-03 0.0011107 0.0016247 2.805e-03 10140 2017       2</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 98575 2.899e-03 0.0014809 0.0008123 2.721e-03 10140 2017       2</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 98526 2.307e-03 0.0051833 0.0000000 2.444e-03 10140 2017       2</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 98552 1.964e-03 0.0025916 0.0000000 1.944e-03 10140 2017       2</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 98536 1.964e-03 0.0007405 0.0000000 1.805e-03 10140 2017       2</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 98571 6.546e-04 0.0007405 0.0016247 6.942e-04 10140 2017       2</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 98579 2.494e-04 0.0000000 0.0000000 2.221e-04 10140 2017       2</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 98559 3.117e-05 0.0007405 0.0000000 8.331e-05 10140 2017       2</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 98562 0.000e+00 0.0003702 0.0008123 5.554e-05 10140 2017       2</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 98583 0.000e+00 0.0000000 0.0008123 2.777e-05 10140 2017       2</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 98587 0.000e+00 0.0000000 0.0008123 2.777e-05 10140 2017       2</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 98566 0.000e+00 0.0000000 0.0008123 2.777e-05 10140 2017       2</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_cbsa_zip.html">hud_cw_cbsa_zip</a></span><span class="op">(</span>cbsa <span class="op">=</span> <span class="st">'10140'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     cbsa   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1  10140 98520 3.384e-01 0.5520178 0.4216084 3.573e-01 2017       2</span>
+<span class="co">#&gt; 2  10140 98550 1.823e-01 0.1780822 0.2258327 1.835e-01 2017       2</span>
+<span class="co">#&gt; 3  10140 98569 1.268e-01 0.0744169 0.1283509 1.230e-01 2017       2</span>
+<span class="co">#&gt; 4  10140 98563 1.166e-01 0.0995927 0.1064175 1.150e-01 2017       2</span>
+<span class="co">#&gt; 5  10140 98541 1.001e-01 0.0377638 0.0609261 9.411e-02 2017       2</span>
+<span class="co">#&gt; 6  10140 98557 4.417e-02 0.0148093 0.0138099 4.093e-02 2017       2</span>
+<span class="co">#&gt; 7  10140 98537 3.694e-02 0.0159200 0.0138099 3.457e-02 2017       2</span>
+<span class="co">#&gt; 8  10140 98568 2.151e-02 0.0011107 0.0040617 1.938e-02 2017       2</span>
+<span class="co">#&gt; 9  10140 98595 1.415e-02 0.0103665 0.0154346 1.391e-02 2017       2</span>
+<span class="co">#&gt; 10 10140 98547 5.923e-03 0.0029619 0.0024370 5.581e-03 2017       2</span>
+<span class="co">#&gt; 11 10140 98535 2.993e-03 0.0011107 0.0016247 2.805e-03 2017       2</span>
+<span class="co">#&gt; 12 10140 98575 2.899e-03 0.0014809 0.0008123 2.721e-03 2017       2</span>
+<span class="co">#&gt; 13 10140 98526 2.307e-03 0.0051833 0.0000000 2.444e-03 2017       2</span>
+<span class="co">#&gt; 14 10140 98552 1.964e-03 0.0025916 0.0000000 1.944e-03 2017       2</span>
+<span class="co">#&gt; 15 10140 98536 1.964e-03 0.0007405 0.0000000 1.805e-03 2017       2</span>
+<span class="co">#&gt; 16 10140 98571 6.546e-04 0.0007405 0.0016247 6.942e-04 2017       2</span>
+<span class="co">#&gt; 17 10140 98579 2.494e-04 0.0000000 0.0000000 2.221e-04 2017       2</span>
+<span class="co">#&gt; 18 10140 98559 3.117e-05 0.0007405 0.0000000 8.331e-05 2017       2</span>
+<span class="co">#&gt; 19 10140 98562 0.000e+00 0.0003702 0.0008123 5.554e-05 2017       2</span>
+<span class="co">#&gt; 20 10140 98583 0.000e+00 0.0000000 0.0008123 2.777e-05 2017       2</span>
+<span class="co">#&gt; 21 10140 98587 0.000e+00 0.0000000 0.0008123 2.777e-05 2017       2</span>
+<span class="co">#&gt; 22 10140 98566 0.000e+00 0.0000000 0.0008123 2.777e-05 2017       2</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-core-based-statistical-areas-division-cbsadiv-to-zipcode">Crosswalk core based statistical areas division (cbsadiv) to
 zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-core-based-statistical-areas-division-cbsadiv-to-zipcode"></a>
 </h5>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_cbsadiv_zip</span>(<span class="at">cbsadiv =</span> <span class="dv">10380</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2017'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">9</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">10380</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2017</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">4</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      zip res_ratio bus_ratio oth_ratio tot_ratio cbsadiv year quarter</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  00662 0.1640649  0.185800  0.147385 1.652e-01   10380 2017       4</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  00603 0.1564245  0.142274  0.407290 1.582e-01   10380 2017       4</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  00685 0.1352663  0.138602  0.076070 1.349e-01   10380 2017       4</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  00602 0.1003411  0.102149  0.061807 1.000e-01   10380 2017       4</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  00610 0.0840450  0.075490  0.037242 8.304e-02   10380 2017       4</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  00641 0.0810440  0.090996  0.081616 8.166e-02   10380 2017       4</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  00676 0.0817030  0.066785  0.045959 8.042e-02   10380 2017       4</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  00669 0.0679181  0.054815  0.025357 6.668e-02   10380 2017       4</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  00677 0.0574370  0.055359  0.102219 5.778e-02   10380 2017       4</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 00605 0.0337231  0.048014  0.001585 3.426e-02   10380 2017       4</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 00690 0.0264032  0.018906  0.007132 2.575e-02   10380 2017       4</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 00604 0.0057615  0.017546  0.001585 6.434e-03   10380 2017       4</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 00611 0.0056725  0.003128  0.001585 5.475e-03   10380 2017       4</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 00612 0.0001959  0.000136  0.001585 2.068e-04   10380 2017       4</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 00631 0.0000000  0.000000  0.001585 1.654e-05   10380 2017       4</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_cbsadiv_zip.html">hud_cw_cbsadiv_zip</a></span><span class="op">(</span>cbsadiv <span class="op">=</span> <span class="fl">10380</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2017'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;    cbsa_div   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1     10380 00662 0.1640649  0.185800  0.147385 1.652e-01 2017       4</span>
+<span class="co">#&gt; 2     10380 00603 0.1564245  0.142274  0.407290 1.582e-01 2017       4</span>
+<span class="co">#&gt; 3     10380 00685 0.1352663  0.138602  0.076070 1.349e-01 2017       4</span>
+<span class="co">#&gt; 4     10380 00602 0.1003411  0.102149  0.061807 1.000e-01 2017       4</span>
+<span class="co">#&gt; 5     10380 00610 0.0840450  0.075490  0.037242 8.304e-02 2017       4</span>
+<span class="co">#&gt; 6     10380 00641 0.0810440  0.090996  0.081616 8.166e-02 2017       4</span>
+<span class="co">#&gt; 7     10380 00676 0.0817030  0.066785  0.045959 8.042e-02 2017       4</span>
+<span class="co">#&gt; 8     10380 00669 0.0679181  0.054815  0.025357 6.668e-02 2017       4</span>
+<span class="co">#&gt; 9     10380 00677 0.0574370  0.055359  0.102219 5.778e-02 2017       4</span>
+<span class="co">#&gt; 10    10380 00605 0.0337231  0.048014  0.001585 3.426e-02 2017       4</span>
+<span class="co">#&gt; 11    10380 00690 0.0264032  0.018906  0.007132 2.575e-02 2017       4</span>
+<span class="co">#&gt; 12    10380 00604 0.0057615  0.017546  0.001585 6.434e-03 2017       4</span>
+<span class="co">#&gt; 13    10380 00611 0.0056725  0.003128  0.001585 5.475e-03 2017       4</span>
+<span class="co">#&gt; 14    10380 00612 0.0001959  0.000136  0.001585 2.068e-04 2017       4</span>
+<span class="co">#&gt; 15    10380 00631 0.0000000  0.000000  0.001585 1.654e-05 2017       4</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-congressional-district-cd-to-zipcode">Crosswalk congressional district (cd) to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-congressional-district-cd-to-zipcode"></a>
 </h5>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_cd_zip</span>(<span class="at">cd =</span> <span class="st">'2202'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2010'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">10</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">2202</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2010</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">4</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      zip res_ratio bus_ratio oth_ratio tot_ratio   cd year quarter</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  70072 0.0873171 6.011e-02 0.0383332 8.356e-02 2202 2010       4</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  70115 0.0700244 6.151e-02 0.0831270 6.984e-02 2202 2010       4</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  70119 0.0689893 7.905e-02 0.0521159 6.916e-02 2202 2010       4</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  70058 0.0621786 5.956e-02 0.1148918 6.382e-02 2202 2010       4</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  70094 0.0559088 2.953e-02 0.0506084 5.374e-02 2202 2010       4</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  70117 0.0563989 3.658e-02 0.0189512 5.360e-02 2202 2010       4</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  70122 0.0560060 2.443e-02 0.0243351 5.252e-02 2202 2010       4</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  70130 0.0438001 1.326e-01 0.1001400 5.245e-02 2202 2010       4</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  70114 0.0511557 3.982e-02 0.0505007 5.028e-02 2202 2010       4</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 70118 0.0520726 2.443e-02 0.0325186 4.931e-02 2202 2010       4</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 70131 0.0484644 1.244e-02 0.0328416 4.521e-02 2202 2010       4</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 70126 0.0421946 2.998e-02 0.0360719 4.106e-02 2202 2010       4</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13 70127 0.0378133 2.358e-02 0.0369333 3.671e-02 2202 2010       4</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14 70056 0.0353248 2.828e-02 0.0390869 3.493e-02 2202 2010       4</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15 70116 0.0319406 4.517e-02 0.0675137 3.418e-02 2202 2010       4</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16 70065 0.0333898 1.114e-02 0.0648218 3.281e-02 2202 2010       4</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17 70062 0.0249526 8.814e-02 0.0412404 3.028e-02 2202 2010       4</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18 70125 0.0298282 2.718e-02 0.0187359 2.924e-02 2202 2010       4</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19 70128 0.0290761 5.197e-03 0.0043071 2.641e-02 2202 2010       4</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20 70113 0.0189405 3.168e-02 0.0330570 2.039e-02 2202 2010       4</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 70053 0.0186194 4.232e-02 0.0179821 2.038e-02 2202 2010       4</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 70112 0.0134058 5.072e-02 0.0194896 1.643e-02 2202 2010       4</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 70129 0.0139466 1.404e-02 0.0059223 1.367e-02 2202 2010       4</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 70003 0.0064473 1.054e-02 0.0052762 6.715e-03 2202 2010       4</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25 70121 0.0040264 6.396e-03 0.0055992 4.260e-03 2202 2010       4</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26 70124 0.0045376 1.049e-03 0.0015075 4.169e-03 2202 2010       4</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27 70123 0.0016308 7.995e-04 0.0023689 1.594e-03 2202 2010       4</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28 70001 0.0004352 8.944e-03 0.0007537 1.087e-03 2202 2010       4</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29 70067 0.0011745 3.498e-04 0.0000000 1.071e-03 2202 2010       4</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30 70170 0.0000000 5.496e-03 0.0003230 4.248e-04 2202 2010       4</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31 70163 0.0000000 4.597e-03 0.0002154 3.534e-04 2202 2010       4</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32 70139 0.0000000 3.698e-03 0.0002154 2.857e-04 2202 2010       4</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33 70146 0.0000000 4.997e-04 0.0002154 4.511e-05 2202 2010       4</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34 70143 0.0000000 4.997e-05 0.0000000 3.760e-06 2202 2010       4</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35 70165 0.0000000 4.997e-05 0.0000000 3.760e-06 2202 2010       4</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36 70141 0.0000000 4.997e-05 0.0000000 3.760e-06 2202 2010       4</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_cd_zip.html">hud_cw_cd_zip</a></span><span class="op">(</span>cd <span class="op">=</span> <span class="st">'2202'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;      cd   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1  2202 70072 0.0873171 6.011e-02 0.0383332 8.356e-02 2010       4</span>
+<span class="co">#&gt; 2  2202 70115 0.0700244 6.151e-02 0.0831270 6.984e-02 2010       4</span>
+<span class="co">#&gt; 3  2202 70119 0.0689893 7.905e-02 0.0521159 6.916e-02 2010       4</span>
+<span class="co">#&gt; 4  2202 70058 0.0621786 5.956e-02 0.1148918 6.382e-02 2010       4</span>
+<span class="co">#&gt; 5  2202 70094 0.0559088 2.953e-02 0.0506084 5.374e-02 2010       4</span>
+<span class="co">#&gt; 6  2202 70117 0.0563989 3.658e-02 0.0189512 5.360e-02 2010       4</span>
+<span class="co">#&gt; 7  2202 70122 0.0560060 2.443e-02 0.0243351 5.252e-02 2010       4</span>
+<span class="co">#&gt; 8  2202 70130 0.0438001 1.326e-01 0.1001400 5.245e-02 2010       4</span>
+<span class="co">#&gt; 9  2202 70114 0.0511557 3.982e-02 0.0505007 5.028e-02 2010       4</span>
+<span class="co">#&gt; 10 2202 70118 0.0520726 2.443e-02 0.0325186 4.931e-02 2010       4</span>
+<span class="co">#&gt; 11 2202 70131 0.0484644 1.244e-02 0.0328416 4.521e-02 2010       4</span>
+<span class="co">#&gt; 12 2202 70126 0.0421946 2.998e-02 0.0360719 4.106e-02 2010       4</span>
+<span class="co">#&gt; 13 2202 70127 0.0378133 2.358e-02 0.0369333 3.671e-02 2010       4</span>
+<span class="co">#&gt; 14 2202 70056 0.0353248 2.828e-02 0.0390869 3.493e-02 2010       4</span>
+<span class="co">#&gt; 15 2202 70116 0.0319406 4.517e-02 0.0675137 3.418e-02 2010       4</span>
+<span class="co">#&gt; 16 2202 70065 0.0333898 1.114e-02 0.0648218 3.281e-02 2010       4</span>
+<span class="co">#&gt; 17 2202 70062 0.0249526 8.814e-02 0.0412404 3.028e-02 2010       4</span>
+<span class="co">#&gt; 18 2202 70125 0.0298282 2.718e-02 0.0187359 2.924e-02 2010       4</span>
+<span class="co">#&gt; 19 2202 70128 0.0290761 5.197e-03 0.0043071 2.641e-02 2010       4</span>
+<span class="co">#&gt; 20 2202 70113 0.0189405 3.168e-02 0.0330570 2.039e-02 2010       4</span>
+<span class="co">#&gt; 21 2202 70053 0.0186194 4.232e-02 0.0179821 2.038e-02 2010       4</span>
+<span class="co">#&gt; 22 2202 70112 0.0134058 5.072e-02 0.0194896 1.643e-02 2010       4</span>
+<span class="co">#&gt; 23 2202 70129 0.0139466 1.404e-02 0.0059223 1.367e-02 2010       4</span>
+<span class="co">#&gt; 24 2202 70003 0.0064473 1.054e-02 0.0052762 6.715e-03 2010       4</span>
+<span class="co">#&gt; 25 2202 70121 0.0040264 6.396e-03 0.0055992 4.260e-03 2010       4</span>
+<span class="co">#&gt; 26 2202 70124 0.0045376 1.049e-03 0.0015075 4.169e-03 2010       4</span>
+<span class="co">#&gt; 27 2202 70123 0.0016308 7.995e-04 0.0023689 1.594e-03 2010       4</span>
+<span class="co">#&gt; 28 2202 70001 0.0004352 8.944e-03 0.0007537 1.087e-03 2010       4</span>
+<span class="co">#&gt; 29 2202 70067 0.0011745 3.498e-04 0.0000000 1.071e-03 2010       4</span>
+<span class="co">#&gt; 30 2202 70170 0.0000000 5.496e-03 0.0003230 4.248e-04 2010       4</span>
+<span class="co">#&gt; 31 2202 70163 0.0000000 4.597e-03 0.0002154 3.534e-04 2010       4</span>
+<span class="co">#&gt; 32 2202 70139 0.0000000 3.698e-03 0.0002154 2.857e-04 2010       4</span>
+<span class="co">#&gt; 33 2202 70146 0.0000000 4.997e-04 0.0002154 4.511e-05 2010       4</span>
+<span class="co">#&gt; 34 2202 70143 0.0000000 4.997e-05 0.0000000 3.760e-06 2010       4</span>
+<span class="co">#&gt; 35 2202 70165 0.0000000 4.997e-05 0.0000000 3.760e-06 2010       4</span>
+<span class="co">#&gt; 36 2202 70141 0.0000000 4.997e-05 0.0000000 3.760e-06 2010       4</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-zipcode-to-county-subdivision-countysub">Crosswalk zipcode to county subdivision (countysub)<a class="anchor" aria-label="anchor" href="#crosswalk-zipcode-to-county-subdivision-countysub"></a>
 </h5>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_zip_countysub</span>(<span class="at">zip =</span> <span class="st">'35213'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'2'</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">11</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">35213</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">2</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    countysub res_ratio bus_ratio oth_ratio tot_ratio   zip year quarter</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0107390324         1         1         1         1 35213 2019       2</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_zip_countysub.html">hud_cw_zip_countysub</a></span><span class="op">(</span>zip <span class="op">=</span> <span class="st">'35213'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2019'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     zip        zip res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 35213 0107390324         1         1         1         1 2019       2</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level5">
 <h5 id="crosswalk-county-subdivision-countysub-to-zipcode">Crosswalk county subdivision (countysub) to zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-county-subdivision-countysub-to-zipcode"></a>
 </h5>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_countysub_zip</span>(<span class="at">countysub =</span> <span class="st">'4606720300 '</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2019'</span>, <span class="st">'2019'</span>, <span class="st">'2019'</span>),</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'4'</span>,<span class="st">'4'</span>))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">12</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">4606720300</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">4</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     zip res_ratio bus_ratio oth_ratio tot_ratio  countysub year quarter</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 57376         1         1         0         1 4606720300 2019       4</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_countysub_zip.html">hud_cw_countysub_zip</a></span><span class="op">(</span>countysub <span class="op">=</span> <span class="st">'4606720300 '</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2019'</span>, <span class="st">'2019'</span>, <span class="st">'2019'</span><span class="op">)</span>,
+                     quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'4'</span>,<span class="st">'4'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;   county_sub   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1 4606720300 57376         1         1         0         1 2019       4</span></code></pre></div>
 <p><br></p>
 </div>
 </div>
@@ -444,11 +429,11 @@ zipcode<a class="anchor" aria-label="anchor" href="#crosswalk-core-based-statist
 <p>If you just want the crosswalked geoids, you can set the
 <strong>minimal</strong> argument to TRUE. This will return a vector
 containing the crosswalked geoids without the extra metadata.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw_county_zip</span>(<span class="at">county =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2010'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'1'</span>), <span class="at">minimal =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">22031</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2010</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [1] "71052" "71078" "71049" "71032" "71027" "71030" "71046" "71063" "71419"</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [10] "71065"</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw_county_zip.html">hud_cw_county_zip</a></span><span class="op">(</span>county <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span>, minimal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  [1] "71052" "71078" "71049" "71032" "71027" "71030" "71046" "71063" "71419"</span>
+<span class="co">#&gt; [10] "71065"</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -461,20 +446,20 @@ The type argument follows the number scheme described at within the
 argument (i.e query = 22031) for inputting geoids instead of the
 specific geoid names (i.e county = 22031, cd = 7200) used by the above
 functions.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hud_cw</span>(<span class="at">type =</span> <span class="dv">7</span>, <span class="at">query =</span> <span class="st">'22031'</span>, <span class="at">year =</span> <span class="fu">c</span>(<span class="st">'2010'</span>), <span class="at">quarter =</span> <span class="fu">c</span>(<span class="st">'1'</span>))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">1</span><span class="sc">/</span><span class="dv">1</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">22031</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2010</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      zip res_ratio bus_ratio oth_ratio tot_ratio county year quarter</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  71052 0.4322130  0.699634   0.56338 0.4455100  22031 2010       1</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  71078 0.1816700  0.086081   0.15493 0.1770400  22031 2010       1</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  71049 0.1103580  0.065934   0.15493 0.1085520  22031 2010       1</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  71032 0.0813449  0.040293   0.01408 0.0790172  22031 2010       1</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  71027 0.0699566  0.047619   0.04225 0.0687441  22031 2010       1</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  71030 0.0435647  0.020147   0.04225 0.0424621  22031 2010       1</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  71046 0.0425705  0.021978   0.01408 0.0414348  22031 2010       1</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  71063 0.0275669  0.014652   0.01408 0.0268813  22031 2010       1</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9  71419 0.0105748  0.003663   0.00000 0.0101875  22031 2010       1</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 71065 0.0001808  0.000000   0.00000 0.0001712  22031 2010       1</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/hud_cw.html">hud_cw</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fl">7</span>, query <span class="op">=</span> <span class="st">'22031'</span>, year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'2010'</span><span class="op">)</span>, quarter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'1'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;    county geoid res_ratio bus_ratio oth_ratio tot_ratio year quarter</span>
+<span class="co">#&gt; 1   22031 71052 0.4322130  0.699634   0.56338 0.4455100 2010       1</span>
+<span class="co">#&gt; 2   22031 71078 0.1816700  0.086081   0.15493 0.1770400 2010       1</span>
+<span class="co">#&gt; 3   22031 71049 0.1103580  0.065934   0.15493 0.1085520 2010       1</span>
+<span class="co">#&gt; 4   22031 71032 0.0813449  0.040293   0.01408 0.0790172 2010       1</span>
+<span class="co">#&gt; 5   22031 71027 0.0699566  0.047619   0.04225 0.0687441 2010       1</span>
+<span class="co">#&gt; 6   22031 71030 0.0435647  0.020147   0.04225 0.0424621 2010       1</span>
+<span class="co">#&gt; 7   22031 71046 0.0425705  0.021978   0.01408 0.0414348 2010       1</span>
+<span class="co">#&gt; 8   22031 71063 0.0275669  0.014652   0.01408 0.0268813 2010       1</span>
+<span class="co">#&gt; 9   22031 71419 0.0105748  0.003663   0.00000 0.0101875 2010       1</span>
+<span class="co">#&gt; 10  22031 71065 0.0001808  0.000000   0.00000 0.0001712 2010       1</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">
@@ -501,75 +486,72 @@ this.</p>
 <span class="co">#&gt; 3  52276  24047</span></code></pre></div>
 <p>In the crosswalked data set below each zip code associated with a
 county is assigned the same population value.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crosswalk</span>(<span class="at">data =</span> sample, <span class="at">geoid =</span> <span class="st">"county"</span>, <span class="at">geoid_col =</span> <span class="st">"county"</span>, </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">cw_geoid =</span> <span class="st">"zip"</span>, <span class="at">cw_geoid_col =</span> <span class="cn">NA</span>, <span class="at">method =</span> <span class="cn">NA</span>, <span class="at">year =</span> <span class="dv">2019</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>          , <span class="at">quarter =</span> <span class="dv">1</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============</span><span class="sc">---------------------------------</span>]    <span class="dv">33</span>% <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">24043</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============================</span><span class="sc">-----------------</span>]    <span class="dv">67</span>% <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">24045</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">3</span><span class="sc">/</span><span class="dv">3</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">24047</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * No method or cw_geoid_col specified: will just merge the datasets.</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    county   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter    pop</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   24043 21740 4.154e-01 0.5855329 0.6520012 4.388e-01 2019       1 151049</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   24043 21742 2.269e-01 0.2051453 0.2022609 2.242e-01 2019       1 151049</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   24043 21795 7.331e-02 0.0689943 0.0498014 7.197e-02 2019       1 151049</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   24043 21713 5.965e-02 0.0295690 0.0192484 5.558e-02 2019       1 151049</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   24043 21783 4.411e-02 0.0126963 0.0033608 3.993e-02 2019       1 151049</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   24043 21722 3.437e-02 0.0075175 0.0030553 3.094e-02 2019       1 151049</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7   24043 21750 2.974e-02 0.0414300 0.0262756 3.051e-02 2019       1 151049</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8   24043 21782 2.497e-02 0.0046776 0.0009166 2.237e-02 2019       1 151049</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9   24043 21756 2.179e-02 0.0018376 0.0009166 1.934e-02 2019       1 151049</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10  24043 21767 1.567e-02 0.0145339 0.0137489 1.550e-02 2019       1 151049</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11  24043 21719 1.093e-02 0.0030070 0.0265811 1.098e-02 2019       1 151049</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12  24043 21734 1.081e-02 0.0150351 0.0012221 1.073e-02 2019       1 151049</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13  24043 21758 1.118e-02 0.0030070 0.0006111 1.010e-02 2019       1 151049</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14  24043 21733 6.992e-03 0.0021717 0.0000000 6.318e-03 2019       1 151049</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15  24043 21711 6.903e-03 0.0015035 0.0000000 6.187e-03 2019       1 151049</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16  24043 21779 5.866e-03 0.0016706 0.0000000 5.289e-03 2019       1 151049</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17  24043 21715 5.481e-04 0.0001671 0.0000000 4.950e-04 2019       1 151049</span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18  24043 21780 4.740e-04 0.0000000 0.0000000 4.168e-04 2019       1 151049</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19  24043 21769 2.370e-04 0.0003341 0.0000000 2.345e-04 2019       1 151049</span></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20  24043 21720 2.963e-05 0.0001671 0.0000000 3.908e-05 2019       1 151049</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21  24043 21746 0.000e+00 0.0005012 0.0000000 3.908e-05 2019       1 151049</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22  24043 21755 1.481e-05 0.0000000 0.0000000 1.303e-05 2019       1 151049</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23  24043 21781 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24  24043 21721 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25  24043 21741 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26  24045 21804 3.617e-01 0.2666006 0.4497751 3.574e-01 2019       1 103609</span></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27  24045 21801 2.563e-01 0.4428147 0.4677661 2.830e-01 2019       1 103609</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28  24045 21826 6.512e-02 0.0471754 0.0228636 6.152e-02 2019       1 103609</span></span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29  24045 21875 6.282e-02 0.0243806 0.0356072 5.809e-02 2019       1 103609</span></span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30  24045 21802 4.247e-02 0.1117939 0.0007496 4.670e-02 2019       1 103609</span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31  24045 21830 3.543e-02 0.0059465 0.0018741 3.121e-02 2019       1 103609</span></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32  24045 21849 3.141e-02 0.0053518 0.0052474 2.784e-02 2019       1 103609</span></span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33  24045 21850 2.981e-02 0.0114965 0.0089955 2.719e-02 2019       1 103609</span></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34  24045 21837 2.548e-02 0.0105055 0.0026237 2.306e-02 2019       1 103609</span></span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35  24045 21874 2.180e-02 0.0073340 0.0022489 1.958e-02 2019       1 103609</span></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36  24045 21803 1.634e-02 0.0537166 0.0003748 1.893e-02 2019       1 103609</span></span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37  24045 21822 1.714e-02 0.0043608 0.0007496 1.522e-02 2019       1 103609</span></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38  24045 21856 9.956e-03 0.0033697 0.0000000 8.897e-03 2019       1 103609</span></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39  24045 21861 8.827e-03 0.0001982 0.0011244 7.692e-03 2019       1 103609</span></span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  24045 21865 5.789e-03 0.0025768 0.0000000 5.228e-03 2019       1 103609</span></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  24045 21840 5.112e-03 0.0011893 0.0000000 4.519e-03 2019       1 103609</span></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42  24045 21814 4.434e-03 0.0005946 0.0000000 3.881e-03 2019       1 103609</span></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43  24045 21852 0.000e+00 0.0003964 0.0000000 3.545e-05 2019       1 103609</span></span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44  24045 21810 0.000e+00 0.0001982 0.0000000 1.772e-05 2019       1 103609</span></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45  24047 21842 5.302e-01 0.4559211 0.8379953 5.443e-01 2019       1  52276</span></span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46  24047 21811 2.832e-01 0.2535088 0.0927739 2.696e-01 2019       1  52276</span></span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47  24047 21851 5.434e-02 0.0881579 0.0417249 5.577e-02 2019       1  52276</span></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48  24047 21843 4.340e-02 0.1065789 0.0009324 4.491e-02 2019       1  52276</span></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49  24047 21863 3.859e-02 0.0660088 0.0205128 3.927e-02 2019       1  52276</span></span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50  24047 21813 2.390e-02 0.0160088 0.0048951 2.221e-02 2019       1  52276</span></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51  24047 21841 7.577e-03 0.0041667 0.0004662 6.918e-03 2019       1  52276</span></span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52  24047 21872 6.003e-03 0.0039474 0.0004662 5.528e-03 2019       1  52276</span></span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53  24047 21864 4.920e-03 0.0017544 0.0000000 4.411e-03 2019       1  52276</span></span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54  24047 21829 3.411e-03 0.0008772 0.0000000 3.036e-03 2019       1  52276</span></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55  24047 21804 1.804e-03 0.0004386 0.0000000 1.604e-03 2019       1  52276</span></span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 56  24047 21862 1.263e-03 0.0024123 0.0002331 1.275e-03 2019       1  52276</span></span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 57  24047 21822 1.361e-03 0.0000000 0.0000000 1.189e-03 2019       1  52276</span></span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58  24047 21792 0.000e+00 0.0002193 0.0000000 1.432e-05 2019       1  52276</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/crosswalk.html">crosswalk</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sample</span>, geoid <span class="op">=</span> <span class="st">"county"</span>, geoid_col <span class="op">=</span> <span class="st">"county"</span>, 
+          cw_geoid <span class="op">=</span> <span class="st">"zip"</span>, cw_geoid_col <span class="op">=</span> <span class="cn">NA</span>, method <span class="op">=</span> <span class="cn">NA</span>, year <span class="op">=</span> <span class="fl">2019</span>
+          , quarter <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; * No method or cw_geoid_col specified: will just merge the datasets.</span>
+<span class="co">#&gt;    county   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter    pop</span>
+<span class="co">#&gt; 1   24043 21740 4.154e-01 0.5855329 0.6520012 4.388e-01 2019       1 151049</span>
+<span class="co">#&gt; 2   24043 21742 2.269e-01 0.2051453 0.2022609 2.242e-01 2019       1 151049</span>
+<span class="co">#&gt; 3   24043 21795 7.331e-02 0.0689943 0.0498014 7.197e-02 2019       1 151049</span>
+<span class="co">#&gt; 4   24043 21713 5.965e-02 0.0295690 0.0192484 5.558e-02 2019       1 151049</span>
+<span class="co">#&gt; 5   24043 21783 4.411e-02 0.0126963 0.0033608 3.993e-02 2019       1 151049</span>
+<span class="co">#&gt; 6   24043 21722 3.437e-02 0.0075175 0.0030553 3.094e-02 2019       1 151049</span>
+<span class="co">#&gt; 7   24043 21750 2.974e-02 0.0414300 0.0262756 3.051e-02 2019       1 151049</span>
+<span class="co">#&gt; 8   24043 21782 2.497e-02 0.0046776 0.0009166 2.237e-02 2019       1 151049</span>
+<span class="co">#&gt; 9   24043 21756 2.179e-02 0.0018376 0.0009166 1.934e-02 2019       1 151049</span>
+<span class="co">#&gt; 10  24043 21767 1.567e-02 0.0145339 0.0137489 1.550e-02 2019       1 151049</span>
+<span class="co">#&gt; 11  24043 21719 1.093e-02 0.0030070 0.0265811 1.098e-02 2019       1 151049</span>
+<span class="co">#&gt; 12  24043 21734 1.081e-02 0.0150351 0.0012221 1.073e-02 2019       1 151049</span>
+<span class="co">#&gt; 13  24043 21758 1.118e-02 0.0030070 0.0006111 1.010e-02 2019       1 151049</span>
+<span class="co">#&gt; 14  24043 21733 6.992e-03 0.0021717 0.0000000 6.318e-03 2019       1 151049</span>
+<span class="co">#&gt; 15  24043 21711 6.903e-03 0.0015035 0.0000000 6.187e-03 2019       1 151049</span>
+<span class="co">#&gt; 16  24043 21779 5.866e-03 0.0016706 0.0000000 5.289e-03 2019       1 151049</span>
+<span class="co">#&gt; 17  24043 21715 5.481e-04 0.0001671 0.0000000 4.950e-04 2019       1 151049</span>
+<span class="co">#&gt; 18  24043 21780 4.740e-04 0.0000000 0.0000000 4.168e-04 2019       1 151049</span>
+<span class="co">#&gt; 19  24043 21769 2.370e-04 0.0003341 0.0000000 2.345e-04 2019       1 151049</span>
+<span class="co">#&gt; 20  24043 21720 2.963e-05 0.0001671 0.0000000 3.908e-05 2019       1 151049</span>
+<span class="co">#&gt; 21  24043 21746 0.000e+00 0.0005012 0.0000000 3.908e-05 2019       1 151049</span>
+<span class="co">#&gt; 22  24043 21755 1.481e-05 0.0000000 0.0000000 1.303e-05 2019       1 151049</span>
+<span class="co">#&gt; 23  24043 21781 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span>
+<span class="co">#&gt; 24  24043 21721 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span>
+<span class="co">#&gt; 25  24043 21741 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1 151049</span>
+<span class="co">#&gt; 26  24045 21804 3.617e-01 0.2666006 0.4497751 3.574e-01 2019       1 103609</span>
+<span class="co">#&gt; 27  24045 21801 2.563e-01 0.4428147 0.4677661 2.830e-01 2019       1 103609</span>
+<span class="co">#&gt; 28  24045 21826 6.512e-02 0.0471754 0.0228636 6.152e-02 2019       1 103609</span>
+<span class="co">#&gt; 29  24045 21875 6.282e-02 0.0243806 0.0356072 5.809e-02 2019       1 103609</span>
+<span class="co">#&gt; 30  24045 21802 4.247e-02 0.1117939 0.0007496 4.670e-02 2019       1 103609</span>
+<span class="co">#&gt; 31  24045 21830 3.543e-02 0.0059465 0.0018741 3.121e-02 2019       1 103609</span>
+<span class="co">#&gt; 32  24045 21849 3.141e-02 0.0053518 0.0052474 2.784e-02 2019       1 103609</span>
+<span class="co">#&gt; 33  24045 21850 2.981e-02 0.0114965 0.0089955 2.719e-02 2019       1 103609</span>
+<span class="co">#&gt; 34  24045 21837 2.548e-02 0.0105055 0.0026237 2.306e-02 2019       1 103609</span>
+<span class="co">#&gt; 35  24045 21874 2.180e-02 0.0073340 0.0022489 1.958e-02 2019       1 103609</span>
+<span class="co">#&gt; 36  24045 21803 1.634e-02 0.0537166 0.0003748 1.893e-02 2019       1 103609</span>
+<span class="co">#&gt; 37  24045 21822 1.714e-02 0.0043608 0.0007496 1.522e-02 2019       1 103609</span>
+<span class="co">#&gt; 38  24045 21856 9.956e-03 0.0033697 0.0000000 8.897e-03 2019       1 103609</span>
+<span class="co">#&gt; 39  24045 21861 8.827e-03 0.0001982 0.0011244 7.692e-03 2019       1 103609</span>
+<span class="co">#&gt; 40  24045 21865 5.789e-03 0.0025768 0.0000000 5.228e-03 2019       1 103609</span>
+<span class="co">#&gt; 41  24045 21840 5.112e-03 0.0011893 0.0000000 4.519e-03 2019       1 103609</span>
+<span class="co">#&gt; 42  24045 21814 4.434e-03 0.0005946 0.0000000 3.881e-03 2019       1 103609</span>
+<span class="co">#&gt; 43  24045 21852 0.000e+00 0.0003964 0.0000000 3.545e-05 2019       1 103609</span>
+<span class="co">#&gt; 44  24045 21810 0.000e+00 0.0001982 0.0000000 1.772e-05 2019       1 103609</span>
+<span class="co">#&gt; 45  24047 21842 5.302e-01 0.4559211 0.8379953 5.443e-01 2019       1  52276</span>
+<span class="co">#&gt; 46  24047 21811 2.832e-01 0.2535088 0.0927739 2.696e-01 2019       1  52276</span>
+<span class="co">#&gt; 47  24047 21851 5.434e-02 0.0881579 0.0417249 5.577e-02 2019       1  52276</span>
+<span class="co">#&gt; 48  24047 21843 4.340e-02 0.1065789 0.0009324 4.491e-02 2019       1  52276</span>
+<span class="co">#&gt; 49  24047 21863 3.859e-02 0.0660088 0.0205128 3.927e-02 2019       1  52276</span>
+<span class="co">#&gt; 50  24047 21813 2.390e-02 0.0160088 0.0048951 2.221e-02 2019       1  52276</span>
+<span class="co">#&gt; 51  24047 21841 7.577e-03 0.0041667 0.0004662 6.918e-03 2019       1  52276</span>
+<span class="co">#&gt; 52  24047 21872 6.003e-03 0.0039474 0.0004662 5.528e-03 2019       1  52276</span>
+<span class="co">#&gt; 53  24047 21864 4.920e-03 0.0017544 0.0000000 4.411e-03 2019       1  52276</span>
+<span class="co">#&gt; 54  24047 21829 3.411e-03 0.0008772 0.0000000 3.036e-03 2019       1  52276</span>
+<span class="co">#&gt; 55  24047 21804 1.804e-03 0.0004386 0.0000000 1.604e-03 2019       1  52276</span>
+<span class="co">#&gt; 56  24047 21862 1.263e-03 0.0024123 0.0002331 1.275e-03 2019       1  52276</span>
+<span class="co">#&gt; 57  24047 21822 1.361e-03 0.0000000 0.0000000 1.189e-03 2019       1  52276</span>
+<span class="co">#&gt; 58  24047 21792 0.000e+00 0.0002193 0.0000000 1.432e-05 2019       1  52276</span></code></pre></div>
 <p><br></p>
 <p>To utilize an allocation method provided by the crosswalk files and
 apply it to columns of the data set, specify the method and cw_geoid_col
@@ -577,75 +559,72 @@ arguments. In this case we want to allocate the county population levels
 to a zip code level using the method based on the ratio of residential
 addresses.</p>
 <p><br></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crosswalk</span>(<span class="at">data =</span> sample, <span class="at">geoid =</span> <span class="st">"county"</span>, <span class="at">geoid_col =</span> <span class="st">"county"</span>, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">cw_geoid =</span> <span class="st">"zip"</span>, <span class="at">cw_geoid_col =</span> <span class="st">"pop"</span>, <span class="at">method =</span> <span class="st">"res"</span>, <span class="at">year =</span> <span class="dv">2019</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          , <span class="at">quarter =</span> <span class="dv">1</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============</span><span class="sc">---------------------------------</span>]    <span class="dv">33</span>% <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">24043</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">===============================</span><span class="sc">-----------------</span>]    <span class="dv">67</span>% <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">24045</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>Downloading<span class="sc">:</span>    [<span class="sc">==</span><span class="er">================================================</span>]    <span class="dv">100</span>%    <span class="dv">3</span><span class="sc">/</span><span class="dv">3</span> <span class="dv">0</span>   usps?type<span class="ot">=</span><span class="dv">7</span><span class="sc">&amp;</span>query<span class="ot">=</span><span class="dv">24047</span><span class="sc">&amp;</span>year<span class="ot">=</span><span class="dv">2019</span><span class="sc">&amp;</span>quarter<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * Applying allocation method based onresidential address percentage.</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    county   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter       pop</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   24043 21740 4.154e-01 0.5855329 0.6520012 4.388e-01 2019       1 62751.933</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   24043 21742 2.269e-01 0.2051453 0.2022609 2.242e-01 2019       1 34280.196</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3   24043 21795 7.331e-02 0.0689943 0.0498014 7.197e-02 2019       1 11073.212</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4   24043 21713 5.965e-02 0.0295690 0.0192484 5.558e-02 2019       1  9010.270</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5   24043 21783 4.411e-02 0.0126963 0.0033608 3.993e-02 2019       1  6663.170</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6   24043 21722 3.437e-02 0.0075175 0.0030553 3.094e-02 2019       1  5190.918</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7   24043 21750 2.974e-02 0.0414300 0.0262756 3.051e-02 2019       1  4492.829</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8   24043 21782 2.497e-02 0.0046776 0.0009166 2.237e-02 2019       1  3772.365</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9   24043 21756 2.179e-02 0.0018376 0.0009166 1.934e-02 2019       1  3291.310</span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10  24043 21767 1.567e-02 0.0145339 0.0137489 1.550e-02 2019       1  2367.238</span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11  24043 21719 1.093e-02 0.0030070 0.0265811 1.098e-02 2019       1  1651.249</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12  24043 21734 1.081e-02 0.0150351 0.0012221 1.073e-02 2019       1  1633.349</span></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13  24043 21758 1.118e-02 0.0030070 0.0006111 1.010e-02 2019       1  1689.286</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14  24043 21733 6.992e-03 0.0021717 0.0000000 6.318e-03 2019       1  1056.083</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15  24043 21711 6.903e-03 0.0015035 0.0000000 6.187e-03 2019       1  1042.659</span></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16  24043 21779 5.866e-03 0.0016706 0.0000000 5.289e-03 2019       1   886.036</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17  24043 21715 5.481e-04 0.0001671 0.0000000 4.950e-04 2019       1    82.786</span></span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 18  24043 21780 4.740e-04 0.0000000 0.0000000 4.168e-04 2019       1    71.599</span></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 19  24043 21769 2.370e-04 0.0003341 0.0000000 2.345e-04 2019       1    35.799</span></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 20  24043 21720 2.963e-05 0.0001671 0.0000000 3.908e-05 2019       1     4.475</span></span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21  24043 21746 0.000e+00 0.0005012 0.0000000 3.908e-05 2019       1     0.000</span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22  24043 21755 1.481e-05 0.0000000 0.0000000 1.303e-05 2019       1     2.237</span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23  24043 21781 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24  24043 21721 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 25  24043 21741 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 26  24045 21804 3.617e-01 0.2666006 0.4497751 3.574e-01 2019       1 37479.352</span></span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 27  24045 21801 2.563e-01 0.4428147 0.4677661 2.830e-01 2019       1 26557.357</span></span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 28  24045 21826 6.512e-02 0.0471754 0.0228636 6.152e-02 2019       1  6746.751</span></span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 29  24045 21875 6.282e-02 0.0243806 0.0356072 5.809e-02 2019       1  6508.531</span></span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 30  24045 21802 4.247e-02 0.1117939 0.0007496 4.670e-02 2019       1  4400.703</span></span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 31  24045 21830 3.543e-02 0.0059465 0.0018741 3.121e-02 2019       1  3671.152</span></span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 32  24045 21849 3.141e-02 0.0053518 0.0052474 2.784e-02 2019       1  3254.265</span></span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 33  24045 21850 2.981e-02 0.0114965 0.0089955 2.719e-02 2019       1  3088.362</span></span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 34  24045 21837 2.548e-02 0.0105055 0.0026237 2.306e-02 2019       1  2639.571</span></span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 35  24045 21874 2.180e-02 0.0073340 0.0022489 1.958e-02 2019       1  2258.843</span></span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 36  24045 21803 1.634e-02 0.0537166 0.0003748 1.893e-02 2019       1  1693.069</span></span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 37  24045 21822 1.714e-02 0.0043608 0.0007496 1.522e-02 2019       1  1776.021</span></span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 38  24045 21856 9.956e-03 0.0033697 0.0000000 8.897e-03 2019       1  1031.581</span></span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 39  24045 21861 8.827e-03 0.0001982 0.0011244 7.692e-03 2019       1   914.597</span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 40  24045 21865 5.789e-03 0.0025768 0.0000000 5.228e-03 2019       1   599.806</span></span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 41  24045 21840 5.112e-03 0.0011893 0.0000000 4.519e-03 2019       1   529.616</span></span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 42  24045 21814 4.434e-03 0.0005946 0.0000000 3.881e-03 2019       1   459.426</span></span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 43  24045 21852 0.000e+00 0.0003964 0.0000000 3.545e-05 2019       1     0.000</span></span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 44  24045 21810 0.000e+00 0.0001982 0.0000000 1.772e-05 2019       1     0.000</span></span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 45  24047 21842 5.302e-01 0.4559211 0.8379953 5.443e-01 2019       1 27719.003</span></span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 46  24047 21811 2.832e-01 0.2535088 0.0927739 2.696e-01 2019       1 14804.331</span></span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 47  24047 21851 5.434e-02 0.0881579 0.0417249 5.577e-02 2019       1  2840.491</span></span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 48  24047 21843 4.340e-02 0.1065789 0.0009324 4.491e-02 2019       1  2268.620</span></span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 49  24047 21863 3.859e-02 0.0660088 0.0205128 3.927e-02 2019       1  2017.408</span></span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 50  24047 21813 2.390e-02 0.0160088 0.0048951 2.221e-02 2019       1  1249.199</span></span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 51  24047 21841 7.577e-03 0.0041667 0.0004662 6.918e-03 2019       1   396.108</span></span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 52  24047 21872 6.003e-03 0.0039474 0.0004662 5.528e-03 2019       1   313.800</span></span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 53  24047 21864 4.920e-03 0.0017544 0.0000000 4.411e-03 2019       1   257.213</span></span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 54  24047 21829 3.411e-03 0.0008772 0.0000000 3.036e-03 2019       1   178.334</span></span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 55  24047 21804 1.804e-03 0.0004386 0.0000000 1.604e-03 2019       1    94.311</span></span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 56  24047 21862 1.263e-03 0.0024123 0.0002331 1.275e-03 2019       1    66.018</span></span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 57  24047 21822 1.361e-03 0.0000000 0.0000000 1.189e-03 2019       1    71.162</span></span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 58  24047 21792 0.000e+00 0.0002193 0.0000000 1.432e-05 2019       1     0.000</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/crosswalk.html">crosswalk</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sample</span>, geoid <span class="op">=</span> <span class="st">"county"</span>, geoid_col <span class="op">=</span> <span class="st">"county"</span>, 
+          cw_geoid <span class="op">=</span> <span class="st">"zip"</span>, cw_geoid_col <span class="op">=</span> <span class="st">"pop"</span>, method <span class="op">=</span> <span class="st">"res"</span>, year <span class="op">=</span> <span class="fl">2019</span>
+          , quarter <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; * Applying allocation method based on residential address percentage.</span>
+<span class="co">#&gt;    county   zip res_ratio bus_ratio oth_ratio tot_ratio year quarter       pop</span>
+<span class="co">#&gt; 1   24043 21740 4.154e-01 0.5855329 0.6520012 4.388e-01 2019       1 62751.933</span>
+<span class="co">#&gt; 2   24043 21742 2.269e-01 0.2051453 0.2022609 2.242e-01 2019       1 34280.196</span>
+<span class="co">#&gt; 3   24043 21795 7.331e-02 0.0689943 0.0498014 7.197e-02 2019       1 11073.212</span>
+<span class="co">#&gt; 4   24043 21713 5.965e-02 0.0295690 0.0192484 5.558e-02 2019       1  9010.270</span>
+<span class="co">#&gt; 5   24043 21783 4.411e-02 0.0126963 0.0033608 3.993e-02 2019       1  6663.170</span>
+<span class="co">#&gt; 6   24043 21722 3.437e-02 0.0075175 0.0030553 3.094e-02 2019       1  5190.918</span>
+<span class="co">#&gt; 7   24043 21750 2.974e-02 0.0414300 0.0262756 3.051e-02 2019       1  4492.829</span>
+<span class="co">#&gt; 8   24043 21782 2.497e-02 0.0046776 0.0009166 2.237e-02 2019       1  3772.365</span>
+<span class="co">#&gt; 9   24043 21756 2.179e-02 0.0018376 0.0009166 1.934e-02 2019       1  3291.310</span>
+<span class="co">#&gt; 10  24043 21767 1.567e-02 0.0145339 0.0137489 1.550e-02 2019       1  2367.238</span>
+<span class="co">#&gt; 11  24043 21719 1.093e-02 0.0030070 0.0265811 1.098e-02 2019       1  1651.249</span>
+<span class="co">#&gt; 12  24043 21734 1.081e-02 0.0150351 0.0012221 1.073e-02 2019       1  1633.349</span>
+<span class="co">#&gt; 13  24043 21758 1.118e-02 0.0030070 0.0006111 1.010e-02 2019       1  1689.286</span>
+<span class="co">#&gt; 14  24043 21733 6.992e-03 0.0021717 0.0000000 6.318e-03 2019       1  1056.083</span>
+<span class="co">#&gt; 15  24043 21711 6.903e-03 0.0015035 0.0000000 6.187e-03 2019       1  1042.659</span>
+<span class="co">#&gt; 16  24043 21779 5.866e-03 0.0016706 0.0000000 5.289e-03 2019       1   886.036</span>
+<span class="co">#&gt; 17  24043 21715 5.481e-04 0.0001671 0.0000000 4.950e-04 2019       1    82.786</span>
+<span class="co">#&gt; 18  24043 21780 4.740e-04 0.0000000 0.0000000 4.168e-04 2019       1    71.599</span>
+<span class="co">#&gt; 19  24043 21769 2.370e-04 0.0003341 0.0000000 2.345e-04 2019       1    35.799</span>
+<span class="co">#&gt; 20  24043 21720 2.963e-05 0.0001671 0.0000000 3.908e-05 2019       1     4.475</span>
+<span class="co">#&gt; 21  24043 21746 0.000e+00 0.0005012 0.0000000 3.908e-05 2019       1     0.000</span>
+<span class="co">#&gt; 22  24043 21755 1.481e-05 0.0000000 0.0000000 1.303e-05 2019       1     2.237</span>
+<span class="co">#&gt; 23  24043 21781 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span>
+<span class="co">#&gt; 24  24043 21721 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span>
+<span class="co">#&gt; 25  24043 21741 0.000e+00 0.0001671 0.0000000 1.303e-05 2019       1     0.000</span>
+<span class="co">#&gt; 26  24045 21804 3.617e-01 0.2666006 0.4497751 3.574e-01 2019       1 37479.352</span>
+<span class="co">#&gt; 27  24045 21801 2.563e-01 0.4428147 0.4677661 2.830e-01 2019       1 26557.357</span>
+<span class="co">#&gt; 28  24045 21826 6.512e-02 0.0471754 0.0228636 6.152e-02 2019       1  6746.751</span>
+<span class="co">#&gt; 29  24045 21875 6.282e-02 0.0243806 0.0356072 5.809e-02 2019       1  6508.531</span>
+<span class="co">#&gt; 30  24045 21802 4.247e-02 0.1117939 0.0007496 4.670e-02 2019       1  4400.703</span>
+<span class="co">#&gt; 31  24045 21830 3.543e-02 0.0059465 0.0018741 3.121e-02 2019       1  3671.152</span>
+<span class="co">#&gt; 32  24045 21849 3.141e-02 0.0053518 0.0052474 2.784e-02 2019       1  3254.265</span>
+<span class="co">#&gt; 33  24045 21850 2.981e-02 0.0114965 0.0089955 2.719e-02 2019       1  3088.362</span>
+<span class="co">#&gt; 34  24045 21837 2.548e-02 0.0105055 0.0026237 2.306e-02 2019       1  2639.571</span>
+<span class="co">#&gt; 35  24045 21874 2.180e-02 0.0073340 0.0022489 1.958e-02 2019       1  2258.843</span>
+<span class="co">#&gt; 36  24045 21803 1.634e-02 0.0537166 0.0003748 1.893e-02 2019       1  1693.069</span>
+<span class="co">#&gt; 37  24045 21822 1.714e-02 0.0043608 0.0007496 1.522e-02 2019       1  1776.021</span>
+<span class="co">#&gt; 38  24045 21856 9.956e-03 0.0033697 0.0000000 8.897e-03 2019       1  1031.581</span>
+<span class="co">#&gt; 39  24045 21861 8.827e-03 0.0001982 0.0011244 7.692e-03 2019       1   914.597</span>
+<span class="co">#&gt; 40  24045 21865 5.789e-03 0.0025768 0.0000000 5.228e-03 2019       1   599.806</span>
+<span class="co">#&gt; 41  24045 21840 5.112e-03 0.0011893 0.0000000 4.519e-03 2019       1   529.616</span>
+<span class="co">#&gt; 42  24045 21814 4.434e-03 0.0005946 0.0000000 3.881e-03 2019       1   459.426</span>
+<span class="co">#&gt; 43  24045 21852 0.000e+00 0.0003964 0.0000000 3.545e-05 2019       1     0.000</span>
+<span class="co">#&gt; 44  24045 21810 0.000e+00 0.0001982 0.0000000 1.772e-05 2019       1     0.000</span>
+<span class="co">#&gt; 45  24047 21842 5.302e-01 0.4559211 0.8379953 5.443e-01 2019       1 27719.003</span>
+<span class="co">#&gt; 46  24047 21811 2.832e-01 0.2535088 0.0927739 2.696e-01 2019       1 14804.331</span>
+<span class="co">#&gt; 47  24047 21851 5.434e-02 0.0881579 0.0417249 5.577e-02 2019       1  2840.491</span>
+<span class="co">#&gt; 48  24047 21843 4.340e-02 0.1065789 0.0009324 4.491e-02 2019       1  2268.620</span>
+<span class="co">#&gt; 49  24047 21863 3.859e-02 0.0660088 0.0205128 3.927e-02 2019       1  2017.408</span>
+<span class="co">#&gt; 50  24047 21813 2.390e-02 0.0160088 0.0048951 2.221e-02 2019       1  1249.199</span>
+<span class="co">#&gt; 51  24047 21841 7.577e-03 0.0041667 0.0004662 6.918e-03 2019       1   396.108</span>
+<span class="co">#&gt; 52  24047 21872 6.003e-03 0.0039474 0.0004662 5.528e-03 2019       1   313.800</span>
+<span class="co">#&gt; 53  24047 21864 4.920e-03 0.0017544 0.0000000 4.411e-03 2019       1   257.213</span>
+<span class="co">#&gt; 54  24047 21829 3.411e-03 0.0008772 0.0000000 3.036e-03 2019       1   178.334</span>
+<span class="co">#&gt; 55  24047 21804 1.804e-03 0.0004386 0.0000000 1.604e-03 2019       1    94.311</span>
+<span class="co">#&gt; 56  24047 21862 1.263e-03 0.0024123 0.0002331 1.275e-03 2019       1    66.018</span>
+<span class="co">#&gt; 57  24047 21822 1.361e-03 0.0000000 0.0000000 1.189e-03 2019       1    71.162</span>
+<span class="co">#&gt; 58  24047 21792 0.000e+00 0.0002193 0.0000000 1.432e-05 2019       1     0.000</span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level4">

@@ -1,4 +1,4 @@
-pandoc: 2.17.1.1
+pandoc: '2.18'
 pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
@@ -10,7 +10,7 @@ articles:
   Setup: Setup.html
   USPS-Crosswalk: USPS-Crosswalk.html
   Visualizing-FMR-and-IL: Visualizing-FMR-and-IL.html
-last_built: 2022-08-17T22:02Z
+last_built: 2022-08-24T17:57Z
 urls:
   reference: https://etam4260.github.io/rhud/reference
   article: https://etam4260.github.io/rhud/articles

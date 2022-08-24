@@ -73,13 +73,17 @@ data for the entire nation.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hud_chas_nation</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2014-2018"</span><span class="op">)</span>, key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span>, <span class="va">to_tibble</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hud_chas_nation</span><span class="op">(</span>
+  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2014-2018"</span><span class="op">)</span>,
+  key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"HUD_KEY"</span><span class="op">)</span>,
+  to_tibble <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"rhud_use_tibble"</span>, <span class="cn">FALSE</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
-<dd><p>The years to query for.</p><ul><li><p>year = "2014-2018"</p></li>
+<dd><p>A character vector with the years to query for.</p><ul><li><p>year = "2014-2018"</p></li>
 <li><p>year = "2013-2017"</p></li>
 <li><p>year = "2012-2016"</p></li>
 <li><p>year = "2011-2015"</p></li>
@@ -90,11 +94,11 @@ data for the entire nation.</p>
 <li><p>year = "2006-2010"</p></li>
 </ul></dd>
 <dt>key</dt>
-<dd><p>The key obtained from HUD
+<dd><p>A character vector of length one with the key obtained from HUD
 (US Department of Housing and Urban Development)
 USER website.</p></dd>
 <dt>to_tibble</dt>
-<dd><p>If TRUE, return the data in a tibble format
+<dd><p>A logical: if TRUE, return the data in a tibble format
 rather than a data frame.</p></dd>
 </dl></div>
     <div class="section level2">
@@ -112,6 +116,7 @@ observations supplied in "year" input.</p>
 <li><p><code><a href="hud_chas_county.html">hud_chas_county()</a></code></p></li>
 <li><p><code><a href="hud_chas_state_mcd.html">hud_chas_state_mcd()</a></code></p></li>
 <li><p><code><a href="hud_chas_state_place.html">hud_chas_state_place()</a></code></p></li>
+<li><p><code><a href="hud_chas.html">hud_chas()</a></code></p></li>
 </ul></div>
     </div>
 

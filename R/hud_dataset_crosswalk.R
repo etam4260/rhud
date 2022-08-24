@@ -133,6 +133,7 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
                                             year,
                                             quarter, key)
 
+
   geoid <- args$geoid
   geoid_col <- args$geoid_col
   cw_geoid <- args$cw_geoid
@@ -201,17 +202,17 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
     if (!to_tibble) {
 
-      result <- merge(cw_data, data, by.x = 6, by.y = geoid_col)
+      result <- merge(cw_data, data, by.x = 1, by.y = geoid_col)
 
     } else {
 
-      result <- as_tibble(merge(cw_data, data, by.x = 6, by.y = geoid_col))
+      result <- as_tibble(merge(cw_data, data, by.x = 1, by.y = geoid_col))
 
     }
 
   } else if (!is.na(cw_geoid_col) && !is.na(method)) {
 
-    merged <- merge(cw_data, data, by.x = 6, by.y = geoid_col)
+    merged <- merge(cw_data, data, by.x = 1, by.y = geoid_col)
 
     # clear memory
     cw_data <- NULL
@@ -219,7 +220,7 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
 
     # apply method to columns specified.
     if (method == "residential" || method == "res" || method == "res_ratio") {
-      message("\n* Applying allocation method based on",
+      message("\n* Applying allocation method based on ",
               "residential address percentage.")
       for (i in seq_len(nrow(merged))) {
 
