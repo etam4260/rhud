@@ -38,7 +38,7 @@ chas_do_query_calls <- function(urls, key, to_tibble) {
 
     if (!is.null(processed_code)) {
 
-      error_urls <- list(c(processed_code, url))
+      error_urls <- c(error_urls, list(c(url, processed_code)))
 
     } else {
       cont <- parse_resp_content(call)
@@ -109,9 +109,10 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
     processed_code <- process_status_codes(call)
 
     if (!is.null(processed_code)) {
+
       # Need to output a single error message instead of a bunch when
       # something bad occurs. Append to list of errored urls.
-      error_urls <- list(c(processed_code, url))
+      error_urls <- c(error_urls, list(c(url, processed_code)))
 
     } else {
 
@@ -178,7 +179,7 @@ misc_do_query_call <- function(urls, key, to_tibble) {
     if (!is.null(processed_code)) {
       # Need to output a single error message instead of a bunch when
       # something bad occurs. Append to list of errored urls.
-      error_urls <- list(c(processed_code, url))
+      error_urls <- c(error_urls, list(c(url, processed_code)))
 
     } else {
 
@@ -237,7 +238,7 @@ il_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
     if (!is.null(processed_code)) {
 
-      error_urls <- list(c(processed_code, url))
+      error_urls <- c(error_urls, list(c(url, processed_code)))
 
     } else {
 
@@ -320,7 +321,7 @@ fmr_do_query_call <- function(all_queries, key, to_tibble, query_type) {
 
     if (!is.null(processed_code)) {
 
-      error_urls <- list(c(processed_code, url))
+      error_urls <- c(error_urls, list(c(url, processed_code)))
 
     } else {
 
@@ -600,6 +601,7 @@ print_resp_warning_messages <- function(errors) {
 
   if (length(errors) != 0) {
     message("\n")
+
     # Spit out error messages to user after all
     # queries are done.
     warning(paste("Could not find data for queries: \n\n",
