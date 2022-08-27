@@ -401,7 +401,7 @@ hud_cw_zip_cbsadiv <- function(zip, year = format(Sys.Date() - 365, "%Y"),
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                              all_queries$quarter, primary_geoid,
                              secondary_geoid, key, to_tibble)
-    colnames(res)[2] <- "cbsadiv"
+    if (!is.null(res)) colnames(res)[2] <- "cbsadiv"
   } else {
     res <- cw_do_query_calls(urls, all_queries$query, all_queries$year,
                                all_queries$quarter, primary_geoid,
