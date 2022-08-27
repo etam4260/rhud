@@ -1087,8 +1087,11 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
 #' @name geo_is_in_geo_most_rec_year_quarter
 #' @title Most Recent Year and Quarter for Geo in Geo Functions
 #' @description Gets the most recent year and quarter currently available
-#'   for the crosswalk files.
+#'   for the crosswalk files. Used mainly in the geo in geo functions located
+#'   this file.
 #' @returns A vector containing the year and quarter
+#' @noRd
+#' @noMd
 geo_is_in_geo_most_rec_year_quarter <- function(year, quarter) {
 
   if (missing(year) || missing(quarter)) {

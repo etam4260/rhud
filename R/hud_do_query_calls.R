@@ -527,7 +527,7 @@ make_query_calls <- function(url, key, path, query) {
                    url,
                    config,
                    pause_cap = 1,
-                   times = 2,
+                   times = getOption("rhud_num_retrys", 2),
                    user_agent(the_user_agent),
                    quiet = TRUE)
 
