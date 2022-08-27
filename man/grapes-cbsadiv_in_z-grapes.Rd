@@ -35,9 +35,7 @@ take a look at their non-infix versions.
 \examples{
 \dontrun{
 
-# HUD API is broken for year 2021, quarter 3.
-
-43340 \%z_in_cbsadiv\% 71052
+"03884" \%z_in_cbsadiv\% 40484
 
 }
 }

@@ -258,9 +258,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' # HUD API is broken for year 2021, quarter 3 for this query
-#'
-#' 71052 %z_in_cbsadiv% 43340
+#' "03884" %z_in_cbsadiv% 40484
 #'
 #' }
 `%z_in_cbsadiv%` <- function(zip, cbsadiv) {
@@ -732,9 +730,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' # HUD API is broken for year 2021, quarter 3.
-#'
-#' 43340 %z_in_cbsadiv% 71052
+#' "03884" %z_in_cbsadiv% 40484
 #'
 #' }
 `%cbsadiv_in_z%` <- function(cbsadiv, zip) {
