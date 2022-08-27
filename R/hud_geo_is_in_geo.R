@@ -41,16 +41,10 @@
 z_in_trt <- function(zip, tract, year, quarter,
                      key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   # Need to validate tract..
   cleaned <- cw_input_check_cleansing(primary_geoid = "tract",
@@ -138,16 +132,10 @@ z_in_trt <- function(zip, tract, year, quarter,
 z_in_cty <- function(zip, county, year, quarter,
                      key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "county",
                                       secondary_geoid = "zip",
@@ -234,16 +222,10 @@ z_in_cty <- function(zip, county, year, quarter,
 z_in_cbsa <- function(zip, cbsa, year, quarter,
                       key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "cbsa",
                                       secondary_geoid = "zip",
@@ -331,16 +313,10 @@ z_in_cbsa <- function(zip, cbsa, year, quarter,
 z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
                          key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "cbsadiv",
                                       secondary_geoid = "zip",
@@ -428,16 +404,10 @@ z_in_cbsadiv <- function(zip, cbsadiv, year, quarter,
 z_in_ctysb <- function(zip, countysub, year, quarter,
                        key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "countysub",
                                       secondary_geoid = "zip",
@@ -523,16 +493,10 @@ z_in_ctysb <- function(zip, countysub, year, quarter,
 #' }
 z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "cd",
                                       secondary_geoid = "zip",
@@ -621,16 +585,10 @@ z_in_cd <- function(zip, cd, year, quarter, key = Sys.getenv("HUD_KEY")) {
 trt_in_z <- function(tract, zip, year, quarter,
                      key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "tract",
@@ -718,16 +676,10 @@ trt_in_z <- function(tract, zip, year, quarter,
 cty_in_z <- function(county, zip, year, quarter,
                      key= Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
@@ -816,17 +768,10 @@ cty_in_z <- function(county, zip, year, quarter,
 cbsa_in_z <- function(cbsa, zip, year, quarter,
                       key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
-
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsa",
@@ -913,17 +858,10 @@ cbsa_in_z <- function(cbsa, zip, year, quarter,
 cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
                          key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
-
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsadiv",
@@ -1010,17 +948,10 @@ cbsadiv_in_z <- function(cbsadiv, zip, year, quarter,
 cd_in_z <- function(cd, zip, year, quarter,
                     key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
-
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cd",
@@ -1107,17 +1038,10 @@ cd_in_z <- function(cd, zip, year, quarter,
 ctysb_in_z <- function(countysub, zip, year, quarter,
                        key = Sys.getenv("HUD_KEY")) {
 
-  if (missing(year) || missing(quarter)) {
-    args <- hud_rec_cw_yr()
-    if (missing(year)) {
-      year <- args[1]
-    }
-
-    if (missing(quarter)) {
-      quarter <- args[2]
-    }
-  }
-
+  year <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                              quarter = quarter)$year
+  quarter <- geo_is_in_geo_most_rec_year_quarter(year = year,
+                                                 quarter = quarter)$quarter
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "ctysb",
@@ -1155,4 +1079,28 @@ ctysb_in_z <- function(countysub, zip, year, quarter,
   }
 
   res
+}
+
+
+
+
+#' @name geo_is_in_geo_most_rec_year_quarter
+#' @title Most Recent Year and Quarter for Geo in Geo Functions
+#' @description Gets the most recent year and quarter currently available
+#'   for the crosswalk files.
+#' @returns A vector containing the year and quarter
+geo_is_in_geo_most_rec_year_quarter <- function(year, quarter) {
+
+  if (missing(year) || missing(quarter)) {
+    args <- hud_rec_cw_yr()
+    if (missing(year)) {
+      year <- args$year
+    }
+
+    if (missing(quarter)) {
+      quarter <- args$quarter
+    }
+  }
+
+  list(year = year, quarter = quarter)
 }

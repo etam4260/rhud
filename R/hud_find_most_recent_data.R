@@ -23,7 +23,7 @@
 #' }
 hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
-  res <- c(NULL, NULL)
+  res <- list(year = NULL, quarter = NULL)
 
   year <- as.integer(format(Sys.Date(), "%Y"))
   month <- as.integer(format(Sys.Date(), "%m"))
@@ -51,7 +51,7 @@ hud_rec_cw_yr <- function(key = Sys.getenv("HUD_KEY")) {
     )))
 
     if (!is.null(data) && nrow(data) >= 1) {
-      res <- c(year = year, quarter = quarter)
+      res <- list(year = year, quarter = quarter)
     }
 
     if (quarter > 1) {
@@ -160,7 +160,7 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
   }
 
-  c(state = year_state, county = year_county, metroarea = year_metroarea)
+  list(state = year_state, county = year_county, metroarea = year_metroarea)
 }
 
 
@@ -256,5 +256,5 @@ hud_rec_il_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
   }
 
-  c(state = year_state, county = year_county, metroarea = year_metroarea)
+  list(state = year_state, county = year_county, metroarea = year_metroarea)
 }

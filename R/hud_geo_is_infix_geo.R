@@ -39,8 +39,8 @@
   # Need to validate tract..
   cleaned <- cw_input_check_cleansing(primary_geoid = "tract",
                                       secondary_geoid = "zip",
-                                      query = tract, year = args[1],
-                                      quarter = args[2],
+                                      query = tract, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   tract <- cleaned$query
@@ -116,8 +116,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "county",
                                       secondary_geoid = "zip",
-                                      query = county, year = args[1],
-                                      quarter = args[2],
+                                      query = county, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   county <- cleaned$query
@@ -194,8 +194,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "cbsa",
                                       secondary_geoid = "zip",
-                                      query = cbsa, year = args[1],
-                                      quarter = args[2],
+                                      query = cbsa, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   cbsa <- cleaned$query
@@ -272,8 +272,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "cbsadiv",
                                       secondary_geoid = "zip",
-                                      query = cbsadiv, year = args[1],
-                                      quarter = args[2],
+                                      query = cbsadiv, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   cbsadiv <- cleaned$query
@@ -351,8 +351,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "countysub",
                                       secondary_geoid = "zip",
-                                      query = countysub, year = args[1],
-                                      quarter = args[2],
+                                      query = countysub, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   countysub <- cleaned$query
@@ -429,8 +429,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "cd",
                                       secondary_geoid = "zip",
-                                      query = cd, year = args[1],
-                                      quarter = args[2],
+                                      query = cd, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   cd <- cleaned$query
@@ -510,8 +510,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "tract",
-                                      query = zip, year = args[1],
-                                      quarter = args[2],
+                                      query = zip, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   zip <- cleaned$query
@@ -588,8 +588,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "county",
-                                      query = zip, year = args[1],
-                                      quarter = args[2],
+                                      query = zip, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   zip <- cleaned$query
@@ -667,8 +667,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsa",
-                                      query = zip, year = args[1],
-                                      quarter = args[2],
+                                      query = zip, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   zip <- cleaned$query
@@ -745,8 +745,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cbsadiv",
-                                      query = zip, year = args[1],
-                                      quarter = args[2],
+                                      query = zip, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   zip <- cleaned$query
@@ -823,8 +823,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "cd",
-                                      query = zip, year = args[1],
-                                      quarter = args[2],
+                                      query = zip, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   zip <- cleaned$query
@@ -904,8 +904,8 @@
 
   cleaned <- cw_input_check_cleansing(primary_geoid = "zip",
                                       secondary_geoid = "countysub",
-                                      query = zip, year = args[1],
-                                      quarter = args[2],
+                                      query = zip, year = args$year,
+                                      quarter = args$quarter,
                                       Sys.getenv("HUD_KEY"))
 
   zip <- cleaned$query
