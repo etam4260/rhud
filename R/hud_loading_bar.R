@@ -16,7 +16,7 @@ download_bar <- function(done = NULL, total = NULL,
   # If user set quiet loading... then don't display download bar...
   # but still make sure to give warnings for failed queries.
 
-  if (getOption("rhud_quiet_loads", FALSE)) {
+  if (!getOption("rhud_quiet_loads", FALSE)) {
 
     done_perc <- done / total
     remain_perc <- (total - done) / total
