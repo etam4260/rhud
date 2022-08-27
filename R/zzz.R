@@ -22,7 +22,7 @@
 #'
 #' This interface uses RETRY over GET requests. By default, rhud will ping a
 #' URL 'twice' at most for a successful response. To set the number of retries
-#' used, use options(rhud_num_retrys = 1), where in this case the
+#' used, use options(rhud_num_retries = 1), where in this case the
 #' number '1' is a placeholder.
 #'
 #' @author Emmet Tam
@@ -51,7 +51,7 @@ NULL
                                 "* To silence messages from downloads, use",
                                 " `options(rhud_quiet_loads = TRUE)`\n",
                                 "* To set the number of retries ",
-                                "used, use options(rhud_num_retrys = 1)\n",
+                                "used, use options(rhud_num_retries = 1)\n",
                                 "* By default, rhud will ping a URL 'twice' at ",
                                 "most for a successful response.\n",
                                "* Caching is enabled by default. To set a new ",

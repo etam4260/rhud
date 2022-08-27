@@ -1,12 +1,13 @@
-rhud 0.5.0.9000 (8/17/2022)
+rhud 0.5.0.9000 (8/27/2022)
 ============================
 
 #### New Features
   
-  * Functions containing the to_tibble argument are now all defaulted to     
-    getOption(“rhud_use_tibble”, FALSE).
+  * Users can now set the number of retries by using 
+    options(rhud_num_retries = 1)
     
-  * Added functionality to quiet the download bar.
+  * Added functionality to quiet the download bar using 
+    options(rhud_quiet_loads = TRUE)
   
   * New feature includes the rhud_sitrep() function which report if api key 
     is set, api is reachable, and current cache settings.
@@ -16,7 +17,10 @@ rhud 0.5.0.9000 (8/17/2022)
 
   * Query calls now use RETRY instead of GET, with 1 additional re-query after a 
     failed API call.
-
+    
+  * Functions containing the to_tibble argument are now all defaulted to     
+    getOption(“rhud_use_tibble”, FALSE).
+    
   * hud_get_key() now raises informative error if no key is set.
   
   * Deleted occurrences of fake key, for example, changed Sys.setenv(“HUD_KEY”   
@@ -35,7 +39,7 @@ rhud 0.5.0.9000 (8/17/2022)
   * When package is attached, the user will be prompted with a startup message
     only if no key is set.
 
-  * Major internal changes and refactoring to follow DRYer principles.
+  * Major internal changes and refactoring to follow DRYer principles. 
 
   * Occurrences of library(rhud) has been removed from the @examples 
     documentation.  
