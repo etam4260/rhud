@@ -166,7 +166,7 @@ hud_rec_fmr_yr <- function(key = Sys.getenv("HUD_KEY")) {
 
 
 
-#' @name hud_rec_il_yr()
+#' @name hud_rec_il_yr
 #' @title Get Most Recently Released Year: Income Limits
 #' @description Pings the Income Limits API provided by HUD User to
 #'    determine the most recently released files. This will only ping

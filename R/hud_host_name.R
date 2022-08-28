@@ -1,7 +1,8 @@
 #' @name get_hud_host_name
 #' @title Base URL for HUD USER
 #' @description Returns the hardcoded base URL location for HUD USER.
-#' @export
+#' @noRd
+#' @noMd
 #' @examples
 #' \dontrun{
 #'

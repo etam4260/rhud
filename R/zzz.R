@@ -52,7 +52,7 @@ NULL
                                 " `options(rhud_quiet_loads = TRUE)`\n",
                                 "* To set the number of retries ",
                                 "used, use options(rhud_num_retries = 1)\n",
-                                "* By default, rhud will ping a URL 'twice' at ",
+                               "* By default, rhud will ping a URL 'twice' at ",
                                 "most for a successful response.\n",
                                "* Caching is enabled by default. To set a new ",
                                 "cache ",

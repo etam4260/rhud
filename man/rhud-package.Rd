@@ -10,12 +10,19 @@ Development APIs}
 rhud is a R library that allows users to easily download data from the
 US Department of Housing and Urban Development APIs @ HUD User.
 The data is defaulted to return measurements for the prior year
-(the year 365 days ago from the current system date). For details about
-this package as well as details about its python counterpart,
-visit https://github.com/etam4260/rhud
+(the year 365 days ago from the current system date) for most functions.
+For details about this package as well as details about its python
+counterpart, visit https://github.com/etam4260/rhud
 
 The default return type of data is a dataframe.
 To get tibbles instead, use: options(rhud_use_tibble = TRUE)
+
+To quiet the download bar, use: options(rhud_quiet_loads = TRUE)
+
+This interface uses RETRY over GET requests. By default, rhud will ping a
+URL 'twice' at most for a successful response. To set the number of retries
+used, use options(rhud_num_retries = 1), where in this case the
+number '1' is a placeholder.
 }
 \author{
 Emmet Tam

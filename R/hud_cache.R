@@ -40,7 +40,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' hud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
+#' # hud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
 #'
 #' }
 hud_set_cache_dir <- function(path,
