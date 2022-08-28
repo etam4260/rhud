@@ -49,24 +49,6 @@ hud_nation_states_territories <- function(key = Sys.getenv("HUD_KEY"),
   states$state_num <- as.character(as.integer(states$state_num))
 
   states
-
-  # A very ambiguous check. Assume that error and only errors return 1 row of
-  # text explaining so error.
-  #if (!is.null(states) && nrow(states) > 1) {
-
-    #states$state_name <- unlist(states$state_name)
-    #states$state_code <- unlist(states$state_code)
-    #states$state_num <- unlist(states$state_num)
-    #states$category <- unlist(states$category)
-
-  #  res <- states
-
-  #  if (to_tibble) {
-  #    res <- as_tibble(states)
- #   }
- # }
- #
-  #res
 }
 
 
@@ -113,15 +95,6 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   urls <- "https://www.huduser.gov/hudapi/public/fmr/listMetroAreas"
   metro <- misc_do_query_call(urls, key, to_tibble = FALSE)
 
-  #call <- memoizedCall(make_query_calls, urls, key)
-
-  #cont <- try(content(call), silent = TRUE) #parse returned data
-
-  #download_bar(done = 1, total = 1,
-  #             current = urls, error = 0)
-
-  #metro <- as.data.frame(do.call(rbind, cont))
-
   # Do a regular expression of the area name column to parse it into
   # the name, the state location, and whether is is a HUD small areas...
   reged <- regexec("^.*,\\s([^ ]*)\\s(.*)", metro$area_name)
@@ -153,22 +126,6 @@ hud_state_metropolitan <- function(state, key = Sys.getenv("HUD_KEY"),
   metro <- metro[metro$metro_state == state_abbr, ]
 
   metro
-
-  # A very ambiguous check. Assume that error and only errors return 1 row of
-  # text explaining so error.
-  #if (!is.null(metro) && nrow(metro) > 1) {
-
-    # metro$cbsa_code <- unlist(metro$cbsa_code)
-    # metro$area_name <- unlist(metro$area_name)
-    # metro$category <- unlist(metro$category)
-  #  res <- metro
-
-  #  if (to_tibble) {
-  #    res <- as_tibble(metro)
-  #  }
-  #}
-
-  #res
 }
 
 
@@ -216,25 +173,6 @@ hud_state_counties <- function(state, key = Sys.getenv("HUD_KEY"),
 
 
   counties
-
-  # A very ambiguous check. Assume that error and only errors return 1 row of
-  # text explaining so error.
-  #if (!is.null(counties) && nrow(counties) > 1) {
-
-    #counties$state_code <- unlist(counties$state_code)
-    #counties$fips_code <- unlist(counties$fips_code)
-    #counties$county_name <- unlist(counties$county_name)
-    #counties$town_name <- unlist(counties$town_name)
-    #counties$category <- unlist(counties$category)
-
-  #  res <- counties
-
-  #  if (to_tibble) {
-  #    res <- as_tibble(counties)
-  #  }
-  #}
-
- #res
 }
 
 
@@ -280,22 +218,6 @@ hud_state_places <- function(state, key = Sys.getenv("HUD_KEY"),
   places <- misc_do_query_call(urls, key, to_tibble)
 
   places
-
-  #if (!is.null(places) && nrow(places) > 1) {
-
-    #places$statecode <- unlist(places$statecode)
-    #places$entityId <- unlist(places$entityId)
-    #places$placename <- unlist(places$placename)
-
-  #  res <- places
-
-   # if (to_tibble) {
-   #   res <- as_tibble(places)
-   # }
-
- # }
-
-  #res
 }
 
 #' @name hud_state_minor_civil_divisions
@@ -340,19 +262,4 @@ hud_state_minor_civil_divisions <- function(state,
   mcd <- misc_do_query_call(urls, key, to_tibble)
 
   mcd
-
-  #if (!is.null(mcd) && nrow(mcd) > 1) {
-
-    #mcd$statecode <- unlist(mcd$statecode)
-    #mcd$entityId <- unlist(mcd$entityId)
-    #mcd$mcdname <- unlist(mcd$mcdname)
-
-  #  res <- mcd
-
-  #  if (to_tibble) {
-  #    res <- to_tibble(mcd)
-  #  }
-  #}
-
-  #res
 }
