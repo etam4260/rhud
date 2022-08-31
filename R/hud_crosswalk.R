@@ -119,12 +119,17 @@
 #'           year = 2018, quarter = 1)
 #'
 #' }
-crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
+crosswalk <- function(data,
+                      geoid,
+                      geoid_col,
+                      cw_geoid,
+                      cw_geoid_col = NA,
                       method = NA,
                       year = format(Sys.Date() - 365, "%Y"),
                       quarter = 1,
                       key = Sys.getenv("HUD_KEY"),
                       to_tibble = getOption("rhud_use_tibble", FALSE)) {
+
   is_internet_available()
   result <- NULL
 
@@ -145,54 +150,45 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
   quarter <- args$quarter
   key <- args$key
 
+  cw_data <- switch(
+    geoid,
 
-  if (geoid == "zip" && cw_geoid %in% c("county", "countysub", "tract",
-                                       "cbsa", "cbsadiv", "cd")) {
-    if (cw_geoid == "county") {
-      cw_data <- hud_cw_zip_county(data[, geoid_col], year = year,
-                                   quarter = quarter, key = key)
-    } else if (cw_geoid == "countysub") {
-      cw_data <- hud_cw_zip_countysub(data[, geoid_col], year = year,
+    "zip" = switch(
+      cw_geoid,
+      "county" =    hud_cw_zip_county(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+      "countysub" = hud_cw_zip_countysub(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+      "cd" =        hud_cw_zip_cd(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+      "tract" =     hud_cw_zip_tract(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+      "cbsa" =      hud_cw_zip_cbsa(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+      "cbsadiv" =   hud_cw_zip_cbsadiv(data[, geoid_col], year = year,
                                       quarter = quarter, key = key)
-    } else if (cw_geoid == "cd") {
-      cw_data <- hud_cw_zip_cd(data[, geoid_col], year = year,
-                               quarter = quarter, key = key)
-    } else if (cw_geoid == "tract") {
-      cw_data <- hud_cw_zip_tract(data[, geoid_col], year = year,
-                                  quarter = quarter, key = key)
-    } else if (cw_geoid == "cbsa") {
-      cw_data <- hud_cw_zip_cbsa(data[, geoid_col], year = year,
-                                 quarter = quarter, key = key)
-    } else if (cw_geoid == "cbsadiv") {
-      cw_data <- hud_cw_zip_cbsadiv(data[, geoid_col], year = year,
-                                    quarter = quarter, key = key)
-    }
-  } else if (geoid == "county" && cw_geoid == "zip") {
-    cw_data <- hud_cw_county_zip(data[, geoid_col], year = year,
-                                 quarter = quarter, key = key)
-  } else if (geoid == "countysub"  && cw_geoid == "zip") {
-    cw_data <- hud_cw_countysub_zip(data[, geoid_col], year = year,
-                                    quarter = quarter, key = key)
-  } else if (geoid == "cd"  && cw_geoid == "zip") {
-    cw_data <- hud_cw_cd_zip(data[, geoid_col], year = year,
-                             quarter = quarter, key = key)
-  } else if (geoid == "tract"  && cw_geoid == "zip") {
-    cw_data <- hud_cw_tract_zip(data[, geoid_col], year = year,
-                                quarter = quarter, key = key)
-  } else if (geoid == "cbsa" && cw_geoid == "zip") {
-    cw_data <- hud_cw_cbsa_zip(data[, geoid_col], year = year,
-                               quarter = quarter, key = key)
-  } else if (geoid == "cbsadiv" && cw_geoid == "zip") {
-    cw_data <- hud_cw_cbsadiv_zip(data[, geoid_col], year = year,
-                                  quarter = quarter, key = key)
-  } else {
+    ),
+
+    "county" =      hud_cw_county_zip(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+    "countysub" =   hud_cw_countysub_zip(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+    "cd" =          hud_cw_cd_zip(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+    "tract" =       hud_cw_tract_zip(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+    "cbsa" =        hud_cw_cbsa_zip(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+    "cbsadiv" =     hud_cw_cbsadiv_zip(data[, geoid_col], year = year,
+                                      quarter = quarter, key = key),
+
     stop(paste("\nCrosswalk from",
                toupper(geoid), "to",
                toupper(cw_geoid),
                "is not supported. Type ?crosswalk to see information on ",
                "what is available.",
                sep = " "), call. = FALSE)
-  }
+  )
 
   # If no columns are provides, assume just want to merge...
   # If no method is provided, assume merge and crosswalk
@@ -200,73 +196,49 @@ crosswalk <- function(data, geoid, geoid_col, cw_geoid, cw_geoid_col = NA,
     message("\n* No method or cw_geoid_col specified: ",
             "will just merge the datasets.")
 
-    if (!to_tibble) {
-
-      result <- merge(cw_data, data, by.x = 1, by.y = geoid_col)
-
-    } else {
-
-      result <- as_tibble(merge(cw_data, data, by.x = 1, by.y = geoid_col))
-
-    }
+    result <- merge(cw_data, data, by.x = 1, by.y = geoid_col)
 
   } else if (!is.na(cw_geoid_col) && !is.na(method)) {
 
     merged <- merge(cw_data, data, by.x = 1, by.y = geoid_col)
 
-    # clear memory
+
     cw_data <- NULL
     data <- NULL
 
-    # apply method to columns specified.
-    if (method == "residential" || method == "res" || method == "res_ratio") {
-      message("\n* Applying allocation method based on ",
-              "residential address percentage.")
-      for (i in seq_len(nrow(merged))) {
+    # Can replace this with a switch statement instead....
+    allocation_method <- switch(
+      method,
+      "residential" = "res_ratio",
+      "res" = "res_ratio",
+      "res_ratio" = "res_ratio",
 
-        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
-          as.numeric(merged[i, "res_ratio"])
-      }
-    } else if (method == "business" || method == "bus" ||
-               method == "bus_ratio") {
-      message("\n* Applying allocation method based on ",
-              "business address percentage.")
-      for (i in seq_len(nrow(merged))) {
+      "business" = "bus_ratio",
+      "bus" = "bus_ratio",
+      "bus_ratio" = "bus_ratio",
 
-        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
-          as.numeric(merged[i, "bus_ratio"])
-      }
-    } else if (method == "other" || method == "oth" || method == "oth_ratio") {
-      message("\n* Applying allocation method based on ",
-              "other address percentage.")
-      for (i in seq_len(nrow(merged))) {
+      "other" = "oth_ratio",
+      "oth" = "oth_ratio",
+      "oth_ratio" = "oth_ratio",
 
-        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
-          as.numeric(merged[i, "oth_ratio"])
-      }
-    } else if (method == "total" || method == "tot" || method == "tot_ratio") {
-      message("\n* Applying allocation method based on ",
-              "total address percentage.")
-      for (i in seq_len(nrow(merged))) {
+      "total" = "tot_ratio",
+      "tot" = "tot_ratio",
+      "tot_ratio" = "tot_ratio",
 
-        merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
-          as.numeric(merged[i, "tot_ratio"])
-      }
-    } else {
       stop("\nThe method specified might be invalid. Check the documentation.",
            call. = FALSE)
+    )
+
+    for (i in seq_len(nrow(merged))) {
+      merged[i, cw_geoid_col] <- as.numeric(merged[i, cw_geoid_col]) *
+        as.numeric(merged[i, allocation_method])
     }
 
-    if (!to_tibble) {
+    result <- merged
+  }
 
-      result <- merged
-
-    } else {
-
-      result <- as_tibble(merged)
-
-    }
-
+  if (to_tibble) {
+    result <- as_tibble(merged)
   }
 
   result

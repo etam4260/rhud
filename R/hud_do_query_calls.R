@@ -598,7 +598,6 @@ process_status_codes <- function(call) {
 print_resp_warning_messages <- function(errors) {
   # Spit out error messages to user after all
   # queries are done.
-
   if (length(errors) != 0) {
     message("\n")
 
@@ -613,7 +612,10 @@ print_resp_warning_messages <- function(errors) {
                   sep = ""), call. = FALSE)
 
   }
+
+
   message("\n")
+
 }
 
 
