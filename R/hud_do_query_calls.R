@@ -481,7 +481,11 @@ if_tibble_return <- function(list_res,
   } else {
 
     if (length(list_res) != 0) {
-      res <- as.data.frame(do.call(rbind, list_res))
+      res <- as.data.frame(smart_rbind(list_res))
+
+      # Depending on year + quarter, data for some data sets might
+      # return differing # of columns. Over time, new fields are added.
+      # This should correct for that.
     }
 
   }
@@ -649,4 +653,38 @@ parse_resp_content <- function(call) {
 
 
   cont
+}
+
+
+
+#' @name smart_rbind
+#' @title Rbind Dataframes with Overlapping Colnames
+#' @description Attempts to rbind a list of dataframes that have
+#'   differing number of columns but contains some with overlapping column
+#'   names.
+#' @param list_res A list of dataframes
+#' @returns The concatenated dataframe of those within list_res.
+#' @noRd
+#' @noMd
+smart_rbind <- function(list_res) {
+  col_set <- FALSE
+  res <- data.frame()
+
+  for (cont in list_res) {
+
+    if (!col_set) {
+
+      res <- cont
+      col_set <- TRUE
+
+    } else {
+
+      res[setdiff(names(cont), names(res))] <- NA
+      cont[setdiff(names(res), names(cont))] <- NA
+
+      res <- rbind(res, cont)
+    }
+  }
+
+  res
 }

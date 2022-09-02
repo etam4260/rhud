@@ -7,89 +7,129 @@ test_that("crosswalk() for Zipcodes and Simple Examples", {
   # Crosswalk zip to every other geoid...
 
   ### Crosswalk zip to tract in quarter 1, 2018
-  expect_error(crosswalk(sample, "zip", "zip", "tract", year = 2018,
+  res <- expect_error(crosswalk(sample, "zip", "zip", "tract", year = 2018,
                          quarter = 1), NA)
-  expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "res",
+  expect_equal(length(res), 9)
+
+  res <- expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "res",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
   # Use business
-  expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "bus",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "bus",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use total
-  expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "tot",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "tot",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use other
-  expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "oth",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "tract", "mes", "oth",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
 
   ### Crosswalk zip to county in quarter 1, 2018
-  expect_error(crosswalk(sample, "zip", "zip", "county",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county",
                          year = 2018, quarter = 1), NA)
-  expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "res",
+  expect_equal(length(res), 9)
+
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "res",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
   # Use business
-  expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "bus",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "bus",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use total
-  expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "tot",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "tot",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use other
-  expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "oth",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "oth",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
 
   ### Crosswalk zip to cbsa in quarter 1, 2018
-  expect_error(crosswalk(sample, "zip", "zip", "cbsa",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cbsa",
                          year = 2018, quarter = 1), NA)
-  expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "res",
+  expect_equal(length(res), 9)
+
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "res",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
   # Use business
-  expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "bus",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "bus",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use total
-  expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "tot",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "tot",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use other
-  expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "oth",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cbsa", "mes", "oth",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
 
   ### Crosswalk zip to cd in quarter 1, 2018
-  expect_error(crosswalk(sample, "zip", "zip", "cd",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd",
                          year = 2018, quarter = 1), NA)
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "res",
+  expect_equal(length(res), 9)
+
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "res",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
   # Use business
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "bus",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "bus",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use total
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "tot",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "tot",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use other
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "oth",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "oth",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
 
 
   ### Crosswalk zip to cd in quarter 1, 2018
-  expect_error(crosswalk(sample, "zip", "zip", "cd",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd",
                          year = 2018, quarter = 1), NA)
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "res",
+  expect_equal(length(res), 9)
+
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "res",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 
   # Use business
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "bus",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "bus",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use total
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "tot",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "tot",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
+
   # Use other
-  expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "oth",
+  res <- expect_error(crosswalk(sample, "zip", "zip", "cd", "mes", "oth",
                          2018, 1), NA)
+  expect_equal(length(res), 9)
 })
 
 
@@ -98,13 +138,18 @@ test_that("crosswalk() for Awkward Inputs", {
 
   sample <- data.frame(mes = c(1232, 1232, 1232), zip = c(21206, 21206, 21206))
 
-  expect_error(crosswalk(sample, "zip", "zip", "county", year = 2018,
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county", year = 2018,
                          quarter = 1), NA)
-  expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "res",
+  expect_equal(length(res), 9)
+
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county", "mes", "res",
            2018, 1), NA)
+  expect_equal(length(res), 9)
 
   # Not all of length 5
   sample <- data.frame(mes = c(1232, 1232, 1232), zip = c(21206, 21206, 212068))
-  expect_error(crosswalk(sample, "zip", "zip", "county", year = 2018,
+
+  res <- expect_error(crosswalk(sample, "zip", "zip", "county", year = 2018,
             quarter = 1))
+  expect_equal(length(res), 9)
 })
