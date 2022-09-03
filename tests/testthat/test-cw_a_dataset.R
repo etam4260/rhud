@@ -151,5 +151,5 @@ test_that("crosswalk() for Awkward Inputs", {
 
   res <- expect_error(crosswalk(sample, "zip", "zip", "county", year = 2018,
             quarter = 1))
-  expect_equal(length(res), 9)
+
 })

@@ -442,56 +442,64 @@ if_tibble_return <- function(list_res,
                              resolution =  NULL) {
 
   res <- NULL
+  if (length(list_res) != 0) {
 
-  if (api == "fmr") {
+    if (api == "fmr") {
 
-      if (resolution == "state") {
+        if (resolution == "state") {
 
-        if (length(list_res) != 0) {
+          if (length(list_res) != 0) {
 
-          res_county <- as.data.frame(do.call(rbind, list_res))
-          res_county <- as.data.frame(sapply(res_county,
-                                      function(x) unlist(as.character(x))))
+            res_county <- as.data.frame(do.call(rbind, list_res))
+            res_county <- as.data.frame(sapply(res_county,
+                                        function(x) unlist(as.character(x))))
 
-          res_metroareas <- as.data.frame(do.call(rbind, list_res_two))
-          res_metroareas <- as.data.frame(sapply(
-            res_metroareas,
-            function(x) unlist(as.character(x))))
+            res_metroareas <- as.data.frame(do.call(rbind, list_res_two))
+            res_metroareas <- as.data.frame(sapply(
+              res_metroareas,
+              function(x) unlist(as.character(x))))
 
-          if (to_tibble) {
-            res_county <- tibble(res_county)
-            res_metroareas <- tibble(res_metroareas)
+            if (to_tibble) {
+              res_county <- tibble(res_county)
+              res_metroareas <- tibble(res_metroareas)
+            }
+
+            res <- list(counties = res_county, metroareas = res_metroareas)
           }
 
-          res <- list(counties = res_county, metroareas = res_metroareas)
+        } else if (resolution == "county" || resolution == "cbsa") {
+
+          res <- as.data.frame(do.call(rbind, list_res))
+
+          if (length(list_res) > 1) {
+
+            res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
+
+          }
+
         }
 
-      } else if (resolution == "county" || resolution == "cbsa") {
+    } else if (api == "cw") {
 
-        res <- as.data.frame(do.call(rbind, list_res))
-
-        if (length(list_res) > 1) {
-
-          res <- as.data.frame(sapply(res, function(x) unlist(as.character(x))))
-
-        }
-
-      }
-
-  } else {
-
-    if (length(list_res) != 0) {
-      res <- as.data.frame(smart_rbind(list_res))
 
       # Depending on year + quarter, data for some data sets might
       # return differing # of columns. Over time, new fields are added.
       # This should correct for that.
+
+      # Smart rbind is really only used for crosswalk data for now, but
+      # may, in the future be required for the other datasets. The CHAS dataset
+      # could also benefit from this instead of hardcoding the expect column
+      # values.
+      res <- as.data.frame(smart_rbind(list_res))
+
+
+    } else {
+      res <- as.data.frame(do.call(rbind, list_res))
     }
 
-  }
-
-  if (to_tibble) {
-    res <- as_tibble(res)
+    if (to_tibble) {
+      res <- as_tibble(res)
+    }
   }
 
   res
@@ -673,18 +681,21 @@ smart_rbind <- function(list_res) {
   for (cont in list_res) {
 
     if (!col_set) {
-
       res <- cont
       col_set <- TRUE
-
     } else {
 
       res[setdiff(names(cont), names(res))] <- NA
       cont[setdiff(names(res), names(cont))] <- NA
 
-      res <- rbind(res, cont)
+      res <- as.data.frame(rbind(res, cont))
+
     }
   }
+  # Cases in hud_chas functions where some row names appear.
+  # Make sure to remove those.
+
+  rownames(res) <- NULL
 
   res
 }
