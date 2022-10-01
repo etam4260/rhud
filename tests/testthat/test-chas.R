@@ -1,8 +1,10 @@
 test_that("hud_chas() for Nation, State, County, MCD and Places", {
   skip_if_no_key()
+
   # Nation
   n <- hud_chas(1)
   expect_true(nrow(n) >= 1)
+
   # State
   s <- hud_chas("2", state_id = "56")
 
