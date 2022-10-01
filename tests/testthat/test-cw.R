@@ -11,38 +11,38 @@ test_that("hud_cw() for All Types", {
                       year = c("2010", "2011"), quarter = c("1"))
   expect_equal(length(zip_tract), 8)
 
-  expect_true(nrow(zip_tract) >= 1)
+  expect_true(nrow(zip_tract) == 18)
 
   zip_county <- hud_cw(type = "2", query = "35213",
                        year = c("2016", "2020"), quarter = c("2"))
   expect_equal(length(zip_county), 8)
 
-  expect_true(nrow(zip_county) >= 1)
+  expect_true(nrow(zip_county) == 2)
 
   zip_cbsa <- hud_cw(type = 3, query = 35213,
                      year = c("2012", "2011"), quarter = c("3"))
   expect_equal(length(zip_cbsa), 8)
 
-  expect_true(nrow(zip_cbsa) >= 1)
+  expect_true(nrow(zip_cbsa) == 2)
 
   zip_cbsadiv <- hud_cw(type = 4, query = "22031",
                         year = c("2017", "2019"), quarter = c("4"))
   expect_equal(length(zip_cbsadiv), 8)
 
-  expect_true(nrow(zip_cbsadiv) >= 1)
+  expect_true(nrow(zip_cbsadiv) == 2)
 
   zip_cd <- hud_cw(type = "5", query = "35213",
                    year = c(2011, "2012"), quarter = c("1", "2"))
   expect_equal(length(zip_cd), 8)
 
-  expect_true(nrow(zip_cd) >= 1)
+  expect_true(nrow(zip_cd) == 12)
 
   tract_zip <- hud_cw(type = 6, query = "48201223100",
                       year = c("2017", "2010"),
                       quarter = c("1", "2", "3"))
   expect_equal(length(tract_zip), 8)
 
-  expect_true(nrow(tract_zip) >= 1)
+  expect_true(nrow(tract_zip) == 12)
 
   # Testing county to zip cross_walk. Assuming this to be the most popular.
   county_zip <- hud_cw(type = 7, query = "22031",
@@ -50,7 +50,7 @@ test_that("hud_cw() for All Types", {
                        quarter = c("1", "2", "3", "4"))
   expect_equal(length(county_zip), 8)
 
-  expect_true(nrow(county_zip) >= 1)
+  expect_true(nrow(county_zip) == 90)
 
   # Try all counties in MD
   county_zip <- hud_cw(type = 7,
@@ -58,7 +58,7 @@ test_that("hud_cw() for All Types", {
                        year = c("2010"), quarter = c("1"))
   expect_equal(length(county_zip), 8)
 
-  expect_true(nrow(county_zip) >= 1)
+  expect_true(nrow(county_zip) == 635)
 
   # A core based Statistical Area to zip crosswalk.
   # CBSA defines Micropolitan and Metropolitan
@@ -66,7 +66,7 @@ test_that("hud_cw() for All Types", {
                      year = c("2010", "2011"), quarter = c("2", "1"))
   expect_equal(length(cbsa_zip), 8)
 
-  expect_true(nrow(cbsa_zip) >= 1)
+  expect_true(nrow(cbsa_zip) == 84)
 
   # Must be a core base statistical area division code which apply to
   # metropolitan areas.
@@ -74,20 +74,20 @@ test_that("hud_cw() for All Types", {
                         year = c("2017"), quarter = c("4"))
   expect_equal(length(cbsadiv_zip), 8)
 
-  expect_true(nrow(cbsadiv_zip) >= 1)
+  expect_true(nrow(cbsadiv_zip) == 15)
 
   cd_zip <- hud_cw(type = 10, query = "2202",
                    year = c("2010", "2011"), quarter = c("4", "3"))
   expect_equal(length(cd_zip), 8)
 
-  expect_true(nrow(cd_zip) >= 1)
+  expect_true(nrow(cd_zip) == 145)
 
   # Testing ZIP CODE _> COUNTYSUB
   zip_countysub <- hud_cw(type = 11, query = "35213",
                           year = c("2019", "2020"), quarter = c("2", "3"))
   expect_equal(length(zip_countysub), 8)
 
-  expect_true(nrow(zip_countysub) >= 1)
+  expect_true(nrow(zip_countysub) == 1)
 
   # User might not provide a "set" of years or quarters, so should make sure to
   # check that Sometimes the API might not provide data because out of range
@@ -99,7 +99,7 @@ test_that("hud_cw() for All Types", {
                           quarter = c("4", "4"))
   expect_equal(length(countysub_zip), 8)
 
-  expect_true(nrow(countysub_zip) >= 1)
+  expect_true(nrow(countysub_zip) == 1)
 })
 
 
