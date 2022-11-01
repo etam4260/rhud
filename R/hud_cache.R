@@ -37,12 +37,6 @@
 #' * [rhud::hud_set_cache_dir()]
 #' * [rhud::hud_clear_cache()]
 #' @export
-#' @examples
-#' \dontrun{
-#'
-#' # hud_set_cache_dir("./an/example/path", in_wkdir = TRUE, in_home = TRUE)
-#'
-#' }
 hud_set_cache_dir <- function(path,
                               in_wkdir = FALSE,
                               in_home = FALSE
