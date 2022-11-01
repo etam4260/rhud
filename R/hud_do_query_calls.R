@@ -135,6 +135,8 @@ cw_do_query_calls <- function(urls, query, year, quarter, primary_geoid,
 
     }
 
+
+
     download_bar(done = i, total = length(urls),
                  current = url, error = length(error_urls))
 
@@ -533,16 +535,24 @@ make_query_calls <- function(url, key, path, query) {
 
   config <- add_headers(Authorization = paste("Bearer ", as.character(key)))
 
-  # For retries, we might want to allow user to specify this
-  # parameter... giving them the choice between speed vs accuracy...
+  # HUD Crosswalk API returns 429 request now so need to use RETRIES
+  # or data returned might be missing...
+
+  # 10/31/2022 HUD does not return a retry-in within 429 request
+  # need to figure out recommended retry amount
+  # for "most" data to pass through.
+
+  # Wait a minute after a 429 is given.
   request <- RETRY("GET",
                    url,
                    config,
-                   pause_cap = 1,
-                   times = getOption("rhud_num_retries", 2),
+                   times = getOption("rhud_num_retries", 10),
                    user_agent(the_user_agent),
-                   quiet = TRUE)
-
+                   pause_min = 60,
+                   queir = TRUE,
+                   terminate_on = c(400, 401, 403, 404, 405, 406, 500),
+                   terminate_on_success = TRUE
+                   )
 
   request
 }
@@ -561,7 +571,6 @@ make_query_calls <- function(url, key, path, query) {
 #' @noMd
 process_status_codes <- function(call) {
   error <- NULL
-
 
   if (status_code(call) == 400) {
 
@@ -594,6 +603,9 @@ process_status_codes <- function(call) {
 
     error <- paste(500, "Internal server error occurred")
 
+  } else if (status_code(call) == 429) {
+
+    error <- paste(429, "Too many requests")
   }
 
   error
@@ -641,7 +653,7 @@ print_resp_warning_messages <- function(errors) {
 #' @noRd
 #' @noMd
 parse_resp_content <- function(call) {
-   cont <- NULL
+   cont <- list()
 
    tryCatch(
 
@@ -659,8 +671,6 @@ parse_resp_content <- function(call) {
 
   )
 
-
-  cont
 }
 
 
