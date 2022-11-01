@@ -22,7 +22,7 @@ test_that("hud_fmr() Simple County Queries", {
   c2 <- hud_fmr("5100199999", year = c("2021"))
   expect_true(nrow(c2) == 1)
   c3 <- hud_fmr("5151099999", year = c(2021))
-  expect_true(nrow(c3) == 1)
+  expect_true(nrow(c3) == 506)
 
   # Make sure to check that everything is of type character
   # not numeric or factor. Also make sure nothing is of list.

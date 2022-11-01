@@ -6,6 +6,28 @@ test_that("hud_cw() for All Types", {
   # Need to also check for if these queries result a satiable result; need
   # to add least have 1 row or more in data frame returned.
 
+
+  # Testing county to zip cross_walk. Assuming this to be the most popular.
+  county_zip <- hud_cw(type = 7, query = "22031",
+                       year = c("2010", "2011"),
+                       quarter = c("1", "2", "3", "4"))
+
+  expect_equal(length(county_zip), 8)
+
+  expect_true(nrow(county_zip) == 90)
+
+  # Try all counties in MD
+  county_zip_two <- hud_cw(type = 7,
+                           query = substr(hud_state_counties("md")$fips_code, 1, 5),
+                           year = c("2010"), quarter = c("1"))
+
+  expect_equal(length(county_zip_two), 8)
+
+  expect_true(nrow(county_zip_two) == 635)
+
+
+
+
   # Lets try a ZIP code in Alabama for now for 1 -> 5 as well as 11.
   zip_tract <- hud_cw(type = 1, query = "35213",
                       year = c("2010", "2011"), quarter = c("1"))
@@ -44,21 +66,6 @@ test_that("hud_cw() for All Types", {
 
   expect_true(nrow(tract_zip) == 12)
 
-  # Testing county to zip cross_walk. Assuming this to be the most popular.
-  county_zip <- hud_cw(type = 7, query = "22031",
-                       year = c("2010", "2011"),
-                       quarter = c("1", "2", "3", "4"))
-  expect_equal(length(county_zip), 8)
-
-  expect_true(nrow(county_zip) == 90)
-
-  # Try all counties in MD
-  county_zip <- hud_cw(type = 7,
-                       query = substr(hud_state_counties("md")$fips_code, 1, 5),
-                       year = c("2010"), quarter = c("1"))
-  expect_equal(length(county_zip), 8)
-
-  expect_true(nrow(county_zip) == 635)
 
   # A core based Statistical Area to zip crosswalk.
   # CBSA defines Micropolitan and Metropolitan
@@ -87,7 +94,7 @@ test_that("hud_cw() for All Types", {
                           year = c("2019", "2020"), quarter = c("2", "3"))
   expect_equal(length(zip_countysub), 8)
 
-  expect_true(nrow(zip_countysub) == 1)
+  expect_true(nrow(zip_countysub) == 4)
 
   # User might not provide a "set" of years or quarters, so should make sure to
   # check that Sometimes the API might not provide data because out of range

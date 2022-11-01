@@ -61,7 +61,7 @@ test_that("hud_cw_zip_cbsadiv() Simple Example and Error", {
 test_that("hud_cw_zip_cd() Simple Example and Error", {
   skip_if_no_key()
   res <- hud_cw_zip_cd(zip = 35213, year = c("2020"), quarter = c("2"))
-  expect_true(nrow(res) == 8)
+  expect_true(nrow(res) == 2)
 
   expect_error(hud_cw_zip_cd(zip = "3521334", year = c("2010"),
                              quarter = c("1")))

@@ -973,6 +973,7 @@ geo_is_infix_query_and_get_warnings <- function(query,
 
   res <- c()
   tryCatch({
+
       res <- suppressMessages(f(query,
                minimal = TRUE,
                year = year,
